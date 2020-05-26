@@ -1,0 +1,68 @@
+---
+title: "Preprocessing and QC"
+author: "Katharina Hembach"
+date: "5/25/2020"
+output: 
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(autodep = TRUE, cache = TRUE, 
+                      dev.args = list(png = list(type = "cairo")))
+```
+
+### Load packages
+```{r, message = FALSE}
+library(DropletUtils)
+library(scDblFinder)
+library(BiocParallel)
+```
+
+
+## Importing CellRanger output and metadata
+```{r import}
+fs <- dir(path = "data/data_sushi/CellRangerCount_42721_2020-01-16--13-26-19", 
+                pattern = "^[1-6]N*", recursive = FALSE, full.names = TRUE)
+names(fs) <- basename(fs)
+## we want to analyse the count matrix
+fs <- sapply(fs, function(x) file.path(x, "filtered_feature_bc_matrix.h5")) 
+sce <- read10xCounts(samples = fs)
+
+# rename colnames and dimnames
+rowData(sce)$Type <- NULL
+names(rowData(sce)) <- c("ensembl_id", "symbol")
+names(colData(sce)) <- c("sample_id", "barcode")
+sce$sample_id <- factor(sce$sample_id)
+dimnames(sce) <- list(with(rowData(sce), paste(ensembl_id, symbol, sep = ".")),
+                      with(colData(sce), paste(barcode, sample_id, sep = ".")))
+
+# load metadata
+meta <- read.csv(file.path("data", "metadata.csv"))
+m <- match(sce$sample_id, meta$sample)
+sce$group_id <- meta$group[m]
+```
+
+## Remove undetected genes and doublets
+
+```{r doublet_removal}
+sce <- sce[rowSums(counts(sce) > 0) > 0, ]
+dim(sce)
+
+# doublet detection with 'scDblFinder'
+# the expected proportion of doublets is 1% per 1000 cells
+sce <- scDblFinder(sce, samples="sample_id", BPPARAM=MulticoreParam(6))
+table(sce$scDblFinder.class)
+# we remove cells that were classified as doublets
+sce <- sce[,sce$scDblFinder.class == "singlet"]
+```
+
+## Save data to RDS
+```{r}
+saveRDS(sce, file.path("output", "sce_01_preprocessing.rds"))
+```
+
