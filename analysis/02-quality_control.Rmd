@@ -13,7 +13,6 @@ knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
                       message = FALSE)
 ```
 
-
 ### Load packages
 ```{r, message = FALSE}
 library(scater)
@@ -25,7 +24,6 @@ library(viridis)
 ```{r}
 sce <- readRDS(file.path("output", "sce_01_preprocessing.rds"))
 ```
-
 
 ## Quality control
 We compute cell-level QC.
@@ -47,30 +45,23 @@ summary(sce$subsets_Mt_percent)
 
 The number of counts per cell:
 ```{r}
-plotColData(sce, x = "sample_id", y="sum")
+plotColData(sce, x = "sample_id", y = "sum")
 ```
 
 The number of genes:
 ```{r}
-plotColData(sce, x = "sample_id", y="detected")
+plotColData(sce, x = "sample_id", y = "detected")
 ```
 
 The percentage of mitochondrial genes:
 ```{r}
-plotColData(sce, x = "sample_id", y="subsets_Mt_percent")
+plotColData(sce, x = "sample_id", y = "subsets_Mt_percent")
 ```
 
 We plot the total number of counts against the number of detected genes and color by the fraction of mitochondrial genes:
 ```{r}
-# plotColData(sce, x = "sum", y="detected", colour_by="subsets_Mt_fraction_logit",
-#             other_fields = "sample_id") +
-#   scale_x_log10() +
-#   scale_y_log10() +
-#   facet_wrap(~sample_id) +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
 cd <- data.frame(colData(sce))
-ggplot(cd, aes(x = sum, y=detected, color = subsets_Mt_fraction)) +
+ggplot(cd, aes(x = sum, y = detected, color = subsets_Mt_fraction)) +
   geom_point(alpha = 0.7) + 
   geom_density_2d(color = "grey", bins = 6) +
   scale_x_log10() +
@@ -86,11 +77,12 @@ ggplot(cd, aes(x = sum, y=detected, color = subsets_Mt_fraction)) +
 
 We plot the total number of counts against the mitochondrial content. Well-behaved cells should have many expressed genes and a low fraction of mitochondrial genes. High mitochondrial content indicates empty or damaged cells. 
 ```{r}
-ggplot(cd, aes(x = sum, y=subsets_Mt_fraction)) +
+ggplot(cd, aes(x = sum, y = subsets_Mt_fraction)) +
   geom_point(color = "darkgrey", alpha = 0.3) + 
   geom_density_2d(color = "lightblue") +
   scale_x_log10() +
-  scale_y_continuous(trans='logit', breaks=c(0.01, 0.05, 0.1, 0.2, 0.5, 0.75)) +
+  scale_y_continuous(trans = 'logit', 
+                     breaks = c(0.01, 0.05, 0.1, 0.2, 0.5, 0.75)) +
   facet_wrap(~sample_id) + 
   theme_bw() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
@@ -102,4 +94,3 @@ We plot the top 20 genes with highest expression. Mitochondrial genes, actin, ri
 ```{r, dev="png", eval = FALSE}
 plotHighestExprs(sce, n = 20)
 ```
-
