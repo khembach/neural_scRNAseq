@@ -23,7 +23,6 @@ library(scDblFinder)
 library(BiocParallel)
 ```
 
-
 ## Importing CellRanger output and metadata
 ```{r import}
 fs <- dir(path = "data/data_sushi/CellRangerCount_42721_2020-01-16--13-26-19", 

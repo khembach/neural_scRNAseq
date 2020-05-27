@@ -94,3 +94,9 @@ We plot the top 20 genes with highest expression. Mitochondrial genes, actin, ri
 ```{r, dev="png", eval = FALSE}
 plotHighestExprs(sce, n = 20)
 ```
+
+
+## Save data to RDS
+```{r}
+saveRDS(sce, file.path("output", "sce_02_quality_control.rds"))
+```

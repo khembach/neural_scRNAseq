@@ -12,3 +12,4 @@ This analysis includes following steps::
 
 - [Preprocessing](01-preprocessing.html)
 - [Quality control](02-quality_control.html)
+  - [SampleQC](02.1-SampleQC.html)
