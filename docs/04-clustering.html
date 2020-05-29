@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7f5c1f8969a92432bc9ea0065cd5d31bbccd3137targetblank7f5c1f8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/7f5c1f8969a92432bc9ea0065cd5d31bbccd3137" target="_blank">7f5c1f8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree0e0adc9e7c543802e83276cd8c9abcc45aeac6b2targetblank0e0adc9a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/0e0adc9e7c543802e83276cd8c9abcc45aeac6b2" target="_blank">0e0adc9</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7f5c1f8969a92432bc9ea0065cd5d31bbccd3137targetblank7f5c1f8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree0e0adc9e7c543802e83276cd8c9abcc45aeac6b2targetblank0e0adc9a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/7f5c1f8969a92432bc9ea0065cd5d31bbccd3137" target="_blank">7f5c1f8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/0e0adc9e7c543802e83276cd8c9abcc45aeac6b2" target="_blank">0e0adc9</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -526,6 +526,7 @@ Ignored files:
     Ignored:    .__workflowr.yml
     Ignored:    ._neural_scRNAseq.Rproj
     Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
     Ignored:    analysis/._.DS_Store
     Ignored:    analysis/._01-preprocessing.Rmd
     Ignored:    analysis/._01-preprocessing.html
@@ -546,10 +547,18 @@ Ignored files:
     Ignored:    data/data_sushi/
     Ignored:    data/metadata.csv
     Ignored:    data/metadata.xlsx
+    Ignored:    output/.DS_Store
+    Ignored:    output/._.DS_Store
+    Ignored:    output/figures/
     Ignored:    output/sce_01_preprocessing.rds
     Ignored:    output/sce_02_quality_control.rds
     Ignored:    output/sce_03_filtering.rds
     Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04_clustering.rds
+
+Untracked files:
+    Untracked:  analysis/05-annotation.Rmd
+    Untracked:  scripts/
 
 Unstaged changes:
     Modified:   analysis/_site.yml
@@ -591,6 +600,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/0e0adc9e7c543802e83276cd8c9abcc45aeac6b2/analysis/04-clustering.Rmd" target="_blank">0e0adc9</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-29
+</td>
+<td>
+add PCA plots
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/a94efaa06c73e3bbbade733cc7a4f81c1e5f8f8f/docs/04-clustering.html" target="_blank">a94efaa</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-29
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -654,22 +697,20 @@ for (i in names(so)) {
   # Identify the 10 most highly variable genes
   top10 &lt;- head(VariableFeatures(so[[i]]), 10)
   p &lt;- VariableFeaturePlot(so[[i]])
-  LabelPoints(plot = p, points = top10, 
+  p &lt;- LabelPoints(plot = p, points = top10, 
               labels = str_split(top10, &quot;\\.&quot;, simplify = TRUE)[,2], 
               repel = TRUE)
-  p
+  print(p)
 }</code></pre>
-<pre><code>Warning: Using `as.character()` on a quosure is deprecated as of rlang 0.3.0.
-Please use `as_label()` or `as_name()` instead.
-This warning is displayed once per session.</code></pre>
+<p><img src="figure/04-clustering.Rmd/variable-features-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/04-clustering.Rmd/variable-features-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/04-clustering.Rmd/variable-features-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/04-clustering.Rmd/variable-features-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/04-clustering.Rmd/variable-features-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/04-clustering.Rmd/variable-features-6.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>## We scale the data so that mean expression is 0 and variance is 1, across cells
 so &lt;- lapply(so, ScaleData, verbose = FALSE)
 
 # find anchors &amp; integrate
 as &lt;- FindIntegrationAnchors(so, verbose = FALSE)
-so &lt;- IntegrateData(anchorset = as, dims = seq_len(30), verbose = FALSE)</code></pre>
-<pre><code>Warning: Adding a command log without an assay associated with it</code></pre>
-<pre class="r"><code># scale integrated data
+so &lt;- IntegrateData(anchorset = as, dims = seq_len(30), verbose = FALSE)
+
+# scale integrated data
 DefaultAssay(so) &lt;- &quot;integrated&quot;
 so &lt;- ScaleData(so, verbose = FALSE)</code></pre>
 </div>
@@ -681,9 +722,21 @@ so &lt;- RunTSNE(so, reduction = &quot;pca&quot;, dims = seq_len(20),
     seed.use = 1, do.fast = TRUE, verbose = FALSE)
 so &lt;- RunUMAP(so, reduction = &quot;pca&quot;, dims = seq_len(20),
     seed.use = 1, verbose = FALSE)</code></pre>
-<pre><code>Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
-To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
-This message will be shown once per session</code></pre>
+<div id="plot-pca-results" class="section level3">
+<h3>Plot PCA results</h3>
+<pre class="r"><code># top genes that are associated with the first two PCs
+VizDimLoadings(so, dims = 1:2, reduction = &quot;pca&quot;)</code></pre>
+<p><img src="figure/04-clustering.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## PCA plot 
+DimPlot(so, reduction = &quot;pca&quot;, group.by = &quot;sample_id&quot;)</code></pre>
+<p><img src="figure/04-clustering.Rmd/unnamed-chunk-5-1.png" width="960" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># elbow plot with the ranking of PCs based on the % of variance explained
+ElbowPlot(so, ndims = 30)</code></pre>
+<p><img src="figure/04-clustering.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## heatmaps of the top 20 PCs and the 500 most extreme cells for each compenent
+DimHeatmap(so, dims = 1:20, cells = 500, balanced = TRUE, nfeatures = 20 )</code></pre>
+<p><img src="figure/04-clustering.Rmd/unnamed-chunk-7-1.png" width="1440" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 <div id="clustering" class="section level2">
 <h2>Clustering</h2>
@@ -707,11 +760,47 @@ ps &lt;- lapply(c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;ident&quot;
 })
 plot_grid(plotlist = ps, ncol = 1)</code></pre>
 <p><img src="figure/04-clustering.Rmd/dr-plots-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dr-plots-1">
+Past versions of dr-plots-1.png
+</button>
+</p>
+<div id="fig-dr-plots-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a94efaa06c73e3bbbade733cc7a4f81c1e5f8f8f/docs/figure/04-clustering.Rmd/dr-plots-1.png" target="_blank">a94efaa</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-29
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="save-seurat-object-to-rds" class="section level2">
-<h2>Save seurat object to RDS</h2>
+<h2>Save Seurat object to RDS</h2>
 <pre class="r"><code>saveRDS(so, file.path(&quot;output&quot;, &quot;so_04_clustering.rds&quot;))</code></pre>
-<!-- TODO: run clustering without integration, only try it if the clusters are completely separated by group_id -->
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
