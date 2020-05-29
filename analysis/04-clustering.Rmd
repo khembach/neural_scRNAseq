@@ -1,0 +1,133 @@
+---
+title: "Clustering"
+author: "Katharina Hembach"
+date: "5/28/2020"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+```{r}
+# increase future's maximum allowed size of exported globals to 4GB 
+# the default is 2GB
+options(future.globals.maxSize = 4096 * 1024 ^ 2)
+```
+
+
+
+### Load packages
+```{r, message = FALSE}
+library(cowplot)
+library(ggplot2)
+library(Seurat)
+library(SingleCellExperiment)
+library(stringr)
+```
+
+## Load data
+
+```{r}
+sce <- readRDS(file.path("output", "sce_03_filtering.rds"))
+```
+
+## Normalization
+```{r normalization}
+# create SeuratObject
+so <- CreateSeuratObject(
+    counts = counts(sce),
+    meta.data = data.frame(colData(sce)),
+    project = "neural_cultures")
+
+# split by sample
+cells_by_sample <- split(colnames(sce), sce$sample_id)
+so <- lapply(cells_by_sample, function(i) subset(so, cells = i))
+
+## log normalize the data using a scaling factor of 10000
+so <- lapply(so, NormalizeData, verbose = FALSE, scale.factor = 10000, 
+             normalization.method = "LogNormalize")
+```
+
+```{r variable-features}
+## Identify the top 2000 genes with high cell-to-cell variation
+so <- lapply(so, FindVariableFeatures, nfeatures = 2000, 
+    selection.method = "vst", verbose = FALSE)
+
+## Plot variable features 
+for (i in names(so)) {
+  # Identify the 10 most highly variable genes
+  top10 <- head(VariableFeatures(so[[i]]), 10)
+  p <- VariableFeaturePlot(so[[i]])
+  LabelPoints(plot = p, points = top10, 
+              labels = str_split(top10, "\\.", simplify = TRUE)[,2], 
+              repel = TRUE)
+  p
+}
+```
+
+```{r integration}
+## We scale the data so that mean expression is 0 and variance is 1, across cells
+so <- lapply(so, ScaleData, verbose = FALSE)
+
+# find anchors & integrate
+as <- FindIntegrationAnchors(so, verbose = FALSE)
+so <- IntegrateData(anchorset = as, dims = seq_len(30), verbose = FALSE)
+
+# scale integrated data
+DefaultAssay(so) <- "integrated"
+so <- ScaleData(so, verbose = FALSE)
+```
+
+## Dimension reduction 
+
+We perform dimension reduction with t-SNE and UMAP based on PCA results.
+```{r dimension-reduction}
+so <- RunPCA(so, npcs = 30, verbose = FALSE)
+so <- RunTSNE(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, do.fast = TRUE, verbose = FALSE)
+so <- RunUMAP(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, verbose = FALSE)
+```
+
+## Clustering
+
+We cluster the cells using the reduced PCA dimensions.
+
+```{r clustering}
+so <- FindNeighbors(so, reduction = "pca", dims = seq_len(20), verbose = FALSE)
+for (res in c(0.1, 0.2, 0.4, 0.8, 1, 1.2, 2))
+    so <- FindClusters(so, resolution = res, random.seed = 1, verbose = FALSE)
+```
+
+## Dimension reduction plots 
+
+We plot the dimension reduction (DR) and color by sample, group and cluster ID
+```{r dr-plots, fig.width = 10, fig.height = 14}
+thm <- theme(aspect.ratio = 1, legend.position = "none")
+ps <- lapply(c("sample_id", "group_id", "ident"), function(u) {
+    p1 <- DimPlot(so, reduction = "tsne", group.by = u) + thm
+    p2 <- DimPlot(so, reduction = "umap", group.by = u)
+    lgd <- get_legend(p2)
+    p2 <- p2 + thm
+    list(p1, p2, lgd)
+    plot_grid(p1, p2, lgd, nrow = 1,
+        rel_widths = c(1, 1, 0.5))
+})
+plot_grid(plotlist = ps, ncol = 1)
+```
+
+## Save seurat object to RDS
+
+```{r}
+saveRDS(so, file.path("output", "so_04_clustering.rds"))
+```
+
+
+
+<!-- TODO: run clustering without integration, only try it if the clusters are completely separated by group_id -->
