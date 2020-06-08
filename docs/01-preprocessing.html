@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-27
+<strong>Last updated:</strong> 2020-06-08
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6be1a5aafda94cebab5b9d59dcf579d4011e825ftargetblank6be1a5aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6be1a5aafda94cebab5b9d59dcf579d4011e825f" target="_blank">6be1a5a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree013c877b3899276c8a59b46ff336b57a3ea62a26targetblank013c877a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/013c877b3899276c8a59b46ff336b57a3ea62a26" target="_blank">013c877</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6be1a5aafda94cebab5b9d59dcf579d4011e825ftargetblank6be1a5aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree013c877b3899276c8a59b46ff336b57a3ea62a26targetblank013c877a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6be1a5aafda94cebab5b9d59dcf579d4011e825f" target="_blank">6be1a5a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/013c877b3899276c8a59b46ff336b57a3ea62a26" target="_blank">013c877</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -526,26 +526,45 @@ Ignored files:
     Ignored:    .__workflowr.yml
     Ignored:    ._neural_scRNAseq.Rproj
     Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
     Ignored:    analysis/._.DS_Store
     Ignored:    analysis/._01-preprocessing.Rmd
     Ignored:    analysis/._01-preprocessing.html
     Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._04-clustering.Rmd
+    Ignored:    analysis/._04-clustering.knit.md
     Ignored:    analysis/.__site.yml
     Ignored:    analysis/02-1-SampleQC_cache/
     Ignored:    analysis/02-quality_control_cache/
+    Ignored:    analysis/02.1-SampleQC_cache/
+    Ignored:    analysis/03-filtering_cache/
+    Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
     Ignored:    data/._metadata.csv
     Ignored:    data/._metadata.xlsx
     Ignored:    data/.smbdeleteAAA17ed8b4b
     Ignored:    data/data_sushi/
+    Ignored:    data/filtered_feature_matrices/
     Ignored:    data/metadata.csv
     Ignored:    data/metadata.xlsx
+    Ignored:    output/.DS_Store
+    Ignored:    output/._.DS_Store
+    Ignored:    output/figures/
     Ignored:    output/sce_01_preprocessing.rds
     Ignored:    output/sce_02_quality_control.rds
+    Ignored:    output/sce_03_filtering.rds
     Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04_clustering.rds
+
+Untracked files:
+    Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  scripts/
 
 Unstaged changes:
+    Modified:   analysis/05-annotation.Rmd
     Modified:   analysis/_site.yml
 
 </code></pre>
@@ -585,6 +604,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/013c877b3899276c8a59b46ff336b57a3ea62a26/analysis/01-preprocessing.Rmd" target="_blank">013c877</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+<td>
+use filtered feature matrix of sample 3 and 5
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/1230f084e4ff4a62804f1043579a1e5872955e48/docs/01-preprocessing.html" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -651,7 +704,7 @@ library(BiocParallel)</code></pre>
 </div>
 <div id="importing-cellranger-output-and-metadata" class="section level2">
 <h2>Importing CellRanger output and metadata</h2>
-<pre class="r"><code>fs &lt;- dir(path = &quot;data/data_sushi/CellRangerCount_42721_2020-01-16--13-26-19&quot;, 
+<pre class="r"><code>fs &lt;- dir(path = &quot;data/filtered_feature_matrices&quot;, 
                 pattern = &quot;^[1-6]N*&quot;, recursive = FALSE, full.names = TRUE)
 names(fs) &lt;- basename(fs)
 ## we want to analyse the count matrix
@@ -675,14 +728,14 @@ sce$group_id &lt;- meta$group[m]</code></pre>
 <h2>Remove undetected genes and doublets</h2>
 <pre class="r"><code>sce &lt;- sce[rowSums(counts(sce) &gt; 0) &gt; 0, ]
 dim(sce)</code></pre>
-<pre><code>[1] 19415 67643</code></pre>
+<pre><code>[1] 19375 52830</code></pre>
 <pre class="r"><code># doublet detection with &#39;scDblFinder&#39;
 # the expected proportion of doublets is 1% per 1000 cells
 sce &lt;- scDblFinder(sce, samples=&quot;sample_id&quot;, BPPARAM=MulticoreParam(6))
 table(sce$scDblFinder.class)</code></pre>
 <pre><code>
 doublet singlet 
-   7636   60007 </code></pre>
+   4249   48581 </code></pre>
 <pre class="r"><code># we remove cells that were classified as doublets
 sce &lt;- sce[,sce$scDblFinder.class == &quot;singlet&quot;]</code></pre>
 </div>

@@ -11,7 +11,7 @@
 
 <meta name="author" content="Katharina Hembach" />
 
-<meta name="date" content="2020-05-27" />
+<meta name="date" content="2020-06-08" />
 
 <title>Quality control with SampleQC</title>
 
@@ -388,7 +388,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Quality control with SampleQC</h1>
 <h4 class="author">Katharina Hembach</h4>
-<h4 class="date">May 27, 2020</h4>
+<h4 class="date">June 08, 2020</h4>
 
 </div>
 
@@ -413,7 +413,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-27
+<strong>Last updated:</strong> 2020-06-08
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -504,16 +504,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6be1a5aafda94cebab5b9d59dcf579d4011e825ftargetblank6be1a5aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6be1a5aafda94cebab5b9d59dcf579d4011e825f" target="_blank">6be1a5a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree013c877b3899276c8a59b46ff336b57a3ea62a26targetblank013c877a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/013c877b3899276c8a59b46ff336b57a3ea62a26" target="_blank">013c877</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6be1a5aafda94cebab5b9d59dcf579d4011e825ftargetblank6be1a5aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree013c877b3899276c8a59b46ff336b57a3ea62a26targetblank013c877a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6be1a5aafda94cebab5b9d59dcf579d4011e825f" target="_blank">6be1a5a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/013c877b3899276c8a59b46ff336b57a3ea62a26" target="_blank">013c877</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -527,27 +527,45 @@ Ignored files:
     Ignored:    .__workflowr.yml
     Ignored:    ._neural_scRNAseq.Rproj
     Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
     Ignored:    analysis/._.DS_Store
     Ignored:    analysis/._01-preprocessing.Rmd
     Ignored:    analysis/._01-preprocessing.html
     Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._04-clustering.Rmd
+    Ignored:    analysis/._04-clustering.knit.md
     Ignored:    analysis/.__site.yml
     Ignored:    analysis/01-preprocessing_cache/
     Ignored:    analysis/02-1-SampleQC_cache/
     Ignored:    analysis/02-quality_control_cache/
+    Ignored:    analysis/03-filtering_cache/
+    Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
     Ignored:    data/._metadata.csv
     Ignored:    data/._metadata.xlsx
     Ignored:    data/.smbdeleteAAA17ed8b4b
     Ignored:    data/data_sushi/
+    Ignored:    data/filtered_feature_matrices/
     Ignored:    data/metadata.csv
     Ignored:    data/metadata.xlsx
+    Ignored:    output/.DS_Store
+    Ignored:    output/._.DS_Store
+    Ignored:    output/figures/
     Ignored:    output/sce_01_preprocessing.rds
     Ignored:    output/sce_02_quality_control.rds
+    Ignored:    output/sce_03_filtering.rds
     Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04_clustering.rds
+
+Untracked files:
+    Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  scripts/
 
 Unstaged changes:
+    Modified:   analysis/04-clustering.Rmd
     Modified:   analysis/_site.yml
 
 </code></pre>
@@ -587,6 +605,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/1230f084e4ff4a62804f1043579a1e5872955e48/docs/02.1-SampleQC.html" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -669,6 +704,43 @@ n_clusters      = length(em_list)</code></pre>
 <p>Heatmap of all pairwise dissimilarities between samples (values close to 0 indicate similar samples; values of 1 and higher indicate extremely dissimilar samples).</p>
 <pre class="r"><code>(plot_mmd_heatmap(mmd_list))</code></pre>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_mmd_distns_heatmap-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_mmd_distns_heatmap-1">
+Past versions of plot_mmd_distns_heatmap-1.png
+</button>
+</p>
+<div id="fig-plot_mmd_distns_heatmap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_mmd_distns_heatmap-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="plot-over-umap-embedding-with-annotations" class="section level2 tabset">
 <h2>Plot over UMAP embedding with annotations</h2>
@@ -677,6 +749,43 @@ n_clusters      = length(em_list)</code></pre>
 <div id="group_id" class="section level3">
 <h3>group_id</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_umap-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_umap-1">
+Past versions of plot_over_umap-1.png
+</button>
+</p>
+<div id="fig-plot_over_umap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_umap-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="qc_clust" class="section level3">
 <h3>QC_clust</h3>
@@ -685,28 +794,289 @@ n_clusters      = length(em_list)</code></pre>
 <h3>N_cat</h3>
 <pre><code>Warning in brewer.pal(n_cols, &quot;PiYG&quot;): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_umap-2.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_umap-2">
+Past versions of plot_over_umap-2.png
+</button>
+</p>
+<div id="fig-plot_over_umap-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_umap-2.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="mito_cat" class="section level3">
 <h3>mito_cat</h3>
 <pre><code>Warning in brewer.pal(n_cols, &quot;PiYG&quot;): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
-<p><img src="figure/02.1-SampleQC.Rmd/plot_over_umap-3.png" width="480" style="display: block; margin: auto;" /><img src="figure/02.1-SampleQC.Rmd/plot_over_umap-4.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="figure/02.1-SampleQC.Rmd/plot_over_umap-3.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_umap-3">
+Past versions of plot_over_umap-3.png
+</button>
+</p>
+<div id="fig-plot_over_umap-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_umap-3.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="counts_cat" class="section level3">
 <h3>counts_cat</h3>
+<pre><code>Warning in brewer.pal(n_cols, &quot;PiYG&quot;): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
+<p><img src="figure/02.1-SampleQC.Rmd/plot_over_umap-4.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_umap-4">
+Past versions of plot_over_umap-4.png
+</button>
+</p>
+<div id="fig-plot_over_umap-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_umap-4.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_umap-5.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_umap-5">
+Past versions of plot_over_umap-5.png
+</button>
+</p>
+<div id="fig-plot_over_umap-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_umap-5.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_embeddings(mmd_list, &quot;continuous&quot;, &quot;UMAP&quot;)</code></pre>
 </div>
 <div id="log_n" class="section level3">
 <h3>log_N</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_umap-6.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_umap-6">
+Past versions of plot_over_umap-6.png
+</button>
+</p>
+<div id="fig-plot_over_umap-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_umap-6.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="med_mito" class="section level3">
 <h3>med_mito</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_umap-7.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_umap-7">
+Past versions of plot_over_umap-7.png
+</button>
+</p>
+<div id="fig-plot_over_umap-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_umap-7.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="med_counts" class="section level3">
 <h3>med_counts</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_umap-8.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_umap-8">
+Past versions of plot_over_umap-8.png
+</button>
+</p>
+<div id="fig-plot_over_umap-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_umap-8.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="plot-over-mds-embedding-with-annotations" class="section level2 tabset">
@@ -716,6 +1086,43 @@ n_clusters      = length(em_list)</code></pre>
 <div id="group_id-1" class="section level3">
 <h3>group_id</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_mds-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_mds-1">
+Past versions of plot_over_mds-1.png
+</button>
+</p>
+<div id="fig-plot_over_mds-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_mds-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="qc_clust-1" class="section level3">
 <h3>QC_clust</h3>
@@ -724,28 +1131,289 @@ n_clusters      = length(em_list)</code></pre>
 <h3>N_cat</h3>
 <pre><code>Warning in brewer.pal(n_cols, &quot;PiYG&quot;): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_mds-2.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_mds-2">
+Past versions of plot_over_mds-2.png
+</button>
+</p>
+<div id="fig-plot_over_mds-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_mds-2.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="mito_cat-1" class="section level3">
 <h3>mito_cat</h3>
 <pre><code>Warning in brewer.pal(n_cols, &quot;PiYG&quot;): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
-<p><img src="figure/02.1-SampleQC.Rmd/plot_over_mds-3.png" width="480" style="display: block; margin: auto;" /><img src="figure/02.1-SampleQC.Rmd/plot_over_mds-4.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="figure/02.1-SampleQC.Rmd/plot_over_mds-3.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_mds-3">
+Past versions of plot_over_mds-3.png
+</button>
+</p>
+<div id="fig-plot_over_mds-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_mds-3.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="counts_cat-1" class="section level3">
 <h3>counts_cat</h3>
+<pre><code>Warning in brewer.pal(n_cols, &quot;PiYG&quot;): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
+<p><img src="figure/02.1-SampleQC.Rmd/plot_over_mds-4.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_mds-4">
+Past versions of plot_over_mds-4.png
+</button>
+</p>
+<div id="fig-plot_over_mds-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_mds-4.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_mds-5.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_mds-5">
+Past versions of plot_over_mds-5.png
+</button>
+</p>
+<div id="fig-plot_over_mds-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_mds-5.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_embeddings(mmd_list, &quot;continuous&quot;, &quot;MDS&quot;)</code></pre>
 </div>
 <div id="log_n-1" class="section level3">
 <h3>log_N</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_mds-6.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_mds-6">
+Past versions of plot_over_mds-6.png
+</button>
+</p>
+<div id="fig-plot_over_mds-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_mds-6.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="med_mito-1" class="section level3">
 <h3>med_mito</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_mds-7.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_mds-7">
+Past versions of plot_over_mds-7.png
+</button>
+</p>
+<div id="fig-plot_over_mds-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_mds-7.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="med_counts-1" class="section level3">
 <h3>med_counts</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_over_mds-8.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_over_mds-8">
+Past versions of plot_over_mds-8.png
+</button>
+</p>
+<div id="fig-plot_over_mds-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_over_mds-8.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -769,26 +1437,248 @@ for (ii in 1:n_clusters) {
 <div id="nsc" class="section level3">
 <h3>1NSC</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_histograms_split-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_histograms_split-1">
+Past versions of plot_histograms_split-1.png
+</button>
+</p>
+<div id="fig-plot_histograms_split-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_histograms_split-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="nsc-1" class="section level3">
 <h3>2NSC</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_histograms_split-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_histograms_split-2">
+Past versions of plot_histograms_split-2.png
+</button>
+</p>
+<div id="fig-plot_histograms_split-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_histograms_split-2.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="nc52" class="section level3">
 <h3>3NC52</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_histograms_split-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_histograms_split-3">
+Past versions of plot_histograms_split-3.png
+</button>
+</p>
+<div id="fig-plot_histograms_split-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_histograms_split-3.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="nc52-1" class="section level3">
 <h3>4NC52</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_histograms_split-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_histograms_split-4">
+Past versions of plot_histograms_split-4.png
+</button>
+</p>
+<div id="fig-plot_histograms_split-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_histograms_split-4.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="nc96" class="section level3">
 <h3>5NC96</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_histograms_split-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_histograms_split-5">
+Past versions of plot_histograms_split-5.png
+</button>
+</p>
+<div id="fig-plot_histograms_split-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_histograms_split-5.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="nc96-1" class="section level3">
 <h3>6NC96</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/plot_histograms_split-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot_histograms_split-6">
+Past versions of plot_histograms_split-6.png
+</button>
+</p>
+<div id="fig-plot_histograms_split-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/plot_histograms_split-6.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -807,6 +1697,43 @@ for (i in 1:n_clusters) {
 <div id="all-1" class="section level3">
 <h3>All</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/outputs_alpha_j_likes-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outputs_alpha_j_likes-1">
+Past versions of outputs_alpha_j_likes-1.png
+</button>
+</p>
+<div id="fig-outputs_alpha_j_likes-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/outputs_alpha_j_likes-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>These plots show the same <span class="math inline">\(\alpha_j\)</span> values, but as biaxials, and equivalently for PCA projections.</p>
 </div>
 </div>
@@ -823,10 +1750,84 @@ for (i in 1:n_clusters) {
 <div id="all-feats" class="section level3">
 <h3>All feats</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/outputs_alpha_j_pca-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outputs_alpha_j_pca-1">
+Past versions of outputs_alpha_j_pca-1.png
+</button>
+</p>
+<div id="fig-outputs_alpha_j_pca-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/outputs_alpha_j_pca-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="all-mito" class="section level3">
 <h3>All mito</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/outputs_alpha_j_pca-2.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outputs_alpha_j_pca-2">
+Past versions of outputs_alpha_j_pca-2.png
+</button>
+</p>
+<div id="fig-outputs_alpha_j_pca-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/outputs_alpha_j_pca-2.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>These plots show the composition of each sample in terms of the <span class="math inline">\(K\)</span> different mixture components, plus outliers.</p>
 </div>
 </div>
@@ -841,6 +1842,43 @@ for (i in 1:n_clusters) {
 <div id="all-2" class="section level3">
 <h3>All</h3>
 <p><img src="figure/02.1-SampleQC.Rmd/outputs_beta_k-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outputs_beta_k-1">
+Past versions of outputs_beta_k-1.png
+</button>
+</p>
+<div id="fig-outputs_beta_k-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02.1-SampleQC.Rmd/outputs_beta_k-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

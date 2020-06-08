@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-27
+<strong>Last updated:</strong> 2020-06-08
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6be1a5aafda94cebab5b9d59dcf579d4011e825ftargetblank6be1a5aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6be1a5aafda94cebab5b9d59dcf579d4011e825f" target="_blank">6be1a5a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree013c877b3899276c8a59b46ff336b57a3ea62a26targetblank013c877a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/013c877b3899276c8a59b46ff336b57a3ea62a26" target="_blank">013c877</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6be1a5aafda94cebab5b9d59dcf579d4011e825ftargetblank6be1a5aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree013c877b3899276c8a59b46ff336b57a3ea62a26targetblank013c877a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6be1a5aafda94cebab5b9d59dcf579d4011e825f" target="_blank">6be1a5a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/013c877b3899276c8a59b46ff336b57a3ea62a26" target="_blank">013c877</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -526,26 +526,45 @@ Ignored files:
     Ignored:    .__workflowr.yml
     Ignored:    ._neural_scRNAseq.Rproj
     Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
     Ignored:    analysis/._.DS_Store
     Ignored:    analysis/._01-preprocessing.Rmd
     Ignored:    analysis/._01-preprocessing.html
     Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._04-clustering.Rmd
+    Ignored:    analysis/._04-clustering.knit.md
     Ignored:    analysis/.__site.yml
     Ignored:    analysis/01-preprocessing_cache/
     Ignored:    analysis/02-1-SampleQC_cache/
+    Ignored:    analysis/02.1-SampleQC_cache/
+    Ignored:    analysis/03-filtering_cache/
+    Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
     Ignored:    data/._metadata.csv
     Ignored:    data/._metadata.xlsx
     Ignored:    data/.smbdeleteAAA17ed8b4b
     Ignored:    data/data_sushi/
+    Ignored:    data/filtered_feature_matrices/
     Ignored:    data/metadata.csv
     Ignored:    data/metadata.xlsx
+    Ignored:    output/.DS_Store
+    Ignored:    output/._.DS_Store
+    Ignored:    output/figures/
     Ignored:    output/sce_01_preprocessing.rds
     Ignored:    output/sce_02_quality_control.rds
+    Ignored:    output/sce_03_filtering.rds
     Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04_clustering.rds
+
+Untracked files:
+    Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  scripts/
 
 Unstaged changes:
+    Modified:   analysis/05-annotation.Rmd
     Modified:   analysis/_site.yml
 
 </code></pre>
@@ -585,6 +604,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/013c877b3899276c8a59b46ff336b57a3ea62a26/analysis/02-quality_control.Rmd" target="_blank">013c877</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+<td>
+use filtered feature matrix of sample 3 and 5
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/1230f084e4ff4a62804f1043579a1e5872955e48/docs/02-quality_control.html" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -717,19 +770,19 @@ sce$subsets_Mt_fraction_logit &lt;- qlogis(sce$subsets_Mt_fraction + 0.001)
 # library size
 summary(sce$sum)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    500    2362    4626    6172    7710   78841 </code></pre>
+    500    4071    5871    7816    9338   89589 </code></pre>
 <pre class="r"><code># number of detected genes per cell
 summary(sce$detected)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-     32    1390    2145    2362    3103    8593 </code></pre>
+     40    1956    2573    2834    3527    9218 </code></pre>
 <pre class="r"><code># percentage of counts that come from mitochondrial genes:
 summary(sce$subsets_Mt_percent)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  0.000   3.704   4.861   5.927   6.604  98.483 </code></pre>
+  0.000   3.616   4.623   5.480   5.900  98.483 </code></pre>
 <div id="diagnostic-plots" class="section level3">
 <h3>Diagnostic plots</h3>
 <p>The number of counts per cell:</p>
-<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;)</code></pre>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;) + scale_y_log10()</code></pre>
 <p><img src="figure/02-quality_control.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
@@ -755,6 +808,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02-quality_control.Rmd/unnamed-chunk-4-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/018ad56f22fcc1eac13c1d81af0cdf9a3681ba35/docs/figure/02-quality_control.Rmd/unnamed-chunk-4-1.png" target="_blank">018ad56</a>
 </td>
 <td>
@@ -769,7 +833,7 @@ khembach
 </div>
 </div>
 <p>The number of genes:</p>
-<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;)</code></pre>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;) + scale_y_log10() </code></pre>
 <p><img src="figure/02-quality_control.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
@@ -793,6 +857,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02-quality_control.Rmd/unnamed-chunk-5-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/018ad56f22fcc1eac13c1d81af0cdf9a3681ba35/docs/figure/02-quality_control.Rmd/unnamed-chunk-5-1.png" target="_blank">018ad56</a>
@@ -833,6 +908,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02-quality_control.Rmd/unnamed-chunk-6-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/018ad56f22fcc1eac13c1d81af0cdf9a3681ba35/docs/figure/02-quality_control.Rmd/unnamed-chunk-6-1.png" target="_blank">018ad56</a>
@@ -887,6 +973,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02-quality_control.Rmd/unnamed-chunk-7-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/d56ccca5df418a2406e0e90388b53871ea2badc8/docs/figure/02-quality_control.Rmd/unnamed-chunk-7-1.png" target="_blank">d56ccca</a>
 </td>
 <td>
@@ -937,6 +1034,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/1230f084e4ff4a62804f1043579a1e5872955e48/docs/figure/02-quality_control.Rmd/unnamed-chunk-8-1.png" target="_blank">1230f08</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-27
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/d56ccca5df418a2406e0e90388b53871ea2badc8/docs/figure/02-quality_control.Rmd/unnamed-chunk-8-1.png" target="_blank">d56ccca</a>
 </td>
 <td>
@@ -952,6 +1060,9 @@ khembach
 </div>
 <p>We plot the top 20 genes with highest expression. Mitochondrial genes, actin, ribosomal proteins or MALAT1 are examples of genes that are expected to have very high expression.</p>
 <pre class="r"><code>plotHighestExprs(sce, n = 20)</code></pre>
+<pre><code>Warning in sweep(sub_mat, 2, colSums2(exprs_mat), &quot;/&quot;, check.margin = FALSE): &#39;check.margin&#39; is ignored when &#39;x&#39; is a DelayedArray object or
+  derivative</code></pre>
+<p><img src="figure/02-quality_control.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="save-data-to-rds" class="section level2">
@@ -1004,31 +1115,32 @@ loaded via a namespace (and not attached):
  [9] lattice_0.20-41           glue_1.4.1               
 [11] beachmat_2.4.0            digest_0.6.25            
 [13] promises_1.1.0            XVector_0.28.0           
-[15] colorspace_1.4-1          htmltools_0.4.0          
-[17] httpuv_1.5.2              Matrix_1.2-18            
-[19] pkgconfig_2.0.3           zlibbioc_1.34.0          
-[21] purrr_0.3.4               whisker_0.4              
-[23] later_1.0.0               BiocParallel_1.22.0      
-[25] git2r_0.27.1              tibble_3.0.1             
-[27] farver_2.0.3              ellipsis_0.3.1           
-[29] withr_2.2.0               magrittr_1.5             
-[31] crayon_1.3.4              evaluate_0.14            
-[33] fs_1.4.1                  MASS_7.3-51.6            
-[35] beeswarm_0.2.3            tools_4.0.0              
-[37] lifecycle_0.2.0           stringr_1.4.0            
-[39] Rhdf5lib_1.10.0           munsell_0.5.0            
-[41] irlba_2.3.3               isoband_0.2.1            
-[43] compiler_4.0.0            rsvd_1.0.3               
-[45] rlang_0.4.6               grid_4.0.0               
-[47] RCurl_1.98-1.2            BiocNeighbors_1.6.0      
-[49] bitops_1.0-6              labeling_0.3             
-[51] rmarkdown_2.1             gtable_0.3.0             
-[53] codetools_0.2-16          R6_2.4.1                 
-[55] gridExtra_2.3             knitr_1.28               
-[57] dplyr_0.8.5               rprojroot_1.3-2          
-[59] stringi_1.4.6             ggbeeswarm_0.6.0         
-[61] Rcpp_1.0.4.6              vctrs_0.3.0              
-[63] tidyselect_1.1.0          xfun_0.14                </code></pre>
+[15] colorspace_1.4-1          cowplot_1.0.0            
+[17] htmltools_0.4.0           httpuv_1.5.2             
+[19] Matrix_1.2-18             pkgconfig_2.0.3          
+[21] zlibbioc_1.34.0           purrr_0.3.4              
+[23] whisker_0.4               later_1.0.0              
+[25] BiocParallel_1.22.0       git2r_0.27.1             
+[27] tibble_3.0.1              farver_2.0.3             
+[29] ellipsis_0.3.1            withr_2.2.0              
+[31] magrittr_1.5              crayon_1.3.4             
+[33] evaluate_0.14             fs_1.4.1                 
+[35] MASS_7.3-51.6             beeswarm_0.2.3           
+[37] tools_4.0.0               lifecycle_0.2.0          
+[39] stringr_1.4.0             Rhdf5lib_1.10.0          
+[41] munsell_0.5.0             irlba_2.3.3              
+[43] isoband_0.2.1             compiler_4.0.0           
+[45] rsvd_1.0.3                rlang_0.4.6              
+[47] grid_4.0.0                RCurl_1.98-1.2           
+[49] BiocNeighbors_1.6.0       bitops_1.0-6             
+[51] labeling_0.3              rmarkdown_2.1            
+[53] gtable_0.3.0              codetools_0.2-16         
+[55] R6_2.4.1                  gridExtra_2.3            
+[57] knitr_1.28                dplyr_0.8.5              
+[59] rprojroot_1.3-2           stringi_1.4.6            
+[61] ggbeeswarm_0.6.0          Rcpp_1.0.4.6             
+[63] vctrs_0.3.0               tidyselect_1.1.0         
+[65] xfun_0.14                </code></pre>
 </div>
 </div>
 
