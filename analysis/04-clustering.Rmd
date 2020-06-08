@@ -145,6 +145,31 @@ ps <- lapply(c("sample_id", "group_id", "ident"), function(u) {
 plot_grid(plotlist = ps, ncol = 1)
 ```
 
+## QC on DR plots {.tabset}
+
+```{r DR-QC, results = "asis", fig.width = 12}
+cs <- sample(colnames(so), 1e4) ## subsample cells
+.plot_features <- function(so, dr, id) {
+    FeaturePlot(so, cells = cs, features = id, reduction = dr, pt.size = 0.4, 
+                cols = c("grey", "blue")) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+}
+ids <- c("sum", "detected", "subsets_Mt_percent")
+for (id in ids) {
+    cat("## ", id, "\n")
+    p1 <- .plot_features(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none") + ggtitle("tSNE")
+    p2 <- .plot_features(so, "umap", id) + theme(legend.position = "none") + 
+      ggtitle("UMAP")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
 
 ## Save Seurat object to RDS
 
