@@ -45,12 +45,12 @@ summary(sce$subsets_Mt_percent)
 
 The number of counts per cell:
 ```{r}
-plotColData(sce, x = "sample_id", y = "sum")
+plotColData(sce, x = "sample_id", y = "sum") + scale_y_log10()
 ```
 
 The number of genes:
 ```{r}
-plotColData(sce, x = "sample_id", y = "detected")
+plotColData(sce, x = "sample_id", y = "detected") + scale_y_log10() 
 ```
 
 The percentage of mitochondrial genes:
@@ -91,7 +91,7 @@ ggplot(cd, aes(x = sum, y = subsets_Mt_fraction)) +
 ```
 
 We plot the top 20 genes with highest expression. Mitochondrial genes, actin, ribosomal proteins or MALAT1 are examples of genes that are expected to have very high expression. 
-```{r, dev="png", eval = FALSE}
+```{r, dev="png"}
 plotHighestExprs(sce, n = 20)
 ```
 

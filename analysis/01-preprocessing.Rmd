@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
-knitr::opts_chunk$set(autodep = TRUE, cache = TRUE, 
+knitr::opts_chunk$set(autodep = TRUE, cache = TRUE, dev = "png",
                       dev.args = list(png = list(type = "cairo")))
 ```
 
@@ -25,7 +25,7 @@ library(BiocParallel)
 
 ## Importing CellRanger output and metadata
 ```{r import}
-fs <- dir(path = "data/data_sushi/CellRangerCount_42721_2020-01-16--13-26-19", 
+fs <- dir(path = "data/filtered_feature_matrices", 
                 pattern = "^[1-6]N*", recursive = FALSE, full.names = TRUE)
 names(fs) <- basename(fs)
 ## we want to analyse the count matrix
