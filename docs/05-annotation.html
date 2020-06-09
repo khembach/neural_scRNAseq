@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-29
+<strong>Last updated:</strong> 2020-06-09
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree97d5a52e05366f9053223a3c456d563d00891f5atargetblank97d5a52a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/97d5a52e05366f9053223a3c456d563d00891f5a" target="_blank">97d5a52</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7cca30c6a9eb28e96ada238d63d751c51dbc470etargetblank7cca30ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/7cca30c6a9eb28e96ada238d63d751c51dbc470e" target="_blank">7cca30c</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree97d5a52e05366f9053223a3c456d563d00891f5atargetblank97d5a52a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7cca30c6a9eb28e96ada238d63d751c51dbc470etargetblank7cca30ca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/97d5a52e05366f9053223a3c456d563d00891f5a" target="_blank">97d5a52</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/7cca30c6a9eb28e96ada238d63d751c51dbc470e" target="_blank">7cca30c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -540,13 +540,14 @@ Ignored files:
     Ignored:    analysis/02.1-SampleQC_cache/
     Ignored:    analysis/03-filtering_cache/
     Ignored:    analysis/04-clustering_cache/
-    Ignored:    analysis/figure/
+    Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
     Ignored:    data/._metadata.csv
     Ignored:    data/._metadata.xlsx
     Ignored:    data/.smbdeleteAAA17ed8b4b
     Ignored:    data/data_sushi/
+    Ignored:    data/filtered_feature_matrices/
     Ignored:    data/metadata.csv
     Ignored:    data/metadata.xlsx
     Ignored:    output/.DS_Store
@@ -559,6 +560,7 @@ Ignored files:
     Ignored:    output/so_04_clustering.rds
 
 Untracked files:
+    Untracked:  analysis/sample5_QC.Rmd
     Untracked:  scripts/
 
 Unstaged changes:
@@ -601,6 +603,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/a4d0e04302b05ad6152378accb91e9c994394e42/docs/05-annotation.html" target="_blank">a4d0e04</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-29
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -652,11 +671,11 @@ colData(sce) &lt;- as.data.frame(colData(sce)) %&gt;%
 <pre class="r"><code>cluster_cols &lt;- grep(&quot;res.[0-9]&quot;, colnames(colData(sce)), value = TRUE)
 sapply(colData(sce)[cluster_cols], nlevels)</code></pre>
 <pre><code>integrated_snn_res.0.1 integrated_snn_res.0.2 integrated_snn_res.0.4 
-                     9                     12                     18 
+                     8                     12                     17 
 integrated_snn_res.0.8   integrated_snn_res.1 integrated_snn_res.1.2 
-                    25                     31                     35 
+                    24                     29                     31 
   integrated_snn_res.2 
-                    41 </code></pre>
+                    39 </code></pre>
 </div>
 <div id="cluster-sample-counts" class="section level1">
 <h1>Cluster-sample counts</h1>
@@ -666,25 +685,24 @@ so@meta.data$cluster_id &lt;- Idents(so)
 sce$cluster_id &lt;- Idents(so)
 (n_cells &lt;- table(sce$cluster_id, sce$sample_id))</code></pre>
 <pre><code>    
-      1NSC  2NSC 3NC52 4NC52 5NC96 6NC96
-  0   6099  6218    97    68   906   104
-  1     10    18    29    20 10244   117
-  2     11     7  1827  1260   357   561
-  3     55    55  1048   851   457   844
-  4      0     0  1361   904   212   336
-  5    721   700   292   226   466   332
-  6    174   174   629   606   749   372
-  7      0     0  1154   866   219   451
-  8      1     0   906   638   493   550
-  9      6     5   716   501   126   222
-  10     0     0   685   467   154   227
-  11   451   475    95    95   124    96
-  12   595   535    53    45    18     9
-  13   161   146   319   266   138   171
-  14     0     0   359   325    80   169
-  15     0     0   270   222   143   174
-  16    68    79    48    43   271    20
-  17     2     4    36    43    15    37</code></pre>
+     1NSC 2NSC 3NC52 4NC52 5NC96 6NC96
+  0  4850 5041   186    98   308    82
+  1     0    0  1552  1279   492   627
+  2  1037 1011   337   288   563   391
+  3    12   10   572   383  1806   372
+  4  1351 1221    69    56    76    16
+  5     0    0  1017   847   380   415
+  6     2    9   628   620   528   774
+  7   253  236   577   606   376   369
+  8     0    0  1007   867   250   285
+  9     0    0   924   764   327   379
+  10  688  716   130   121   188   119
+  11    3    3   582   524   211   248
+  12    0    0   365   281   186   235
+  13    0    0   339   247   141   174
+  14    1    1   205   260   210   194
+  15   51   70   148   153    64    89
+  16   83   90    49    44    83    24</code></pre>
 </div>
 <div id="relative-cluster-abundances" class="section level1">
 <h1>Relative cluster-abundances</h1>
@@ -704,6 +722,43 @@ Heatmap(mat,
         grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
             gp = gpar(col = &quot;white&quot;, fontsize = 8)))</code></pre>
 <p><img src="figure/05-annotation.Rmd/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a4d0e04302b05ad6152378accb91e9c994394e42/docs/figure/05-annotation.Rmd/unnamed-chunk-3-1.png" target="_blank">a4d0e04</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-29
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="dr-colored-by-cluster-id" class="section level1 tabset">
 <h1>DR colored by cluster ID</h1>
@@ -728,14 +783,125 @@ for (id in ids) {
 <div id="cluster_id" class="section level2">
 <h2>cluster_id</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-1">
+Past versions of dim-red-1.png
+</button>
+</p>
+<div id="fig-dim-red-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a4d0e04302b05ad6152378accb91e9c994394e42/docs/figure/05-annotation.Rmd/dim-red-1.png" target="_blank">a4d0e04</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-29
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="group_id" class="section level2">
 <h2>group_id</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-2">
+Past versions of dim-red-2.png
+</button>
+</p>
+<div id="fig-dim-red-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a4d0e04302b05ad6152378accb91e9c994394e42/docs/figure/05-annotation.Rmd/dim-red-2.png" target="_blank">a4d0e04</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-29
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="sample_id" class="section level2">
 <h2>sample_id</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-3">
+Past versions of dim-red-3.png
+</button>
+</p>
+<div id="fig-dim-red-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a4d0e04302b05ad6152378accb91e9c994394e42/docs/figure/05-annotation.Rmd/dim-red-3.png" target="_blank">a4d0e04</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-29
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
