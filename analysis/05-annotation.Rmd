@@ -28,6 +28,7 @@ library(viridis)
 library(scran)
 library(Seurat)
 library(SingleCellExperiment)
+library(stringr)
 ```
 
 # Load data & convert to SCE
@@ -77,6 +78,35 @@ Heatmap(mat,
             gp = gpar(col = "white", fontsize = 8)))
 ```
 
+
+# Cell cycle
+
+We assign each cell a cell cycle scores and visualize them in the DR plots. 
+We use known G2/M and S phase markers that come with the `Seurat` package. The markers are anticorrelated and cells that to not express the markers are supposed to be in G1 phase.
+```{r}
+# A list of cell cycle markers, from Tirosh et al, 2015, is loaded with Seurat.  We can
+# segregate this list into markers of G2/M phase and markers of S phase
+(s_genes <- cc.genes$s.genes)
+(g2m_genes <- cc.genes$g2m.genes)
+# match the marker genes to the features
+m <- match(s_genes, str_split(rownames(GetAssayData(so, assay = "RNA")), 
+                              pattern = "\\.", simplify = TRUE)[,2])
+s_genes <- rownames(GetAssayData(so, assay = "RNA"))[m]
+s_genes <- s_genes[!is.na(s_genes)] 
+m <- match(g2m_genes, str_split(rownames(GetAssayData(so, assay = "RNA")), 
+                              pattern = "\\.", simplify = TRUE)[,2])
+g2m_genes <- rownames(GetAssayData(so, assay = "RNA"))[m]
+g2m_genes <- g2m_genes[!is.na(g2m_genes)] 
+
+# change the default assay to the raw counts
+DefaultAssay(so) <- "RNA"
+so <- CellCycleScoring(so, s.features = s_genes, g2m.features = g2m_genes, 
+                       set.ident = TRUE)
+# change back to integrated
+DefaultAssay(so) <- "integrated"
+```
+
+
 # DR colored by cluster ID {.tabset}
 
 ```{r dim-red, results = "asis", fig.width = 12}
@@ -86,7 +116,7 @@ cs <- sample(colnames(so), 5e3)
         guides(col = guide_legend(nrow = 11, 
             override.aes = list(size = 3, alpha = 1))) +
         theme_void() + theme(aspect.ratio = 1)
-ids <- c("cluster_id", "group_id", "sample_id")
+ids <- c("cluster_id", "group_id", "sample_id", "Phase")
 for (id in ids) {
     cat("## ", id, "\n")
     p1 <- .plot_dr(so, "tsne", id)
@@ -99,4 +129,37 @@ for (id in ids) {
     cat("\n\n")
 }
 ```
+
+# Find markers using `scran`
+
+We identify candidate marker genes for each cluster that enable a separation of that group from all other groups.
+
+```{r scran-findMarkers}
+scran_markers <- findMarkers(sce, 
+    groups = sce$cluster_id, block = sce$sample_id, 
+    direction = "up", lfc = 2, full.stats = TRUE)
+```
+
+## Heatmap of mean marker-exprs. by cluster
+We aggregate the cells to pseudobulks and plot the average expression of the condidate marker genes in each of the clusters. 
+```{r scran-markers-heatmap, fig.width = 12, fig.height = 6}
+gs <- lapply(scran_markers, function(u) rownames(u)[u$Top == 1])
+## candidate cluster markers
+lapply(gs, function(x) str_split(x, pattern = "\\.", simplify = TRUE)[,2])
+sub <- sce[unique(unlist(gs)), ]
+pbs <- aggregateData(sub, assay = "logcounts", by = "cluster_id", fun = "mean")
+mat <- t(muscat:::.scale(assay(pbs)))
+## remove the Ensembl ID from the gene names
+colnames(mat) <- str_split(colnames(mat), pattern = "\\.", simplify = TRUE)[,2] 
+Heatmap(mat,
+    name = "scaled avg.\nexpression",
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "cluster_id",
+    rect_gp = gpar(col = "white"))
+```
+
+
 
