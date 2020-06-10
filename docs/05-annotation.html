@@ -394,7 +394,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -403,7 +403,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -412,10 +412,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-06-09
+<strong>Last updated:</strong> 2020-06-10
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -479,12 +479,42 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongdetected"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>Cache:</strong> detected </a>
 </p>
 </div>
-<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div id="strongCachestrongdetected" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+The following chunks had caches available:
+<ul>
+<li>
+dim-red
+</li>
+<li>
+load-data
+</li>
+<li>
+load-libs
+</li>
+<li>
+scran-findMarkers
+</li>
+<li>
+scran-markers-heatmap
+</li>
+<li>
+session-info-chunk-inserted-by-workflowr
+</li>
+<li>
+unnamed-chunk-1
+</li>
+<li>
+unnamed-chunk-2
+</li>
+<li>
+unnamed-chunk-3
+</li>
+</ul>
+<p>To ensure reproducibility of the results, delete the cache directory <code>05-annotation_cache</code> and re-run the analysis. To have workflowr automatically delete the cache directory prior to building the file, set <code>delete_cache = TRUE</code> when running <code>wflow_build()</code> or <code>wflow_publish()</code>.</p>
 </div>
 </div>
 </div>
@@ -503,16 +533,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7cca30c6a9eb28e96ada238d63d751c51dbc470etargetblank7cca30ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/7cca30c6a9eb28e96ada238d63d751c51dbc470e" target="_blank">7cca30c</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeb6767a67e1f5e494c3bb27a0eee656dc5298a4actargetblankb6767a6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/b6767a67e1f5e494c3bb27a0eee656dc5298a4ac" target="_blank">b6767a6</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7cca30c6a9eb28e96ada238d63d751c51dbc470etargetblank7cca30ca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeb6767a67e1f5e494c3bb27a0eee656dc5298a4actargetblankb6767a6a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/7cca30c6a9eb28e96ada238d63d751c51dbc470e" target="_blank">7cca30c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/b6767a67e1f5e494c3bb27a0eee656dc5298a4ac" target="_blank">b6767a6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -540,6 +570,7 @@ Ignored files:
     Ignored:    analysis/02.1-SampleQC_cache/
     Ignored:    analysis/03-filtering_cache/
     Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/05-annotation_cache/
     Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
@@ -605,6 +636,40 @@ Message
 <tbody>
 <tr>
 <td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/b6767a67e1f5e494c3bb27a0eee656dc5298a4ac/analysis/05-annotation.Rmd" target="_blank">b6767a6</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-10
+</td>
+<td>
+wflow_publish(“analysis/05-annotation.Rmd”, verbose = TRUE)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/419ac731213a1080529b48e43a1e0494cf7a10a5/docs/05-annotation.html" target="_blank">419ac73</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 html
 </td>
 <td>
@@ -656,7 +721,8 @@ library(RColorBrewer)
 library(viridis)
 library(scran)
 library(Seurat)
-library(SingleCellExperiment)</code></pre>
+library(SingleCellExperiment)
+library(stringr)</code></pre>
 </div>
 <div id="load-data-convert-to-sce" class="section level1">
 <h1>Load data &amp; convert to SCE</h1>
@@ -760,6 +826,46 @@ khembach
 </div>
 </div>
 </div>
+<div id="cell-cycle" class="section level1">
+<h1>Cell cycle</h1>
+<p>We assign each cell a cell cycle scores and visualize them in the DR plots. We use known G2/M and S phase markers that come with the <code>Seurat</code> package. The markers are anticorrelated and cells that to not express the markers are supposed to be in G1 phase.</p>
+<pre class="r"><code># A list of cell cycle markers, from Tirosh et al, 2015, is loaded with Seurat.  We can
+# segregate this list into markers of G2/M phase and markers of S phase
+(s_genes &lt;- cc.genes$s.genes)</code></pre>
+<pre><code> [1] &quot;MCM5&quot;     &quot;PCNA&quot;     &quot;TYMS&quot;     &quot;FEN1&quot;     &quot;MCM2&quot;     &quot;MCM4&quot;    
+ [7] &quot;RRM1&quot;     &quot;UNG&quot;      &quot;GINS2&quot;    &quot;MCM6&quot;     &quot;CDCA7&quot;    &quot;DTL&quot;     
+[13] &quot;PRIM1&quot;    &quot;UHRF1&quot;    &quot;MLF1IP&quot;   &quot;HELLS&quot;    &quot;RFC2&quot;     &quot;RPA2&quot;    
+[19] &quot;NASP&quot;     &quot;RAD51AP1&quot; &quot;GMNN&quot;     &quot;WDR76&quot;    &quot;SLBP&quot;     &quot;CCNE2&quot;   
+[25] &quot;UBR7&quot;     &quot;POLD3&quot;    &quot;MSH2&quot;     &quot;ATAD2&quot;    &quot;RAD51&quot;    &quot;RRM2&quot;    
+[31] &quot;CDC45&quot;    &quot;CDC6&quot;     &quot;EXO1&quot;     &quot;TIPIN&quot;    &quot;DSCC1&quot;    &quot;BLM&quot;     
+[37] &quot;CASP8AP2&quot; &quot;USP1&quot;     &quot;CLSPN&quot;    &quot;POLA1&quot;    &quot;CHAF1B&quot;   &quot;BRIP1&quot;   
+[43] &quot;E2F8&quot;    </code></pre>
+<pre class="r"><code>(g2m_genes &lt;- cc.genes$g2m.genes)</code></pre>
+<pre><code> [1] &quot;HMGB2&quot;   &quot;CDK1&quot;    &quot;NUSAP1&quot;  &quot;UBE2C&quot;   &quot;BIRC5&quot;   &quot;TPX2&quot;    &quot;TOP2A&quot;  
+ [8] &quot;NDC80&quot;   &quot;CKS2&quot;    &quot;NUF2&quot;    &quot;CKS1B&quot;   &quot;MKI67&quot;   &quot;TMPO&quot;    &quot;CENPF&quot;  
+[15] &quot;TACC3&quot;   &quot;FAM64A&quot;  &quot;SMC4&quot;    &quot;CCNB2&quot;   &quot;CKAP2L&quot;  &quot;CKAP2&quot;   &quot;AURKB&quot;  
+[22] &quot;BUB1&quot;    &quot;KIF11&quot;   &quot;ANP32E&quot;  &quot;TUBB4B&quot;  &quot;GTSE1&quot;   &quot;KIF20B&quot;  &quot;HJURP&quot;  
+[29] &quot;CDCA3&quot;   &quot;HN1&quot;     &quot;CDC20&quot;   &quot;TTK&quot;     &quot;CDC25C&quot;  &quot;KIF2C&quot;   &quot;RANGAP1&quot;
+[36] &quot;NCAPD2&quot;  &quot;DLGAP5&quot;  &quot;CDCA2&quot;   &quot;CDCA8&quot;   &quot;ECT2&quot;    &quot;KIF23&quot;   &quot;HMMR&quot;   
+[43] &quot;AURKA&quot;   &quot;PSRC1&quot;   &quot;ANLN&quot;    &quot;LBR&quot;     &quot;CKAP5&quot;   &quot;CENPE&quot;   &quot;CTCF&quot;   
+[50] &quot;NEK2&quot;    &quot;G2E3&quot;    &quot;GAS2L3&quot;  &quot;CBX5&quot;    &quot;CENPA&quot;  </code></pre>
+<pre class="r"><code># match the marker genes to the features
+m &lt;- match(s_genes, str_split(rownames(GetAssayData(so, assay = &quot;RNA&quot;)), 
+                              pattern = &quot;\\.&quot;, simplify = TRUE)[,2])
+s_genes &lt;- rownames(GetAssayData(so, assay = &quot;RNA&quot;))[m]
+s_genes &lt;- s_genes[!is.na(s_genes)] 
+m &lt;- match(g2m_genes, str_split(rownames(GetAssayData(so, assay = &quot;RNA&quot;)), 
+                              pattern = &quot;\\.&quot;, simplify = TRUE)[,2])
+g2m_genes &lt;- rownames(GetAssayData(so, assay = &quot;RNA&quot;))[m]
+g2m_genes &lt;- g2m_genes[!is.na(g2m_genes)] 
+
+# change the default assay to the raw counts
+DefaultAssay(so) &lt;- &quot;RNA&quot;
+so &lt;- CellCycleScoring(so, s.features = s_genes, g2m.features = g2m_genes, 
+                       set.ident = TRUE)
+# change back to integrated
+DefaultAssay(so) &lt;- &quot;integrated&quot;</code></pre>
+</div>
 <div id="dr-colored-by-cluster-id" class="section level1 tabset">
 <h1>DR colored by cluster ID</h1>
 <pre class="r"><code>cs &lt;- sample(colnames(so), 5e3)
@@ -768,7 +874,7 @@ khembach
         guides(col = guide_legend(nrow = 11, 
             override.aes = list(size = 3, alpha = 1))) +
         theme_void() + theme(aspect.ratio = 1)
-ids &lt;- c(&quot;cluster_id&quot;, &quot;group_id&quot;, &quot;sample_id&quot;)
+ids &lt;- c(&quot;cluster_id&quot;, &quot;group_id&quot;, &quot;sample_id&quot;, &quot;Phase&quot;)
 for (id in ids) {
     cat(&quot;## &quot;, id, &quot;\n&quot;)
     p1 &lt;- .plot_dr(so, &quot;tsne&quot;, id)
@@ -805,6 +911,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/419ac731213a1080529b48e43a1e0494cf7a10a5/docs/figure/05-annotation.Rmd/dim-red-1.png" target="_blank">419ac73</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-09
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a4d0e04302b05ad6152378accb91e9c994394e42/docs/figure/05-annotation.Rmd/dim-red-1.png" target="_blank">a4d0e04</a>
@@ -848,6 +965,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/419ac731213a1080529b48e43a1e0494cf7a10a5/docs/figure/05-annotation.Rmd/dim-red-2.png" target="_blank">419ac73</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-09
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a4d0e04302b05ad6152378accb91e9c994394e42/docs/figure/05-annotation.Rmd/dim-red-2.png" target="_blank">a4d0e04</a>
 </td>
 <td>
@@ -889,6 +1017,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/419ac731213a1080529b48e43a1e0494cf7a10a5/docs/figure/05-annotation.Rmd/dim-red-3.png" target="_blank">419ac73</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-09
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a4d0e04302b05ad6152378accb91e9c994394e42/docs/figure/05-annotation.Rmd/dim-red-3.png" target="_blank">a4d0e04</a>
 </td>
 <td>
@@ -902,6 +1041,89 @@ khembach
 </table>
 </div>
 </div>
+</div>
+<div id="phase" class="section level2">
+<h2>Phase</h2>
+<p><img src="figure/05-annotation.Rmd/dim-red-4.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="find-markers-using-scran" class="section level1">
+<h1>Find markers using <code>scran</code></h1>
+<p>We identify candidate marker genes for each cluster that enable a separation of that group from all other groups.</p>
+<pre class="r"><code>scran_markers &lt;- findMarkers(sce, 
+    groups = sce$cluster_id, block = sce$sample_id, 
+    direction = &quot;up&quot;, lfc = 2, full.stats = TRUE)</code></pre>
+<div id="heatmap-of-mean-marker-exprs.-by-cluster" class="section level2">
+<h2>Heatmap of mean marker-exprs. by cluster</h2>
+<p>We aggregate the cells to pseudobulks and plot the average expression of the condidate marker genes in each of the clusters.</p>
+<pre class="r"><code>gs &lt;- lapply(scran_markers, function(u) rownames(u)[u$Top == 1])
+## candidate cluster markers
+lapply(gs, function(x) str_split(x, pattern = &quot;\\.&quot;, simplify = TRUE)[,2])</code></pre>
+<pre><code>$`0`
+[1] &quot;SAMD11&quot; &quot;NEFL&quot;   &quot;VIM&quot;    &quot;CKB&quot;    &quot;TTYH1&quot; 
+
+$`1`
+[1] &quot;SAMD11&quot; &quot;STMN2&quot;  &quot;CRABP1&quot; &quot;ZFHX3&quot;  &quot;HOXB8&quot;  &quot;MT-CO2&quot;
+
+$`2`
+[1] &quot;S100A10&quot; &quot;S100A11&quot; &quot;CLU&quot;     &quot;VIM&quot;     &quot;TAGLN&quot;   &quot;CKB&quot;     &quot;TPM1&quot;   
+
+$`3`
+[1] &quot;SAMD11&quot;  &quot;STMN2&quot;   &quot;SNCG&quot;    &quot;RTN1&quot;    &quot;HOXB5&quot;   &quot;ONECUT2&quot; &quot;PCP4&quot;   
+[8] &quot;MT-CO2&quot; 
+
+$`4`
+[1] &quot;HMGB2&quot; &quot;VIM&quot;   &quot;CKB&quot;   &quot;TOP2A&quot;
+
+$`5`
+[1] &quot;STMN2&quot;  &quot;RTN1&quot;   &quot;MEIS2&quot;  &quot;HOXB9&quot;  &quot;PCP4&quot;   &quot;MT-ND3&quot;
+
+$`6`
+[1] &quot;C1orf61&quot; &quot;SPP1&quot;    &quot;FABP5&quot;   &quot;VIM&quot;     &quot;HOXB9&quot;   &quot;TTYH1&quot;   &quot;MT-ND4&quot; 
+
+$`7`
+[1] &quot;CLU&quot;   &quot;LY6H&quot;  &quot;VIM&quot;   &quot;TAGLN&quot; &quot;DLK1&quot;  &quot;CKB&quot;   &quot;METRN&quot;
+
+$`8`
+[1] &quot;SAMD11&quot; &quot;TAC1&quot;   &quot;STMN2&quot;  &quot;ZFHX3&quot;  &quot;HOXB8&quot;  &quot;LAMP5&quot;  &quot;MT-CO2&quot;
+
+$`9`
+[1] &quot;SAMD11&quot; &quot;FOXP1&quot;  &quot;STMN2&quot;  &quot;PCP4&quot;  
+
+$`10`
+[1] &quot;SAMD11&quot;   &quot;VGF&quot;      &quot;EIF4EBP1&quot; &quot;ANXA1&quot;    &quot;VIM&quot;      &quot;CKB&quot;      &quot;FTL&quot;     
+
+$`11`
+[1] &quot;ENC1&quot;    &quot;STMN2&quot;   &quot;NFIB&quot;    &quot;HOXB8&quot;   &quot;HOXB9&quot;   &quot;MT-RNR2&quot;
+
+$`12`
+[1] &quot;TAC1&quot;  &quot;STMN2&quot;
+
+$`13`
+[1] &quot;STMN2&quot;  &quot;SNCG&quot;   &quot;MPPED2&quot; &quot;PCP4&quot;  
+
+$`14`
+[1] &quot;STMN2&quot; &quot;DDIT3&quot;
+
+$`15`
+[1] &quot;C1orf61&quot; &quot;HES6&quot;    &quot;SOX2&quot;    &quot;VIM&quot;     &quot;CKB&quot;    
+
+$`16`
+[1] &quot;S100A11&quot; &quot;COL3A1&quot;  &quot;COL1A1&quot; </code></pre>
+<pre class="r"><code>sub &lt;- sce[unique(unlist(gs)), ]
+pbs &lt;- aggregateData(sub, assay = &quot;logcounts&quot;, by = &quot;cluster_id&quot;, fun = &quot;mean&quot;)
+mat &lt;- t(muscat:::.scale(assay(pbs)))
+## remove the Ensembl ID from the gene names
+colnames(mat) &lt;- str_split(colnames(mat), pattern = &quot;\\.&quot;, simplify = TRUE)[,2] 
+Heatmap(mat,
+    name = &quot;scaled avg.\nexpression&quot;,
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cluster_id&quot;,
+    rect_gp = gpar(col = &quot;white&quot;))</code></pre>
+<p><img src="figure/05-annotation.Rmd/scran-markers-heatmap-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
