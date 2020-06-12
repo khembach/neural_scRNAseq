@@ -185,12 +185,9 @@ labs <- lapply(fs, function(x) gsub(".*\\.", "",x))
 # split cells by cluster
 cs_by_k <- split(colnames(sce), sce$cluster_id)
 # compute cluster-marker means
-ms_by_cluster <- lapply(fs, function(gs) {
-    cat(gs)
-    vapply(cs_by_k, function(i)
+ms_by_cluster <- lapply(fs, function(gs) vapply(cs_by_k, function(i)
         Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
-        numeric(length(gs)))}
-    )
+        numeric(length(gs))))
 # prep. for plotting & scale b/w 0 and 1
 mat <- do.call("rbind", ms_by_cluster)
 mat <- muscat:::.scale(mat)
