@@ -196,8 +196,23 @@ cols <- muscat:::.cluster_colors[seq_along(fs)]
 cols <- setNames(cols, names(fs))
 row_anno <- rowAnnotation(
     df = data.frame(label = factor(ks, levels = names(fs))),
-    col = list(label = cols), gp = gpar(col = "white")) 
-Heatmap(mat,
+    col = list(label = cols), gp = gpar(col = "white"))
+# percentage of cells from each of the samples per cluster
+sample_props <- prop.table(n_cells, margin = 1)
+col_mat <- as.matrix(unclass(sample_props))
+sample_cols <- c("#882255", "#CC6677", "#11588A", "#88CCEE", "#117733", "#44AA99")
+sample_cols <- setNames(sample_cols, colnames(col_mat))
+col_anno <- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, "cm"),
+                               border = FALSE),
+    annotation_label = "fraction of sample\nin cluster",
+    gap = unit(10, "points"))
+col_lgd <- Legend(labels = names(sample_cols),
+       title = "sample",
+       legend_gp = gpar(fill = sample_cols))
+
+hm <- Heatmap(mat,
     name = "scaled avg.\nexpression",
     col = viridis(10),
     cluster_rows = FALSE,
@@ -205,8 +220,13 @@ Heatmap(mat,
     row_names_side = "left",
     column_title = "cluster_id",
     column_title_side = "bottom",
+    column_names_side = "bottom",
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
     rect_gp = gpar(col = "white"),
-    left_annotation = row_anno)
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))
 ```
 
 
