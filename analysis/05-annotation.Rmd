@@ -29,6 +29,7 @@ library(scran)
 library(Seurat)
 library(SingleCellExperiment)
 library(stringr)
+library(RCurl)
 ```
 
 # Load data & convert to SCE
@@ -81,29 +82,27 @@ Heatmap(mat,
 
 # Cell cycle
 
-We assign each cell a cell cycle scores and visualize them in the DR plots. 
-We use known G2/M and S phase markers that come with the `Seurat` package. The markers are anticorrelated and cells that to not express the markers are supposed to be in G1 phase.
-```{r}
-# A list of cell cycle markers, from Tirosh et al, 2015, is loaded with Seurat.  We can
-# segregate this list into markers of G2/M phase and markers of S phase
-(s_genes <- cc.genes$s.genes)
-(g2m_genes <- cc.genes$g2m.genes)
-# match the marker genes to the features
-m <- match(s_genes, str_split(rownames(GetAssayData(so, assay = "RNA")), 
-                              pattern = "\\.", simplify = TRUE)[,2])
-s_genes <- rownames(GetAssayData(so, assay = "RNA"))[m]
-s_genes <- s_genes[!is.na(s_genes)] 
-m <- match(g2m_genes, str_split(rownames(GetAssayData(so, assay = "RNA")), 
-                              pattern = "\\.", simplify = TRUE)[,2])
-g2m_genes <- rownames(GetAssayData(so, assay = "RNA"))[m]
-g2m_genes <- g2m_genes[!is.na(g2m_genes)] 
+We assign each cell a cell cycle scores and visualize them in the DR plots.
+We use known G2/M and S phase markers that come with the `Seurat` package. The markers are anticorrelated and cells that to not express the markers should be in G1 phase.
 
-# change the default assay to the raw counts
-DefaultAssay(so) <- "RNA"
-so <- CellCycleScoring(so, s.features = s_genes, g2m.features = g2m_genes, 
+We compute cell cycle phase using the 2000 anchor genes of the integrated data.
+```{r cell-cycle}
+# A list of cell cycle markers, from Tirosh et al, 2015
+cc_file <- getURL("https://raw.githubusercontent.com/hbc/tinyatlas/master/cell_cycle/Homo_sapiens.csv") 
+cc_genes <- read.csv(text = cc_file)
+# match the marker genes to the features
+m <- match(cc_genes$geneID[cc_genes$phase == "S"], 
+           str_split(rownames(GetAssayData(so)),
+                     pattern = "\\.", simplify = TRUE)[,1])
+s_genes <- rownames(GetAssayData(so))[m]
+(s_genes <- s_genes[!is.na(s_genes)])
+m <- match(cc_genes$geneID[cc_genes$phase == "G2/M"], 
+           str_split(rownames(GetAssayData(so)), 
+                     pattern = "\\.", simplify = TRUE)[,1])
+g2m_genes <- rownames(GetAssayData(so))[m]
+(g2m_genes <- g2m_genes[!is.na(g2m_genes)])
+so <- CellCycleScoring(so, s.features = s_genes, g2m.features = g2m_genes,
                        set.ident = TRUE)
-# change back to integrated
-DefaultAssay(so) <- "integrated"
 ```
 
 
@@ -162,4 +161,82 @@ Heatmap(mat,
 ```
 
 
+# Known marker genes
 
+```{r}
+## source file with list of known marker genes
+source(file.path("data", "known_cell_type_markers.R"))
+
+fs <- lapply(fs, sapply, function(g)
+    grep(pattern = paste0("\\.", g, "$"), rownames(sce), value = TRUE)
+  )
+
+fs <- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
+
+gs <- gsub(".*\\.", "", unlist(fs))
+ns <- vapply(fs, length, numeric(1))
+ks <- rep.int(names(fs), ns)
+labs <- lapply(fs, function(x) gsub(".*\\.", "",x))
+```
+
+## Heatmap of mean marker-exprs. by cluster
+
+```{r known-markers-heatmap, fig.width = 10, fig.height = 18}
+# split cells by cluster
+cs_by_k <- split(colnames(sce), sce$cluster_id)
+# compute cluster-marker means
+ms_by_cluster <- lapply(fs, function(gs) {
+    cat(gs)
+    vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs)))}
+    )
+# prep. for plotting & scale b/w 0 and 1
+mat <- do.call("rbind", ms_by_cluster)
+mat <- muscat:::.scale(mat)
+rownames(mat) <- gs
+cols <- muscat:::.cluster_colors[seq_along(fs)]
+cols <- setNames(cols, names(fs))
+row_anno <- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = "white")) 
+Heatmap(mat,
+    name = "scaled avg.\nexpression",
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    column_title = "cluster_id",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    left_annotation = row_anno)
+```
+
+
+# DR colored by marker expression {.tabset}
+
+```{r dim-red-expr, fig.width = 12, fig.height = 12}
+# downsample to 5000 cells
+cs <- sample(colnames(sce), 5e3)
+sub <- subset(so, cells = cs)
+# UMAPs colored by marker-expression
+for (m in seq_along(fs)) {
+    cat("## ", names(fs)[m], "\n")
+    ps <- lapply(seq_along(fs[[m]]), function(i) {
+        if (!fs[[m]][i] %in% rownames(so)) return(NULL)
+        FeaturePlot(sub, features = fs[[m]][i], reduction = "umap", pt.size = 0.4) +
+            theme(aspect.ratio = 1, legend.position = "none") +
+            ggtitle(labs[[m]][i]) + theme_void() + theme(aspect.ratio = 1)
+    })
+    # arrange plots in grid
+    ps <- ps[!vapply(ps, is.null, logical(1))]
+    p <- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+    print(p)
+    cat("\n\n")
+}
+```
+
+
+# Cluster annotation
+
+Based on the plots we annotated the clusters: ...
