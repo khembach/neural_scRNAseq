@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree38c33d80926f365236669b14646f7a0c52104aabtargetblank38c33d8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/38c33d80926f365236669b14646f7a0c52104aab" target="_blank">38c33d8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef376d767aa109dd9ad9e23e73994d46308a58a62targetblankf376d76a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/f376d767aa109dd9ad9e23e73994d46308a58a62" target="_blank">f376d76</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree38c33d80926f365236669b14646f7a0c52104aabtargetblank38c33d8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef376d767aa109dd9ad9e23e73994d46308a58a62targetblankf376d76a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/38c33d80926f365236669b14646f7a0c52104aab" target="_blank">38c33d8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/f376d767aa109dd9ad9e23e73994d46308a58a62" target="_blank">f376d76</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -524,7 +524,14 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    ._.DS_Store
     Ignored:    .__workflowr.yml
+    Ignored:    ._hm.pdf
     Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    ._tmp.pdf
+    Ignored:    ._tmp_detected.pdf
+    Ignored:    ._tmp_manual_discard.pdf
+    Ignored:    ._tmp_manual_discard1.pdf
+    Ignored:    ._tmp_manual_discard_all.pdf
+    Ignored:    ._tmp_manual_discard_all1.pdf
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.Rhistory
     Ignored:    analysis/._.DS_Store
@@ -541,6 +548,9 @@ Ignored files:
     Ignored:    analysis/02.1-SampleQC_cache/
     Ignored:    analysis/03-filtering_cache/
     Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/additional_filtering_cache/
+    Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/figure/
     Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
@@ -550,16 +560,28 @@ Ignored files:
     Ignored:    data/filtered_feature_matrices/
     Ignored:    output/.DS_Store
     Ignored:    output/._.DS_Store
+    Ignored:    output/additional_filtering.rds
     Ignored:    output/figures/
     Ignored:    output/sce_01_preprocessing.rds
     Ignored:    output/sce_02_quality_control.rds
     Ignored:    output/sce_03_filtering.rds
     Ignored:    output/sce_preprocessing.rds
     Ignored:    output/so_04_clustering.rds
+    Ignored:    output/so_additional_filtering_clustering.rds
 
 Untracked files:
+    Untracked:  Rplots.pdf
+    Untracked:  analysis/additional_filtering.Rmd
+    Untracked:  analysis/additional_filtering_clustering.Rmd
     Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  hm.pdf
     Untracked:  scripts/
+    Untracked:  tmp.pdf
+    Untracked:  tmp_detected.pdf
+    Untracked:  tmp_manual_discard.pdf
+    Untracked:  tmp_manual_discard1.pdf
+    Untracked:  tmp_manual_discard_all.pdf
+    Untracked:  tmp_manual_discard_all1.pdf
 
 Unstaged changes:
     Modified:   analysis/_site.yml
@@ -601,6 +623,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f376d767aa109dd9ad9e23e73994d46308a58a62/analysis/05-annotation.Rmd" target="_blank">f376d76</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-12
+</td>
+<td>
+add barplot with sample fraction to heatmap
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/34b86b86d6b2dc842e6e0ad4fec8841e31ec1b75/docs/05-annotation.html" target="_blank">34b86b8</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1382,8 +1438,23 @@ cols &lt;- muscat:::.cluster_colors[seq_along(fs)]
 cols &lt;- setNames(cols, names(fs))
 row_anno &lt;- rowAnnotation(
     df = data.frame(label = factor(ks, levels = names(fs))),
-    col = list(label = cols), gp = gpar(col = &quot;white&quot;)) 
-Heatmap(mat,
+    col = list(label = cols), gp = gpar(col = &quot;white&quot;))
+# percentage of cells from each of the samples per cluster
+sample_props &lt;- prop.table(n_cells, margin = 1)
+col_mat &lt;- as.matrix(unclass(sample_props))
+sample_cols &lt;- c(&quot;#882255&quot;, &quot;#CC6677&quot;, &quot;#11588A&quot;, &quot;#88CCEE&quot;, &quot;#117733&quot;, &quot;#44AA99&quot;)
+sample_cols &lt;- setNames(sample_cols, colnames(col_mat))
+col_anno &lt;- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, &quot;cm&quot;),
+                               border = FALSE),
+    annotation_label = &quot;fraction of sample\nin cluster&quot;,
+    gap = unit(10, &quot;points&quot;))
+col_lgd &lt;- Legend(labels = names(sample_cols),
+       title = &quot;sample&quot;,
+       legend_gp = gpar(fill = sample_cols))
+
+hm &lt;- Heatmap(mat,
     name = &quot;scaled avg.\nexpression&quot;,
     col = viridis(10),
     cluster_rows = FALSE,
@@ -1391,8 +1462,13 @@ Heatmap(mat,
     row_names_side = &quot;left&quot;,
     column_title = &quot;cluster_id&quot;,
     column_title_side = &quot;bottom&quot;,
+    column_names_side = &quot;bottom&quot;,
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
     rect_gp = gpar(col = &quot;white&quot;),
-    left_annotation = row_anno)</code></pre>
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
 <p><img src="figure/05-annotation.Rmd/known-markers-heatmap-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-known-markers-heatmap-1">
