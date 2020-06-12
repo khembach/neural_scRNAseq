@@ -9,5 +9,6 @@ analysis/figure
 analysis/*png
 analysis/*_cache
 analysis/site_libs
-data/*
+data/data_sushi
+data/filtered_feature_matrices
 output/*
