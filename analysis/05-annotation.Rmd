@@ -232,7 +232,7 @@ draw(hm, annotation_legend_list = list(col_lgd))
 
 # DR colored by marker expression {.tabset}
 
-```{r dim-red-expr, fig.width = 12, fig.height = 12}
+```{r dim-red-expr, results = "asis", fig.width = 12, fig.height = 12}
 # downsample to 5000 cells
 cs <- sample(colnames(sce), 5e3)
 sub <- subset(so, cells = cs)
