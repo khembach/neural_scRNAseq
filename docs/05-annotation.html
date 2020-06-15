@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-06-12
+<strong>Last updated:</strong> 2020-06-15
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef376d767aa109dd9ad9e23e73994d46308a58a62targetblankf376d76a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/f376d767aa109dd9ad9e23e73994d46308a58a62" target="_blank">f376d76</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree47f9578eed7d138961daee7f1235b8b162962addtargetblank47f9578a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/47f9578eed7d138961daee7f1235b8b162962add" target="_blank">47f9578</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef376d767aa109dd9ad9e23e73994d46308a58a62targetblankf376d76a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree47f9578eed7d138961daee7f1235b8b162962addtargetblank47f9578a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/f376d767aa109dd9ad9e23e73994d46308a58a62" target="_blank">f376d76</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/47f9578eed7d138961daee7f1235b8b162962add" target="_blank">47f9578</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -550,7 +550,6 @@ Ignored files:
     Ignored:    analysis/04-clustering_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
-    Ignored:    analysis/figure/
     Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
@@ -574,6 +573,7 @@ Untracked files:
     Untracked:  analysis/additional_filtering.Rmd
     Untracked:  analysis/additional_filtering_clustering.Rmd
     Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  analysis/tabsets.Rmd
     Untracked:  hm.pdf
     Untracked:  scripts/
     Untracked:  tmp.pdf
@@ -623,6 +623,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/47f9578eed7d138961daee7f1235b8b162962add/analysis/05-annotation.Rmd" target="_blank">47f9578</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-15
+</td>
+<td>
+fix tabset
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/d04635aa982aeb95824d6534e7e7a20326a53872/docs/05-annotation.html" target="_blank">d04635a</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1494,6 +1528,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d04635aa982aeb95824d6534e7e7a20326a53872/docs/figure/05-annotation.Rmd/known-markers-heatmap-1.png" target="_blank">d04635a</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-12
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/known-markers-heatmap-1.png" target="_blank">98d3f0d</a>
 </td>
 <td>
@@ -1529,7 +1574,8 @@ for (m in seq_along(fs)) {
     print(p)
     cat(&quot;\n\n&quot;)
 }</code></pre>
-<pre><code>##  NSC </code></pre>
+<div id="nsc" class="section level2">
+<h2>NSC</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-1">
@@ -1568,9 +1614,9 @@ khembach
 </table>
 </div>
 </div>
-<pre><code>
-
-##  proliferating </code></pre>
+</div>
+<div id="proliferating" class="section level2">
+<h2>proliferating</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-2.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-2">
@@ -1609,9 +1655,9 @@ khembach
 </table>
 </div>
 </div>
-<pre><code>
-
-##  neuronal </code></pre>
+</div>
+<div id="neuronal" class="section level2">
+<h2>neuronal</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-3.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-3">
@@ -1650,9 +1696,9 @@ khembach
 </table>
 </div>
 </div>
-<pre><code>
-
-##  mature_astrocytes </code></pre>
+</div>
+<div id="mature_astrocytes" class="section level2">
+<h2>mature_astrocytes</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-4.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-4">
@@ -1691,9 +1737,9 @@ khembach
 </table>
 </div>
 </div>
-<pre><code>
-
-##  glial_astrocytic </code></pre>
+</div>
+<div id="glial_astrocytic" class="section level2">
+<h2>glial_astrocytic</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-5.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-5">
@@ -1732,9 +1778,9 @@ khembach
 </table>
 </div>
 </div>
-<pre><code>
-
-##  radial_glia </code></pre>
+</div>
+<div id="radial_glia" class="section level2">
+<h2>radial_glia</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-6.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-6">
@@ -1773,9 +1819,9 @@ khembach
 </table>
 </div>
 </div>
-<pre><code>
-
-##  oligodendrocyte </code></pre>
+</div>
+<div id="oligodendrocyte" class="section level2">
+<h2>oligodendrocyte</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-7.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-7">
@@ -1814,9 +1860,9 @@ khembach
 </table>
 </div>
 </div>
-<pre><code>
-
-##  GABAergic_neurons </code></pre>
+</div>
+<div id="gabaergic_neurons" class="section level2">
+<h2>GABAergic_neurons</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-8.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-8">
@@ -1855,9 +1901,9 @@ khembach
 </table>
 </div>
 </div>
-<pre><code>
-
-##  glycinergic_neurons </code></pre>
+</div>
+<div id="glycinergic_neurons" class="section level2">
+<h2>glycinergic_neurons</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-9.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-9">
@@ -1896,9 +1942,9 @@ khembach
 </table>
 </div>
 </div>
-<pre><code>
-
-##  glutaminergic_neurons </code></pre>
+</div>
+<div id="glutaminergic_neurons" class="section level2">
+<h2>glutaminergic_neurons</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-10.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-10">
@@ -1937,9 +1983,9 @@ khembach
 </table>
 </div>
 </div>
-<pre><code>
-
-##  dopaminergic_neurons </code></pre>
+</div>
+<div id="dopaminergic_neurons" class="section level2">
+<h2>dopaminergic_neurons</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-11.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-11">
@@ -1978,9 +2024,9 @@ khembach
 </table>
 </div>
 </div>
-<pre><code>
-
-##  apoptotic </code></pre>
+</div>
+<div id="apoptotic" class="section level2">
+<h2>apoptotic</h2>
 <p><img src="figure/05-annotation.Rmd/dim-red-expr-12.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-12">
@@ -2017,6 +2063,7 @@ khembach
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 </div>
