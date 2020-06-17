@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree336ee0cad851f879345cffb59c8ce81eaeaf0942targetblank336ee0ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/336ee0cad851f879345cffb59c8ce81eaeaf0942" target="_blank">336ee0c</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7379a9b0f8128bf833d22bfc080ddebccebb0dbetargetblank7379a9ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/7379a9b0f8128bf833d22bfc080ddebccebb0dbe" target="_blank">7379a9b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree336ee0cad851f879345cffb59c8ce81eaeaf0942targetblank336ee0ca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7379a9b0f8128bf833d22bfc080ddebccebb0dbetargetblank7379a9ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/336ee0cad851f879345cffb59c8ce81eaeaf0942" target="_blank">336ee0c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/7379a9b0f8128bf833d22bfc080ddebccebb0dbe" target="_blank">7379a9b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -636,6 +636,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7379a9b0f8128bf833d22bfc080ddebccebb0dbe/analysis/01-preprocessing.Rmd" target="_blank">7379a9b</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-17
+</td>
+<td>
+add histo and PCA for scDblFinder results
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/7e96c7171f0b6ed305e8e5b3532f21e0bf05b361/docs/01-preprocessing.html" target="_blank">7e96c71</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-17
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -803,8 +837,8 @@ sce &lt;- scDblFinder(sce, samples=&quot;sample_id&quot;, BPPARAM=MulticoreParam
 table(colData(sce)[,c(&quot;scDblFinder.class&quot;, &quot;sample_id&quot;)])</code></pre>
 <pre><code>                 sample_id
 scDblFinder.class 1NSC 2NSC 3NC52 4NC52 5NC96 6NC96
-          doublet  853  819   918   849   427   410
-          singlet 8893 8854  9082  8866  6573  6286</code></pre>
+          doublet  838  813   904   826   422   404
+          singlet 8908 8860  9096  8889  6578  6292</code></pre>
 <pre class="r"><code># histogram of the doublet scores
 dat &lt;- as.data.frame(colData(sce)[c(&quot;scDblFinder.score&quot;, 
                                     &quot;scDblFinder.class&quot;, &quot;sample_id&quot;)])
@@ -818,21 +852,64 @@ print(p)</code></pre>
 <pre><code>Warning: Transformation introduced infinite values in continuous y-axis</code></pre>
 <pre><code>Warning: Removed 625 rows containing missing values (geom_bar).</code></pre>
 <p><img src="figure/01-preprocessing.Rmd/doublet_removal-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-doublet_removal-1">
+Past versions of doublet_removal-1.png
+</button>
+</p>
+<div id="fig-doublet_removal-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7e96c7171f0b6ed305e8e5b3532f21e0bf05b361/docs/figure/01-preprocessing.Rmd/doublet_removal-1.png" target="_blank">7e96c71</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## PCA plot colored by doublet score
 for (i in levels(sce$sample_id)) {
   print(i)
   subs &lt;- sce[,sce$sample_id == i]
   subs &lt;- logNormCounts(subs)
   subs &lt;- runPCA(subs)
-  plotPCA(subs, colour_by = &quot;scDblFinder.score&quot;)
-  plotPCA(subs, colour_by = &quot;scDblFinder.class&quot;)
+  print(plotPCA(subs, colour_by = &quot;scDblFinder.score&quot;))
+  print(plotPCA(subs, colour_by = &quot;scDblFinder.class&quot;))
 }</code></pre>
-<pre><code>[1] &quot;1NSC&quot;
-[1] &quot;2NSC&quot;
-[1] &quot;3NC52&quot;
-[1] &quot;4NC52&quot;
-[1] &quot;5NC96&quot;
-[1] &quot;6NC96&quot;</code></pre>
+<pre><code>[1] &quot;1NSC&quot;</code></pre>
+<p><img src="figure/01-preprocessing.Rmd/doublet_removal-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/01-preprocessing.Rmd/doublet_removal-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;2NSC&quot;</code></pre>
+<p><img src="figure/01-preprocessing.Rmd/doublet_removal-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/01-preprocessing.Rmd/doublet_removal-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;3NC52&quot;</code></pre>
+<p><img src="figure/01-preprocessing.Rmd/doublet_removal-6.png" width="672" style="display: block; margin: auto;" /><img src="figure/01-preprocessing.Rmd/doublet_removal-7.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;4NC52&quot;</code></pre>
+<p><img src="figure/01-preprocessing.Rmd/doublet_removal-8.png" width="672" style="display: block; margin: auto;" /><img src="figure/01-preprocessing.Rmd/doublet_removal-9.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;5NC96&quot;</code></pre>
+<p><img src="figure/01-preprocessing.Rmd/doublet_removal-10.png" width="672" style="display: block; margin: auto;" /><img src="figure/01-preprocessing.Rmd/doublet_removal-11.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>[1] &quot;6NC96&quot;</code></pre>
+<p><img src="figure/01-preprocessing.Rmd/doublet_removal-12.png" width="672" style="display: block; margin: auto;" /><img src="figure/01-preprocessing.Rmd/doublet_removal-13.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># we remove the cells that were classified as doublets
 sce &lt;- sce[,sce$scDblFinder.class == &quot;singlet&quot;]</code></pre>
 </div>
