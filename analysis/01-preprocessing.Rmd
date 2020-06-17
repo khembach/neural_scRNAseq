@@ -50,7 +50,7 @@ sce$group_id <- meta$group[m]
 
 ## Remove undetected genes and doublets
 
-```{r doublet_removal}
+```{r doublet_removal, warnings = FALSE}
 sce <- sce[rowSums(counts(sce) > 0) > 0, ]
 dim(sce)
 
@@ -76,8 +76,8 @@ for (i in levels(sce$sample_id)) {
   subs <- sce[,sce$sample_id == i]
   subs <- logNormCounts(subs)
   subs <- runPCA(subs)
-  plotPCA(subs, colour_by = "scDblFinder.score")
-  plotPCA(subs, colour_by = "scDblFinder.class")
+  print(plotPCA(subs, colour_by = "scDblFinder.score"))
+  print(plotPCA(subs, colour_by = "scDblFinder.class"))
 }
 
 # we remove the cells that were classified as doublets
