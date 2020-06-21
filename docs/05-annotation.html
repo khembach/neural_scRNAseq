@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-06-15
+<strong>Last updated:</strong> 2020-06-21
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree47f9578eed7d138961daee7f1235b8b162962addtargetblank47f9578a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/47f9578eed7d138961daee7f1235b8b162962add" target="_blank">47f9578</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef349423edbc451916f37bad9b1fb160941f65399targetblankf349423a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/f349423edbc451916f37bad9b1fb160941f65399" target="_blank">f349423</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree47f9578eed7d138961daee7f1235b8b162962addtargetblank47f9578a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef349423edbc451916f37bad9b1fb160941f65399targetblankf349423a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/47f9578eed7d138961daee7f1235b8b162962add" target="_blank">47f9578</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/f349423edbc451916f37bad9b1fb160941f65399" target="_blank">f349423</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -523,9 +523,15 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    ._.DS_Store
+    Ignored:    ._MA.pdf
+    Ignored:    ._MA2.pdf
+    Ignored:    ._MA_plots.pdf
+    Ignored:    ._Rplots.pdf
     Ignored:    .__workflowr.yml
     Ignored:    ._hm.pdf
     Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    ._sample5_MA_2nd_pop.pdf
+    Ignored:    ._sample5_QC_2nd_pop.pdf
     Ignored:    ._tmp.pdf
     Ignored:    ._tmp_detected.pdf
     Ignored:    ._tmp_manual_discard.pdf
@@ -540,14 +546,19 @@ Ignored files:
     Ignored:    analysis/._02.1-SampleQC.Rmd
     Ignored:    analysis/._04-clustering.Rmd
     Ignored:    analysis/._04-clustering.knit.md
+    Ignored:    analysis/._04.1-cell_cycle.Rmd
     Ignored:    analysis/._05-annotation.Rmd
     Ignored:    analysis/.__site.yml
+    Ignored:    analysis/._additional_filtering.Rmd
+    Ignored:    analysis/._additional_filtering_clustering.Rmd
+    Ignored:    analysis/._index.Rmd
     Ignored:    analysis/01-preprocessing_cache/
     Ignored:    analysis/02-1-SampleQC_cache/
     Ignored:    analysis/02-quality_control_cache/
     Ignored:    analysis/02.1-SampleQC_cache/
     Ignored:    analysis/03-filtering_cache/
     Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/04.1-cell_cycle_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
     Ignored:    analysis/sample5_QC_cache/
@@ -565,16 +576,22 @@ Ignored files:
     Ignored:    output/sce_02_quality_control.rds
     Ignored:    output/sce_03_filtering.rds
     Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04_1_cell_cycle.rds
     Ignored:    output/so_04_clustering.rds
     Ignored:    output/so_additional_filtering_clustering.rds
 
 Untracked files:
+    Untracked:  MA.pdf
+    Untracked:  MA2.pdf
+    Untracked:  MA_plots.pdf
     Untracked:  Rplots.pdf
     Untracked:  analysis/additional_filtering.Rmd
     Untracked:  analysis/additional_filtering_clustering.Rmd
     Untracked:  analysis/sample5_QC.Rmd
     Untracked:  analysis/tabsets.Rmd
     Untracked:  hm.pdf
+    Untracked:  sample5_MA_2nd_pop.pdf
+    Untracked:  sample5_QC_2nd_pop.pdf
     Untracked:  scripts/
     Untracked:  tmp.pdf
     Untracked:  tmp_detected.pdf
@@ -623,6 +640,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f349423edbc451916f37bad9b1fb160941f65399/analysis/05-annotation.Rmd" target="_blank">f349423</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-21
+</td>
+<td>
+regress out number of UMIs and perc mitochondrial features; cyclone
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/4e52d16389794beeb20d47cf30ae90bbd73d4586/docs/05-annotation.html" target="_blank">4e52d16</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-15
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -848,7 +899,8 @@ library(scran)
 library(Seurat)
 library(SingleCellExperiment)
 library(stringr)
-library(RCurl)</code></pre>
+library(RCurl)
+library(BiocParallel)</code></pre>
 </div>
 <div id="load-data-convert-to-sce" class="section level1">
 <h1>Load data &amp; convert to SCE</h1>
@@ -858,16 +910,16 @@ colData(sce) &lt;- as.data.frame(colData(sce)) %&gt;%
     mutate_if(is.character, as.factor) %&gt;% 
     DataFrame(row.names = colnames(sce))</code></pre>
 </div>
-<div id="nb.-of-clusters-by-resolution" class="section level1">
-<h1>Nb. of clusters by resolution</h1>
+<div id="number-of-clusters-by-resolution" class="section level1">
+<h1>Number of clusters by resolution</h1>
 <pre class="r"><code>cluster_cols &lt;- grep(&quot;res.[0-9]&quot;, colnames(colData(sce)), value = TRUE)
 sapply(colData(sce)[cluster_cols], nlevels)</code></pre>
 <pre><code>integrated_snn_res.0.1 integrated_snn_res.0.2 integrated_snn_res.0.4 
-                     8                     12                     17 
+                     7                     12                     17 
 integrated_snn_res.0.8   integrated_snn_res.1 integrated_snn_res.1.2 
-                    24                     29                     31 
+                    23                     26                     30 
   integrated_snn_res.2 
-                    39 </code></pre>
+                    37 </code></pre>
 </div>
 <div id="cluster-sample-counts" class="section level1">
 <h1>Cluster-sample counts</h1>
@@ -878,23 +930,23 @@ sce$cluster_id &lt;- Idents(so)
 (n_cells &lt;- table(sce$cluster_id, sce$sample_id))</code></pre>
 <pre><code>    
      1NSC 2NSC 3NC52 4NC52 5NC96 6NC96
-  0  4850 5041   186    98   308    82
-  1     0    0  1552  1279   492   627
-  2  1037 1011   337   288   563   391
-  3    12   10   572   383  1806   372
-  4  1351 1221    69    56    76    16
-  5     0    0  1017   847   380   415
-  6     2    9   628   620   528   774
-  7   253  236   577   606   376   369
-  8     0    0  1007   867   250   285
-  9     0    0   924   764   327   379
-  10  688  716   130   121   188   119
-  11    3    3   582   524   211   248
-  12    0    0   365   281   186   235
-  13    0    0   339   247   141   174
-  14    1    1   205   260   210   194
-  15   51   70   148   153    64    89
-  16   83   90    49    44    83    24</code></pre>
+  0  4224 4453   178    88   262    64
+  1     0    0  1573  1297   553   610
+  2  1202 1150   328   279   550   381
+  3   658  632   609   621   683   401
+  4  1430 1308    69    58   104    15
+  5     0    0  1065   870   418   431
+  6     2    0   917   747   796   271
+  7     1    4   623   644   559   784
+  8    12    9   672   463   879   451
+  9     0    0   884   747   337   374
+  10    3    2   712   663   269   301
+  11  247  245   187   264   250   208
+  12  435  467   117   104   144   112
+  13    0    0   373   268   170   181
+  14   34   50   148   146    52    91
+  15    0    0   183   137    76    97
+  16   83   88    49    42    87    21</code></pre>
 </div>
 <div id="relative-cluster-abundances" class="section level1">
 <h1>Relative cluster-abundances</h1>
@@ -985,11 +1037,12 @@ khembach
 </div>
 </div>
 </div>
-<div id="cell-cycle" class="section level1">
-<h1>Cell cycle</h1>
+<div id="cell-cycle-scoring-with-seurat" class="section level1">
+<h1>Cell cycle scoring with Seurat</h1>
 <p>We assign each cell a cell cycle scores and visualize them in the DR plots. We use known G2/M and S phase markers that come with the <code>Seurat</code> package. The markers are anticorrelated and cells that to not express the markers should be in G1 phase.</p>
-<p>We compute cell cycle phase using the 2000 anchor genes of the integrated data.</p>
-<pre class="r"><code># A list of cell cycle markers, from Tirosh et al, 2015
+<p>We compute cell cycle phase:</p>
+<pre class="r"><code>DefaultAssay(so) &lt;- &quot;RNA&quot;
+# A list of cell cycle markers, from Tirosh et al, 2015
 cc_file &lt;- getURL(&quot;https://raw.githubusercontent.com/hbc/tinyatlas/master/cell_cycle/Homo_sapiens.csv&quot;) 
 cc_genes &lt;- read.csv(text = cc_file)
 # match the marker genes to the features
@@ -998,37 +1051,63 @@ m &lt;- match(cc_genes$geneID[cc_genes$phase == &quot;S&quot;],
                      pattern = &quot;\\.&quot;, simplify = TRUE)[,1])
 s_genes &lt;- rownames(GetAssayData(so))[m]
 (s_genes &lt;- s_genes[!is.na(s_genes)])</code></pre>
-<pre><code> [1] &quot;ENSG00000051180.RAD51&quot;    &quot;ENSG00000092853.CLSPN&quot;   
- [3] &quot;ENSG00000093009.CDC45&quot;    &quot;ENSG00000094804.CDC6&quot;    
- [5] &quot;ENSG00000111247.RAD51AP1&quot; &quot;ENSG00000112312.GMNN&quot;    
- [7] &quot;ENSG00000119969.HELLS&quot;    &quot;ENSG00000131153.GINS2&quot;   
- [9] &quot;ENSG00000132646.PCNA&quot;     &quot;ENSG00000143476.DTL&quot;     
-[11] &quot;ENSG00000151725.CENPU&quot;    &quot;ENSG00000156802.ATAD2&quot;   
-[13] &quot;ENSG00000162607.USP1&quot;     &quot;ENSG00000171848.RRM2&quot;    
-[15] &quot;ENSG00000176890.TYMS&quot;    </code></pre>
+<pre><code> [1] &quot;ENSG00000012963.UBR7&quot;     &quot;ENSG00000049541.RFC2&quot;    
+ [3] &quot;ENSG00000051180.RAD51&quot;    &quot;ENSG00000073111.MCM2&quot;    
+ [5] &quot;ENSG00000075131.TIPIN&quot;    &quot;ENSG00000076003.MCM6&quot;    
+ [7] &quot;ENSG00000076248.UNG&quot;      &quot;ENSG00000077514.POLD3&quot;   
+ [9] &quot;ENSG00000092470.WDR76&quot;    &quot;ENSG00000092853.CLSPN&quot;   
+[11] &quot;ENSG00000093009.CDC45&quot;    &quot;ENSG00000094804.CDC6&quot;    
+[13] &quot;ENSG00000095002.MSH2&quot;     &quot;ENSG00000100297.MCM5&quot;    
+[15] &quot;ENSG00000101868.POLA1&quot;    &quot;ENSG00000104738.MCM4&quot;    
+[17] &quot;ENSG00000111247.RAD51AP1&quot; &quot;ENSG00000112312.GMNN&quot;    
+[19] &quot;ENSG00000117748.RPA2&quot;     &quot;ENSG00000118412.CASP8AP2&quot;
+[21] &quot;ENSG00000119969.HELLS&quot;    &quot;ENSG00000129173.E2F8&quot;    
+[23] &quot;ENSG00000131153.GINS2&quot;    &quot;ENSG00000132646.PCNA&quot;    
+[25] &quot;ENSG00000132780.NASP&quot;     &quot;ENSG00000136492.BRIP1&quot;   
+[27] &quot;ENSG00000136982.DSCC1&quot;    &quot;ENSG00000143476.DTL&quot;     
+[29] &quot;ENSG00000144354.CDCA7&quot;    &quot;ENSG00000151725.CENPU&quot;   
+[31] &quot;ENSG00000156802.ATAD2&quot;    &quot;ENSG00000159259.CHAF1B&quot;  
+[33] &quot;ENSG00000162607.USP1&quot;     &quot;ENSG00000163950.SLBP&quot;    
+[35] &quot;ENSG00000167325.RRM1&quot;     &quot;ENSG00000168496.FEN1&quot;    
+[37] &quot;ENSG00000171848.RRM2&quot;     &quot;ENSG00000174371.EXO1&quot;    
+[39] &quot;ENSG00000175305.CCNE2&quot;    &quot;ENSG00000176890.TYMS&quot;    
+[41] &quot;ENSG00000197299.BLM&quot;      &quot;ENSG00000198056.PRIM1&quot;   
+[43] &quot;ENSG00000276043.UHRF1&quot;   </code></pre>
 <pre class="r"><code>m &lt;- match(cc_genes$geneID[cc_genes$phase == &quot;G2/M&quot;], 
            str_split(rownames(GetAssayData(so)), 
                      pattern = &quot;\\.&quot;, simplify = TRUE)[,1])
 g2m_genes &lt;- rownames(GetAssayData(so))[m]
 (g2m_genes &lt;- g2m_genes[!is.na(g2m_genes)])</code></pre>
-<pre><code> [1] &quot;ENSG00000010292.NCAPD2&quot; &quot;ENSG00000011426.ANLN&quot;   &quot;ENSG00000013810.TACC3&quot; 
- [4] &quot;ENSG00000072571.HMMR&quot;   &quot;ENSG00000075218.GTSE1&quot;  &quot;ENSG00000080986.NDC80&quot; 
- [7] &quot;ENSG00000087586.AURKA&quot;  &quot;ENSG00000088325.TPX2&quot;   &quot;ENSG00000089685.BIRC5&quot; 
-[10] &quot;ENSG00000111665.CDCA3&quot;  &quot;ENSG00000112742.TTK&quot;    &quot;ENSG00000113810.SMC4&quot;  
-[13] &quot;ENSG00000114346.ECT2&quot;   &quot;ENSG00000115163.CENPA&quot;  &quot;ENSG00000117399.CDC20&quot; 
-[16] &quot;ENSG00000117650.NEK2&quot;   &quot;ENSG00000117724.CENPF&quot;  &quot;ENSG00000123485.HJURP&quot; 
-[19] &quot;ENSG00000123975.CKS2&quot;   &quot;ENSG00000126787.DLGAP5&quot; &quot;ENSG00000129195.PIMREG&quot;
-[22] &quot;ENSG00000131747.TOP2A&quot;  &quot;ENSG00000134222.PSRC1&quot;  &quot;ENSG00000134690.CDCA8&quot; 
-[25] &quot;ENSG00000136108.CKAP2&quot;  &quot;ENSG00000137804.NUSAP1&quot; &quot;ENSG00000137807.KIF23&quot; 
-[28] &quot;ENSG00000138160.KIF11&quot;  &quot;ENSG00000138182.KIF20B&quot; &quot;ENSG00000138778.CENPE&quot; 
-[31] &quot;ENSG00000139354.GAS2L3&quot; &quot;ENSG00000142945.KIF2C&quot;  &quot;ENSG00000143228.NUF2&quot;  
-[34] &quot;ENSG00000143401.ANP32E&quot; &quot;ENSG00000148773.MKI67&quot;  &quot;ENSG00000157456.CCNB2&quot; 
-[37] &quot;ENSG00000158402.CDC25C&quot; &quot;ENSG00000164104.HMGB2&quot;  &quot;ENSG00000169607.CKAP2L&quot;
-[40] &quot;ENSG00000169679.BUB1&quot;   &quot;ENSG00000170312.CDK1&quot;   &quot;ENSG00000173207.CKS1B&quot; 
-[43] &quot;ENSG00000175063.UBE2C&quot;  &quot;ENSG00000178999.AURKB&quot;  &quot;ENSG00000184661.CDCA2&quot; 
-[46] &quot;ENSG00000188229.TUBB4B&quot; &quot;ENSG00000189159.JPT1&quot;  </code></pre>
+<pre><code> [1] &quot;ENSG00000010292.NCAPD2&quot;  &quot;ENSG00000011426.ANLN&quot;   
+ [3] &quot;ENSG00000013810.TACC3&quot;   &quot;ENSG00000072571.HMMR&quot;   
+ [5] &quot;ENSG00000075218.GTSE1&quot;   &quot;ENSG00000080986.NDC80&quot;  
+ [7] &quot;ENSG00000087586.AURKA&quot;   &quot;ENSG00000088325.TPX2&quot;   
+ [9] &quot;ENSG00000089685.BIRC5&quot;   &quot;ENSG00000092140.G2E3&quot;   
+[11] &quot;ENSG00000094916.CBX5&quot;    &quot;ENSG00000100401.RANGAP1&quot;
+[13] &quot;ENSG00000102974.CTCF&quot;    &quot;ENSG00000111665.CDCA3&quot;  
+[15] &quot;ENSG00000112742.TTK&quot;     &quot;ENSG00000113810.SMC4&quot;   
+[17] &quot;ENSG00000114346.ECT2&quot;    &quot;ENSG00000115163.CENPA&quot;  
+[19] &quot;ENSG00000117399.CDC20&quot;   &quot;ENSG00000117650.NEK2&quot;   
+[21] &quot;ENSG00000117724.CENPF&quot;   &quot;ENSG00000120802.TMPO&quot;   
+[23] &quot;ENSG00000123485.HJURP&quot;   &quot;ENSG00000123975.CKS2&quot;   
+[25] &quot;ENSG00000126787.DLGAP5&quot;  &quot;ENSG00000129195.PIMREG&quot; 
+[27] &quot;ENSG00000131747.TOP2A&quot;   &quot;ENSG00000134222.PSRC1&quot;  
+[29] &quot;ENSG00000134690.CDCA8&quot;   &quot;ENSG00000136108.CKAP2&quot;  
+[31] &quot;ENSG00000137804.NUSAP1&quot;  &quot;ENSG00000137807.KIF23&quot;  
+[33] &quot;ENSG00000138160.KIF11&quot;   &quot;ENSG00000138182.KIF20B&quot; 
+[35] &quot;ENSG00000138778.CENPE&quot;   &quot;ENSG00000139354.GAS2L3&quot; 
+[37] &quot;ENSG00000142945.KIF2C&quot;   &quot;ENSG00000143228.NUF2&quot;   
+[39] &quot;ENSG00000143401.ANP32E&quot;  &quot;ENSG00000143815.LBR&quot;    
+[41] &quot;ENSG00000148773.MKI67&quot;   &quot;ENSG00000157456.CCNB2&quot;  
+[43] &quot;ENSG00000158402.CDC25C&quot;  &quot;ENSG00000164104.HMGB2&quot;  
+[45] &quot;ENSG00000169607.CKAP2L&quot;  &quot;ENSG00000169679.BUB1&quot;   
+[47] &quot;ENSG00000170312.CDK1&quot;    &quot;ENSG00000173207.CKS1B&quot;  
+[49] &quot;ENSG00000175063.UBE2C&quot;   &quot;ENSG00000175216.CKAP5&quot;  
+[51] &quot;ENSG00000178999.AURKB&quot;   &quot;ENSG00000184661.CDCA2&quot;  
+[53] &quot;ENSG00000188229.TUBB4B&quot;  &quot;ENSG00000189159.JPT1&quot;   </code></pre>
 <pre class="r"><code>so &lt;- CellCycleScoring(so, s.features = s_genes, g2m.features = g2m_genes,
-                       set.ident = TRUE)</code></pre>
+                       set.ident = TRUE)
+DefaultAssay(so) &lt;- &quot;integrated&quot;</code></pre>
 </div>
 <div id="dr-colored-by-cluster-id" class="section level1 tabset">
 <h1>DR colored by cluster ID</h1>
@@ -1338,17 +1417,17 @@ khembach
 ## candidate cluster markers
 lapply(gs, function(x) str_split(x, pattern = &quot;\\.&quot;, simplify = TRUE)[,2])</code></pre>
 <pre><code>$`0`
-[1] &quot;SAMD11&quot; &quot;NEFL&quot;   &quot;VIM&quot;    &quot;CKB&quot;    &quot;TTYH1&quot; 
+[1] &quot;SAMD11&quot; &quot;PTN&quot;    &quot;NEFL&quot;   &quot;VIM&quot;    &quot;CKB&quot;    &quot;TTYH1&quot; 
 
 $`1`
-[1] &quot;SAMD11&quot; &quot;STMN2&quot;  &quot;CRABP1&quot; &quot;ZFHX3&quot;  &quot;HOXB8&quot;  &quot;MT-CO2&quot;
+[1] &quot;SAMD11&quot; &quot;STMN2&quot;  &quot;CRABP1&quot; &quot;ZFHX3&quot;  &quot;HOXB8&quot;  &quot;MT-CO3&quot;
 
 $`2`
-[1] &quot;S100A10&quot; &quot;S100A11&quot; &quot;CLU&quot;     &quot;VIM&quot;     &quot;TAGLN&quot;   &quot;CKB&quot;     &quot;TPM1&quot;   
+[1] &quot;SAMD11&quot;  &quot;S100A10&quot; &quot;CLU&quot;     &quot;VIM&quot;     &quot;TAGLN&quot;   &quot;CKB&quot;     &quot;METRN&quot;  
 
 $`3`
-[1] &quot;SAMD11&quot;  &quot;STMN2&quot;   &quot;SNCG&quot;    &quot;RTN1&quot;    &quot;HOXB5&quot;   &quot;ONECUT2&quot; &quot;PCP4&quot;   
-[8] &quot;MT-CO2&quot; 
+[1] &quot;SAMD11&quot;  &quot;C1orf61&quot; &quot;PTN&quot;     &quot;CLU&quot;     &quot;VIM&quot;     &quot;TAGLN&quot;   &quot;DLK1&quot;   
+[8] &quot;CKB&quot;     &quot;METRN&quot;  
 
 $`4`
 [1] &quot;HMGB2&quot; &quot;VIM&quot;   &quot;CKB&quot;   &quot;TOP2A&quot;
@@ -1357,34 +1436,35 @@ $`5`
 [1] &quot;STMN2&quot;  &quot;RTN1&quot;   &quot;MEIS2&quot;  &quot;HOXB9&quot;  &quot;PCP4&quot;   &quot;MT-ND3&quot;
 
 $`6`
-[1] &quot;C1orf61&quot; &quot;SPP1&quot;    &quot;FABP5&quot;   &quot;VIM&quot;     &quot;HOXB9&quot;   &quot;TTYH1&quot;   &quot;MT-ND4&quot; 
+[1] &quot;SAMD11&quot; &quot;TAC1&quot;   &quot;STMN2&quot;  &quot;CRABP1&quot; &quot;ZFHX3&quot;  &quot;HOXB8&quot;  &quot;MT-CO2&quot;
 
 $`7`
-[1] &quot;CLU&quot;   &quot;LY6H&quot;  &quot;VIM&quot;   &quot;TAGLN&quot; &quot;DLK1&quot;  &quot;CKB&quot;   &quot;METRN&quot;
+[1] &quot;C1orf61&quot; &quot;SPARCL1&quot; &quot;SPP1&quot;    &quot;VIM&quot;     &quot;GFAP&quot;    &quot;HOXB9&quot;   &quot;TTYH1&quot;  
 
 $`8`
-[1] &quot;SAMD11&quot; &quot;TAC1&quot;   &quot;STMN2&quot;  &quot;ZFHX3&quot;  &quot;HOXB8&quot;  &quot;LAMP5&quot;  &quot;MT-CO2&quot;
+[1] &quot;STMN2&quot;   &quot;SNCG&quot;    &quot;RTN1&quot;    &quot;HOXB5&quot;   &quot;ONECUT2&quot;
 
 $`9`
-[1] &quot;SAMD11&quot; &quot;FOXP1&quot;  &quot;STMN2&quot;  &quot;PCP4&quot;  
+[1] &quot;FOXP1&quot; &quot;FABP7&quot; &quot;STMN2&quot; &quot;PCP4&quot; 
 
 $`10`
-[1] &quot;SAMD11&quot;   &quot;VGF&quot;      &quot;EIF4EBP1&quot; &quot;ANXA1&quot;    &quot;VIM&quot;      &quot;CKB&quot;      &quot;FTL&quot;     
+[1] &quot;SAMD11&quot;  &quot;BASP1&quot;   &quot;ENC1&quot;    &quot;SOX4&quot;    &quot;STMN2&quot;   &quot;HOXB8&quot;   &quot;HOXB9&quot;  
+[8] &quot;DCX&quot;     &quot;MT-RNR2&quot;
 
 $`11`
-[1] &quot;ENC1&quot;    &quot;STMN2&quot;   &quot;NFIB&quot;    &quot;HOXB8&quot;   &quot;HOXB9&quot;   &quot;MT-RNR2&quot;
+[1] &quot;VGF&quot;      &quot;NEFL&quot;     &quot;STMN2&quot;    &quot;ANXA1&quot;    &quot;DDIT3&quot;    &quot;HSP90AA1&quot;
 
 $`12`
-[1] &quot;TAC1&quot;  &quot;STMN2&quot;
+[1] &quot;PTN&quot;      &quot;EIF4EBP1&quot; &quot;VIM&quot;      &quot;CKB&quot;      &quot;FTL&quot;     
 
 $`13`
 [1] &quot;STMN2&quot;  &quot;SNCG&quot;   &quot;MPPED2&quot; &quot;PCP4&quot;  
 
 $`14`
-[1] &quot;STMN2&quot; &quot;DDIT3&quot;
+[1] &quot;C1orf61&quot; &quot;HES6&quot;    &quot;SOX2&quot;    &quot;VIM&quot;     &quot;CKB&quot;    
 
 $`15`
-[1] &quot;C1orf61&quot; &quot;HES6&quot;    &quot;SOX2&quot;    &quot;VIM&quot;     &quot;CKB&quot;    
+[1] &quot;TAC1&quot;  &quot;STMN2&quot;
 
 $`16`
 [1] &quot;S100A11&quot; &quot;COL3A1&quot;  &quot;COL1A1&quot; </code></pre>
@@ -2099,92 +2179,92 @@ attached base packages:
  [8] datasets  methods   base     
 
 other attached packages:
- [1] RCurl_1.98-1.2              stringr_1.4.0              
- [3] Seurat_3.1.5                scran_1.16.0               
- [5] SingleCellExperiment_1.10.1 SummarizedExperiment_1.18.1
- [7] DelayedArray_0.14.0         matrixStats_0.56.0         
- [9] Biobase_2.48.0              GenomicRanges_1.40.0       
-[11] GenomeInfoDb_1.24.0         IRanges_2.22.2             
-[13] S4Vectors_0.26.1            BiocGenerics_0.34.0        
-[15] viridis_0.5.1               viridisLite_0.3.0          
-[17] RColorBrewer_1.1-2          purrr_0.3.4                
-[19] muscat_1.2.0                dplyr_0.8.5                
-[21] ggplot2_3.3.0               cowplot_1.0.0              
-[23] ComplexHeatmap_2.4.2        workflowr_1.6.2            
+ [1] BiocParallel_1.22.0         RCurl_1.98-1.2             
+ [3] stringr_1.4.0               Seurat_3.1.5               
+ [5] scran_1.16.0                SingleCellExperiment_1.10.1
+ [7] SummarizedExperiment_1.18.1 DelayedArray_0.14.0        
+ [9] matrixStats_0.56.0          Biobase_2.48.0             
+[11] GenomicRanges_1.40.0        GenomeInfoDb_1.24.0        
+[13] IRanges_2.22.2              S4Vectors_0.26.1           
+[15] BiocGenerics_0.34.0         viridis_0.5.1              
+[17] viridisLite_0.3.0           RColorBrewer_1.1-2         
+[19] purrr_0.3.4                 muscat_1.2.0               
+[21] dplyr_0.8.5                 ggplot2_3.3.0              
+[23] cowplot_1.0.0               ComplexHeatmap_2.4.2       
+[25] workflowr_1.6.2            
 
 loaded via a namespace (and not attached):
   [1] backports_1.1.7           circlize_0.4.9           
   [3] blme_1.0-4                igraph_1.2.5             
   [5] plyr_1.8.6                lazyeval_0.2.2           
   [7] TMB_1.7.16                splines_4.0.0            
-  [9] BiocParallel_1.22.0       listenv_0.8.0            
- [11] scater_1.16.0             digest_0.6.25            
- [13] foreach_1.5.0             htmltools_0.4.0          
- [15] gdata_2.18.0              lmerTest_3.1-2           
- [17] magrittr_1.5              memoise_1.1.0            
- [19] cluster_2.1.0             doParallel_1.0.15        
- [21] ROCR_1.0-11               limma_3.44.1             
- [23] globals_0.12.5            annotate_1.66.0          
- [25] prettyunits_1.1.1         colorspace_1.4-1         
- [27] rappdirs_0.3.1            ggrepel_0.8.2            
- [29] blob_1.2.1                xfun_0.14                
- [31] jsonlite_1.6.1            crayon_1.3.4             
- [33] genefilter_1.70.0         lme4_1.1-23              
- [35] zoo_1.8-8                 ape_5.3                  
- [37] survival_3.1-12           iterators_1.0.12         
- [39] glue_1.4.1                gtable_0.3.0             
- [41] zlibbioc_1.34.0           XVector_0.28.0           
- [43] leiden_0.3.3              GetoptLong_0.1.8         
- [45] BiocSingular_1.4.0        future.apply_1.5.0       
- [47] shape_1.4.4               scales_1.1.1             
- [49] DBI_1.1.0                 edgeR_3.30.0             
- [51] Rcpp_1.0.4.6              xtable_1.8-4             
- [53] progress_1.2.2            clue_0.3-57              
- [55] reticulate_1.16           dqrng_0.2.1              
- [57] bit_1.1-15.2              rsvd_1.0.3               
- [59] tsne_0.1-3                htmlwidgets_1.5.1        
- [61] httr_1.4.1                gplots_3.0.3             
- [63] ellipsis_0.3.1            ica_1.0-2                
- [65] farver_2.0.3              pkgconfig_2.0.3          
- [67] XML_3.99-0.3              uwot_0.1.8               
- [69] locfit_1.5-9.4            labeling_0.3             
- [71] tidyselect_1.1.0          rlang_0.4.6              
- [73] reshape2_1.4.4            later_1.0.0              
- [75] AnnotationDbi_1.50.0      munsell_0.5.0            
- [77] tools_4.0.0               RSQLite_2.2.0            
- [79] ggridges_0.5.2            evaluate_0.14            
- [81] yaml_2.2.1                knitr_1.28               
- [83] bit64_0.9-7               fs_1.4.1                 
- [85] fitdistrplus_1.1-1        caTools_1.18.0           
- [87] RANN_2.6.1                pbapply_1.4-2            
- [89] future_1.17.0             nlme_3.1-148             
- [91] whisker_0.4               pbkrtest_0.4-8.6         
- [93] compiler_4.0.0            plotly_4.9.2.1           
- [95] beeswarm_0.2.3            png_0.1-7                
- [97] variancePartition_1.18.0  tibble_3.0.1             
- [99] statmod_1.4.34            geneplotter_1.66.0       
-[101] stringi_1.4.6             lattice_0.20-41          
-[103] Matrix_1.2-18             nloptr_1.2.2.1           
-[105] vctrs_0.3.0               pillar_1.4.4             
-[107] lifecycle_0.2.0           lmtest_0.9-37            
-[109] GlobalOptions_0.1.1       RcppAnnoy_0.0.16         
-[111] BiocNeighbors_1.6.0       data.table_1.12.8        
-[113] bitops_1.0-6              irlba_2.3.3              
-[115] patchwork_1.0.0           httpuv_1.5.2             
-[117] colorRamps_2.3            R6_2.4.1                 
-[119] promises_1.1.0            KernSmooth_2.23-17       
-[121] gridExtra_2.3             vipor_0.4.5              
-[123] codetools_0.2-16          boot_1.3-25              
-[125] MASS_7.3-51.6             gtools_3.8.2             
-[127] assertthat_0.2.1          DESeq2_1.28.1            
-[129] rprojroot_1.3-2           rjson_0.2.20             
-[131] withr_2.2.0               sctransform_0.2.1        
-[133] GenomeInfoDbData_1.2.3    hms_0.5.3                
-[135] tidyr_1.1.0               glmmTMB_1.0.1            
-[137] minqa_1.2.4               rmarkdown_2.1            
-[139] DelayedMatrixStats_1.10.0 Rtsne_0.15               
-[141] git2r_0.27.1              numDeriv_2016.8-1.1      
-[143] ggbeeswarm_0.6.0         </code></pre>
+  [9] listenv_0.8.0             scater_1.16.0            
+ [11] digest_0.6.25             foreach_1.5.0            
+ [13] htmltools_0.4.0           gdata_2.18.0             
+ [15] lmerTest_3.1-2            magrittr_1.5             
+ [17] memoise_1.1.0             cluster_2.1.0            
+ [19] doParallel_1.0.15         ROCR_1.0-11              
+ [21] limma_3.44.1              globals_0.12.5           
+ [23] annotate_1.66.0           prettyunits_1.1.1        
+ [25] colorspace_1.4-1          rappdirs_0.3.1           
+ [27] ggrepel_0.8.2             blob_1.2.1               
+ [29] xfun_0.14                 jsonlite_1.6.1           
+ [31] crayon_1.3.4              genefilter_1.70.0        
+ [33] lme4_1.1-23               zoo_1.8-8                
+ [35] ape_5.3                   survival_3.1-12          
+ [37] iterators_1.0.12          glue_1.4.1               
+ [39] gtable_0.3.0              zlibbioc_1.34.0          
+ [41] XVector_0.28.0            leiden_0.3.3             
+ [43] GetoptLong_0.1.8          BiocSingular_1.4.0       
+ [45] future.apply_1.5.0        shape_1.4.4              
+ [47] scales_1.1.1              DBI_1.1.0                
+ [49] edgeR_3.30.0              Rcpp_1.0.4.6             
+ [51] xtable_1.8-4              progress_1.2.2           
+ [53] clue_0.3-57               reticulate_1.16          
+ [55] dqrng_0.2.1               bit_1.1-15.2             
+ [57] rsvd_1.0.3                tsne_0.1-3               
+ [59] htmlwidgets_1.5.1         httr_1.4.1               
+ [61] gplots_3.0.3              ellipsis_0.3.1           
+ [63] ica_1.0-2                 farver_2.0.3             
+ [65] pkgconfig_2.0.3           XML_3.99-0.3             
+ [67] uwot_0.1.8                locfit_1.5-9.4           
+ [69] labeling_0.3              tidyselect_1.1.0         
+ [71] rlang_0.4.6               reshape2_1.4.4           
+ [73] later_1.0.0               AnnotationDbi_1.50.0     
+ [75] munsell_0.5.0             tools_4.0.0              
+ [77] RSQLite_2.2.0             ggridges_0.5.2           
+ [79] evaluate_0.14             yaml_2.2.1               
+ [81] knitr_1.28                bit64_0.9-7              
+ [83] fs_1.4.1                  fitdistrplus_1.1-1       
+ [85] caTools_1.18.0            RANN_2.6.1               
+ [87] pbapply_1.4-2             future_1.17.0            
+ [89] nlme_3.1-148              whisker_0.4              
+ [91] pbkrtest_0.4-8.6          compiler_4.0.0           
+ [93] plotly_4.9.2.1            beeswarm_0.2.3           
+ [95] png_0.1-7                 variancePartition_1.18.0 
+ [97] tibble_3.0.1              statmod_1.4.34           
+ [99] geneplotter_1.66.0        stringi_1.4.6            
+[101] lattice_0.20-41           Matrix_1.2-18            
+[103] nloptr_1.2.2.1            vctrs_0.3.0              
+[105] pillar_1.4.4              lifecycle_0.2.0          
+[107] lmtest_0.9-37             GlobalOptions_0.1.1      
+[109] RcppAnnoy_0.0.16          BiocNeighbors_1.6.0      
+[111] data.table_1.12.8         bitops_1.0-6             
+[113] irlba_2.3.3               patchwork_1.0.0          
+[115] httpuv_1.5.2              colorRamps_2.3           
+[117] R6_2.4.1                  promises_1.1.0           
+[119] KernSmooth_2.23-17        gridExtra_2.3            
+[121] vipor_0.4.5               codetools_0.2-16         
+[123] boot_1.3-25               MASS_7.3-51.6            
+[125] gtools_3.8.2              assertthat_0.2.1         
+[127] DESeq2_1.28.1             rprojroot_1.3-2          
+[129] rjson_0.2.20              withr_2.2.0              
+[131] sctransform_0.2.1         GenomeInfoDbData_1.2.3   
+[133] hms_0.5.3                 tidyr_1.1.0              
+[135] glmmTMB_1.0.1             minqa_1.2.4              
+[137] rmarkdown_2.1             DelayedMatrixStats_1.10.0
+[139] Rtsne_0.15                git2r_0.27.1             
+[141] numDeriv_2016.8-1.1       ggbeeswarm_0.6.0         </code></pre>
 </div>
 </div>
 

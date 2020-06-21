@@ -333,7 +333,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-05-29
+<strong>Last updated:</strong> 2020-06-22
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -364,16 +364,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree97d5a52e05366f9053223a3c456d563d00891f5atargetblank97d5a52a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/97d5a52e05366f9053223a3c456d563d00891f5a" target="_blank">97d5a52</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef349423edbc451916f37bad9b1fb160941f65399targetblankf349423a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/f349423edbc451916f37bad9b1fb160941f65399" target="_blank">f349423</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree97d5a52e05366f9053223a3c456d563d00891f5atargetblank97d5a52a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef349423edbc451916f37bad9b1fb160941f65399targetblankf349423a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/97d5a52e05366f9053223a3c456d563d00891f5a" target="_blank">97d5a52</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/f349423edbc451916f37bad9b1fb160941f65399" target="_blank">f349423</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -384,8 +384,21 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    ._.DS_Store
+    Ignored:    ._MA.pdf
+    Ignored:    ._MA2.pdf
+    Ignored:    ._MA_plots.pdf
+    Ignored:    ._Rplots.pdf
     Ignored:    .__workflowr.yml
+    Ignored:    ._hm.pdf
     Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    ._sample5_MA_2nd_pop.pdf
+    Ignored:    ._sample5_QC_2nd_pop.pdf
+    Ignored:    ._tmp.pdf
+    Ignored:    ._tmp_detected.pdf
+    Ignored:    ._tmp_manual_discard.pdf
+    Ignored:    ._tmp_manual_discard1.pdf
+    Ignored:    ._tmp_manual_discard_all.pdf
+    Ignored:    ._tmp_manual_discard_all1.pdf
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.Rhistory
     Ignored:    analysis/._.DS_Store
@@ -394,33 +407,60 @@ Ignored files:
     Ignored:    analysis/._02.1-SampleQC.Rmd
     Ignored:    analysis/._04-clustering.Rmd
     Ignored:    analysis/._04-clustering.knit.md
+    Ignored:    analysis/._04.1-cell_cycle.Rmd
+    Ignored:    analysis/._05-annotation.Rmd
     Ignored:    analysis/.__site.yml
+    Ignored:    analysis/._additional_filtering.Rmd
+    Ignored:    analysis/._additional_filtering_clustering.Rmd
+    Ignored:    analysis/._index.Rmd
     Ignored:    analysis/01-preprocessing_cache/
     Ignored:    analysis/02-1-SampleQC_cache/
     Ignored:    analysis/02-quality_control_cache/
     Ignored:    analysis/02.1-SampleQC_cache/
     Ignored:    analysis/03-filtering_cache/
     Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/04.1-cell_cycle_cache/
     Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/additional_filtering_cache/
+    Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
+    Ignored:    data/._.smbdeleteAAA17ed8b4b
     Ignored:    data/._metadata.csv
-    Ignored:    data/._metadata.xlsx
-    Ignored:    data/.smbdeleteAAA17ed8b4b
     Ignored:    data/data_sushi/
-    Ignored:    data/metadata.csv
-    Ignored:    data/metadata.xlsx
+    Ignored:    data/filtered_feature_matrices/
     Ignored:    output/.DS_Store
     Ignored:    output/._.DS_Store
+    Ignored:    output/additional_filtering.rds
     Ignored:    output/figures/
     Ignored:    output/sce_01_preprocessing.rds
     Ignored:    output/sce_02_quality_control.rds
     Ignored:    output/sce_03_filtering.rds
     Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04_1_cell_cycle.rds
     Ignored:    output/so_04_clustering.rds
+    Ignored:    output/so_additional_filtering_clustering.rds
 
 Untracked files:
+    Untracked:  MA.pdf
+    Untracked:  MA2.pdf
+    Untracked:  MA_plots.pdf
+    Untracked:  Rplots.pdf
+    Untracked:  analysis/additional_filtering.Rmd
+    Untracked:  analysis/additional_filtering_clustering.Rmd
+    Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  analysis/tabsets.Rmd
+    Untracked:  hm.pdf
+    Untracked:  sample5_MA_2nd_pop.pdf
+    Untracked:  sample5_QC_2nd_pop.pdf
     Untracked:  scripts/
+    Untracked:  tmp.pdf
+    Untracked:  tmp_detected.pdf
+    Untracked:  tmp_manual_discard.pdf
+    Untracked:  tmp_manual_discard1.pdf
+    Untracked:  tmp_manual_discard_all.pdf
+    Untracked:  tmp_manual_discard_all1.pdf
 
 Unstaged changes:
     Modified:   analysis/_site.yml
@@ -462,6 +502,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f349423edbc451916f37bad9b1fb160941f65399/analysis/index.Rmd" target="_blank">f349423</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-21
+</td>
+<td>
+regress out number of UMIs and perc mitochondrial features; cyclone
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/a4d0e04302b05ad6152378accb91e9c994394e42/docs/index.html" target="_blank">a4d0e04</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-05-29
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -664,7 +738,10 @@ Start workflowr project.
 <li><a href="02.1-SampleQC.html">SampleQC</a></li>
 </ul></li>
 <li><a href="03-filtering.html">Filtering</a></li>
-<li><a href="04-clustering.html">Clustering</a></li>
+<li><a href="04-clustering.html">Clustering</a>
+<ul>
+<li><a href="04.1-cell_cycle.html">Cell cycle</a></li>
+</ul></li>
 <li><a href="05-annotation.html">Annotation</a></li>
 </ul>
 

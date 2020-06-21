@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-06-08
+<strong>Last updated:</strong> 2020-06-21
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree8cd9077cc0ba68bc7c7b696759634635e7536442targetblank8cd9077a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/8cd9077cc0ba68bc7c7b696759634635e7536442" target="_blank">8cd9077</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef349423edbc451916f37bad9b1fb160941f65399targetblankf349423a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/f349423edbc451916f37bad9b1fb160941f65399" target="_blank">f349423</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree8cd9077cc0ba68bc7c7b696759634635e7536442targetblank8cd9077a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef349423edbc451916f37bad9b1fb160941f65399targetblankf349423a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/8cd9077cc0ba68bc7c7b696759634635e7536442" target="_blank">8cd9077</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/f349423edbc451916f37bad9b1fb160941f65399" target="_blank">f349423</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -523,8 +523,21 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    ._.DS_Store
+    Ignored:    ._MA.pdf
+    Ignored:    ._MA2.pdf
+    Ignored:    ._MA_plots.pdf
+    Ignored:    ._Rplots.pdf
     Ignored:    .__workflowr.yml
+    Ignored:    ._hm.pdf
     Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    ._sample5_MA_2nd_pop.pdf
+    Ignored:    ._sample5_QC_2nd_pop.pdf
+    Ignored:    ._tmp.pdf
+    Ignored:    ._tmp_detected.pdf
+    Ignored:    ._tmp_manual_discard.pdf
+    Ignored:    ._tmp_manual_discard1.pdf
+    Ignored:    ._tmp_manual_discard_all.pdf
+    Ignored:    ._tmp_manual_discard_all1.pdf
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.Rhistory
     Ignored:    analysis/._.DS_Store
@@ -533,36 +546,58 @@ Ignored files:
     Ignored:    analysis/._02.1-SampleQC.Rmd
     Ignored:    analysis/._04-clustering.Rmd
     Ignored:    analysis/._04-clustering.knit.md
+    Ignored:    analysis/._04.1-cell_cycle.Rmd
+    Ignored:    analysis/._05-annotation.Rmd
     Ignored:    analysis/.__site.yml
+    Ignored:    analysis/._additional_filtering.Rmd
+    Ignored:    analysis/._additional_filtering_clustering.Rmd
+    Ignored:    analysis/._index.Rmd
     Ignored:    analysis/01-preprocessing_cache/
     Ignored:    analysis/02-1-SampleQC_cache/
     Ignored:    analysis/02-quality_control_cache/
     Ignored:    analysis/02.1-SampleQC_cache/
     Ignored:    analysis/03-filtering_cache/
+    Ignored:    analysis/04.1-cell_cycle_cache/
     Ignored:    analysis/05-annotation_cache/
-    Ignored:    analysis/figure/
+    Ignored:    analysis/additional_filtering_cache/
+    Ignored:    analysis/additional_filtering_clustering_cache/
     Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
+    Ignored:    data/._.smbdeleteAAA17ed8b4b
     Ignored:    data/._metadata.csv
-    Ignored:    data/._metadata.xlsx
-    Ignored:    data/.smbdeleteAAA17ed8b4b
     Ignored:    data/data_sushi/
     Ignored:    data/filtered_feature_matrices/
-    Ignored:    data/metadata.csv
-    Ignored:    data/metadata.xlsx
     Ignored:    output/.DS_Store
     Ignored:    output/._.DS_Store
+    Ignored:    output/additional_filtering.rds
     Ignored:    output/figures/
     Ignored:    output/sce_01_preprocessing.rds
     Ignored:    output/sce_02_quality_control.rds
     Ignored:    output/sce_03_filtering.rds
     Ignored:    output/sce_preprocessing.rds
     Ignored:    output/so_04_clustering.rds
+    Ignored:    output/so_additional_filtering_clustering.rds
 
 Untracked files:
+    Untracked:  MA.pdf
+    Untracked:  MA2.pdf
+    Untracked:  MA_plots.pdf
+    Untracked:  Rplots.pdf
+    Untracked:  analysis/additional_filtering.Rmd
+    Untracked:  analysis/additional_filtering_clustering.Rmd
     Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  analysis/tabsets.Rmd
+    Untracked:  hm.pdf
+    Untracked:  sample5_MA_2nd_pop.pdf
+    Untracked:  sample5_QC_2nd_pop.pdf
     Untracked:  scripts/
+    Untracked:  tmp.pdf
+    Untracked:  tmp_detected.pdf
+    Untracked:  tmp_manual_discard.pdf
+    Untracked:  tmp_manual_discard1.pdf
+    Untracked:  tmp_manual_discard_all.pdf
+    Untracked:  tmp_manual_discard_all1.pdf
 
 Unstaged changes:
     Modified:   analysis/_site.yml
@@ -604,6 +639,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f349423edbc451916f37bad9b1fb160941f65399/analysis/04-clustering.Rmd" target="_blank">f349423</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-21
+</td>
+<td>
+regress out number of UMIs and perc mitochondrial features; cyclone
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/04-clustering.html" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -740,17 +809,244 @@ for (i in names(so)) {
               repel = TRUE)
   print(p)
 }</code></pre>
-<p><img src="figure/04-clustering.Rmd/variable-features-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/04-clustering.Rmd/variable-features-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/04-clustering.Rmd/variable-features-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/04-clustering.Rmd/variable-features-4.png" width="672" style="display: block; margin: auto;" /><img src="figure/04-clustering.Rmd/variable-features-5.png" width="672" style="display: block; margin: auto;" /><img src="figure/04-clustering.Rmd/variable-features-6.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>## We scale the data so that mean expression is 0 and variance is 1, across cells
-so &lt;- lapply(so, ScaleData, verbose = FALSE)
-
-# find anchors &amp; integrate
+<p><img src="figure/04-clustering.Rmd/variable-features-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-variable-features-1">
+Past versions of variable-features-1.png
+</button>
+</p>
+<div id="fig-variable-features-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/variable-features-1.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/04-clustering.Rmd/variable-features-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-variable-features-2">
+Past versions of variable-features-2.png
+</button>
+</p>
+<div id="fig-variable-features-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/variable-features-2.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/04-clustering.Rmd/variable-features-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-variable-features-3">
+Past versions of variable-features-3.png
+</button>
+</p>
+<div id="fig-variable-features-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/variable-features-3.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/04-clustering.Rmd/variable-features-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-variable-features-4">
+Past versions of variable-features-4.png
+</button>
+</p>
+<div id="fig-variable-features-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/variable-features-4.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/04-clustering.Rmd/variable-features-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-variable-features-5">
+Past versions of variable-features-5.png
+</button>
+</p>
+<div id="fig-variable-features-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/variable-features-5.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/04-clustering.Rmd/variable-features-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-variable-features-6">
+Past versions of variable-features-6.png
+</button>
+</p>
+<div id="fig-variable-features-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/variable-features-6.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code># find anchors &amp; integrate
 as &lt;- FindIntegrationAnchors(so, verbose = FALSE)
 so &lt;- IntegrateData(anchorset = as, dims = seq_len(30), verbose = FALSE)
 
-# scale integrated data
+## We scale the data so that mean expression is 0 and variance is 1, across cells
+## We also regress out the number of UMIs and the percentag of mitochondrial UMIs 
+## per cell.
 DefaultAssay(so) &lt;- &quot;integrated&quot;
-so &lt;- ScaleData(so, verbose = FALSE)</code></pre>
+so &lt;- ScaleData(so, verbose = FALSE, vars.to.regress = c(&quot;sum&quot;, 
+                                                         &quot;subsets_Mt_percent&quot;))</code></pre>
 </div>
 <div id="dimension-reduction" class="section level2">
 <h2>Dimension reduction</h2>
@@ -787,6 +1083,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/unnamed-chunk-4-1.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/0c0c4321512b27f66238d7394a7e371c93b7a041/docs/figure/04-clustering.Rmd/unnamed-chunk-4-1.png" target="_blank">0c0c432</a>
@@ -829,6 +1136,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/unnamed-chunk-5-1.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/0c0c4321512b27f66238d7394a7e371c93b7a041/docs/figure/04-clustering.Rmd/unnamed-chunk-5-1.png" target="_blank">0c0c432</a>
 </td>
 <td>
@@ -869,6 +1187,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/unnamed-chunk-6-1.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/0c0c4321512b27f66238d7394a7e371c93b7a041/docs/figure/04-clustering.Rmd/unnamed-chunk-6-1.png" target="_blank">0c0c432</a>
 </td>
 <td>
@@ -907,6 +1236,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/unnamed-chunk-7-1.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/0c0c4321512b27f66238d7394a7e371c93b7a041/docs/figure/04-clustering.Rmd/unnamed-chunk-7-1.png" target="_blank">0c0c432</a>
@@ -970,6 +1310,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/dr-plots-1.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a94efaa06c73e3bbbade733cc7a4f81c1e5f8f8f/docs/figure/04-clustering.Rmd/dr-plots-1.png" target="_blank">a94efaa</a>
 </td>
 <td>
@@ -1011,14 +1362,125 @@ for (id in ids) {
 <div id="sum" class="section level2">
 <h2>sum</h2>
 <p><img src="figure/04-clustering.Rmd/DR-QC-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-DR-QC-1">
+Past versions of DR-QC-1.png
+</button>
+</p>
+<div id="fig-DR-QC-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/DR-QC-1.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="detected" class="section level2">
 <h2>detected</h2>
 <p><img src="figure/04-clustering.Rmd/DR-QC-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-DR-QC-2">
+Past versions of DR-QC-2.png
+</button>
+</p>
+<div id="fig-DR-QC-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/DR-QC-2.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="subsets_mt_percent" class="section level2">
 <h2>subsets_Mt_percent</h2>
 <p><img src="figure/04-clustering.Rmd/DR-QC-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-DR-QC-3">
+Past versions of DR-QC-3.png
+</button>
+</p>
+<div id="fig-DR-QC-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7cca30c6a9eb28e96ada238d63d751c51dbc470e/docs/figure/04-clustering.Rmd/DR-QC-3.png" target="_blank">7cca30c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="save-seurat-object-to-rds" class="section level2">
 <h2>Save Seurat object to RDS</h2>
