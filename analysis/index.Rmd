@@ -15,4 +15,5 @@ This analysis includes following steps::
     - [SampleQC](02.1-SampleQC.html)
 - [Filtering](03-filtering.html)
 - [Clustering](04-clustering.html)
+    - [Cell cycle](04.1-cell_cycle.html)
 - [Annotation](05-annotation.html)

@@ -1,0 +1,120 @@
+---
+title: "Cell cycle scoring"
+author: "Katharina Hembach"
+date: "6/18/2020"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+
+### Load packages
+
+```{r load-libs, message = FALSE, warning = FALSE}
+library(cowplot)
+library(ggplot2)
+library(RColorBrewer)
+library(viridis)
+library(scran)
+library(Seurat)
+library(SingleCellExperiment)
+library(stringr)
+library(RCurl)
+library(BiocParallel)
+library(dplyr)
+```
+
+
+# Load data & convert to SCE
+
+```{r load-data}
+so <- readRDS(file.path("output", "so_04_clustering.rds"))
+sce <- as.SingleCellExperiment(so, assay = "RNA")
+colData(sce) <- as.data.frame(colData(sce)) %>% 
+    mutate_if(is.character, as.factor) %>% 
+    DataFrame(row.names = colnames(sce))
+so <- SetIdent(so, value = "integrated_snn_res.0.4")
+so@meta.data$cluster_id <- Idents(so)
+sce$cluster_id <- Idents(so)
+```
+
+
+# Cell cycle scoring with Seurat
+
+We assign each cell a cell cycle scores and visualize them in the DR plots.
+We use known G2/M and S phase markers that come with the `Seurat` package. The markers are anticorrelated and cells that to not express the markers should be in G1 phase.
+
+We compute cell cycle phase:
+```{r cell-cycle}
+DefaultAssay(so) <- "RNA"
+# A list of cell cycle markers, from Tirosh et al, 2015
+cc_file <- getURL("https://raw.githubusercontent.com/hbc/tinyatlas/master/cell_cycle/Homo_sapiens.csv") 
+cc_genes <- read.csv(text = cc_file)
+# match the marker genes to the features
+m <- match(cc_genes$geneID[cc_genes$phase == "S"], 
+           str_split(rownames(GetAssayData(so)),
+                     pattern = "\\.", simplify = TRUE)[,1])
+s_genes <- rownames(GetAssayData(so))[m]
+(s_genes <- s_genes[!is.na(s_genes)])
+m <- match(cc_genes$geneID[cc_genes$phase == "G2/M"], 
+           str_split(rownames(GetAssayData(so)), 
+                     pattern = "\\.", simplify = TRUE)[,1])
+g2m_genes <- rownames(GetAssayData(so))[m]
+(g2m_genes <- g2m_genes[!is.na(g2m_genes)])
+so <- CellCycleScoring(so, s.features = s_genes, g2m.features = g2m_genes,
+                       set.ident = TRUE)
+DefaultAssay(so) <- "integrated"
+```
+
+# Cell cycle assignment using `cyclone`
+
+```{r}
+## read pretrained set of human cell cycle markers
+human_pairs <- readRDS(system.file("exdata", "human_cycle_markers.rds", 
+                                   package="scran"))
+# Using Ensembl IDs to match up with the annotation in 'mm.pairs'.
+assignments <- cyclone(sce, human_pairs, 
+                       gene.names = str_split(rownames(sce), pattern = "\\.", 
+                                              simplify = TRUE)[,1],
+                       BPPARAM = MulticoreParam(workers = 20),
+                       verbose = TRUE)
+table(assignments$phases, colData(sce)$cluster_id)
+## Add cell cycle phases to Seurat object
+so$cyclone_phase <- assignments$phases
+```
+
+# Colored DR {.tabset}
+
+```{r dim-red, results = "asis", fig.width = 12}
+cs <- sample(colnames(so), 5e3)
+.plot_dr <- function(so, dr, id)
+    DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+ids <- c("cluster_id", "group_id", "sample_id", "Phase", "cyclone_phase")
+for (id in ids) {
+    cat("## ", id, "\n")
+    p1 <- .plot_dr(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none")
+    p2 <- .plot_dr(so, "umap", id) + theme(legend.position = "none")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
+
+## Save Seurat object to RDS
+
+```{r}
+saveRDS(so, file.path("output", "so_04_1_cell_cycle.rds"))
+```

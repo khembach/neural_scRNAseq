@@ -71,16 +71,16 @@ for (i in names(so)) {
 ```
 
 ```{r integration, warning = FALSE}
-## We scale the data so that mean expression is 0 and variance is 1, across cells
-so <- lapply(so, ScaleData, verbose = FALSE)
-
 # find anchors & integrate
 as <- FindIntegrationAnchors(so, verbose = FALSE)
 so <- IntegrateData(anchorset = as, dims = seq_len(30), verbose = FALSE)
 
-# scale integrated data
+## We scale the data so that mean expression is 0 and variance is 1, across cells
+## We also regress out the number of UMIs and the percentag of mitochondrial UMIs 
+## per cell.
 DefaultAssay(so) <- "integrated"
-so <- ScaleData(so, verbose = FALSE)
+so <- ScaleData(so, verbose = FALSE, vars.to.regress = c("sum", 
+                                                         "subsets_Mt_percent"))
 ```
 
 ## Dimension reduction 

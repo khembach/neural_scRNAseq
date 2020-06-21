@@ -30,6 +30,7 @@ library(Seurat)
 library(SingleCellExperiment)
 library(stringr)
 library(RCurl)
+library(BiocParallel)
 ```
 
 # Load data & convert to SCE
@@ -42,7 +43,7 @@ colData(sce) <- as.data.frame(colData(sce)) %>%
     DataFrame(row.names = colnames(sce))
 ```
 
-# Nb. of clusters by resolution
+# Number of clusters by resolution
 
 ```{r}
 cluster_cols <- grep("res.[0-9]", colnames(colData(sce)), value = TRUE)
@@ -80,13 +81,14 @@ Heatmap(mat,
 ```
 
 
-# Cell cycle
+# Cell cycle scoring with Seurat
 
 We assign each cell a cell cycle scores and visualize them in the DR plots.
 We use known G2/M and S phase markers that come with the `Seurat` package. The markers are anticorrelated and cells that to not express the markers should be in G1 phase.
 
-We compute cell cycle phase using the 2000 anchor genes of the integrated data.
+We compute cell cycle phase:
 ```{r cell-cycle}
+DefaultAssay(so) <- "RNA"
 # A list of cell cycle markers, from Tirosh et al, 2015
 cc_file <- getURL("https://raw.githubusercontent.com/hbc/tinyatlas/master/cell_cycle/Homo_sapiens.csv") 
 cc_genes <- read.csv(text = cc_file)
@@ -103,6 +105,7 @@ g2m_genes <- rownames(GetAssayData(so))[m]
 (g2m_genes <- g2m_genes[!is.na(g2m_genes)])
 so <- CellCycleScoring(so, s.features = s_genes, g2m.features = g2m_genes,
                        set.ident = TRUE)
+DefaultAssay(so) <- "integrated"
 ```
 
 
