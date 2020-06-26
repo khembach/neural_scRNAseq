@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-06-21
+<strong>Last updated:</strong> 2020-06-26
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef349423edbc451916f37bad9b1fb160941f65399targetblankf349423a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/f349423edbc451916f37bad9b1fb160941f65399" target="_blank">f349423</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeafe57ccb03f02d4568586b075c77cd26bc1fd24ctargetblankafe57cca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/afe57ccb03f02d4568586b075c77cd26bc1fd24c" target="_blank">afe57cc</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef349423edbc451916f37bad9b1fb160941f65399targetblankf349423a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeafe57ccb03f02d4568586b075c77cd26bc1fd24ctargetblankafe57cca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/f349423edbc451916f37bad9b1fb160941f65399" target="_blank">f349423</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/afe57ccb03f02d4568586b075c77cd26bc1fd24c" target="_blank">afe57cc</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -544,6 +544,7 @@ Ignored files:
     Ignored:    analysis/._01-preprocessing.Rmd
     Ignored:    analysis/._01-preprocessing.html
     Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._03-filtering.Rmd
     Ignored:    analysis/._04-clustering.Rmd
     Ignored:    analysis/._04-clustering.knit.md
     Ignored:    analysis/._04.1-cell_cycle.Rmd
@@ -640,6 +641,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/05-annotation.html" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -915,11 +933,11 @@ colData(sce) &lt;- as.data.frame(colData(sce)) %&gt;%
 <pre class="r"><code>cluster_cols &lt;- grep(&quot;res.[0-9]&quot;, colnames(colData(sce)), value = TRUE)
 sapply(colData(sce)[cluster_cols], nlevels)</code></pre>
 <pre><code>integrated_snn_res.0.1 integrated_snn_res.0.2 integrated_snn_res.0.4 
-                     7                     12                     17 
+                     9                     10                     17 
 integrated_snn_res.0.8   integrated_snn_res.1 integrated_snn_res.1.2 
-                    23                     26                     30 
+                    23                     28                     30 
   integrated_snn_res.2 
-                    37 </code></pre>
+                    35 </code></pre>
 </div>
 <div id="cluster-sample-counts" class="section level1">
 <h1>Cluster-sample counts</h1>
@@ -930,23 +948,23 @@ sce$cluster_id &lt;- Idents(so)
 (n_cells &lt;- table(sce$cluster_id, sce$sample_id))</code></pre>
 <pre><code>    
      1NSC 2NSC 3NC52 4NC52 5NC96 6NC96
-  0  4224 4453   178    88   262    64
-  1     0    0  1573  1297   553   610
-  2  1202 1150   328   279   550   381
-  3   658  632   609   621   683   401
-  4  1430 1308    69    58   104    15
-  5     0    0  1065   870   418   431
-  6     2    0   917   747   796   271
-  7     1    4   623   644   559   784
-  8    12    9   672   463   879   451
-  9     0    0   884   747   337   374
-  10    3    2   712   663   269   301
-  11  247  245   187   264   250   208
-  12  435  467   117   104   144   112
-  13    0    0   373   268   170   181
-  14   34   50   148   146    52    91
-  15    0    0   183   137    76    97
-  16   83   88    49    42    87    21</code></pre>
+  0  5184 5397   238   107   152   116
+  1     0    1  1602  1312   447   576
+  2  1430 1273    69    55    18    11
+  3   753  727   301   279   340   363
+  4     4    5   653   676   500   770
+  5     1    1   970   870   265   374
+  6     0    0   979   818   256   414
+  7     0    0   912   781   270   369
+  8   159  149   541   578   235   286
+  9     0    0   793   613   209   255
+  10  426  474   117   108    94   121
+  11  243  237   203   261   178   206
+  12    3    2   400   270   236   265
+  13    0    1   395   277   127   176
+  14   12    9   315   251   137   191
+  15   32   45   150   138    40    83
+  16   84   87    49    44    34    19</code></pre>
 </div>
 <div id="relative-cluster-abundances" class="section level1">
 <h1>Relative cluster-abundances</h1>
@@ -988,6 +1006,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/unnamed-chunk-3-1.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/unnamed-chunk-3-1.png" target="_blank">98d3f0d</a>
@@ -1156,6 +1185,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-1.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-1.png" target="_blank">98d3f0d</a>
 </td>
 <td>
@@ -1228,6 +1268,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-2.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-2.png" target="_blank">98d3f0d</a>
@@ -1304,6 +1355,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-3.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-3.png" target="_blank">98d3f0d</a>
 </td>
 <td>
@@ -1378,6 +1440,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-4.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-4.png" target="_blank">98d3f0d</a>
 </td>
 <td>
@@ -1417,54 +1490,52 @@ khembach
 ## candidate cluster markers
 lapply(gs, function(x) str_split(x, pattern = &quot;\\.&quot;, simplify = TRUE)[,2])</code></pre>
 <pre><code>$`0`
-[1] &quot;SAMD11&quot; &quot;PTN&quot;    &quot;NEFL&quot;   &quot;VIM&quot;    &quot;CKB&quot;    &quot;TTYH1&quot; 
+[1] &quot;SAMD11&quot; &quot;IGFBP5&quot; &quot;PTN&quot;    &quot;NEFL&quot;   &quot;VIM&quot;    &quot;CKB&quot;    &quot;TTYH1&quot; 
 
 $`1`
-[1] &quot;SAMD11&quot; &quot;STMN2&quot;  &quot;CRABP1&quot; &quot;ZFHX3&quot;  &quot;HOXB8&quot;  &quot;MT-CO3&quot;
+[1] &quot;SAMD11&quot; &quot;STMN2&quot;  &quot;CRABP1&quot; &quot;ZFHX3&quot;  &quot;HOXB8&quot;  &quot;MT-CO2&quot;
 
 $`2`
-[1] &quot;SAMD11&quot;  &quot;S100A10&quot; &quot;CLU&quot;     &quot;VIM&quot;     &quot;TAGLN&quot;   &quot;CKB&quot;     &quot;METRN&quot;  
+[1] &quot;CENPF&quot; &quot;HMGB2&quot; &quot;VIM&quot;   &quot;CKB&quot;   &quot;TOP2A&quot;
 
 $`3`
-[1] &quot;SAMD11&quot;  &quot;C1orf61&quot; &quot;PTN&quot;     &quot;CLU&quot;     &quot;VIM&quot;     &quot;TAGLN&quot;   &quot;DLK1&quot;   
-[8] &quot;CKB&quot;     &quot;METRN&quot;  
+[1] &quot;S100A10&quot; &quot;S100A11&quot; &quot;CLU&quot;     &quot;VIM&quot;     &quot;CKB&quot;     &quot;METRN&quot;  
 
 $`4`
-[1] &quot;HMGB2&quot; &quot;VIM&quot;   &quot;CKB&quot;   &quot;TOP2A&quot;
+[1] &quot;C1orf61&quot; &quot;VCAN&quot;    &quot;VIM&quot;     &quot;GFAP&quot;    &quot;HOXB9&quot;   &quot;TTYH1&quot;   &quot;MT-ND4&quot; 
 
 $`5`
-[1] &quot;STMN2&quot;  &quot;RTN1&quot;   &quot;MEIS2&quot;  &quot;HOXB9&quot;  &quot;PCP4&quot;   &quot;MT-ND3&quot;
+[1] &quot;SAMD11&quot;  &quot;STMN2&quot;   &quot;HOXB8&quot;   &quot;HOXB9&quot;   &quot;MT-RNR2&quot;
 
 $`6`
-[1] &quot;SAMD11&quot; &quot;TAC1&quot;   &quot;STMN2&quot;  &quot;CRABP1&quot; &quot;ZFHX3&quot;  &quot;HOXB8&quot;  &quot;MT-CO2&quot;
+[1] &quot;STMN2&quot;  &quot;RTN1&quot;   &quot;MEIS2&quot;  &quot;HOXB9&quot;  &quot;PCP4&quot;   &quot;MT-ND3&quot;
 
 $`7`
-[1] &quot;C1orf61&quot; &quot;SPARCL1&quot; &quot;SPP1&quot;    &quot;VIM&quot;     &quot;GFAP&quot;    &quot;HOXB9&quot;   &quot;TTYH1&quot;  
-
-$`8`
-[1] &quot;STMN2&quot;   &quot;SNCG&quot;    &quot;RTN1&quot;    &quot;HOXB5&quot;   &quot;ONECUT2&quot;
-
-$`9`
 [1] &quot;FOXP1&quot; &quot;FABP7&quot; &quot;STMN2&quot; &quot;PCP4&quot; 
 
+$`8`
+[1] &quot;PTPRZ1&quot; &quot;CLU&quot;    &quot;LY6H&quot;   &quot;VIM&quot;    &quot;TAGLN&quot;  &quot;DLK1&quot;   &quot;METRN&quot; 
+
+$`9`
+[1] &quot;TAC1&quot;   &quot;STMN2&quot;  &quot;HOXB5&quot;  &quot;MT-CO2&quot;
+
 $`10`
-[1] &quot;SAMD11&quot;  &quot;BASP1&quot;   &quot;ENC1&quot;    &quot;SOX4&quot;    &quot;STMN2&quot;   &quot;HOXB8&quot;   &quot;HOXB9&quot;  
-[8] &quot;DCX&quot;     &quot;MT-RNR2&quot;
-
-$`11`
-[1] &quot;VGF&quot;      &quot;NEFL&quot;     &quot;STMN2&quot;    &quot;ANXA1&quot;    &quot;DDIT3&quot;    &quot;HSP90AA1&quot;
-
-$`12`
 [1] &quot;PTN&quot;      &quot;EIF4EBP1&quot; &quot;VIM&quot;      &quot;CKB&quot;      &quot;FTL&quot;     
 
+$`11`
+[1] &quot;VGF&quot;      &quot;STMN2&quot;    &quot;ANXA1&quot;    &quot;DDIT3&quot;    &quot;HSP90AA1&quot;
+
+$`12`
+[1] &quot;POU3F1&quot;  &quot;STMN2&quot;   &quot;SNCG&quot;    &quot;RTN1&quot;    &quot;HOXB5&quot;   &quot;ONECUT2&quot;
+
 $`13`
-[1] &quot;STMN2&quot;  &quot;SNCG&quot;   &quot;MPPED2&quot; &quot;PCP4&quot;  
+[1] &quot;STMN2&quot;  &quot;SNCG&quot;   &quot;MPPED2&quot; &quot;RTN1&quot;   &quot;PCP4&quot;  
 
 $`14`
-[1] &quot;C1orf61&quot; &quot;HES6&quot;    &quot;SOX2&quot;    &quot;VIM&quot;     &quot;CKB&quot;    
+[1] &quot;TAC1&quot;  &quot;STMN2&quot;
 
 $`15`
-[1] &quot;TAC1&quot;  &quot;STMN2&quot;
+[1] &quot;C1orf61&quot; &quot;HES6&quot;    &quot;SOX2&quot;    &quot;VIM&quot;     &quot;CKB&quot;    
 
 $`16`
 [1] &quot;S100A11&quot; &quot;COL3A1&quot;  &quot;COL1A1&quot; </code></pre>
@@ -1504,6 +1575,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/scran-markers-heatmap-1.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/f116d0f9f2bbe87a88f6541eaca106b390f3866c/docs/figure/05-annotation.Rmd/scran-markers-heatmap-1.png" target="_blank">f116d0f</a>
@@ -1608,6 +1690,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/known-markers-heatmap-1.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/d04635aa982aeb95824d6534e7e7a20326a53872/docs/figure/05-annotation.Rmd/known-markers-heatmap-1.png" target="_blank">d04635a</a>
 </td>
 <td>
@@ -1681,6 +1774,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-1.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-1.png" target="_blank">98d3f0d</a>
 </td>
 <td>
@@ -1720,6 +1824,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-2.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-2.png" target="_blank">98d3f0d</a>
@@ -1763,6 +1878,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-3.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-3.png" target="_blank">98d3f0d</a>
 </td>
 <td>
@@ -1802,6 +1928,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-4.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-4.png" target="_blank">98d3f0d</a>
@@ -1845,6 +1982,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-5.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-5.png" target="_blank">98d3f0d</a>
 </td>
 <td>
@@ -1884,6 +2032,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-6.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-6.png" target="_blank">98d3f0d</a>
@@ -1927,6 +2086,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-7.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-7.png" target="_blank">98d3f0d</a>
 </td>
 <td>
@@ -1966,6 +2136,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-8.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-8.png" target="_blank">98d3f0d</a>
@@ -2009,6 +2190,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-9.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-9.png" target="_blank">98d3f0d</a>
 </td>
 <td>
@@ -2048,6 +2240,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-10.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-10.png" target="_blank">98d3f0d</a>
@@ -2091,6 +2294,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-11.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-11.png" target="_blank">98d3f0d</a>
 </td>
 <td>
@@ -2130,6 +2344,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/05-annotation.Rmd/dim-red-expr-12.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/98d3f0d71203ec143409f007d944ff7848701c33/docs/figure/05-annotation.Rmd/dim-red-expr-12.png" target="_blank">98d3f0d</a>

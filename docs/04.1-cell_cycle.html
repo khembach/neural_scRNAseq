@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-06-21
+<strong>Last updated:</strong> 2020-06-26
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef349423edbc451916f37bad9b1fb160941f65399targetblankf349423a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/f349423edbc451916f37bad9b1fb160941f65399" target="_blank">f349423</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeafe57ccb03f02d4568586b075c77cd26bc1fd24ctargetblankafe57cca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/afe57ccb03f02d4568586b075c77cd26bc1fd24c" target="_blank">afe57cc</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef349423edbc451916f37bad9b1fb160941f65399targetblankf349423a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeafe57ccb03f02d4568586b075c77cd26bc1fd24ctargetblankafe57cca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/f349423edbc451916f37bad9b1fb160941f65399" target="_blank">f349423</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/afe57ccb03f02d4568586b075c77cd26bc1fd24c" target="_blank">afe57cc</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -544,6 +544,7 @@ Ignored files:
     Ignored:    analysis/._01-preprocessing.Rmd
     Ignored:    analysis/._01-preprocessing.html
     Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._03-filtering.Rmd
     Ignored:    analysis/._04-clustering.Rmd
     Ignored:    analysis/._04-clustering.knit.md
     Ignored:    analysis/._04.1-cell_cycle.Rmd
@@ -576,6 +577,7 @@ Ignored files:
     Ignored:    output/sce_02_quality_control.rds
     Ignored:    output/sce_03_filtering.rds
     Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04_1_cell_cycle.rds
     Ignored:    output/so_04_clustering.rds
     Ignored:    output/so_additional_filtering_clustering.rds
 
@@ -639,6 +641,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/098317829a726e01a219382f931f6eb86103f863/analysis/04.1-cell_cycle.Rmd" target="_blank">0983178</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-26
+</td>
+<td>
+Fix tabset
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/04.1-cell_cycle.html" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -774,14 +810,14 @@ assignments &lt;- cyclone(sce, human_pairs,
 table(assignments$phases, colData(sce)$cluster_id)</code></pre>
 <pre><code>     
          0    1    2    3    4    5    6    7    8    9   10   11   12   13
-  G1  6447 1827 2777 2934  772 1393 1536 2413 1653 1255  969 1018  975  503
-  G2M  593  243  157   80 1583  104  154   30   32   92  128   36  103   28
-  S   2229 1963  956  590  629 1287 1043  172  801  995  853  347  301  461
+  G1  7717 1745  678 2019 2415 1247 1232 1214 1684 1039  957  950  747  472
+  G2M  637  241 1581  136   26  149   89   92   30   99  101   37    5   33
+  S   2840 1952  597  608  167 1085 1146 1026  234  732  282  341  424  471
      
         14   15   16
-  G1   424  319  231
-  G2M   14    7   31
-  S     83  167  108</code></pre>
+  G1   601  401  197
+  G2M   15   14   27
+  S    299   73   93</code></pre>
 <pre class="r"><code>## Add cell cycle phases to Seurat object
 so$cyclone_phase &lt;- assignments$phases</code></pre>
 </div>
@@ -808,25 +844,211 @@ for (id in ids) {
 <div id="cluster_id" class="section level2">
 <h2>cluster_id</h2>
 <p><img src="figure/04.1-cell_cycle.Rmd/dim-red-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-1">
+Past versions of dim-red-1.png
+</button>
+</p>
+<div id="fig-dim-red-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/04.1-cell_cycle.Rmd/dim-red-1.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="group_id" class="section level2">
 <h2>group_id</h2>
 <p><img src="figure/04.1-cell_cycle.Rmd/dim-red-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-2">
+Past versions of dim-red-2.png
+</button>
+</p>
+<div id="fig-dim-red-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/04.1-cell_cycle.Rmd/dim-red-2.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="sample_id" class="section level2">
 <h2>sample_id</h2>
 <p><img src="figure/04.1-cell_cycle.Rmd/dim-red-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-3">
+Past versions of dim-red-3.png
+</button>
+</p>
+<div id="fig-dim-red-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/04.1-cell_cycle.Rmd/dim-red-3.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="phase" class="section level2">
 <h2>Phase</h2>
 <p><img src="figure/04.1-cell_cycle.Rmd/dim-red-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-4">
+Past versions of dim-red-4.png
+</button>
+</p>
+<div id="fig-dim-red-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/04.1-cell_cycle.Rmd/dim-red-4.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="cyclone_phase" class="section level2">
 <h2>cyclone_phase</h2>
 <p><img src="figure/04.1-cell_cycle.Rmd/dim-red-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-5">
+Past versions of dim-red-5.png
+</button>
+</p>
+<div id="fig-dim-red-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/figure/04.1-cell_cycle.Rmd/dim-red-5.png" target="_blank">06330b1</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-06-22
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="save-seurat-object-to-rds" class="section level2">
-<h2>Save Seurat object to RDS</h2>
+</div>
+</div>
+</div>
+<div id="save-seurat-object-to-rds" class="section level1">
+<h1>Save Seurat object to RDS</h1>
 <pre class="r"><code>saveRDS(so, file.path(&quot;output&quot;, &quot;so_04_1_cell_cycle.rds&quot;))</code></pre>
 <br>
 <p>
@@ -922,7 +1144,6 @@ loaded via a namespace (and not attached):
  [99] tidyr_1.1.0               httpuv_1.5.2             
 [101] munsell_0.5.0             beeswarm_0.2.3           
 [103] vipor_0.4.5              </code></pre>
-</div>
 </div>
 </div>
 
