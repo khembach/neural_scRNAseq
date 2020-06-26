@@ -113,7 +113,7 @@ for (id in ids) {
 }
 ```
 
-## Save Seurat object to RDS
+# Save Seurat object to RDS
 
 ```{r}
 saveRDS(so, file.path("output", "so_04_1_cell_cycle.rds"))
