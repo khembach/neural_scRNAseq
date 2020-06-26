@@ -17,6 +17,9 @@ knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
 ```{r, message = FALSE}
 library(scater)
 library(LSD)
+library(dplyr)
+library(edgeR)
+library(ggrepel)
 ```
 
 ## Load data
@@ -56,6 +59,86 @@ plotColData(sce, x = "sample_id", y = "subsets_Mt_percent",
             colour_by = "discard")
 ```
 
+
+## MA plot of the two populations
+
+We think that the second cell population in sample 5 with the lower number of UMIs and detected genes consists of damaged cells caused by the dissociation. Sample 5 and 6 are technical replicates and we thus expect similar distributions of the QC metrics. We want to know if there are any genes enriched in the second cell population or if we can safely remove the cells?
+
+To check if we would discarded an specific cell identity with out stringent filtering, we compare the gene expression in the two cell populations (excluding the outlier cells as defined above).
+If the second cell population is enriched for a specific cell identity, the corresponding marker genes will have high log2FC in the MA plot. Mitochondrial genes are in blue.
+
+```{r, results='asis'}
+for (i in c("5NC96", "6NC96")) {
+cat("### ", i, "\n")
+## all retained cells
+part <- sce[,colData(sce)$sample_id == i & colData(sce)$discard == FALSE]
+## second population: cells with less than 7000 detected genes in sample 5 
+colData(part)$second_pop <- (colData(part)$sum < 7000 | 
+  colData(part)$detected < 3000) 
+plotColData(part, x = "sample_id", y = "sum", colour_by = "second_pop") + 
+  scale_y_log10()
+plotColData(part, x = "sample_id", y = "detected", colour_by = "second_pop") + 
+  scale_y_log10()
+
+lost <- calculateAverage(counts(part)[,colData(part)$second_pop])
+kept <- calculateAverage(counts(part)[,!colData(part)$second_pop])
+logged <- cpm(cbind(lost, kept), log=TRUE, prior.count=2)
+logFC <- logged[,1] - logged[,2]
+abundance <- rowMeans(logged)
+
+label <- rep("", length(logFC))
+top <- order(logFC, decreasing = TRUE)[1:20]
+label[top]  <- rowData(sce)$symbol[top]
+df <- data.frame(abundance = abundance, logFC = logFC, label = label)
+mito <- grep("MT-", rownames(sce), value = TRUE)
+p <- ggplot(df, aes(x = abundance, y = logFC, label = label)) + 
+  geom_point(size = 2.5) +
+  geom_point(data = df[mito,], color = "dodgerblue", size = 2.5) + 
+  xlab("Average count") + ylab("logFC (lost/kept)") + 
+  theme_bw(base_size = 16) + 
+  geom_text_repel()
+print(p)
+cat("\n\n")
+}
+```
+
+We decided to additionally filter the cells in sample 5 and 6.
+
+```{r}
+## filter the cells with less than 5000 UMIs in sample 5 and 6
+colData(sce) %>% data.frame() %>% 
+  filter(sample_id %in% c("5NC96", "6NC96")) %>% 
+  group_by(sample_id, discard) %>% 
+  summarise(below_cutoff = sum(sum < 5000))
+colData(sce)$manual_discard_sum <- colData(sce)$sum < 5000 & 
+  colData(sce)$sample_id %in% c("5NC96", "6NC96")
+## filter the cells with less than 3000 detected genes in sample 5 and 6
+colData(sce) %>% data.frame() %>% 
+  filter(sample_id %in% c("5NC96", "6NC96")) %>% 
+  group_by(sample_id, discard) %>% 
+  summarise(below_cutoff = sum(detected < 2500) )
+colData(sce)$manual_discard_detected <- colData(sce)$detected < 2500 & 
+  colData(sce)$sample_id %in% c("5NC96", "6NC96")
+## highlight all manually discarded cells
+colData(sce)$manual_discard <- colData(sce)$manual_discard_sum |
+                                   colData(sce)$manual_discard_detected
+plotColData(sce, x = "sample_id", y = "sum", colour_by = "manual_discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "detected", colour_by = "manual_discard") + 
+  scale_y_log10()
+
+## highlight all discarded cells
+colData(sce)$discard <- colData(sce)$manual_discard |
+                                   colData(sce)$discard
+plotColData(sce, x = "sample_id", y = "detected", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "sum", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "subsets_Mt_percent", 
+            colour_by = "discard")
+```
+
+
 Plot the library size against the number of detected genes before and after filtering.
 ```{r, fig.width=12, fig.height = 10}
 cd <- colData(sce)
@@ -71,6 +154,62 @@ for (i in levels(sce$sample_id)) {
 }
 ```
 
+
+## MA plot of all discarded over retained cells
+
+MA plot of all discarded cells (outlier cells or cells in second population in sample 5) over the retained cells. Mitochondrial genes in blue.
+
+```{r}
+lost <- calculateAverage(counts(sce)[,colData(sce)$discard])
+kept <- calculateAverage(counts(sce)[,!colData(sce)$discard])
+
+logged <- cpm(cbind(lost, kept), log=TRUE, prior.count=2)
+logFC <- logged[,1] - logged[,2]
+abundance <- rowMeans(logged)
+
+## only label genes with high logFC
+label <- rep("", length(logFC))
+top <- order(logFC, decreasing = TRUE)[1:20]
+label[top]  <- rowData(sce)$symbol[top]
+df <- data.frame(abundance = abundance, logFC = logFC, label = label)
+mito <- grep("MT-", rownames(sce), value = TRUE)
+p <- ggplot(df, aes(x = abundance, y = logFC, label = label)) + 
+  geom_point(size = 2.5) +
+  geom_point(data = df[mito,], color = "dodgerblue", size = 2.5) + 
+  xlab("Average count") + ylab("logFC (lost/kept)") + 
+  theme_bw(base_size = 16) + 
+  geom_text_repel()
+print(p)
+```
+
+### MA plot per sample {.tabset}
+```{r, results='asis'}
+for (s in levels(colData(sce)$sample_id)) {
+  cat("#### ", s, "\n")
+  part <- sce[,colData(sce)$sample_id == s]
+  lost <- calculateAverage(counts(part)[,colData(part)$discard])
+  kept <- calculateAverage(counts(part)[,!colData(part)$discard])
+  logged <- cpm(cbind(lost, kept), log=TRUE, prior.count=2)
+  logFC <- logged[,1] - logged[,2]
+  abundance <- rowMeans(logged)
+  ## only label genes with high logFC
+  label <- rep("", length(logFC))
+  top <- order(logFC, decreasing = TRUE)[1:20]
+  label[top]  <- rowData(part)$symbol[top]
+  df <- data.frame(abundance = abundance, logFC = logFC, label = label)
+  mito <- grep("MT-", rownames(part), value = TRUE)
+  p <- ggplot(df, aes(x = abundance, y = logFC, label = label)) + 
+    geom_point(size = 2.5) +
+    geom_point(data = df[mito,], color = "dodgerblue", size = 2.5) + 
+    xlab("Average count") + ylab("logFC (lost/kept)") + 
+    theme_bw(base_size = 16) + 
+    geom_text_repel()
+  print(p) 
+  cat("\n\n")
+}
+```
+
+## Removal of outlier cells
 We remove the outlier cells and filter the genes:
 
 ```{r}
