@@ -8,12 +8,18 @@ editor_options:
   chunk_output_type: console
 ---
 
-This analysis includes following steps::
+This analysis includes following steps:
 
 - [Preprocessing](01-preprocessing.html)
 - [Quality control](02-quality_control.html)
     - [SampleQC](02.1-SampleQC.html)
 - [Filtering](03-filtering.html)
+
+Analysis of the two NSC samples:
+- [NSC clustering](NSC-1-clustering.html)
+- [NSC annotation](NSC-2-annotation.html)
+
+Integrated analysis of all 6 samples:
 - [Clustering](04-clustering.html)
     - [Cell cycle](04.1-cell_cycle.html)
 - [Annotation](05-annotation.html)
