@@ -16,10 +16,18 @@ This analysis includes following steps:
 - [Filtering](03-filtering.html)
 
 Analysis of the two NSC samples:
+
 - [NSC clustering](NSC-1-clustering.html)
 - [NSC annotation](NSC-2-annotation.html)
 
 Integrated analysis of all 6 samples:
+
 - [Clustering](04-clustering.html)
     - [Cell cycle](04.1-cell_cycle.html)
 - [Annotation](05-annotation.html)
+
+Integration with Lam et al. 2019.
+Neuroepithelial stem (NES) cells:
+
+- [Integration](Lam-01-NSC_integration.html)
+- [Cluster comparison](Lam-02-NSC_annotation.html)

@@ -1,0 +1,306 @@
+---
+title: "Integration NSC from Lam et al."
+author: "Katharina Hembach"
+date: "7/3/2020"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+
+### Load packages
+```{r, message = FALSE}
+library(cowplot)
+library(ggplot2)
+library(Seurat)
+library(SingleCellExperiment)
+library(stringr)
+library(Seurat)
+library(rtracklayer)
+library(future)
+library(biomaRt)
+library(dplyr)
+library(data.table)
+```
+
+```{r future-setup}
+# increase future's maximum allowed size of exported globals to 4GB 
+# the default is 2GB
+options(future.globals.maxSize = 4096 * 1024 ^ 2)
+# change the current plan to access parallelization
+plan("multiprocess", workers = 20)
+```
+
+
+## Load our NSC data
+```{r load-sce}
+# sce <- readRDS(file.path("output", "sce_03_filtering.rds"))
+## our NSC from sample 1 and 2
+# so <- readRDS(file.path("output", "NSC_1_clustering.rds"))
+
+sce <- readRDS(file.path("output", "sce_03_filtering.rds"))
+
+## subset the two NSC samples
+sce <- sce[,colData(sce)$sample_id %in% c("1NSC", "2NSC")]
+sce$sample_id <- droplevels(sce$sample_id)
+# ## we filter genes and require > 1 count in at least 20 cells
+# sce <- sce[rowSums(counts(sce) > 1) >= 20, ]
+# dim(sce)
+
+# create SeuratObject
+so <- CreateSeuratObject(
+    counts = counts(sce),
+    meta.data = data.frame(colData(sce)),
+    project = "neural_cultures")
+```
+
+
+## Load NES data and map symbold to Ensembl IDs
+```{r process-NES-data}
+nes_meta <- read.table(file.path("data", "Lam_et_al", "figure2", "Figure_2_metadata.NES.Healthy.Cell.lines.healthy_NES.7.clusters.final.figure.txt"))
+
+nes_counts <- read.table(file.path("data", "Lam_et_al", "figure2", "Figure_2_NES.Healthy.Cell.lines.healthy_NES.7.clusters.final.figure.txt"))
+
+sce_nes <- SingleCellExperiment(list(counts=nes_counts), colData = nes_meta)
+dim(sce_nes)
+
+## I think Lam et al. used UCSC hg19 gene annotations for their analysis.
+## --> we map the gene symbols to hg19 Ensembl IDs
+grch37 <- biomaRt::useMart(biomart="ENSEMBL_MART_ENSEMBL", host="grch37.ensembl.org", 
+                  path="/biomart/martservice", dataset="hsapiens_gene_ensembl")
+res <- getBM(attributes=c('hgnc_symbol', 'ensembl_gene_id'), 
+      filters = 'hgnc_symbol', 
+      values = rownames(sce_nes), 
+      mart = grch37)
+table(rownames(sce_nes) %in% res$hgnc_symbol)
+res_split <- split(res$ensembl_gene_id, res$hgnc_symbol)
+
+# we match our Ensembl IDs to the biomaRt IDs and only keep rows from Lam et al. 
+# that match one of our IDs
+a <- res %>% dplyr::left_join(data.frame(rowData(sce)), 
+                              by = c("ensembl_gene_id" = "ensembl_id"))
+## if a symbols has multiple IDs, we keep the ID with the same symbol in our dataset
+## find all duplicates
+dups <- duplicated(a$hgnc_symbol) | duplicated(a$hgnc_symbol, fromLast=TRUE)
+## check the symbol in our dataset and remove the duplicate with wrong symbol
+b_split <- split(a[dups,], a[dups,]$hgnc_symbol)
+
+## if GRCh38 symbol matches the hgnc_symbol, we keep the corresponding Ensembl ID
+## otherwise we only keep the gene symbol without an ID
+resolve_dups <- function(b){
+  res <- b[which(b$hgnc_symbol == b$symbol),]
+  if (nrow(res) != 1){
+    res <- b[1,]
+    res[, c("ensembl_gene_id", "symbol")] <- ""
+  }
+  res
+}
+
+b_resolved <- lapply(b_split, resolve_dups)
+b_resolved <- rbindlist(b_resolved)
+id_map <- rbind(a[!dups,], b_resolved)
+id_map$symbol <- NULL
+colnames(id_map) <- c("symbol", "ensembl_id")
+
+## Remove the features for which we don't have an ensembl ID
+sce_nes <- sce_nes[rownames(sce_nes) %in% id_map$symbol,]
+dim(sce_nes)
+
+## We have to use identical gene symbols for all datasets if we want to integrate the data.
+## We replace the Lam et al. gene symbols with GRCh38 symbols for all features 
+## where the Ensembl IDs could be mapped.
+gtf <- import(file.path("data", "Homo_sapiens.GRCh38.98.sorted.gtf"))
+gene <- gtf[gtf$type == "gene"]
+m <- match(id_map$symbol, gene$gene_name)
+id_map[!is.na(m),]$symbol <- gene$gene_name[m[!is.na(m)]]
+
+## adjust row and colData
+colData(sce_nes)$sample_id <- factor("NES")
+rowData(sce_nes) <- id_map[match(rownames(sce_nes), id_map$symbol),]
+rownames(sce_nes) <- with(rowData(sce_nes), 
+                               paste(ensembl_id, symbol, sep = "."))
+sce_nes$group_id <- "NES"
+## how many genes could be mapped between datasets?
+rownames(sce_nes) %in% rownames(sce) %>% table
+
+## The data already comes with the number of RNAs and features
+names(colData(sce_nes))[names(colData(sce_nes)) == 'BARCODE'] <- 'barcode'
+names(colData(sce_nes))[names(colData(sce_nes)) == 'nCount_RNA'] <- 'sum'
+names(colData(sce_nes))[names(colData(sce_nes)) == 'nFeature_RNA'] <- 'detected'
+
+# ## we filter genes and require > 1 count in at least 5 cells
+# sce_nes <- sce_nes[rowSums(counts(sce_nes) > 1) >= 5, ]
+# dim(sce_nes)
+
+so_nes <- CreateSeuratObject(
+    counts = counts(sce_nes),
+    meta.data = data.frame(colData(sce_nes)),
+    project = "neural_cultures")
+```
+
+<!-- # ## Ensembl GTF annotations -->
+<!-- # # /home/Shared_taupo/data/annotation/Human/Ensembl_GRCh37.71/gtf/Homo_sapiens.GRCh37.71.gtf -->
+<!-- # gtf <- import("/home/Shared_taupo/data/annotation/Human/GRCH37/gencode_v19/gencode.v19.annotation.gtf") -->
+<!-- # # gtf <- import("/home/Shared_taupo/data/annotation/Human/Ensembl_GRCh37.71/gtf/Homo_sapiens.GRCh37.71.gtf") -->
+<!-- # gene <- gtf[gtf$type == "gene"] -->
+<!-- # map <- data.frame(gene_id = gtf$gene_id, gene_name = gtf$gene_name) -->
+<!-- # map <- unique(map) -->
+<!-- # -->
+<!-- # ## we map the gene symbols to Ensembl IDs -->
+<!-- # m <- match(rownames(sce_nes), map$gene_name) -->
+<!-- # table(is.na(m)) -->
+<!-- # rowData(sce_nes)$symbol <- rownames(sce_nes) -->
+<!-- # rowData(sce_nes)$ensembl_id <- gene$gene_id[m] -->
+<!-- # ## GRCH37/gencode_v19 -->
+<!-- # FALSE  TRUE -->
+<!-- # 12616  1470 -->
+
+<!-- # #GRCh37.71 -->
+<!-- # FALSE  TRUE -->
+<!-- # 12423  1663 -->
+
+## Normalisation
+
+```{r normalisation}
+# split by sample
+cells_by_sample <- split(colnames(sce), sce$sample_id)
+so <- lapply(cells_by_sample, function(i) subset(so, cells = i))
+## add the NES
+so[["NES"]] <- so_nes
+
+## log normalize the data using a scaling factor of 10000
+so <- lapply(so, NormalizeData, verbose = FALSE, scale.factor = 10000, 
+             normalization.method = "LogNormalize")
+```
+
+```{r variable-features, warning = FALSE}
+## Identify the top 2000 genes with high cell-to-cell variation
+so <- lapply(so, FindVariableFeatures, nfeatures = 2000, 
+    selection.method = "vst", verbose = FALSE)
+
+## Plot variable features 
+for (i in names(so)) {
+  # Identify the 10 most highly variable genes
+  top10 <- head(VariableFeatures(so[[i]]), 10)
+  p <- VariableFeaturePlot(so[[i]])
+  p <- LabelPoints(plot = p, points = top10, 
+              labels = str_split(top10, "\\.", simplify = TRUE)[,2], 
+              repel = TRUE)
+  print(p)
+}
+```
+
+```{r integration, warning = FALSE}
+# find anchors & integrate
+as <- FindIntegrationAnchors(so, verbose = FALSE)
+so <- IntegrateData(anchorset = as, dims = seq_len(30), verbose = FALSE)
+
+## We scale the data so that mean expression is 0 and variance is 1, across cells
+## We also regress out the number of UMIs. 
+## We don't have mitochondrial genes for the NES
+DefaultAssay(so) <- "integrated"
+so <- ScaleData(so, verbose = FALSE, vars.to.regress = "sum")
+```
+
+
+## Dimension reduction 
+
+We perform dimension reduction with t-SNE and UMAP based on PCA results.
+```{r dimension-reduction, warning = FALSE}
+so <- RunPCA(so, npcs = 30, verbose = FALSE)
+so <- RunTSNE(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, do.fast = TRUE, verbose = FALSE)
+so <- RunUMAP(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, verbose = FALSE)
+```
+
+### Plot PCA results
+
+```{r, fig.width = 12, fig.height = 8}
+# top genes that are associated with the first two PCs
+VizDimLoadings(so, dims = 1:2, reduction = "pca")
+```
+
+```{r, fig.width = 10, fig.height = 8}
+## PCA plot 
+DimPlot(so, reduction = "pca", group.by = "sample_id")
+```
+
+```{r}
+# elbow plot with the ranking of PCs based on the % of variance explained
+ElbowPlot(so, ndims = 30)
+```
+
+```{r,  fig.width = 15, fig.height = 20}
+## heatmaps of the top 20 PCs and the 500 most extreme cells for each component
+DimHeatmap(so, dims = 1:20, cells = 500, balanced = TRUE, nfeatures = 20 )
+```
+
+
+## Clustering
+
+We cluster the cells using the reduced PCA dimensions.
+
+```{r clustering, warning = FALSE}
+so <- FindNeighbors(so, reduction = "pca", dims = seq_len(20), verbose = FALSE)
+for (res in c(0.1, 0.2, 0.4, 0.8, 1, 1.2, 2))
+    so <- FindClusters(so, resolution = res, random.seed = 1, verbose = FALSE)
+```
+
+
+## Dimension reduction plots 
+
+We plot the dimension reduction (DR) and color by sample, group and cluster ID
+```{r dr-plots, fig.width = 10, fig.height = 8, warning = FALSE}
+thm <- theme(aspect.ratio = 1, legend.position = "none")
+ps <- lapply(c("sample_id", "group_id", "ident"), function(u) {
+    p1 <- DimPlot(so, reduction = "tsne", group.by = u) + thm
+    p2 <- DimPlot(so, reduction = "umap", group.by = u)
+    lgd <- get_legend(p2)
+    p2 <- p2 + thm
+    list(p1, p2, lgd)
+    plot_grid(p1, p2, lgd, nrow = 1,
+        rel_widths = c(1, 1, 0.5))
+})
+plot_grid(plotlist = ps, ncol = 1)
+```
+
+## QC on DR plots {.tabset}
+
+```{r DR-QC, results = "asis", fig.width = 12}
+cs <- sample(colnames(so), 1e4) ## subsample cells
+.plot_features <- function(so, dr, id) {
+    FeaturePlot(so, cells = cs, features = id, reduction = dr, pt.size = 0.4, 
+                cols = c("grey", "blue")) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+}
+ids <- c("sum", "detected", "subsets_Mt_percent")
+for (id in ids) {
+    cat("## ", id, "\n")
+    p1 <- .plot_features(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none") + ggtitle("tSNE")
+    p2 <- .plot_features(so, "umap", id) + theme(legend.position = "none") + 
+      ggtitle("UMAP")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
+
+## Save Seurat object to RDS
+
+```{r}
+saveRDS(so, file.path("output", "Lam-01-clustering.rds"))
+```
+

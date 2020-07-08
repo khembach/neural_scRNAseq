@@ -1,0 +1,200 @@
+---
+title: "Annotation of cell identity after Lam et al. NSC integration"
+author: "Katharina Hembach"
+date: "7/6/2020"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+### Load packages
+
+```{r load-libs, message = FALSE, warning = FALSE}
+library(ComplexHeatmap)
+library(cowplot)
+library(ggplot2)
+library(dplyr)
+library(muscat)
+library(purrr)
+library(RColorBrewer)
+library(viridis)
+library(scran)
+library(Seurat)
+library(SingleCellExperiment)
+library(stringr)
+library(RCurl)
+library(BiocParallel)
+```
+
+# Load data & convert to SCE
+
+```{r load-data}
+so <- readRDS(file.path("output", "Lam-01-clustering.rds"))
+sce <- as.SingleCellExperiment(so, assay = "RNA")
+colData(sce) <- as.data.frame(colData(sce)) %>% 
+    mutate_if(is.character, as.factor) %>% 
+    DataFrame(row.names = colnames(sce))
+```
+
+# Number of clusters by resolution
+
+```{r}
+cluster_cols <- grep("res.[0-9]", colnames(colData(sce)), value = TRUE)
+sapply(colData(sce)[cluster_cols], nlevels)
+```
+
+# Cluster-sample counts
+
+```{r}
+# set cluster IDs to resolution 0.4 clustering
+so <- SetIdent(so, value = "integrated_snn_res.0.4")
+so@meta.data$cluster_id <- Idents(so)
+sce$cluster_id <- Idents(so)
+(n_cells <- table(sce$cluster_id, sce$sample_id))
+```
+
+# Relative cluster-abundances
+
+```{r fig.width = 6, fig.height = 5}
+fqs <- prop.table(n_cells, margin = 2)
+mat <- as.matrix(unclass(fqs))
+Heatmap(mat,
+    col = rev(brewer.pal(11, "RdGy")[-6]),
+    name = "Frequency",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "cluster_id",
+    column_title = "sample_id",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
+            gp = gpar(col = "white", fontsize = 8)))
+```
+
+
+# Discribution of NES subtypes per cluster
+
+```{r}
+(n_types <- table(sce$cluster_id, sce$cell_subtype_nes))
+fqs <- prop.table(n_types, margin = 2)
+mat <- as.matrix(unclass(fqs))
+Heatmap(mat,
+    col = rev(brewer.pal(11, "RdGy")[-6]),
+    name = "Frequency",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "cluster_id",
+    column_title = "sample_id",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
+            gp = gpar(col = "white", fontsize = 8)))
+```
+
+
+
+# DR colored by cluster ID {.tabset}
+
+```{r dim-red, results = "asis", fig.width = 12}
+.plot_dr <- function(so, dr, id)
+    DimPlot(so, group.by = id, reduction = dr, pt.size = 0.4) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+ids <- c("cluster_id", "group_id", "sample_id")
+for (id in ids) {
+    cat("## ", id, "\n")
+    p1 <- .plot_dr(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none")
+    p2 <- .plot_dr(so, "umap", id) + theme(legend.position = "none")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
+
+
+# Cluster markers from Lam et al. 
+
+Similar to figure 2f in paper.
+
+```{r}
+## source file with list of known marker genes
+source(file.path("data", "Lam_figure2_markers.R"))
+
+fs <- lapply(fs, sapply, function(g)
+    grep(pattern = paste0("\\.", g, "$"), rownames(sce), value = TRUE)
+  )
+
+fs <- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
+
+gs <- gsub(".*\\.", "", unlist(fs))
+ns <- vapply(fs, length, numeric(1))
+ks <- rep.int(names(fs), ns)
+labs <- lapply(fs, function(x) gsub(".*\\.", "",x))
+```
+
+## Heatmap of mean marker-exprs. by cluster
+
+```{r known-markers-heatmap, fig.width = 10, fig.height = 18}
+# split cells by cluster
+cs_by_k <- split(colnames(sce), sce$cluster_id)
+# compute cluster-marker means
+ms_by_cluster <- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+# prep. for plotting & scale b/w 0 and 1
+mat <- do.call("rbind", ms_by_cluster)
+mat <- muscat:::.scale(mat)
+rownames(mat) <- gs
+cols <- muscat:::.cluster_colors[seq_along(fs)]
+cols <- setNames(cols, names(fs))
+row_anno <- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = "white"))
+# percentage of cells from each of the samples per cluster
+sample_props <- prop.table(n_cells, margin = 1)
+col_mat <- as.matrix(unclass(sample_props))
+sample_cols <- c("#882255", "#CC6677", "#11588A")
+sample_cols <- setNames(sample_cols, colnames(col_mat))
+col_anno <- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, "cm"),
+                               border = FALSE),
+    annotation_label = "fraction of sample\nin cluster",
+    gap = unit(10, "points"))
+col_lgd <- Legend(labels = names(sample_cols),
+       title = "sample",
+       legend_gp = gpar(fill = sample_cols))
+
+hm <- Heatmap(mat,
+    name = "scaled avg.\nexpression",
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    column_title = "cluster_id",
+    column_title_side = "bottom",
+    column_names_side = "bottom",
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = "white"),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))
+```
+
+
