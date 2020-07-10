@@ -81,10 +81,18 @@ Heatmap(mat,
 ```
 
 
-# Discribution of NES subtypes per cluster
-
+# Distribution of NES subtypes per cluster
+In the paper, they identified clusters that were specific for different cell types. For our analysis, we merge identical cell subtypes from the different cell lines.
 ```{r}
+levels(sce$cell_subtype_nes) 
+## merge identical cell subtypes
+levels(sce$cell_subtype_nes)  <- 
+  c("Glia_progenitor", "Neural_prog_Proliferating", "Neural_progenitor", 
+    "Neural_progenitor", "Neural_progenitor", "Neuroblast", 
+    "Radial_Glia_progenitor")
+levels(sce$cell_subtype_nes) 
 (n_types <- table(sce$cluster_id, sce$cell_subtype_nes))
+
 fqs <- prop.table(n_types, margin = 2)
 mat <- as.matrix(unclass(fqs))
 Heatmap(mat,
