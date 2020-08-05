@@ -62,7 +62,7 @@ sce$cluster_id <- Idents(so)
 
 # Relative cluster-abundances
 
-```{r fig.width = 5, fig.height = 5}
+```{r fig.width = 3.5, fig.height = 4}
 fqs <- prop.table(n_cells, margin = 2)
 mat <- as.matrix(unclass(fqs))
 Heatmap(mat,
@@ -77,7 +77,7 @@ Heatmap(mat,
     rect_gp = gpar(col = "white"),
     cell_fun = function(i, j, x, y, width, height, fill)
         grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
-            gp = gpar(col = "white", fontsize = 8)))
+            gp = gpar(col = "white", fontsize = 10)))
 ```
 
 
@@ -143,7 +143,7 @@ scran_markers <- findMarkers(sce,
 ```
 
 ## Heatmap of mean marker-exprs. by cluster
-We aggregate the cells to pseudobulks and plot the average expression of the condidate marker genes in each of the clusters. 
+We aggregate the cells to pseudobulks and plot the average expression of the candidate marker genes in each of the clusters. 
 ```{r scran-markers-heatmap, fig.width = 12, fig.height = 6}
 gs <- lapply(scran_markers, function(u) rownames(u)[u$Top == 1])
 ## candidate cluster markers
@@ -238,6 +238,7 @@ draw(hm, annotation_legend_list = list(col_lgd))
 ```{r dim-red-expr, results = "asis", fig.width = 12, fig.height = 12}
 # downsample to 5000 cells
 cs <- sample(colnames(sce), 5e3)
+DefaultAssay(so) <- "RNA"
 sub <- subset(so, cells = cs)
 # UMAPs colored by marker-expression
 for (m in seq_along(fs)) {
@@ -254,5 +255,6 @@ for (m in seq_along(fs)) {
     print(p)
     cat("\n\n")
 }
+DefaultAssay(so) <- "integrated"
 ```
 
