@@ -1,5 +1,5 @@
 fs <- list(NSC = c("NES", "SOX2", "NR2F1", "CDH2", "IRX2", "SOX1", "PAX6", "POU3F2",
-                   "PAX3", "VIM", "TJP1"),
+                   "PAX3", "VIM", "TJP1", "ZO1"),
            proliferating = c("TFPI2", "UBE2C", "CCND1", "CDKN1C", "UBE2S", "PTTG1",
                              "CCNB1", "EIF4EBP1", "PSAT1", "ASNS", "SLC3A2", "PHGDH",
                              "PCLAF", "RRM2"),
