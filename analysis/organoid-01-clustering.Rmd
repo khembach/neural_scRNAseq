@@ -1,0 +1,237 @@
+---
+title: "Organoid integration"
+author: "Katharina Hembach"
+date: "8/10/2020"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+### Load packages
+```{r, message = FALSE}
+library(DropletUtils)
+library(scDblFinder)
+library(BiocParallel)
+library(ggplot2)
+library(scater)
+library(dplyr)
+library(cowplot)
+library(ggplot2)
+library(Seurat)
+library(SingleCellExperiment)
+library(stringr)
+library(Seurat)
+library(rtracklayer)
+library(future)
+library(data.table)
+```
+
+```{r future-setup}
+# increase future's maximum allowed size of exported globals to 5GB 
+# the default is 2GB
+options(future.globals.maxSize = 5000 * 1024 ^ 2)
+
+# change the current plan to access parallelization
+plan("multiprocess", workers = 20)
+```
+
+## Importing CellRanger output and metadata
+
+```{r import}
+fs <- file.path("data", "Kanton_et_al", "files")
+sce <- read10xCounts(samples = fs, sample.names = "organoids")
+
+# rename colnames and dimnames
+names(rowData(sce)) <- c("ensembl_id", "symbol", "type")
+names(colData(sce)) <- c("sample_id", "barcode")
+
+# load metadata
+meta <- read.csv(file.path("data", "Kanton_et_al", "metadata.csv"))
+colData(sce) <- cbind(colData(sce), meta[, colnames(meta != "Barcode")])
+
+sce$sample_id <- factor(sce$sample_id)
+dimnames(sce) <- list(with(rowData(sce), paste(ensembl_id, symbol, sep = ".")),
+                      with(colData(sce), paste(barcode, Sample, sep = ".")))
+```
+
+## Overview of the data
+```{r}
+table(colData(sce)$Line)
+table(colData(sce)$Stage)
+table(colData(sce)$Sample)
+table(colData(sce)$PredCellType)
+## The cells for Fig. 1a-d, Extended Data Fig. 2
+table(colData(sce)$in_FullLineage)
+## The cells for Fig. 1e
+table(colData(sce)$in_LineComp)
+## Cluster labels for Extended Data Fig. 2
+table(colData(sce)$cl_FullLineage)
+## Cluster labels
+table(colData(sce)$cl_LineComp)
+```
+
+The dataset consists of 10X scRNA-seq from organoid development using embryonic stem cells (H9) and an iPSC (409b2) line. The cells for figure 1 a-d are labeled in column `in_FullLineage` and figure 1e in `in_LineComp`.
+
+## Quality control
+We remove undetected genes and check cell-level QC that came with the data.
+```{r, message = FALSE}
+sce <- sce[rowSums(counts(sce) > 0) > 0, ]
+dim(sce)
+
+# library size
+summary(sce$nUMI)
+# number of detected genes per cell
+summary(sce$nGene)
+# percentage of counts that come from mitochondrial genes:
+summary(sce$PercentMito)
+```
+
+It seems the cells are already filtered based on the number of detected genes. From the methods section of the paper: "Cells with more than
+6,000 or less than 200 detected genes, as well as those with mitochondrial transcripts proportion higher than 5% were excluded"
+
+### Diagnostic plots
+
+The number of counts per cell:
+```{r}
+plotColData(sce, x = "sample_id", y = "nUMI") + scale_y_log10()
+```
+
+The number of genes:
+```{r}
+plotColData(sce, x = "sample_id", y = "nGene") + scale_y_log10() 
+```
+
+The percentage of mitochondrial genes:
+```{r}
+plotColData(sce, x = "sample_id", y = "PercentMito")
+```
+
+
+## Normalization
+
+We try to recreate Extended Data Fig. 2 a-e.
+```{r normalization, warning = FALSE}
+## subset the cells
+sce_all <- sce
+sce <- sce[, sce$in_FullLineage]
+dim(sce)
+
+# create SeuratObject
+so <- CreateSeuratObject(
+    counts = counts(sce),
+    meta.data = data.frame(colData(sce)),
+    project = "organoids")
+
+# split by sample
+cells_by_sample <- split(colnames(sce), sce$Sample)
+so <- lapply(cells_by_sample, function(i) subset(so, cells = i))
+
+## log normalize the data using a scaling factor of 10000
+so <- lapply(so, NormalizeData, verbose = FALSE, scale.factor = 10000, 
+             normalization.method = "LogNormalize")
+```
+
+## Integration of H9 and 409b2
+
+```{r variable-features, warning = FALSE}
+so_all <- so
+sub_samples <- unique(c(colData(sce)[sce$Line %in% c("H9","409b2"),]$Sample))
+so <- so[sub_samples]
+
+## Identify the top 2000 genes with high cell-to-cell variation
+so <- lapply(so, FindVariableFeatures, nfeatures = 2000, 
+    selection.method = "vst", verbose = FALSE)
+```
+
+```{r integration, warning = FALSE}
+# find anchors & integrate
+as <- FindIntegrationAnchors(so, verbose = FALSE)
+so <- IntegrateData(anchorset = as, dims = seq_len(20), verbose = FALSE)
+# 
+# ## We scale the data so that mean expression is 0 and variance is 1, across cells
+# ## We also regress out the number of UMIs. 
+# ## We don't have mitochondrial genes for the NES
+# DefaultAssay(so) <- "integrated"
+so <- ScaleData(so, verbose = FALSE, vars.to.regress = c("nGene", "PercentMito"))
+```
+
+
+## Dimension reduction 
+
+We perform dimension reduction with t-SNE and UMAP based on PCA results.
+```{r dimension-reduction, warning = FALSE}
+so <- RunPCA(so, npcs = 30, verbose = FALSE)
+so <- RunTSNE(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, do.fast = TRUE, verbose = FALSE)
+so <- RunUMAP(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, verbose = FALSE)
+```
+
+### Plot PCA results
+
+```{r, fig.width = 10, fig.height = 8}
+## PCA plot 
+DimPlot(so, reduction = "pca", group.by = "sample_id")
+```
+
+```{r}
+# elbow plot with the ranking of PCs based on the % of variance explained
+ElbowPlot(so, ndims = 30)
+```
+
+
+## Clustering
+
+We cluster the cells using the reduced PCA dimensions.
+
+```{r clustering, warning = FALSE}
+so <- FindNeighbors(so, reduction = "pca", dims = seq_len(20), verbose = FALSE)
+for (res in c(0.4, 0.6, 0.8))
+    so <- FindClusters(so, resolution = res, random.seed = 1, verbose = FALSE)
+```
+
+
+## Dimension reduction plots {.tabset} 
+
+We plot the dimension reduction (DR) and color by cell line, sample, predicted cell type, cluster ID
+
+```{r dim-red, results = "asis", fig.width = 12}
+# set cluster IDs to resolution 0.4 clustering
+so <- SetIdent(so, value = "integrated_snn_res.0.6")
+so@meta.data$cluster_id <- Idents(so)
+
+cs <- sample(colnames(so), 10e3)
+.plot_dr <- function(so, dr, id)
+    DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+ids <- c("Line", "Sample", "Stage","cl_FullLineage", "ident")
+for (id in ids) {
+    cat("### ", id, "\n")
+    p1 <- .plot_dr(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none")
+    p2 <- .plot_dr(so, "umap", id) + theme(legend.position = "none")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.5))
+    print(p)
+    cat("\n\n")
+}
+```
+
+
+## Save Seurat object to RDS
+
+```{r}
+saveRDS(so, file.path("output", "so_organoid-01-clustering.rds"))
+saveRDS(sce_all, file.path("output", "sce_organoid-01-clustering.rds"))
+```
+
+
