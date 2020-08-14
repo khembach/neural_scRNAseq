@@ -394,7 +394,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -403,7 +403,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -412,10 +412,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-08-12
+<strong>Last updated:</strong> 2020-08-14
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -479,12 +479,87 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongdetected"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>Cache:</strong> detected </a>
 </p>
 </div>
-<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div id="strongCachestrongdetected" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+The following chunks had caches available:
+<ul>
+<li>
+clustering
+</li>
+<li>
+dim-red
+</li>
+<li>
+dimension-reduction
+</li>
+<li>
+future-setup
+</li>
+<li>
+import
+</li>
+<li>
+integration
+</li>
+<li>
+normalization
+</li>
+<li>
+reproduce-plots-clustering
+</li>
+<li>
+reproduce-plots-dim-red
+</li>
+<li>
+reproduce-plots-DR
+</li>
+<li>
+reproduce-plots-integration
+</li>
+<li>
+reproduce-plots-normalisation
+</li>
+<li>
+save-objects
+</li>
+<li>
+session-info-chunk-inserted-by-workflowr
+</li>
+<li>
+unnamed-chunk-1
+</li>
+<li>
+unnamed-chunk-2
+</li>
+<li>
+unnamed-chunk-3
+</li>
+<li>
+unnamed-chunk-4
+</li>
+<li>
+unnamed-chunk-5
+</li>
+<li>
+unnamed-chunk-6
+</li>
+<li>
+unnamed-chunk-7
+</li>
+<li>
+unnamed-chunk-8
+</li>
+<li>
+unnamed-chunk-9
+</li>
+<li>
+variable-features
+</li>
+</ul>
+<p>To ensure reproducibility of the results, delete the cache directory <code>organoid-01-clustering_cache</code> and re-run the analysis. To have workflowr automatically delete the cache directory prior to building the file, set <code>delete_cache = TRUE</code> when running <code>wflow_build()</code> or <code>wflow_publish()</code>.</p>
 </div>
 </div>
 </div>
@@ -503,16 +578,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeec375b2501236d4314f4b376874418c059b43a37targetblankec375b2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/ec375b2501236d4314f4b376874418c059b43a37" target="_blank">ec375b2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree638915fa4f8e11001cf1f113dfd8534778aa8561targetblank638915fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/638915fa4f8e11001cf1f113dfd8534778aa8561" target="_blank">638915f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeec375b2501236d4314f4b376874418c059b43a37targetblankec375b2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree638915fa4f8e11001cf1f113dfd8534778aa8561targetblank638915fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/ec375b2501236d4314f4b376874418c059b43a37" target="_blank">ec375b2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/638915fa4f8e11001cf1f113dfd8534778aa8561" target="_blank">638915f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -547,6 +622,7 @@ Ignored files:
     Ignored:    analysis/._additional_filtering_clustering.Rmd
     Ignored:    analysis/._index.Rmd
     Ignored:    analysis/._organoid-01-clustering.Rmd
+    Ignored:    analysis/._organoid-02-integration.Rmd
     Ignored:    analysis/01-preprocessing_cache/
     Ignored:    analysis/02-1-SampleQC_cache/
     Ignored:    analysis/02-quality_control_cache/
@@ -561,6 +637,8 @@ Ignored files:
     Ignored:    analysis/NSC-2-annotation_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/organoid-01-clustering_cache/
+    Ignored:    analysis/organoid-02-integration_cache/
     Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
@@ -593,13 +671,17 @@ Ignored files:
     Ignored:    output/so_04_1_cell_cycle.rds
     Ignored:    output/so_04_clustering.rds
     Ignored:    output/so_additional_filtering_clustering.rds
+    Ignored:    output/so_merged_organoid-02-integration.rds
     Ignored:    output/so_organoid-01-clustering.rds
+    Ignored:    output/so_sample_organoid-01-clustering.rds
 
 Untracked files:
     Untracked:  Rplots.pdf
     Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
     Untracked:  analysis/additional_filtering.Rmd
     Untracked:  analysis/additional_filtering_clustering.Rmd
+    Untracked:  analysis/organoid-01-integration.Rmd
+    Untracked:  analysis/organoid-02-integration.Rmd
     Untracked:  analysis/sample5_QC.Rmd
     Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
     Untracked:  data/Kanton_et_al/
@@ -608,7 +690,6 @@ Untracked files:
 
 Unstaged changes:
     Modified:   analysis/_site.yml
-    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -647,6 +728,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/638915fa4f8e11001cf1f113dfd8534778aa8561/analysis/organoid-01-clustering.Rmd" target="_blank">638915f</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-14
+</td>
+<td>
+organoid clustering
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/5b37055b675c0a2c7273daf196d71bce8efaf677/docs/organoid-01-clustering.html" target="_blank">5b37055</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -691,7 +806,6 @@ library(data.table)</code></pre>
 <pre class="r"><code># increase future&#39;s maximum allowed size of exported globals to 5GB 
 # the default is 2GB
 options(future.globals.maxSize = 5000 * 1024 ^ 2)
-
 # change the current plan to access parallelization
 plan(&quot;multiprocess&quot;, workers = 20)</code></pre>
 </div>
@@ -834,12 +948,123 @@ summary(sce$PercentMito)</code></pre>
 <p>The number of counts per cell:</p>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;nUMI&quot;) + scale_y_log10()</code></pre>
 <p><img src="figure/organoid-01-clustering.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5b37055b675c0a2c7273daf196d71bce8efaf677/docs/figure/organoid-01-clustering.Rmd/unnamed-chunk-4-1.png" target="_blank">5b37055</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The number of genes:</p>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;nGene&quot;) + scale_y_log10() </code></pre>
 <p><img src="figure/organoid-01-clustering.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5b37055b675c0a2c7273daf196d71bce8efaf677/docs/figure/organoid-01-clustering.Rmd/unnamed-chunk-5-1.png" target="_blank">5b37055</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The percentage of mitochondrial genes:</p>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;PercentMito&quot;)</code></pre>
 <p><img src="figure/organoid-01-clustering.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5b37055b675c0a2c7273daf196d71bce8efaf677/docs/figure/organoid-01-clustering.Rmd/unnamed-chunk-6-1.png" target="_blank">5b37055</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="normalization" class="section level2">
@@ -896,9 +1121,83 @@ so &lt;- RunUMAP(so, reduction = &quot;pca&quot;, dims = seq_len(20),
 <pre class="r"><code>## PCA plot 
 DimPlot(so, reduction = &quot;pca&quot;, group.by = &quot;sample_id&quot;)</code></pre>
 <p><img src="figure/organoid-01-clustering.Rmd/unnamed-chunk-7-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5b37055b675c0a2c7273daf196d71bce8efaf677/docs/figure/organoid-01-clustering.Rmd/unnamed-chunk-7-1.png" target="_blank">5b37055</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># elbow plot with the ranking of PCs based on the % of variance explained
 ElbowPlot(so, ndims = 30)</code></pre>
 <p><img src="figure/organoid-01-clustering.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5b37055b675c0a2c7273daf196d71bce8efaf677/docs/figure/organoid-01-clustering.Rmd/unnamed-chunk-8-1.png" target="_blank">5b37055</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="clustering" class="section level2">
@@ -936,27 +1235,313 @@ for (id in ids) {
 <div id="line" class="section level3">
 <h3>Line</h3>
 <p><img src="figure/organoid-01-clustering.Rmd/dim-red-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-1">
+Past versions of dim-red-1.png
+</button>
+</p>
+<div id="fig-dim-red-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5b37055b675c0a2c7273daf196d71bce8efaf677/docs/figure/organoid-01-clustering.Rmd/dim-red-1.png" target="_blank">5b37055</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="sample" class="section level3">
 <h3>Sample</h3>
 <p><img src="figure/organoid-01-clustering.Rmd/dim-red-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-2">
+Past versions of dim-red-2.png
+</button>
+</p>
+<div id="fig-dim-red-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5b37055b675c0a2c7273daf196d71bce8efaf677/docs/figure/organoid-01-clustering.Rmd/dim-red-2.png" target="_blank">5b37055</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="stage" class="section level3">
 <h3>Stage</h3>
 <p><img src="figure/organoid-01-clustering.Rmd/dim-red-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-3">
+Past versions of dim-red-3.png
+</button>
+</p>
+<div id="fig-dim-red-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5b37055b675c0a2c7273daf196d71bce8efaf677/docs/figure/organoid-01-clustering.Rmd/dim-red-3.png" target="_blank">5b37055</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="cl_fulllineage" class="section level3">
 <h3>cl_FullLineage</h3>
 <p><img src="figure/organoid-01-clustering.Rmd/dim-red-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-4">
+Past versions of dim-red-4.png
+</button>
+</p>
+<div id="fig-dim-red-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5b37055b675c0a2c7273daf196d71bce8efaf677/docs/figure/organoid-01-clustering.Rmd/dim-red-4.png" target="_blank">5b37055</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="ident" class="section level3">
 <h3>ident</h3>
 <p><img src="figure/organoid-01-clustering.Rmd/dim-red-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-5">
+Past versions of dim-red-5.png
+</button>
+</p>
+<div id="fig-dim-red-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5b37055b675c0a2c7273daf196d71bce8efaf677/docs/figure/organoid-01-clustering.Rmd/dim-red-5.png" target="_blank">5b37055</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>so_sample &lt;- so</code></pre>
+</div>
+</div>
+<div id="reproduction-of-the-paper-figures" class="section level2">
+<h2>Reproduction of the paper figures</h2>
+<p>In the paper, the authors used CCA to integrate the H9 and 409b2 cells in a single tSNE plot. We try to use the exact same approach to see if we can reproduce their Extended data figure 2a.<br />
+</p>
+<pre class="r"><code>## They describe their pipeline as follows:
+## Seurat v3 CCA
+## log-normalisation
+## highly variable genes with vst (for 409b2 and H9 cells)
+## integration using top 20 CCs using the Seurat method by identifying anchors and integrating the datasets
+## scale data
+## PCA
+## clustering based on top 20 PCs, resolution of 0.6
+## feature plots with non-integrated expression values
+
+# create SeuratObject for the H9 and 409b2 cells
+so &lt;- CreateSeuratObject(
+    counts = counts(sce),
+    meta.data = data.frame(colData(sce)),
+    project = &quot;organoids&quot;)
+
+# split by cell line instead of sample as before
+cells_by_sample &lt;- split(colnames(sce), sce$Line)
+so &lt;- lapply(cells_by_sample, function(i) subset(so, cells = i))
+
+## log normalize the data using a scaling factor of 10000
+so &lt;- lapply(so, NormalizeData, verbose = FALSE, scale.factor = 10000, 
+             normalization.method = &quot;LogNormalize&quot;)
+
+## Identify the top 2000 genes with high cell-to-cell variation
+so &lt;- lapply(so, FindVariableFeatures, nfeatures = 2000, 
+    selection.method = &quot;vst&quot;, verbose = FALSE)</code></pre>
+<pre class="r"><code># find anchors &amp; integrate
+as &lt;- FindIntegrationAnchors(so, verbose = FALSE, dims = 1:20)
+so &lt;- IntegrateData(anchorset = as, dims = seq_len(20), verbose = FALSE)
+# ## We scale the data without regressing out any factors
+so &lt;- ScaleData(so, verbose = FALSE)</code></pre>
+<pre class="r"><code>so &lt;- RunPCA(so, npcs = 30, verbose = FALSE)
+so &lt;- RunTSNE(so, reduction = &quot;pca&quot;, dims = seq_len(20),
+    seed.use = 1, do.fast = TRUE, verbose = FALSE)
+so &lt;- RunUMAP(so, reduction = &quot;pca&quot;, dims = seq_len(20),
+    seed.use = 1, verbose = FALSE)
+
+## PCA plot 
+DimPlot(so, reduction = &quot;pca&quot;, group.by = &quot;sample_id&quot;)</code></pre>
+<p><img src="figure/organoid-01-clustering.Rmd/reproduce-plots-DR-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># elbow plot with the ranking of PCs based on the % of variance explained
+ElbowPlot(so, ndims = 30)</code></pre>
+<p><img src="figure/organoid-01-clustering.Rmd/reproduce-plots-DR-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>so &lt;- FindNeighbors(so, reduction = &quot;pca&quot;, dims = seq_len(20), verbose = FALSE)
+so &lt;- FindClusters(so, resolution = 0.6, random.seed = 1, verbose = FALSE)</code></pre>
+</div>
+<div id="dimension-reduction-plots-1" class="section level2 tabset">
+<h2>Dimension reduction plots</h2>
+<p>We plot the dimension reduction (DR) and color by cell line, sample, predicted cell type, cluster ID</p>
+<pre class="r"><code># set cluster IDs to resolution 0.4 clustering
+so &lt;- SetIdent(so, value = &quot;integrated_snn_res.0.6&quot;)
+so@meta.data$cluster_id &lt;- Idents(so)
+
+cs &lt;- sample(colnames(so), 10e3)
+.plot_dr &lt;- function(so, dr, id)
+    DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+ids &lt;- c(&quot;Line&quot;, &quot;Sample&quot;, &quot;Stage&quot;,&quot;cl_FullLineage&quot;, &quot;ident&quot;)
+for (id in ids) {
+    cat(&quot;### &quot;, id, &quot;\n&quot;)
+    p1 &lt;- .plot_dr(so, &quot;tsne&quot;, id)
+    lgd &lt;- get_legend(p1)
+    p1 &lt;- p1 + theme(legend.position = &quot;none&quot;)
+    p2 &lt;- .plot_dr(so, &quot;umap&quot;, id) + theme(legend.position = &quot;none&quot;)
+    ps &lt;- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p &lt;- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.5))
+    print(p)
+    cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="line-1" class="section level3">
+<h3>Line</h3>
+<p><img src="figure/organoid-01-clustering.Rmd/reproduce-plots-dim-red-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="sample-1" class="section level3">
+<h3>Sample</h3>
+<p><img src="figure/organoid-01-clustering.Rmd/reproduce-plots-dim-red-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stage-1" class="section level3">
+<h3>Stage</h3>
+<p><img src="figure/organoid-01-clustering.Rmd/reproduce-plots-dim-red-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cl_fulllineage-1" class="section level3">
+<h3>cl_FullLineage</h3>
+<p><img src="figure/organoid-01-clustering.Rmd/reproduce-plots-dim-red-4.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="ident-1" class="section level3">
+<h3>ident</h3>
+<p><img src="figure/organoid-01-clustering.Rmd/reproduce-plots-dim-red-5.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="save-seurat-object-to-rds" class="section level2">
 <h2>Save Seurat object to RDS</h2>
-<pre class="r"><code>saveRDS(so, file.path(&quot;output&quot;, &quot;so_organoid-01-clustering.rds&quot;))
+<pre class="r"><code>## Seurat object integrated by sample
+saveRDS(so_sample, file.path(&quot;output&quot;, &quot;so_sample_organoid-01-clustering.rds&quot;))
+## Seurat object integrated by cell line
+saveRDS(so, file.path(&quot;output&quot;, &quot;so_organoid-01-clustering.rds&quot;))
 saveRDS(sce_all, file.path(&quot;output&quot;, &quot;sce_organoid-01-clustering.rds&quot;))</code></pre>
 <br>
 <p>
