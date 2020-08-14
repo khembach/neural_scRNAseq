@@ -31,3 +31,9 @@ Neuroepithelial stem (NES) cells:
 
 - [Integration](Lam-01-NSC_integration.html)
 - [Cluster comparison](Lam-02-NSC_annotation.html)
+
+Integration with Kanton et al. 2019.
+Cerebral organoids:
+
+- [Clustering](organoid-01-clustering.html)
+- [Integration](organoid-02-integration.html)

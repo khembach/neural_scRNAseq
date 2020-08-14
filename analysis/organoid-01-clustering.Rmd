@@ -36,7 +36,6 @@ library(data.table)
 # increase future's maximum allowed size of exported globals to 5GB 
 # the default is 2GB
 options(future.globals.maxSize = 5000 * 1024 ^ 2)
-
 # change the current plan to access parallelization
 plan("multiprocess", workers = 20)
 ```
@@ -226,10 +225,107 @@ for (id in ids) {
 }
 ```
 
+```{r}
+so_sample <- so
+```
+
+## Reproduction of the paper figures
+
+In the paper, the authors used CCA to integrate the H9 and 409b2 cells in a single tSNE plot. We try to use the exact same approach to see if we can reproduce their Extended data figure 2a.\
+
+```{r reproduce-plots-normalisation, warning = FALSE}
+## They describe their pipeline as follows:
+## Seurat v3 CCA
+## log-normalisation
+## highly variable genes with vst (for 409b2 and H9 cells)
+## integration using top 20 CCs using the Seurat method by identifying anchors and integrating the datasets
+## scale data
+## PCA
+## clustering based on top 20 PCs, resolution of 0.6
+## feature plots with non-integrated expression values
+
+# create SeuratObject for the H9 and 409b2 cells
+so <- CreateSeuratObject(
+    counts = counts(sce),
+    meta.data = data.frame(colData(sce)),
+    project = "organoids")
+
+# split by cell line instead of sample as before
+cells_by_sample <- split(colnames(sce), sce$Line)
+so <- lapply(cells_by_sample, function(i) subset(so, cells = i))
+
+## log normalize the data using a scaling factor of 10000
+so <- lapply(so, NormalizeData, verbose = FALSE, scale.factor = 10000, 
+             normalization.method = "LogNormalize")
+
+## Identify the top 2000 genes with high cell-to-cell variation
+so <- lapply(so, FindVariableFeatures, nfeatures = 2000, 
+    selection.method = "vst", verbose = FALSE)
+```
+
+```{r reproduce-plots-integration, warning = FALSE}
+# find anchors & integrate
+as <- FindIntegrationAnchors(so, verbose = FALSE, dims = 1:20)
+so <- IntegrateData(anchorset = as, dims = seq_len(20), verbose = FALSE)
+# ## We scale the data without regressing out any factors
+so <- ScaleData(so, verbose = FALSE)
+```
+
+```{r reproduce-plots-DR, warning = FALSE}
+so <- RunPCA(so, npcs = 30, verbose = FALSE)
+so <- RunTSNE(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, do.fast = TRUE, verbose = FALSE)
+so <- RunUMAP(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, verbose = FALSE)
+
+## PCA plot 
+DimPlot(so, reduction = "pca", group.by = "sample_id")
+
+# elbow plot with the ranking of PCs based on the % of variance explained
+ElbowPlot(so, ndims = 30)
+```
+
+```{r reproduce-plots-clustering, warning = FALSE}
+so <- FindNeighbors(so, reduction = "pca", dims = seq_len(20), verbose = FALSE)
+so <- FindClusters(so, resolution = 0.6, random.seed = 1, verbose = FALSE)
+```
+
+
+## Dimension reduction plots {.tabset} 
+
+We plot the dimension reduction (DR) and color by cell line, sample, predicted cell type, cluster ID
+
+```{r reproduce-plots-dim-red, results = "asis", fig.width = 12}
+# set cluster IDs to resolution 0.4 clustering
+so <- SetIdent(so, value = "integrated_snn_res.0.6")
+so@meta.data$cluster_id <- Idents(so)
+
+cs <- sample(colnames(so), 10e3)
+.plot_dr <- function(so, dr, id)
+    DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+ids <- c("Line", "Sample", "Stage","cl_FullLineage", "ident")
+for (id in ids) {
+    cat("### ", id, "\n")
+    p1 <- .plot_dr(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none")
+    p2 <- .plot_dr(so, "umap", id) + theme(legend.position = "none")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.5))
+    print(p)
+    cat("\n\n")
+}
+```
 
 ## Save Seurat object to RDS
 
-```{r}
+```{r save-objects}
+## Seurat object integrated by sample
+saveRDS(so_sample, file.path("output", "so_sample_organoid-01-clustering.rds"))
+## Seurat object integrated by cell line
 saveRDS(so, file.path("output", "so_organoid-01-clustering.rds"))
 saveRDS(sce_all, file.path("output", "sce_organoid-01-clustering.rds"))
 ```
