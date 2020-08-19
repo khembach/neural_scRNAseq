@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-08-07
+<strong>Last updated:</strong> 2020-08-19
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7562682eb1c259b241d480903f1cced850214f43targetblank7562682a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/7562682eb1c259b241d480903f1cced850214f43" target="_blank">7562682</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeeb3e64d2cf603119611bde6a965f216ba198d3d0targetblankeb3e64da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/eb3e64d2cf603119611bde6a965f216ba198d3d0" target="_blank">eb3e64d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7562682eb1c259b241d480903f1cced850214f43targetblank7562682a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeeb3e64d2cf603119611bde6a965f216ba198d3d0targetblankeb3e64da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/7562682eb1c259b241d480903f1cced850214f43" target="_blank">7562682</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/eb3e64d2cf603119611bde6a965f216ba198d3d0" target="_blank">eb3e64d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -546,6 +546,8 @@ Ignored files:
     Ignored:    analysis/._additional_filtering.Rmd
     Ignored:    analysis/._additional_filtering_clustering.Rmd
     Ignored:    analysis/._index.Rmd
+    Ignored:    analysis/._organoid-01-clustering.Rmd
+    Ignored:    analysis/._organoid-02-integration.Rmd
     Ignored:    analysis/01-preprocessing_cache/
     Ignored:    analysis/02-1-SampleQC_cache/
     Ignored:    analysis/02-quality_control_cache/
@@ -559,6 +561,8 @@ Ignored files:
     Ignored:    analysis/NSC-2-annotation_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/organoid-01-clustering_cache/
+    Ignored:    analysis/organoid-02-integration_cache/
     Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
@@ -571,17 +575,30 @@ Ignored files:
     Ignored:    data/filtered_feature_matrices/
     Ignored:    output/.DS_Store
     Ignored:    output/._.DS_Store
+    Ignored:    output/._NSC_cluster1_marker_genes.txt
     Ignored:    output/Lam-01-clustering.rds
     Ignored:    output/NSC_1_clustering.rds
+    Ignored:    output/NSC_cluster1_marker_genes.txt
+    Ignored:    output/NSC_cluster2_marker_genes.txt
+    Ignored:    output/NSC_cluster3_marker_genes.txt
+    Ignored:    output/NSC_cluster4_marker_genes.txt
+    Ignored:    output/NSC_cluster5_marker_genes.txt
+    Ignored:    output/NSC_cluster6_marker_genes.txt
+    Ignored:    output/NSC_cluster7_marker_genes.txt
     Ignored:    output/additional_filtering.rds
     Ignored:    output/figures/
     Ignored:    output/sce_01_preprocessing.rds
     Ignored:    output/sce_02_quality_control.rds
     Ignored:    output/sce_03_filtering.rds
+    Ignored:    output/sce_organoid-01-clustering.rds
     Ignored:    output/sce_preprocessing.rds
     Ignored:    output/so_04_1_cell_cycle.rds
     Ignored:    output/so_04_clustering.rds
     Ignored:    output/so_additional_filtering_clustering.rds
+    Ignored:    output/so_integrated_organoid-02-integration.rds
+    Ignored:    output/so_merged_organoid-02-integration.rds
+    Ignored:    output/so_organoid-01-clustering.rds
+    Ignored:    output/so_sample_organoid-01-clustering.rds
 
 Untracked files:
     Untracked:  Rplots.pdf
@@ -590,6 +607,7 @@ Untracked files:
     Untracked:  analysis/additional_filtering_clustering.Rmd
     Untracked:  analysis/sample5_QC.Rmd
     Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
+    Untracked:  data/Kanton_et_al/
     Untracked:  data/Lam_et_al/
     Untracked:  scripts/
 
@@ -633,6 +651,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/eb3e64d2cf603119611bde6a965f216ba198d3d0/analysis/Lam-02-NSC_annotation.Rmd" target="_blank">eb3e64d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-19
+</td>
+<td>
+split NES into cell lines
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/e659e63ea5f3e7a99863e8fd92b6ec89b2e25d4e/docs/Lam-02-NSC_annotation.html" target="_blank">e659e63</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -820,6 +872,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e659e63ea5f3e7a99863e8fd92b6ec89b2e25d4e/docs/figure/Lam-02-NSC_annotation.Rmd/unnamed-chunk-3-1.png" target="_blank">e659e63</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-07
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/875e3c521e9cdb673301cb7675d1e0efe8949cc8/docs/figure/Lam-02-NSC_annotation.Rmd/unnamed-chunk-3-1.png" target="_blank">875e3c5</a>
 </td>
 <td>
@@ -832,6 +895,100 @@ khembach
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a1ebb78b453525afd0dfe7d1a4ef2bc273e3cc56/docs/figure/Lam-02-NSC_annotation.Rmd/unnamed-chunk-3-1.png" target="_blank">a1ebb78</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-07-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We split the cells from Lam et al. into the three different cell lines that they used in the paper.</p>
+<pre class="r"><code>ind &lt;- which(sce$sample_id == &quot;NES&quot;)
+cell_label &lt;- sce$sample_id
+levels(cell_label) &lt;- c(levels(cell_label), levels(sce$Cell_line))
+cell_label[ind] &lt;- sce$Cell_line[ind]
+cell_label &lt;- droplevels(cell_label)
+levels(cell_label)[levels(cell_label)==&quot;.SAi2&quot;] &lt;- &quot;SAi2&quot;
+so$cell_label &lt;- cell_label
+
+(n_cells_line &lt;- table(sce$cluster_id, cell_label))</code></pre>
+<pre><code>   cell_label
+    1NSC 2NSC SAi2 AF22 Ctrl7
+  0 2896 3024   51   67    97
+  1 1770 1725   76   44    86
+  2 1669 1582   80   46    62
+  3  983 1042   34   41    13
+  4  564  600    2   13     4
+  5  412  401   10   12     0
+  6   37   34    3    3    24</code></pre>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells_line, margin = 2)
+mat &lt;- as.matrix(unclass(fqs))
+Heatmap(mat,
+    col = rev(brewer.pal(11, &quot;RdGy&quot;)[-6]),
+    name = &quot;Frequency&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cluster_id&quot;,
+    column_title = &quot;sample_id&quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
+            gp = gpar(col = &quot;white&quot;, fontsize = 10)))</code></pre>
+<p><img src="figure/Lam-02-NSC_annotation.Rmd/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e659e63ea5f3e7a99863e8fd92b6ec89b2e25d4e/docs/figure/Lam-02-NSC_annotation.Rmd/unnamed-chunk-4-1.png" target="_blank">e659e63</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-08-07
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/875e3c521e9cdb673301cb7675d1e0efe8949cc8/docs/figure/Lam-02-NSC_annotation.Rmd/unnamed-chunk-4-1.png" target="_blank">875e3c5</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-07-10
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a1ebb78b453525afd0dfe7d1a4ef2bc273e3cc56/docs/figure/Lam-02-NSC_annotation.Rmd/unnamed-chunk-4-1.png" target="_blank">a1ebb78</a>
 </td>
 <td>
 khembach
@@ -896,55 +1053,7 @@ Heatmap(mat,
     cell_fun = function(i, j, x, y, width, height, fill)
         grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
             gp = gpar(col = &quot;white&quot;, fontsize = 10)))</code></pre>
-<p><img src="figure/Lam-02-NSC_annotation.Rmd/unnamed-chunk-4-1.png" width="528" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
-Past versions of unnamed-chunk-4-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/875e3c521e9cdb673301cb7675d1e0efe8949cc8/docs/figure/Lam-02-NSC_annotation.Rmd/unnamed-chunk-4-1.png" target="_blank">875e3c5</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-07-10
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/a1ebb78b453525afd0dfe7d1a4ef2bc273e3cc56/docs/figure/Lam-02-NSC_annotation.Rmd/unnamed-chunk-4-1.png" target="_blank">a1ebb78</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-07-08
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/Lam-02-NSC_annotation.Rmd/unnamed-chunk-5-1.png" width="528" style="display: block; margin: auto;" /></p>
 </div>
 <div id="dr-colored-by-cluster-id" class="section level1 tabset">
 <h1>DR colored by cluster ID</h1>
@@ -953,7 +1062,7 @@ khembach
         guides(col = guide_legend(nrow = 11, 
             override.aes = list(size = 3, alpha = 1))) +
         theme_void() + theme(aspect.ratio = 1)
-ids &lt;- c(&quot;cluster_id&quot;, &quot;group_id&quot;, &quot;sample_id&quot;)
+ids &lt;- c(&quot;cluster_id&quot;, &quot;group_id&quot;, &quot;sample_id&quot;, &quot;cell_label&quot;)
 for (id in ids) {
     cat(&quot;## &quot;, id, &quot;\n&quot;)
     p1 &lt;- .plot_dr(so, &quot;tsne&quot;, id)
@@ -1120,6 +1229,10 @@ khembach
 </table>
 </div>
 </div>
+</div>
+<div id="cell_label" class="section level2">
+<h2>cell_label</h2>
+<p><img src="figure/Lam-02-NSC_annotation.Rmd/dim-red-4.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="cluster-markers-from-lam-et-al." class="section level1">
