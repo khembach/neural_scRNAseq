@@ -80,6 +80,34 @@ Heatmap(mat,
             gp = gpar(col = "white", fontsize = 10)))
 ```
 
+We split the cells from Lam et al. into the three different cell lines that they used in the paper.
+```{r fig.width = 5, fig.height = 4}
+ind <- which(sce$sample_id == "NES")
+cell_label <- sce$sample_id
+levels(cell_label) <- c(levels(cell_label), levels(sce$Cell_line))
+cell_label[ind] <- sce$Cell_line[ind]
+cell_label <- droplevels(cell_label)
+levels(cell_label)[levels(cell_label)==".SAi2"] <- "SAi2"
+so$cell_label <- cell_label
+
+(n_cells_line <- table(sce$cluster_id, cell_label))
+fqs <- prop.table(n_cells_line, margin = 2)
+mat <- as.matrix(unclass(fqs))
+Heatmap(mat,
+    col = rev(brewer.pal(11, "RdGy")[-6]),
+    name = "Frequency",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "cluster_id",
+    column_title = "sample_id",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
+            gp = gpar(col = "white", fontsize = 10)))
+```
+
 
 # Distribution of NES subtypes per cluster
 In the paper, they identified clusters that were specific for different cell types. For our analysis, we merge identical cell subtypes from the different cell lines.
@@ -120,7 +148,7 @@ Heatmap(mat,
         guides(col = guide_legend(nrow = 11, 
             override.aes = list(size = 3, alpha = 1))) +
         theme_void() + theme(aspect.ratio = 1)
-ids <- c("cluster_id", "group_id", "sample_id")
+ids <- c("cluster_id", "group_id", "sample_id", "cell_label")
 for (id in ids) {
     cat("## ", id, "\n")
     p1 <- .plot_dr(so, "tsne", id)
