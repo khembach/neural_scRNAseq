@@ -36,4 +36,7 @@ Integration with Kanton et al. 2019.
 Cerebral organoids:
 
 - [Clustering](organoid-01-clustering.html)
-- [Integration](organoid-02-integration.html)
+- [DR without integration](organoid-02-integration.html)
+    - [Cluster abundances](organoid-03-cluster_analysis.html)
+- [Group integration](organoid-04-group_integration.html)
+    - [Cluster abundances](organoid-05-group_integration_cluster_analysis.html)
