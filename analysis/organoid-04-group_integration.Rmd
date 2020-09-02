@@ -1,0 +1,192 @@
+---
+title: "Integrate Kanton et al. by groups"
+author: "Katharina Hembach"
+date: "8/26/2020"
+ooutput: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+### Load packages
+```{r, message = FALSE}
+library(BiocParallel)
+library(ggplot2)
+library(dplyr)
+library(cowplot)
+library(ggplot2)
+library(Seurat)
+library(SingleCellExperiment)
+library(future)
+```
+
+
+```{r future-setup}
+# increase future's maximum allowed size of exported globals
+# the default is 2GB
+options(future.globals.maxSize = 11000 * 1024 ^ 2)
+# change the current plan to access parallelization
+plan("multiprocess", workers = 20)
+```
+
+## Load data & convert to SCE
+
+```{r load-data}
+so_nsc <- readRDS(file.path("output", "so_04_clustering.rds"))
+DefaultAssay(so_nsc) <- "RNA"
+```
+
+```{r load-organoid-data}
+so_org <- readRDS(file.path("output", "so_organoid-01-clustering.rds"))
+DefaultAssay(so_org) <- "RNA"
+```
+
+
+## Integration
+
+We integrate the two datasets using our three groups and the two cell lines from Kanton et al.
+
+```{r integration-normalisation, warning = FALSE}
+## make sure column names match between datasets:
+## we will use sample_id, group_id, nUMI, fractionMt, nGene
+so_nsc$nUMI <- so_nsc$sum
+so_nsc$fractionMt <- so_nsc$subsets_Mt_fraction
+so_nsc$nGene <- so_nsc$detected
+so_nsc$sum <- NULL
+so_nsc$subsets_Mt_fraction <- NULL
+so_nsc$detected <- NULL
+so_org$sample_id <- so_org$Line
+so_org$group_id <- so_org$Stage
+so_org$fractionMt <- so_org$PercentMito
+so_org$Line <- NULL
+so_org$Stage <- NULL
+so_org$PercentMito <- NULL
+
+so_nsc$integration_group <- so_nsc$group_id
+so_org$integration_group <- so_org$sample_id
+
+# split our cells by group
+cells_by_sample <- split(colnames(so_nsc), so_nsc$integration_group)
+so_nsc <- lapply(cells_by_sample, function(i) subset(so_nsc, cells = i))
+# split organoid cells by cell Line
+cells_by_sample <- split(colnames(so_org), so_org$sample_id)
+so_org <- lapply(cells_by_sample, function(i) subset(so_org, cells = i))
+## we combine the two lists
+so <- c(so_nsc, so_org)
+
+## Identify the top 2000 genes with high cell-to-cell variation
+so <- lapply(so, FindVariableFeatures, nfeatures = 2000, 
+    selection.method = "vst", verbose = FALSE)
+```
+
+```{r integration, warning = FALSE}
+## find anchors & integrate
+as <- FindIntegrationAnchors(so, verbose = FALSE)
+so <- IntegrateData(anchorset = as, dims = seq_len(30), verbose = FALSE)
+```
+
+```{r integration-scale-data, warning = FALSE}
+DefaultAssay(so) <- "integrated"
+## We scale the data
+so <- ScaleData(so, verbose = FALSE,
+                vars.to.regress = c("nUMI", "fractionMt"))
+```
+
+```{r integration-DR, warning = FALSE}
+so <- RunPCA(so, npcs = 30, verbose = FALSE)
+so <- RunTSNE(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, do.fast = TRUE, verbose = FALSE)
+so <- RunUMAP(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, verbose = FALSE)
+
+## PCA plot 
+DimPlot(so, reduction = "pca", group.by = "sample_id")
+
+# elbow plot with the ranking of PCs based on the % of variance explained
+ElbowPlot(so, ndims = 30)
+```
+
+```{r integration-clustering, warning = FALSE}
+so <- FindNeighbors(so, reduction = "pca", dims = seq_len(20), verbose = FALSE)
+so <- FindClusters(so, resolution = 0.4, random.seed = 1, verbose = FALSE)
+```
+
+```{r}
+## we use factors for plotting
+so$sample_id <- factor(so$sample_id, levels = c("1NSC", "2NSC", "3NC52", 
+                                                "4NC52", "5NC96", "6NC96", 
+                                                "H9", "409b2"))
+## order levels according to experiment timeline (Fig. 1a)
+so$group_id <- factor(so$group_id, levels = c("P22", "D52", "D96", "iPSCs", 
+                                              "EB", "Neuroectoderm", 
+                                              "Neuroepithelium", "Organoid-1M", 
+                                              "Organoid-2M", "Organoid-4M"))
+```
+
+
+## Dimension reduction plots {.tabset} 
+
+We plot the dimension reduction (DR) and color by the groups used for integration, sample/cell line, group/Stage, organoid cluster labels, cluster ID.
+
+```{r integration-dim-red, results = "asis", fig.width = 12}
+# set cluster IDs to resolution 0.4 clustering
+so <- SetIdent(so, value = "integrated_snn_res.0.4")
+so@meta.data$cluster_id <- Idents(so)
+
+cs <- sample(colnames(so), 10e3)
+.plot_dr <- function(so, dr, id)
+    DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+ids <- c("integration_group", "sample_id", "group_id", "cl_FullLineage", "ident")
+for (id in ids) {
+    cat("### ", id, "\n")
+    p1 <- .plot_dr(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none")
+    p2 <- .plot_dr(so, "umap", id) + theme(legend.position = "none")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.5))
+    print(p)
+    cat("\n\n")
+}
+```
+
+
+## QC on DR plots {.tabset}
+
+```{r integration-DR-QC, results = "asis", fig.width = 12}
+.plot_features <- function(so, dr, id) {
+    FeaturePlot(so, cells = cs, features = id, reduction = dr, pt.size = 0.4, 
+                cols = c("grey", "blue")) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+}
+ids <- c("nUMI", "nGene", "fractionMt")
+for (id in ids) {
+    cat("### ", id, "\n")
+    p1 <- .plot_features(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none") + ggtitle("tSNE")
+    p2 <- .plot_features(so, "umap", id) + theme(legend.position = "none") + 
+      ggtitle("UMAP")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
+
+## Save Seurat object to RDS
+
+```{r save-so}
+saveRDS(so, file.path("output", "so_04-group_integration.rds"))
+```
+
