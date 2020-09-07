@@ -226,14 +226,15 @@ sce <- sce[,!cd$discard]
 dim(sce)
 
 ## we filter genes and require > 1 count in at least 20 cells
-sce <- sce[rowSums(counts(sce) > 1) >= 20, ]
-dim(sce)
+sce_filtered <- sce[rowSums(counts(sce) > 1) >= 20, ]
+dim(sce_filtered)
 ```
 
 
 ## Save data to RDS
 
 ```{r}
-saveRDS(sce, file.path("output", "sce_03_filtering.rds"))
+saveRDS(sce_filtered, file.path("output", "sce_03_filtering.rds"))
+saveRDS(sce, file.path("output", "sce_03_filtering_all_genes.rds"))
 ```
 
