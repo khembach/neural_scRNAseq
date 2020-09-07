@@ -198,7 +198,7 @@ so@meta.data$cluster_id_before <- so_before@meta.data$cluster_id[
 ```
 
 
-# Dimension reduction plots
+# Dimension reduction plots {.tabset} 
 
 ```{r integration-dim-red, results = "asis", fig.width = 12}
 ## merge the lineage labels of identical cell types
@@ -224,7 +224,7 @@ cs <- sample(colnames(so), 10e3)
 ids <- c("integration_group", "group_id", "cl_FullLineage_merged", "cluster_id", 
          "cluster_id_before")
 for (id in ids) {
-    cat("### ", id, "\n")
+    cat("## ", id, "\n")
     p1 <- .plot_dr(so, "tsne", id)
     lgd <- get_legend(p1)
     p1 <- p1 + theme(legend.position = "none")
