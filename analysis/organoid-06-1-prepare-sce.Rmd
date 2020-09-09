@@ -1,0 +1,80 @@
+---
+title: "Prepare sce object for conos"
+author: "Katharina Hembach"
+date: "9/9/2020"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = FALSE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+### Load packages
+
+```{r load-libs, message = FALSE, warning = FALSE}
+library(dplyr)
+library(SingleCellExperiment)
+```
+
+# Load data
+```{r load-organoid-data}
+sce_org <- readRDS(file.path("output", "sce_organoid-01-clustering.rds"))
+sce_org <- sce_org[, sce_org$in_FullLineage]
+```
+
+
+```{r load-NSC-data}
+sce_nsc <- readRDS(file.path("output", "sce_03_filtering_all_genes.rds"))
+## convert to "dgCMatrix" as input for Pagoda2
+counts(sce_nsc) <- as(counts(sce_nsc), "dgCMatrix")
+```
+
+## Merge SCE objects
+```{r, message = FALSE, warning = FALSE}
+## intersection of measured features
+rdat <- inner_join(data.frame(rowData(sce_org)), data.frame(rowData(sce_nsc)), 
+                   by = "ensembl_id", suffix = c(".org", ".nsc"))
+## subset rows to intersection and harmonize row data and names
+sce_org <- sce_org[paste0(rdat$ensembl_id, ".", rdat$symbol.org),]
+sce_nsc <- sce_nsc[paste0(rdat$ensembl_id, ".", rdat$symbol.nsc),]
+rdat <- rdat %>% dplyr::select(-symbol.org) %>% rename(symbol.nsc = "symbol")
+rowData(sce_org) <- rdat
+rowData(sce_nsc) <- rdat
+rownames(sce_org) <- rownames(sce_nsc) 
+## subset matching columns
+cdat_nsc <- colData(sce_nsc)
+cdat_org <- colData(sce_org)
+## harmonize the colData
+## we keep following columns
+## sample_id, barcode, group_id, sum, detected, subsets_Mt_fraction
+cdat_nsc <- cdat_nsc[, c("sample_id", "barcode", "group_id", "sum", 
+                         "detected", "subsets_Mt_fraction")]
+## sample_id, barcode, Species, Stage, Line, Sample, PredCellType, nGene, nUMI, 
+## PercentMito, cl_FullLineage cl_LineComp 
+## nsc = org --> matching columns that need to be renamed
+## group_id = Stage
+## sample_id = Sample
+## detected = nGene
+## sum = nUMI
+## subsets_Mt_fraction = PercentMito
+cdat_org <- cdat_org[, c("barcode", "Stage", "Line", 
+                         "Sample", "PredCellType", "nGene", "nUMI", 
+                         "PercentMito", "cl_FullLineage", "cl_LineComp")]
+## rename columns to match the two dataframes
+cdat_org <- cdat_org %>% rename(Sample = "sample_id", Line = "group_id")
+cdat_nsc <- cdat_nsc %>% rename(sum = "nUMI", detected = "nGene", 
+                                subsets_Mt_fraction = "PercentMito") 
+cdat_nsc[,c("Stage", "PredCellType", "cl_FullLineage", "cl_LineComp")] <- NA
+## reorder the columns
+cdat_org <- cdat_org[, colnames(cdat_nsc)]
+colData(sce_nsc) <- cdat_nsc
+colData(sce_org) <- cdat_org
+## combine the two sce objects
+sce <- cbind(sce_nsc, sce_org)
+saveRDS(sce, file.path("output", "sce_06-1-prepare-sce.rds"))
+```

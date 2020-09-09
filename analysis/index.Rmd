@@ -40,3 +40,7 @@ Cerebral organoids:
     - [Cluster abundances](organoid-03-cluster_analysis.html)
 - [Group integration](organoid-04-group_integration.html)
     - [Cluster abundances](organoid-05-group_integration_cluster_analysis.html)
+    
+Integration with Conos:
+
+-[Preprocessing of sce object](organoid-06-1-prepare-sce.html)
