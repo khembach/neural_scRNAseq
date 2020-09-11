@@ -173,6 +173,7 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = res)
   cat("\n\n")
 }
+
 for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
@@ -189,6 +190,7 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
   cat("\n\n")
 }
+
 for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
@@ -256,6 +258,7 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = res)
   cat("\n\n")
 }
+
 for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
@@ -272,6 +275,7 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
   cat("\n\n")
 }
+
 for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
@@ -336,6 +340,7 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = res)
   cat("\n\n")
 }
+
 for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
@@ -352,6 +357,7 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
   cat("\n\n")
 }
+
 for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
@@ -432,6 +438,7 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = res)
   cat("\n\n")
 }
+
 for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
@@ -448,6 +455,7 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
   cat("\n\n")
 }
+
 for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
@@ -493,13 +501,12 @@ fwrite(label_dist, label_distr_file)
 
 We plot the propagated labels and the uncertainty.
 ```{r plot-labels, results = "asis", fig.width = 12}
-dat <- dat %>% full_join(label_df)
+dat <- dat %>% left_join(label_df)
 for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage", "label")){
   cat("### ", g, "\n")
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
   cat("\n\n")
 }
-
 cat("### uncertainty\n")
 p <- ggplot(dat, aes(x = umap1, y = umap2, color = uncertainty)) + 
   geom_point(alpha = 0.5) +
