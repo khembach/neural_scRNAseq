@@ -1,0 +1,514 @@
+---
+title: "Conos analysis"
+author: "Katharina Hembach"
+date: "9/10/2020"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+```{r set-seed}
+## set seed for reprocibility
+set.seed(1)
+```
+
+
+### Load packages
+
+```{r load-libs, message = FALSE, warning = FALSE}
+library(dplyr)
+library(Seurat)
+library(SingleCellExperiment)
+library(pagoda2)
+library(conos)
+library(data.table)
+library(magrittr)
+library(ggplot2)
+```
+
+# Preprocessing
+
+```{r preprocessing}
+n_cores <- 20 
+sce_file <- file.path("output", "sce_06-1-prepare-sce.rds")
+sce <- readRDS(sce_file)
+cols_dt <- as.data.table(colData(sce))
+cols_dt$cell_id <- rownames(colData(sce))
+
+sample_list <- as.character(unique(sce$sample_id))
+## Pagoda2 requires dgCMatrix matrix as input
+counts_list <- lapply(sample_list, function(s)
+  # as(counts(sce[, colData(sce)$sample_id == s]), "dgCMatrix"))
+  counts(sce[, colData(sce)$sample_id == s]))
+names(counts_list) <- sample_list
+# check if cell names will be unique
+stopifnot(any(duplicated(unlist(lapply(counts_list,colnames)))) == FALSE) 
+## we do not filter lowly expressed genes
+counts_proc <- lapply(counts_list, basicP2proc, 
+                     n.cores = n_cores, nPcs = 50, min.cells.per.gene = 0, 
+                     n.odgenes = 2e3, get.largevis = FALSE, get.tsne = FALSE, 
+                     make.geneknn = FALSE)
+con <- Conos$new(counts_proc, n.cores = n_cores)
+```
+
+# Conos Pipeline - default parameters
+
+## Build joint graph
+
+```{r default-graph}
+# define output files
+clusts_file <- file.path("output", "conos", "conos_clusts_default.txt")
+viz_file <- file.path("output", "conos", "conos_viz_default.txt")
+umap_file <- file.path("output", "conos","conos_umap_default.txt")
+graph_file <- file.path("output", "conos","conos_graph_default.txt")
+
+# build joint graph
+con$buildGraph(space = "PCA")
+
+# find communities using Leiden community detection
+res_list <- list(1, 1.2, 1.4, 1.6)
+clusts_ls <- lapply(res_list, function(res) {
+        con$findCommunities(method = leiden.community, resolution = res)
+        con$clusters$leiden$groups})
+## table with cell ID and cluster ID per resolution
+conos_clusters <- do.call(cbind, clusts_ls) %>% 
+    set_colnames(paste0('conos', res_list)) %>%
+    data.table %>%
+    .[, cell_id := names(con$clusters$leiden$groups)] %>%
+    setcolorder('cell_id')        
+# fwrite(conos_clusters, clusts_file)
+```
+
+## Graph embeddings
+
+We embed the joint graph with two different methods: largeVis and UMAP.
+
+```{r default-embedding}
+## graph embedding: largeVis visualization
+## using default parameters
+con$embedGraph(method = 'largeVis')
+viz_dt <-  data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(viz_dt, names(viz_dt), c("cell_id", "viz1", "viz2"))
+# fwrite(viz_dt, viz_file)
+
+## UMAP visualization
+con$embedGraph(method = "UMAP", n.cores = n_cores)
+umap_dt <- data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(umap_dt, names(umap_dt), c("cell_id", "umap1", "umap2"))
+# fwrite(umap_dt, umap_file)
+```
+
+We define a plotting function to visualize the embeddings.
+```{r plotting-function}
+## function to plot the graph embedding
+plot_conos <- function(dat, title = "", x = "", y = "", color = "sample_id") {
+  p <- ggplot(dat, aes(x = get(x), y = get(y), color = as.factor(get(color)))) + 
+    geom_point(alpha = 0.5) +
+    scale_color_discrete(name = color) + 
+    ggtitle(title)  +
+    labs(x = x, y = y) +
+    theme_bw() + 
+    theme(aspect.ratio = 1) +
+    guides(col = guide_legend(nrow = 16, 
+                              override.aes = list(size = 3, alpha = 1)))
+  print(p)
+}
+```
+
+And merge all results in a data.table.
+```{r prepare-plotting-dt-default}
+## Function for merging the data.tables and organizing the factors for coloring
+prepare_dt <- function(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04){
+  dat <- viz_dt %>% full_join(umap_dt) %>% 
+  full_join(conos_clusters) %>%
+  full_join(cols_dt) 
+
+  ## label our cells with the group_id in the organoid metadata columns
+  dat$Stage <- ifelse(is.na(dat$Stage), dat$group_id, dat$Stage)
+  ## reorder factor levels for plotting
+  dat$group_id <- factor(dat$group_id, 
+                         levels = c("P22", "D52", "D96", "H9", "409b2"))
+  ## order levels according to experiment timeline (Fig. 1a)
+  dat$Stage <- factor(dat$Stage, levels = c("P22", "D52", "D96", "iPSCs", "EB", 
+                                            "Neuroectoderm", "Neuroepithelium",
+                                            "Organoid-1M", "Organoid-2M", 
+                                            "Organoid-4M"))
+  ## merge the lineage labels of identical cell types
+  dat$cl_FullLineage <- as.factor(dat$cl_FullLineage)
+  levels(dat$cl_FullLineage) <- c("choroid plexus/mesenchymal-like cells",  
+                   "cortical neurons",  "cortical neurons", 
+                   "cycling dorsal progenitors", "cycling ventral progenitors", 
+                   "ectodermal/neuroectodermal-like cells", 
+                   "gliogenic/outer RGCs and astrocytes",
+                   "IPs and early cortical neurons", "midbrain/hindbrain cells", 
+                   "neuroepithelial-like cells", "retina progenitors", "RGCs", 
+                   "RGCs early", "RGCs early", "stem cells", "stem cells", 
+                   "stem cells", "ventral progenitors and neurons", 
+                   "ventral progenitors and neurons", 
+                   "ventral progenitors and neurons")
+  ## convert columns to factor for plotting
+  dat <- dat %>% mutate_if(is.character, as.factor)
+
+  ## we only plot a random sub sample of cells
+  selected <- sample(nrow(dat), size = size)
+  dat <- dat[selected,]
+}
+
+dat <- prepare_dt(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04)
+```
+
+### largeVis {.tabset}
+
+```{r default-largeVis, results = "asis", fig.width = 12}
+## plot the embedding
+for(res in names(dat)[startsWith(names(dat), "conos")]){
+  cat("#### ", res, "\n")
+  plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = res)
+  cat("\n\n")
+}
+for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+  cat("#### ", g, "\n")
+  plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
+  cat("\n\n")
+}
+```
+
+
+### UMAP {.tabset}
+
+```{r default-umap, results = "asis", fig.width = 12}
+for(res in names(dat)[startsWith(names(dat), "conos")]){
+  cat("#### ", res, "\n")
+  plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
+  cat("\n\n")
+}
+for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+  cat("#### ", g, "\n")
+  plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
+  cat("\n\n")
+}
+```
+
+
+# Conos with different parameters
+
+All our samples were measured with 10X genomics and "genes" space is supposed to give better resolution for such (simpler) cases. The overdispersed gene space is used for graph construction instead of PCs. However, the resulting plots (not shown) are still clearly separated.
+
+## CPCA space
+CPCA space should provide more accurate alignment under greater dataset-specific distortions.
+
+## Build joint graph
+
+```{r cpca-graph}
+# build joint graph
+con$buildGraph(space = "CPCA")
+
+# find communities using Leiden community detection
+clusts_ls <- lapply(res_list, function(res) {
+        con$findCommunities(method = leiden.community, resolution = res)
+        con$clusters$leiden$groups})
+## table with cell ID and cluster ID per resolution
+conos_clusters <- do.call(cbind, clusts_ls) %>% 
+    set_colnames(paste0('conos', res_list)) %>%
+    data.table %>%
+    .[, cell_id := names(con$clusters$leiden$groups)] %>%
+    setcolorder('cell_id')        
+# fwrite(conos_clusters, clusts_file)
+```
+
+## Graph embeddings
+
+We embed the joint graph with two different methods: largeVis and UMAP.
+
+```{r cpca-graph-embedding}
+## graph embedding: largeVis visualization
+con$embedGraph(method = 'largeVis')
+viz_dt <-  data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(viz_dt, names(viz_dt), c("cell_id", "viz1", "viz2"))
+# fwrite(viz_dt, viz_file)
+
+## UMAP visualization
+con$embedGraph(method = "UMAP", n.cores = n_cores)
+umap_dt <- data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(umap_dt, names(umap_dt), c("cell_id", "umap1", "umap2"))
+# fwrite(umap_dt, umap_file)
+```
+
+
+And merge all results in a data.table.
+```{r prepare-plotting-dt-cpca}
+dat <- prepare_dt(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04)
+```
+
+### largeVis {.tabset}
+
+```{r cpca-largeVis, results = "asis", fig.width = 12}
+## plot the embedding
+for(res in names(dat)[startsWith(names(dat), "conos")]){
+  cat("#### ", res, "\n")
+  plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = res)
+  cat("\n\n")
+}
+for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+  cat("#### ", g, "\n")
+  plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
+  cat("\n\n")
+}
+```
+
+
+### UMAP {.tabset}
+
+```{r cpca-umap, results = "asis", fig.width = 12}
+for(res in names(dat)[startsWith(names(dat), "conos")]){
+  cat("#### ", res, "\n")
+  plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
+  cat("\n\n")
+}
+for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+  cat("#### ", g, "\n")
+  plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
+  cat("\n\n")
+}
+```
+
+
+####
+## CCA space
+CCA space optimizes conservation of correlation between datasets and can give yield very good alignments in low-similarity cases (e.g. large evolutionary distances).
+
+## Build joint graph
+
+```{r cca-graph}
+# build joint graph
+con$buildGraph(space = "CCA")
+
+# find communities using Leiden community detection
+clusts_ls <- lapply(res_list, function(res) {
+        con$findCommunities(method = leiden.community, resolution = res)
+        con$clusters$leiden$groups})
+## table with cell ID and cluster ID per resolution
+conos_clusters <- do.call(cbind, clusts_ls) %>% 
+    set_colnames(paste0('conos', res_list)) %>%
+    data.table %>%
+    .[, cell_id := names(con$clusters$leiden$groups)] %>%
+    setcolorder('cell_id')        
+# fwrite(conos_clusters, clusts_file)
+```
+
+## Graph embeddings
+
+We embed the joint graph with two different methods: largeVis and UMAP.
+
+```{r cca-graph-embedding}
+## graph embedding: largeVis visualization
+con$embedGraph(method = 'largeVis')
+viz_dt <-  data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(viz_dt, names(viz_dt), c("cell_id", "viz1", "viz2"))
+# fwrite(viz_dt, viz_file)
+
+## UMAP visualization
+con$embedGraph(method = "UMAP", n.cores = n_cores)
+umap_dt <- data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(umap_dt, names(umap_dt), c("cell_id", "umap1", "umap2"))
+# fwrite(umap_dt, umap_file)
+```
+
+
+And merge all results in a data.table.
+```{r prepare-plotting-dt-cca}
+dat <- prepare_dt(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04)
+```
+
+### largeVis {.tabset}
+
+```{r cca-largeVis, results = "asis", fig.width = 12}
+## plot the embedding
+for(res in names(dat)[startsWith(names(dat), "conos")]){
+  cat("#### ", res, "\n")
+  plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = res)
+  cat("\n\n")
+}
+for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+  cat("#### ", g, "\n")
+  plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
+  cat("\n\n")
+}
+```
+
+
+### UMAP {.tabset}
+
+```{r cca-umap, results = "asis", fig.width = 12}
+for(res in names(dat)[startsWith(names(dat), "conos")]){
+  cat("#### ", res, "\n")
+  plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
+  cat("\n\n")
+}
+for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+  cat("#### ", g, "\n")
+  plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
+  cat("\n\n")
+}
+```
+
+
+
+# Embedding parameters
+
+We choose CPCA space for building the graph and try different parameters for the largeVis and UMAP embedding. For largeVis we test larger alpha for tighter clusters and increased scd_batches to avoid that clusters intersect. For UMAP, we test lower min.dist which should lead to a more even dispersal of points and less clumped clusters.
+
+We save the results to files.
+```{r embedding-save-files}
+# define output files
+clusts_file <- file.path("output", "conos", "conos_clusts_CPCA.txt")
+viz_file <- file.path("output", "conos", "conos_viz_CPCA.txt")
+umap_file <- file.path("output", "conos","conos_umap_CPCA.txt")
+graph_file <- file.path("output", "conos","conos_graph_CPCA.txt")
+label_file <- file.path("output", "conos","conos_labels_CPCA.txt")
+label_distr_file <- file.path("output", "conos","conos_label_distr_CPCA.txt")
+```
+
+
+## Build joint graph using CPCA space
+
+```{r embedding-graph}
+# build joint graph
+con$buildGraph(space = "CPCA")
+# find communities using Leiden community detection
+res_list <- list(1, 1.2, 1.4, 1.6)
+clusts_ls <- lapply(res_list, function(res) {
+        con$findCommunities(method = leiden.community, resolution = res)
+        con$clusters$leiden$groups})
+## table with cell ID and cluster ID per resolution
+conos_clusters <- do.call(cbind, clusts_ls) %>% 
+    set_colnames(paste0('conos', res_list)) %>%
+    data.table %>%
+    .[, cell_id := names(con$clusters$leiden$groups)] %>%
+    setcolorder('cell_id')        
+fwrite(conos_clusters, clusts_file)
+```
+
+## Graph embeddings
+
+We embed the joint graph with two different methods: largeVis and UMAP. Testing parameters alpha = 0.5, sgd_batches = 5e+08 and min.dist = 0.01.
+```{r params-graph-embedding}
+## graph embedding: largeVis visualization
+## Decreasing alpha results in less compressed clusters, and increasing 
+## sgd_batches often helps to avoid cluster intersections and spread out the 
+## clusters
+con$embedGraph(method = 'largeVis', alpha = 0.5, sgd_batches = 5e+08)
+viz_dt <-  data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(viz_dt, names(viz_dt), c("cell_id", "viz1", "viz2"))
+fwrite(viz_dt, viz_file)
+## UMAP visualization
+## the most important parameters are spread and min.dist which together control 
+## how tight the clusters are
+con$embedGraph(method = "UMAP", n.cores = n_cores, min.dist = 0.01, spread = 15)
+umap_dt <- data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(umap_dt, names(umap_dt), c("cell_id", "umap1", "umap2"))
+fwrite(umap_dt, umap_file)
+```
+
+
+And merge all results in a data.table.
+```{r prepare-plotting-dt-params}
+dat <- prepare_dt(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04)
+```
+
+### largeVis {.tabset}
+
+```{r params-largeVis, results = "asis", fig.width = 12}
+## plot the embedding
+for(res in names(dat)[startsWith(names(dat), "conos")]){
+  cat("#### ", res, "\n")
+  plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = res)
+  cat("\n\n")
+}
+for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+  cat("#### ", g, "\n")
+  plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
+  cat("\n\n")
+}
+```
+
+
+### UMAP {.tabset}
+
+```{r params-umap, results = "asis", fig.width = 12}
+for(res in names(dat)[startsWith(names(dat), "conos")]){
+  cat("#### ", res, "\n")
+  plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
+  cat("\n\n")
+}
+for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+  cat("#### ", g, "\n")
+  plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
+  cat("\n\n")
+}
+```
+
+
+# Label propagation
+
+We want to propagate the cell annotations cl_FullLineage from the organoid dataset onto our cells.
+
+```{r propagate-labels}
+labels <- cols_dt$cl_FullLineage
+label_idx <- !is.na(labels)
+labels <- labels[label_idx]
+labels <- as.factor(labels)
+levels(labels) <- c("choroid plexus/mesenchymal-like cells",  
+                   "cortical neurons",  "cortical neurons", 
+                   "cycling dorsal progenitors", "cycling ventral progenitors", 
+                   "ectodermal/neuroectodermal-like cells", 
+                   "gliogenic/outer RGCs and astrocytes",
+                   "IPs and early cortical neurons", "midbrain/hindbrain cells", 
+                   "neuroepithelial-like cells", "retina progenitors", "RGCs", 
+                   "RGCs early", "RGCs early", "stem cells", "stem cells", 
+                   "stem cells", "ventral progenitors and neurons", 
+                   "ventral progenitors and neurons", 
+                   "ventral progenitors and neurons")
+labels <- setNames(labels, cols_dt$cell_id[label_idx])
+new_label <- con$propagateLabels(labels = labels, verbose = TRUE)
+
+label_df <-  data.table(cell_id = names(new_label$labels), new_label$labels, 
+                        new_label$uncertainty)
+setnames(label_df, names(label_df), c("cell_id", "label", "uncertainty"))
+fwrite(label_df, label_file)
+## distribution of labels per cell
+label_dist <- data.table(cell_id = rownames(new_label$label.distribution), 
+                         new_label$label.distribution)
+fwrite(label_dist, label_distr_file)
+```
+
+## UMAP with propagated labels {.tabset}
+
+We plot the propagated labels and the uncertainty.
+```{r plot-labels, results = "asis", fig.width = 12}
+dat <- dat %>% full_join(label_df)
+for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage", "label")){
+  cat("### ", g, "\n")
+  plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
+  cat("\n\n")
+}
+
+cat("### uncertainty\n")
+p <- ggplot(dat, aes(x = umap1, y = umap2, color = uncertainty)) + 
+  geom_point(alpha = 0.5) +
+  scale_colour_gradient(name = "uncertainty", low = "grey", high = "red") + 
+  ggtitle("UMAP")  +
+  theme_bw() + 
+  theme(aspect.ratio = 1) +
+  guides(col = guide_legend(nrow = 16, 
+                            override.aes = list(size = 3, alpha = 1)))
+print(p)
+cat("\n\n")
+```
