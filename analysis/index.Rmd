@@ -44,4 +44,5 @@ Cerebral organoids:
 Integration with Conos:
 
 - [Preprocessing of sce object](organoid-06-1-prepare-sce.html)
-- [Conos integration](organoid-06-conos-analysis.Rmd)
+- [Conos integration](organoid-06-conos-analysis.html)
+- [Conos cell line integration](organoid-06-group-integration-conos-analysis.html)
