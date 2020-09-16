@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Katharina Hembach" />
+
+
+<title>Conos group integration</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">neural_scRNAseq</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/khembach/neural_scRNAseq">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Conos group integration</h1>
+<h4 class="author">Katharina Hembach</h4>
+<h4 class="date">9/15/2020</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-09-16
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it's best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200522code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200522)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200522code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200522)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeec8eba65035fe2c56da727e15c960a43465f1359targetblankec8eba6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/ec8eba65035fe2c56da727e15c960a43465f1359" target="_blank">ec8eba6</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeec8eba65035fe2c56da727e15c960a43465f1359targetblankec8eba6a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/ec8eba65035fe2c56da727e15c960a43465f1359" target="_blank">ec8eba6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    ._.DS_Store
+    Ignored:    ._Rplots.pdf
+    Ignored:    ._Rplots_largeViz.pdf
+    Ignored:    ._Rplots_separate.pdf
+    Ignored:    .__workflowr.yml
+    Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/._.DS_Store
+    Ignored:    analysis/._01-preprocessing.Rmd
+    Ignored:    analysis/._01-preprocessing.html
+    Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._03-filtering.Rmd
+    Ignored:    analysis/._04-clustering.Rmd
+    Ignored:    analysis/._04-clustering.knit.md
+    Ignored:    analysis/._04.1-cell_cycle.Rmd
+    Ignored:    analysis/._05-annotation.Rmd
+    Ignored:    analysis/._Lam-0-NSC_no_integration.Rmd
+    Ignored:    analysis/._Lam-01-NSC_integration.Rmd
+    Ignored:    analysis/._Lam-02-NSC_annotation.Rmd
+    Ignored:    analysis/._NSC-1-clustering.Rmd
+    Ignored:    analysis/._NSC-2-annotation.Rmd
+    Ignored:    analysis/.__site.yml
+    Ignored:    analysis/._additional_filtering.Rmd
+    Ignored:    analysis/._additional_filtering_clustering.Rmd
+    Ignored:    analysis/._index.Rmd
+    Ignored:    analysis/._organoid-01-clustering.Rmd
+    Ignored:    analysis/._organoid-02-integration.Rmd
+    Ignored:    analysis/._organoid-03-cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-04-group_integration.Rmd
+    Ignored:    analysis/._organoid-05-group_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-06-1-prepare-sce.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-Seurat.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-function.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-06-group-integration-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-07-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-07-group-integration-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-0x-sample_integration.Rmd
+    Ignored:    analysis/01-preprocessing_cache/
+    Ignored:    analysis/02-1-SampleQC_cache/
+    Ignored:    analysis/02-quality_control_cache/
+    Ignored:    analysis/02.1-SampleQC_cache/
+    Ignored:    analysis/03-filtering_cache/
+    Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/04.1-cell_cycle_cache/
+    Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/Lam-01-NSC_integration_cache/
+    Ignored:    analysis/Lam-02-NSC_annotation_cache/
+    Ignored:    analysis/NSC-1-clustering_cache/
+    Ignored:    analysis/NSC-2-annotation_cache/
+    Ignored:    analysis/additional_filtering_cache/
+    Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/organoid-01-clustering_cache/
+    Ignored:    analysis/organoid-02-integration_cache/
+    Ignored:    analysis/organoid-03-cluster_analysis_cache/
+    Ignored:    analysis/organoid-04-group_integration_cache/
+    Ignored:    analysis/organoid-05-group_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_test_cache/
+    Ignored:    analysis/organoid-07-conos-visualization_cache/
+    Ignored:    analysis/organoid-07-group-integration-conos-visualization_cache/
+    Ignored:    analysis/organoid-0x-sample_integration_cache/
+    Ignored:    analysis/sample5_QC_cache/
+    Ignored:    data/.DS_Store
+    Ignored:    data/._.DS_Store
+    Ignored:    data/._.smbdeleteAAA17ed8b4b
+    Ignored:    data/._Lam_figure2_markers.R
+    Ignored:    data/._known_NSC_markers.R
+    Ignored:    data/._known_cell_type_markers.R
+    Ignored:    data/._metadata.csv
+    Ignored:    data/data_sushi/
+    Ignored:    data/filtered_feature_matrices/
+    Ignored:    output/.DS_Store
+    Ignored:    output/._.DS_Store
+    Ignored:    output/._NSC_cluster1_marker_genes.txt
+    Ignored:    output/._organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/Lam-01-clustering.rds
+    Ignored:    output/NSC_1_clustering.rds
+    Ignored:    output/NSC_cluster1_marker_genes.txt
+    Ignored:    output/NSC_cluster2_marker_genes.txt
+    Ignored:    output/NSC_cluster3_marker_genes.txt
+    Ignored:    output/NSC_cluster4_marker_genes.txt
+    Ignored:    output/NSC_cluster5_marker_genes.txt
+    Ignored:    output/NSC_cluster6_marker_genes.txt
+    Ignored:    output/NSC_cluster7_marker_genes.txt
+    Ignored:    output/additional_filtering.rds
+    Ignored:    output/conos/
+    Ignored:    output/conos_organoid-06-conos-analysis.rds
+    Ignored:    output/conos_organoid-06-group-integration-conos-analysis.rds
+    Ignored:    output/figures/
+    Ignored:    output/organoid_integration_cluster10_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster11_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster12_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster13_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster14_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster15_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster16_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster17_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster2_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster3_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster4_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster5_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster6_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster7_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster8_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster9_marker_genes.txt
+    Ignored:    output/sce_01_preprocessing.rds
+    Ignored:    output/sce_02_quality_control.rds
+    Ignored:    output/sce_03_filtering.rds
+    Ignored:    output/sce_03_filtering_all_genes.rds
+    Ignored:    output/sce_06-1-prepare-sce.rds
+    Ignored:    output/sce_organoid-01-clustering.rds
+    Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04-group_integration.rds
+    Ignored:    output/so_04_1_cell_cycle.rds
+    Ignored:    output/so_04_clustering.rds
+    Ignored:    output/so_0x-sample_integration.rds
+    Ignored:    output/so_additional_filtering_clustering.rds
+    Ignored:    output/so_integrated_organoid-02-integration.rds
+    Ignored:    output/so_merged_organoid-02-integration.rds
+    Ignored:    output/so_organoid-01-clustering.rds
+    Ignored:    output/so_sample_organoid-01-clustering.rds
+
+Untracked files:
+    Untracked:  Rplots.pdf
+    Untracked:  Rplots_largeViz.pdf
+    Untracked:  Rplots_separate.pdf
+    Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
+    Untracked:  analysis/additional_filtering.Rmd
+    Untracked:  analysis/additional_filtering_clustering.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-Seurat.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-function.Rmd
+    Untracked:  analysis/organoid-07-conos-visualization.Rmd
+    Untracked:  analysis/organoid-07-group-integration-conos-visualization.Rmd
+    Untracked:  analysis/organoid-0x-sample_integration.Rmd
+    Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
+    Untracked:  data/Kanton_et_al/
+    Untracked:  data/Lam_et_al/
+    Untracked:  scripts/
+
+Unstaged changes:
+    Modified:   analysis/Lam-02-NSC_annotation.Rmd
+    Modified:   analysis/_site.yml
+    Modified:   analysis/organoid-02-integration.Rmd
+    Modified:   analysis/organoid-04-group_integration.Rmd
+    Modified:   analysis/organoid-06-conos-analysis.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/organoid-06-group-integration-conos-analysis.Rmd</code>) and HTML (<code>docs/organoid-06-group-integration-conos-analysis.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ec8eba65035fe2c56da727e15c960a43465f1359/analysis/organoid-06-group-integration-conos-analysis.Rmd" target="_blank">ec8eba6</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+<td>
+conos analysis with cell line integration
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<pre class="r"><code>## set seed for reproducibility
+set.seed(1)</code></pre>
+<div id="load-packages" class="section level3">
+<h3>Load packages</h3>
+<pre class="r"><code>library(dplyr)
+library(Seurat)
+library(SingleCellExperiment)
+library(pagoda2)
+library(conos)
+library(data.table)
+library(magrittr)
+library(ggplot2)</code></pre>
+</div>
+<div id="preprocessing" class="section level1">
+<h1>Preprocessing</h1>
+<pre class="r"><code>n_cores &lt;- 20 
+sce_file &lt;- file.path(&quot;output&quot;, &quot;sce_06-1-prepare-sce.rds&quot;)
+sce &lt;- readRDS(sce_file)
+
+## We use the sample_id for our cells and the cell line for the organoid cells 
+## for integration
+sce$sample_id &lt;- ifelse(sce$group_id %in% c(&quot;H9&quot;, &quot;409b2&quot;), 
+                        sce$group_id, as.character(sce$sample_id))
+
+cols_dt &lt;- as.data.table(colData(sce))
+cols_dt$cell_id &lt;- rownames(colData(sce))
+
+sample_list &lt;- as.character(unique(sce$sample_id))
+## Pagoda2 requires dgCMatrix matrix as input
+counts_list &lt;- lapply(sample_list, function(s)
+  counts(sce[, colData(sce)$sample_id == s]))
+names(counts_list) &lt;- sample_list
+# check if cell names will be unique
+stopifnot(any(duplicated(unlist(lapply(counts_list,colnames)))) == FALSE) 
+## we do not filter lowly expressed genes
+counts_proc &lt;- lapply(counts_list, basicP2proc, 
+                     n.cores = n_cores, nPcs = 50, min.cells.per.gene = 0, 
+                     n.odgenes = 2e3, get.largevis = FALSE, get.tsne = FALSE, 
+                     make.geneknn = FALSE)</code></pre>
+<pre><code>8331 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 365 overdispersed genes ... 365persisting ... done.
+running PCA using 2000 OD genes .... done
+8408 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 369 overdispersed genes ... 369persisting ... done.
+running PCA using 2000 OD genes .... done
+8687 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 1126 overdispersed genes ... 1126persisting ... done.
+running PCA using 2000 OD genes .... done
+7438 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 1230 overdispersed genes ... 1230persisting ... done.
+running PCA using 2000 OD genes .... done
+3538 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 1444 overdispersed genes ... 1444persisting ... done.
+running PCA using 2000 OD genes .... done
+4595 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 1884 overdispersed genes ... 1884persisting ... done.
+running PCA using 2000 OD genes .... done
+20272 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 2102 overdispersed genes ... 2102persisting ... done.
+running PCA using 2000 OD genes .... done
+23226 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 3046 overdispersed genes ... 3046persisting ... done.
+running PCA using 2000 OD genes .... done</code></pre>
+<pre class="r"><code>con &lt;- Conos$new(counts_proc, n.cores = n_cores)</code></pre>
+</div>
+<div id="conos-pipeline---default-parameters" class="section level1">
+<h1>Conos Pipeline - default parameters</h1>
+<div id="build-joint-graph" class="section level2">
+<h2>Build joint graph</h2>
+<pre class="r"><code># define output files
+clusts_file &lt;- file.path(&quot;output&quot;, &quot;conos&quot;, &quot;conos_clusts_default.txt&quot;)
+viz_file &lt;- file.path(&quot;output&quot;, &quot;conos&quot;, &quot;conos_viz_default.txt&quot;)
+umap_file &lt;- file.path(&quot;output&quot;, &quot;conos&quot;,&quot;conos_umap_default.txt&quot;)
+graph_file &lt;- file.path(&quot;output&quot;, &quot;conos&quot;,&quot;conos_graph_default.txt&quot;)
+
+# build joint graph
+con$buildGraph(space = &quot;PCA&quot;)</code></pre>
+<pre><code>found 0 out of 28 cached PCA  space pairs ... running 28 additional PCA  space pairs  done
+inter-sample links using  mNN   done
+local pairs local pairs  done
+building graph ..done</code></pre>
+<pre class="r"><code># find communities using Leiden community detection
+res_list &lt;- list(1, 1.2, 1.4, 1.6)
+clusts_ls &lt;- lapply(res_list, function(res) {
+        con$findCommunities(method = leiden.community, resolution = res)
+        con$clusters$leiden$groups})
+## table with cell ID and cluster ID per resolution
+conos_clusters &lt;- do.call(cbind, clusts_ls) %&gt;% 
+    set_colnames(paste0(&#39;conos&#39;, res_list)) %&gt;%
+    data.table %&gt;%
+    .[, cell_id := names(con$clusters$leiden$groups)] %&gt;%
+    setcolorder(&#39;cell_id&#39;)        
+# fwrite(conos_clusters, clusts_file)</code></pre>
+</div>
+<div id="graph-embeddings" class="section level2">
+<h2>Graph embeddings</h2>
+<p>We embed the joint graph with two different methods: largeVis and UMAP.</p>
+<pre class="r"><code>## graph embedding: largeVis visualization
+## using default parameters
+con$embedGraph(method = &#39;largeVis&#39;)</code></pre>
+<pre><code>Estimating embeddings.</code></pre>
+<pre class="r"><code>viz_dt &lt;-  data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(viz_dt, names(viz_dt), c(&quot;cell_id&quot;, &quot;viz1&quot;, &quot;viz2&quot;))
+# fwrite(viz_dt, viz_file)
+
+## UMAP visualization
+con$embedGraph(method = &quot;UMAP&quot;, n.cores = n_cores)</code></pre>
+<pre><code>Convert graph to adjacency list...
+Done
+Estimate nearest neighbors and commute times...
+Estimating hitting distances: 12:43:21.
+Done.
+Estimating commute distances: 12:43:51.
+Hashing adjacency list: 12:43:51.
+Done.
+Estimating distances: 12:44:02.
+Done
+Done.
+All done!: 12:44:25.
+Done
+Estimate UMAP embedding...
+Done</code></pre>
+<pre class="r"><code>umap_dt &lt;- data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(umap_dt, names(umap_dt), c(&quot;cell_id&quot;, &quot;umap1&quot;, &quot;umap2&quot;))
+# fwrite(umap_dt, umap_file)</code></pre>
+<p>We define a plotting function to visualize the embeddings.</p>
+<pre class="r"><code>## function to plot the graph embedding
+plot_conos &lt;- function(dat, title = &quot;&quot;, x = &quot;&quot;, y = &quot;&quot;, color = &quot;sample_id&quot;) {
+  p &lt;- ggplot(dat, aes(x = get(x), y = get(y), color = as.factor(get(color)))) + 
+    geom_point(alpha = 0.5) +
+    scale_color_discrete(name = color) + 
+    ggtitle(title)  +
+    labs(x = x, y = y) +
+    theme_bw() + 
+    theme(aspect.ratio = 1) +
+    guides(col = guide_legend(nrow = 16, 
+                              override.aes = list(size = 3, alpha = 1)))
+  print(p)
+}</code></pre>
+<p>And merge all results in a data.table.</p>
+<pre class="r"><code>## Function for merging the data.tables and organizing the factors for coloring
+prepare_dt &lt;- function(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04){
+  dat &lt;- viz_dt %&gt;% full_join(umap_dt) %&gt;% 
+  full_join(conos_clusters) %&gt;%
+  full_join(cols_dt) 
+
+  ## label our cells with the group_id in the organoid metadata columns
+  dat$Stage &lt;- ifelse(is.na(dat$Stage), dat$group_id, dat$Stage)
+  ## we use factors for plotting
+  dat$sample_id &lt;- factor(dat$sample_id, levels = c(&quot;1NSC&quot;, &quot;2NSC&quot;, &quot;3NC52&quot;,
+                                                    &quot;4NC52&quot;, &quot;5NC96&quot;, &quot;6NC96&quot;,
+                                                    &quot;H9&quot;, &quot;409b2&quot;))
+  ## reorder factor levels for plotting
+  dat$group_id &lt;- factor(dat$group_id, 
+                         levels = c(&quot;P22&quot;, &quot;D52&quot;, &quot;D96&quot;, &quot;H9&quot;, &quot;409b2&quot;))
+  ## order levels according to experiment timeline (Fig. 1a)
+  dat$Stage &lt;- factor(dat$Stage, levels = c(&quot;P22&quot;, &quot;D52&quot;, &quot;D96&quot;, &quot;iPSCs&quot;, &quot;EB&quot;, 
+                                            &quot;Neuroectoderm&quot;, &quot;Neuroepithelium&quot;,
+                                            &quot;Organoid-1M&quot;, &quot;Organoid-2M&quot;, 
+                                            &quot;Organoid-4M&quot;))
+  ## merge the lineage labels of identical cell types
+  dat$cl_FullLineage &lt;- as.factor(dat$cl_FullLineage)
+  levels(dat$cl_FullLineage) &lt;- c(&quot;choroid plexus/mesenchymal-like cells&quot;,  
+                   &quot;cortical neurons&quot;,  &quot;cortical neurons&quot;, 
+                   &quot;cycling dorsal progenitors&quot;, &quot;cycling ventral progenitors&quot;, 
+                   &quot;ectodermal/neuroectodermal-like cells&quot;, 
+                   &quot;gliogenic/outer RGCs and astrocytes&quot;,
+                   &quot;IPs and early cortical neurons&quot;, &quot;midbrain/hindbrain cells&quot;, 
+                   &quot;neuroepithelial-like cells&quot;, &quot;retina progenitors&quot;, &quot;RGCs&quot;, 
+                   &quot;RGCs early&quot;, &quot;RGCs early&quot;, &quot;stem cells&quot;, &quot;stem cells&quot;, 
+                   &quot;stem cells&quot;, &quot;ventral progenitors and neurons&quot;, 
+                   &quot;ventral progenitors and neurons&quot;, 
+                   &quot;ventral progenitors and neurons&quot;)
+  ## convert columns to factor for plotting
+  dat &lt;- dat %&gt;% mutate_if(is.character, as.factor)
+
+  ## we only plot a random sub sample of cells
+  selected &lt;- sample(nrow(dat), size = size)
+  dat &lt;- dat[selected,]
+}
+
+dat &lt;- prepare_dt(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04)</code></pre>
+<div id="largevis" class="section level3 tabset">
+<h3>largeVis</h3>
+<pre class="r"><code>## plot the embedding
+for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
+  cat(&quot;#### &quot;, res, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = res)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="conos1" class="section level4">
+<h4>conos1</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.2" class="section level4">
+<h4>conos1.2</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.4" class="section level4">
+<h4>conos1.4</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.6" class="section level4">
+<h4>conos1.6</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+  cat(&quot;#### &quot;, g, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = g)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+</div>
+<div id="sample_id" class="section level4">
+<h4>sample_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="group_id" class="section level4">
+<h4>group_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stage" class="section level4">
+<h4>Stage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cl_fulllineage" class="section level4">
+<h4>cl_FullLineage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="umap" class="section level3 tabset">
+<h3>UMAP</h3>
+<pre class="r"><code>for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
+  cat(&quot;#### &quot;, res, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = res)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="conos1-1" class="section level4">
+<h4>conos1</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.2-1" class="section level4">
+<h4>conos1.2</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.4-1" class="section level4">
+<h4>conos1.4</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.6-1" class="section level4">
+<h4>conos1.6</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+  cat(&quot;#### &quot;, g, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = g)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+</div>
+<div id="sample_id-1" class="section level4">
+<h4>sample_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="group_id-1" class="section level4">
+<h4>group_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stage-1" class="section level4">
+<h4>Stage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cl_fulllineage-1" class="section level4">
+<h4>cl_FullLineage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="conos-with-different-parameters" class="section level1">
+<h1>Conos with different parameters</h1>
+<p>All our samples were measured with 10X genomics and &quot;genes&quot; space is supposed to give better resolution for such (simpler) cases. The overdispersed gene space is used for graph construction instead of PCs. However, the resulting plots (not shown) are still clearly separated.</p>
+<div id="cpca-space" class="section level2">
+<h2>CPCA space</h2>
+<p>CPCA space should provide more accurate alignment under greater dataset-specific distortions.</p>
+</div>
+<div id="build-joint-graph-1" class="section level2">
+<h2>Build joint graph</h2>
+<pre class="r"><code># build joint graph
+con$buildGraph(space = &quot;CPCA&quot;)</code></pre>
+<pre><code>found 0 out of 28 cached CPCA  space pairs ... running 28 additional CPCA  space pairs  done
+inter-sample links using  mNN   done
+local pairs local pairs  done
+building graph ..done</code></pre>
+<pre class="r"><code># find communities using Leiden community detection
+clusts_ls &lt;- lapply(res_list, function(res) {
+        con$findCommunities(method = leiden.community, resolution = res)
+        con$clusters$leiden$groups})
+## table with cell ID and cluster ID per resolution
+conos_clusters &lt;- do.call(cbind, clusts_ls) %&gt;% 
+    set_colnames(paste0(&#39;conos&#39;, res_list)) %&gt;%
+    data.table %&gt;%
+    .[, cell_id := names(con$clusters$leiden$groups)] %&gt;%
+    setcolorder(&#39;cell_id&#39;)        
+# fwrite(conos_clusters, clusts_file)</code></pre>
+</div>
+<div id="graph-embeddings-1" class="section level2">
+<h2>Graph embeddings</h2>
+<p>We embed the joint graph with two different methods: largeVis and UMAP.</p>
+<pre class="r"><code>## graph embedding: largeVis visualization
+con$embedGraph(method = &#39;largeVis&#39;)</code></pre>
+<pre><code>Estimating embeddings.</code></pre>
+<pre class="r"><code>viz_dt &lt;-  data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(viz_dt, names(viz_dt), c(&quot;cell_id&quot;, &quot;viz1&quot;, &quot;viz2&quot;))
+# fwrite(viz_dt, viz_file)
+
+## UMAP visualization
+con$embedGraph(method = &quot;UMAP&quot;, n.cores = n_cores)</code></pre>
+<pre><code>Convert graph to adjacency list...
+Done
+Estimate nearest neighbors and commute times...
+Estimating hitting distances: 12:50:34.
+Done.
+Estimating commute distances: 12:51:04.
+Hashing adjacency list: 12:51:04.
+Done.
+Estimating distances: 12:51:16.
+Done
+Done.
+All done!: 12:51:40.
+Done
+Estimate UMAP embedding...
+Done</code></pre>
+<pre class="r"><code>umap_dt &lt;- data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(umap_dt, names(umap_dt), c(&quot;cell_id&quot;, &quot;umap1&quot;, &quot;umap2&quot;))
+# fwrite(umap_dt, umap_file)</code></pre>
+<p>And merge all results in a data.table.</p>
+<pre class="r"><code>dat &lt;- prepare_dt(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04)</code></pre>
+<div id="largevis-1" class="section level3 tabset">
+<h3>largeVis</h3>
+<pre class="r"><code>## plot the embedding
+for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
+  cat(&quot;#### &quot;, res, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = res)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="conos1-2" class="section level4">
+<h4>conos1</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.2-2" class="section level4">
+<h4>conos1.2</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.4-2" class="section level4">
+<h4>conos1.4</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.6-2" class="section level4">
+<h4>conos1.6</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+  cat(&quot;#### &quot;, g, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = g)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+</div>
+<div id="sample_id-2" class="section level4">
+<h4>sample_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="group_id-2" class="section level4">
+<h4>group_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stage-2" class="section level4">
+<h4>Stage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cl_fulllineage-2" class="section level4">
+<h4>cl_FullLineage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="umap-1" class="section level3 tabset">
+<h3>UMAP</h3>
+<pre class="r"><code>for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
+  cat(&quot;#### &quot;, res, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = res)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="conos1-3" class="section level4">
+<h4>conos1</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.2-3" class="section level4">
+<h4>conos1.2</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.4-3" class="section level4">
+<h4>conos1.4</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.6-3" class="section level4">
+<h4>conos1.6</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+  cat(&quot;#### &quot;, g, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = g)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+</div>
+<div id="sample_id-3" class="section level4">
+<h4>sample_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="group_id-3" class="section level4">
+<h4>group_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stage-3" class="section level4">
+<h4>Stage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cl_fulllineage-3" class="section level4">
+<h4>cl_FullLineage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="cca-space" class="section level2">
+<h2>CCA space</h2>
+<p>CCA space optimizes conservation of correlation between datasets and can give yield very good alignments in low-similarity cases (e.g. large evolutionary distances).</p>
+</div>
+<div id="build-joint-graph-2" class="section level2">
+<h2>Build joint graph</h2>
+<pre class="r"><code># build joint graph
+con$buildGraph(space = &quot;CCA&quot;)</code></pre>
+<pre><code>found 0 out of 28 cached CCA  space pairs ... running 28 additional CCA  space pairs  done
+inter-sample links using  mNN   done
+local pairs local pairs  done
+building graph ..done</code></pre>
+<pre class="r"><code># find communities using Leiden community detection
+clusts_ls &lt;- lapply(res_list, function(res) {
+        con$findCommunities(method = leiden.community, resolution = res)
+        con$clusters$leiden$groups})
+## table with cell ID and cluster ID per resolution
+conos_clusters &lt;- do.call(cbind, clusts_ls) %&gt;% 
+    set_colnames(paste0(&#39;conos&#39;, res_list)) %&gt;%
+    data.table %&gt;%
+    .[, cell_id := names(con$clusters$leiden$groups)] %&gt;%
+    setcolorder(&#39;cell_id&#39;)        
+# fwrite(conos_clusters, clusts_file)</code></pre>
+</div>
+<div id="graph-embeddings-2" class="section level2">
+<h2>Graph embeddings</h2>
+<p>We embed the joint graph with two different methods: largeVis and UMAP.</p>
+<pre class="r"><code>## graph embedding: largeVis visualization
+con$embedGraph(method = &#39;largeVis&#39;)</code></pre>
+<pre><code>Estimating embeddings.</code></pre>
+<pre class="r"><code>viz_dt &lt;-  data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(viz_dt, names(viz_dt), c(&quot;cell_id&quot;, &quot;viz1&quot;, &quot;viz2&quot;))
+# fwrite(viz_dt, viz_file)
+
+## UMAP visualization
+con$embedGraph(method = &quot;UMAP&quot;, n.cores = n_cores)</code></pre>
+<pre><code>Convert graph to adjacency list...
+Done
+Estimate nearest neighbors and commute times...
+Estimating hitting distances: 13:17:16.
+Done.
+Estimating commute distances: 13:17:56.
+Hashing adjacency list: 13:17:56.
+Done.
+Estimating distances: 13:18:25.
+Done
+Done.
+All done!: 13:19:21.
+Done
+Estimate UMAP embedding...
+Done</code></pre>
+<pre class="r"><code>umap_dt &lt;- data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(umap_dt, names(umap_dt), c(&quot;cell_id&quot;, &quot;umap1&quot;, &quot;umap2&quot;))
+# fwrite(umap_dt, umap_file)</code></pre>
+<p>And merge all results in a data.table.</p>
+<pre class="r"><code>dat &lt;- prepare_dt(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04)</code></pre>
+<div id="largevis-2" class="section level3 tabset">
+<h3>largeVis</h3>
+<pre class="r"><code>## plot the embedding
+for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
+  cat(&quot;#### &quot;, res, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = res)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="conos1-4" class="section level4">
+<h4>conos1</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.2-4" class="section level4">
+<h4>conos1.2</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.4-4" class="section level4">
+<h4>conos1.4</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.6-4" class="section level4">
+<h4>conos1.6</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+  cat(&quot;#### &quot;, g, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = g)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+</div>
+<div id="sample_id-4" class="section level4">
+<h4>sample_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="group_id-4" class="section level4">
+<h4>group_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stage-4" class="section level4">
+<h4>Stage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cl_fulllineage-4" class="section level4">
+<h4>cl_FullLineage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="umap-2" class="section level3 tabset">
+<h3>UMAP</h3>
+<pre class="r"><code>for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
+  cat(&quot;#### &quot;, res, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = res)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="conos1-5" class="section level4">
+<h4>conos1</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.2-5" class="section level4">
+<h4>conos1.2</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.4-5" class="section level4">
+<h4>conos1.4</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.6-5" class="section level4">
+<h4>conos1.6</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+  cat(&quot;#### &quot;, g, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = g)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+</div>
+<div id="sample_id-5" class="section level4">
+<h4>sample_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="group_id-5" class="section level4">
+<h4>group_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stage-5" class="section level4">
+<h4>Stage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cl_fulllineage-5" class="section level4">
+<h4>cl_FullLineage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="embedding-parameters" class="section level1">
+<h1>Embedding parameters</h1>
+<p>We choose CCA space for building the graph and try different parameters for the largeVis and UMAP embedding. The CCA UMAP is the only one where cells from the two organoid cell lines are merged in clusters and not separaterd. For largeVis we test larger alpha for tighter clusters and increased scd_batches to avoid that clusters intersect. For UMAP, we test lower min.dist which should lead to a more even dispersal of points and less clumped clusters.</p>
+<p>We save the results to files.</p>
+<pre class="r"><code># define output files
+clusts_file &lt;- file.path(&quot;output&quot;, &quot;conos&quot;, &quot;conos_clusts_group_CCA.txt&quot;)
+viz_file &lt;- file.path(&quot;output&quot;, &quot;conos&quot;, &quot;conos_viz_group_CCA.txt&quot;)
+umap_file &lt;- file.path(&quot;output&quot;, &quot;conos&quot;,&quot;conos_umap_group_CCA.txt&quot;)
+graph_file &lt;- file.path(&quot;output&quot;, &quot;conos&quot;,&quot;conos_graph_group_CCA.txt&quot;)
+label_file &lt;- file.path(&quot;output&quot;, &quot;conos&quot;,&quot;conos_labels_group_CCA.txt&quot;)
+label_distr_file &lt;- file.path(&quot;output&quot;, &quot;conos&quot;,&quot;conos_label_distr_group_CCA.txt&quot;)</code></pre>
+<pre class="r"><code>fwrite(conos_clusters, clusts_file)</code></pre>
+<div id="graph-embeddings-3" class="section level2">
+<h2>Graph embeddings</h2>
+<p>We embed the joint graph with two different methods: largeVis and UMAP. Testing parameters alpha = 0.5, sgd_batches = 5e+08 and min.dist = 0.01.</p>
+<pre class="r"><code>## graph embedding: largeVis visualization
+## Decreasing alpha results in less compressed clusters, and increasing
+## sgd_batches often helps to avoid cluster intersections and spread out the
+## clusters
+con$embedGraph(method = &#39;largeVis&#39;, alpha = 0.5, sgd_batches = 5e+08)</code></pre>
+<pre><code>Estimating embeddings.</code></pre>
+<pre class="r"><code>viz_dt &lt;-  data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(viz_dt, names(viz_dt), c(&quot;cell_id&quot;, &quot;viz1&quot;, &quot;viz2&quot;))
+fwrite(viz_dt, viz_file)
+## UMAP visualization
+## the most important parameters are spread and min.dist which together control
+## how tight the clusters are. Default min.dist = 0.001
+con$embedGraph(method = &quot;UMAP&quot;, n.cores = n_cores, min.dist = 0.01, spread = 15)</code></pre>
+<pre><code>Convert graph to adjacency list...
+Done
+Estimate nearest neighbors and commute times...
+Estimating hitting distances: 13:24:02.
+Done.
+Estimating commute distances: 13:24:40.
+Hashing adjacency list: 13:24:40.
+Done.
+Estimating distances: 13:25:08.
+Done
+Done.
+All done!: 13:26:02.
+Done
+Estimate UMAP embedding...
+Done</code></pre>
+<pre class="r"><code>umap_dt &lt;- data.table(cell_id = rownames(con$embedding), con$embedding)
+setnames(umap_dt, names(umap_dt), c(&quot;cell_id&quot;, &quot;umap1&quot;, &quot;umap2&quot;))
+fwrite(umap_dt, umap_file)</code></pre>
+<p>Save conos object.</p>
+<pre class="r"><code>saveRDS(con, file.path(&quot;output&quot;, &quot;conos_organoid-06-group-integration-conos-analysis.rds&quot;))</code></pre>
+<p>And merge all results in a data.table.</p>
+<pre class="r"><code>dat &lt;- prepare_dt(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04)</code></pre>
+<div id="largevis-3" class="section level3 tabset">
+<h3>largeVis</h3>
+<pre class="r"><code>## plot the embedding
+for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
+  cat(&quot;#### &quot;, res, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = res)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="conos1-6" class="section level4">
+<h4>conos1</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.2-6" class="section level4">
+<h4>conos1.2</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.4-6" class="section level4">
+<h4>conos1.4</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.6-6" class="section level4">
+<h4>conos1.6</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+  cat(&quot;#### &quot;, g, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = g)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+</div>
+<div id="sample_id-6" class="section level4">
+<h4>sample_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="group_id-6" class="section level4">
+<h4>group_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stage-6" class="section level4">
+<h4>Stage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cl_fulllineage-6" class="section level4">
+<h4>cl_FullLineage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="umap-3" class="section level3 tabset">
+<h3>UMAP</h3>
+<pre class="r"><code>for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
+  cat(&quot;#### &quot;, res, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = res)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="conos1-7" class="section level4">
+<h4>conos1</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.2-7" class="section level4">
+<h4>conos1.2</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.4-7" class="section level4">
+<h4>conos1.4</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="conos1.6-7" class="section level4">
+<h4>conos1.6</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+  cat(&quot;#### &quot;, g, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = g)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+</div>
+<div id="sample_id-7" class="section level4">
+<h4>sample_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="group_id-7" class="section level4">
+<h4>group_id</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stage-7" class="section level4">
+<h4>Stage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cl_fulllineage-7" class="section level4">
+<h4>cl_FullLineage</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="label-propagation" class="section level1">
+<h1>Label propagation</h1>
+<p>We want to propagate the cell annotations cl_FullLineage from the organoid dataset onto our cells. Conos uses diffusion propagation based on a random walk for label transfer.</p>
+<pre class="r"><code>labels &lt;- cols_dt$cl_FullLineage
+label_idx &lt;- !is.na(labels)
+labels &lt;- labels[label_idx]
+labels &lt;- as.factor(labels)
+levels(labels) &lt;- c(&quot;choroid plexus/mesenchymal-like cells&quot;,
+                   &quot;cortical neurons&quot;,  &quot;cortical neurons&quot;,
+                   &quot;cycling dorsal progenitors&quot;, &quot;cycling ventral progenitors&quot;,
+                   &quot;ectodermal/neuroectodermal-like cells&quot;,
+                   &quot;gliogenic/outer RGCs and astrocytes&quot;,
+                   &quot;IPs and early cortical neurons&quot;, &quot;midbrain/hindbrain cells&quot;,
+                   &quot;neuroepithelial-like cells&quot;, &quot;retina progenitors&quot;, &quot;RGCs&quot;,
+                   &quot;RGCs early&quot;, &quot;RGCs early&quot;, &quot;stem cells&quot;, &quot;stem cells&quot;,
+                   &quot;stem cells&quot;, &quot;ventral progenitors and neurons&quot;,
+                   &quot;ventral progenitors and neurons&quot;,
+                   &quot;ventral progenitors and neurons&quot;)
+labels &lt;- setNames(labels, cols_dt$cell_id[label_idx])
+new_label &lt;- con$propagateLabels(labels = labels, verbose = TRUE)
+
+label_df &lt;-  data.table(cell_id = names(new_label$labels), new_label$labels,
+                        new_label$uncertainty)
+setnames(label_df, names(label_df), c(&quot;cell_id&quot;, &quot;label&quot;, &quot;uncertainty&quot;))
+fwrite(label_df, label_file)
+## distribution of labels per cell
+label_dist &lt;- data.table(cell_id = rownames(new_label$label.distribution),
+                         new_label$label.distribution)
+fwrite(label_dist, label_distr_file)</code></pre>
+<div id="umap-with-propagated-labels" class="section level2 tabset">
+<h2>UMAP with propagated labels</h2>
+<p>We plot the propagated labels and the uncertainty.</p>
+<pre class="r"><code>dat &lt;- dat %&gt;% left_join(label_df)
+for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;, &quot;label&quot;)){
+  cat(&quot;### &quot;, g, &quot;\n&quot;)
+  plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = g)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="sample_id-8" class="section level3">
+<h3>sample_id</h3>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="group_id-8" class="section level3">
+<h3>group_id</h3>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stage-8" class="section level3">
+<h3>Stage</h3>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cl_fulllineage-8" class="section level3">
+<h3>cl_FullLineage</h3>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-4.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="label" class="section level3">
+<h3>label</h3>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>cat(&quot;### uncertainty\n&quot;)</code></pre>
+</div>
+<div id="uncertainty" class="section level3">
+<h3>uncertainty</h3>
+<pre class="r"><code>p &lt;- ggplot(dat, aes(x = umap1, y = umap2, color = uncertainty)) +
+  geom_point(alpha = 0.5) +
+  scale_colour_gradient(name = &quot;uncertainty&quot;, low = &quot;grey&quot;, high = &quot;red&quot;) +
+  ggtitle(&quot;UMAP&quot;)  +
+  theme_bw() +
+  theme(aspect.ratio = 1) +
+  guides(col = guide_legend(nrow = 16,
+                            override.aes = list(size = 3, alpha = 1)))
+print(p)</code></pre>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.0 (2020-04-24)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 16.04.6 LTS
+
+Matrix products: default
+BLAS:   /usr/local/R/R-4.0.0/lib/libRblas.so
+LAPACK: /usr/local/R/R-4.0.0/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] parallel  stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] ggplot2_3.3.2               magrittr_1.5               
+ [3] data.table_1.12.8           conos_1.3.0                
+ [5] pagoda2_0.1.1               igraph_1.2.5               
+ [7] Matrix_1.2-18               SingleCellExperiment_1.10.1
+ [9] SummarizedExperiment_1.18.1 DelayedArray_0.14.0        
+[11] matrixStats_0.56.0          Biobase_2.48.0             
+[13] GenomicRanges_1.40.0        GenomeInfoDb_1.24.2        
+[15] IRanges_2.22.2              S4Vectors_0.26.1           
+[17] BiocGenerics_0.34.0         Seurat_3.1.5               
+[19] dplyr_1.0.2                 workflowr_1.6.2            
+
+loaded via a namespace (and not attached):
+  [1] Rtsne_0.15             colorspace_1.4-1       rjson_0.2.20          
+  [4] ellipsis_0.3.1         ggridges_0.5.2         rprojroot_1.3-2       
+  [7] XVector_0.28.0         base64enc_0.1-3        fs_1.4.2              
+ [10] farver_2.0.3           leiden_0.3.3           listenv_0.8.0         
+ [13] urltools_1.7.3         ggrepel_0.8.2          RSpectra_0.16-0       
+ [16] codetools_0.2-16       splines_4.0.0          knitr_1.29            
+ [19] jsonlite_1.7.0         ica_1.0-2              cluster_2.1.0         
+ [22] png_0.1-7              uwot_0.1.8             shiny_1.5.0           
+ [25] sctransform_0.2.1      compiler_4.0.0         httr_1.4.1            
+ [28] backports_1.1.9        fastmap_1.0.1          lazyeval_0.2.2        
+ [31] later_1.1.0.1          htmltools_0.5.0        tools_4.0.0           
+ [34] rsvd_1.0.3             gtable_0.3.0           glue_1.4.2            
+ [37] GenomeInfoDbData_1.2.3 RANN_2.6.1             reshape2_1.4.4        
+ [40] rappdirs_0.3.1         Rcpp_1.0.5             vctrs_0.3.4           
+ [43] ape_5.4                nlme_3.1-148           lmtest_0.9-37         
+ [46] sccore_0.1.0           xfun_0.15              stringr_1.4.0         
+ [49] globals_0.12.5         mime_0.9               lifecycle_0.2.0       
+ [52] irlba_2.3.3            dendextend_1.14.0      future_1.17.0         
+ [55] MASS_7.3-51.6          zlibbioc_1.34.0        zoo_1.8-8             
+ [58] scales_1.1.1           promises_1.1.1         RColorBrewer_1.1-2    
+ [61] yaml_2.2.1             reticulate_1.16        pbapply_1.4-2         
+ [64] gridExtra_2.3          triebeard_0.3.0        stringi_1.4.6         
+ [67] Rook_1.1-1             rlang_0.4.7            pkgconfig_2.0.3       
+ [70] bitops_1.0-6           evaluate_0.14          lattice_0.20-41       
+ [73] ROCR_1.0-11            purrr_0.3.4            labeling_0.3          
+ [76] patchwork_1.0.1        htmlwidgets_1.5.1      cowplot_1.0.0         
+ [79] tidyselect_1.1.0       RcppAnnoy_0.0.16       plyr_1.8.6            
+ [82] R6_2.4.1               generics_0.0.2         mgcv_1.8-31           
+ [85] withr_2.2.0            pillar_1.4.6           whisker_0.4           
+ [88] fitdistrplus_1.1-1     survival_3.2-3         RCurl_1.98-1.2        
+ [91] tibble_3.0.3           future.apply_1.6.0     tsne_0.1-3            
+ [94] crayon_1.3.4           KernSmooth_2.23-17     plotly_4.9.2.1        
+ [97] rmarkdown_2.3          viridis_0.5.1          grid_4.0.0            
+[100] git2r_0.27.1           digest_0.6.25          xtable_1.8-4          
+[103] tidyr_1.1.0            httpuv_1.5.4           brew_1.0-6            
+[106] munsell_0.5.0          viridisLite_0.3.0     </code></pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
