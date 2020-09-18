@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-09-16
+<strong>Last updated:</strong> 2020-09-18
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeec8eba65035fe2c56da727e15c960a43465f1359targetblankec8eba6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/ec8eba65035fe2c56da727e15c960a43465f1359" target="_blank">ec8eba6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree51fad17784f0296014e81b5ade106f3aa3d4d114targetblank51fad17a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/51fad17784f0296014e81b5ade106f3aa3d4d114" target="_blank">51fad17</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeec8eba65035fe2c56da727e15c960a43465f1359targetblankec8eba6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree51fad17784f0296014e81b5ade106f3aa3d4d114targetblank51fad17a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/ec8eba65035fe2c56da727e15c960a43465f1359" target="_blank">ec8eba6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/51fad17784f0296014e81b5ade106f3aa3d4d114" target="_blank">51fad17</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -553,6 +553,7 @@ Ignored files:
     Ignored:    analysis/._organoid-03-cluster_analysis.Rmd
     Ignored:    analysis/._organoid-04-group_integration.Rmd
     Ignored:    analysis/._organoid-05-group_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-05-stage_integration_cluster_analysis.Rmd
     Ignored:    analysis/._organoid-06-1-prepare-sce.Rmd
     Ignored:    analysis/._organoid-06-conos-analysis-Seurat.Rmd
     Ignored:    analysis/._organoid-06-conos-analysis-function.Rmd
@@ -560,6 +561,7 @@ Ignored files:
     Ignored:    analysis/._organoid-06-group-integration-conos-analysis.Rmd
     Ignored:    analysis/._organoid-07-conos-visualization.Rmd
     Ignored:    analysis/._organoid-07-group-integration-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-08-conos-comparison.Rmd
     Ignored:    analysis/._organoid-0x-sample_integration.Rmd
     Ignored:    analysis/01-preprocessing_cache/
     Ignored:    analysis/02-1-SampleQC_cache/
@@ -584,6 +586,7 @@ Ignored files:
     Ignored:    analysis/organoid-06-conos-analysis_test_cache/
     Ignored:    analysis/organoid-07-conos-visualization_cache/
     Ignored:    analysis/organoid-07-group-integration-conos-visualization_cache/
+    Ignored:    analysis/organoid-08-conos-comparison_cache/
     Ignored:    analysis/organoid-0x-sample_integration_cache/
     Ignored:    analysis/sample5_QC_cache/
     Ignored:    data/.DS_Store
@@ -654,10 +657,12 @@ Untracked files:
     Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
     Untracked:  analysis/additional_filtering.Rmd
     Untracked:  analysis/additional_filtering_clustering.Rmd
+    Untracked:  analysis/organoid-05-stage_integration_cluster_analysis.Rmd
     Untracked:  analysis/organoid-06-conos-analysis-Seurat.Rmd
     Untracked:  analysis/organoid-06-conos-analysis-function.Rmd
     Untracked:  analysis/organoid-07-conos-visualization.Rmd
     Untracked:  analysis/organoid-07-group-integration-conos-visualization.Rmd
+    Untracked:  analysis/organoid-08-conos-comparison.Rmd
     Untracked:  analysis/organoid-0x-sample_integration.Rmd
     Untracked:  analysis/sample5_QC.Rmd
     Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
@@ -714,6 +719,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/51fad17784f0296014e81b5ade106f3aa3d4d114/analysis/organoid-06-group-integration-conos-analysis.Rmd" target="_blank">51fad17</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-18
+</td>
+<td>
+use cell line and age as integration groups
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/031fd4c05732f789c5dc8242d452161e1002d90c/docs/organoid-06-group-integration-conos-analysis.html" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/ec8eba65035fe2c56da727e15c960a43465f1359/analysis/organoid-06-group-integration-conos-analysis.Rmd" target="_blank">ec8eba6</a>
 </td>
 <td>
@@ -748,22 +787,22 @@ library(ggplot2)</code></pre>
 </div>
 <div id="preprocessing" class="section level1">
 <h1>Preprocessing</h1>
+<p>We integrate the samples by cell line and age/Stage.</p>
 <pre class="r"><code>n_cores &lt;- 20 
 sce_file &lt;- file.path(&quot;output&quot;, &quot;sce_06-1-prepare-sce.rds&quot;)
 sce &lt;- readRDS(sce_file)
 
-## We use the sample_id for our cells and the cell line for the organoid cells 
-## for integration
-sce$sample_id &lt;- ifelse(sce$group_id %in% c(&quot;H9&quot;, &quot;409b2&quot;), 
-                        sce$group_id, as.character(sce$sample_id))
+sce$integration_group &lt;- ifelse(sce$group_id %in% c(&quot;H9&quot;, &quot;409b2&quot;), 
+                                paste0(sce$Stage, &quot;_&quot;, sce$group_id), 
+                                sce$group_id)
 
 cols_dt &lt;- as.data.table(colData(sce))
 cols_dt$cell_id &lt;- rownames(colData(sce))
 
-sample_list &lt;- as.character(unique(sce$sample_id))
+sample_list &lt;- as.character(unique(sce$integration_group))
 ## Pagoda2 requires dgCMatrix matrix as input
 counts_list &lt;- lapply(sample_list, function(s)
-  counts(sce[, colData(sce)$sample_id == s]))
+  counts(sce[, colData(sce)$integration_group == s]))
 names(counts_list) &lt;- sample_list
 # check if cell names will be unique
 stopifnot(any(duplicated(unlist(lapply(counts_list,colnames)))) == FALSE) 
@@ -772,29 +811,56 @@ counts_proc &lt;- lapply(counts_list, basicP2proc,
                      n.cores = n_cores, nPcs = 50, min.cells.per.gene = 0, 
                      n.odgenes = 2e3, get.largevis = FALSE, get.tsne = FALSE, 
                      make.geneknn = FALSE)</code></pre>
-<pre><code>8331 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
-calculating variance fit ... using gam 365 overdispersed genes ... 365persisting ... done.
+<pre><code>16739 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 488 overdispersed genes ... 488persisting ... done.
 running PCA using 2000 OD genes .... done
-8408 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
-calculating variance fit ... using gam 369 overdispersed genes ... 369persisting ... done.
+16125 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 1471 overdispersed genes ... 1471persisting ... done.
 running PCA using 2000 OD genes .... done
-8687 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
-calculating variance fit ... using gam 1126 overdispersed genes ... 1126persisting ... done.
+8133 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 2057 overdispersed genes ... 2057persisting ... done.
 running PCA using 2000 OD genes .... done
-7438 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
-calculating variance fit ... using gam 1230 overdispersed genes ... 1230persisting ... done.
+1943 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 172 overdispersed genes ... 172persisting ... done.
 running PCA using 2000 OD genes .... done
-3538 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
-calculating variance fit ... using gam 1444 overdispersed genes ... 1444persisting ... done.
+2357 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 186 overdispersed genes ... 186persisting ... done.
 running PCA using 2000 OD genes .... done
-4595 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
-calculating variance fit ... using gam 1884 overdispersed genes ... 1884persisting ... done.
+2445 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 264 overdispersed genes ... 264persisting ... done.
 running PCA using 2000 OD genes .... done
-20272 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
-calculating variance fit ... using gam 2102 overdispersed genes ... 2102persisting ... done.
+855 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 135 overdispersed genes ... 135persisting ... done.
 running PCA using 2000 OD genes .... done
-23226 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
-calculating variance fit ... using gam 3046 overdispersed genes ... 3046persisting ... done.
+1871 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 619 overdispersed genes ... 619persisting ... done.
+running PCA using 2000 OD genes .... done
+886 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 307 overdispersed genes ... 307persisting ... done.
+running PCA using 2000 OD genes .... done
+920 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 272 overdispersed genes ... 272persisting ... done.
+running PCA using 2000 OD genes .... done
+443 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 138 overdispersed genes ... 138persisting ... done.
+running PCA using 2000 OD genes .... done
+2416 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 670 overdispersed genes ... 670persisting ... done.
+running PCA using 2000 OD genes .... done
+2654 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 659 overdispersed genes ... 659persisting ... done.
+running PCA using 2000 OD genes .... done
+8056 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 978 overdispersed genes ... 978persisting ... done.
+running PCA using 2000 OD genes .... done
+9164 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 962 overdispersed genes ... 962persisting ... done.
+running PCA using 2000 OD genes .... done
+5673 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 1064 overdispersed genes ... 1064persisting ... done.
+running PCA using 2000 OD genes .... done
+3815 cells, 17890 genes; normalizing ... using plain model winsorizing ... log scale ... done.
+calculating variance fit ... using gam 404 overdispersed genes ... 404persisting ... done.
 running PCA using 2000 OD genes .... done</code></pre>
 <pre class="r"><code>con &lt;- Conos$new(counts_proc, n.cores = n_cores)</code></pre>
 </div>
@@ -810,7 +876,7 @@ graph_file &lt;- file.path(&quot;output&quot;, &quot;conos&quot;,&quot;conos_gra
 
 # build joint graph
 con$buildGraph(space = &quot;PCA&quot;)</code></pre>
-<pre><code>found 0 out of 28 cached PCA  space pairs ... running 28 additional PCA  space pairs  done
+<pre><code>found 0 out of 136 cached PCA  space pairs ... running 136 additional PCA  space pairs  done
 inter-sample links using  mNN   done
 local pairs local pairs  done
 building graph ..done</code></pre>
@@ -843,15 +909,15 @@ con$embedGraph(method = &quot;UMAP&quot;, n.cores = n_cores)</code></pre>
 <pre><code>Convert graph to adjacency list...
 Done
 Estimate nearest neighbors and commute times...
-Estimating hitting distances: 12:43:21.
+Estimating hitting distances: 15:41:24.
 Done.
-Estimating commute distances: 12:43:51.
-Hashing adjacency list: 12:43:51.
+Estimating commute distances: 15:41:55.
+Hashing adjacency list: 15:41:55.
 Done.
-Estimating distances: 12:44:02.
+Estimating distances: 15:42:14.
 Done
 Done.
-All done!: 12:44:25.
+All done!: 15:42:50.
 Done
 Estimate UMAP embedding...
 Done</code></pre>
@@ -882,9 +948,13 @@ prepare_dt &lt;- function(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04
   ## label our cells with the group_id in the organoid metadata columns
   dat$Stage &lt;- ifelse(is.na(dat$Stage), dat$group_id, dat$Stage)
   ## we use factors for plotting
-  dat$sample_id &lt;- factor(dat$sample_id, levels = c(&quot;1NSC&quot;, &quot;2NSC&quot;, &quot;3NC52&quot;,
-                                                    &quot;4NC52&quot;, &quot;5NC96&quot;, &quot;6NC96&quot;,
-                                                    &quot;H9&quot;, &quot;409b2&quot;))
+  dat$integration_group &lt;- factor(dat$integration_group, 
+          levels = c(&quot;P22&quot;, &quot;D52&quot;, &quot;D96&quot;, &quot;iPSCs_409b2&quot;, &quot;iPSCs_H9&quot;, &quot;EB_409b2&quot;, 
+                     &quot;EB_H9&quot;, &quot;Neuroectoderm_409b2&quot;, &quot;Neuroectoderm_H9&quot;, 
+                     &quot;Neuroepithelium_409b2&quot;, &quot;Neuroepithelium_H9&quot;,
+                     &quot;Organoid-1M_409b2&quot;, &quot;Organoid-1M_H9&quot;, &quot;Organoid-2M_409b2&quot;, 
+                     &quot;Organoid-2M_H9&quot;, &quot;Organoid-4M_409b2&quot;, &quot;Organoid-4M_H9&quot;))
+  
   ## reorder factor levels for plotting
   dat$group_id &lt;- factor(dat$group_id, 
                          levels = c(&quot;P22&quot;, &quot;D52&quot;, &quot;D96&quot;, &quot;H9&quot;, &quot;409b2&quot;))
@@ -938,27 +1008,32 @@ for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
 <div id="conos1.6" class="section level4">
 <h4>conos1.6</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-4.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+<pre class="r"><code>for(g in c(&quot;integration_group&quot;, &quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, 
+           &quot;cl_FullLineage&quot;)){
   cat(&quot;#### &quot;, g, &quot;\n&quot;)
   plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = g)
   cat(&quot;\n\n&quot;)
 }</code></pre>
 </div>
+<div id="integration_group" class="section level4">
+<h4>integration_group</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
 <div id="sample_id" class="section level4">
 <h4>sample_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="group_id" class="section level4">
 <h4>group_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="stage" class="section level4">
 <h4>Stage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="cl_fulllineage" class="section level4">
 <h4>cl_FullLineage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-largeVis-9.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="umap" class="section level3 tabset">
@@ -983,27 +1058,32 @@ for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
 <div id="conos1.6-1" class="section level4">
 <h4>conos1.6</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-4.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+<pre class="r"><code>for(g in c(&quot;integration_group&quot;, &quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, 
+           &quot;cl_FullLineage&quot;)){
   cat(&quot;#### &quot;, g, &quot;\n&quot;)
   plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = g)
   cat(&quot;\n\n&quot;)
 }</code></pre>
 </div>
+<div id="integration_group-1" class="section level4">
+<h4>integration_group</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
 <div id="sample_id-1" class="section level4">
 <h4>sample_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="group_id-1" class="section level4">
 <h4>group_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="stage-1" class="section level4">
 <h4>Stage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="cl_fulllineage-1" class="section level4">
 <h4>cl_FullLineage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/default-umap-9.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1019,7 +1099,7 @@ for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
 <h2>Build joint graph</h2>
 <pre class="r"><code># build joint graph
 con$buildGraph(space = &quot;CPCA&quot;)</code></pre>
-<pre><code>found 0 out of 28 cached CPCA  space pairs ... running 28 additional CPCA  space pairs  done
+<pre><code>found 0 out of 136 cached CPCA  space pairs ... running 136 additional CPCA  space pairs  done
 inter-sample links using  mNN   done
 local pairs local pairs  done
 building graph ..done</code></pre>
@@ -1050,15 +1130,15 @@ con$embedGraph(method = &quot;UMAP&quot;, n.cores = n_cores)</code></pre>
 <pre><code>Convert graph to adjacency list...
 Done
 Estimate nearest neighbors and commute times...
-Estimating hitting distances: 12:50:34.
+Estimating hitting distances: 15:56:03.
 Done.
-Estimating commute distances: 12:51:04.
-Hashing adjacency list: 12:51:04.
+Estimating commute distances: 15:56:40.
+Hashing adjacency list: 15:56:40.
 Done.
-Estimating distances: 12:51:16.
+Estimating distances: 15:57:03.
 Done
 Done.
-All done!: 12:51:40.
+All done!: 15:57:37.
 Done
 Estimate UMAP embedding...
 Done</code></pre>
@@ -1090,27 +1170,32 @@ for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
 <div id="conos1.6-2" class="section level4">
 <h4>conos1.6</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-4.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+<pre class="r"><code>for(g in c(&quot;integration_group&quot;, &quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, 
+           &quot;cl_FullLineage&quot;)){
   cat(&quot;#### &quot;, g, &quot;\n&quot;)
   plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = g)
   cat(&quot;\n\n&quot;)
 }</code></pre>
 </div>
+<div id="integration_group-2" class="section level4">
+<h4>integration_group</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
 <div id="sample_id-2" class="section level4">
 <h4>sample_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="group_id-2" class="section level4">
 <h4>group_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="stage-2" class="section level4">
 <h4>Stage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="cl_fulllineage-2" class="section level4">
 <h4>cl_FullLineage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-largeVis-9.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="umap-1" class="section level3 tabset">
@@ -1135,27 +1220,32 @@ for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
 <div id="conos1.6-3" class="section level4">
 <h4>conos1.6</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-4.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+<pre class="r"><code>for(g in c(&quot;integration_group&quot;, &quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, 
+           &quot;cl_FullLineage&quot;)){
   cat(&quot;#### &quot;, g, &quot;\n&quot;)
   plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = g)
   cat(&quot;\n\n&quot;)
 }</code></pre>
 </div>
+<div id="integration_group-3" class="section level4">
+<h4>integration_group</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
 <div id="sample_id-3" class="section level4">
 <h4>sample_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="group_id-3" class="section level4">
 <h4>group_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="stage-3" class="section level4">
 <h4>Stage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="cl_fulllineage-3" class="section level4">
 <h4>cl_FullLineage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cpca-umap-9.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1167,7 +1257,7 @@ for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
 <h2>Build joint graph</h2>
 <pre class="r"><code># build joint graph
 con$buildGraph(space = &quot;CCA&quot;)</code></pre>
-<pre><code>found 0 out of 28 cached CCA  space pairs ... running 28 additional CCA  space pairs  done
+<pre><code>found 0 out of 136 cached CCA  space pairs ... running 136 additional CCA  space pairs  done
 inter-sample links using  mNN   done
 local pairs local pairs  done
 building graph ..done</code></pre>
@@ -1198,15 +1288,15 @@ con$embedGraph(method = &quot;UMAP&quot;, n.cores = n_cores)</code></pre>
 <pre><code>Convert graph to adjacency list...
 Done
 Estimate nearest neighbors and commute times...
-Estimating hitting distances: 13:17:16.
+Estimating hitting distances: 16:15:12.
 Done.
-Estimating commute distances: 13:17:56.
-Hashing adjacency list: 13:17:56.
+Estimating commute distances: 16:15:54.
+Hashing adjacency list: 16:15:54.
 Done.
-Estimating distances: 13:18:25.
+Estimating distances: 16:16:27.
 Done
 Done.
-All done!: 13:19:21.
+All done!: 16:17:47.
 Done
 Estimate UMAP embedding...
 Done</code></pre>
@@ -1226,39 +1316,340 @@ for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
 <div id="conos1-4" class="section level4">
 <h4>conos1</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-largeVis-1">
+Past versions of cca-largeVis-1.png
+</button>
+</p>
+<div id="fig-cca-largeVis-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-1.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.2-4" class="section level4">
 <h4>conos1.2</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-largeVis-2">
+Past versions of cca-largeVis-2.png
+</button>
+</p>
+<div id="fig-cca-largeVis-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-2.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.4-4" class="section level4">
 <h4>conos1.4</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-largeVis-3">
+Past versions of cca-largeVis-3.png
+</button>
+</p>
+<div id="fig-cca-largeVis-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-3.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.6-4" class="section level4">
 <h4>conos1.6</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-4.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-largeVis-4">
+Past versions of cca-largeVis-4.png
+</button>
+</p>
+<div id="fig-cca-largeVis-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-4.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>for(g in c(&quot;integration_group&quot;, &quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, 
+           &quot;cl_FullLineage&quot;)){
   cat(&quot;#### &quot;, g, &quot;\n&quot;)
   plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = g)
   cat(&quot;\n\n&quot;)
 }</code></pre>
 </div>
+<div id="integration_group-4" class="section level4">
+<h4>integration_group</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-largeVis-5">
+Past versions of cca-largeVis-5.png
+</button>
+</p>
+<div id="fig-cca-largeVis-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-5.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <div id="sample_id-4" class="section level4">
 <h4>sample_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-largeVis-6">
+Past versions of cca-largeVis-6.png
+</button>
+</p>
+<div id="fig-cca-largeVis-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-6.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="group_id-4" class="section level4">
 <h4>group_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-largeVis-7">
+Past versions of cca-largeVis-7.png
+</button>
+</p>
+<div id="fig-cca-largeVis-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-7.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="stage-4" class="section level4">
 <h4>Stage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-largeVis-8">
+Past versions of cca-largeVis-8.png
+</button>
+</p>
+<div id="fig-cca-largeVis-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-8.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="cl_fulllineage-4" class="section level4">
 <h4>cl_FullLineage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-largeVis-9.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="umap-2" class="section level3 tabset">
@@ -1271,39 +1662,340 @@ for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
 <div id="conos1-5" class="section level4">
 <h4>conos1</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-umap-1">
+Past versions of cca-umap-1.png
+</button>
+</p>
+<div id="fig-cca-umap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-1.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.2-5" class="section level4">
 <h4>conos1.2</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-umap-2">
+Past versions of cca-umap-2.png
+</button>
+</p>
+<div id="fig-cca-umap-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-2.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.4-5" class="section level4">
 <h4>conos1.4</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-umap-3">
+Past versions of cca-umap-3.png
+</button>
+</p>
+<div id="fig-cca-umap-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-3.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.6-5" class="section level4">
 <h4>conos1.6</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-4.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-umap-4">
+Past versions of cca-umap-4.png
+</button>
+</p>
+<div id="fig-cca-umap-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-4.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>for(g in c(&quot;integration_group&quot;, &quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, 
+           &quot;cl_FullLineage&quot;)){
   cat(&quot;#### &quot;, g, &quot;\n&quot;)
   plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = g)
   cat(&quot;\n\n&quot;)
 }</code></pre>
 </div>
+<div id="integration_group-5" class="section level4">
+<h4>integration_group</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-umap-5">
+Past versions of cca-umap-5.png
+</button>
+</p>
+<div id="fig-cca-umap-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-5.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <div id="sample_id-5" class="section level4">
 <h4>sample_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-umap-6">
+Past versions of cca-umap-6.png
+</button>
+</p>
+<div id="fig-cca-umap-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-6.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="group_id-5" class="section level4">
 <h4>group_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-umap-7">
+Past versions of cca-umap-7.png
+</button>
+</p>
+<div id="fig-cca-umap-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-7.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="stage-5" class="section level4">
 <h4>Stage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cca-umap-8">
+Past versions of cca-umap-8.png
+</button>
+</p>
+<div id="fig-cca-umap-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-8.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="cl_fulllineage-5" class="section level4">
 <h4>cl_FullLineage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/cca-umap-9.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1339,15 +2031,15 @@ con$embedGraph(method = &quot;UMAP&quot;, n.cores = n_cores, min.dist = 0.01, sp
 <pre><code>Convert graph to adjacency list...
 Done
 Estimate nearest neighbors and commute times...
-Estimating hitting distances: 13:24:02.
+Estimating hitting distances: 16:23:23.
 Done.
-Estimating commute distances: 13:24:40.
-Hashing adjacency list: 13:24:40.
+Estimating commute distances: 16:24:02.
+Hashing adjacency list: 16:24:02.
 Done.
-Estimating distances: 13:25:08.
+Estimating distances: 16:24:34.
 Done
 Done.
-All done!: 13:26:02.
+All done!: 16:25:38.
 Done
 Estimate UMAP embedding...
 Done</code></pre>
@@ -1369,39 +2061,340 @@ for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
 <div id="conos1-6" class="section level4">
 <h4>conos1</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-largeVis-1">
+Past versions of params-largeVis-1.png
+</button>
+</p>
+<div id="fig-params-largeVis-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-1.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.2-6" class="section level4">
 <h4>conos1.2</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-largeVis-2">
+Past versions of params-largeVis-2.png
+</button>
+</p>
+<div id="fig-params-largeVis-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-2.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.4-6" class="section level4">
 <h4>conos1.4</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-largeVis-3">
+Past versions of params-largeVis-3.png
+</button>
+</p>
+<div id="fig-params-largeVis-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-3.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.6-6" class="section level4">
 <h4>conos1.6</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-4.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-largeVis-4">
+Past versions of params-largeVis-4.png
+</button>
+</p>
+<div id="fig-params-largeVis-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-4.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>for(g in c(&quot;integration_group&quot;, &quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, 
+           &quot;cl_FullLineage&quot;)){
   cat(&quot;#### &quot;, g, &quot;\n&quot;)
   plot_conos(dat, title = &quot;largeVis&quot;, x = &quot;viz1&quot;, y = &quot;viz2&quot;, color = g)
   cat(&quot;\n\n&quot;)
 }</code></pre>
 </div>
+<div id="integration_group-6" class="section level4">
+<h4>integration_group</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-largeVis-5">
+Past versions of params-largeVis-5.png
+</button>
+</p>
+<div id="fig-params-largeVis-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-5.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <div id="sample_id-6" class="section level4">
 <h4>sample_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-largeVis-6">
+Past versions of params-largeVis-6.png
+</button>
+</p>
+<div id="fig-params-largeVis-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-6.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="group_id-6" class="section level4">
 <h4>group_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-largeVis-7">
+Past versions of params-largeVis-7.png
+</button>
+</p>
+<div id="fig-params-largeVis-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-7.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="stage-6" class="section level4">
 <h4>Stage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-largeVis-8">
+Past versions of params-largeVis-8.png
+</button>
+</p>
+<div id="fig-params-largeVis-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-8.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="cl_fulllineage-6" class="section level4">
 <h4>cl_FullLineage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-largeVis-9.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="umap-3" class="section level3 tabset">
@@ -1414,39 +2407,340 @@ for(res in names(dat)[startsWith(names(dat), &quot;conos&quot;)]){
 <div id="conos1-7" class="section level4">
 <h4>conos1</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-umap-1">
+Past versions of params-umap-1.png
+</button>
+</p>
+<div id="fig-params-umap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-1.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.2-7" class="section level4">
 <h4>conos1.2</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-umap-2">
+Past versions of params-umap-2.png
+</button>
+</p>
+<div id="fig-params-umap-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-2.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.4-7" class="section level4">
 <h4>conos1.4</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-umap-3">
+Past versions of params-umap-3.png
+</button>
+</p>
+<div id="fig-params-umap-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-3.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="conos1.6-7" class="section level4">
 <h4>conos1.6</h4>
 <p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-4.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;)){
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-umap-4">
+Past versions of params-umap-4.png
+</button>
+</p>
+<div id="fig-params-umap-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-4.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>for(g in c(&quot;integration_group&quot;, &quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, 
+           &quot;cl_FullLineage&quot;)){
   cat(&quot;#### &quot;, g, &quot;\n&quot;)
   plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = g)
   cat(&quot;\n\n&quot;)
 }</code></pre>
 </div>
+<div id="integration_group-7" class="section level4">
+<h4>integration_group</h4>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-umap-5">
+Past versions of params-umap-5.png
+</button>
+</p>
+<div id="fig-params-umap-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-5.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <div id="sample_id-7" class="section level4">
 <h4>sample_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-umap-6">
+Past versions of params-umap-6.png
+</button>
+</p>
+<div id="fig-params-umap-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-6.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="group_id-7" class="section level4">
 <h4>group_id</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-umap-7">
+Past versions of params-umap-7.png
+</button>
+</p>
+<div id="fig-params-umap-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-7.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="stage-7" class="section level4">
 <h4>Stage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-params-umap-8">
+Past versions of params-umap-8.png
+</button>
+</p>
+<div id="fig-params-umap-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-8.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="cl_fulllineage-7" class="section level4">
 <h4>cl_FullLineage</h4>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/params-umap-9.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1484,30 +2778,257 @@ fwrite(label_dist, label_distr_file)</code></pre>
 <h2>UMAP with propagated labels</h2>
 <p>We plot the propagated labels and the uncertainty.</p>
 <pre class="r"><code>dat &lt;- dat %&gt;% left_join(label_df)
-for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot;cl_FullLineage&quot;, &quot;label&quot;)){
+for(g in c(&quot;integration_group&quot;, &quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, 
+           &quot;cl_FullLineage&quot;, &quot;label&quot;)){
   cat(&quot;### &quot;, g, &quot;\n&quot;)
   plot_conos(dat, title = &quot;UMAP&quot;, x = &quot;umap1&quot;, y = &quot;umap2&quot;, color = g)
   cat(&quot;\n\n&quot;)
 }</code></pre>
+<div id="integration_group-8" class="section level3">
+<h3>integration_group</h3>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot-labels-1">
+Past versions of plot-labels-1.png
+</button>
+</p>
+<div id="fig-plot-labels-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-1.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <div id="sample_id-8" class="section level3">
 <h3>sample_id</h3>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot-labels-2">
+Past versions of plot-labels-2.png
+</button>
+</p>
+<div id="fig-plot-labels-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-2.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="group_id-8" class="section level3">
 <h3>group_id</h3>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot-labels-3">
+Past versions of plot-labels-3.png
+</button>
+</p>
+<div id="fig-plot-labels-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-3.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="stage-8" class="section level3">
 <h3>Stage</h3>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot-labels-4">
+Past versions of plot-labels-4.png
+</button>
+</p>
+<div id="fig-plot-labels-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-4.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="cl_fulllineage-8" class="section level3">
 <h3>cl_FullLineage</h3>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot-labels-5">
+Past versions of plot-labels-5.png
+</button>
+</p>
+<div id="fig-plot-labels-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-5.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="label" class="section level3">
 <h3>label</h3>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot-labels-6">
+Past versions of plot-labels-6.png
+</button>
+</p>
+<div id="fig-plot-labels-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/031fd4c05732f789c5dc8242d452161e1002d90c/docs/figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-6.png" target="_blank">031fd4c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-09-16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>cat(&quot;### uncertainty\n&quot;)</code></pre>
 </div>
 <div id="uncertainty" class="section level3">
@@ -1521,7 +3042,7 @@ for(g in c(&quot;sample_id&quot;, &quot;group_id&quot;, &quot;Stage&quot;, &quot
   guides(col = guide_legend(nrow = 16,
                             override.aes = list(size = 3, alpha = 1)))
 print(p)</code></pre>
-<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/organoid-06-group-integration-conos-analysis.Rmd/plot-labels-7.png" width="1152" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 <br>
 <p>
