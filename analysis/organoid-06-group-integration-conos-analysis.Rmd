@@ -35,23 +35,24 @@ library(ggplot2)
 
 # Preprocessing
 
+We integrate the samples by cell line and age/Stage. 
+
 ```{r preprocessing}
 n_cores <- 20 
 sce_file <- file.path("output", "sce_06-1-prepare-sce.rds")
 sce <- readRDS(sce_file)
 
-## We use the sample_id for our cells and the cell line for the organoid cells 
-## for integration
-sce$sample_id <- ifelse(sce$group_id %in% c("H9", "409b2"), 
-                        sce$group_id, as.character(sce$sample_id))
+sce$integration_group <- ifelse(sce$group_id %in% c("H9", "409b2"), 
+                                paste0(sce$Stage, "_", sce$group_id), 
+                                sce$group_id)
 
 cols_dt <- as.data.table(colData(sce))
 cols_dt$cell_id <- rownames(colData(sce))
 
-sample_list <- as.character(unique(sce$sample_id))
+sample_list <- as.character(unique(sce$integration_group))
 ## Pagoda2 requires dgCMatrix matrix as input
 counts_list <- lapply(sample_list, function(s)
-  counts(sce[, colData(sce)$sample_id == s]))
+  counts(sce[, colData(sce)$integration_group == s]))
 names(counts_list) <- sample_list
 # check if cell names will be unique
 stopifnot(any(duplicated(unlist(lapply(counts_list,colnames)))) == FALSE) 
@@ -138,9 +139,13 @@ prepare_dt <- function(cols_dt, viz_dt, umap_dt, conos_clusters, size = 1e+04){
   ## label our cells with the group_id in the organoid metadata columns
   dat$Stage <- ifelse(is.na(dat$Stage), dat$group_id, dat$Stage)
   ## we use factors for plotting
-  dat$sample_id <- factor(dat$sample_id, levels = c("1NSC", "2NSC", "3NC52",
-                                                    "4NC52", "5NC96", "6NC96",
-                                                    "H9", "409b2"))
+  dat$integration_group <- factor(dat$integration_group, 
+          levels = c("P22", "D52", "D96", "iPSCs_409b2", "iPSCs_H9", "EB_409b2", 
+                     "EB_H9", "Neuroectoderm_409b2", "Neuroectoderm_H9", 
+                     "Neuroepithelium_409b2", "Neuroepithelium_H9",
+                     "Organoid-1M_409b2", "Organoid-1M_H9", "Organoid-2M_409b2", 
+                     "Organoid-2M_H9", "Organoid-4M_409b2", "Organoid-4M_H9"))
+  
   ## reorder factor levels for plotting
   dat$group_id <- factor(dat$group_id, 
                          levels = c("P22", "D52", "D96", "H9", "409b2"))
@@ -182,7 +187,8 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = res)
   cat("\n\n")
 }
-for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+for(g in c("integration_group", "sample_id", "group_id", "Stage", 
+           "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
   cat("\n\n")
@@ -198,7 +204,8 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
   cat("\n\n")
 }
-for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+for(g in c("integration_group", "sample_id", "group_id", "Stage", 
+           "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
   cat("\n\n")
@@ -265,7 +272,8 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = res)
   cat("\n\n")
 }
-for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+for(g in c("integration_group", "sample_id", "group_id", "Stage", 
+           "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
   cat("\n\n")
@@ -281,7 +289,8 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
   cat("\n\n")
 }
-for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+for(g in c("integration_group", "sample_id", "group_id", "Stage", 
+           "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
   cat("\n\n")
@@ -344,7 +353,8 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = res)
   cat("\n\n")
 }
-for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+for(g in c("integration_group", "sample_id", "group_id", "Stage", 
+           "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
   cat("\n\n")
@@ -360,7 +370,8 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
   cat("\n\n")
 }
-for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+for(g in c("integration_group", "sample_id", "group_id", "Stage", 
+           "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
   cat("\n\n")
@@ -431,7 +442,8 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   cat("\n\n")
 }
 
-for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+for(g in c("integration_group", "sample_id", "group_id", "Stage", 
+           "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "largeVis", x = "viz1", y = "viz2", color = g)
   cat("\n\n")
@@ -447,7 +459,8 @@ for(res in names(dat)[startsWith(names(dat), "conos")]){
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = res)
   cat("\n\n")
 }
-for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage")){
+for(g in c("integration_group", "sample_id", "group_id", "Stage", 
+           "cl_FullLineage")){
   cat("#### ", g, "\n")
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
   cat("\n\n")
@@ -493,7 +506,8 @@ fwrite(label_dist, label_distr_file)
 We plot the propagated labels and the uncertainty.
 ```{r plot-labels, results = "asis", fig.width = 12}
 dat <- dat %>% left_join(label_df)
-for(g in c("sample_id", "group_id", "Stage", "cl_FullLineage", "label")){
+for(g in c("integration_group", "sample_id", "group_id", "Stage", 
+           "cl_FullLineage", "label")){
   cat("### ", g, "\n")
   plot_conos(dat, title = "UMAP", x = "umap1", y = "umap2", color = g)
   cat("\n\n")
