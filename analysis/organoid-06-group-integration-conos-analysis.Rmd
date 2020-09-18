@@ -387,18 +387,32 @@ We choose CCA space for building the graph and try different parameters for the 
 We save the results to files.
 ```{r embedding-save-files}
 # define output files
-clusts_file <- file.path("output", "conos", "conos_clusts_group_CCA.txt")
-viz_file <- file.path("output", "conos", "conos_viz_group_CCA.txt")
-umap_file <- file.path("output", "conos","conos_umap_group_CCA.txt")
-graph_file <- file.path("output", "conos","conos_graph_group_CCA.txt")
-label_file <- file.path("output", "conos","conos_labels_group_CCA.txt")
-label_distr_file <- file.path("output", "conos","conos_label_distr_group_CCA.txt")
+clusts_file <- file.path("output", "conos", "conos_clusts_group_CPCA.txt")
+viz_file <- file.path("output", "conos", "conos_viz_group_CPCA.txt")
+umap_file <- file.path("output", "conos","conos_umap_group_CPCA.txt")
+graph_file <- file.path("output", "conos","conos_graph_group_CPCA.txt")
+label_file <- file.path("output", "conos","conos_labels_group_CPCA.txt")
+label_distr_file <- file.path("output", "conos","conos_label_distr_group_CPCA.txt")
 ```
 
-```{r write-clusters}
+## Build joint graph using CPCA space
+
+```{r embedding-graph}
+# build joint graph
+con$buildGraph(space = "CPCA")
+# find communities using Leiden community detection
+res_list <- list(1, 1.2, 1.4, 1.6)
+clusts_ls <- lapply(res_list, function(res) {
+        con$findCommunities(method = leiden.community, resolution = res)
+        con$clusters$leiden$groups})
+## table with cell ID and cluster ID per resolution
+conos_clusters <- do.call(cbind, clusts_ls) %>% 
+    set_colnames(paste0('conos', res_list)) %>%
+    data.table %>%
+    .[, cell_id := names(con$clusters$leiden$groups)] %>%
+    setcolorder('cell_id')        
 fwrite(conos_clusters, clusts_file)
 ```
-
 
 ## Graph embeddings
 
