@@ -54,3 +54,4 @@ We additionally sequences neural cultures at 223 days and performed a TDP-43 ove
 
 - [Preprocessing](TDP-01-preprocessing.html)
 - [Quality control](TDP-02-quality_control.html)
+- [Filtering](TDP-03-filtering.html)

@@ -1,0 +1,107 @@
+---
+title: "Quality filtering"
+author: "Katharina Hembach"
+date: "10/7/2020"
+output:
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE)
+```
+
+### Load packages
+```{r, message = FALSE}
+library(scater)
+library(LSD)
+library(dplyr)
+library(edgeR)
+library(ggrepel)
+```
+
+## Load data
+
+```{r}
+sce <- readRDS(file.path("output", "sce_TDP_02_quality_control.rds"))
+```
+
+## Identification of outlier cells
+
+Based on the QC metrics, we now identify outlier cells:
+
+```{r}
+cols <- c("sum", "detected", "subsets_Mt_percent")
+log <- c(TRUE, TRUE, FALSE)
+type <- c("both", "both", "higher")
+
+drop_cols <- paste0(cols, "_drop")
+for (i in seq_along(cols))
+    colData(sce)[[drop_cols[i]]] <- isOutlier(sce[[cols[i]]], 
+        nmads = 3, type = type[i], log = log[i], batch = sce$sample_id)
+
+# Overlap of outlier cells from two metrics
+sapply(drop_cols, function(i) 
+    sapply(drop_cols, function(j)
+        sum(sce[[i]] & sce[[j]])))
+
+colData(sce)$discard <- rowSums(data.frame(colData(sce)[,drop_cols])) > 0
+table(colData(sce)$discard)
+
+## Plot the metrics and highlight the discarded cells
+plotColData(sce, x = "sample_id", y = "sum", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "detected", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "subsets_Mt_percent", 
+            colour_by = "discard")
+```
+
+
+Plot the library size against the number of detected genes before and after filtering.
+```{r, fig.width=12, fig.height = 10}
+cd <- colData(sce)
+layout(matrix(1:12, nrow = 3, byrow = TRUE))
+for (i in levels(sce$sample_id)) {
+  tmp <- cd[cd$sample_id == i,]
+  heatscatter(tmp$sum, tmp$detected, log = "xy", 
+              main = paste0(i, "-unfiltered"), xlab = "total counts", 
+              ylab = "detected genes")
+  heatscatter(tmp$sum[!tmp$discard], tmp$detected[!tmp$discard], 
+              log = "xy", main = paste0(i, "-filtered"), xlab = "total counts", 
+              ylab = "detected genes")    
+}
+```
+
+
+## Removal of outlier cells
+We remove the outlier cells and filter the genes:
+
+```{r}
+## summary of the kept cells
+nr <- table(cd$sample_id)
+nr_fil <- table(cd$sample_id[!cd$discard])
+print(rbind(
+    unfiltered = nr, filtered = nr_fil, 
+    "%" = round(nr_fil / nr * 100, digits = 0)))
+
+## discard the outlier cells
+dim(sce)
+sce <- sce[,!cd$discard]
+dim(sce)
+
+## we filter genes and require > 1 count in at least 20 cells
+sce_filtered <- sce[rowSums(counts(sce) > 1) >= 20, ]
+dim(sce_filtered)
+```
+
+
+## Save data to RDS
+
+```{r}
+saveRDS(sce_filtered, file.path("output", "sce_TDP_03_filtering.rds"))
+saveRDS(sce, file.path("output", "sce_TDP_03_filtering_all_genes.rds"))
+```
+
