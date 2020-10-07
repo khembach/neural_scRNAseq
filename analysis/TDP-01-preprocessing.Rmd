@@ -1,0 +1,84 @@
+---
+title: "Preprocessing"
+author: "Katharina Hembach"
+date: "10/7/2020"
+output: 
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")))
+```
+
+### Load packages
+```{r, message = FALSE}
+library(DropletUtils)
+library(scDblFinder)
+library(BiocParallel)
+library(ggplot2)
+library(scater)
+```
+
+## Importing CellRanger output and metadata
+```{r import}
+fs <- dir(path = "data/Sep2020/filtered_feature_matrices", 
+                pattern = "^[NT]*", recursive = FALSE, full.names = TRUE)
+names(fs) <- basename(fs)
+## we want to analyse the count matrix
+fs <- sapply(fs, function(x) file.path(x, "filtered_feature_bc_matrix.h5")) 
+sce <- read10xCounts(samples = fs)
+
+# rename colnames and dimnames
+rowData(sce)$Type <- NULL
+names(rowData(sce)) <- c("ensembl_id", "symbol")
+names(colData(sce)) <- c("sample_id", "barcode")
+sce$sample_id <- factor(sce$sample_id)
+dimnames(sce) <- list(with(rowData(sce), paste(ensembl_id, symbol, sep = ".")),
+                      with(colData(sce), paste(barcode, sample_id, sep = ".")))
+
+# load metadata
+meta <- read.csv(file.path("data", "metadata.csv"))
+m <- match(sce$sample_id, meta$sample)
+sce$group_id <- meta$group[m]
+```
+
+## Detect doublets
+
+```{r doublet_detection, warnings = FALSE}
+# doublet detection with 'scDblFinder'
+# the expected proportion of doublets is 1% per 1000 cells
+sce <- scDblFinder(sce, samples="sample_id", BPPARAM=MulticoreParam(6))
+table(colData(sce)[,c("scDblFinder.class", "sample_id")])
+
+# histogram of the doublet scores
+dat <- as.data.frame(colData(sce)[c("scDblFinder.score", 
+                                    "scDblFinder.class", "sample_id")])
+dat$scDblFinder.class <- factor(dat$scDblFinder.class, 
+                                levels = c("singlet", "doublet"))
+p <- ggplot(dat, aes(scDblFinder.score)) + 
+  geom_histogram(bins = 100) + 
+  facet_grid(vars(sample_id), vars(scDblFinder.class)) + 
+  scale_y_log10()
+print(p)
+
+## PCA plot colored by doublet score
+for (i in levels(sce$sample_id)) {
+  print(i)
+  subs <- sce[,sce$sample_id == i]
+  subs <- logNormCounts(subs)
+  subs <- runPCA(subs)
+  print(plotPCA(subs, colour_by = "scDblFinder.score"))
+  print(plotPCA(subs, colour_by = "scDblFinder.class"))
+}
+```
+
+## Save data to RDS
+```{r}
+saveRDS(sce, file.path("output", "sce_TDP_01_preprocessing.rds"))
+```

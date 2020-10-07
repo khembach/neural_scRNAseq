@@ -49,3 +49,7 @@ Integration with Conos:
 - [Conos integration](organoid-06-conos-analysis.html)
 - [Conos group integration](organoid-06-group-integration-conos-analysis.html)
 
+
+We additionally sequences neural cultures at 223 days and performed a TDP-43 overexpression experiment (at 96 days):
+
+- [Preprocessing](TDP-01-preprocessing.html)
