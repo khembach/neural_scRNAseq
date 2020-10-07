@@ -1,0 +1,112 @@
+---
+title: "Quality control"
+author: "Katharina Hembach"
+date: "10/7/2020"
+output: 
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE)
+```
+
+### Load packages
+```{r, message = FALSE}
+library(scater)
+library(scales)
+library(viridis)
+```
+
+### Load sce
+```{r}
+sce <- readRDS(file.path("output", "sce_TDP_01_preprocessing.rds"))
+```
+
+We remove undetected genes and the doublets.
+```{r remove-doublets}
+dim(sce)
+sce <- sce[rowSums(counts(sce) > 0) > 0, ]
+dim(sce)
+# we remove the cells that were classified as doublets
+sce <- sce[,sce$scDblFinder.class == "singlet"]
+dim(sce)
+```
+
+## Quality control
+We compute cell-level QC.
+```{r, message = FALSE}
+(mito <- grep("MT-", rownames(sce), value = TRUE))
+sce <- addPerCellQC(sce, subsets = list(Mt = mito))
+# we compute the fraction of mitochondrial genes and the logit of it 
+sce$subsets_Mt_fraction <- (sce$subsets_Mt_percent + 0.001) /100
+sce$subsets_Mt_fraction_logit <- qlogis(sce$subsets_Mt_fraction + 0.001)
+# library size
+summary(sce$sum)
+# number of detected genes per cell
+summary(sce$detected)
+# percentage of counts that come from mitochondrial genes:
+summary(sce$subsets_Mt_percent)
+```
+
+### Diagnostic plots
+
+The number of counts per cell:
+```{r}
+plotColData(sce, x = "sample_id", y = "sum") + scale_y_log10()
+```
+
+The number of genes:
+```{r}
+plotColData(sce, x = "sample_id", y = "detected") + scale_y_log10() 
+```
+
+The percentage of mitochondrial genes:
+```{r}
+plotColData(sce, x = "sample_id", y = "subsets_Mt_percent")
+```
+
+We plot the total number of counts against the number of detected genes and color by the fraction of mitochondrial genes:
+```{r}
+cd <- data.frame(colData(sce))
+ggplot(cd, aes(x = sum, y = detected, color = subsets_Mt_fraction)) +
+  geom_point(alpha = 0.7) + 
+  geom_density_2d(color = "grey", bins = 6) +
+  scale_x_log10() +
+  scale_y_log10() +
+  facet_wrap(~sample_id) + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("sum of counts") + 
+  ylab("number of detected genes") + 
+  labs(color = "mitochondrial fraction") +
+  scale_color_viridis(trans = "logit", breaks = c(0.01, 0.1, 0.25, 0.5, 0.75))
+```
+
+We plot the total number of counts against the mitochondrial content. Well-behaved cells should have many expressed genes and a low fraction of mitochondrial genes. High mitochondrial content indicates empty or damaged cells. 
+```{r}
+ggplot(cd, aes(x = sum, y = subsets_Mt_fraction)) +
+  geom_point(color = "darkgrey", alpha = 0.3) + 
+  geom_density_2d(color = "lightblue") +
+  scale_x_log10() +
+  scale_y_continuous(trans = 'logit', 
+                     breaks = c(0.01, 0.05, 0.1, 0.2, 0.5, 0.75)) +
+  facet_wrap(~sample_id) + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("sum of counts") + 
+  ylab("logit(mitochondrial fraction)")
+```
+
+We plot the top 20 genes with highest expression. Mitochondrial genes, actin, ribosomal proteins or MALAT1 are examples of genes that are expected to have very high expression. 
+```{r, dev="png", message = FALSE}
+plotHighestExprs(sce, n = 20)
+```
+
+
+## Save data to RDS
+```{r}
+saveRDS(sce, file.path("output", "sce_TDP_02_quality_control.rds"))
+```

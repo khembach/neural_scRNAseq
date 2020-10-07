@@ -53,3 +53,4 @@ Integration with Conos:
 We additionally sequences neural cultures at 223 days and performed a TDP-43 overexpression experiment (at 96 days):
 
 - [Preprocessing](TDP-01-preprocessing.html)
+- [Quality control](TDP-02-quality_control.html)
