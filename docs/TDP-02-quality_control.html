@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Katharina Hembach" />
 
 
-<title>Home</title>
+<title>Quality control</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -258,6 +262,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -265,6 +332,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -308,7 +385,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Quality control</h1>
+<h4 class="author">Katharina Hembach</h4>
+<h4 class="date">10/7/2020</h4>
 
 </div>
 
@@ -336,7 +415,7 @@ $(document).ready(function () {
 <strong>Last updated:</strong> 2020-10-07
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -358,6 +437,66 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
 <p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it's best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200522code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200522)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200522code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200522)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
@@ -439,7 +578,6 @@ Ignored files:
     Ignored:    analysis/NSC-1-clustering_cache/
     Ignored:    analysis/NSC-2-annotation_cache/
     Ignored:    analysis/TDP-01-preprocessing_cache/
-    Ignored:    analysis/TDP-02-quality_control_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
     Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
@@ -508,7 +646,6 @@ Ignored files:
     Ignored:    output/sce_03_filtering_all_genes.rds
     Ignored:    output/sce_06-1-prepare-sce.rds
     Ignored:    output/sce_TDP_01_preprocessing.rds
-    Ignored:    output/sce_TDP_02_quality_control.rds
     Ignored:    output/sce_organoid-01-clustering.rds
     Ignored:    output/sce_preprocessing.rds
     Ignored:    output/so_04-group_integration.rds
@@ -564,7 +701,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in th
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML (<code>docs/index.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/TDP-02-quality_control.Rmd</code>) and HTML (<code>docs/TDP-02-quality_control.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -593,7 +730,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/6b396987d4aaead02f00b57a7bd9ff0546007cdb/analysis/index.Rmd" target="_blank">6b39698</a>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/6b396987d4aaead02f00b57a7bd9ff0546007cdb/analysis/TDP-02-quality_control.Rmd" target="_blank">6b39698</a>
 </td>
 <td>
 khembach
@@ -605,618 +742,6 @@ khembach
 quality control of TDP experiment
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/e6cb7c642def4422c31bc7e15a0ebedcdf3b1cda/docs/index.html" target="_blank">e6cb7c6</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/d4257298634791ccae8e144c1cb4184feb1004b0/analysis/index.Rmd" target="_blank">d425729</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-07
-</td>
-<td>
-preprocessing of new sequencing data
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/ff520aefa753dff305aab2255f2cfae85084232f/docs/index.html" target="_blank">ff520ae</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/f91df7bcab4cf89c5ed6dc14c87cccf175555083/analysis/index.Rmd" target="_blank">f91df7b</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-20
-</td>
-<td>
-cluster abundances of cell line and stage integration
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/efe6216759cb454049b69695d92de2d39ba28fe5/docs/index.html" target="_blank">efe6216</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/d1615eb6c0884c39c3704c88daf468074ec5a74b/analysis/index.Rmd" target="_blank">d1615eb</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-18
-</td>
-<td>
-integrate by cell line and stage
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/031fd4c05732f789c5dc8242d452161e1002d90c/docs/index.html" target="_blank">031fd4c</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/ec8eba65035fe2c56da727e15c960a43465f1359/analysis/index.Rmd" target="_blank">ec8eba6</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-16
-</td>
-<td>
-conos analysis with cell line integration
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/29d2b15cbb8a119d31f909c15cceb8602a215e1c/docs/index.html" target="_blank">29d2b15</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/dfbc9a87ba59b4e78b204b68536124a24f19bcb7/analysis/index.Rmd" target="_blank">dfbc9a8</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-11
-</td>
-<td>
-Conos analysis with different parameters and label propagation
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/600041014d85335fed74f39881de26b750a0a686/docs/index.html" target="_blank">6000410</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-09
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/88fccd1505e44a2d5fd5e16060bd50f1b3411f37/analysis/index.Rmd" target="_blank">88fccd1</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-09
-</td>
-<td>
-Prepare sce object for conos
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/947869a6d22b6f51ad90879c94508f10c9f1651e/docs/index.html" target="_blank">947869a</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/b93b07d596d4aff9a076829c30512766cdf87455/docs/index.html" target="_blank">b93b07d</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-02
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/043115f530696831ee46d91395e39ef00c26bd56/analysis/index.Rmd" target="_blank">043115f</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-02
-</td>
-<td>
-group organoid integration cluster abundances
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/b9603562404d94cfff7d0166693f6e0c36d6dcfa/docs/index.html" target="_blank">b960356</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-08-15
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/6405fad19256342fc9850e45caddfecfe3fc970b/docs/index.html" target="_blank">6405fad</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-08-14
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/638915fa4f8e11001cf1f113dfd8534778aa8561/analysis/index.Rmd" target="_blank">638915f</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-08-14
-</td>
-<td>
-organoid clustering
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/a1ebb78b453525afd0dfe7d1a4ef2bc273e3cc56/docs/index.html" target="_blank">a1ebb78</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-07-08
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/d8bd3397b3cf440d3c7ec628b677f7858c001011/analysis/index.Rmd" target="_blank">d8bd339</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-07-08
-</td>
-<td>
-NSC integration with NES from Lam et al.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/0afd60fadaa6239c9911a02709624f7fd1e96f25/docs/index.html" target="_blank">0afd60f</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-07-02
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/6d0742b9e3e10aed885ebd9b344e08b1c9c70671/analysis/index.Rmd" target="_blank">6d0742b</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-07-02
-</td>
-<td>
-wflow_publish(c(&quot;analysis/NSC-1-clustering.Rmd&quot;, &quot;analysis/NSC-2-annotation.Rmd&quot;,
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/index.html" target="_blank">06330b1</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-06-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/f349423edbc451916f37bad9b1fb160941f65399/analysis/index.Rmd" target="_blank">f349423</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-06-21
-</td>
-<td>
-regress out number of UMIs and perc mitochondrial features; cyclone
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/a4d0e04302b05ad6152378accb91e9c994394e42/docs/index.html" target="_blank">a4d0e04</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/97d5a52e05366f9053223a3c456d563d00891f5a/analysis/index.Rmd" target="_blank">97d5a52</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-29
-</td>
-<td>
-cluster analysis
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/a94efaa06c73e3bbbade733cc7a4f81c1e5f8f8f/docs/index.html" target="_blank">a94efaa</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/7f5c1f8969a92432bc9ea0065cd5d31bbccd3137/analysis/index.Rmd" target="_blank">7f5c1f8</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-29
-</td>
-<td>
-dimension reduction and clustering
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/6d822af9ff45e71aaae0b22865306f8d3e6b49ee/docs/index.html" target="_blank">6d822af</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/a7ced5960ae11be3e8967081abc689d3b9b21849/analysis/index.Rmd" target="_blank">a7ced59</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-28
-</td>
-<td>
-cell and gene filtering
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/1230f084e4ff4a62804f1043579a1e5872955e48/docs/index.html" target="_blank">1230f08</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-27
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/6be1a5aafda94cebab5b9d59dcf579d4011e825f/analysis/index.Rmd" target="_blank">6be1a5a</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-27
-</td>
-<td>
-rebuild without cache and SampleQC report
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/bb957e863e5efb7c321d4119303797396e632128/docs/index.html" target="_blank">bb957e8</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/4acc3c469ecb3c8952594c53fac61694178eaefd/analysis/index.Rmd" target="_blank">4acc3c4</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-26
-</td>
-<td>
-Link to preprocessing and QC
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/16fe492900d72fea08e421f85a4c2ccd3236fbe6/docs/index.html" target="_blank">16fe492</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/e4c9cd13410f593acca709a278cf6feb318e33a4/analysis/index.Rmd" target="_blank">e4c9cd1</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-22
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -1224,60 +749,189 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<p>This analysis includes following steps:</p>
-<ul>
-<li><a href="01-preprocessing.html">Preprocessing</a></li>
-<li><a href="02-quality_control.html">Quality control</a>
-<ul>
-<li><a href="02.1-SampleQC.html">SampleQC</a></li>
-</ul></li>
-<li><a href="03-filtering.html">Filtering</a></li>
-</ul>
-<p>Analysis of the two NSC samples:</p>
-<ul>
-<li><a href="NSC-1-clustering.html">NSC clustering</a></li>
-<li><a href="NSC-2-annotation.html">NSC annotation</a></li>
-</ul>
-<p>Integrated analysis of all 6 samples:</p>
-<ul>
-<li><a href="04-clustering.html">Clustering</a>
-<ul>
-<li><a href="04.1-cell_cycle.html">Cell cycle</a></li>
-</ul></li>
-<li><a href="05-annotation.html">Annotation</a></li>
-</ul>
-<p>Integration with Lam et al. 2019. Neuroepithelial stem (NES) cells:</p>
-<ul>
-<li><a href="Lam-01-NSC_integration.html">Integration</a></li>
-<li><a href="Lam-02-NSC_annotation.html">Cluster comparison</a></li>
-</ul>
-<p>Integration with Kanton et al. 2019. Cerebral organoids:</p>
-<ul>
-<li><a href="organoid-01-clustering.html">Clustering</a></li>
-<li><a href="organoid-02-integration.html">DR without integration</a>
-<ul>
-<li><a href="organoid-03-cluster_analysis.html">Cluster abundances</a></li>
-</ul></li>
-<li><a href="organoid-04-group_integration.html">Group integration</a>
-<ul>
-<li><a href="organoid-05-group_integration_cluster_analysis.html">Cluster abundances</a></li>
-</ul></li>
-<li><a href="organoid-04-stage_integration.html">Stage integration</a>
-<ul>
-<li><a href="organoid-05-stage_integration_cluster_analysis.html">Cluster abundances</a></li>
-</ul></li>
-</ul>
-<p>Integration with Conos:</p>
-<ul>
-<li><a href="organoid-06-1-prepare-sce.html">Preprocessing of sce object</a></li>
-<li><a href="organoid-06-conos-analysis.html">Conos integration</a></li>
-<li><a href="organoid-06-group-integration-conos-analysis.html">Conos group integration</a></li>
-</ul>
-<p>We additionally sequences neural cultures at 223 days and performed a TDP-43 overexpression experiment (at 96 days):</p>
-<ul>
-<li><a href="TDP-01-preprocessing.html">Preprocessing</a></li>
-<li><a href="TDP-02-quality_control.html">Quality control</a></li>
-</ul>
+<div id="load-packages" class="section level3">
+<h3>Load packages</h3>
+<pre class="r"><code>library(scater)
+library(scales)
+library(viridis)</code></pre>
+</div>
+<div id="load-sce" class="section level3">
+<h3>Load sce</h3>
+<pre class="r"><code>sce &lt;- readRDS(file.path(&quot;output&quot;, &quot;sce_TDP_01_preprocessing.rds&quot;))</code></pre>
+<p>We remove undetected genes and the doublets.</p>
+<pre class="r"><code>dim(sce)</code></pre>
+<pre><code>[1] 21587 83921</code></pre>
+<pre class="r"><code>sce &lt;- sce[rowSums(counts(sce) &gt; 0) &gt; 0, ]
+dim(sce)</code></pre>
+<pre><code>[1] 19741 83921</code></pre>
+<pre class="r"><code># we remove the cells that were classified as doublets
+sce &lt;- sce[,sce$scDblFinder.class == &quot;singlet&quot;]
+dim(sce)</code></pre>
+<pre><code>[1] 19741 73013</code></pre>
+</div>
+<div id="quality-control" class="section level2">
+<h2>Quality control</h2>
+<p>We compute cell-level QC.</p>
+<pre class="r"><code>(mito &lt;- grep(&quot;MT-&quot;, rownames(sce), value = TRUE))</code></pre>
+<pre><code> [1] &quot;ENSG00000210049.MT-TF&quot;   &quot;ENSG00000211459.MT-RNR1&quot;
+ [3] &quot;ENSG00000210077.MT-TV&quot;   &quot;ENSG00000210082.MT-RNR2&quot;
+ [5] &quot;ENSG00000209082.MT-TL1&quot;  &quot;ENSG00000198888.MT-ND1&quot; 
+ [7] &quot;ENSG00000210100.MT-TI&quot;   &quot;ENSG00000210107.MT-TQ&quot;  
+ [9] &quot;ENSG00000210112.MT-TM&quot;   &quot;ENSG00000198763.MT-ND2&quot; 
+[11] &quot;ENSG00000210117.MT-TW&quot;   &quot;ENSG00000210127.MT-TA&quot;  
+[13] &quot;ENSG00000210135.MT-TN&quot;   &quot;ENSG00000210140.MT-TC&quot;  
+[15] &quot;ENSG00000210144.MT-TY&quot;   &quot;ENSG00000198804.MT-CO1&quot; 
+[17] &quot;ENSG00000210151.MT-TS1&quot;  &quot;ENSG00000210154.MT-TD&quot;  
+[19] &quot;ENSG00000198712.MT-CO2&quot;  &quot;ENSG00000210156.MT-TK&quot;  
+[21] &quot;ENSG00000228253.MT-ATP8&quot; &quot;ENSG00000198899.MT-ATP6&quot;
+[23] &quot;ENSG00000198938.MT-CO3&quot;  &quot;ENSG00000210164.MT-TG&quot;  
+[25] &quot;ENSG00000198840.MT-ND3&quot;  &quot;ENSG00000210174.MT-TR&quot;  
+[27] &quot;ENSG00000212907.MT-ND4L&quot; &quot;ENSG00000198886.MT-ND4&quot; 
+[29] &quot;ENSG00000210176.MT-TH&quot;   &quot;ENSG00000210184.MT-TS2&quot; 
+[31] &quot;ENSG00000210191.MT-TL2&quot;  &quot;ENSG00000198786.MT-ND5&quot; 
+[33] &quot;ENSG00000198695.MT-ND6&quot;  &quot;ENSG00000210194.MT-TE&quot;  
+[35] &quot;ENSG00000198727.MT-CYB&quot;  &quot;ENSG00000210195.MT-TT&quot;  
+[37] &quot;ENSG00000210196.MT-TP&quot;  </code></pre>
+<pre class="r"><code>sce &lt;- addPerCellQC(sce, subsets = list(Mt = mito))
+# we compute the fraction of mitochondrial genes and the logit of it 
+sce$subsets_Mt_fraction &lt;- (sce$subsets_Mt_percent + 0.001) /100
+sce$subsets_Mt_fraction_logit &lt;- qlogis(sce$subsets_Mt_fraction + 0.001)
+# library size
+summary(sce$sum)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    500    1581    9255   12331   18719  118668 </code></pre>
+<pre class="r"><code># number of detected genes per cell
+summary(sce$detected)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+     41     956    3351    3216    4896    9786 </code></pre>
+<pre class="r"><code># percentage of counts that come from mitochondrial genes:
+summary(sce$subsets_Mt_percent)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.000   3.047   5.022   6.703   7.819  98.577 </code></pre>
+<div id="diagnostic-plots" class="section level3">
+<h3>Diagnostic plots</h3>
+<p>The number of counts per cell:</p>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;) + scale_y_log10()</code></pre>
+<p><img src="figure/TDP-02-quality_control.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The number of genes:</p>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;) + scale_y_log10() </code></pre>
+<p><img src="figure/TDP-02-quality_control.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The percentage of mitochondrial genes:</p>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;subsets_Mt_percent&quot;)</code></pre>
+<p><img src="figure/TDP-02-quality_control.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We plot the total number of counts against the number of detected genes and color by the fraction of mitochondrial genes:</p>
+<pre class="r"><code>cd &lt;- data.frame(colData(sce))
+ggplot(cd, aes(x = sum, y = detected, color = subsets_Mt_fraction)) +
+  geom_point(alpha = 0.7) + 
+  geom_density_2d(color = &quot;grey&quot;, bins = 6) +
+  scale_x_log10() +
+  scale_y_log10() +
+  facet_wrap(~sample_id) + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab(&quot;sum of counts&quot;) + 
+  ylab(&quot;number of detected genes&quot;) + 
+  labs(color = &quot;mitochondrial fraction&quot;) +
+  scale_color_viridis(trans = &quot;logit&quot;, breaks = c(0.01, 0.1, 0.25, 0.5, 0.75))</code></pre>
+<p><img src="figure/TDP-02-quality_control.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We plot the total number of counts against the mitochondrial content. Well-behaved cells should have many expressed genes and a low fraction of mitochondrial genes. High mitochondrial content indicates empty or damaged cells.</p>
+<pre class="r"><code>ggplot(cd, aes(x = sum, y = subsets_Mt_fraction)) +
+  geom_point(color = &quot;darkgrey&quot;, alpha = 0.3) + 
+  geom_density_2d(color = &quot;lightblue&quot;) +
+  scale_x_log10() +
+  scale_y_continuous(trans = &#39;logit&#39;, 
+                     breaks = c(0.01, 0.05, 0.1, 0.2, 0.5, 0.75)) +
+  facet_wrap(~sample_id) + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab(&quot;sum of counts&quot;) + 
+  ylab(&quot;logit(mitochondrial fraction)&quot;)</code></pre>
+<p><img src="figure/TDP-02-quality_control.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We plot the top 20 genes with highest expression. Mitochondrial genes, actin, ribosomal proteins or MALAT1 are examples of genes that are expected to have very high expression.</p>
+<pre class="r"><code>plotHighestExprs(sce, n = 20)</code></pre>
+<pre><code>Warning in sweep(sub_mat, 2, colSums2(exprs_mat), &quot;/&quot;, check.margin = FALSE): &#39;check.margin&#39; is ignored when &#39;x&#39; is a DelayedArray object or
+  derivative</code></pre>
+<p><img src="figure/TDP-02-quality_control.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="save-data-to-rds" class="section level2">
+<h2>Save data to RDS</h2>
+<pre class="r"><code>saveRDS(sce, file.path(&quot;output&quot;, &quot;sce_TDP_02_quality_control.rds&quot;))</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.0 (2020-04-24)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 16.04.6 LTS
+
+Matrix products: default
+BLAS:   /usr/local/R/R-4.0.0/lib/libRblas.so
+LAPACK: /usr/local/R/R-4.0.0/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] parallel  stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] HDF5Array_1.16.1            rhdf5_2.32.2               
+ [3] viridis_0.5.1               viridisLite_0.3.0          
+ [5] scales_1.1.1                scater_1.16.2              
+ [7] ggplot2_3.3.2               SingleCellExperiment_1.10.1
+ [9] SummarizedExperiment_1.18.1 DelayedArray_0.14.0        
+[11] matrixStats_0.56.0          Biobase_2.48.0             
+[13] GenomicRanges_1.40.0        GenomeInfoDb_1.24.2        
+[15] IRanges_2.22.2              S4Vectors_0.26.1           
+[17] BiocGenerics_0.34.0         workflowr_1.6.2            
+
+loaded via a namespace (and not attached):
+ [1] BiocSingular_1.4.0        DelayedMatrixStats_1.10.1
+ [3] GenomeInfoDbData_1.2.3    vipor_0.4.5              
+ [5] yaml_2.2.1                pillar_1.4.6             
+ [7] backports_1.1.9           lattice_0.20-41          
+ [9] glue_1.4.2                beachmat_2.4.0           
+[11] digest_0.6.25             promises_1.1.1           
+[13] XVector_0.28.0            colorspace_1.4-1         
+[15] cowplot_1.0.0             htmltools_0.5.0          
+[17] httpuv_1.5.4              Matrix_1.2-18            
+[19] pkgconfig_2.0.3           zlibbioc_1.34.0          
+[21] purrr_0.3.4               whisker_0.4              
+[23] later_1.1.0.1             BiocParallel_1.22.0      
+[25] git2r_0.27.1              tibble_3.0.3             
+[27] generics_0.0.2            farver_2.0.3             
+[29] ellipsis_0.3.1            withr_2.2.0              
+[31] magrittr_1.5              crayon_1.3.4             
+[33] evaluate_0.14             fs_1.4.2                 
+[35] MASS_7.3-51.6             beeswarm_0.2.3           
+[37] tools_4.0.0               lifecycle_0.2.0          
+[39] stringr_1.4.0             Rhdf5lib_1.10.0          
+[41] munsell_0.5.0             irlba_2.3.3              
+[43] isoband_0.2.2             compiler_4.0.0           
+[45] rsvd_1.0.3                rlang_0.4.7              
+[47] grid_4.0.0                RCurl_1.98-1.2           
+[49] BiocNeighbors_1.6.0       bitops_1.0-6             
+[51] labeling_0.3              rmarkdown_2.3            
+[53] gtable_0.3.0              codetools_0.2-16         
+[55] R6_2.4.1                  gridExtra_2.3            
+[57] knitr_1.29                dplyr_1.0.2              
+[59] rprojroot_1.3-2           stringi_1.4.6            
+[61] ggbeeswarm_0.6.0          Rcpp_1.0.5               
+[63] vctrs_0.3.4               tidyselect_1.1.0         
+[65] xfun_0.15                </code></pre>
+</div>
+</div>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -1293,6 +947,8 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
+</div>
+</div>
 
 </div>
 
@@ -1325,6 +981,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
