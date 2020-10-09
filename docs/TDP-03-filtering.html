@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-10-07
+<strong>Last updated:</strong> 2020-10-09
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreee5acfd97b84338c7e756e8bb659a44343b6383b4targetblanke5acfd9a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/e5acfd97b84338c7e756e8bb659a44343b6383b4" target="_blank">e5acfd9</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreea653577d70f0ecc95ea8f791717ae50267d58e28targetblanka653577a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/a653577d70f0ecc95ea8f791717ae50267d58e28" target="_blank">a653577</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreee5acfd97b84338c7e756e8bb659a44343b6383b4targetblanke5acfd9a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreea653577d70f0ecc95ea8f791717ae50267d58e28targetblanka653577a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/e5acfd97b84338c7e756e8bb659a44343b6383b4" target="_blank">e5acfd9</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/a653577d70f0ecc95ea8f791717ae50267d58e28" target="_blank">a653577</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -648,6 +648,8 @@ Ignored files:
     Ignored:    output/sce_06-1-prepare-sce.rds
     Ignored:    output/sce_TDP_01_preprocessing.rds
     Ignored:    output/sce_TDP_02_quality_control.rds
+    Ignored:    output/sce_TDP_03_filtering.rds
+    Ignored:    output/sce_TDP_03_filtering_all_genes.rds
     Ignored:    output/sce_organoid-01-clustering.rds
     Ignored:    output/sce_preprocessing.rds
     Ignored:    output/so_04-group_integration.rds
@@ -732,6 +734,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a653577d70f0ecc95ea8f791717ae50267d58e28/analysis/TDP-03-filtering.Rmd" target="_blank">a653577</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-09
+</td>
+<td>
+manual cutoffs for cell filtering
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/5a50966b6a494a660c2401240f8f6ae5ca28676f/docs/TDP-03-filtering.html" target="_blank">5a50966</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/e5acfd97b84338c7e756e8bb659a44343b6383b4/analysis/TDP-03-filtering.Rmd" target="_blank">e5acfd9</a>
 </td>
 <td>
@@ -791,16 +827,55 @@ FALSE  TRUE
 <pre class="r"><code>## Plot the metrics and highlight the discarded cells
 plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;, colour_by = &quot;discard&quot;) + 
   scale_y_log10()</code></pre>
-<p><img src="figure/TDP-03-filtering.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/TDP-03-filtering.Rmd/outlier-identification-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;, colour_by = &quot;discard&quot;) + 
   scale_y_log10()</code></pre>
-<p><img src="figure/TDP-03-filtering.Rmd/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/TDP-03-filtering.Rmd/outlier-identification-2.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;subsets_Mt_percent&quot;, 
             colour_by = &quot;discard&quot;)</code></pre>
-<p><img src="figure/TDP-03-filtering.Rmd/unnamed-chunk-3-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/TDP-03-filtering.Rmd/outlier-identification-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We decided to additionally filter the cells in the TDP experiment samples. We use the same cutoffs as for the 96 days old neural cultures from the first experiment. We also remove the cell population with low number of UMIs and detected genes from the old neural cultures (223 days).</p>
+<pre class="r"><code>## filter the cells with less than 5000 UMIs in the TDP experiment samples
+tdp_samples &lt;- c(&quot;TDP2wON&quot;, &quot;TDP4wOFF&quot;, &quot;TDP4wONa&quot;, &quot;TDP4wONb&quot;)
+colData(sce)$manual_discard_sum &lt;- colData(sce)$sum &lt; 5000 &amp; 
+  colData(sce)$sample_id %in% tdp_samples
+## filter the cells with less than 2500 detected genes
+colData(sce)$manual_discard_detected &lt;- colData(sce)$detected &lt; 2500 &amp; 
+  colData(sce)$sample_id %in% tdp_samples
+
+## day 223
+colData(sce)$manual_discard_sum &lt;- colData(sce)$manual_discard_sum | 
+  colData(sce)$sum &lt; 2000 &amp; 
+  colData(sce)$sample_id %in% c(&quot;NC223a&quot;, &quot;NC223b&quot;)
+colData(sce)$manual_discard_detected &lt;- colData(sce)$manual_discard_detected |
+  colData(sce)$detected &lt; 1500 &amp; 
+  colData(sce)$sample_id %in% c(&quot;NC223a&quot;, &quot;NC223b&quot;)
+
+## highlight all manually discarded cells
+colData(sce)$manual_discard &lt;- colData(sce)$manual_discard_sum |
+                                   colData(sce)$manual_discard_detected
+plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;, colour_by = &quot;manual_discard&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="figure/TDP-03-filtering.Rmd/manual-filtering-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;, colour_by = &quot;manual_discard&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="figure/TDP-03-filtering.Rmd/manual-filtering-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## highlight all discarded cells
+colData(sce)$discard &lt;- colData(sce)$manual_discard |
+                                   colData(sce)$discard
+plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;, colour_by = &quot;discard&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="figure/TDP-03-filtering.Rmd/manual-filtering-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;, colour_by = &quot;discard&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="figure/TDP-03-filtering.Rmd/manual-filtering-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;subsets_Mt_percent&quot;, 
+            colour_by = &quot;discard&quot;)</code></pre>
+<p><img src="figure/TDP-03-filtering.Rmd/manual-filtering-5.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Plot the library size against the number of detected genes before and after filtering.</p>
 <pre class="r"><code>cd &lt;- colData(sce)
 layout(matrix(1:12, nrow = 3, byrow = TRUE))
+
 for (i in levels(sce$sample_id)) {
   tmp &lt;- cd[cd$sample_id == i,]
   heatscatter(tmp$sum, tmp$detected, log = &quot;xy&quot;, 
@@ -810,7 +885,44 @@ for (i in levels(sce$sample_id)) {
               log = &quot;xy&quot;, main = paste0(i, &quot;-filtered&quot;), xlab = &quot;total counts&quot;, 
               ylab = &quot;detected genes&quot;)    
 }</code></pre>
-<p><img src="figure/TDP-03-filtering.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/TDP-03-filtering.Rmd/unnamed-chunk-3-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5a50966b6a494a660c2401240f8f6ae5ca28676f/docs/figure/TDP-03-filtering.Rmd/unnamed-chunk-3-1.png" target="_blank">5a50966</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="removal-of-outlier-cells" class="section level2">
 <h2>Removal of outlier cells</h2>
@@ -823,18 +935,18 @@ print(rbind(
     &quot;%&quot; = round(nr_fil / nr * 100, digits = 0)))</code></pre>
 <pre><code>           NC223a NC223b TDP2wON TDP4wOFF TDP4wONa TDP4wONb
 unfiltered  12647  14221   11030     8758    14112    12245
-filtered    11958  13530    8515     6767    11272     9727
-%              95     95      77       77       80       79</code></pre>
+filtered     5350   7363    7406     6077     9665     7722
+%              42     52      67       69       68       63</code></pre>
 <pre class="r"><code>## discard the outlier cells
 dim(sce)</code></pre>
 <pre><code>[1] 19741 73013</code></pre>
 <pre class="r"><code>sce &lt;- sce[,!cd$discard]
 dim(sce)</code></pre>
-<pre><code>[1] 19741 61769</code></pre>
+<pre><code>[1] 19741 43583</code></pre>
 <pre class="r"><code>## we filter genes and require &gt; 1 count in at least 20 cells
 sce_filtered &lt;- sce[rowSums(counts(sce) &gt; 1) &gt;= 20, ]
 dim(sce_filtered)</code></pre>
-<pre><code>[1] 13986 61769</code></pre>
+<pre><code>[1] 13968 43583</code></pre>
 </div>
 <div id="save-data-to-rds" class="section level2">
 <h2>Save data to RDS</h2>
