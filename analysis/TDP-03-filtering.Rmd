@@ -32,7 +32,7 @@ sce <- readRDS(file.path("output", "sce_TDP_02_quality_control.rds"))
 
 Based on the QC metrics, we now identify outlier cells:
 
-```{r}
+```{r outlier-identification}
 cols <- c("sum", "detected", "subsets_Mt_percent")
 log <- c(TRUE, TRUE, FALSE)
 type <- c("both", "both", "higher")
@@ -60,10 +60,50 @@ plotColData(sce, x = "sample_id", y = "subsets_Mt_percent",
 ```
 
 
+We decided to additionally filter the cells in the TDP experiment samples. We use the same cutoffs as for the 96 days old neural cultures from the first experiment. We also remove the cell population with low number of UMIs and detected genes from the old neural cultures (223 days).
+
+```{r manual-filtering}
+## filter the cells with less than 5000 UMIs in the TDP experiment samples
+tdp_samples <- c("TDP2wON", "TDP4wOFF", "TDP4wONa", "TDP4wONb")
+colData(sce)$manual_discard_sum <- colData(sce)$sum < 5000 & 
+  colData(sce)$sample_id %in% tdp_samples
+## filter the cells with less than 2500 detected genes
+colData(sce)$manual_discard_detected <- colData(sce)$detected < 2500 & 
+  colData(sce)$sample_id %in% tdp_samples
+
+## day 223
+colData(sce)$manual_discard_sum <- colData(sce)$manual_discard_sum | 
+  colData(sce)$sum < 2000 & 
+  colData(sce)$sample_id %in% c("NC223a", "NC223b")
+colData(sce)$manual_discard_detected <- colData(sce)$manual_discard_detected |
+  colData(sce)$detected < 1500 & 
+  colData(sce)$sample_id %in% c("NC223a", "NC223b")
+
+## highlight all manually discarded cells
+colData(sce)$manual_discard <- colData(sce)$manual_discard_sum |
+                                   colData(sce)$manual_discard_detected
+plotColData(sce, x = "sample_id", y = "sum", colour_by = "manual_discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "detected", colour_by = "manual_discard") + 
+  scale_y_log10()
+
+## highlight all discarded cells
+colData(sce)$discard <- colData(sce)$manual_discard |
+                                   colData(sce)$discard
+plotColData(sce, x = "sample_id", y = "detected", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "sum", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "subsets_Mt_percent", 
+            colour_by = "discard")
+```
+
+
 Plot the library size against the number of detected genes before and after filtering.
 ```{r, fig.width=12, fig.height = 10}
 cd <- colData(sce)
 layout(matrix(1:12, nrow = 3, byrow = TRUE))
+
 for (i in levels(sce$sample_id)) {
   tmp <- cd[cd$sample_id == i,]
   heatscatter(tmp$sum, tmp$detected, log = "xy", 
@@ -79,7 +119,7 @@ for (i in levels(sce$sample_id)) {
 ## Removal of outlier cells
 We remove the outlier cells and filter the genes:
 
-```{r}
+```{r discard-outliers}
 ## summary of the kept cells
 nr <- table(cd$sample_id)
 nr_fil <- table(cd$sample_id[!cd$discard])
