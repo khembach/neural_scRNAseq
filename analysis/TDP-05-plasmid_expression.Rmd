@@ -1,0 +1,193 @@
+---
+title: "Plasmid expression"
+author: "Katharina Hembach"
+date: "10/14/2020"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+
+### Load packages
+
+```{r, message = FALSE}
+library(cowplot)
+library(ggplot2)
+library(Seurat)
+library(SingleCellExperiment)
+library(tximport)
+```
+
+## Load data
+
+We combine the quantification of the plasmid transcript and the endogenous TDP-43 with the CellRanger count matrix.
+
+```{r read-sce}
+sce <- readRDS(file.path("output", "sce_TDP_03_filtering.rds"))
+## we only keep the four samples of the TDP-43 experiment
+sample_ids <- c("TDP2wON", "TDP4wOFF", "TDP4wONa", "TDP4wONb")
+sce <- sce[,colData(sce)$sample_id %in% sample_ids]
+sce$sample_id <- droplevels(sce$sample_id)
+```
+
+```{r read-alevin}
+samples <- c("no1_Neural_cuture_d_96_TDP-43-HA_4w_DOXoff", 
+             "no2_Neural_cuture_d_96_TDP-43-HA_2w_DOXON",
+             "no3_Neural_cuture_d_96_TDP-43-HA_4w_DOXONa",
+             "no4_Neural_cuture_d_96_TDP-43-HA_4w_DOXONb")
+txi <- matrix(NA, nrow = 2)
+for (i in 1:4) {
+  fi <- file.path("data", "Sep2020", "alevin_TDP43", samples[i], 
+                     "alevin/quants_mat.gz")
+
+  # import alevin quants
+  a <- tximport(fi, type="alevin")$counts
+  
+  ## match the alevin and CellRanger cell IDs
+  colnames(a) <- paste0(colnames(a), "-1.", sample_ids[i])
+  txi <- cbind(txi, a)
+}
+txi <- txi[,colnames(txi) != ""]
+rownames(txi) <- c("ENSG00000120948.TARDBP-alevin", "TDP43-HA")
+```
+We add the alevin counts to the CellRanger matrix.
+```{r combine-counts}
+## add two new rows to counts matrix and replace the counts for matching 
+## barcodes with the alevin counts
+counts <- rbind(counts(sce), DelayedArray(matrix(0, nrow = 2, 
+                                                 ncol = ncol(counts(sce)))))
+rownames(counts) <- c(rownames(sce), rownames(txi))
+## match the barcodes
+m <- match(colnames(txi), colnames(sce))
+counts[rownames(txi),m[!is.na(m)]] <- txi[,which(!is.na(m))]
+
+so <- CreateSeuratObject(
+    counts = counts,
+    meta.data = data.frame(colData(sce)),
+    project = "TDP_experiment")
+```
+
+## Normalization
+```{r normalization, warning = FALSE}
+# split by sample
+cells_by_sample <- split(colnames(sce), sce$sample_id)
+so <- lapply(cells_by_sample, function(i) subset(so, cells = i))
+
+## log normalize the data using a scaling factor of 10000
+so <- lapply(so, NormalizeData, verbose = FALSE, scale.factor = 10000, 
+             normalization.method = "LogNormalize")
+```
+
+We merge the normalized and data of the six samples into a combined Seurat object and compute variable features.
+```{r merge-samples}
+so_list <- so
+## merge the individial Seurat objects and conserve the normalized and scaled data
+so <- merge(so[[1]], y = so[2:length(so)], project = "TDP_experiment", 
+            merge.data = TRUE)
+```
+
+```{r variable-features-scaling}
+so <- FindVariableFeatures(so, nfeatures = 2000, 
+    selection.method = "vst", verbose = FALSE)
+so <- ScaleData(so, verbose = FALSE, vars.to.regress = c("sum", 
+                                                         "subsets_Mt_percent"))
+```
+
+
+## Dimension reduction 
+
+We perform dimension reduction with t-SNE and UMAP based on PCA results.
+```{r dimension-reduction, warning = FALSE}
+so <- RunPCA(so, npcs = 30, verbose = FALSE)
+so <- RunTSNE(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, do.fast = TRUE, verbose = FALSE)
+so <- RunUMAP(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, verbose = FALSE)
+```
+
+### Plot PCA results
+
+```{r, fig.width = 12, fig.height = 8}
+# top genes that are associated with the first two PCs
+VizDimLoadings(so, dims = 1:2, reduction = "pca")
+```
+
+```{r, fig.width = 10, fig.height = 8}
+## PCA plot 
+DimPlot(so, reduction = "pca", group.by = "sample_id")
+```
+
+```{r}
+# elbow plot with the ranking of PCs based on the % of variance explained
+ElbowPlot(so, ndims = 30)
+```
+
+
+## Clustering
+
+We cluster the cells using the reduced PCA dimensions.
+
+```{r clustering, warning = FALSE}
+so <- FindNeighbors(so, reduction = "pca", dims = seq_len(20), verbose = FALSE)
+for (res in c(0.2, 0.4, 0.8, 1))
+    so <- FindClusters(so, resolution = res, random.seed = 1, verbose = FALSE)
+```
+
+
+## Dimension reduction plots 
+
+We plot the dimension reduction (DR) and color by sample, group and cluster ID
+```{r dr-plots, fig.width = 10, fig.height = 9, warning = FALSE}
+thm <- theme(aspect.ratio = 1, legend.position = "none")
+ps <- lapply(c("sample_id", "ident"), function(u) {
+    p1 <- DimPlot(so, reduction = "tsne", group.by = u) + thm
+    p2 <- DimPlot(so, reduction = "umap", group.by = u)
+    lgd <- get_legend(p2)
+    p2 <- p2 + thm
+    list(p1, p2, lgd)
+    plot_grid(p1, p2, lgd, nrow = 1,
+        rel_widths = c(1, 1, 0.5))
+})
+plot_grid(plotlist = ps, ncol = 1)
+```
+
+
+## QC on DR plots {.tabset}
+
+```{r DR-QC, results = "asis", fig.width = 12}
+cs <- sample(colnames(so), 1e4) ## subsample cells
+.plot_features <- function(so, dr, id) {
+    FeaturePlot(so, cells = cs, features = id, reduction = dr, pt.size = 0.4, 
+                cols = c("grey", "blue")) +
+        guides(col = guide_colourbar()) +
+        theme_void() + theme(aspect.ratio = 1)
+}
+ids <- c("sum", "detected", "subsets_Mt_percent", "ENSG00000120948.TARDBP", 
+         "ENSG00000120948.TARDBP-alevin", "TDP43-HA")
+for (id in ids) {
+    cat("### ", id, "\n")
+    p1 <- .plot_features(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none") + ggtitle("tSNE")
+    p2 <- .plot_features(so, "umap", id) + theme(legend.position = "none") + 
+      ggtitle("UMAP")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
+
+## Save Seurat object to RDS
+
+```{r}
+saveRDS(so, file.path("output", "so_TDP_05_plasmid_expression.rds"))
+```
+
