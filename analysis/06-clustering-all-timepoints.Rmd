@@ -1,0 +1,173 @@
+---
+title: "Clustering of timeline experiment"
+author: "Katharina Hembach"
+date: "10/15/2020"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+### Load packages
+```{r, message = FALSE}
+library(BiocParallel)
+library(ggplot2)
+library(dplyr)
+library(cowplot)
+library(ggplot2)
+library(Seurat)
+library(SingleCellExperiment)
+library(future)
+```
+
+## Load data
+
+```{r read-sce}
+## first dataset
+sce <- readRDS(file.path("output", "sce_03_filtering_all_genes.rds"))
+## second dataset
+sce2 <- readRDS(file.path("output", "sce_TDP_03_filtering_all_genes.rds"))
+## we only keep the two samples of 223days old neural cultures
+sce2 <- sce2[,colData(sce2)$sample_id %in% c("NC223a", "NC223b")]
+sce2$sample_id <- droplevels(sce2$sample_id)
+sce2$group_id <- "D223"
+```
+We merge the samples from the two data sets into a Seurat object.
+```{r merge-so}
+so <- CreateSeuratObject(
+    counts = counts(sce),
+    meta.data = data.frame(colData(sce)),
+    project = "time_line")
+
+so2 <- CreateSeuratObject(
+    counts = counts(sce2),
+    meta.data = data.frame(colData(sce2)),
+    project = "d223")
+
+## merge the two Seurat objects
+so <- merge(so, y = so2, add.cell.ids = c("time_line", "d223"), 
+            project = "neural_cultures", merge.data = TRUE)
+
+so$group_id <- factor(so$group_id, levels = c("P22", "D52", "D96", "D223"))
+```
+
+
+## Normalization
+```{r normalization, warning = FALSE}
+# split by sample
+cells_by_sample <- split(colnames(so), so$sample_id)
+so <- lapply(cells_by_sample, function(i) subset(so, cells = i))
+
+## log normalize the data using a scaling factor of 10000
+so <- lapply(so, NormalizeData, verbose = FALSE, scale.factor = 10000, 
+             normalization.method = "LogNormalize")
+```
+
+We merge the normalized and data of the six samples into a combined Seurat object and compute variable features.
+```{r merge-samples}
+## merge the individual Seurat objects and conserve the normalized and scaled data
+so <- merge(so[[1]], y = so[2:length(so)], project = "NC_timeline", 
+            merge.data = TRUE)
+```
+
+```{r variable-features-scaling}
+so <- FindVariableFeatures(so, nfeatures = 2000, 
+    selection.method = "vst", verbose = FALSE)
+so <- ScaleData(so, verbose = FALSE, vars.to.regress = c("sum", 
+                                                         "subsets_Mt_percent"))
+```
+
+
+## Dimension reduction 
+
+We perform dimension reduction with t-SNE and UMAP based on PCA results.
+```{r dimension-reduction, warning = FALSE}
+so <- RunPCA(so, npcs = 30, verbose = FALSE)
+so <- RunTSNE(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, do.fast = TRUE, verbose = FALSE)
+so <- RunUMAP(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, verbose = FALSE)
+```
+
+### Plot PCA results
+
+```{r, fig.width = 12, fig.height = 8}
+# top genes that are associated with the first two PCs
+VizDimLoadings(so, dims = 1:2, reduction = "pca")
+```
+
+```{r, fig.width = 10, fig.height = 8}
+## PCA plot 
+DimPlot(so, reduction = "pca", group.by = "sample_id")
+```
+
+```{r}
+# elbow plot with the ranking of PCs based on the % of variance explained
+ElbowPlot(so, ndims = 30)
+```
+
+
+## Clustering
+
+We cluster the cells using the reduced PCA dimensions.
+
+```{r clustering, warning = FALSE}
+so <- FindNeighbors(so, reduction = "pca", dims = seq_len(20), verbose = FALSE)
+for (res in c(0.2, 0.4, 0.8, 1))
+    so <- FindClusters(so, resolution = res, random.seed = 1, verbose = FALSE)
+```
+
+
+## Dimension reduction plots 
+
+We plot the dimension reduction (DR) and color by sample, group and cluster ID
+```{r dr-plots, fig.width = 10, fig.height = 9, warning = FALSE}
+thm <- theme(aspect.ratio = 1, legend.position = "none")
+ps <- lapply(c("sample_id", "group_id", "ident"), function(u) {
+    p1 <- DimPlot(so, reduction = "tsne", group.by = u) + thm
+    p2 <- DimPlot(so, reduction = "umap", group.by = u)
+    lgd <- get_legend(p2)
+    p2 <- p2 + thm
+    list(p1, p2, lgd)
+    plot_grid(p1, p2, lgd, nrow = 1,
+        rel_widths = c(1, 1, 0.5))
+})
+plot_grid(plotlist = ps, ncol = 1)
+```
+
+
+## QC on DR plots {.tabset}
+
+```{r DR-QC, results = "asis", fig.width = 12}
+cs <- sample(colnames(so), 1e4) ## subsample cells
+.plot_features <- function(so, dr, id) {
+    FeaturePlot(so, cells = cs, features = id, reduction = dr, pt.size = 0.4, 
+                cols = c("grey", "blue")) +
+        guides(col = guide_colourbar()) +
+        theme_void() + theme(aspect.ratio = 1)
+}
+ids <- c("sum", "detected", "subsets_Mt_percent")
+for (id in ids) {
+    cat("### ", id, "\n")
+    p1 <- .plot_features(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none") + ggtitle("tSNE")
+    p2 <- .plot_features(so, "umap", id) + theme(legend.position = "none") + 
+      ggtitle("UMAP")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
+
+## Save Seurat object to RDS
+
+```{r}
+saveRDS(so, file.path("output", "so_06-clustering_all_timepoints.rds"))
+```

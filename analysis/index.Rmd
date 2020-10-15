@@ -55,8 +55,13 @@ We additionally sequenced neural cultures at 223 days and performed a TDP-43 ove
 - [Preprocessing](TDP-01-preprocessing.html)
 - [Quality control](TDP-02-quality_control.html)
 - [Filtering](TDP-03-filtering.html)
-- [Clustering](TDP-04-clustering.html)
+- [Clustering (no integration)](TDP-04-clustering.html)
 
 We quantified the transcript encoded by the plasmid and the endogenous TDP-43 with alevin and include the counts in the analysis.
 
-- [Clustering](TDP-05-plasmid_expression.html)
+- [Clustering (no integration)](TDP-05-plasmid_expression.html)
+
+
+We combine the D223 samples with the P22, D56 and D96 samples:
+
+- [Clustering (no integration)](06-clustering-all-timepoints.html)
