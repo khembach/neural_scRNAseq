@@ -364,16 +364,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreee6e671087695fd00922d98528ff5a300c66eb448targetblanke6e6710a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/e6e671087695fd00922d98528ff5a300c66eb448" target="_blank">e6e6710</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6d7e3c30fbc1dc0792cc59a27c3ad47900745537targetblank6d7e3c3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6d7e3c30fbc1dc0792cc59a27c3ad47900745537" target="_blank">6d7e3c3</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreee6e671087695fd00922d98528ff5a300c66eb448targetblanke6e6710a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6d7e3c30fbc1dc0792cc59a27c3ad47900745537targetblank6d7e3c3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/e6e671087695fd00922d98528ff5a300c66eb448" target="_blank">e6e6710</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6d7e3c30fbc1dc0792cc59a27c3ad47900745537" target="_blank">6d7e3c3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -443,6 +443,7 @@ Ignored files:
     Ignored:    analysis/TDP-02-quality_control_cache/
     Ignored:    analysis/TDP-03-filtering_cache/
     Ignored:    analysis/TDP-04-clustering_cache/
+    Ignored:    analysis/TDP-05-00-filtering-plasmid-QC_cache/
     Ignored:    analysis/TDP-05-plasmid_expression_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
@@ -539,7 +540,6 @@ Untracked files:
     Untracked:  Rplots_largeViz.pdf
     Untracked:  Rplots_separate.pdf
     Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
-    Untracked:  analysis/TDP-05-00-filtering-plasmid-QC.Rmd
     Untracked:  analysis/additional_filtering.Rmd
     Untracked:  analysis/additional_filtering_clustering.Rmd
     Untracked:  analysis/organoid-01-1-qualtiy-control.Rmd
@@ -603,6 +603,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/6d7e3c30fbc1dc0792cc59a27c3ad47900745537/analysis/index.Rmd" target="_blank">6d7e3c3</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-15
+</td>
+<td>
+TDP-43-HA expression in filtered cells
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/3c1f2aaacd8856bcde7b777e8a97e7e3224dd4f0/docs/index.html" target="_blank">3c1f2aa</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-15
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1433,6 +1467,7 @@ Start workflowr project.
 </ul>
 <p>We quantified the transcript encoded by the plasmid and the endogenous TDP-43 with alevin and include the counts in the analysis.</p>
 <ul>
+<li><a href="TDP-05-00-filtering-plasmid-QC.html">Filtering and TDP-43 HA expression</a></li>
 <li><a href="TDP-05-plasmid_expression.html">Clustering (no integration)</a></li>
 </ul>
 <p>We combine the D223 samples with the P22, D56 and D96 samples:</p>

@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Katharina Hembach" />
+
+<meta name="date" content="2020-10-15" />
+
+<title>TDP-43-HA expression in unfiltered cells</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">neural_scRNAseq</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/khembach/neural_scRNAseq">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">TDP-43-HA expression in unfiltered cells</h1>
+<h4 class="author">Katharina Hembach</h4>
+<h4 class="date">10/15/2020</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-10-15
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it's best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200522code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200522)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200522code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200522)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6d7e3c30fbc1dc0792cc59a27c3ad47900745537targetblank6d7e3c3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6d7e3c30fbc1dc0792cc59a27c3ad47900745537" target="_blank">6d7e3c3</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6d7e3c30fbc1dc0792cc59a27c3ad47900745537targetblank6d7e3c3a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6d7e3c30fbc1dc0792cc59a27c3ad47900745537" target="_blank">6d7e3c3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    ._.DS_Store
+    Ignored:    ._Rplots.pdf
+    Ignored:    ._Rplots_largeViz.pdf
+    Ignored:    ._Rplots_separate.pdf
+    Ignored:    .__workflowr.yml
+    Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/._.DS_Store
+    Ignored:    analysis/._01-preprocessing.Rmd
+    Ignored:    analysis/._01-preprocessing.html
+    Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._03-filtering.Rmd
+    Ignored:    analysis/._04-clustering.Rmd
+    Ignored:    analysis/._04-clustering.knit.md
+    Ignored:    analysis/._04.1-cell_cycle.Rmd
+    Ignored:    analysis/._05-annotation.Rmd
+    Ignored:    analysis/._Lam-0-NSC_no_integration.Rmd
+    Ignored:    analysis/._Lam-01-NSC_integration.Rmd
+    Ignored:    analysis/._Lam-02-NSC_annotation.Rmd
+    Ignored:    analysis/._NSC-1-clustering.Rmd
+    Ignored:    analysis/._NSC-2-annotation.Rmd
+    Ignored:    analysis/.__site.yml
+    Ignored:    analysis/._additional_filtering.Rmd
+    Ignored:    analysis/._additional_filtering_clustering.Rmd
+    Ignored:    analysis/._index.Rmd
+    Ignored:    analysis/._organoid-01-1-qualtiy-control.Rmd
+    Ignored:    analysis/._organoid-01-clustering.Rmd
+    Ignored:    analysis/._organoid-02-integration.Rmd
+    Ignored:    analysis/._organoid-03-cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-04-group_integration.Rmd
+    Ignored:    analysis/._organoid-04-stage_integration.Rmd
+    Ignored:    analysis/._organoid-05-group_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-05-stage_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-06-1-prepare-sce.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-Seurat.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-function.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-06-group-integration-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-07-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-07-group-integration-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-08-conos-comparison.Rmd
+    Ignored:    analysis/._organoid-0x-sample_integration.Rmd
+    Ignored:    analysis/01-preprocessing_cache/
+    Ignored:    analysis/02-1-SampleQC_cache/
+    Ignored:    analysis/02-quality_control_cache/
+    Ignored:    analysis/02.1-SampleQC_cache/
+    Ignored:    analysis/03-filtering_cache/
+    Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/04.1-cell_cycle_cache/
+    Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/06-clustering-all-timepoints_cache/
+    Ignored:    analysis/Lam-01-NSC_integration_cache/
+    Ignored:    analysis/Lam-02-NSC_annotation_cache/
+    Ignored:    analysis/NSC-1-clustering_cache/
+    Ignored:    analysis/NSC-2-annotation_cache/
+    Ignored:    analysis/TDP-01-preprocessing_cache/
+    Ignored:    analysis/TDP-02-quality_control_cache/
+    Ignored:    analysis/TDP-03-filtering_cache/
+    Ignored:    analysis/TDP-04-clustering_cache/
+    Ignored:    analysis/TDP-05-plasmid_expression_cache/
+    Ignored:    analysis/additional_filtering_cache/
+    Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/figure/
+    Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
+    Ignored:    analysis/organoid-01-clustering_cache/
+    Ignored:    analysis/organoid-02-integration_cache/
+    Ignored:    analysis/organoid-03-cluster_analysis_cache/
+    Ignored:    analysis/organoid-04-group_integration_cache/
+    Ignored:    analysis/organoid-04-stage_integration_cache/
+    Ignored:    analysis/organoid-05-group_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-05-stage_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_test_cache/
+    Ignored:    analysis/organoid-06-group-integration-conos-analysis_cache/
+    Ignored:    analysis/organoid-07-conos-visualization_cache/
+    Ignored:    analysis/organoid-07-group-integration-conos-visualization_cache/
+    Ignored:    analysis/organoid-08-conos-comparison_cache/
+    Ignored:    analysis/organoid-0x-sample_integration_cache/
+    Ignored:    analysis/sample5_QC_cache/
+    Ignored:    data/.DS_Store
+    Ignored:    data/._.DS_Store
+    Ignored:    data/._.smbdeleteAAA17ed8b4b
+    Ignored:    data/._Lam_figure2_markers.R
+    Ignored:    data/._known_NSC_markers.R
+    Ignored:    data/._known_cell_type_markers.R
+    Ignored:    data/._metadata.csv
+    Ignored:    data/data_sushi/
+    Ignored:    data/filtered_feature_matrices/
+    Ignored:    output/.DS_Store
+    Ignored:    output/._.DS_Store
+    Ignored:    output/._NSC_cluster1_marker_genes.txt
+    Ignored:    output/._organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/Lam-01-clustering.rds
+    Ignored:    output/NSC_1_clustering.rds
+    Ignored:    output/NSC_cluster1_marker_genes.txt
+    Ignored:    output/NSC_cluster2_marker_genes.txt
+    Ignored:    output/NSC_cluster3_marker_genes.txt
+    Ignored:    output/NSC_cluster4_marker_genes.txt
+    Ignored:    output/NSC_cluster5_marker_genes.txt
+    Ignored:    output/NSC_cluster6_marker_genes.txt
+    Ignored:    output/NSC_cluster7_marker_genes.txt
+    Ignored:    output/additional_filtering.rds
+    Ignored:    output/conos/
+    Ignored:    output/conos_organoid-06-conos-analysis.rds
+    Ignored:    output/conos_organoid-06-group-integration-conos-analysis.rds
+    Ignored:    output/figures/
+    Ignored:    output/organoid_integration_cluster10_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster11_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster12_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster13_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster14_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster15_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster16_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster17_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster2_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster3_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster4_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster5_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster6_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster7_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster8_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster9_marker_genes.txt
+    Ignored:    output/sce_01_preprocessing.rds
+    Ignored:    output/sce_02_quality_control.rds
+    Ignored:    output/sce_03_filtering.rds
+    Ignored:    output/sce_03_filtering_all_genes.rds
+    Ignored:    output/sce_06-1-prepare-sce.rds
+    Ignored:    output/sce_TDP_01_preprocessing.rds
+    Ignored:    output/sce_TDP_02_quality_control.rds
+    Ignored:    output/sce_TDP_03_filtering.rds
+    Ignored:    output/sce_TDP_03_filtering_all_genes.rds
+    Ignored:    output/sce_organoid-01-clustering.rds
+    Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04-group_integration.rds
+    Ignored:    output/so_04-stage_integration.rds
+    Ignored:    output/so_04_1_cell_cycle.rds
+    Ignored:    output/so_04_clustering.rds
+    Ignored:    output/so_06-clustering_all_timepoints.rds
+    Ignored:    output/so_0x-sample_integration.rds
+    Ignored:    output/so_TDP_04_clustering.rds
+    Ignored:    output/so_TDP_05_plasmid_expression.rds
+    Ignored:    output/so_additional_filtering_clustering.rds
+    Ignored:    output/so_integrated_organoid-02-integration.rds
+    Ignored:    output/so_merged_organoid-02-integration.rds
+    Ignored:    output/so_organoid-01-clustering.rds
+    Ignored:    output/so_sample_organoid-01-clustering.rds
+    Ignored:    scripts/._bu_Rcode.R
+    Ignored:    scripts/._plasmid_expression.sh
+    Ignored:    scripts/._prepare_salmon_transcripts.R
+
+Untracked files:
+    Untracked:  Rplots.pdf
+    Untracked:  Rplots_largeViz.pdf
+    Untracked:  Rplots_separate.pdf
+    Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
+    Untracked:  analysis/additional_filtering.Rmd
+    Untracked:  analysis/additional_filtering_clustering.Rmd
+    Untracked:  analysis/organoid-01-1-qualtiy-control.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-Seurat.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-function.Rmd
+    Untracked:  analysis/organoid-07-conos-visualization.Rmd
+    Untracked:  analysis/organoid-07-group-integration-conos-visualization.Rmd
+    Untracked:  analysis/organoid-08-conos-comparison.Rmd
+    Untracked:  analysis/organoid-0x-sample_integration.Rmd
+    Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
+    Untracked:  data/Kanton_et_al/
+    Untracked:  data/Lam_et_al/
+    Untracked:  data/Sep2020/
+    Untracked:  data/reference/
+    Untracked:  scripts/bu_Rcode.R
+
+Unstaged changes:
+    Modified:   analysis/05-annotation.Rmd
+    Modified:   analysis/Lam-02-NSC_annotation.Rmd
+    Modified:   analysis/TDP-04-clustering.Rmd
+    Modified:   analysis/_site.yml
+    Modified:   analysis/organoid-02-integration.Rmd
+    Modified:   analysis/organoid-04-group_integration.Rmd
+    Modified:   analysis/organoid-06-conos-analysis.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/TDP-05-00-filtering-plasmid-QC.Rmd</code>) and HTML (<code>docs/TDP-05-00-filtering-plasmid-QC.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/6d7e3c30fbc1dc0792cc59a27c3ad47900745537/analysis/TDP-05-00-filtering-plasmid-QC.Rmd" target="_blank">6d7e3c3</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-15
+</td>
+<td>
+TDP-43-HA expression in filtered cells
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-packages" class="section level3">
+<h3>Load packages</h3>
+<pre class="r"><code>library(cowplot)
+library(ggplot2)
+library(Seurat)
+library(SingleCellExperiment)
+library(tximport)
+library(scater)
+library(LSD)
+library(dplyr)
+library(ggridges)</code></pre>
+</div>
+<div id="load-data" class="section level2">
+<h2>Load data</h2>
+<p>We combine the quantification of the plasmid transcript and the endogenous TDP-43 with the CellRanger count matrix.</p>
+<pre class="r"><code>sce &lt;- readRDS(file.path(&quot;output&quot;, &quot;sce_TDP_02_quality_control.rds&quot;))
+## we only keep the four samples of the TDP-43 experiment
+sample_ids &lt;- c(&quot;TDP2wON&quot;, &quot;TDP4wOFF&quot;, &quot;TDP4wONa&quot;, &quot;TDP4wONb&quot;)
+sce &lt;- sce[,colData(sce)$sample_id %in% sample_ids]
+sce$sample_id &lt;- droplevels(sce$sample_id)</code></pre>
+<pre class="r"><code>samples &lt;- c(&quot;no1_Neural_cuture_d_96_TDP-43-HA_4w_DOXoff&quot;, 
+             &quot;no2_Neural_cuture_d_96_TDP-43-HA_2w_DOXON&quot;,
+             &quot;no3_Neural_cuture_d_96_TDP-43-HA_4w_DOXONa&quot;,
+             &quot;no4_Neural_cuture_d_96_TDP-43-HA_4w_DOXONb&quot;)
+txi &lt;- matrix(NA, nrow = 2)
+for (i in 1:4) {
+  fi &lt;- file.path(&quot;data&quot;, &quot;Sep2020&quot;, &quot;alevin_TDP43&quot;, samples[i], 
+                     &quot;alevin/quants_mat.gz&quot;)
+
+  # import alevin quants
+  a &lt;- tximport(fi, type=&quot;alevin&quot;)$counts
+  
+  ## match the alevin and CellRanger cell IDs
+  colnames(a) &lt;- paste0(colnames(a), &quot;-1.&quot;, sample_ids[i])
+  txi &lt;- cbind(txi, a)
+}
+txi &lt;- txi[,colnames(txi) != &quot;&quot;]
+rownames(txi) &lt;- c(&quot;ENSG00000120948.TARDBP-alevin&quot;, &quot;TDP43-HA&quot;)</code></pre>
+<p>We add the alevin counts to the CellRanger matrix.</p>
+<pre class="r"><code>## add two new rows to counts matrix and replace the counts for matching 
+## barcodes with the alevin counts
+counts &lt;- rbind(counts(sce), DelayedArray(matrix(0, nrow = 2, 
+                                                 ncol = ncol(counts(sce)))))
+rownames(counts) &lt;- c(rownames(sce), rownames(txi))
+## match the barcodes
+m &lt;- match(colnames(txi), colnames(sce))
+counts[rownames(txi),m[!is.na(m)]] &lt;- txi[,which(!is.na(m))]
+
+# adjust rowData
+rd &lt;- rbind(rowData(sce), data.frame(ensembl_id = c(&quot;ENSG00000120948&quot;, &quot;&quot;), 
+                                     symbol = c(&quot;TARDBP_alevin&quot;, &quot;TDP43-HA&quot;)))
+rownames(rd) &lt;- rownames(counts)
+
+sce &lt;- SingleCellExperiment(list(counts=counts),
+                            colData = colData(sce),
+                            rowData = rd)</code></pre>
+</div>
+<div id="identification-of-outlier-cells" class="section level2">
+<h2>Identification of outlier cells</h2>
+<p>Based on the QC metrics, we now identify outlier cells:</p>
+<pre class="r"><code>cols &lt;- c(&quot;sum&quot;, &quot;detected&quot;, &quot;subsets_Mt_percent&quot;)
+log &lt;- c(TRUE, TRUE, FALSE)
+type &lt;- c(&quot;both&quot;, &quot;both&quot;, &quot;higher&quot;)
+
+drop_cols &lt;- paste0(cols, &quot;_drop&quot;)
+for (i in seq_along(cols))
+    colData(sce)[[drop_cols[i]]] &lt;- isOutlier(sce[[cols[i]]], 
+        nmads = 3, type = type[i], log = log[i], batch = sce$sample_id)
+
+# Overlap of outlier cells from two metrics
+sapply(drop_cols, function(i) 
+    sapply(drop_cols, function(j)
+        sum(sce[[i]] &amp; sce[[j]])))</code></pre>
+<pre><code>                        sum_drop detected_drop subsets_Mt_percent_drop
+sum_drop                    3644          3644                     221
+detected_drop               3644          7701                     686
+subsets_Mt_percent_drop      221           686                    2849</code></pre>
+<pre class="r"><code>colData(sce)$discard &lt;- rowSums(data.frame(colData(sce)[,drop_cols])) &gt; 0
+table(colData(sce)$discard)</code></pre>
+<pre><code>
+FALSE  TRUE 
+36281  9864 </code></pre>
+<pre class="r"><code>## Plot the metrics and highlight the discarded cells
+plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;, colour_by = &quot;discard&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/outlier-identification-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;, colour_by = &quot;discard&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/outlier-identification-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;subsets_Mt_percent&quot;, 
+            colour_by = &quot;discard&quot;)</code></pre>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/outlier-identification-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We decided to additionally filter the cells in the TDP experiment samples. We use the same cutoffs as for the 96 days old neural cultures from the first experiment. We also remove the cell population with low number of UMIs and detected genes from the old neural cultures (223 days).</p>
+<pre class="r"><code>## filter the cells with less than 5000 UMIs in the TDP experiment samples
+tdp_samples &lt;- c(&quot;TDP2wON&quot;, &quot;TDP4wOFF&quot;, &quot;TDP4wONa&quot;, &quot;TDP4wONb&quot;)
+colData(sce)$manual_discard_sum &lt;- colData(sce)$sum &lt; 5000 &amp; 
+  colData(sce)$sample_id %in% tdp_samples
+## filter the cells with less than 2500 detected genes
+colData(sce)$manual_discard_detected &lt;- colData(sce)$detected &lt; 2500 &amp; 
+  colData(sce)$sample_id %in% tdp_samples
+
+## day 223
+colData(sce)$manual_discard_sum &lt;- colData(sce)$manual_discard_sum | 
+  colData(sce)$sum &lt; 2000 &amp; 
+  colData(sce)$sample_id %in% c(&quot;NC223a&quot;, &quot;NC223b&quot;)
+colData(sce)$manual_discard_detected &lt;- colData(sce)$manual_discard_detected |
+  colData(sce)$detected &lt; 1500 &amp; 
+  colData(sce)$sample_id %in% c(&quot;NC223a&quot;, &quot;NC223b&quot;)
+
+## highlight all manually discarded cells
+colData(sce)$manual_discard &lt;- colData(sce)$manual_discard_sum |
+                                   colData(sce)$manual_discard_detected
+plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;, colour_by = &quot;manual_discard&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/manual-filtering-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;, colour_by = &quot;manual_discard&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/manual-filtering-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## highlight all discarded cells
+colData(sce)$discard &lt;- colData(sce)$manual_discard |
+                                   colData(sce)$discard
+plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;, colour_by = &quot;discard&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/manual-filtering-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;, colour_by = &quot;discard&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/manual-filtering-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;subsets_Mt_percent&quot;, 
+            colour_by = &quot;discard&quot;)</code></pre>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/manual-filtering-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>TDP-43 expression per cell.</p>
+<pre class="r"><code>gene_ids &lt;- c(&quot;ENSG00000120948.TARDBP&quot;, &quot;ENSG00000120948.TARDBP-alevin&quot;, &quot;TDP43-HA&quot;)
+
+plotExpression(sce, gene_ids,
+               x = &quot;sample_id&quot;, exprs_values = &quot;counts&quot;, 
+               colour = &quot;discard&quot;)</code></pre>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/TDP-expression-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotExpression(sce, gene_ids,
+               x = &quot;discard&quot;, exprs_values = &quot;counts&quot;, 
+               colour = &quot;sample_id&quot;)</code></pre>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/TDP-expression-2.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="ridge-plot" class="section level3 tabset">
+<h3>Ridge plot</h3>
+<p>Do the filtered cells express TDP-43 and TDP-43-HA?</p>
+<pre class="r"><code>df &lt;- colData(sce) %&gt;% as.data.frame() %&gt;%
+  dplyr::select(sample_id, discard, detected, sum, subsets_Mt_detected, 
+                discard) %&gt;%
+  dplyr::mutate(TARDBP = as.vector(counts(sce[&quot;ENSG00000120948.TARDBP&quot;])),
+                TARDBP_alevin = as.vector(counts(sce[&quot;ENSG00000120948.TARDBP-alevin&quot;])),
+                TDP43_HA = as.vector(counts(sce[&quot;TDP43-HA&quot;]))) 
+
+for (g in c(&quot;TARDBP&quot;, &quot;TARDBP_alevin&quot;, &quot;TDP43_HA&quot;)){
+  cat(&quot;#### &quot;, g, &quot;\n&quot;)
+  p &lt;- df %&gt;%
+    ggplot(aes(x = get(g), y = sample_id, fill = discard)) +
+    geom_density_ridges(panel_scaling = FALSE, show.legend = TRUE, 
+                        alpha = 0.5, color = &quot;white&quot;, scale = 0.95, 
+                        rel_min_height = 0.01) +
+    # facet_wrap(~group_id, nrow = 1) + 
+    theme_ridges(center_axis_labels = TRUE) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    xlab(g) + ggtitle(&quot;all cells&quot;)
+  print(p)
+  
+  ## number of cells with gene count &gt; 0
+  table(df$sample_id, df[,g] &gt; 0)
+  
+   p &lt;- df %&gt;% dplyr::filter(get(g) &gt; 0) %&gt;%
+    ggplot(aes(x = get(g), y = sample_id, fill = discard)) +
+    geom_density_ridges(panel_scaling = FALSE, show.legend = TRUE, 
+                        alpha = 0.5, color = &quot;white&quot;, scale = 0.95, 
+                        rel_min_height = 0.01) +
+    # facet_wrap(~group_id, nrow = 1) + 
+    theme_ridges(center_axis_labels = TRUE) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    xlab(g) + ggtitle(paste0(&quot;cells with &quot;, g, &quot; count &gt; 0&quot;))
+
+  print(p)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="tardbp" class="section level4">
+<h4>TARDBP</h4>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-1.png" width="1152" style="display: block; margin: auto;" /><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tardbp_alevin" class="section level4">
+<h4>TARDBP_alevin</h4>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-3.png" width="1152" style="display: block; margin: auto;" /><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-4.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tdp43_ha" class="section level4">
+<h4>TDP43_HA</h4>
+<p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-5.png" width="1152" style="display: block; margin: auto;" /><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.0 (2020-04-24)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 16.04.6 LTS
+
+Matrix products: default
+BLAS:   /usr/local/R/R-4.0.0/lib/libRblas.so
+LAPACK: /usr/local/R/R-4.0.0/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] parallel  stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] HDF5Array_1.16.1            rhdf5_2.32.2               
+ [3] ggridges_0.5.2              dplyr_1.0.2                
+ [5] LSD_4.1-0                   scater_1.16.2              
+ [7] tximport_1.16.1             SingleCellExperiment_1.10.1
+ [9] SummarizedExperiment_1.18.1 DelayedArray_0.14.0        
+[11] matrixStats_0.56.0          Biobase_2.48.0             
+[13] GenomicRanges_1.40.0        GenomeInfoDb_1.24.2        
+[15] IRanges_2.22.2              S4Vectors_0.26.1           
+[17] BiocGenerics_0.34.0         Seurat_3.1.5               
+[19] ggplot2_3.3.2               cowplot_1.0.0              
+[21] workflowr_1.6.2            
+
+loaded via a namespace (and not attached):
+  [1] Rtsne_0.15                ggbeeswarm_0.6.0         
+  [3] colorspace_1.4-1          ellipsis_0.3.1           
+  [5] rprojroot_1.3-2           XVector_0.28.0           
+  [7] BiocNeighbors_1.6.0       fs_1.4.2                 
+  [9] farver_2.0.3              leiden_0.3.3             
+ [11] listenv_0.8.0             ggrepel_0.8.2            
+ [13] codetools_0.2-16          splines_4.0.0            
+ [15] knitr_1.29                jsonlite_1.7.0           
+ [17] ica_1.0-2                 cluster_2.1.0            
+ [19] png_0.1-7                 uwot_0.1.8               
+ [21] sctransform_0.2.1         compiler_4.0.0           
+ [23] httr_1.4.1                backports_1.1.9          
+ [25] Matrix_1.2-18             lazyeval_0.2.2           
+ [27] later_1.1.0.1             BiocSingular_1.4.0       
+ [29] htmltools_0.5.0           tools_4.0.0              
+ [31] rsvd_1.0.3                igraph_1.2.5             
+ [33] gtable_0.3.0              glue_1.4.2               
+ [35] GenomeInfoDbData_1.2.3    RANN_2.6.1               
+ [37] reshape2_1.4.4            rappdirs_0.3.1           
+ [39] Rcpp_1.0.5                vctrs_0.3.4              
+ [41] ape_5.4                   nlme_3.1-148             
+ [43] DelayedMatrixStats_1.10.1 lmtest_0.9-37            
+ [45] xfun_0.15                 stringr_1.4.0            
+ [47] globals_0.12.5            lifecycle_0.2.0          
+ [49] irlba_2.3.3               future_1.17.0            
+ [51] MASS_7.3-51.6             zlibbioc_1.34.0          
+ [53] zoo_1.8-8                 scales_1.1.1             
+ [55] promises_1.1.1            RColorBrewer_1.1-2       
+ [57] yaml_2.2.1                reticulate_1.16          
+ [59] pbapply_1.4-2             gridExtra_2.3            
+ [61] stringi_1.4.6             BiocParallel_1.22.0      
+ [63] rlang_0.4.7               pkgconfig_2.0.3          
+ [65] bitops_1.0-6              evaluate_0.14            
+ [67] lattice_0.20-41           Rhdf5lib_1.10.0          
+ [69] ROCR_1.0-11               purrr_0.3.4              
+ [71] labeling_0.3              patchwork_1.0.1          
+ [73] htmlwidgets_1.5.1         tidyselect_1.1.0         
+ [75] RcppAnnoy_0.0.16          plyr_1.8.6               
+ [77] magrittr_1.5              R6_2.4.1                 
+ [79] generics_0.0.2            pillar_1.4.6             
+ [81] whisker_0.4               withr_2.2.0              
+ [83] fitdistrplus_1.1-1        survival_3.2-3           
+ [85] RCurl_1.98-1.2            tibble_3.0.3             
+ [87] future.apply_1.6.0        tsne_0.1-3               
+ [89] crayon_1.3.4              KernSmooth_2.23-17       
+ [91] plotly_4.9.2.1            rmarkdown_2.3            
+ [93] viridis_0.5.1             grid_4.0.0               
+ [95] data.table_1.12.8         git2r_0.27.1             
+ [97] digest_0.6.25             tidyr_1.1.0              
+ [99] httpuv_1.5.4              munsell_0.5.0            
+[101] beeswarm_0.2.3            viridisLite_0.3.0        
+[103] vipor_0.4.5              </code></pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
