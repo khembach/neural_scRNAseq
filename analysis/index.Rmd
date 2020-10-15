@@ -59,6 +59,7 @@ We additionally sequenced neural cultures at 223 days and performed a TDP-43 ove
 
 We quantified the transcript encoded by the plasmid and the endogenous TDP-43 with alevin and include the counts in the analysis.
 
+- [Filtering and TDP-43 HA expression](TDP-05-00-filtering-plasmid-QC.html)
 - [Clustering (no integration)](TDP-05-plasmid_expression.html)
 
 

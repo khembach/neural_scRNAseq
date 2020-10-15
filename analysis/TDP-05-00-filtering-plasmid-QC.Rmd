@@ -1,0 +1,210 @@
+---
+title: "TDP-43-HA expression in unfiltered cells"
+author: "Katharina Hembach"
+date: "10/15/2020"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+
+### Load packages
+
+```{r, message = FALSE}
+library(cowplot)
+library(ggplot2)
+library(Seurat)
+library(SingleCellExperiment)
+library(tximport)
+library(scater)
+library(LSD)
+library(dplyr)
+library(ggridges)
+```
+
+## Load data
+
+We combine the quantification of the plasmid transcript and the endogenous TDP-43 with the CellRanger count matrix.
+
+```{r read-sce}
+sce <- readRDS(file.path("output", "sce_TDP_02_quality_control.rds"))
+## we only keep the four samples of the TDP-43 experiment
+sample_ids <- c("TDP2wON", "TDP4wOFF", "TDP4wONa", "TDP4wONb")
+sce <- sce[,colData(sce)$sample_id %in% sample_ids]
+sce$sample_id <- droplevels(sce$sample_id)
+```
+
+```{r read-alevin}
+samples <- c("no1_Neural_cuture_d_96_TDP-43-HA_4w_DOXoff", 
+             "no2_Neural_cuture_d_96_TDP-43-HA_2w_DOXON",
+             "no3_Neural_cuture_d_96_TDP-43-HA_4w_DOXONa",
+             "no4_Neural_cuture_d_96_TDP-43-HA_4w_DOXONb")
+txi <- matrix(NA, nrow = 2)
+for (i in 1:4) {
+  fi <- file.path("data", "Sep2020", "alevin_TDP43", samples[i], 
+                     "alevin/quants_mat.gz")
+
+  # import alevin quants
+  a <- tximport(fi, type="alevin")$counts
+  
+  ## match the alevin and CellRanger cell IDs
+  colnames(a) <- paste0(colnames(a), "-1.", sample_ids[i])
+  txi <- cbind(txi, a)
+}
+txi <- txi[,colnames(txi) != ""]
+rownames(txi) <- c("ENSG00000120948.TARDBP-alevin", "TDP43-HA")
+```
+We add the alevin counts to the CellRanger matrix.
+```{r combine-counts}
+## add two new rows to counts matrix and replace the counts for matching 
+## barcodes with the alevin counts
+counts <- rbind(counts(sce), DelayedArray(matrix(0, nrow = 2, 
+                                                 ncol = ncol(counts(sce)))))
+rownames(counts) <- c(rownames(sce), rownames(txi))
+## match the barcodes
+m <- match(colnames(txi), colnames(sce))
+counts[rownames(txi),m[!is.na(m)]] <- txi[,which(!is.na(m))]
+
+# adjust rowData
+rd <- rbind(rowData(sce), data.frame(ensembl_id = c("ENSG00000120948", ""), 
+                                     symbol = c("TARDBP_alevin", "TDP43-HA")))
+rownames(rd) <- rownames(counts)
+
+sce <- SingleCellExperiment(list(counts=counts),
+                            colData = colData(sce),
+                            rowData = rd)
+```
+
+
+## Identification of outlier cells
+
+Based on the QC metrics, we now identify outlier cells:
+
+```{r outlier-identification}
+cols <- c("sum", "detected", "subsets_Mt_percent")
+log <- c(TRUE, TRUE, FALSE)
+type <- c("both", "both", "higher")
+
+drop_cols <- paste0(cols, "_drop")
+for (i in seq_along(cols))
+    colData(sce)[[drop_cols[i]]] <- isOutlier(sce[[cols[i]]], 
+        nmads = 3, type = type[i], log = log[i], batch = sce$sample_id)
+
+# Overlap of outlier cells from two metrics
+sapply(drop_cols, function(i) 
+    sapply(drop_cols, function(j)
+        sum(sce[[i]] & sce[[j]])))
+
+colData(sce)$discard <- rowSums(data.frame(colData(sce)[,drop_cols])) > 0
+table(colData(sce)$discard)
+
+## Plot the metrics and highlight the discarded cells
+plotColData(sce, x = "sample_id", y = "sum", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "detected", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "subsets_Mt_percent", 
+            colour_by = "discard")
+```
+
+
+We decided to additionally filter the cells in the TDP experiment samples. We use the same cutoffs as for the 96 days old neural cultures from the first experiment. We also remove the cell population with low number of UMIs and detected genes from the old neural cultures (223 days).
+
+```{r manual-filtering}
+## filter the cells with less than 5000 UMIs in the TDP experiment samples
+tdp_samples <- c("TDP2wON", "TDP4wOFF", "TDP4wONa", "TDP4wONb")
+colData(sce)$manual_discard_sum <- colData(sce)$sum < 5000 & 
+  colData(sce)$sample_id %in% tdp_samples
+## filter the cells with less than 2500 detected genes
+colData(sce)$manual_discard_detected <- colData(sce)$detected < 2500 & 
+  colData(sce)$sample_id %in% tdp_samples
+
+## day 223
+colData(sce)$manual_discard_sum <- colData(sce)$manual_discard_sum | 
+  colData(sce)$sum < 2000 & 
+  colData(sce)$sample_id %in% c("NC223a", "NC223b")
+colData(sce)$manual_discard_detected <- colData(sce)$manual_discard_detected |
+  colData(sce)$detected < 1500 & 
+  colData(sce)$sample_id %in% c("NC223a", "NC223b")
+
+## highlight all manually discarded cells
+colData(sce)$manual_discard <- colData(sce)$manual_discard_sum |
+                                   colData(sce)$manual_discard_detected
+plotColData(sce, x = "sample_id", y = "sum", colour_by = "manual_discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "detected", colour_by = "manual_discard") + 
+  scale_y_log10()
+
+## highlight all discarded cells
+colData(sce)$discard <- colData(sce)$manual_discard |
+                                   colData(sce)$discard
+plotColData(sce, x = "sample_id", y = "detected", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "sum", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "subsets_Mt_percent", 
+            colour_by = "discard")
+```
+
+
+TDP-43 expression per cell.
+```{r TDP-expression}
+gene_ids <- c("ENSG00000120948.TARDBP", "ENSG00000120948.TARDBP-alevin", "TDP43-HA")
+
+plotExpression(sce, gene_ids,
+               x = "sample_id", exprs_values = "counts", 
+               colour = "discard")
+
+plotExpression(sce, gene_ids,
+               x = "discard", exprs_values = "counts", 
+               colour = "sample_id")
+```
+
+### Ridge plot {.tabset}
+
+Do the filtered cells express TDP-43 and TDP-43-HA?
+```{r ridge-plot, results = "asis", fig.width = 12}
+df <- colData(sce) %>% as.data.frame() %>%
+  dplyr::select(sample_id, discard, detected, sum, subsets_Mt_detected, 
+                discard) %>%
+  dplyr::mutate(TARDBP = as.vector(counts(sce["ENSG00000120948.TARDBP"])),
+                TARDBP_alevin = as.vector(counts(sce["ENSG00000120948.TARDBP-alevin"])),
+                TDP43_HA = as.vector(counts(sce["TDP43-HA"]))) 
+
+for (g in c("TARDBP", "TARDBP_alevin", "TDP43_HA")){
+  cat("#### ", g, "\n")
+  p <- df %>%
+    ggplot(aes(x = get(g), y = sample_id, fill = discard)) +
+    geom_density_ridges(panel_scaling = FALSE, show.legend = TRUE, 
+                        alpha = 0.5, color = "white", scale = 0.95, 
+                        rel_min_height = 0.01) +
+    # facet_wrap(~group_id, nrow = 1) + 
+    theme_ridges(center_axis_labels = TRUE) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    xlab(g) + ggtitle("all cells")
+  print(p)
+  
+  ## number of cells with gene count > 0
+  table(df$sample_id, df[,g] > 0)
+  
+   p <- df %>% dplyr::filter(get(g) > 0) %>%
+    ggplot(aes(x = get(g), y = sample_id, fill = discard)) +
+    geom_density_ridges(panel_scaling = FALSE, show.legend = TRUE, 
+                        alpha = 0.5, color = "white", scale = 0.95, 
+                        rel_min_height = 0.01) +
+    # facet_wrap(~group_id, nrow = 1) + 
+    theme_ridges(center_axis_labels = TRUE) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    xlab(g) + ggtitle(paste0("cells with ", g, " count > 0"))
+
+  print(p)
+  cat("\n\n")
+}
+```
