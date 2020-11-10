@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Katharina Hembach" />
+
+<meta name="date" content="2020-11-10" />
+
+<title>Cluster analysis of timeline experiment</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">neural_scRNAseq</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/khembach/neural_scRNAseq">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Cluster analysis of timeline experiment</h1>
+<h4 class="author">Katharina Hembach</h4>
+<h4 class="date">11/10/2020</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2020-11-10
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it's best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200522code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200522)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200522code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200522)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree68d329db6494067d9ec4a873fdf38ebdb1191e18targetblank68d329da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/68d329db6494067d9ec4a873fdf38ebdb1191e18" target="_blank">68d329d</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree68d329db6494067d9ec4a873fdf38ebdb1191e18targetblank68d329da" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/68d329db6494067d9ec4a873fdf38ebdb1191e18" target="_blank">68d329d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    ._.DS_Store
+    Ignored:    ._Rplots.pdf
+    Ignored:    ._Rplots_largeViz.pdf
+    Ignored:    ._Rplots_separate.pdf
+    Ignored:    .__workflowr.yml
+    Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/._.DS_Store
+    Ignored:    analysis/._01-preprocessing.Rmd
+    Ignored:    analysis/._01-preprocessing.html
+    Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._03-filtering.Rmd
+    Ignored:    analysis/._04-clustering.Rmd
+    Ignored:    analysis/._04-clustering.knit.md
+    Ignored:    analysis/._04.1-cell_cycle.Rmd
+    Ignored:    analysis/._05-annotation.Rmd
+    Ignored:    analysis/._Lam-0-NSC_no_integration.Rmd
+    Ignored:    analysis/._Lam-01-NSC_integration.Rmd
+    Ignored:    analysis/._Lam-02-NSC_annotation.Rmd
+    Ignored:    analysis/._NSC-1-clustering.Rmd
+    Ignored:    analysis/._NSC-2-annotation.Rmd
+    Ignored:    analysis/.__site.yml
+    Ignored:    analysis/._additional_filtering.Rmd
+    Ignored:    analysis/._additional_filtering_clustering.Rmd
+    Ignored:    analysis/._index.Rmd
+    Ignored:    analysis/._organoid-01-1-qualtiy-control.Rmd
+    Ignored:    analysis/._organoid-01-clustering.Rmd
+    Ignored:    analysis/._organoid-02-integration.Rmd
+    Ignored:    analysis/._organoid-03-cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-04-group_integration.Rmd
+    Ignored:    analysis/._organoid-04-stage_integration.Rmd
+    Ignored:    analysis/._organoid-05-group_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-05-stage_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-06-1-prepare-sce.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-Seurat.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-function.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-06-group-integration-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-07-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-07-group-integration-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-08-conos-comparison.Rmd
+    Ignored:    analysis/._organoid-0x-sample_integration.Rmd
+    Ignored:    analysis/01-preprocessing_cache/
+    Ignored:    analysis/02-1-SampleQC_cache/
+    Ignored:    analysis/02-quality_control_cache/
+    Ignored:    analysis/02.1-SampleQC_cache/
+    Ignored:    analysis/03-filtering_cache/
+    Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/04.1-cell_cycle_cache/
+    Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/06-clustering-all-timepoints_cache/
+    Ignored:    analysis/Lam-01-NSC_integration_cache/
+    Ignored:    analysis/Lam-02-NSC_annotation_cache/
+    Ignored:    analysis/NSC-1-clustering_cache/
+    Ignored:    analysis/NSC-2-annotation_cache/
+    Ignored:    analysis/TDP-01-preprocessing_cache/
+    Ignored:    analysis/TDP-02-quality_control_cache/
+    Ignored:    analysis/TDP-03-filtering_cache/
+    Ignored:    analysis/TDP-04-clustering_cache/
+    Ignored:    analysis/TDP-05-00-filtering-plasmid-QC_cache/
+    Ignored:    analysis/TDP-05-plasmid_expression_cache/
+    Ignored:    analysis/TDP-06-cluster_analysis_cache/
+    Ignored:    analysis/additional_filtering_cache/
+    Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
+    Ignored:    analysis/organoid-01-clustering_cache/
+    Ignored:    analysis/organoid-02-integration_cache/
+    Ignored:    analysis/organoid-03-cluster_analysis_cache/
+    Ignored:    analysis/organoid-04-group_integration_cache/
+    Ignored:    analysis/organoid-04-stage_integration_cache/
+    Ignored:    analysis/organoid-05-group_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-05-stage_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_test_cache/
+    Ignored:    analysis/organoid-06-group-integration-conos-analysis_cache/
+    Ignored:    analysis/organoid-07-conos-visualization_cache/
+    Ignored:    analysis/organoid-07-group-integration-conos-visualization_cache/
+    Ignored:    analysis/organoid-08-conos-comparison_cache/
+    Ignored:    analysis/organoid-0x-sample_integration_cache/
+    Ignored:    analysis/sample5_QC_cache/
+    Ignored:    analysis/timepoints-01-organoid-integration_cache/
+    Ignored:    data/.DS_Store
+    Ignored:    data/._.DS_Store
+    Ignored:    data/._.smbdeleteAAA17ed8b4b
+    Ignored:    data/._Lam_figure2_markers.R
+    Ignored:    data/._Reactive_astrocytes_markers.xlsx
+    Ignored:    data/._known_NSC_markers.R
+    Ignored:    data/._known_cell_type_markers.R
+    Ignored:    data/._metadata.csv
+    Ignored:    data/data_sushi/
+    Ignored:    data/filtered_feature_matrices/
+    Ignored:    output/.DS_Store
+    Ignored:    output/._.DS_Store
+    Ignored:    output/._NSC_cluster1_marker_genes.txt
+    Ignored:    output/._organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/Lam-01-clustering.rds
+    Ignored:    output/NSC_1_clustering.rds
+    Ignored:    output/NSC_cluster1_marker_genes.txt
+    Ignored:    output/NSC_cluster2_marker_genes.txt
+    Ignored:    output/NSC_cluster3_marker_genes.txt
+    Ignored:    output/NSC_cluster4_marker_genes.txt
+    Ignored:    output/NSC_cluster5_marker_genes.txt
+    Ignored:    output/NSC_cluster6_marker_genes.txt
+    Ignored:    output/NSC_cluster7_marker_genes.txt
+    Ignored:    output/additional_filtering.rds
+    Ignored:    output/conos/
+    Ignored:    output/conos_organoid-06-conos-analysis.rds
+    Ignored:    output/conos_organoid-06-group-integration-conos-analysis.rds
+    Ignored:    output/figures/
+    Ignored:    output/organoid_integration_cluster10_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster11_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster12_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster13_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster14_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster15_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster16_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster17_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster2_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster3_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster4_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster5_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster6_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster7_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster8_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster9_marker_genes.txt
+    Ignored:    output/sce_01_preprocessing.rds
+    Ignored:    output/sce_02_quality_control.rds
+    Ignored:    output/sce_03_filtering.rds
+    Ignored:    output/sce_03_filtering_all_genes.rds
+    Ignored:    output/sce_06-1-prepare-sce.rds
+    Ignored:    output/sce_TDP_01_preprocessing.rds
+    Ignored:    output/sce_TDP_02_quality_control.rds
+    Ignored:    output/sce_TDP_03_filtering.rds
+    Ignored:    output/sce_TDP_03_filtering_all_genes.rds
+    Ignored:    output/sce_organoid-01-clustering.rds
+    Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04-group_integration.rds
+    Ignored:    output/so_04-stage_integration.rds
+    Ignored:    output/so_04_1_cell_cycle.rds
+    Ignored:    output/so_04_clustering.rds
+    Ignored:    output/so_06-clustering_all_timepoints.rds
+    Ignored:    output/so_0x-sample_integration.rds
+    Ignored:    output/so_TDP_04_clustering.rds
+    Ignored:    output/so_TDP_05_plasmid_expression.rds
+    Ignored:    output/so_additional_filtering_clustering.rds
+    Ignored:    output/so_integrated_organoid-02-integration.rds
+    Ignored:    output/so_merged_organoid-02-integration.rds
+    Ignored:    output/so_organoid-01-clustering.rds
+    Ignored:    output/so_sample_organoid-01-clustering.rds
+    Ignored:    scripts/._bu_Rcode.R
+    Ignored:    scripts/._plasmid_expression.sh
+    Ignored:    scripts/._prepare_salmon_transcripts.R
+
+Untracked files:
+    Untracked:  Rplots.pdf
+    Untracked:  Rplots_largeViz.pdf
+    Untracked:  Rplots_separate.pdf
+    Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
+    Untracked:  analysis/additional_filtering.Rmd
+    Untracked:  analysis/additional_filtering_clustering.Rmd
+    Untracked:  analysis/organoid-01-1-qualtiy-control.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-Seurat.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-function.Rmd
+    Untracked:  analysis/organoid-07-conos-visualization.Rmd
+    Untracked:  analysis/organoid-07-group-integration-conos-visualization.Rmd
+    Untracked:  analysis/organoid-08-conos-comparison.Rmd
+    Untracked:  analysis/organoid-0x-sample_integration.Rmd
+    Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
+    Untracked:  data/Kanton_et_al/
+    Untracked:  data/Lam_et_al/
+    Untracked:  data/Reactive_astrocytes_markers.xlsx
+    Untracked:  data/Sep2020/
+    Untracked:  data/reference/
+    Untracked:  scripts/bu_Rcode.R
+    Untracked:  timepoints-01-organoid-integration.Rmd
+
+Unstaged changes:
+    Modified:   analysis/05-annotation.Rmd
+    Modified:   analysis/Lam-02-NSC_annotation.Rmd
+    Modified:   analysis/TDP-04-clustering.Rmd
+    Modified:   analysis/TDP-05-00-filtering-plasmid-QC.Rmd
+    Modified:   analysis/_site.yml
+    Modified:   analysis/organoid-02-integration.Rmd
+    Modified:   analysis/organoid-04-group_integration.Rmd
+    Modified:   analysis/organoid-06-conos-analysis.Rmd
+    Modified:   analysis/timepoints-01-organoid-integration.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/07-cluster-analysis-all-timepoints.Rmd</code>) and HTML (<code>docs/07-cluster-analysis-all-timepoints.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/68d329db6494067d9ec4a873fdf38ebdb1191e18/analysis/07-cluster-analysis-all-timepoints.Rmd" target="_blank">68d329d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-10
+</td>
+<td>
+analyse clusters of all timepoints
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-packages" class="section level3">
+<h3>Load packages</h3>
+<pre class="r"><code>library(ComplexHeatmap)
+library(cowplot)
+library(ggplot2)
+library(dplyr)
+library(muscat)
+library(purrr)
+library(RColorBrewer)
+library(viridis)
+library(scran)
+library(Seurat)
+library(SingleCellExperiment)
+library(stringr)
+library(RCurl)
+library(BiocParallel)</code></pre>
+</div>
+<div id="load-data-convert-to-sce" class="section level1">
+<h1>Load data &amp; convert to SCE</h1>
+<pre class="r"><code>so &lt;- readRDS(file.path(&quot;output&quot;, &quot;so_06-clustering_all_timepoints.rds&quot;))
+sce &lt;- as.SingleCellExperiment(so, assay = &quot;RNA&quot;)
+colData(sce) &lt;- as.data.frame(colData(sce)) %&gt;% 
+    mutate_if(is.character, as.factor) %&gt;% 
+    DataFrame(row.names = colnames(sce))</code></pre>
+</div>
+<div id="number-of-clusters-by-resolution" class="section level1">
+<h1>Number of clusters by resolution</h1>
+<pre class="r"><code>cluster_cols &lt;- grep(&quot;res.[0-9]&quot;, colnames(colData(sce)), value = TRUE)
+sapply(colData(sce)[cluster_cols], nlevels)</code></pre>
+<pre><code>RNA_snn_res.0.2 RNA_snn_res.0.4 RNA_snn_res.0.8   RNA_snn_res.1 
+             13              19              26              29 </code></pre>
+</div>
+<div id="cluster-sample-counts" class="section level1">
+<h1>Cluster-sample counts</h1>
+<pre class="r"><code># set cluster IDs to resolution 0.4 clustering
+so &lt;- SetIdent(so, value = &quot;RNA_snn_res.0.4&quot;)
+so@meta.data$cluster_id &lt;- Idents(so)
+sce$cluster_id &lt;- Idents(so)
+(n_cells &lt;- table(sce$cluster_id, sce$sample_id))</code></pre>
+<pre><code>    
+     1NSC 2NSC 3NC52 4NC52 5NC96 6NC96 NC223a NC223b
+  0  4567 4622     2     3     0     1     12      4
+  1  3397 3407     0     1     0     0      5      2
+  2     0    0  2932  2497   121   180     11     15
+  3     0    0  3173  2471    29    49      5      4
+  4     0    0     1     2    11     8   1727   2577
+  5     0    0     1     4   115   151   1348   2172
+  6     0    0    38    25  1196  1865     62     47
+  7    10    7     1     0   673   369    773    688
+  8     0    0     1     0     4     5    867   1447
+  9     0    0     3    33   836  1326     14      3
+  10    0    0  1044   949    17    20     13      3
+  11    0    0   332   276   356   368     72      5
+  12    0    0   646   637     3     8      0      0
+  13    0    0   299   230    87   188    104    227
+  14  357  372     0     1     0     0      0      0
+  15    0    0   112   218    46    36     20     22
+  16    0    0     0     0    10     2    315    123
+  17    0    0    49    43    34    19      1     24
+  18    0    0    53    48     0     0      1      0</code></pre>
+</div>
+<div id="relative-cluster-abundances" class="section level1">
+<h1>Relative cluster-abundances</h1>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells, margin = 2)
+mat &lt;- as.matrix(unclass(fqs))
+Heatmap(mat,
+    col = rev(brewer.pal(11, &quot;RdGy&quot;)[-6]),
+    name = &quot;Frequency&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cluster_id&quot;,
+    column_title = &quot;sample_id&quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
+            gp = gpar(col = &quot;white&quot;, fontsize = 8)))</code></pre>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cell-cycle-scoring-with-seurat" class="section level1">
+<h1>Cell cycle scoring with Seurat</h1>
+<p>We assign each cell a cell cycle scores and visualize them in the DR plots. We use known G2/M and S phase markers that come with the <code>Seurat</code> package. The markers are anticorrelated and cells that to not express the markers should be in G1 phase.</p>
+<p>We compute cell cycle phase:</p>
+<pre class="r"><code># A list of cell cycle markers, from Tirosh et al, 2015
+cc_file &lt;- getURL(&quot;https://raw.githubusercontent.com/hbc/tinyatlas/master/cell_cycle/Homo_sapiens.csv&quot;) 
+cc_genes &lt;- read.csv(text = cc_file)
+# match the marker genes to the features
+m &lt;- match(cc_genes$geneID[cc_genes$phase == &quot;S&quot;], 
+           str_split(rownames(GetAssayData(so)),
+                     pattern = &quot;\\.&quot;, simplify = TRUE)[,1])
+s_genes &lt;- rownames(GetAssayData(so))[m]
+(s_genes &lt;- s_genes[!is.na(s_genes)])</code></pre>
+<pre><code> [1] &quot;ENSG00000012963.UBR7&quot;     &quot;ENSG00000049541.RFC2&quot;    
+ [3] &quot;ENSG00000051180.RAD51&quot;    &quot;ENSG00000073111.MCM2&quot;    
+ [5] &quot;ENSG00000075131.TIPIN&quot;    &quot;ENSG00000076003.MCM6&quot;    
+ [7] &quot;ENSG00000076248.UNG&quot;      &quot;ENSG00000077514.POLD3&quot;   
+ [9] &quot;ENSG00000092470.WDR76&quot;    &quot;ENSG00000092853.CLSPN&quot;   
+[11] &quot;ENSG00000093009.CDC45&quot;    &quot;ENSG00000094804.CDC6&quot;    
+[13] &quot;ENSG00000095002.MSH2&quot;     &quot;ENSG00000100297.MCM5&quot;    
+[15] &quot;ENSG00000101868.POLA1&quot;    &quot;ENSG00000104738.MCM4&quot;    
+[17] &quot;ENSG00000111247.RAD51AP1&quot; &quot;ENSG00000112312.GMNN&quot;    
+[19] &quot;ENSG00000117748.RPA2&quot;     &quot;ENSG00000118412.CASP8AP2&quot;
+[21] &quot;ENSG00000119969.HELLS&quot;    &quot;ENSG00000129173.E2F8&quot;    
+[23] &quot;ENSG00000131153.GINS2&quot;    &quot;ENSG00000132646.PCNA&quot;    
+[25] &quot;ENSG00000132780.NASP&quot;     &quot;ENSG00000136492.BRIP1&quot;   
+[27] &quot;ENSG00000136982.DSCC1&quot;    &quot;ENSG00000143476.DTL&quot;     
+[29] &quot;ENSG00000144354.CDCA7&quot;    &quot;ENSG00000151725.CENPU&quot;   
+[31] &quot;ENSG00000156802.ATAD2&quot;    &quot;ENSG00000159259.CHAF1B&quot;  
+[33] &quot;ENSG00000162607.USP1&quot;     &quot;ENSG00000163950.SLBP&quot;    
+[35] &quot;ENSG00000167325.RRM1&quot;     &quot;ENSG00000168496.FEN1&quot;    
+[37] &quot;ENSG00000171848.RRM2&quot;     &quot;ENSG00000174371.EXO1&quot;    
+[39] &quot;ENSG00000175305.CCNE2&quot;    &quot;ENSG00000176890.TYMS&quot;    
+[41] &quot;ENSG00000197299.BLM&quot;      &quot;ENSG00000198056.PRIM1&quot;   
+[43] &quot;ENSG00000276043.UHRF1&quot;   </code></pre>
+<pre class="r"><code>m &lt;- match(cc_genes$geneID[cc_genes$phase == &quot;G2/M&quot;], 
+           str_split(rownames(GetAssayData(so)), 
+                     pattern = &quot;\\.&quot;, simplify = TRUE)[,1])
+g2m_genes &lt;- rownames(GetAssayData(so))[m]
+(g2m_genes &lt;- g2m_genes[!is.na(g2m_genes)])</code></pre>
+<pre><code> [1] &quot;ENSG00000010292.NCAPD2&quot;  &quot;ENSG00000011426.ANLN&quot;   
+ [3] &quot;ENSG00000013810.TACC3&quot;   &quot;ENSG00000072571.HMMR&quot;   
+ [5] &quot;ENSG00000075218.GTSE1&quot;   &quot;ENSG00000080986.NDC80&quot;  
+ [7] &quot;ENSG00000087586.AURKA&quot;   &quot;ENSG00000088325.TPX2&quot;   
+ [9] &quot;ENSG00000089685.BIRC5&quot;   &quot;ENSG00000092140.G2E3&quot;   
+[11] &quot;ENSG00000094916.CBX5&quot;    &quot;ENSG00000100401.RANGAP1&quot;
+[13] &quot;ENSG00000102974.CTCF&quot;    &quot;ENSG00000111665.CDCA3&quot;  
+[15] &quot;ENSG00000112742.TTK&quot;     &quot;ENSG00000113810.SMC4&quot;   
+[17] &quot;ENSG00000114346.ECT2&quot;    &quot;ENSG00000115163.CENPA&quot;  
+[19] &quot;ENSG00000117399.CDC20&quot;   &quot;ENSG00000117650.NEK2&quot;   
+[21] &quot;ENSG00000117724.CENPF&quot;   &quot;ENSG00000120802.TMPO&quot;   
+[23] &quot;ENSG00000123485.HJURP&quot;   &quot;ENSG00000123975.CKS2&quot;   
+[25] &quot;ENSG00000126787.DLGAP5&quot;  &quot;ENSG00000129195.PIMREG&quot; 
+[27] &quot;ENSG00000131747.TOP2A&quot;   &quot;ENSG00000134222.PSRC1&quot;  
+[29] &quot;ENSG00000134690.CDCA8&quot;   &quot;ENSG00000136108.CKAP2&quot;  
+[31] &quot;ENSG00000137804.NUSAP1&quot;  &quot;ENSG00000137807.KIF23&quot;  
+[33] &quot;ENSG00000138160.KIF11&quot;   &quot;ENSG00000138182.KIF20B&quot; 
+[35] &quot;ENSG00000138778.CENPE&quot;   &quot;ENSG00000139354.GAS2L3&quot; 
+[37] &quot;ENSG00000142945.KIF2C&quot;   &quot;ENSG00000143228.NUF2&quot;   
+[39] &quot;ENSG00000143401.ANP32E&quot;  &quot;ENSG00000143815.LBR&quot;    
+[41] &quot;ENSG00000148773.MKI67&quot;   &quot;ENSG00000157456.CCNB2&quot;  
+[43] &quot;ENSG00000158402.CDC25C&quot;  &quot;ENSG00000164104.HMGB2&quot;  
+[45] &quot;ENSG00000169607.CKAP2L&quot;  &quot;ENSG00000169679.BUB1&quot;   
+[47] &quot;ENSG00000170312.CDK1&quot;    &quot;ENSG00000173207.CKS1B&quot;  
+[49] &quot;ENSG00000175063.UBE2C&quot;   &quot;ENSG00000175216.CKAP5&quot;  
+[51] &quot;ENSG00000178999.AURKB&quot;   &quot;ENSG00000184661.CDCA2&quot;  
+[53] &quot;ENSG00000188229.TUBB4B&quot;  &quot;ENSG00000189159.JPT1&quot;   </code></pre>
+<pre class="r"><code>so &lt;- CellCycleScoring(so, s.features = s_genes, g2m.features = g2m_genes,
+                       set.ident = TRUE)</code></pre>
+</div>
+<div id="dr-colored-by-cluster-id" class="section level1 tabset">
+<h1>DR colored by cluster ID</h1>
+<pre class="r"><code>cs &lt;- sample(colnames(so), 5e3)
+.plot_dr &lt;- function(so, dr, id)
+    DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+ids &lt;- c(&quot;cluster_id&quot;, &quot;group_id&quot;, &quot;sample_id&quot;, &quot;Phase&quot;)
+for (id in ids) {
+    cat(&quot;## &quot;, id, &quot;\n&quot;)
+    p1 &lt;- .plot_dr(so, &quot;tsne&quot;, id)
+    lgd &lt;- get_legend(p1)
+    p1 &lt;- p1 + theme(legend.position = &quot;none&quot;)
+    p2 &lt;- .plot_dr(so, &quot;umap&quot;, id) + theme(legend.position = &quot;none&quot;)
+    ps &lt;- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p &lt;- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="cluster_id" class="section level2">
+<h2>cluster_id</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="group_id" class="section level2">
+<h2>group_id</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="sample_id" class="section level2">
+<h2>sample_id</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="phase" class="section level2">
+<h2>Phase</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-4.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="find-markers-using-scran" class="section level1">
+<h1>Find markers using <code>scran</code></h1>
+<p>We identify candidate marker genes for each cluster that enable a separation of that group from all other groups.</p>
+<pre class="r"><code>scran_markers &lt;- findMarkers(sce, 
+    groups = sce$cluster_id, block = sce$sample_id, 
+    direction = &quot;up&quot;, lfc = 2, full.stats = TRUE)</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 12 and 1</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 14 and 2</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 14 and 3</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 14 and 4</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 14 and 5</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 14 and 6</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 14 and 8</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 14 and 9</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 14 and 10</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 14 and 11</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 14 and 12</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 14 and 13</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 15 and 14</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 16 and 14</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 17 and 14</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 18 and 1</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 18 and 7</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 18 and 8</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 18 and 14</code></pre>
+<pre><code>Warning in FUN(...): no within-block comparison between 18 and 16</code></pre>
+<div id="heatmap-of-mean-marker-exprs.-by-cluster" class="section level2">
+<h2>Heatmap of mean marker-exprs. by cluster</h2>
+<p>We aggregate the cells to pseudobulks and plot the average expression of the condidate marker genes in each of the clusters.</p>
+<pre class="r"><code>gs &lt;- lapply(scran_markers, function(u) rownames(u)[u$Top == 1])
+## candidate cluster markers
+lapply(gs, function(x) str_split(x, pattern = &quot;\\.&quot;, simplify = TRUE)[,2])</code></pre>
+<pre><code>$`0`
+ [1] &quot;SAMD11&quot;  &quot;GNG5&quot;    &quot;IGFBP5&quot;  &quot;GNG11&quot;   &quot;PEG10&quot;   &quot;PTN&quot;     &quot;NEFL&quot;   
+ [8] &quot;STMN2&quot;   &quot;VIM&quot;     &quot;METRN&quot;   &quot;PCSK1N&quot;  &quot;RPS4X&quot;   &quot;MT-RNR2&quot; &quot;MT-CO2&quot; 
+[15] &quot;MT-CYB&quot; 
+
+$`1`
+[1] &quot;SAMD11&quot; &quot;STMN1&quot;  &quot;PTN&quot;    &quot;CRH&quot;    &quot;GFAP&quot;   &quot;PCSK1N&quot; &quot;MT-CO2&quot; &quot;MT-CO3&quot;
+
+$`2`
+[1] &quot;VGF&quot;    &quot;NEFM&quot;   &quot;NEFL&quot;   &quot;STMN2&quot;  &quot;RTN1&quot;   &quot;HOXB8&quot;  &quot;HOXB9&quot;  &quot;MT-CO2&quot;
+[9] &quot;MT-CO3&quot;
+
+$`3`
+[1] &quot;SAMD11&quot; &quot;STMN2&quot;  &quot;PCDH9&quot;  &quot;RTN1&quot;   &quot;ZFHX3&quot;  &quot;PCP4&quot;   &quot;MT-CO2&quot;
+
+$`4`
+[1] &quot;SPARCL1&quot; &quot;STMN2&quot;   &quot;VIM&quot;     &quot;RTN1&quot;    &quot;GFAP&quot;    &quot;MT-ND1&quot;  &quot;MT-ATP6&quot;
+
+$`5`
+[1] &quot;S100A10&quot; &quot;IGFBP5&quot;  &quot;VGF&quot;     &quot;STMN2&quot;   &quot;VAMP2&quot;   &quot;MT-RNR2&quot;
+
+$`6`
+[1] &quot;PKIB&quot;    &quot;FABP7&quot;   &quot;STMN2&quot;   &quot;PCP4&quot;    &quot;MT-RNR2&quot;
+
+$`7`
+[1] &quot;VGF&quot;    &quot;CRH&quot;    &quot;STMN2&quot;  &quot;CRABP1&quot;
+
+$`8`
+[1] &quot;SPARCL1&quot; &quot;VGF&quot;     &quot;PTPRZ1&quot;  &quot;NTRK2&quot;   &quot;PTGDS&quot;   &quot;MT-ND1&quot;  &quot;MT-ATP6&quot;
+
+$`9`
+[1] &quot;C1orf61&quot; &quot;IGFBP2&quot;  &quot;VIM&quot;     &quot;CRYAB&quot;   &quot;DLK1&quot;    &quot;GFAP&quot;    &quot;MT-ND1&quot; 
+
+$`10`
+[1] &quot;C1orf61&quot;  &quot;SQSTM1&quot;   &quot;VIM&quot;      &quot;CYP26A1&quot;  &quot;ATP1B2&quot;   &quot;HOXB9&quot;    &quot;PPP1R15A&quot;
+[8] &quot;FTL&quot;     
+
+$`11`
+[1] &quot;S100A10&quot; &quot;IGFBP5&quot;  &quot;IGFBP7&quot;  &quot;CCN2&quot;    &quot;CLU&quot;     &quot;VIM&quot;     &quot;TAGLN&quot;  
+[8] &quot;METRN&quot;   &quot;MT-CYB&quot; 
+
+$`12`
+ [1] &quot;C1orf61&quot; &quot;PTPRZ1&quot;  &quot;CLU&quot;     &quot;LY6H&quot;    &quot;NTRK2&quot;   &quot;VIM&quot;     &quot;METRN&quot;  
+ [8] &quot;C1QL1&quot;   &quot;TTYH1&quot;   &quot;S100B&quot;   &quot;MT-ND4&quot; 
+
+$`13`
+[1] &quot;S100A10&quot; &quot;TAC1&quot;    &quot;VGF&quot;     &quot;STMN2&quot;   &quot;DLK1&quot;    &quot;MT-CO2&quot; 
+
+$`14`
+[1] &quot;S100A11&quot;
+
+$`15`
+[1] &quot;GADD45A&quot; &quot;VGF&quot;     &quot;STMN2&quot;   &quot;CRYAB&quot;   &quot;DDIT3&quot;  
+
+$`16`
+ [1] &quot;C1orf61&quot; &quot;VGF&quot;     &quot;PTGDS&quot;   &quot;VIM&quot;     &quot;IFITM3&quot;  &quot;CRYAB&quot;   &quot;TAGLN&quot;  
+ [8] &quot;GAPDH&quot;   &quot;CKB&quot;     &quot;METRN&quot;   &quot;C1QL1&quot;  
+
+$`17`
+[1] &quot;COL3A1&quot; &quot;MGP&quot;    &quot;COL1A1&quot;
+
+$`18`
+[1] &quot;H2AFZ&quot; &quot;HMGB2&quot; &quot;PTTG1&quot; &quot;VIM&quot;   &quot;CKB&quot;   &quot;METRN&quot;</code></pre>
+<pre class="r"><code>sub &lt;- sce[unique(unlist(gs)), ]
+pbs &lt;- aggregateData(sub, assay = &quot;logcounts&quot;, by = &quot;cluster_id&quot;, fun = &quot;mean&quot;)
+mat &lt;- t(muscat:::.scale(assay(pbs)))
+## remove the Ensembl ID from the gene names
+colnames(mat) &lt;- str_split(colnames(mat), pattern = &quot;\\.&quot;, simplify = TRUE)[,2] 
+Heatmap(mat,
+    name = &quot;scaled avg.\nexpression&quot;,
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cluster_id&quot;,
+    rect_gp = gpar(col = &quot;white&quot;))</code></pre>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/scran-markers-heatmap-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="known-marker-genes" class="section level1">
+<h1>Known marker genes</h1>
+<pre class="r"><code>## source file with list of known marker genes
+source(file.path(&quot;data&quot;, &quot;known_cell_type_markers.R&quot;))
+
+fs &lt;- lapply(fs, sapply, function(g)
+    grep(pattern = paste0(&quot;\\.&quot;, g, &quot;$&quot;), rownames(sce), value = TRUE)
+  )
+
+fs &lt;- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
+
+gs &lt;- gsub(&quot;.*\\.&quot;, &quot;&quot;, unlist(fs))
+ns &lt;- vapply(fs, length, numeric(1))
+ks &lt;- rep.int(names(fs), ns)
+labs &lt;- lapply(fs, function(x) gsub(&quot;.*\\.&quot;, &quot;&quot;,x))</code></pre>
+<div id="heatmap-of-mean-marker-exprs.-by-cluster-1" class="section level2">
+<h2>Heatmap of mean marker-exprs. by cluster</h2>
+<pre class="r"><code># split cells by cluster
+cs_by_k &lt;- split(colnames(sce), sce$cluster_id)
+# compute cluster-marker means
+ms_by_cluster &lt;- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+# prep. for plotting &amp; scale b/w 0 and 1
+mat &lt;- do.call(&quot;rbind&quot;, ms_by_cluster)
+mat &lt;- muscat:::.scale(mat)
+rownames(mat) &lt;- gs
+cols &lt;- muscat:::.cluster_colors[seq_along(fs)]
+cols &lt;- setNames(cols, names(fs))
+row_anno &lt;- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = &quot;white&quot;))
+# percentage of cells from each of the samples per cluster
+sample_props &lt;- prop.table(n_cells, margin = 1)
+col_mat &lt;- as.matrix(unclass(sample_props))
+sample_cols &lt;- c(&quot;#882255&quot;, &quot;#CC6677&quot;, &quot;#11588A&quot;, &quot;#88CCEE&quot;, &quot;#117733&quot;,  
+                 &quot;#44AA99&quot;,  &quot;#FF8E21&quot;, &quot;#FDC78E&quot;)
+
+sample_cols &lt;- setNames(sample_cols, colnames(col_mat))
+col_anno &lt;- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, &quot;cm&quot;),
+                               border = FALSE),
+    annotation_label = &quot;fraction of sample\nin cluster&quot;,
+    gap = unit(10, &quot;points&quot;))
+col_lgd &lt;- Legend(labels = names(sample_cols),
+       title = &quot;sample&quot;,
+       legend_gp = gpar(fill = sample_cols))
+
+hm &lt;- Heatmap(mat,
+    name = &quot;scaled avg.\nexpression&quot;,
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    column_title = &quot;cluster_id&quot;,
+    column_title_side = &quot;bottom&quot;,
+    column_names_side = &quot;bottom&quot;,
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = &quot;white&quot;),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/known-markers-heatmap-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="dr-colored-by-marker-expression" class="section level1 tabset">
+<h1>DR colored by marker expression</h1>
+<pre class="r"><code># downsample to 5000 cells
+cs &lt;- sample(colnames(sce), 5e3)
+sub &lt;- subset(so, cells = cs)
+# UMAPs colored by marker-expression
+for (m in seq_along(fs)) {
+    cat(&quot;## &quot;, names(fs)[m], &quot;\n&quot;)
+    ps &lt;- lapply(seq_along(fs[[m]]), function(i) {
+        if (!fs[[m]][i] %in% rownames(so)) return(NULL)
+        FeaturePlot(sub, features = fs[[m]][i], reduction = &quot;umap&quot;, pt.size = 0.4) +
+            theme(aspect.ratio = 1, legend.position = &quot;none&quot;) +
+            ggtitle(labs[[m]][i]) + theme_void() + theme(aspect.ratio = 1)
+    })
+    # arrange plots in grid
+    ps &lt;- ps[!vapply(ps, is.null, logical(1))]
+    p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+    print(p)
+    cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="nsc" class="section level2">
+<h2>NSC</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="proliferating" class="section level2">
+<h2>proliferating</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="neuronal" class="section level2">
+<h2>neuronal</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="mature_astrocytes" class="section level2">
+<h2>mature_astrocytes</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-4.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="glial_astrocytic" class="section level2">
+<h2>glial_astrocytic</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="radial_glia" class="section level2">
+<h2>radial_glia</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-6.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="oligodendrocyte" class="section level2">
+<h2>oligodendrocyte</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-7.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="gabaergic_neurons" class="section level2">
+<h2>GABAergic_neurons</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-8.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="glycinergic_neurons" class="section level2">
+<h2>glycinergic_neurons</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-9.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="glutaminergic_neurons" class="section level2">
+<h2>glutaminergic_neurons</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-10.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="dopaminergic_neurons" class="section level2">
+<h2>dopaminergic_neurons</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-11.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="apoptotic" class="section level2">
+<h2>apoptotic</h2>
+<p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/dim-red-expr-12.png" width="1152" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.0 (2020-04-24)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 16.04.6 LTS
+
+Matrix products: default
+BLAS:   /usr/local/R/R-4.0.0/lib/libRblas.so
+LAPACK: /usr/local/R/R-4.0.0/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+ [1] parallel  stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] BiocParallel_1.22.0         RCurl_1.98-1.2             
+ [3] stringr_1.4.0               Seurat_3.1.5               
+ [5] scran_1.16.0                SingleCellExperiment_1.10.1
+ [7] SummarizedExperiment_1.18.1 DelayedArray_0.14.0        
+ [9] matrixStats_0.56.0          Biobase_2.48.0             
+[11] GenomicRanges_1.40.0        GenomeInfoDb_1.24.2        
+[13] IRanges_2.22.2              S4Vectors_0.26.1           
+[15] BiocGenerics_0.34.0         viridis_0.5.1              
+[17] viridisLite_0.3.0           RColorBrewer_1.1-2         
+[19] purrr_0.3.4                 muscat_1.2.1               
+[21] dplyr_1.0.2                 ggplot2_3.3.2              
+[23] cowplot_1.0.0               ComplexHeatmap_2.4.2       
+[25] workflowr_1.6.2            
+
+loaded via a namespace (and not attached):
+  [1] backports_1.1.9           circlize_0.4.10          
+  [3] blme_1.0-4                igraph_1.2.5             
+  [5] plyr_1.8.6                lazyeval_0.2.2           
+  [7] TMB_1.7.16                splines_4.0.0            
+  [9] listenv_0.8.0             scater_1.16.2            
+ [11] digest_0.6.25             foreach_1.5.0            
+ [13] htmltools_0.5.0           gdata_2.18.0             
+ [15] lmerTest_3.1-2            magrittr_1.5             
+ [17] memoise_1.1.0             cluster_2.1.0            
+ [19] doParallel_1.0.15         ROCR_1.0-11              
+ [21] limma_3.44.3              globals_0.12.5           
+ [23] annotate_1.66.0           prettyunits_1.1.1        
+ [25] colorspace_1.4-1          rappdirs_0.3.1           
+ [27] ggrepel_0.8.2             blob_1.2.1               
+ [29] xfun_0.15                 jsonlite_1.7.0           
+ [31] crayon_1.3.4              genefilter_1.70.0        
+ [33] lme4_1.1-23               zoo_1.8-8                
+ [35] ape_5.4                   survival_3.2-3           
+ [37] iterators_1.0.12          glue_1.4.2               
+ [39] gtable_0.3.0              zlibbioc_1.34.0          
+ [41] XVector_0.28.0            leiden_0.3.3             
+ [43] GetoptLong_1.0.1          BiocSingular_1.4.0       
+ [45] future.apply_1.6.0        shape_1.4.4              
+ [47] scales_1.1.1              DBI_1.1.0                
+ [49] edgeR_3.30.3              Rcpp_1.0.5               
+ [51] xtable_1.8-4              progress_1.2.2           
+ [53] clue_0.3-57               reticulate_1.16          
+ [55] dqrng_0.2.1               bit_1.1-15.2             
+ [57] rsvd_1.0.3                tsne_0.1-3               
+ [59] htmlwidgets_1.5.1         httr_1.4.1               
+ [61] gplots_3.0.4              ellipsis_0.3.1           
+ [63] ica_1.0-2                 farver_2.0.3             
+ [65] pkgconfig_2.0.3           XML_3.99-0.4             
+ [67] uwot_0.1.8                locfit_1.5-9.4           
+ [69] labeling_0.3              tidyselect_1.1.0         
+ [71] rlang_0.4.7               reshape2_1.4.4           
+ [73] later_1.1.0.1             AnnotationDbi_1.50.1     
+ [75] munsell_0.5.0             tools_4.0.0              
+ [77] generics_0.0.2            RSQLite_2.2.0            
+ [79] ggridges_0.5.2            evaluate_0.14            
+ [81] yaml_2.2.1                knitr_1.29               
+ [83] bit64_0.9-7               fs_1.4.2                 
+ [85] fitdistrplus_1.1-1        caTools_1.18.0           
+ [87] RANN_2.6.1                pbapply_1.4-2            
+ [89] future_1.17.0             nlme_3.1-148             
+ [91] whisker_0.4               pbkrtest_0.4-8.6         
+ [93] compiler_4.0.0            plotly_4.9.2.1           
+ [95] beeswarm_0.2.3            png_0.1-7                
+ [97] variancePartition_1.18.2  tibble_3.0.3             
+ [99] statmod_1.4.34            geneplotter_1.66.0       
+[101] stringi_1.4.6             lattice_0.20-41          
+[103] Matrix_1.2-18             nloptr_1.2.2.2           
+[105] vctrs_0.3.4               pillar_1.4.6             
+[107] lifecycle_0.2.0           lmtest_0.9-37            
+[109] GlobalOptions_0.1.2       RcppAnnoy_0.0.16         
+[111] BiocNeighbors_1.6.0       data.table_1.12.8        
+[113] bitops_1.0-6              irlba_2.3.3              
+[115] patchwork_1.0.1           httpuv_1.5.4             
+[117] colorRamps_2.3            R6_2.4.1                 
+[119] promises_1.1.1            KernSmooth_2.23-17       
+[121] gridExtra_2.3             vipor_0.4.5              
+[123] codetools_0.2-16          boot_1.3-25              
+[125] MASS_7.3-51.6             gtools_3.8.2             
+[127] DESeq2_1.28.1             rprojroot_1.3-2          
+[129] rjson_0.2.20              withr_2.2.0              
+[131] sctransform_0.2.1         GenomeInfoDbData_1.2.3   
+[133] hms_0.5.3                 tidyr_1.1.0              
+[135] glmmTMB_1.0.2.1           minqa_1.2.4              
+[137] rmarkdown_2.3             DelayedMatrixStats_1.10.1
+[139] Rtsne_0.15                git2r_0.27.1             
+[141] numDeriv_2016.8-1.1       ggbeeswarm_0.6.0         </code></pre>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
