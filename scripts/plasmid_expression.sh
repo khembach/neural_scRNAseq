@@ -28,18 +28,17 @@ salmon index -i ../data/reference/index -k 31 --gencode -p 4 -t ../data/referenc
 ## quantification 
 ##----------------
 ## we quantify the TDP-43 transcripts using the raw 10X reads and the identified barcodes as whitelist
-## we remove the "-1" suffix from the barcodes because they are added by CellRanger to indicate the library
+## we remove the "-1" suffix from the barcodes because they were added by CellRanger to indicate the library
 
 for f in no1_Neural_cuture_d_96_TDP-43-HA_4w_DOXoff no2_Neural_cuture_d_96_TDP-43-HA_2w_DOXON no3_Neural_cuture_d_96_TDP-43-HA_4w_DOXONa no4_Neural_cuture_d_96_TDP-43-HA_4w_DOXONb
   do
     ## input fastq files
     f1a=$(ls ../data/Sep2020/NovaSeq_20200918_NOV469_o7451_DataDelivery/${f}/${f}_S*_L001_R1_001.fastq.gz)
-    f1b=$(ls ../data/Sep2020/NovaSeq_20200918_NOV469_o7451_DataDelivery/${f}/${f}_S*_L001_R1_001.fastq.gz)
+    f1b=$(ls ../data/Sep2020/NovaSeq_20200918_NOV469_o7451_DataDelivery/${f}/${f}_S*_L002_R1_001.fastq.gz)
     f2a=$(ls ../data/Sep2020/NovaSeq_20200918_NOV469_o7451_DataDelivery/${f}/${f}_S*_L001_R2_001.fastq.gz)
     f2b=$(ls ../data/Sep2020/NovaSeq_20200918_NOV469_o7451_DataDelivery/${f}/${f}_S*_L002_R2_001.fastq.gz)
     ## remove -1 suffix from barcodes
     zcat ../data/Sep2020/CellRangerCount_50076_2020-09-22--15-40-54/${f}/filtered_feature_bc_matrix/barcodes.tsv.gz | sed 's/..$//' > ../data/Sep2020/CellRangerCount_50076_2020-09-22--15-40-54/${f}/filtered_feature_bc_matrix/barcodes_noSuffix.txt
     nice -n 10 salmon alevin -lISR -1 ${f1a} ${f1b} -2 ${f2a} ${f2b} --chromiumV3 -i ../data/reference/index -p 10 -o ../data/Sep2020/alevin_TDP43/${f} --tgMap ../data/reference/t2g.txt --whitelist ../data/Sep2020/CellRangerCount_50076_2020-09-22--15-40-54/${f}/filtered_feature_bc_matrix/barcodes_noSuffix.txt
   done
-
 
