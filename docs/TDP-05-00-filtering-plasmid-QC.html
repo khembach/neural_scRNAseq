@@ -504,16 +504,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef627bf7edc65846ed4a65122764a25c815c9d57atargetblankf627bf7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/f627bf7edc65846ed4a65122764a25c815c9d57a" target="_blank">f627bf7</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6b073026d828fd5a4a04627467dcbe2753878bb4targetblank6b07302a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6b073026d828fd5a4a04627467dcbe2753878bb4" target="_blank">6b07302</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef627bf7edc65846ed4a65122764a25c815c9d57atargetblankf627bf7a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6b073026d828fd5a4a04627467dcbe2753878bb4targetblank6b07302a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/f627bf7edc65846ed4a65122764a25c815c9d57a" target="_blank">f627bf7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6b073026d828fd5a4a04627467dcbe2753878bb4" target="_blank">6b07302</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -710,7 +710,6 @@ Unstaged changes:
     Modified:   analysis/organoid-04-group_integration.Rmd
     Modified:   analysis/organoid-06-conos-analysis.Rmd
     Modified:   analysis/timepoints-01-organoid-integration.Rmd
-    Modified:   scripts/plasmid_expression.sh
 
 </code></pre>
 <p>
@@ -749,6 +748,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/6b073026d828fd5a4a04627467dcbe2753878bb4/analysis/TDP-05-00-filtering-plasmid-QC.Rmd" target="_blank">6b07302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+<td>
+fix cell barcode matching
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/49397d890f83bba1282461a33c5b5ea519456495/docs/TDP-05-00-filtering-plasmid-QC.html" target="_blank">49397d8</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -824,7 +857,7 @@ library(ggridges)</code></pre>
 <p>We combine the quantification of the plasmid transcript and the endogenous TDP-43 with the CellRanger count matrix.</p>
 <pre class="r"><code>sce &lt;- readRDS(file.path(&quot;output&quot;, &quot;sce_TDP_02_quality_control.rds&quot;))
 ## we only keep the four samples of the TDP-43 experiment
-sample_ids &lt;- c(&quot;TDP2wON&quot;, &quot;TDP4wOFF&quot;, &quot;TDP4wONa&quot;, &quot;TDP4wONb&quot;)
+sample_ids &lt;- c(&quot;TDP4wOFF&quot;, &quot;TDP2wON&quot;, &quot;TDP4wONa&quot;, &quot;TDP4wONb&quot;)
 sce &lt;- sce[,colData(sce)$sample_id %in% sample_ids]
 sce$sample_id &lt;- droplevels(sce$sample_id)</code></pre>
 <pre class="r"><code>samples &lt;- c(&quot;no1_Neural_cuture_d_96_TDP-43-HA_4w_DOXoff&quot;, 
@@ -852,7 +885,11 @@ counts &lt;- rbind(counts(sce), DelayedArray(matrix(0, nrow = 2,
                                                  ncol = ncol(counts(sce)))))
 rownames(counts) &lt;- c(rownames(sce), rownames(txi))
 ## match the barcodes
-m &lt;- match(colnames(txi), colnames(sce))
+colnames(txi) %in% colnames(sce) %&gt;% table</code></pre>
+<pre><code>.
+FALSE  TRUE 
+ 2667  9719 </code></pre>
+<pre class="r"><code>m &lt;- match(colnames(txi), colnames(sce))
 counts[rownames(txi),m[!is.na(m)]] &lt;- txi[,which(!is.na(m))]
 
 # adjust rowData
@@ -1018,14 +1055,6 @@ colData(sce)$manual_discard_sum &lt;- colData(sce)$sum &lt; 5000 &amp;
 ## filter the cells with less than 2500 detected genes
 colData(sce)$manual_discard_detected &lt;- colData(sce)$detected &lt; 2500 &amp; 
   colData(sce)$sample_id %in% tdp_samples
-
-## day 223
-colData(sce)$manual_discard_sum &lt;- colData(sce)$manual_discard_sum | 
-  colData(sce)$sum &lt; 2000 &amp; 
-  colData(sce)$sample_id %in% c(&quot;NC223a&quot;, &quot;NC223b&quot;)
-colData(sce)$manual_discard_detected &lt;- colData(sce)$manual_discard_detected |
-  colData(sce)$detected &lt; 1500 &amp; 
-  colData(sce)$sample_id %in% c(&quot;NC223a&quot;, &quot;NC223b&quot;)
 
 ## highlight all manually discarded cells
 colData(sce)$manual_discard &lt;- colData(sce)$manual_discard_sum |
@@ -1234,7 +1263,8 @@ khembach
 </div>
 </div>
 <p>TDP-43 expression per cell.</p>
-<pre class="r"><code>gene_ids &lt;- c(&quot;ENSG00000120948.TARDBP&quot;, &quot;ENSG00000120948.TARDBP-alevin&quot;, &quot;TDP43-HA&quot;)
+<pre class="r"><code>gene_ids &lt;- c(&quot;ENSG00000120948.TARDBP&quot;, &quot;ENSG00000120948.TARDBP-alevin&quot;, 
+              &quot;TDP43-HA&quot;)
 
 plotExpression(sce, gene_ids,
                x = &quot;sample_id&quot;, exprs_values = &quot;counts&quot;, 
@@ -1262,6 +1292,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/49397d890f83bba1282461a33c5b5ea519456495/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/TDP-expression-1.png" target="_blank">49397d8</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/80e0ebe1dd10b427cd5a7c8052f53dfc8cfbe7d9/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/TDP-expression-1.png" target="_blank">80e0ebe</a>
@@ -1303,6 +1344,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/49397d890f83bba1282461a33c5b5ea519456495/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/TDP-expression-2.png" target="_blank">49397d8</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/80e0ebe1dd10b427cd5a7c8052f53dfc8cfbe7d9/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/TDP-expression-2.png" target="_blank">80e0ebe</a>
@@ -1476,6 +1528,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/49397d890f83bba1282461a33c5b5ea519456495/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-3.png" target="_blank">49397d8</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/80e0ebe1dd10b427cd5a7c8052f53dfc8cfbe7d9/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-3.png" target="_blank">80e0ebe</a>
 </td>
 <td>
@@ -1491,14 +1554,14 @@ khembach
 </div>
 <pre><code>cells with gene count &gt; 0          
            FALSE  TRUE
-  TDP2wON  11024     6
-  TDP4wOFF  8750     8
+  TDP2wON   8884  2146
+  TDP4wOFF  6973  1785
   TDP4wONa 11714  2398
   TDP4wONb  9850  2395
 discarded cells with gene count &gt; 0          
            FALSE TRUE
-  TDP2wON      3    3
-  TDP4wOFF     5    3
+  TDP2wON   2008  138
+  TDP4wOFF  1667  118
   TDP4wONa  2230  168
   TDP4wONb  2233  162</code></pre>
 <p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-4.png" width="1152" style="display: block; margin: auto;" /></p>
@@ -1524,6 +1587,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/49397d890f83bba1282461a33c5b5ea519456495/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-4.png" target="_blank">49397d8</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/80e0ebe1dd10b427cd5a7c8052f53dfc8cfbe7d9/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-4.png" target="_blank">80e0ebe</a>
@@ -1565,6 +1639,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/49397d890f83bba1282461a33c5b5ea519456495/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-5.png" target="_blank">49397d8</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/80e0ebe1dd10b427cd5a7c8052f53dfc8cfbe7d9/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-5.png" target="_blank">80e0ebe</a>
 </td>
 <td>
@@ -1580,14 +1665,14 @@ khembach
 </div>
 <pre><code>cells with gene count &gt; 0          
            FALSE  TRUE
-  TDP2wON  11027     3
-  TDP4wOFF  8750     8
+  TDP2wON   9537  1493
+  TDP4wOFF  7596  1162
   TDP4wONa 12484  1628
   TDP4wONb 10722  1523
 discarded cells with gene count &gt; 0          
            FALSE TRUE
-  TDP2wON      2    1
-  TDP4wOFF     5    3
+  TDP2wON   1305  188
+  TDP4wOFF  1071   91
   TDP4wONa  1484  144
   TDP4wONb  1370  153</code></pre>
 <p><img src="figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-6.png" width="1152" style="display: block; margin: auto;" /></p>
@@ -1613,6 +1698,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/49397d890f83bba1282461a33c5b5ea519456495/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-6.png" target="_blank">49397d8</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/80e0ebe1dd10b427cd5a7c8052f53dfc8cfbe7d9/docs/figure/TDP-05-00-filtering-plasmid-QC.Rmd/ridge-plot-6.png" target="_blank">80e0ebe</a>
