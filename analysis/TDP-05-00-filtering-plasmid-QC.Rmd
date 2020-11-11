@@ -167,10 +167,10 @@ plotExpression(sce, gene_ids,
                colour = "sample_id")
 ```
 
-### Ridge plot {.tabset}
+### Ridge plot
 
 Do the filtered cells express TDP-43 and TDP-43-HA?
-```{r ridge-plot, results = "asis", fig.width = 12}
+```{r ridge-plot, fig.width = 12}
 df <- colData(sce) %>% as.data.frame() %>%
   dplyr::select(sample_id, discard, detected, sum, subsets_Mt_detected, 
                 discard) %>%
@@ -192,9 +192,14 @@ for (g in c("TARDBP", "TARDBP_alevin", "TDP43_HA")){
   print(p)
   
   ## number of cells with gene count > 0
-  table(df$sample_id, df[,g] > 0)
+  cat("cells with gene count > 0")
+  print(table(df$sample_id, df[,g] > 0))
+  ## retained cells with gene count > 0
+  df1 <- df %>%  dplyr::filter(get(g) > 0)
+  cat("discarded cells with gene count > 0")
+  print(table(df1$sample_id, df1$discard))
   
-   p <- df %>% dplyr::filter(get(g) > 0) %>%
+   p <- df1 %>%
     ggplot(aes(x = get(g), y = sample_id, fill = discard)) +
     geom_density_ridges(panel_scaling = FALSE, show.legend = TRUE, 
                         alpha = 0.5, color = "white", scale = 0.95, 
@@ -205,6 +210,5 @@ for (g in c("TARDBP", "TARDBP_alevin", "TDP43_HA")){
     xlab(g) + ggtitle(paste0("cells with ", g, " count > 0"))
 
   print(p)
-  cat("\n\n")
 }
 ```
