@@ -147,12 +147,20 @@ We aggregate the cells to pseudobulks and plot the average expression of the con
 gs <- lapply(scran_markers, function(u) rownames(u)[u$Top %in% 1:2])
 
 ## candidate cluster markers
-lapply(gs, function(x) str_split(x, pattern = "\\.", simplify = TRUE)[,2])
+lapply(gs, function(x) {
+  y <- str_split(x, pattern = "\\.", simplify = TRUE)[,2]
+  y[which(y == "")] <- x[which(y == "")]
+  y
+  })
+
 sub <- sce[unique(unlist(gs)), ]
 pbs <- aggregateData(sub, assay = "logcounts", by = "cluster_id", fun = "mean")
 mat <- t(muscat:::.scale(assay(pbs)))
 ## remove the Ensembl ID from the gene names
-colnames(mat) <- str_split(colnames(mat), pattern = "\\.", simplify = TRUE)[,2] 
+cnames <- colnames(mat)
+colnames(mat) <- str_split(cnames, pattern = "\\.", simplify = TRUE)[,2] 
+colnames(mat)[which(colnames(mat) == "")] <- cnames[which(colnames(mat) == "")]
+
 Heatmap(mat,
     name = "scaled avg.\nexpression",
     col = viridis(10),
@@ -344,7 +352,7 @@ draw(hm, annotation_legend_list = list(col_lgd))
 
 ```{r astrocyte-markers-glial-clusters-heatmap, fig.width = 9, fig.height = 15}
 ## subset to glial clusters
-subs <- c("1", "7", "13", "14", "15", "16")
+subs <- c("1", "6", "13", "14", "15", "16")
 cs_by_k <- cs_by_k[subs]
 # compute cluster-marker means
 ms_by_cluster <- lapply(fs, function(gs) vapply(cs_by_k, function(i)
