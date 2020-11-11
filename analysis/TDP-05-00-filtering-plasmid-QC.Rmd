@@ -36,7 +36,7 @@ We combine the quantification of the plasmid transcript and the endogenous TDP-4
 ```{r read-sce}
 sce <- readRDS(file.path("output", "sce_TDP_02_quality_control.rds"))
 ## we only keep the four samples of the TDP-43 experiment
-sample_ids <- c("TDP2wON", "TDP4wOFF", "TDP4wONa", "TDP4wONb")
+sample_ids <- c("TDP4wOFF", "TDP2wON", "TDP4wONa", "TDP4wONb")
 sce <- sce[,colData(sce)$sample_id %in% sample_ids]
 sce$sample_id <- droplevels(sce$sample_id)
 ```
@@ -61,6 +61,7 @@ for (i in 1:4) {
 txi <- txi[,colnames(txi) != ""]
 rownames(txi) <- c("ENSG00000120948.TARDBP-alevin", "TDP43-HA")
 ```
+
 We add the alevin counts to the CellRanger matrix.
 ```{r combine-counts}
 ## add two new rows to counts matrix and replace the counts for matching 
@@ -69,6 +70,7 @@ counts <- rbind(counts(sce), DelayedArray(matrix(0, nrow = 2,
                                                  ncol = ncol(counts(sce)))))
 rownames(counts) <- c(rownames(sce), rownames(txi))
 ## match the barcodes
+colnames(txi) %in% colnames(sce) %>% table
 m <- match(colnames(txi), colnames(sce))
 counts[rownames(txi),m[!is.na(m)]] <- txi[,which(!is.na(m))]
 
@@ -81,7 +83,6 @@ sce <- SingleCellExperiment(list(counts=counts),
                             colData = colData(sce),
                             rowData = rd)
 ```
-
 
 ## Identification of outlier cells
 
@@ -126,14 +127,6 @@ colData(sce)$manual_discard_sum <- colData(sce)$sum < 5000 &
 colData(sce)$manual_discard_detected <- colData(sce)$detected < 2500 & 
   colData(sce)$sample_id %in% tdp_samples
 
-## day 223
-colData(sce)$manual_discard_sum <- colData(sce)$manual_discard_sum | 
-  colData(sce)$sum < 2000 & 
-  colData(sce)$sample_id %in% c("NC223a", "NC223b")
-colData(sce)$manual_discard_detected <- colData(sce)$manual_discard_detected |
-  colData(sce)$detected < 1500 & 
-  colData(sce)$sample_id %in% c("NC223a", "NC223b")
-
 ## highlight all manually discarded cells
 colData(sce)$manual_discard <- colData(sce)$manual_discard_sum |
                                    colData(sce)$manual_discard_detected
@@ -156,7 +149,8 @@ plotColData(sce, x = "sample_id", y = "subsets_Mt_percent",
 
 TDP-43 expression per cell.
 ```{r TDP-expression}
-gene_ids <- c("ENSG00000120948.TARDBP", "ENSG00000120948.TARDBP-alevin", "TDP43-HA")
+gene_ids <- c("ENSG00000120948.TARDBP", "ENSG00000120948.TARDBP-alevin", 
+              "TDP43-HA")
 
 plotExpression(sce, gene_ids,
                x = "sample_id", exprs_values = "counts", 
@@ -212,3 +206,4 @@ for (g in c("TARDBP", "TARDBP_alevin", "TDP43_HA")){
   print(p)
 }
 ```
+
