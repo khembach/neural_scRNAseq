@@ -413,7 +413,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-10-14
+<strong>Last updated:</strong> 2020-11-11
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -504,16 +504,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree10a776297db206bccea379a6a94a6b13fafbad1btargetblank10a7762a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/10a776297db206bccea379a6a94a6b13fafbad1b" target="_blank">10a7762</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree09364dd84bca04a00bca10d71f6f9869f726b276targetblank09364dda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/09364dd84bca04a00bca10d71f6f9869f726b276" target="_blank">09364dd</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree10a776297db206bccea379a6a94a6b13fafbad1btargetblank10a7762a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree09364dd84bca04a00bca10d71f6f9869f726b276targetblank09364dda" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/10a776297db206bccea379a6a94a6b13fafbad1b" target="_blank">10a7762</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/09364dd84bca04a00bca10d71f6f9869f726b276" target="_blank">09364dd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -525,8 +525,6 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    ._.DS_Store
     Ignored:    ._Rplots.pdf
-    Ignored:    ._Rplots_largeViz.pdf
-    Ignored:    ._Rplots_separate.pdf
     Ignored:    .__workflowr.yml
     Ignored:    ._neural_scRNAseq.Rproj
     Ignored:    analysis/.DS_Store
@@ -574,6 +572,8 @@ Ignored files:
     Ignored:    analysis/04-clustering_cache/
     Ignored:    analysis/04.1-cell_cycle_cache/
     Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/06-clustering-all-timepoints_cache/
+    Ignored:    analysis/07-cluster-analysis-all-timepoints_cache/
     Ignored:    analysis/Lam-01-NSC_integration_cache/
     Ignored:    analysis/Lam-02-NSC_annotation_cache/
     Ignored:    analysis/NSC-1-clustering_cache/
@@ -582,8 +582,11 @@ Ignored files:
     Ignored:    analysis/TDP-02-quality_control_cache/
     Ignored:    analysis/TDP-03-filtering_cache/
     Ignored:    analysis/TDP-04-clustering_cache/
+    Ignored:    analysis/TDP-05-00-filtering-plasmid-QC_cache/
+    Ignored:    analysis/TDP-06-cluster_analysis_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/figure/
     Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
     Ignored:    analysis/organoid-01-clustering_cache/
     Ignored:    analysis/organoid-02-integration_cache/
@@ -600,13 +603,17 @@ Ignored files:
     Ignored:    analysis/organoid-08-conos-comparison_cache/
     Ignored:    analysis/organoid-0x-sample_integration_cache/
     Ignored:    analysis/sample5_QC_cache/
+    Ignored:    analysis/timepoints-01-organoid-integration_cache/
     Ignored:    data/.DS_Store
     Ignored:    data/._.DS_Store
     Ignored:    data/._.smbdeleteAAA17ed8b4b
     Ignored:    data/._Lam_figure2_markers.R
+    Ignored:    data/._Reactive_astrocytes_markers.xlsx
     Ignored:    data/._known_NSC_markers.R
     Ignored:    data/._known_cell_type_markers.R
     Ignored:    data/._metadata.csv
+    Ignored:    data/._reactive_astrocyte_markers.R
+    Ignored:    data/._~$Reactive_astrocytes_markers.xlsx
     Ignored:    data/data_sushi/
     Ignored:    data/filtered_feature_matrices/
     Ignored:    output/.DS_Store
@@ -659,6 +666,7 @@ Ignored files:
     Ignored:    output/so_04-stage_integration.rds
     Ignored:    output/so_04_1_cell_cycle.rds
     Ignored:    output/so_04_clustering.rds
+    Ignored:    output/so_06-clustering_all_timepoints.rds
     Ignored:    output/so_0x-sample_integration.rds
     Ignored:    output/so_TDP_04_clustering.rds
     Ignored:    output/so_TDP_05_plasmid_expression.rds
@@ -667,11 +675,12 @@ Ignored files:
     Ignored:    output/so_merged_organoid-02-integration.rds
     Ignored:    output/so_organoid-01-clustering.rds
     Ignored:    output/so_sample_organoid-01-clustering.rds
+    Ignored:    scripts/._bu_Rcode.R
+    Ignored:    scripts/._plasmid_expression.sh
+    Ignored:    scripts/._prepare_salmon_transcripts.R
 
 Untracked files:
     Untracked:  Rplots.pdf
-    Untracked:  Rplots_largeViz.pdf
-    Untracked:  Rplots_separate.pdf
     Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
     Untracked:  analysis/additional_filtering.Rmd
     Untracked:  analysis/additional_filtering_clustering.Rmd
@@ -688,7 +697,9 @@ Untracked files:
     Untracked:  data/Lam_et_al/
     Untracked:  data/Sep2020/
     Untracked:  data/reference/
-    Untracked:  scripts/
+    Untracked:  data/~$Reactive_astrocytes_markers.xlsx
+    Untracked:  scripts/bu_Rcode.R
+    Untracked:  scripts/salmon-latest_linux_x86_64/
 
 Unstaged changes:
     Modified:   analysis/05-annotation.Rmd
@@ -697,8 +708,8 @@ Unstaged changes:
     Modified:   analysis/_site.yml
     Modified:   analysis/organoid-02-integration.Rmd
     Modified:   analysis/organoid-04-group_integration.Rmd
-    Modified:   analysis/organoid-04-stage_integration.Rmd
     Modified:   analysis/organoid-06-conos-analysis.Rmd
+    Modified:   analysis/timepoints-01-organoid-integration.Rmd
 
 </code></pre>
 <p>
@@ -742,6 +753,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/09364dd84bca04a00bca10d71f6f9869f726b276/analysis/TDP-05-plasmid_expression.Rmd" target="_blank">09364dd</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+<td>
+use corrected alevin counts and fix cell barcode matching
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/4cda3026778c89b1d27a16204998ba1c141413d8/docs/TDP-05-plasmid_expression.html" target="_blank">4cda302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/10a776297db206bccea379a6a94a6b13fafbad1b/analysis/TDP-05-plasmid_expression.Rmd" target="_blank">10a7762</a>
 </td>
 <td>
@@ -774,7 +819,7 @@ library(tximport)</code></pre>
 <p>We combine the quantification of the plasmid transcript and the endogenous TDP-43 with the CellRanger count matrix.</p>
 <pre class="r"><code>sce &lt;- readRDS(file.path(&quot;output&quot;, &quot;sce_TDP_03_filtering.rds&quot;))
 ## we only keep the four samples of the TDP-43 experiment
-sample_ids &lt;- c(&quot;TDP2wON&quot;, &quot;TDP4wOFF&quot;, &quot;TDP4wONa&quot;, &quot;TDP4wONb&quot;)
+sample_ids &lt;- c(&quot;TDP4wOFF&quot;, &quot;TDP2wON&quot;, &quot;TDP4wONa&quot;, &quot;TDP4wONb&quot;)
 sce &lt;- sce[,colData(sce)$sample_id %in% sample_ids]
 sce$sample_id &lt;- droplevels(sce$sample_id)</code></pre>
 <pre class="r"><code>samples &lt;- c(&quot;no1_Neural_cuture_d_96_TDP-43-HA_4w_DOXoff&quot;, 
@@ -844,12 +889,123 @@ so &lt;- RunUMAP(so, reduction = &quot;pca&quot;, dims = seq_len(20),
 <pre class="r"><code># top genes that are associated with the first two PCs
 VizDimLoadings(so, dims = 1:2, reduction = &quot;pca&quot;)</code></pre>
 <p><img src="figure/TDP-05-plasmid_expression.Rmd/unnamed-chunk-2-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4cda3026778c89b1d27a16204998ba1c141413d8/docs/figure/TDP-05-plasmid_expression.Rmd/unnamed-chunk-2-1.png" target="_blank">4cda302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## PCA plot 
 DimPlot(so, reduction = &quot;pca&quot;, group.by = &quot;sample_id&quot;)</code></pre>
 <p><img src="figure/TDP-05-plasmid_expression.Rmd/unnamed-chunk-3-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4cda3026778c89b1d27a16204998ba1c141413d8/docs/figure/TDP-05-plasmid_expression.Rmd/unnamed-chunk-3-1.png" target="_blank">4cda302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># elbow plot with the ranking of PCs based on the % of variance explained
 ElbowPlot(so, ndims = 30)</code></pre>
 <p><img src="figure/TDP-05-plasmid_expression.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4cda3026778c89b1d27a16204998ba1c141413d8/docs/figure/TDP-05-plasmid_expression.Rmd/unnamed-chunk-4-1.png" target="_blank">4cda302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="clustering" class="section level2">
@@ -874,6 +1030,43 @@ ps &lt;- lapply(c(&quot;sample_id&quot;, &quot;ident&quot;), function(u) {
 })
 plot_grid(plotlist = ps, ncol = 1)</code></pre>
 <p><img src="figure/TDP-05-plasmid_expression.Rmd/dr-plots-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dr-plots-1">
+Past versions of dr-plots-1.png
+</button>
+</p>
+<div id="fig-dr-plots-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4cda3026778c89b1d27a16204998ba1c141413d8/docs/figure/TDP-05-plasmid_expression.Rmd/dr-plots-1.png" target="_blank">4cda302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="qc-on-dr-plots" class="section level2 tabset">
 <h2>QC on DR plots</h2>
@@ -901,26 +1094,248 @@ for (id in ids) {
 <div id="sum" class="section level3">
 <h3>sum</h3>
 <p><img src="figure/TDP-05-plasmid_expression.Rmd/DR-QC-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-DR-QC-1">
+Past versions of DR-QC-1.png
+</button>
+</p>
+<div id="fig-DR-QC-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4cda3026778c89b1d27a16204998ba1c141413d8/docs/figure/TDP-05-plasmid_expression.Rmd/DR-QC-1.png" target="_blank">4cda302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="detected" class="section level3">
 <h3>detected</h3>
 <p><img src="figure/TDP-05-plasmid_expression.Rmd/DR-QC-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-DR-QC-2">
+Past versions of DR-QC-2.png
+</button>
+</p>
+<div id="fig-DR-QC-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4cda3026778c89b1d27a16204998ba1c141413d8/docs/figure/TDP-05-plasmid_expression.Rmd/DR-QC-2.png" target="_blank">4cda302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="subsets_mt_percent" class="section level3">
 <h3>subsets_Mt_percent</h3>
 <p><img src="figure/TDP-05-plasmid_expression.Rmd/DR-QC-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-DR-QC-3">
+Past versions of DR-QC-3.png
+</button>
+</p>
+<div id="fig-DR-QC-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4cda3026778c89b1d27a16204998ba1c141413d8/docs/figure/TDP-05-plasmid_expression.Rmd/DR-QC-3.png" target="_blank">4cda302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="ensg00000120948.tardbp" class="section level3">
 <h3>ENSG00000120948.TARDBP</h3>
 <p><img src="figure/TDP-05-plasmid_expression.Rmd/DR-QC-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-DR-QC-4">
+Past versions of DR-QC-4.png
+</button>
+</p>
+<div id="fig-DR-QC-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4cda3026778c89b1d27a16204998ba1c141413d8/docs/figure/TDP-05-plasmid_expression.Rmd/DR-QC-4.png" target="_blank">4cda302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="ensg00000120948.tardbp-alevin" class="section level3">
 <h3>ENSG00000120948.TARDBP-alevin</h3>
 <p><img src="figure/TDP-05-plasmid_expression.Rmd/DR-QC-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-DR-QC-5">
+Past versions of DR-QC-5.png
+</button>
+</p>
+<div id="fig-DR-QC-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4cda3026778c89b1d27a16204998ba1c141413d8/docs/figure/TDP-05-plasmid_expression.Rmd/DR-QC-5.png" target="_blank">4cda302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="tdp43-ha" class="section level3">
 <h3>TDP43-HA</h3>
 <p><img src="figure/TDP-05-plasmid_expression.Rmd/DR-QC-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-DR-QC-6">
+Past versions of DR-QC-6.png
+</button>
+</p>
+<div id="fig-DR-QC-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4cda3026778c89b1d27a16204998ba1c141413d8/docs/figure/TDP-05-plasmid_expression.Rmd/DR-QC-6.png" target="_blank">4cda302</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-10-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="save-seurat-object-to-rds" class="section level2">
