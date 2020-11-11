@@ -32,7 +32,7 @@ We combine the quantification of the plasmid transcript and the endogenous TDP-4
 ```{r read-sce}
 sce <- readRDS(file.path("output", "sce_TDP_03_filtering.rds"))
 ## we only keep the four samples of the TDP-43 experiment
-sample_ids <- c("TDP2wON", "TDP4wOFF", "TDP4wONa", "TDP4wONb")
+sample_ids <- c("TDP4wOFF", "TDP2wON", "TDP4wONa", "TDP4wONb")
 sce <- sce[,colData(sce)$sample_id %in% sample_ids]
 sce$sample_id <- droplevels(sce$sample_id)
 ```
@@ -57,6 +57,7 @@ for (i in 1:4) {
 txi <- txi[,colnames(txi) != ""]
 rownames(txi) <- c("ENSG00000120948.TARDBP-alevin", "TDP43-HA")
 ```
+
 We add the alevin counts to the CellRanger matrix.
 ```{r combine-counts}
 ## add two new rows to counts matrix and replace the counts for matching 
