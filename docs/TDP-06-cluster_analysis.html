@@ -504,16 +504,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6a0642f4cef74d924b470d23d7f4c6800c2d5880targetblank6a0642fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6a0642f4cef74d924b470d23d7f4c6800c2d5880" target="_blank">6a0642f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree21fdefb0ebf07ee0bf6854901e5a268c1bc4142btargetblank21fdefba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/21fdefb0ebf07ee0bf6854901e5a268c1bc4142b" target="_blank">21fdefb</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6a0642f4cef74d924b470d23d7f4c6800c2d5880targetblank6a0642fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree21fdefb0ebf07ee0bf6854901e5a268c1bc4142btargetblank21fdefba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6a0642f4cef74d924b470d23d7f4c6800c2d5880" target="_blank">6a0642f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/21fdefb0ebf07ee0bf6854901e5a268c1bc4142b" target="_blank">21fdefb</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -698,12 +698,12 @@ Untracked files:
     Untracked:  data/reference/
     Untracked:  data/~$Reactive_astrocytes_markers.xlsx
     Untracked:  scripts/bu_Rcode.R
+    Untracked:  scripts/salmon-latest_linux_x86_64/
 
 Unstaged changes:
     Modified:   analysis/05-annotation.Rmd
     Modified:   analysis/Lam-02-NSC_annotation.Rmd
     Modified:   analysis/TDP-04-clustering.Rmd
-    Modified:   analysis/TDP-05-00-filtering-plasmid-QC.Rmd
     Modified:   analysis/_site.yml
     Modified:   analysis/organoid-02-integration.Rmd
     Modified:   analysis/organoid-04-group_integration.Rmd
@@ -747,6 +747,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/a31892efa9c08ee9c7a82e3c092bb2c06c877ecd/docs/TDP-06-cluster_analysis.html" target="_blank">a31892e</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -903,7 +920,7 @@ colData(sce) &lt;- as.data.frame(colData(sce)) %&gt;%
 <pre class="r"><code>cluster_cols &lt;- grep(&quot;res.[0-9]&quot;, colnames(colData(sce)), value = TRUE)
 sapply(colData(sce)[cluster_cols], nlevels)</code></pre>
 <pre><code>RNA_snn_res.0.2 RNA_snn_res.0.4 RNA_snn_res.0.8   RNA_snn_res.1 
-             10              17              25              25 </code></pre>
+             11              17              24              25 </code></pre>
 </div>
 <div id="cluster-sample-counts" class="section level1">
 <h1>Cluster-sample counts</h1>
@@ -914,23 +931,23 @@ sce$cluster_id &lt;- Idents(so)
 (n_cells &lt;- table(sce$cluster_id, sce$sample_id))</code></pre>
 <pre><code>    
      TDP2wON TDP4wOFF TDP4wONa TDP4wONb
-  0     1203     1042     1627     1400
-  1     1171      935     1617      942
-  2      872      780     1022     1059
-  3      718      613      915      756
-  4      674      599      850      825
-  5      608      552      986      771
-  6      489      331      490      500
-  7      576      414      478      242
-  8      368      334      518      428
-  9      251      178      397      298
-  10     207      174      306      253
-  11      64       64      232      143
-  12      93        4       85       37
-  13      51       14       42       32
-  14      41       17       25       26
+  0     1188     1015     1599     1384
+  1     1168      938     1621      943
+  2      907      811     1066     1091
+  3      725      619      925      775
+  4      616      560      996      771
+  5      672      594      846      802
+  6      576      411      477      243
+  7      375      348      530      446
+  8      450      307      444      467
+  9      254      176      396      304
+  10     207      174      307      251
+  11      63       64      231      143
+  12      97        3       88       36
+  13      49       14       42       32
+  14      37       17       23       24
   15      12       25       32        9
-  16       8        1       43        1</code></pre>
+  16      10        1       42        1</code></pre>
 </div>
 <div id="relative-cluster-abundances" class="section level1">
 <h1>Relative cluster-abundances</h1>
@@ -1248,7 +1265,7 @@ gs &lt;- lapply(scran_markers, function(u) rownames(u)[u$Top %in% 1:2])
 lapply(gs, function(x) str_split(x, pattern = &quot;\\.&quot;, simplify = TRUE)[,2])</code></pre>
 <pre><code>$`0`
  [1] &quot;SAMD11&quot;  &quot;SCG2&quot;    &quot;SCRG1&quot;   &quot;FABP7&quot;   &quot;TAC1&quot;    &quot;STMN2&quot;   &quot;RTN1&quot;   
- [8] &quot;MT-ND4L&quot; &quot;NOC2L&quot;   &quot;UTS2&quot;    &quot;IGFBP2&quot;  &quot;IGFBP5&quot;  &quot;VGF&quot;     &quot;SEZ6L2&quot; 
+ [8] &quot;SEZ6L2&quot;  &quot;MT-ND4L&quot; &quot;NOC2L&quot;   &quot;UTS2&quot;    &quot;IGFBP5&quot;  &quot;GAP43&quot;   &quot;VGF&quot;    
 [15] &quot;MT-ND5&quot; 
 
 $`1`
@@ -1257,30 +1274,30 @@ $`1`
 
 $`2`
  [1] &quot;UTS2&quot;    &quot;IGFBP2&quot;  &quot;SCRG1&quot;   &quot;PNOC&quot;    &quot;STMN2&quot;   &quot;RTN1&quot;    &quot;SEZ6L2&quot; 
- [8] &quot;SAMD11&quot;  &quot;VGF&quot;     &quot;LAPTM4B&quot; &quot;PCP4&quot;    &quot;MT-ND4L&quot;
+ [8] &quot;SAMD11&quot;  &quot;GAP43&quot;   &quot;VGF&quot;     &quot;LAPTM4B&quot; &quot;PCP4&quot;    &quot;MT-ND4L&quot;
 
 $`3`
-[1] &quot;S100A10&quot; &quot;IGFBP5&quot;  &quot;FABP7&quot;   &quot;TAC1&quot;    &quot;STMN2&quot;   &quot;UTS2&quot;    &quot;SCG2&quot;   
-[8] &quot;VGF&quot;     &quot;MT-ND5&quot; 
-
-$`4`
-[1] &quot;S100A10&quot; &quot;VGF&quot;     &quot;PNOC&quot;    &quot;STMN2&quot;   &quot;IGFBP5&quot;  &quot;SCRG1&quot;   &quot;TAC1&quot;   
+[1] &quot;S100A10&quot; &quot;IGFBP5&quot;  &quot;FABP7&quot;   &quot;TAC1&quot;    &quot;STMN2&quot;   &quot;UTS2&quot;    &quot;VGF&quot;    
 [8] &quot;MT-ND5&quot; 
 
-$`5`
+$`4`
 [1] &quot;UTS2&quot;   &quot;TRH&quot;    &quot;CRH&quot;    &quot;STMN2&quot;  &quot;NTS&quot;    &quot;TAC1&quot;   &quot;CSRP2&quot;  &quot;RTN1&quot;  
 [9] &quot;MT-ND5&quot;
 
-$`6`
- [1] &quot;IGFBP5&quot;  &quot;NEFM&quot;    &quot;PNOC&quot;    &quot;STMN2&quot;   &quot;LAPTM4B&quot; &quot;RTN1&quot;    &quot;MT-ND4L&quot;
- [8] &quot;SAMD11&quot;  &quot;GAP43&quot;   &quot;SPP1&quot;    &quot;VGF&quot;     &quot;MT-ND5&quot; 
+$`5`
+ [1] &quot;S100A10&quot; &quot;VGF&quot;     &quot;PNOC&quot;    &quot;STMN2&quot;   &quot;SAMD11&quot;  &quot;IGFBP5&quot;  &quot;SCRG1&quot;  
+ [8] &quot;TAC1&quot;    &quot;MT-RNR2&quot; &quot;MT-ND5&quot; 
 
-$`7`
+$`6`
  [1] &quot;PTGDS&quot;   &quot;DLK1&quot;    &quot;METRN&quot;   &quot;TTYH1&quot;   &quot;MT-CO1&quot;  &quot;C1orf61&quot; &quot;CLU&quot;    
  [8] &quot;LY6H&quot;    &quot;VIM&quot;     &quot;MT-CO3&quot; 
 
-$`8`
+$`7`
 [1] &quot;UTS2&quot;   &quot;CRH&quot;    &quot;STMN2&quot;  &quot;PCP4&quot;   &quot;MT-ND5&quot;
+
+$`8`
+ [1] &quot;IGFBP5&quot;  &quot;NEFM&quot;    &quot;PNOC&quot;    &quot;STMN2&quot;   &quot;RTN1&quot;    &quot;MT-ND4L&quot; &quot;SAMD11&quot; 
+ [8] &quot;GAP43&quot;   &quot;SPP1&quot;    &quot;VGF&quot;     &quot;LAPTM4B&quot; &quot;MT-ND5&quot; 
 
 $`9`
  [1] &quot;S100A10&quot; &quot;TAC1&quot;    &quot;CRH&quot;     &quot;STMN2&quot;   &quot;LYPD1&quot;   &quot;IGFBP5&quot;  &quot;VGF&quot;    
@@ -1291,14 +1308,14 @@ $`10`
 
 $`11`
  [1] &quot;WDPCP&quot;   &quot;IGFBP5&quot;  &quot;NRN1&quot;    &quot;TAC1&quot;    &quot;CRH&quot;     &quot;STMN2&quot;   &quot;SNCG&quot;   
- [8] &quot;RTN1&quot;    &quot;MT-ND5&quot;  &quot;CHL1&quot;    &quot;GPX1&quot;    &quot;ATP2B1&quot;  &quot;CALB2&quot;   &quot;MT-ND4L&quot;
+ [8] &quot;MT-ND5&quot;  &quot;CHL1&quot;    &quot;GPX1&quot;    &quot;ATP2B1&quot;  &quot;RTN1&quot;    &quot;CALB2&quot;   &quot;MT-ND4L&quot;
 
 $`12`
-[1] &quot;FGF18&quot;  &quot;NPTX2&quot;  &quot;STMN2&quot;  &quot;MEF2A&quot;  &quot;PCP4&quot;   &quot;MT-CO2&quot;
+[1] &quot;NPTX2&quot;  &quot;STMN2&quot;  &quot;&quot;       &quot;FGF18&quot;  &quot;MEF2A&quot;  &quot;MT-ND4&quot;
 
 $`13`
- [1] &quot;VIM&quot;     &quot;CKB&quot;     &quot;PCLAF&quot;   &quot;METRN&quot;   &quot;GFAP&quot;    &quot;MT-CO1&quot;  &quot;MT-ND4L&quot;
- [8] &quot;C1orf61&quot; &quot;SPP1&quot;    &quot;TYMS&quot;    &quot;MT-ND4&quot; 
+ [1] &quot;C1orf61&quot; &quot;VIM&quot;     &quot;CKB&quot;     &quot;PCLAF&quot;   &quot;METRN&quot;   &quot;GFAP&quot;    &quot;MT-ND4&quot; 
+ [8] &quot;SPP1&quot;    &quot;TYMS&quot;    &quot;MT-CO1&quot;  &quot;MT-ND4L&quot;
 
 $`14`
 [1] &quot;SPP1&quot;  &quot;VIM&quot;   &quot;CRYAB&quot; &quot;FTL&quot;   &quot;DDIT3&quot;
@@ -2260,6 +2277,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a31892efa9c08ee9c7a82e3c092bb2c06c877ecd/docs/figure/TDP-06-cluster_analysis.Rmd/astrocyte-markers-heatmap-1.png" target="_blank">a31892e</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/4622291649be7c6a0a91bc20883f9c342e9cdd7e/docs/figure/TDP-06-cluster_analysis.Rmd/astrocyte-markers-heatmap-1.png" target="_blank">4622291</a>
 </td>
 <td>
@@ -2322,6 +2350,43 @@ hm &lt;- Heatmap(mat,
     top_annotation = col_anno)
 draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
 <p><img src="figure/TDP-06-cluster_analysis.Rmd/astrocyte-markers-glial-clusters-heatmap-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-astrocyte-markers-glial-clusters-heatmap-1">
+Past versions of astrocyte-markers-glial-clusters-heatmap-1.png
+</button>
+</p>
+<div id="fig-astrocyte-markers-glial-clusters-heatmap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a31892efa9c08ee9c7a82e3c092bb2c06c877ecd/docs/figure/TDP-06-cluster_analysis.Rmd/astrocyte-markers-glial-clusters-heatmap-1.png" target="_blank">a31892e</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="dr-colored-by-reactive-astrocyte-marker-expression" class="section level2 tabset">
@@ -2369,6 +2434,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a31892efa9c08ee9c7a82e3c092bb2c06c877ecd/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-1.png" target="_blank">a31892e</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/4622291649be7c6a0a91bc20883f9c342e9cdd7e/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-1.png" target="_blank">4622291</a>
 </td>
 <td>
@@ -2408,6 +2484,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a31892efa9c08ee9c7a82e3c092bb2c06c877ecd/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-2.png" target="_blank">a31892e</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/4622291649be7c6a0a91bc20883f9c342e9cdd7e/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-2.png" target="_blank">4622291</a>
@@ -2451,6 +2538,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a31892efa9c08ee9c7a82e3c092bb2c06c877ecd/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-3.png" target="_blank">a31892e</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/4622291649be7c6a0a91bc20883f9c342e9cdd7e/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-3.png" target="_blank">4622291</a>
 </td>
 <td>
@@ -2492,6 +2590,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a31892efa9c08ee9c7a82e3c092bb2c06c877ecd/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-4.png" target="_blank">a31892e</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/4622291649be7c6a0a91bc20883f9c342e9cdd7e/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-4.png" target="_blank">4622291</a>
 </td>
 <td>
@@ -2531,6 +2640,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/a31892efa9c08ee9c7a82e3c092bb2c06c877ecd/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-5.png" target="_blank">a31892e</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/4622291649be7c6a0a91bc20883f9c342e9cdd7e/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-5.png" target="_blank">4622291</a>
