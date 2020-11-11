@@ -294,7 +294,7 @@ labs <- lapply(fs, function(x) gsub(".*\\.", "",x))
 
 ## Heatmap of reactive astrocyte markers
 
-```{r astrocyte-markers-heatmap, fig.width = 10, fig.height = 18}
+```{r astrocyte-markers-heatmap, fig.width = 9, fig.height = 15}
 # compute cluster-marker means
 ms_by_cluster <- lapply(fs, function(gs) vapply(cs_by_k, function(i)
         Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
@@ -340,10 +340,61 @@ hm <- Heatmap(mat,
 draw(hm, annotation_legend_list = list(col_lgd))
 ```
 
+### Subset to only the glial cell clusters
+
+```{r astrocyte-markers-glial-clusters-heatmap, fig.width = 9, fig.height = 15}
+## subset to glial clusters
+subs <- c("1", "7", "13", "14", "15", "16")
+cs_by_k <- cs_by_k[subs]
+# compute cluster-marker means
+ms_by_cluster <- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+# prep. for plotting & scale b/w 0 and 1
+mat <- do.call("rbind", ms_by_cluster)
+mat <- muscat:::.scale(mat)
+rownames(mat) <- gs
+cols <- muscat:::.cluster_colors[seq_along(fs)]
+cols <- setNames(cols, names(fs))
+row_anno <- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = "white"))
+# percentage of cells from each of the samples per cluster
+sample_props <- prop.table(n_cells, margin = 1)
+col_mat <- as.matrix(unclass(sample_props[subs,]))
+sample_cols <- c("#882255", "#11588A",  "#117733", "#44AA99")
+sample_cols <- setNames(sample_cols, colnames(col_mat))
+col_anno <- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, "cm"),
+                               border = FALSE),
+    annotation_label = "fraction of sample\nin cluster",
+    gap = unit(10, "points"))
+col_lgd <- Legend(labels = names(sample_cols),
+       title = "sample",
+       legend_gp = gpar(fill = sample_cols))
+
+hm <- Heatmap(mat,
+    name = "scaled avg.\nexpression",
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    column_title = "cluster_id",
+    column_title_side = "bottom",
+    column_names_side = "bottom",
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = "white"),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))
+```
+
 
 ## DR colored by reactive astrocyte marker expression {.tabset}
 
-```{r dim-red-astrocyte-marker-expr, results = "asis", fig.width = 12, fig.height = 12}
+```{r dim-red-astrocyte-marker-expr, results = "asis", fig.width = 12, fig.height = 9}
 # UMAPs colored by marker-expression
 for (m in seq_along(fs)) {
     cat("### ", names(fs)[m], "\n")
