@@ -132,20 +132,35 @@ for (id in ids) {
 
 # Find markers using `scran`
 
-We identify candidate marker genes for each cluster that enable a separation of that group from all other groups.
+## Markers 
+We identify candidate marker genes for each cluster that enable a separation of that group from any other group. The null hypothesis is that the log FC between a cluster and the compared cluster is 2.
 
 ```{r scran-findMarkers}
 scran_markers <- findMarkers(sce, 
     groups = sce$cluster_id, block = sce$sample_id, 
-    direction = "up", lfc = 2, full.stats = TRUE)
+    direction = "up", lfc = 2, full.stats = TRUE, log.p = FALSE)
 ```
+
+We write tables with the top marker genes  per cluster.
+
+```{r write-scran-markers}
+gs2 <- lapply(scran_markers, function(u) u[u$Top %in% 1:2,])
+for (i in seq_along(gs2)) {
+  write.table(x = gs2[[i]] %>% as.data.frame %>% 
+                dplyr::mutate(gene = rownames(gs2[[i]])) %>%
+                dplyr::relocate(gene), 
+              file =  file.path("output", 
+                                paste0("TDP-06-no_integration_cluster", i-1, "_marker_genes.txt")),
+              sep = "\t", quote = FALSE, row.names = FALSE)
+}
+```
+
 
 ## Heatmap of mean marker-exprs. by cluster
 We aggregate the cells to pseudobulks and plot the average expression of the condidate marker genes in each of the clusters. 
 ```{r scran-markers-heatmap, fig.width = 12, fig.height = 6}
 ## including marker genes of rank 1 and 2
 gs <- lapply(scran_markers, function(u) rownames(u)[u$Top %in% 1:2])
-
 ## candidate cluster markers
 lapply(gs, function(x) {
   y <- str_split(x, pattern = "\\.", simplify = TRUE)[,2]
@@ -419,5 +434,12 @@ for (m in seq_along(fs)) {
     print(p)
     cat("\n\n")
 }
+```
+
+## Save cluster markers to RDS
+
+```{r save-rds}
+saveRDS(scran_markers, file.path("output", "TDP-06_scran_markers.rds"))
+saveRDS(so, file.path("output", "so_TDP-06-cluster-analysis.rds"))
 ```
 
