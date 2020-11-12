@@ -413,7 +413,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-11-11
+<strong>Last updated:</strong> 2020-11-12
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -504,16 +504,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreed96dd7c34ae8fd52cbffd2c911a0abd4bf31c4betargetblankd96dd7ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/d96dd7c34ae8fd52cbffd2c911a0abd4bf31c4be" target="_blank">d96dd7c</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeca4b784adb03800cb808bc3ea9a038e41a093739targetblankca4b784a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/ca4b784adb03800cb808bc3ea9a038e41a093739" target="_blank">ca4b784</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreed96dd7c34ae8fd52cbffd2c911a0abd4bf31c4betargetblankd96dd7ca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeca4b784adb03800cb808bc3ea9a038e41a093739targetblankca4b784a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/d96dd7c34ae8fd52cbffd2c911a0abd4bf31c4be" target="_blank">d96dd7c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/ca4b784adb03800cb808bc3ea9a038e41a093739" target="_blank">ca4b784</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -618,7 +618,9 @@ Ignored files:
     Ignored:    data/filtered_feature_matrices/
     Ignored:    output/.DS_Store
     Ignored:    output/._.DS_Store
-    Ignored:    output/._NSC_cluster1_marker_genes.txt
+    Ignored:    output/._NSC_cluster2_marker_genes.txt
+    Ignored:    output/._TDP-06-no_integration_cluster12_marker_genes.txt
+    Ignored:    output/._TDP-06-no_integration_cluster13_marker_genes.txt
     Ignored:    output/._organoid_integration_cluster1_marker_genes.txt
     Ignored:    output/Lam-01-clustering.rds
     Ignored:    output/NSC_1_clustering.rds
@@ -629,6 +631,24 @@ Ignored files:
     Ignored:    output/NSC_cluster5_marker_genes.txt
     Ignored:    output/NSC_cluster6_marker_genes.txt
     Ignored:    output/NSC_cluster7_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster0_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster10_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster11_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster12_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster13_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster14_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster15_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster16_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster17_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster1_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster2_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster3_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster4_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster5_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster6_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster7_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster8_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster9_marker_genes.txt
     Ignored:    output/additional_filtering.rds
     Ignored:    output/conos/
     Ignored:    output/conos_organoid-06-conos-analysis.rds
@@ -748,6 +768,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ca4b784adb03800cb808bc3ea9a038e41a093739/analysis/TDP-06-cluster_analysis.Rmd" target="_blank">ca4b784</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-12
+</td>
+<td>
+save marker genes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/ac0f11a8ced400f7581e4ce7640658ce2cde1a93/docs/TDP-06-cluster_analysis.html" target="_blank">ac0f11a</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1330,16 +1384,28 @@ khembach
 </div>
 <div id="find-markers-using-scran" class="section level1">
 <h1>Find markers using <code>scran</code></h1>
-<p>We identify candidate marker genes for each cluster that enable a separation of that group from all other groups.</p>
+<div id="markers" class="section level2">
+<h2>Markers</h2>
+<p>We identify candidate marker genes for each cluster that enable a separation of that group from any other group. The null hypothesis is that the log FC between a cluster and the compared cluster is 2.</p>
 <pre class="r"><code>scran_markers &lt;- findMarkers(sce, 
     groups = sce$cluster_id, block = sce$sample_id, 
-    direction = &quot;up&quot;, lfc = 2, full.stats = TRUE)</code></pre>
+    direction = &quot;up&quot;, lfc = 2, full.stats = TRUE, log.p = FALSE)</code></pre>
+<p>We write tables with the top marker genes per cluster.</p>
+<pre class="r"><code>gs2 &lt;- lapply(scran_markers, function(u) u[u$Top %in% 1:2,])
+for (i in seq_along(gs2)) {
+  write.table(x = gs2[[i]] %&gt;% as.data.frame %&gt;% 
+                dplyr::mutate(gene = rownames(gs2[[i]])) %&gt;%
+                dplyr::relocate(gene), 
+              file =  file.path(&quot;output&quot;, 
+                                paste0(&quot;TDP-06-no_integration_cluster&quot;, i-1, &quot;_marker_genes.txt&quot;)),
+              sep = &quot;\t&quot;, quote = FALSE, row.names = FALSE)
+}</code></pre>
+</div>
 <div id="heatmap-of-mean-marker-exprs.-by-cluster" class="section level2">
 <h2>Heatmap of mean marker-exprs. by cluster</h2>
 <p>We aggregate the cells to pseudobulks and plot the average expression of the condidate marker genes in each of the clusters.</p>
 <pre class="r"><code>## including marker genes of rank 1 and 2
 gs &lt;- lapply(scran_markers, function(u) rownames(u)[u$Top %in% 1:2])
-
 ## candidate cluster markers
 lapply(gs, function(x) {
   y &lt;- str_split(x, pattern = &quot;\\.&quot;, simplify = TRUE)[,2]
@@ -1447,6 +1513,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ac0f11a8ced400f7581e4ce7640658ce2cde1a93/docs/figure/TDP-06-cluster_analysis.Rmd/scran-markers-heatmap-1.png" target="_blank">ac0f11a</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/090b45070ee299cba5b44a7a96e9fdac2e9960ac/docs/figure/TDP-06-cluster_analysis.Rmd/scran-markers-heatmap-1.png" target="_blank">090b450</a>
@@ -2636,6 +2713,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ac0f11a8ced400f7581e4ce7640658ce2cde1a93/docs/figure/TDP-06-cluster_analysis.Rmd/astrocyte-markers-glial-clusters-heatmap-1.png" target="_blank">ac0f11a</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-11
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/090b45070ee299cba5b44a7a96e9fdac2e9960ac/docs/figure/TDP-06-cluster_analysis.Rmd/astrocyte-markers-glial-clusters-heatmap-1.png" target="_blank">090b450</a>
 </td>
 <td>
@@ -2994,6 +3082,12 @@ khembach
 </table>
 </div>
 </div>
+</div>
+</div>
+<div id="save-cluster-markers-to-rds" class="section level2">
+<h2>Save cluster markers to RDS</h2>
+<pre class="r"><code>saveRDS(scran_markers, file.path(&quot;output&quot;, &quot;TDP-06_scran_markers.rds&quot;))
+saveRDS(so, file.path(&quot;output&quot;, &quot;so_TDP-06-cluster-analysis.rds&quot;))</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -3109,7 +3203,6 @@ loaded via a namespace (and not attached):
 [137] rmarkdown_2.3             DelayedMatrixStats_1.10.1
 [139] Rtsne_0.15                git2r_0.27.1             
 [141] numDeriv_2016.8-1.1       ggbeeswarm_0.6.0         </code></pre>
-</div>
 </div>
 </div>
 </div>
