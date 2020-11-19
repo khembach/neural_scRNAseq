@@ -504,16 +504,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree21d8e8c0fbdde729444ade624e91d09097911c36targetblank21d8e8ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/21d8e8c0fbdde729444ade624e91d09097911c36" target="_blank">21d8e8c</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree8c0edda8b93f91a7d000a0a301a9a44e876293c5targetblank8c0eddaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/8c0edda8b93f91a7d000a0a301a9a44e876293c5" target="_blank">8c0edda</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree21d8e8c0fbdde729444ade624e91d09097911c36targetblank21d8e8ca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree8c0edda8b93f91a7d000a0a301a9a44e876293c5targetblank8c0eddaa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/21d8e8c0fbdde729444ade624e91d09097911c36" target="_blank">21d8e8c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/8c0edda8b93f91a7d000a0a301a9a44e876293c5" target="_blank">8c0edda</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -775,6 +775,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/8c0edda8b93f91a7d000a0a301a9a44e876293c5/analysis/TDP-07-cluster_12.Rmd" target="_blank">8c0edda</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-19
+</td>
+<td>
+no blocking
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/390fedee342dc10cd322203fefb3612cc22c2ed6/docs/TDP-07-cluster_12.html" target="_blank">390fede</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-19
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/21d8e8c0fbdde729444ade624e91d09097911c36/analysis/TDP-07-cluster_12.Rmd" target="_blank">21d8e8c</a>
 </td>
 <td>
@@ -837,599 +871,112 @@ dim(sce)</code></pre>
 <pre><code>[1] 13970 24123</code></pre>
 <pre class="r"><code>## marker for any other cluster
 ## UP
-any_up &lt;- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                      block = sce_sub$sample_id, direction = &quot;up&quot;, 
-                      lfc = 2, pval.type=&quot;any&quot;)</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 1 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 2 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 3 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 4 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 5 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 15</code></pre>
-<pre class="r"><code>## top 10 markers
+any_up &lt;- findMarkers(sce_sub, groups = sce_sub$cluster_id, direction = &quot;up&quot;, 
+                      lfc = 2, pval.type=&quot;any&quot;)
+## top 10 markers
 any_up[[&quot;12&quot;]][1:10,1:4]</code></pre>
 <pre><code>DataFrame with 10 rows and 4 columns
                               Top     p.value         FDR summary.logFC
                         &lt;integer&gt;   &lt;numeric&gt;   &lt;numeric&gt;     &lt;numeric&gt;
-ENSG00000106236.NPTX2           1 4.28405e-19 5.98482e-15      2.682297
-TDP43-HA                        1 9.99986e-01 1.00000e+00      1.747798
-ENSG00000156427.FGF18           2 1.00000e+00 1.00000e+00      1.854643
-ENSG00000068305.MEF2A           2 1.00000e+00 1.00000e+00      1.624630
-ENSG00000116717.GADD45A         3 1.00000e+00 1.00000e+00      1.222869
-ENSG00000130203.APOE            3 1.00000e+00 1.00000e+00      1.106295
-ENSG00000132635.PCED1A          3 1.00000e+00 1.00000e+00      1.377570
-ENSG00000183036.PCP4            4 1.00000e+00 1.00000e+00      1.633619
-ENSG00000197747.S100A10         5 1.00000e+00 1.00000e+00      0.753217
-ENSG00000175197.DDIT3           5 1.00000e+00 1.00000e+00      1.075995</code></pre>
+ENSG00000106236.NPTX2           1 2.26562e-22 3.16506e-18      2.831270
+ENSG00000156427.FGF18           2 9.91261e-01 1.00000e+00      1.867654
+ENSG00000183036.PCP4            3 1.00000e+00 1.00000e+00      1.647749
+TDP43-HA                        3 9.99994e-01 1.00000e+00      1.750398
+ENSG00000068305.MEF2A           4 1.00000e+00 1.00000e+00      1.605818
+ENSG00000132635.PCED1A          4 1.00000e+00 1.00000e+00      1.400512
+ENSG00000116717.GADD45A         6 1.00000e+00 1.00000e+00      1.227090
+ENSG00000187240.DYNC2H1         6 1.00000e+00 1.00000e+00      1.089005
+ENSG00000130203.APOE            6 1.00000e+00 1.00000e+00      1.112024
+ENSG00000197747.S100A10         9 1.00000e+00 1.00000e+00      0.787618</code></pre>
 <pre class="r"><code>## DOWN
 any_down &lt;- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                        block = sce_sub$sample_id, direction = &quot;down&quot;, 
-                        lfc = 2, pval.type=&quot;any&quot;)</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 1 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 2 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 3 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 4 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 5 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 15</code></pre>
-<pre class="r"><code>any_down[[&quot;12&quot;]][1:10,1:4]</code></pre>
+                        direction = &quot;down&quot;, 
+                        lfc = 2, pval.type=&quot;any&quot;)
+any_down[[&quot;12&quot;]][1:10,1:4]</code></pre>
 <pre><code>DataFrame with 10 rows and 4 columns
                               Top      p.value          FDR summary.logFC
                         &lt;integer&gt;    &lt;numeric&gt;    &lt;numeric&gt;     &lt;numeric&gt;
-ENSG00000197747.S100A10         1  3.52044e-05  8.19676e-02      -2.40744
-ENSG00000115457.IGFBP2          1  1.00000e+00  1.00000e+00      -1.85186
-ENSG00000115461.IGFBP5          1  8.43891e-01  1.00000e+00      -2.05806
-ENSG00000171951.SCG2            1  3.57320e-10  9.98353e-07      -2.36260
-ENSG00000175426.PCSK1           1  2.23788e-66  1.04211e-62      -2.72369
-ENSG00000147571.CRH             1 2.73658e-149 3.82300e-145      -3.38874
-ENSG00000049247.UTS2            2 4.09516e-117 2.86047e-113      -3.86898
-ENSG00000172020.GAP43           2  1.00000e+00  1.00000e+00      -1.83483
-ENSG00000006128.TAC1            2  1.15050e-33  4.01811e-30      -3.20934
-ENSG00000128564.VGF             2  9.03152e-03  1.00000e+00      -2.17053</code></pre>
+ENSG00000197747.S100A10         1  1.01182e-05  2.35586e-02      -2.39943
+ENSG00000115457.IGFBP2          1  1.00000e+00  1.00000e+00      -1.86749
+ENSG00000115461.IGFBP5          1  4.05389e-01  1.00000e+00      -2.06417
+ENSG00000171951.SCG2            1  4.50190e-13  1.25783e-09      -2.39547
+ENSG00000175426.PCSK1           1  6.20799e-71  2.89085e-67      -2.74919
+ENSG00000147571.CRH             1 3.14570e-164 4.39455e-160      -3.45347
+ENSG00000049247.UTS2            2 1.46581e-103  1.02386e-99      -3.83757
+ENSG00000172020.GAP43           2  1.00000e+00  1.00000e+00      -1.83240
+ENSG00000006128.TAC1            2  4.56656e-39  1.59487e-35      -3.23100
+ENSG00000128564.VGF             2  2.51249e-03  1.00000e+00      -2.17395</code></pre>
 <pre class="r"><code>## any default parameters
 any_default &lt;- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                        block = sce_sub$sample_id, pval.type=&quot;any&quot;)</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 1 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 2 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 3 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 4 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 5 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 15</code></pre>
-<pre class="r"><code>any_default[[&quot;12&quot;]][1:10,1:4]</code></pre>
+                        pval.type=&quot;any&quot;)
+any_default[[&quot;12&quot;]][1:10,1:4]</code></pre>
 <pre><code>DataFrame with 10 rows and 4 columns
                              Top      p.value          FDR summary.logFC
                        &lt;integer&gt;    &lt;numeric&gt;    &lt;numeric&gt;     &lt;numeric&gt;
-ENSG00000115461.IGFBP5         1 4.11036e-295 9.57030e-292     -2.007404
-ENSG00000175426.PCSK1          1 5.33377e-266 7.45128e-263     -2.723690
-ENSG00000175445.LPL            1  0.00000e+00  0.00000e+00     -0.544666
-ENSG00000147571.CRH            1  0.00000e+00  0.00000e+00     -3.442282
-ENSG00000148826.NKX6-2         1 8.88340e-302 2.48202e-298     -0.663731
-ENSG00000102468.HTR2A          1  0.00000e+00  0.00000e+00     -0.346255
-ENSG00000172137.CALB2          1 3.23111e-250 3.22419e-247     -0.804253
-ENSG00000115756.HPCAL1         2 4.76925e-213 2.66505e-210     -1.140708
-ENSG00000166407.LMO1           2 9.88023e-205 4.75955e-202     -0.622676
-ENSG00000069431.ABCC9          2 4.90206e-294 9.78312e-291     -0.892212</code></pre>
+ENSG00000115461.IGFBP5         1  0.00000e+00 2.25788e-321     -1.958679
+ENSG00000175426.PCSK1          1 7.15640e-258 5.26183e-255     -2.749195
+ENSG00000175445.LPL            1  0.00000e+00  0.00000e+00     -0.550130
+ENSG00000147571.CRH            1  0.00000e+00  0.00000e+00     -3.453471
+ENSG00000102468.HTR2A          1  0.00000e+00  0.00000e+00     -0.408254
+ENSG00000172137.CALB2          1 9.31601e-290 1.08454e-286     -0.779942
+ENSG00000147255.IGSF1          1 1.41743e-269 1.41439e-266     -0.350740
+ENSG00000115756.HPCAL1         2 1.87907e-234 1.14133e-231     -1.159961
+ENSG00000148826.NKX6-2         2 4.71313e-268 4.38950e-265     -0.663511
+ENSG00000069431.ABCC9          2 1.71935e-321 3.42776e-318     -1.018577</code></pre>
 <pre class="r"><code>## markers for all other clusters
 ## UP
 all_up &lt;- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                      block = sce_sub$sample_id, direction = &quot;up&quot;, 
-                      lfc = 2, pval.type=&quot;all&quot;)</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 1 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 2 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 3 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 4 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 5 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 15</code></pre>
-<pre class="r"><code>all_up[[&quot;12&quot;]][1:10,1:3]</code></pre>
+                      direction = &quot;up&quot;, 
+                      lfc = 2, pval.type=&quot;all&quot;)
+all_up[[&quot;12&quot;]][1:10,1:3]</code></pre>
 <pre><code>DataFrame with 10 rows and 3 columns
-                           p.value       FDR summary.logFC
-                         &lt;numeric&gt; &lt;numeric&gt;     &lt;numeric&gt;
-TDP43-HA                  0.999986         1      1.727443
-ENSG00000068305.MEF2A     1.000000         1      1.518248
-ENSG00000130203.APOE      1.000000         1      1.008032
-ENSG00000116717.GADD45A   1.000000         1      1.087205
-ENSG00000175197.DDIT3     1.000000         1      0.662130
-ENSG00000168003.SLC3A2    1.000000         1      0.654434
-ENSG00000164830.OXR1      1.000000         1      1.010881
-ENSG00000178567.EPM2AIP1  1.000000         1      0.873885
-ENSG00000123975.CKS2      1.000000         1      0.612537
-ENSG00000174021.GNG5      1.000000         1      0.700476</code></pre>
+                            p.value       FDR summary.logFC
+                          &lt;numeric&gt; &lt;numeric&gt;     &lt;numeric&gt;
+ENSG00000106236.NPTX2   1.55484e-06 0.0217211      2.364647
+ENSG00000156427.FGF18   9.91261e-01 1.0000000      1.807844
+TDP43-HA                9.99994e-01 1.0000000      1.732752
+ENSG00000132635.PCED1A  1.00000e+00 1.0000000      1.327038
+ENSG00000068305.MEF2A   1.00000e+00 1.0000000      1.522896
+ENSG00000187240.DYNC2H1 1.00000e+00 1.0000000      0.952902
+ENSG00000130203.APOE    1.00000e+00 1.0000000      1.015335
+ENSG00000116717.GADD45A 1.00000e+00 1.0000000      1.083348
+ENSG00000187244.BCAM    1.00000e+00 1.0000000      0.818770
+ENSG00000175197.DDIT3   1.00000e+00 1.0000000      0.684888</code></pre>
 <pre class="r"><code>## DOWN
 all_down &lt;- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                        block = sce_sub$sample_id, direction = &quot;down&quot;, 
-                        lfc = 2, pval.type=&quot;all&quot;)</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 1 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 2 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 3 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 4 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 5 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 15</code></pre>
-<pre class="r"><code>all_down[[&quot;12&quot;]][1:10,1:3]</code></pre>
+                        direction = &quot;down&quot;, 
+                        lfc = 2, pval.type=&quot;all&quot;)
+all_down[[&quot;12&quot;]][1:10,1:3]</code></pre>
 <pre><code>DataFrame with 10 rows and 3 columns
                           p.value       FDR summary.logFC
                         &lt;numeric&gt; &lt;numeric&gt;     &lt;numeric&gt;
-ENSG00000128564.VGF             1         1     -1.506826
-ENSG00000171951.SCG2            1         1     -1.477966
-ENSG00000172020.GAP43           1         1     -1.151456
-ENSG00000243449.C4orf48         1         1     -1.078962
-ENSG00000169567.HINT1           1         1     -0.929621
-ENSG00000176956.LY6H            1         1     -0.974516
-ENSG00000167552.TUBA1A          1         1     -0.701007
-ENSG00000205542.TMSB4X          1         1     -0.966615
-ENSG00000137285.TUBB2B          1         1     -0.717901
-ENSG00000104435.STMN2           1         1     -0.684823</code></pre>
+ENSG00000128564.VGF             1         1     -1.486591
+ENSG00000171951.SCG2            1         1     -1.476279
+ENSG00000172020.GAP43           1         1     -1.171562
+ENSG00000243449.C4orf48         1         1     -0.999043
+ENSG00000169567.HINT1           1         1     -0.910935
+ENSG00000176956.LY6H            1         1     -0.944435
+ENSG00000167552.TUBA1A          1         1     -0.706289
+ENSG00000205542.TMSB4X          1         1     -0.951074
+ENSG00000137285.TUBB2B          1         1     -0.741400
+ENSG00000104435.STMN2           1         1     -0.686553</code></pre>
 <pre class="r"><code>## no logFC cutoff and direction
 all_default &lt;- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                           block = sce_sub$sample_id, pval.type=&quot;all&quot;)</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 1 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 2 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 3 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 4 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 5 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 6 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 7 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 8 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 9 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 10 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 11 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 12 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 13 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 14 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 15 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 0</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 1</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 2</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 3</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 4</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 5</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 6</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 7</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 8</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 9</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 10</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 11</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 12</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 13</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 14</code></pre>
-<pre><code>Warning in FUN(...): no within-block comparison between 16 and 15</code></pre>
-<pre class="r"><code>all_default[[&quot;12&quot;]][1:10,1:3]</code></pre>
+                           pval.type=&quot;all&quot;)
+all_default[[&quot;12&quot;]][1:10,1:3]</code></pre>
 <pre><code>DataFrame with 10 rows and 3 columns
-                           p.value         FDR summary.logFC
-                         &lt;numeric&gt;   &lt;numeric&gt;     &lt;numeric&gt;
-ENSG00000068305.MEF2A  3.72096e-95 5.19818e-91      1.523421
-ENSG00000106236.NPTX2  4.15122e-90 2.89963e-86      2.365903
-ENSG00000171724.VAT1L  7.40799e-86 3.44965e-82     -0.659656
-ENSG00000115756.HPCAL1 1.16936e-83 4.08400e-80     -0.475947
-ENSG00000197406.DIO3   7.35966e-81 2.05629e-77     -0.761639
-ENSG00000128564.VGF    1.15333e-77 2.68533e-74     -1.506826
-TDP43-HA               1.11039e-74 2.21602e-71      1.725728
-ENSG00000137818.RPLP1  3.65119e-73 6.37589e-70      0.609642
-ENSG00000171951.SCG2   2.83462e-72 4.39995e-69     -1.471992
-ENSG00000161203.AP2M1  2.12509e-65 2.96875e-62     -1.055850</code></pre>
+                            p.value         FDR summary.logFC
+                          &lt;numeric&gt;   &lt;numeric&gt;     &lt;numeric&gt;
+ENSG00000197406.DIO3   2.12946e-101 2.97486e-97     -0.625671
+ENSG00000068305.MEF2A   5.34150e-94 3.73104e-90      1.522896
+ENSG00000128564.VGF     1.28745e-87 5.99522e-84     -1.486591
+ENSG00000106236.NPTX2   6.24255e-86 2.18021e-82      2.377799
+ENSG00000171951.SCG2    1.58359e-85 4.42455e-82     -1.525665
+ENSG00000171724.VAT1L   9.10156e-82 1.95512e-78     -0.646556
+ENSG00000115756.HPCAL1  9.79659e-82 1.95512e-78     -0.472824
+TDP43-HA                3.47730e-78 6.07223e-75      1.732752
+ENSG00000101489.CELF4   7.88379e-74 1.22374e-70     -0.618175
+ENSG00000182870.GALNT9  9.63322e-71 1.34576e-67     -0.320352</code></pre>
 </div>
 <div id="heatmap-of-mean-marker-exprs.-by-cluster" class="section level2">
 <h2>Heatmap of mean marker-exprs. by cluster</h2>
@@ -1464,16 +1011,238 @@ ENSG00000161203.AP2M1  2.12509e-65 2.96875e-62     -1.055850</code></pre>
 
 plot_marker_heatmap(any_up, &quot;12&quot;, top = 5, title = &quot;any UP&quot;)</code></pre>
 <p><img src="figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-any-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-scran-markers-heatmap-any-1">
+Past versions of scran-markers-heatmap-any-1.png
+</button>
+</p>
+<div id="fig-scran-markers-heatmap-any-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/390fedee342dc10cd322203fefb3612cc22c2ed6/docs/figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-any-1.png" target="_blank">390fede</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_marker_heatmap(any_down, &quot;12&quot;, top = 5, title = &quot;any DOWN&quot;)</code></pre>
 <p><img src="figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-any-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-scran-markers-heatmap-any-2">
+Past versions of scran-markers-heatmap-any-2.png
+</button>
+</p>
+<div id="fig-scran-markers-heatmap-any-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/390fedee342dc10cd322203fefb3612cc22c2ed6/docs/figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-any-2.png" target="_blank">390fede</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_marker_heatmap(any_default, &quot;12&quot;, top = 5, title = &quot;any default&quot;)</code></pre>
 <p><img src="figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-any-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-scran-markers-heatmap-any-3">
+Past versions of scran-markers-heatmap-any-3.png
+</button>
+</p>
+<div id="fig-scran-markers-heatmap-any-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/390fedee342dc10cd322203fefb3612cc22c2ed6/docs/figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-any-3.png" target="_blank">390fede</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_marker_heatmap(all_up, &quot;12&quot;, any = FALSE, top = 10, title = &quot;all UP&quot;)</code></pre>
 <p><img src="figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-all-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-scran-markers-heatmap-all-1">
+Past versions of scran-markers-heatmap-all-1.png
+</button>
+</p>
+<div id="fig-scran-markers-heatmap-all-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/390fedee342dc10cd322203fefb3612cc22c2ed6/docs/figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-all-1.png" target="_blank">390fede</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_marker_heatmap(all_down, &quot;12&quot;, any = FALSE, top = 10, title = &quot;all DOWN&quot;)</code></pre>
 <p><img src="figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-all-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-scran-markers-heatmap-all-2">
+Past versions of scran-markers-heatmap-all-2.png
+</button>
+</p>
+<div id="fig-scran-markers-heatmap-all-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/390fedee342dc10cd322203fefb3612cc22c2ed6/docs/figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-all-2.png" target="_blank">390fede</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plot_marker_heatmap(all_default, &quot;12&quot;, any = FALSE, top = 10, title = &quot;all default&quot;)</code></pre>
 <p><img src="figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-all-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-scran-markers-heatmap-all-3">
+Past versions of scran-markers-heatmap-all-3.png
+</button>
+</p>
+<div id="fig-scran-markers-heatmap-all-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/390fedee342dc10cd322203fefb3612cc22c2ed6/docs/figure/TDP-07-cluster_12.Rmd/scran-markers-heatmap-all-3.png" target="_blank">390fede</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
