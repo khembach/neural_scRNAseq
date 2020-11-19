@@ -65,39 +65,38 @@ dim(sce_sub)
 ```
 
 
-```{r scran-findMarkers}
+```{r scran-findMarkers, warning = FALSE}
 ## marker for any other cluster
 ## UP
-any_up <- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                      block = sce_sub$sample_id, direction = "up", 
+any_up <- findMarkers(sce_sub, groups = sce_sub$cluster_id, direction = "up", 
                       lfc = 2, pval.type="any")
 ## top 10 markers
 any_up[["12"]][1:10,1:4]
 ## DOWN
 any_down <- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                        block = sce_sub$sample_id, direction = "down", 
+                        direction = "down", 
                         lfc = 2, pval.type="any")
 any_down[["12"]][1:10,1:4]
 ## any default parameters
 any_default <- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                        block = sce_sub$sample_id, pval.type="any")
+                        pval.type="any")
 any_default[["12"]][1:10,1:4]
 
 
 ## markers for all other clusters
 ## UP
 all_up <- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                      block = sce_sub$sample_id, direction = "up", 
+                      direction = "up", 
                       lfc = 2, pval.type="all")
 all_up[["12"]][1:10,1:3]
 ## DOWN
 all_down <- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                        block = sce_sub$sample_id, direction = "down", 
+                        direction = "down", 
                         lfc = 2, pval.type="all")
 all_down[["12"]][1:10,1:3]
 ## no logFC cutoff and direction
 all_default <- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
-                           block = sce_sub$sample_id, pval.type="all")
+                           pval.type="all")
 all_default[["12"]][1:10,1:3]
 ```
 
