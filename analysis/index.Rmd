@@ -62,8 +62,11 @@ We quantified the transcript encoded by the plasmid and the endogenous TDP-43 wi
 - [Filtering and TDP-43 HA expression](TDP-05-00-filtering-plasmid-QC.html)
 - [Clustering (no integration)](TDP-05-plasmid_expression.html)
 - [Cluster analysis](TDP-06-cluster_analysis.html)
-    - [Analyiss of cluster 12 (TDP-HA positive)](TDP-07-cluster_12.html)
+    - [Analysis of cluster 12 (TDP-HA positive)](TDP-07-cluster_12.html)
+    
+We combine the TDP-HA samples with the D96 samples as controls (all samples are D96):
 
+- [Clustering (no integration)](TDP-08-clustering-timeline-HA.html)
 
 We combine the D223 samples with the P22, D56 and D96 samples:
 

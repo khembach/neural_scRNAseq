@@ -1,0 +1,143 @@
+---
+title: "Clustering of timeline and TDP-HA experiments"
+author: "Katharina Hembach"
+date: "21/01/2021"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+### Load packages
+```{r, message = FALSE}
+library(BiocParallel)
+library(ggplot2)
+library(dplyr)
+library(cowplot)
+library(ggplot2)
+library(Seurat)
+library(SingleCellExperiment)
+library(future)
+```
+
+## Load data
+
+```{r read-data}
+## Seurat objects with normalized data
+so_tdp <- readRDS(file.path("output", "so_TDP_05_plasmid_expression.rds"))
+so_tdp$group_id <- "D96"
+so_timeline <- readRDS(file.path("output", "so_06-clustering_all_timepoints.rds"))
+```
+We merge the samples from the two data sets into a Seurat object.
+```{r merge-so}
+## merge the two Seurat objects
+so <- merge(so_tdp, y = so_timeline, add.cell.ids = c("tdp_ha", "time_line"), 
+            project = "neural_cultures", merge.data = TRUE)
+
+so$group_id <- factor(so$group_id, levels = c("P22", "D52", "D96", "D223"))
+```
+
+
+## Variable features
+```{r variable-features-scaling}
+so <- FindVariableFeatures(so, nfeatures = 2000, 
+    selection.method = "vst", verbose = FALSE)
+so <- ScaleData(so, verbose = FALSE, vars.to.regress = c("sum", 
+                                                         "subsets_Mt_percent"))
+```
+
+
+## Dimension reduction 
+
+We perform dimension reduction with t-SNE and UMAP based on PCA results.
+```{r dimension-reduction, warning = FALSE}
+so <- RunPCA(so, npcs = 30, verbose = FALSE)
+so <- RunTSNE(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, do.fast = TRUE, verbose = FALSE)
+so <- RunUMAP(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, verbose = FALSE)
+```
+
+### Plot PCA results
+
+```{r, fig.width = 12, fig.height = 8}
+# top genes that are associated with the first two PCs
+VizDimLoadings(so, dims = 1:2, reduction = "pca")
+```
+
+```{r, fig.width = 10, fig.height = 8}
+## PCA plot 
+DimPlot(so, reduction = "pca", group.by = "sample_id")
+```
+
+```{r}
+# elbow plot with the ranking of PCs based on the % of variance explained
+ElbowPlot(so, ndims = 30)
+```
+
+
+## Clustering
+
+We cluster the cells using the reduced PCA dimensions.
+
+```{r clustering, warning = FALSE}
+so <- FindNeighbors(so, reduction = "pca", dims = seq_len(20), verbose = FALSE)
+for (res in c(0.2, 0.4, 0.8, 1))
+    so <- FindClusters(so, resolution = res, random.seed = 1, verbose = FALSE)
+```
+
+
+## Dimension reduction plots 
+
+We plot the dimension reduction (DR) and color by sample, group and cluster ID
+```{r dr-plots, fig.width = 10, fig.height = 9, warning = FALSE}
+thm <- theme(aspect.ratio = 1, legend.position = "none")
+ps <- lapply(c("sample_id", "group_id", "ident"), function(u) {
+    p1 <- DimPlot(so, reduction = "tsne", group.by = u) + thm
+    p2 <- DimPlot(so, reduction = "umap", group.by = u)
+    lgd <- get_legend(p2)
+    p2 <- p2 + thm
+    list(p1, p2, lgd)
+    plot_grid(p1, p2, lgd, nrow = 1,
+        rel_widths = c(1, 1, 0.5))
+})
+plot_grid(plotlist = ps, ncol = 1)
+```
+
+
+## QC on DR plots {.tabset}
+
+```{r DR-QC, results = "asis", fig.width = 12}
+cs <- sample(colnames(so), 1e4) ## subsample cells
+.plot_features <- function(so, dr, id) {
+    FeaturePlot(so, cells = cs, features = id, reduction = dr, pt.size = 0.4, 
+                cols = c("grey", "blue")) +
+        guides(col = guide_colourbar()) +
+        theme_void() + theme(aspect.ratio = 1)
+}
+ids <- c("sum", "detected", "subsets_Mt_percent", "ENSG00000120948.TARDBP", 
+         "ENSG00000120948.TARDBP-alevin", "TDP43-HA")
+for (id in ids) {
+    cat("### ", id, "\n")
+    p1 <- .plot_features(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none") + ggtitle("tSNE")
+    p2 <- .plot_features(so, "umap", id) + theme(legend.position = "none") + 
+      ggtitle("UMAP")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
+
+## Save Seurat object to RDS
+
+```{r}
+saveRDS(so, file.path("output", "so_08-clustering_timeline_HA.rds"))
+```
