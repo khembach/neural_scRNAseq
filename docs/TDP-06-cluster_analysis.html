@@ -395,7 +395,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -404,7 +404,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -413,10 +413,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2020-11-12
+<strong>Last updated:</strong> 2021-01-21
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -480,12 +480,75 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongdetected"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>Cache:</strong> detected </a>
 </p>
 </div>
-<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div id="strongCachestrongdetected" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+The following chunks had caches available:
+<ul>
+<li>
+astrocyte-markers-glial-clusters-heatmap
+</li>
+<li>
+astrocyte-markers-heatmap
+</li>
+<li>
+cell-cycle
+</li>
+<li>
+dim-red
+</li>
+<li>
+dim-red-astrocyte-marker-expr
+</li>
+<li>
+dim-red-expr
+</li>
+<li>
+known-markers-heatmap
+</li>
+<li>
+load-data
+</li>
+<li>
+load-libs
+</li>
+<li>
+read-astrocyte-markers
+</li>
+<li>
+read-virus-markers
+</li>
+<li>
+save-rds
+</li>
+<li>
+scran-findMarkers
+</li>
+<li>
+scran-markers-heatmap
+</li>
+<li>
+session-info-chunk-inserted-by-workflowr
+</li>
+<li>
+unnamed-chunk-1
+</li>
+<li>
+unnamed-chunk-2
+</li>
+<li>
+unnamed-chunk-3
+</li>
+<li>
+unnamed-chunk-4
+</li>
+<li>
+write-scran-markers
+</li>
+</ul>
+<p>To ensure reproducibility of the results, delete the cache directory <code>TDP-06-cluster_analysis_cache</code> and re-run the analysis. To have workflowr automatically delete the cache directory prior to building the file, set <code>delete_cache = TRUE</code> when running <code>wflow_build()</code> or <code>wflow_publish()</code>.</p>
 </div>
 </div>
 </div>
@@ -504,16 +567,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeca4b784adb03800cb808bc3ea9a038e41a093739targetblankca4b784a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/ca4b784adb03800cb808bc3ea9a038e41a093739" target="_blank">ca4b784</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6c9f7babc393cb53c49c53b9d88840afe3fbc631targetblank6c9f7baa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6c9f7babc393cb53c49c53b9d88840afe3fbc631" target="_blank">6c9f7ba</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeca4b784adb03800cb808bc3ea9a038e41a093739targetblankca4b784a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6c9f7babc393cb53c49c53b9d88840afe3fbc631targetblank6c9f7baa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/ca4b784adb03800cb808bc3ea9a038e41a093739" target="_blank">ca4b784</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6c9f7babc393cb53c49c53b9d88840afe3fbc631" target="_blank">6c9f7ba</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -584,6 +647,9 @@ Ignored files:
     Ignored:    analysis/TDP-04-clustering_cache/
     Ignored:    analysis/TDP-05-00-filtering-plasmid-QC_cache/
     Ignored:    analysis/TDP-05-plasmid_expression_cache/
+    Ignored:    analysis/TDP-06-cluster_analysis_cache/
+    Ignored:    analysis/TDP-07-cluster_12_cache/
+    Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
     Ignored:    analysis/figure/
@@ -612,7 +678,7 @@ Ignored files:
     Ignored:    data/._known_NSC_markers.R
     Ignored:    data/._known_cell_type_markers.R
     Ignored:    data/._metadata.csv
-    Ignored:    data/._reactive_astrocyte_markers.R
+    Ignored:    data/._virus_cell_tropism_markers.R
     Ignored:    data/._~$Reactive_astrocytes_markers.xlsx
     Ignored:    data/data_sushi/
     Ignored:    data/filtered_feature_matrices/
@@ -649,6 +715,7 @@ Ignored files:
     Ignored:    output/TDP-06-no_integration_cluster7_marker_genes.txt
     Ignored:    output/TDP-06-no_integration_cluster8_marker_genes.txt
     Ignored:    output/TDP-06-no_integration_cluster9_marker_genes.txt
+    Ignored:    output/TDP-06_scran_markers.rds
     Ignored:    output/additional_filtering.rds
     Ignored:    output/conos/
     Ignored:    output/conos_organoid-06-conos-analysis.rds
@@ -688,6 +755,7 @@ Ignored files:
     Ignored:    output/so_04_clustering.rds
     Ignored:    output/so_06-clustering_all_timepoints.rds
     Ignored:    output/so_0x-sample_integration.rds
+    Ignored:    output/so_TDP-06-cluster-analysis.rds
     Ignored:    output/so_TDP_04_clustering.rds
     Ignored:    output/so_TDP_05_plasmid_expression.rds
     Ignored:    output/so_additional_filtering_clustering.rds
@@ -717,6 +785,7 @@ Untracked files:
     Untracked:  data/Lam_et_al/
     Untracked:  data/Sep2020/
     Untracked:  data/reference/
+    Untracked:  data/virus_cell_tropism_markers.R
     Untracked:  data/~$Reactive_astrocytes_markers.xlsx
     Untracked:  scripts/bu_Rcode.R
     Untracked:  scripts/salmon-latest_linux_x86_64/
@@ -768,6 +837,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/6c9f7babc393cb53c49c53b9d88840afe3fbc631/analysis/TDP-06-cluster_analysis.Rmd" target="_blank">6c9f7ba</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-01-21
+</td>
+<td>
+heatmap with virus cell tropism markers
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/c56d284517ea613c9f0d948182f6adb79d7e9452/docs/TDP-06-cluster_analysis.html" target="_blank">c56d284</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2020-11-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -2644,9 +2747,9 @@ khembach
 <h3>Subset to only the glial cell clusters</h3>
 <pre class="r"><code>## subset to glial clusters
 subs &lt;- c(&quot;1&quot;, &quot;6&quot;, &quot;13&quot;, &quot;14&quot;, &quot;15&quot;, &quot;16&quot;)
-cs_by_k &lt;- cs_by_k[subs]
+cs_by_k_sub &lt;- cs_by_k[subs]
 # compute cluster-marker means
-ms_by_cluster &lt;- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+ms_by_cluster &lt;- lapply(fs, function(gs) vapply(cs_by_k_sub, function(i)
         Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
         numeric(length(gs))))
 # prep. for plotting &amp; scale b/w 0 and 1
@@ -3083,6 +3186,68 @@ khembach
 </div>
 </div>
 </div>
+</div>
+</div>
+<div id="marker-genes-for-virus-cell-tropism" class="section level1">
+<h1>Marker genes for virus cell tropism</h1>
+<pre class="r"><code>## source file with list of known marker genes
+source(file.path(&quot;data&quot;, &quot;virus_cell_tropism_markers.R&quot;))
+fs &lt;- lapply(fs, sapply, function(g)
+    grep(pattern = paste0(&quot;\\.&quot;, g, &quot;$&quot;), rownames(sce), value = TRUE)
+  )
+
+fs &lt;- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
+
+gs &lt;- gsub(&quot;.*\\.&quot;, &quot;&quot;, unlist(fs))
+ns &lt;- vapply(fs, length, numeric(1))
+ks &lt;- rep.int(names(fs), ns)
+labs &lt;- lapply(fs, function(x) gsub(&quot;.*\\.&quot;, &quot;&quot;,x))</code></pre>
+<div id="heatmap-of-virus-cell-tropism-markers" class="section level2">
+<h2>Heatmap of virus cell tropism markers</h2>
+<pre class="r"><code># compute cluster-marker means
+ms_by_cluster &lt;- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+# prep. for plotting &amp; scale b/w 0 and 1
+mat &lt;- do.call(&quot;rbind&quot;, ms_by_cluster)
+mat &lt;- muscat:::.scale(mat)
+rownames(mat) &lt;- gs
+cols &lt;- muscat:::.cluster_colors[seq_along(fs)]
+cols &lt;- setNames(cols, names(fs))
+row_anno &lt;- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = &quot;white&quot;))
+# percentage of cells from each of the samples per cluster
+sample_props &lt;- prop.table(n_cells, margin = 1)
+col_mat &lt;- as.matrix(unclass(sample_props))
+sample_cols &lt;- c(&quot;#882255&quot;, &quot;#11588A&quot;,  &quot;#117733&quot;, &quot;#44AA99&quot;)
+sample_cols &lt;- setNames(sample_cols, colnames(col_mat))
+col_anno &lt;- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, &quot;cm&quot;),
+                               border = FALSE),
+    annotation_label = &quot;fraction of sample\nin cluster&quot;,
+    gap = unit(10, &quot;points&quot;))
+col_lgd &lt;- Legend(labels = names(sample_cols),
+       title = &quot;sample&quot;,
+       legend_gp = gpar(fill = sample_cols))
+
+hm &lt;- Heatmap(mat,
+    name = &quot;scaled avg.\nexpression&quot;,
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    column_title = &quot;cluster_id&quot;,
+    column_title_side = &quot;bottom&quot;,
+    column_names_side = &quot;bottom&quot;,
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = &quot;white&quot;),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
+<p><img src="figure/TDP-06-cluster_analysis.Rmd/virus-markers-heatmap-1.png" width="864" style="display: block; margin: auto;" /></p>
 </div>
 <div id="save-cluster-markers-to-rds" class="section level2">
 <h2>Save cluster markers to RDS</h2>
