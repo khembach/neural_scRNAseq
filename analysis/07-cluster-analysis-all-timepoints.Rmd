@@ -134,7 +134,7 @@ for (id in ids) {
 
 We identify candidate marker genes for each cluster that enable a separation of that group from all other groups.
 
-```{r scran-findMarkers}
+```{r scran-findMarkers, warnings = FALSE}
 scran_markers <- findMarkers(sce, 
     groups = sce$cluster_id, block = sce$sample_id, 
     direction = "up", lfc = 2, full.stats = TRUE)
@@ -255,3 +255,71 @@ for (m in seq_along(fs)) {
     cat("\n\n")
 }
 ```
+
+
+# Marker genes for virus cell tropism
+
+```{r read-virus-markers}
+## source file with list of known marker genes
+source(file.path("data", "virus_cell_tropism_markers.R"))
+fs <- lapply(fs, sapply, function(g)
+    grep(pattern = paste0("\\.", g, "$"), rownames(sce), value = TRUE)
+  )
+
+fs <- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
+
+gs <- gsub(".*\\.", "", unlist(fs))
+ns <- vapply(fs, length, numeric(1))
+ks <- rep.int(names(fs), ns)
+labs <- lapply(fs, function(x) gsub(".*\\.", "",x))
+```
+
+## Heatmap of virus cell tropism markers
+
+```{r virus-markers-heatmap, fig.width = 9, fig.height = 10}
+# compute cluster-marker means
+ms_by_cluster <- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+# prep. for plotting & scale b/w 0 and 1
+mat <- do.call("rbind", ms_by_cluster)
+mat <- muscat:::.scale(mat)
+rownames(mat) <- gs
+cols <- muscat:::.cluster_colors[seq_along(fs)]
+cols <- setNames(cols, names(fs))
+row_anno <- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = "white"))
+# percentage of cells from each of the samples per cluster
+sample_props <- prop.table(n_cells, margin = 1)
+col_mat <- as.matrix(unclass(sample_props))
+sample_cols <- c("#882255", "#CC6677", "#11588A", "#88CCEE", "#117733",  
+                 "#44AA99",  "#FF8E21", "#FDC78E")
+sample_cols <- setNames(sample_cols, colnames(col_mat))
+col_anno <- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, "cm"),
+                               border = FALSE),
+    annotation_label = "fraction of sample\nin cluster",
+    gap = unit(10, "points"))
+col_lgd <- Legend(labels = names(sample_cols),
+       title = "sample",
+       legend_gp = gpar(fill = sample_cols))
+
+hm <- Heatmap(mat,
+    name = "scaled avg.\nexpression",
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    column_title = "cluster_id",
+    column_title_side = "bottom",
+    column_names_side = "bottom",
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = "white"),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))
+```
+
