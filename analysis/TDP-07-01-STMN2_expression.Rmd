@@ -116,7 +116,7 @@ plotTracks(c(dtrack, eTrack),
            # chromosome = chr, from = region_start, to = region_end,
            shape = "arrow", geneSymbols = TRUE, aggregateGroups=FALSE,
            groups = c("TDP4wOFF", "TDP2wON", "TDP4wONa", "TDP4wONb"),
-           stackedBars = FALSE, cex.legend = 4
+           stackedBars = FALSE, fontsize=13
            )
 
 ## one data track per sample
@@ -150,7 +150,7 @@ plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, eTrack),
            # chromosome = chr, from = region_start, to = region_end,
            shape = "arrow", geneSymbols = TRUE, aggregateGroups=FALSE,
            # groups = c("TDP4wOFF", "TDP2wON", "TDP4wONa", "TDP4wONb"),
-           stackedBars = FALSE, cex.legend = 4
+           stackedBars = FALSE, fontsize=13
            )
 
 ## zoom into intron 1 that contains the cryptic exon
@@ -164,7 +164,7 @@ plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, eTrack),
            chromosome = chr, from = region_start, to = region_end,
            shape = "arrow", geneSymbols = TRUE, aggregateGroups=FALSE,
            # groups = c("TDP4wOFF", "TDP2wON", "TDP4wONa", "TDP4wONb"),
-           stackedBars = FALSE, cex.legend = 4
+           stackedBars = FALSE, fontsize=13
            )
 ```
 
