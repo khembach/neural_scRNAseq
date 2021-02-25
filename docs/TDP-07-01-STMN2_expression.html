@@ -504,16 +504,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree85bfc607e67067dddf0d9eefe90b2a30a3e7d67btargetblank85bfc60a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/85bfc607e67067dddf0d9eefe90b2a30a3e7d67b" target="_blank">85bfc60</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6c24696df12b980903d432a8673d7a38f50d4fdatargetblank6c24696a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6c24696df12b980903d432a8673d7a38f50d4fda" target="_blank">6c24696</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree85bfc607e67067dddf0d9eefe90b2a30a3e7d67btargetblank85bfc60a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6c24696df12b980903d432a8673d7a38f50d4fdatargetblank6c24696a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/85bfc607e67067dddf0d9eefe90b2a30a3e7d67b" target="_blank">85bfc60</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6c24696df12b980903d432a8673d7a38f50d4fda" target="_blank">6c24696</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -597,6 +597,7 @@ Ignored files:
     Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/figure/
     Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
     Ignored:    analysis/organoid-01-clustering_cache/
     Ignored:    analysis/organoid-02-integration_cache/
@@ -801,6 +802,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/6c24696df12b980903d432a8673d7a38f50d4fda/analysis/TDP-07-01-STMN2_expression.Rmd" target="_blank">6c24696</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+<td>
+add cryptic exon location and splice junctions to plot
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/c350e92894809a4829798fe5d99a83f99e631271/docs/TDP-07-01-STMN2_expression.html" target="_blank">c350e92</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/85bfc607e67067dddf0d9eefe90b2a30a3e7d67b/analysis/TDP-07-01-STMN2_expression.Rmd" target="_blank">85bfc60</a>
 </td>
 <td>
@@ -954,23 +989,23 @@ summary(dat_ha)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   0.000   1.226   1.771   1.800   2.454   4.112 </code></pre>
 <pre class="r"><code>## select cells with high TDP-HA expression
-high &lt;- clus12[which(dat_ha &gt; 3.5)]
+high &lt;- clus12[,which(dat_ha &gt; 3.5)]
 high$barcode %&gt;% head</code></pre>
-<pre><code>AAAGGATGTGTCATTG-1.TDP2wON AAAGTGAAGAGATTCA-1.TDP2wON 
-      &quot;AAAGGATGTGTCATTG-1&quot;       &quot;AAAGTGAAGAGATTCA-1&quot; 
-AACAACCGTGGCCTCA-1.TDP2wON AAGAACAAGCGTACAG-1.TDP2wON 
-      &quot;AACAACCGTGGCCTCA-1&quot;       &quot;AAGAACAAGCGTACAG-1&quot; 
-AAGACTCGTTGCAACT-1.TDP2wON AATCACGCAAATGGAT-1.TDP2wON 
-      &quot;AAGACTCGTTGCAACT-1&quot;       &quot;AATCACGCAAATGGAT-1&quot; </code></pre>
+<pre><code> ACCATTTAGGCTCCCA-1.TDP2wON  ATAGACCAGCATTTCG-1.TDP2wON 
+       &quot;ACCATTTAGGCTCCCA-1&quot;        &quot;ATAGACCAGCATTTCG-1&quot; 
+ CTTCTCTAGCCTATCA-1.TDP2wON GCTGGGTTCCCGAGAC-1.TDP4wONa 
+       &quot;CTTCTCTAGCCTATCA-1&quot;        &quot;GCTGGGTTCCCGAGAC-1&quot; 
+TCACATTAGTCCGTCG-1.TDP4wONa 
+       &quot;TCACATTAGTCCGTCG-1&quot; </code></pre>
 <pre class="r"><code>## cells with low TDP-HA expression
-low &lt;- clus12[which(dat_ha &lt; 0.5 &amp; dat_ha &gt; 0)]
+low &lt;- clus12[,which(dat_ha &lt; 0.5 &amp; dat_ha &gt; 0)]
 low$barcode %&gt;% head</code></pre>
-<pre><code>AAAGGATGTGTCATTG-1.TDP2wON AAAGTGAAGAGATTCA-1.TDP2wON 
-      &quot;AAAGGATGTGTCATTG-1&quot;       &quot;AAAGTGAAGAGATTCA-1&quot; 
-AACAACCGTGGCCTCA-1.TDP2wON AAGAACAAGCGTACAG-1.TDP2wON 
-      &quot;AACAACCGTGGCCTCA-1&quot;       &quot;AAGAACAAGCGTACAG-1&quot; 
-AAGACTCGTTGCAACT-1.TDP2wON AATCACGCAAATGGAT-1.TDP2wON 
-      &quot;AAGACTCGTTGCAACT-1&quot;       &quot;AATCACGCAAATGGAT-1&quot; </code></pre>
+<pre><code> ACTATGGAGCCATCCG-1.TDP2wON  AGCCACGGTGTACATC-1.TDP2wON 
+       &quot;ACTATGGAGCCATCCG-1&quot;        &quot;AGCCACGGTGTACATC-1&quot; 
+ CAACGATTCCCGTGAG-1.TDP2wON AACCCAACATTCTTCA-1.TDP4wOFF 
+       &quot;CAACGATTCCCGTGAG-1&quot;        &quot;AACCCAACATTCTTCA-1&quot; 
+CTAGACAAGATCACCT-1.TDP4wONa GCATCTCGTAGTATAG-1.TDP4wONa 
+       &quot;CTAGACAAGATCACCT-1&quot;        &quot;GCATCTCGTAGTATAG-1&quot; </code></pre>
 </div>
 <div id="get-stathmin2-reads-of-selected-cells" class="section level1">
 <h1>Get stathmin2 reads of selected cells</h1>
@@ -1570,7 +1605,11 @@ region_start &lt;- 79611100
 region_end &lt;- 79666200
 
 # Create the alignments track
-alTrack_4wOFF &lt;- AlignmentsTrack(
+low$sample_id %&gt;% table</code></pre>
+<pre><code>.
+ TDP2wON TDP4wOFF TDP4wONa 
+       3        1        3 </code></pre>
+<pre class="r"><code>alTrack_4wOFF &lt;- AlignmentsTrack(
   range = bams[[&quot;TDP4wOFF&quot;]],
   isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
   cells = low$barcode[low$sample_id == &quot;TDP4wOFF&quot;], 
@@ -1585,19 +1624,14 @@ alTrack_4wONa &lt;- AlignmentsTrack(
   isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
   cells = low$barcode[low$sample_id == &quot;TDP4wONa&quot;], 
   importFunction = .import.bam.alignments.cells, name = &quot;4wONa&quot;)
-alTrack_4wONb &lt;- AlignmentsTrack(
-  range = bams[[&quot;TDP4wONb&quot;]],
-  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
-  cells = low$barcode[low$sample_id == &quot;TDP4wONb&quot;], 
-  importFunction = .import.bam.alignments.cells, name = &quot;4wONb&quot;)
 
-plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa,
              ceTrack, gtftrack),  
            type = c(&quot;coverage&quot;, &quot;sashimi&quot;), 
            chromosome = chr, from = region_start, to = region_end,
            extend.left = 500, extend.right = 100,
            fontsize=13,
-           sizes = c(rep(3, 4), 1, 3),
+           sizes = c(rep(3, 3), 1, 3),
            transcriptAnnotation = &quot;transcript&quot;)</code></pre>
 <p><img src="figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1642,14 +1676,13 @@ khembach
 region_start &lt;- 79611100
 region_end &lt;- 79637000
 
-plotTracks(c(alTrack_4wOFF, 
-             alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, 
              ceTrack, gtftrack),  
            type = c(&quot;coverage&quot;, &quot;sashimi&quot;), 
            chromosome = chr, from = region_start, to = region_end,
            extend.left = 500, extend.right = 100,
            fontsize=13,
-           sizes = c(rep(3, 4), 1, 3),
+           sizes = c(rep(3, 3), 1, 3),
            transcriptAnnotation = &quot;transcript&quot;)</code></pre>
 <p><img src="figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1676,6 +1709,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/c350e92894809a4829798fe5d99a83f99e631271/docs/figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-2.png" target="_blank">c350e92</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a02eb1b19e76fcfb3648951cda280bde1453103f/docs/figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-2.png" target="_blank">a02eb1b</a>
 </td>
 <td>
@@ -1694,12 +1738,11 @@ region_start &lt;- 79611100
 region_end &lt;- 79666200
 
 # Create the alignments track
-alTrack_4wOFF &lt;- AlignmentsTrack(
-  range = bams[[&quot;TDP4wOFF&quot;]],
-  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
-  cells = high$barcode[high$sample_id == &quot;TDP4wOFF&quot;], 
-  importFunction = .import.bam.alignments.cells, name = &quot;4wOFF&quot;)
-alTrack_2wON &lt;- AlignmentsTrack(
+high$sample_id %&gt;% table</code></pre>
+<pre><code>.
+ TDP2wON TDP4wONa 
+       3        2 </code></pre>
+<pre class="r"><code>alTrack_2wON &lt;- AlignmentsTrack(
   range = bams[[&quot;TDP2wON&quot;]],
   isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
   cells = high$barcode[high$sample_id == &quot;TDP2wON&quot;], 
@@ -1709,18 +1752,12 @@ alTrack_4wONa &lt;- AlignmentsTrack(
   isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
   cells = high$barcode[high$sample_id == &quot;TDP4wONa&quot;], 
   importFunction = .import.bam.alignments.cells, name = &quot;4wONa&quot;)
-alTrack_4wONb &lt;- AlignmentsTrack(
-  range = bams[[&quot;TDP4wONb&quot;]],
-  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
-  cells = high$barcode[high$sample_id == &quot;TDP4wONb&quot;], 
-  importFunction = .import.bam.alignments.cells, name = &quot;4wONb&quot;)
 
-plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
-             ceTrack, gtftrack),  
+plotTracks(c(alTrack_2wON, alTrack_4wONa, ceTrack, gtftrack),  
            type = c(&quot;coverage&quot;, &quot;sashimi&quot;), 
            chromosome = chr, from = region_start, to = region_end,
            extend.left = 500, extend.right = 100, fontsize=13,
-           sizes = c(rep(3, 4), 1, 2),
+           sizes = c(rep(4, 2), 1, 2),
            transcriptAnnotation = &quot;transcript&quot;)</code></pre>
 <p><img src="figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-3.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1747,6 +1784,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/c350e92894809a4829798fe5d99a83f99e631271/docs/figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-3.png" target="_blank">c350e92</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a02eb1b19e76fcfb3648951cda280bde1453103f/docs/figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-3.png" target="_blank">a02eb1b</a>
 </td>
 <td>
@@ -1765,13 +1813,11 @@ khembach
 region_start &lt;- 79611100
 region_end &lt;- 79637000
 
-plotTracks(c(alTrack_4wOFF, 
-             alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
-             ceTrack, gtftrack),  
+plotTracks(c(alTrack_2wON, alTrack_4wONa, ceTrack, gtftrack),  
            type = c(&quot;coverage&quot;, &quot;sashimi&quot;), 
            chromosome = chr, from = region_start, to = region_end,
            extend.left = 500, extend.right = 100, fontsize=13,
-           sizes = c(rep(3, 4), 1, 3),
+           sizes = c(rep(4, 2), 1, 3),
            transcriptAnnotation = &quot;transcript&quot;)</code></pre>
 <p><img src="figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-4.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1796,6 +1842,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/c350e92894809a4829798fe5d99a83f99e631271/docs/figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-4.png" target="_blank">c350e92</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a02eb1b19e76fcfb3648951cda280bde1453103f/docs/figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-4.png" target="_blank">a02eb1b</a>
