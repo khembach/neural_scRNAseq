@@ -46,10 +46,10 @@ clus12$sample_id %>% table
 dat_ha <- GetAssayData(object = clus12, slot = "data")["TDP43-HA",]
 summary(dat_ha)
 ## select cells with high TDP-HA expression
-high <- clus12[which(dat_ha > 3.5)]
+high <- clus12[,which(dat_ha > 3.5)]
 high$barcode %>% head
 ## cells with low TDP-HA expression
-low <- clus12[which(dat_ha < 0.5 & dat_ha > 0)]
+low <- clus12[,which(dat_ha < 0.5 & dat_ha > 0)]
 low$barcode %>% head
 ```
 
@@ -409,6 +409,7 @@ region_start <- 79611100
 region_end <- 79666200
 
 # Create the alignments track
+low$sample_id %>% table
 alTrack_4wOFF <- AlignmentsTrack(
   range = bams[["TDP4wOFF"]],
   isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
@@ -424,19 +425,14 @@ alTrack_4wONa <- AlignmentsTrack(
   isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
   cells = low$barcode[low$sample_id == "TDP4wONa"], 
   importFunction = .import.bam.alignments.cells, name = "4wONa")
-alTrack_4wONb <- AlignmentsTrack(
-  range = bams[["TDP4wONb"]],
-  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
-  cells = low$barcode[low$sample_id == "TDP4wONb"], 
-  importFunction = .import.bam.alignments.cells, name = "4wONb")
 
-plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa,
              ceTrack, gtftrack),  
            type = c("coverage", "sashimi"), 
            chromosome = chr, from = region_start, to = region_end,
            extend.left = 500, extend.right = 100,
            fontsize=13,
-           sizes = c(rep(3, 4), 1, 3),
+           sizes = c(rep(3, 3), 1, 3),
            transcriptAnnotation = "transcript")
 
 ## only first intron 
@@ -444,14 +440,13 @@ plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
 region_start <- 79611100
 region_end <- 79637000
 
-plotTracks(c(alTrack_4wOFF, 
-             alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, 
              ceTrack, gtftrack),  
            type = c("coverage", "sashimi"), 
            chromosome = chr, from = region_start, to = region_end,
            extend.left = 500, extend.right = 100,
            fontsize=13,
-           sizes = c(rep(3, 4), 1, 3),
+           sizes = c(rep(3, 3), 1, 3),
            transcriptAnnotation = "transcript")
 
 ## HIGH ##
@@ -459,11 +454,7 @@ region_start <- 79611100
 region_end <- 79666200
 
 # Create the alignments track
-alTrack_4wOFF <- AlignmentsTrack(
-  range = bams[["TDP4wOFF"]],
-  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
-  cells = high$barcode[high$sample_id == "TDP4wOFF"], 
-  importFunction = .import.bam.alignments.cells, name = "4wOFF")
+high$sample_id %>% table
 alTrack_2wON <- AlignmentsTrack(
   range = bams[["TDP2wON"]],
   isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
@@ -474,18 +465,12 @@ alTrack_4wONa <- AlignmentsTrack(
   isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
   cells = high$barcode[high$sample_id == "TDP4wONa"], 
   importFunction = .import.bam.alignments.cells, name = "4wONa")
-alTrack_4wONb <- AlignmentsTrack(
-  range = bams[["TDP4wONb"]],
-  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
-  cells = high$barcode[high$sample_id == "TDP4wONb"], 
-  importFunction = .import.bam.alignments.cells, name = "4wONb")
 
-plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
-             ceTrack, gtftrack),  
+plotTracks(c(alTrack_2wON, alTrack_4wONa, ceTrack, gtftrack),  
            type = c("coverage", "sashimi"), 
            chromosome = chr, from = region_start, to = region_end,
            extend.left = 500, extend.right = 100, fontsize=13,
-           sizes = c(rep(3, 4), 1, 2),
+           sizes = c(rep(4, 2), 1, 2),
            transcriptAnnotation = "transcript")
 
 
@@ -494,13 +479,11 @@ plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
 region_start <- 79611100
 region_end <- 79637000
 
-plotTracks(c(alTrack_4wOFF, 
-             alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
-             ceTrack, gtftrack),  
+plotTracks(c(alTrack_2wON, alTrack_4wONa, ceTrack, gtftrack),  
            type = c("coverage", "sashimi"), 
            chromosome = chr, from = region_start, to = region_end,
            extend.left = 500, extend.right = 100, fontsize=13,
-           sizes = c(rep(3, 4), 1, 3),
+           sizes = c(rep(4, 2), 1, 3),
            transcriptAnnotation = "transcript")
 ```
 
