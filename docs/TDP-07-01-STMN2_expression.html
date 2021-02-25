@@ -11,9 +11,9 @@
 
 <meta name="author" content="Katharina Hembach" />
 
-<meta name="date" content="2021-12-01" />
+<meta name="date" content="2021-12-02" />
 
-<title>Stathmin 2 expression</title>
+<title>Stathmin 2 read coverage</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -386,9 +386,9 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Stathmin 2 expression</h1>
+<h1 class="title toc-ignore">Stathmin 2 read coverage</h1>
 <h4 class="author">Katharina Hembach</h4>
-<h4 class="date">21/01/2021</h4>
+<h4 class="date">25/02/2021</h4>
 
 </div>
 
@@ -413,7 +413,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-02-19
+<strong>Last updated:</strong> 2021-02-25
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -504,16 +504,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree4ddbb0db1f0a94a96be64987f00d34f3a9046086targetblank4ddbb0da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/4ddbb0db1f0a94a96be64987f00d34f3a9046086" target="_blank">4ddbb0d</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef01a91a68643ad3dadd32ad8a99a3b84cc71905btargetblankf01a91aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/f01a91a68643ad3dadd32ad8a99a3b84cc71905b" target="_blank">f01a91a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree4ddbb0db1f0a94a96be64987f00d34f3a9046086targetblank4ddbb0da" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef01a91a68643ad3dadd32ad8a99a3b84cc71905btargetblankf01a91aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/4ddbb0db1f0a94a96be64987f00d34f3a9046086" target="_blank">4ddbb0d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/f01a91a68643ad3dadd32ad8a99a3b84cc71905b" target="_blank">f01a91a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -525,8 +525,15 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    ._.DS_Store
     Ignored:    ._Rplots.pdf
+    Ignored:    ._Unfiltered.pdf
     Ignored:    .__workflowr.yml
+    Ignored:    ._coverage.pdf
+    Ignored:    ._coverage_sashimi.pdf
+    Ignored:    ._coverage_sashimi.png
     Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    ._sashimi.pdf
+    Ignored:    ._stmn2.pdf
+    Ignored:    ._tdp.pdf
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.Rhistory
     Ignored:    analysis/._.DS_Store
@@ -590,6 +597,7 @@ Ignored files:
     Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/figure/
     Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
     Ignored:    analysis/organoid-01-clustering_cache/
     Ignored:    analysis/organoid-02-integration_cache/
@@ -708,8 +716,13 @@ Ignored files:
     Ignored:    scripts/._plasmid_expression.sh
 
 Untracked files:
+    Untracked:  Filtered.pdf
     Untracked:  Rplots.pdf
+    Untracked:  Unfiltered
+    Untracked:  Unfiltered.pdf
     Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
+    Untracked:  analysis/TDP-07-01-STMN2_expression copy.Rmd
+    Untracked:  analysis/TDP-08-01-HA-D96-expression-changes.Rmd
     Untracked:  analysis/additional_filtering.Rmd
     Untracked:  analysis/additional_filtering_clustering.Rmd
     Untracked:  analysis/organoid-01-1-qualtiy-control.Rmd
@@ -720,6 +733,9 @@ Untracked files:
     Untracked:  analysis/organoid-08-conos-comparison.Rmd
     Untracked:  analysis/organoid-0x-sample_integration.Rmd
     Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  coverage.pdf
+    Untracked:  coverage_sashimi.pdf
+    Untracked:  coverage_sashimi.png
     Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
     Untracked:  data/Kanton_et_al/
     Untracked:  data/Lam_et_al/
@@ -727,8 +743,11 @@ Untracked files:
     Untracked:  data/reference/
     Untracked:  data/virus_cell_tropism_markers.R
     Untracked:  data/~$Reactive_astrocytes_markers.xlsx
+    Untracked:  sashimi.pdf
     Untracked:  scripts/bu_Rcode.R
     Untracked:  scripts/salmon-latest_linux_x86_64/
+    Untracked:  stmn2.pdf
+    Untracked:  tdp.pdf
 
 Unstaged changes:
     Modified:   analysis/05-annotation.Rmd
@@ -778,6 +797,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f01a91a68643ad3dadd32ad8a99a3b84cc71905b/analysis/TDP-07-01-STMN2_expression.Rmd" target="_blank">f01a91a</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+<td>
+add cryptic exon location and splice junctions to plot
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/5340095cabde7838184cf8f540ac0978eb007f7c/docs/TDP-07-01-STMN2_expression.html" target="_blank">5340095</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-19
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -844,12 +897,12 @@ library(dplyr)
 library(Gviz)
 library(TxDb.Hsapiens.UCSC.hg38.knownGene)
 library(Rsamtools)
-library(GenomicAlignments)</code></pre>
+library(GenomicAlignments)
+library(rtracklayer)</code></pre>
 </div>
 <div id="load-data-convert-to-sce" class="section level1">
 <h1>Load data &amp; convert to SCE</h1>
-<pre class="r"><code># so &lt;- readRDS(file.path(&quot;output&quot;, &quot;so_TDP-06-cluster-analysis.rds&quot;))
-so &lt;- readRDS(file.path(&quot;output&quot;, &quot;so_TDP_05_plasmid_expression.rds&quot;))
+<pre class="r"><code>so &lt;- readRDS(file.path(&quot;output&quot;, &quot;so_TDP_05_plasmid_expression.rds&quot;))
 so &lt;- SetIdent(so, value = &quot;RNA_snn_res.0.4&quot;)
 so@meta.data$cluster_id &lt;- Idents(so)</code></pre>
 </div>
@@ -868,25 +921,459 @@ summary(dat_ha)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   0.000   1.226   1.771   1.800   2.454   4.112 </code></pre>
 <pre class="r"><code>## select cells with high TDP-HA expression
-high &lt;- clus12$barcode[which(dat_ha &gt; 3.5)]
-high</code></pre>
-<pre><code> ACCATTTAGGCTCCCA-1.TDP2wON  ATAGACCAGCATTTCG-1.TDP2wON 
-       &quot;ACCATTTAGGCTCCCA-1&quot;        &quot;ATAGACCAGCATTTCG-1&quot; 
- CTTCTCTAGCCTATCA-1.TDP2wON GCTGGGTTCCCGAGAC-1.TDP4wONa 
-       &quot;CTTCTCTAGCCTATCA-1&quot;        &quot;GCTGGGTTCCCGAGAC-1&quot; 
-TCACATTAGTCCGTCG-1.TDP4wONa 
-       &quot;TCACATTAGTCCGTCG-1&quot; </code></pre>
+high &lt;- clus12[which(dat_ha &gt; 3.5)]
+high$barcode</code></pre>
+<pre><code> AAAGGATGTGTCATTG-1.TDP2wON  AAAGTGAAGAGATTCA-1.TDP2wON 
+       &quot;AAAGGATGTGTCATTG-1&quot;        &quot;AAAGTGAAGAGATTCA-1&quot; 
+ AACAACCGTGGCCTCA-1.TDP2wON  AAGAACAAGCGTACAG-1.TDP2wON 
+       &quot;AACAACCGTGGCCTCA-1&quot;        &quot;AAGAACAAGCGTACAG-1&quot; 
+ AAGACTCGTTGCAACT-1.TDP2wON  AATCACGCAAATGGAT-1.TDP2wON 
+       &quot;AAGACTCGTTGCAACT-1&quot;        &quot;AATCACGCAAATGGAT-1&quot; 
+ AATCGTGTCCGTGGGT-1.TDP2wON  AATTCCTCACACAGCC-1.TDP2wON 
+       &quot;AATCGTGTCCGTGGGT-1&quot;        &quot;AATTCCTCACACAGCC-1&quot; 
+ ACCATTTAGGCTCCCA-1.TDP2wON  ACGGTCGCAACGAGGT-1.TDP2wON 
+       &quot;ACCATTTAGGCTCCCA-1&quot;        &quot;ACGGTCGCAACGAGGT-1&quot; 
+ ACTATGGAGCCATCCG-1.TDP2wON  ACTGATGCATAGATGA-1.TDP2wON 
+       &quot;ACTATGGAGCCATCCG-1&quot;        &quot;ACTGATGCATAGATGA-1&quot; 
+ AGCCAATGTCATGCAT-1.TDP2wON  AGCCACGGTGTACATC-1.TDP2wON 
+       &quot;AGCCAATGTCATGCAT-1&quot;        &quot;AGCCACGGTGTACATC-1&quot; 
+ AGGAGGTTCCGAAATC-1.TDP2wON  AGGGTTTAGTTGGGAC-1.TDP2wON 
+       &quot;AGGAGGTTCCGAAATC-1&quot;        &quot;AGGGTTTAGTTGGGAC-1&quot; 
+ ATACCGACAAGATTGA-1.TDP2wON  ATAGACCAGCATTTCG-1.TDP2wON 
+       &quot;ATACCGACAAGATTGA-1&quot;        &quot;ATAGACCAGCATTTCG-1&quot; 
+ ATCGGATGTGTGATGG-1.TDP2wON  ATGGATCAGCCAGAGT-1.TDP2wON 
+       &quot;ATCGGATGTGTGATGG-1&quot;        &quot;ATGGATCAGCCAGAGT-1&quot; 
+ ATTACCTAGTTGCCCG-1.TDP2wON  ATTACTCAGAAAGTCT-1.TDP2wON 
+       &quot;ATTACCTAGTTGCCCG-1&quot;        &quot;ATTACTCAGAAAGTCT-1&quot; 
+ ATTACTCTCCGGTTCT-1.TDP2wON  ATTCCCGAGGTTGGAC-1.TDP2wON 
+       &quot;ATTACTCTCCGGTTCT-1&quot;        &quot;ATTCCCGAGGTTGGAC-1&quot; 
+ ATTCCTAAGCTTTCCC-1.TDP2wON  CAACAACCAACCGACC-1.TDP2wON 
+       &quot;ATTCCTAAGCTTTCCC-1&quot;        &quot;CAACAACCAACCGACC-1&quot; 
+ CAACGATTCCCGTGAG-1.TDP2wON  CACTTCGCAACGTTAC-1.TDP2wON 
+       &quot;CAACGATTCCCGTGAG-1&quot;        &quot;CACTTCGCAACGTTAC-1&quot; 
+ CAGCCAGTCAATCTCT-1.TDP2wON  CAGGGCTCACCCTAGG-1.TDP2wON 
+       &quot;CAGCCAGTCAATCTCT-1&quot;        &quot;CAGGGCTCACCCTAGG-1&quot; 
+ CATGAGTCACCAAAGG-1.TDP2wON  CATTGAGGTACGTGAG-1.TDP2wON 
+       &quot;CATGAGTCACCAAAGG-1&quot;        &quot;CATTGAGGTACGTGAG-1&quot; 
+ CCTTCAGGTAGATCGG-1.TDP2wON  CGCCATTCACAGCTTA-1.TDP2wON 
+       &quot;CCTTCAGGTAGATCGG-1&quot;        &quot;CGCCATTCACAGCTTA-1&quot; 
+ CGTAAGTAGCAATTAG-1.TDP2wON  CGTCCATTCTTACTGT-1.TDP2wON 
+       &quot;CGTAAGTAGCAATTAG-1&quot;        &quot;CGTCCATTCTTACTGT-1&quot; 
+ CGTTAGAAGGCATGGT-1.TDP2wON  CGTTCTGTCTTCGTGC-1.TDP2wON 
+       &quot;CGTTAGAAGGCATGGT-1&quot;        &quot;CGTTCTGTCTTCGTGC-1&quot; 
+ CTAGACAGTCGAGTGA-1.TDP2wON  CTCAGAATCTAGTCAG-1.TDP2wON 
+       &quot;CTAGACAGTCGAGTGA-1&quot;        &quot;CTCAGAATCTAGTCAG-1&quot; 
+ CTCGAGGCAGCGTATT-1.TDP2wON  CTGAGCGAGGTCACAG-1.TDP2wON 
+       &quot;CTCGAGGCAGCGTATT-1&quot;        &quot;CTGAGCGAGGTCACAG-1&quot; 
+ CTGCAGGAGTACTGGG-1.TDP2wON  CTGCGAGAGACCTTTG-1.TDP2wON 
+       &quot;CTGCAGGAGTACTGGG-1&quot;        &quot;CTGCGAGAGACCTTTG-1&quot; 
+ CTTAGGAAGTTATGGA-1.TDP2wON  CTTCTCTAGCCTATCA-1.TDP2wON 
+       &quot;CTTAGGAAGTTATGGA-1&quot;        &quot;CTTCTCTAGCCTATCA-1&quot; 
+ GAAACCTGTGGTAATA-1.TDP2wON  GACCGTGGTAGTGGCA-1.TDP2wON 
+       &quot;GAAACCTGTGGTAATA-1&quot;        &quot;GACCGTGGTAGTGGCA-1&quot; 
+ GACTTCCAGGGCTTCC-1.TDP2wON  GAGGCAATCGGTAACT-1.TDP2wON 
+       &quot;GACTTCCAGGGCTTCC-1&quot;        &quot;GAGGCAATCGGTAACT-1&quot; 
+ GAGGGATTCCGTTGGG-1.TDP2wON  GAGTTGTTCCTGGTCT-1.TDP2wON 
+       &quot;GAGGGATTCCGTTGGG-1&quot;        &quot;GAGTTGTTCCTGGTCT-1&quot; 
+ GATAGCTCATCAGCTA-1.TDP2wON  GCTACCTGTCAGATTC-1.TDP2wON 
+       &quot;GATAGCTCATCAGCTA-1&quot;        &quot;GCTACCTGTCAGATTC-1&quot; 
+ GCTCAAACATCGATCA-1.TDP2wON  GCTGCAGCAACGCATT-1.TDP2wON 
+       &quot;GCTCAAACATCGATCA-1&quot;        &quot;GCTGCAGCAACGCATT-1&quot; 
+ GCTTTCGCACTACACA-1.TDP2wON  GGCTGTGCACTGCGTG-1.TDP2wON 
+       &quot;GCTTTCGCACTACACA-1&quot;        &quot;GGCTGTGCACTGCGTG-1&quot; 
+ GGCTTTCTCGTCAGAT-1.TDP2wON  GGGTTATGTTACAGCT-1.TDP2wON 
+       &quot;GGCTTTCTCGTCAGAT-1&quot;        &quot;GGGTTATGTTACAGCT-1&quot; 
+ GGTTAACAGGTCGACA-1.TDP2wON  GTAGTACAGTCGGGAT-1.TDP2wON 
+       &quot;GGTTAACAGGTCGACA-1&quot;        &quot;GTAGTACAGTCGGGAT-1&quot; 
+ GTCAAGTAGGACAAGA-1.TDP2wON  GTCATTTAGCTGGTGA-1.TDP2wON 
+       &quot;GTCAAGTAGGACAAGA-1&quot;        &quot;GTCATTTAGCTGGTGA-1&quot; 
+ GTCTAGACAATTGAAG-1.TDP2wON  GTGAGGAGTCGTTGGC-1.TDP2wON 
+       &quot;GTCTAGACAATTGAAG-1&quot;        &quot;GTGAGGAGTCGTTGGC-1&quot; 
+ GTGGTTACAAGATCCT-1.TDP2wON  GTGTAACAGAGCCGTA-1.TDP2wON 
+       &quot;GTGGTTACAAGATCCT-1&quot;        &quot;GTGTAACAGAGCCGTA-1&quot; 
+ TAACACGAGATTCGAA-1.TDP2wON  TACCCGTAGTTAGTAG-1.TDP2wON 
+       &quot;TAACACGAGATTCGAA-1&quot;        &quot;TACCCGTAGTTAGTAG-1&quot; 
+ TACTTCAGTGGTAACG-1.TDP2wON  TAGATCGCACGAAGAC-1.TDP2wON 
+       &quot;TACTTCAGTGGTAACG-1&quot;        &quot;TAGATCGCACGAAGAC-1&quot; 
+ TATCAGGTCGTTGCCT-1.TDP2wON  TCAATCTTCGCCAACG-1.TDP2wON 
+       &quot;TATCAGGTCGTTGCCT-1&quot;        &quot;TCAATCTTCGCCAACG-1&quot; 
+ TCACTCGCATGAGGGT-1.TDP2wON  TCAGGGCGTGAGACCA-1.TDP2wON 
+       &quot;TCACTCGCATGAGGGT-1&quot;        &quot;TCAGGGCGTGAGACCA-1&quot; 
+ TCAGTCCAGGGCCAAT-1.TDP2wON  TCATGGAGTCTCTCCA-1.TDP2wON 
+       &quot;TCAGTCCAGGGCCAAT-1&quot;        &quot;TCATGGAGTCTCTCCA-1&quot; 
+ TCCATCGCATTGTAGC-1.TDP2wON  TCGGGTGAGGTCGTCC-1.TDP2wON 
+       &quot;TCCATCGCATTGTAGC-1&quot;        &quot;TCGGGTGAGGTCGTCC-1&quot; 
+ TCGGGTGGTCGTCTCT-1.TDP2wON  TCTAACTAGCACTAGG-1.TDP2wON 
+       &quot;TCGGGTGGTCGTCTCT-1&quot;        &quot;TCTAACTAGCACTAGG-1&quot; 
+ TCTACATGTTGTCCCT-1.TDP2wON  TCTACCGGTTTCCATT-1.TDP2wON 
+       &quot;TCTACATGTTGTCCCT-1&quot;        &quot;TCTACCGGTTTCCATT-1&quot; 
+ TGAGCGCTCCATCGTC-1.TDP2wON  TGCAGTATCGCCGTGA-1.TDP2wON 
+       &quot;TGAGCGCTCCATCGTC-1&quot;        &quot;TGCAGTATCGCCGTGA-1&quot; 
+ TGCTCGTCAAAGACGC-1.TDP2wON  TGCTTCGAGCAGCAGT-1.TDP2wON 
+       &quot;TGCTCGTCAAAGACGC-1&quot;        &quot;TGCTTCGAGCAGCAGT-1&quot; 
+ TGGGAGACAGCGTGCT-1.TDP2wON  TGTCCTGAGGTCTTTG-1.TDP2wON 
+       &quot;TGGGAGACAGCGTGCT-1&quot;        &quot;TGTCCTGAGGTCTTTG-1&quot; 
+ TTCCAATAGCGACTTT-1.TDP2wON  TTCCTCTGTACCGGAA-1.TDP2wON 
+       &quot;TTCCAATAGCGACTTT-1&quot;        &quot;TTCCTCTGTACCGGAA-1&quot; 
+ TTCGCTGAGCTTTCCC-1.TDP2wON  TTGGATGAGCGGCTCT-1.TDP2wON 
+       &quot;TTCGCTGAGCTTTCCC-1&quot;        &quot;TTGGATGAGCGGCTCT-1&quot; 
+ TTGGGTAAGTATAGGT-1.TDP2wON  TTTACGTCACAGCCAC-1.TDP2wON 
+       &quot;TTGGGTAAGTATAGGT-1&quot;        &quot;TTTACGTCACAGCCAC-1&quot; 
+ TTTGACTGTTATGTCG-1.TDP2wON AACCCAACATTCTTCA-1.TDP4wOFF 
+       &quot;TTTGACTGTTATGTCG-1&quot;        &quot;AACCCAACATTCTTCA-1&quot; 
+ATTCCCGAGTGATGGC-1.TDP4wOFF CAGTTCCTCATGCCGG-1.TDP4wOFF 
+       &quot;ATTCCCGAGTGATGGC-1&quot;        &quot;CAGTTCCTCATGCCGG-1&quot; 
+AAAGGATTCGTCAAAC-1.TDP4wONa AATGGCTTCAGGGATG-1.TDP4wONa 
+       &quot;AAAGGATTCGTCAAAC-1&quot;        &quot;AATGGCTTCAGGGATG-1&quot; 
+ACAGAAACATCGGCCA-1.TDP4wONa ACGATCAGTCATAAAG-1.TDP4wONa 
+       &quot;ACAGAAACATCGGCCA-1&quot;        &quot;ACGATCAGTCATAAAG-1&quot; 
+ACTTTCATCCACATAG-1.TDP4wONa AGCGATTGTGGGTCAA-1.TDP4wONa 
+       &quot;ACTTTCATCCACATAG-1&quot;        &quot;AGCGATTGTGGGTCAA-1&quot; 
+AGGGCTCAGTTTCTTC-1.TDP4wONa AGTTAGCAGTGCTACT-1.TDP4wONa 
+       &quot;AGGGCTCAGTTTCTTC-1&quot;        &quot;AGTTAGCAGTGCTACT-1&quot; 
+ATAGAGAGTGTTGATC-1.TDP4wONa ATCGCCTAGCTAGAGC-1.TDP4wONa 
+       &quot;ATAGAGAGTGTTGATC-1&quot;        &quot;ATCGCCTAGCTAGAGC-1&quot; 
+ATGAGGGGTACGATCT-1.TDP4wONa ATGATCGCACCGGAAA-1.TDP4wONa 
+       &quot;ATGAGGGGTACGATCT-1&quot;        &quot;ATGATCGCACCGGAAA-1&quot; 
+ATTCAGGTCGGACAAG-1.TDP4wONa ATTTACCCATCACAGT-1.TDP4wONa 
+       &quot;ATTCAGGTCGGACAAG-1&quot;        &quot;ATTTACCCATCACAGT-1&quot; 
+ATTTCACAGAGTCACG-1.TDP4wONa CAACGATGTGAGACCA-1.TDP4wONa 
+       &quot;ATTTCACAGAGTCACG-1&quot;        &quot;CAACGATGTGAGACCA-1&quot; 
+CACCAAAGTTAACCTG-1.TDP4wONa CAGATACCACGGATCC-1.TDP4wONa 
+       &quot;CACCAAAGTTAACCTG-1&quot;        &quot;CAGATACCACGGATCC-1&quot; 
+CATCAAGTCCCAAGTA-1.TDP4wONa CCAATGAGTGCGGTAA-1.TDP4wONa 
+       &quot;CATCAAGTCCCAAGTA-1&quot;        &quot;CCAATGAGTGCGGTAA-1&quot; 
+CCGGTAGTCTCGGGAC-1.TDP4wONa CCTCATGCATAGGTAA-1.TDP4wONa 
+       &quot;CCGGTAGTCTCGGGAC-1&quot;        &quot;CCTCATGCATAGGTAA-1&quot; 
+CCTGCATAGAGCCGTA-1.TDP4wONa CGACAGCAGAGGCCAT-1.TDP4wONa 
+       &quot;CCTGCATAGAGCCGTA-1&quot;        &quot;CGACAGCAGAGGCCAT-1&quot; 
+CGGAGAAGTTCTGAGT-1.TDP4wONa CGGGTCACATTACTCT-1.TDP4wONa 
+       &quot;CGGAGAAGTTCTGAGT-1&quot;        &quot;CGGGTCACATTACTCT-1&quot; 
+CGTTAGAAGGCCACTC-1.TDP4wONa CTAGACAAGATCACCT-1.TDP4wONa 
+       &quot;CGTTAGAAGGCCACTC-1&quot;        &quot;CTAGACAAGATCACCT-1&quot; 
+CTCCCTCCATATGGCT-1.TDP4wONa CTCGAGGAGTTGCATC-1.TDP4wONa 
+       &quot;CTCCCTCCATATGGCT-1&quot;        &quot;CTCGAGGAGTTGCATC-1&quot; 
+CTGCCTATCAAAGACA-1.TDP4wONa CTGTCGTTCTACCAGA-1.TDP4wONa 
+       &quot;CTGCCTATCAAAGACA-1&quot;        &quot;CTGTCGTTCTACCAGA-1&quot; 
+CTTCTAACACCACATA-1.TDP4wONa GAAGCGAGTTGTCCCT-1.TDP4wONa 
+       &quot;CTTCTAACACCACATA-1&quot;        &quot;GAAGCGAGTTGTCCCT-1&quot; 
+GAAGTAAGTCCCAAAT-1.TDP4wONa GACCGTGGTCTTCCGT-1.TDP4wONa 
+       &quot;GAAGTAAGTCCCAAAT-1&quot;        &quot;GACCGTGGTCTTCCGT-1&quot; 
+GAGACCCTCGAGCACC-1.TDP4wONa GAGGGATCACGAGAAC-1.TDP4wONa 
+       &quot;GAGACCCTCGAGCACC-1&quot;        &quot;GAGGGATCACGAGAAC-1&quot; 
+GATAGCTGTACTGCGC-1.TDP4wONa GATGCTAGTCACTGAT-1.TDP4wONa 
+       &quot;GATAGCTGTACTGCGC-1&quot;        &quot;GATGCTAGTCACTGAT-1&quot; 
+GCAGTTAAGGTGGCTA-1.TDP4wONa GCATCTCGTAGTATAG-1.TDP4wONa 
+       &quot;GCAGTTAAGGTGGCTA-1&quot;        &quot;GCATCTCGTAGTATAG-1&quot; 
+GCATCTCTCCGGGACT-1.TDP4wONa GCCCAGATCTCCTGAC-1.TDP4wONa 
+       &quot;GCATCTCTCCGGGACT-1&quot;        &quot;GCCCAGATCTCCTGAC-1&quot; 
+GCTGGGTTCCCGAGAC-1.TDP4wONa GGAGAACGTAAGATTG-1.TDP4wONa 
+       &quot;GCTGGGTTCCCGAGAC-1&quot;        &quot;GGAGAACGTAAGATTG-1&quot; 
+GGGTATTCAAGCGCAA-1.TDP4wONa GGGTCTGTCGATACTG-1.TDP4wONa 
+       &quot;GGGTATTCAAGCGCAA-1&quot;        &quot;GGGTCTGTCGATACTG-1&quot; 
+GGTTCTCAGACCAAGC-1.TDP4wONa GTAGCTACATACAGGG-1.TDP4wONa 
+       &quot;GGTTCTCAGACCAAGC-1&quot;        &quot;GTAGCTACATACAGGG-1&quot; 
+GTAGTACAGTTGCCTA-1.TDP4wONa GTATTGGCATGATGCT-1.TDP4wONa 
+       &quot;GTAGTACAGTTGCCTA-1&quot;        &quot;GTATTGGCATGATGCT-1&quot; 
+GTCTACCGTACAGGTG-1.TDP4wONa GTCTCACCACCATATG-1.TDP4wONa 
+       &quot;GTCTACCGTACAGGTG-1&quot;        &quot;GTCTCACCACCATATG-1&quot; 
+GTCTTTATCAGCTCTC-1.TDP4wONa GTCTTTATCATCCTGC-1.TDP4wONa 
+       &quot;GTCTTTATCAGCTCTC-1&quot;        &quot;GTCTTTATCATCCTGC-1&quot; 
+GTGCAGCAGTCCTGCG-1.TDP4wONa GTGTTCCTCCAAGGGA-1.TDP4wONa 
+       &quot;GTGCAGCAGTCCTGCG-1&quot;        &quot;GTGTTCCTCCAAGGGA-1&quot; 
+GTTAGACTCGCTACGG-1.TDP4wONa GTTCGCTCACTGGACC-1.TDP4wONa 
+       &quot;GTTAGACTCGCTACGG-1&quot;        &quot;GTTCGCTCACTGGACC-1&quot; 
+TAACGACGTCTTCCGT-1.TDP4wONa TACAGGTAGTTGGGAC-1.TDP4wONa 
+       &quot;TAACGACGTCTTCCGT-1&quot;        &quot;TACAGGTAGTTGGGAC-1&quot; 
+TACCCACAGGGAGAAT-1.TDP4wONa TACGGGCTCGAAATCC-1.TDP4wONa 
+       &quot;TACCCACAGGGAGAAT-1&quot;        &quot;TACGGGCTCGAAATCC-1&quot; 
+TATATCCGTAGCCCTG-1.TDP4wONa TCACACCCATCACCAA-1.TDP4wONa 
+       &quot;TATATCCGTAGCCCTG-1&quot;        &quot;TCACACCCATCACCAA-1&quot; 
+TCACATTAGTCCGTCG-1.TDP4wONa TCACTCGCAACAGAGC-1.TDP4wONa 
+       &quot;TCACATTAGTCCGTCG-1&quot;        &quot;TCACTCGCAACAGAGC-1&quot; 
+TCCCATGCAATTGCGT-1.TDP4wONa TCTACCGGTAAGTTAG-1.TDP4wONa 
+       &quot;TCCCATGCAATTGCGT-1&quot;        &quot;TCTACCGGTAAGTTAG-1&quot; 
+TGACTCCTCCACCTCA-1.TDP4wONa TGAGACTAGGACACTG-1.TDP4wONa 
+       &quot;TGACTCCTCCACCTCA-1&quot;        &quot;TGAGACTAGGACACTG-1&quot; 
+TGCATCCGTTACGCCG-1.TDP4wONa TGCATGATCGCGATCG-1.TDP4wONa 
+       &quot;TGCATCCGTTACGCCG-1&quot;        &quot;TGCATGATCGCGATCG-1&quot; 
+TGTAAGCTCCGTGCGA-1.TDP4wONa TGTCAGAAGTTTGCTG-1.TDP4wONa 
+       &quot;TGTAAGCTCCGTGCGA-1&quot;        &quot;TGTCAGAAGTTTGCTG-1&quot; 
+TGTCCCAAGTGCAACG-1.TDP4wONa TGTGGCGAGCACTAGG-1.TDP4wONa 
+       &quot;TGTCCCAAGTGCAACG-1&quot;        &quot;TGTGGCGAGCACTAGG-1&quot; 
+TGTTCTACACATAGCT-1.TDP4wONa TTACGTTTCGCGTTTC-1.TDP4wONa 
+       &quot;TGTTCTACACATAGCT-1&quot;        &quot;TTACGTTTCGCGTTTC-1&quot; 
+TTAGTCTGTCCTGAAT-1.TDP4wONa TTCCTTCCAGTTCCAA-1.TDP4wONa 
+       &quot;TTAGTCTGTCCTGAAT-1&quot;        &quot;TTCCTTCCAGTTCCAA-1&quot; 
+TTCGATTTCTCAAAGC-1.TDP4wONa TTCTAGTAGAAGATCT-1.TDP4wONa 
+       &quot;TTCGATTTCTCAAAGC-1&quot;        &quot;TTCTAGTAGAAGATCT-1&quot; 
+TTCTCTCCAGCGAGTA-1.TDP4wONa TTGGGCGAGGATCATA-1.TDP4wONa 
+       &quot;TTCTCTCCAGCGAGTA-1&quot;        &quot;TTGGGCGAGGATCATA-1&quot; 
+TTTACCAAGCGGGTTA-1.TDP4wONa TTTATGCAGCGAACTG-1.TDP4wONa 
+       &quot;TTTACCAAGCGGGTTA-1&quot;        &quot;TTTATGCAGCGAACTG-1&quot; 
+AATCGACGTTCGAGCC-1.TDP4wONb ACACTGAAGACGGATC-1.TDP4wONb 
+       &quot;AATCGACGTTCGAGCC-1&quot;        &quot;ACACTGAAGACGGATC-1&quot; 
+AGAACCTTCCCTATTA-1.TDP4wONb AGATGCTTCTGTCAGA-1.TDP4wONb 
+       &quot;AGAACCTTCCCTATTA-1&quot;        &quot;AGATGCTTCTGTCAGA-1&quot; 
+AGCGCTGTCAAGTGTC-1.TDP4wONb ATCCTATCAATAGTGA-1.TDP4wONb 
+       &quot;AGCGCTGTCAAGTGTC-1&quot;        &quot;ATCCTATCAATAGTGA-1&quot; 
+CAGGGCTAGGTCATAA-1.TDP4wONb CCCTAACCACCTTCGT-1.TDP4wONb 
+       &quot;CAGGGCTAGGTCATAA-1&quot;        &quot;CCCTAACCACCTTCGT-1&quot; 
+CGAAGTTAGACGGATC-1.TDP4wONb CGCCAGATCGCAACAT-1.TDP4wONb 
+       &quot;CGAAGTTAGACGGATC-1&quot;        &quot;CGCCAGATCGCAACAT-1&quot; 
+CGTAGTACAAGCTGTT-1.TDP4wONb CTCATCGAGTATAGGT-1.TDP4wONb 
+       &quot;CGTAGTACAAGCTGTT-1&quot;        &quot;CTCATCGAGTATAGGT-1&quot; 
+CTCATCGCAAGCAGGT-1.TDP4wONb CTCATTAGTAGGAGGG-1.TDP4wONb 
+       &quot;CTCATCGCAAGCAGGT-1&quot;        &quot;CTCATTAGTAGGAGGG-1&quot; 
+CTGAGGCTCCTCTAAT-1.TDP4wONb CTGCCATGTACGTGTT-1.TDP4wONb 
+       &quot;CTGAGGCTCCTCTAAT-1&quot;        &quot;CTGCCATGTACGTGTT-1&quot; 
+GAAATGACAAGGCTTT-1.TDP4wONb GAGTCATCAGAGTCAG-1.TDP4wONb 
+       &quot;GAAATGACAAGGCTTT-1&quot;        &quot;GAGTCATCAGAGTCAG-1&quot; 
+GCAGCTGTCACGGGCT-1.TDP4wONb GCCGATGCAATCACGT-1.TDP4wONb 
+       &quot;GCAGCTGTCACGGGCT-1&quot;        &quot;GCCGATGCAATCACGT-1&quot; 
+GGGAGTACAGCTGTTA-1.TDP4wONb GTAGAGGCATATCTGG-1.TDP4wONb 
+       &quot;GGGAGTACAGCTGTTA-1&quot;        &quot;GTAGAGGCATATCTGG-1&quot; 
+GTGTTCCCACGCCACA-1.TDP4wONb TAAGTCGAGATCGCCC-1.TDP4wONb 
+       &quot;GTGTTCCCACGCCACA-1&quot;        &quot;TAAGTCGAGATCGCCC-1&quot; 
+TCAGTGAAGCTGGCCT-1.TDP4wONb TCATACTTCAAGGACG-1.TDP4wONb 
+       &quot;TCAGTGAAGCTGGCCT-1&quot;        &quot;TCATACTTCAAGGACG-1&quot; 
+TCTACCGTCTCTGGTC-1.TDP4wONb TCTCACGCAATTGCTG-1.TDP4wONb 
+       &quot;TCTACCGTCTCTGGTC-1&quot;        &quot;TCTCACGCAATTGCTG-1&quot; 
+TGATCAGAGCTCCGAC-1.TDP4wONb TGCTTGCAGTGGACTG-1.TDP4wONb 
+       &quot;TGATCAGAGCTCCGAC-1&quot;        &quot;TGCTTGCAGTGGACTG-1&quot; 
+TGTTCCGGTACTCGAT-1.TDP4wONb TGTTTGTAGCCGAATG-1.TDP4wONb 
+       &quot;TGTTCCGGTACTCGAT-1&quot;        &quot;TGTTTGTAGCCGAATG-1&quot; 
+TTCATGTAGCATCCCG-1.TDP4wONb TTCATGTGTTGTTTGG-1.TDP4wONb 
+       &quot;TTCATGTAGCATCCCG-1&quot;        &quot;TTCATGTGTTGTTTGG-1&quot; 
+TTGCCTGAGCACTTTG-1.TDP4wONb TTGTTGTTCAGAGCAG-1.TDP4wONb 
+       &quot;TTGCCTGAGCACTTTG-1&quot;        &quot;TTGTTGTTCAGAGCAG-1&quot; </code></pre>
 <pre class="r"><code>## cells with low TDP-HA expression
-low &lt;- clus12$barcode[which(dat_ha &lt; 0.5 &amp; dat_ha &gt; 0)]
-low </code></pre>
-<pre><code> ACTATGGAGCCATCCG-1.TDP2wON  AGCCACGGTGTACATC-1.TDP2wON 
-       &quot;ACTATGGAGCCATCCG-1&quot;        &quot;AGCCACGGTGTACATC-1&quot; 
- CAACGATTCCCGTGAG-1.TDP2wON AACCCAACATTCTTCA-1.TDP4wOFF 
-       &quot;CAACGATTCCCGTGAG-1&quot;        &quot;AACCCAACATTCTTCA-1&quot; 
-CTAGACAAGATCACCT-1.TDP4wONa GCATCTCGTAGTATAG-1.TDP4wONa 
-       &quot;CTAGACAAGATCACCT-1&quot;        &quot;GCATCTCGTAGTATAG-1&quot; 
-GGAGAACGTAAGATTG-1.TDP4wONa 
-       &quot;GGAGAACGTAAGATTG-1&quot; </code></pre>
+low &lt;- clus12[which(dat_ha &lt; 0.5 &amp; dat_ha &gt; 0)]
+low$barcode </code></pre>
+<pre><code> AAAGGATGTGTCATTG-1.TDP2wON  AAAGTGAAGAGATTCA-1.TDP2wON 
+       &quot;AAAGGATGTGTCATTG-1&quot;        &quot;AAAGTGAAGAGATTCA-1&quot; 
+ AACAACCGTGGCCTCA-1.TDP2wON  AAGAACAAGCGTACAG-1.TDP2wON 
+       &quot;AACAACCGTGGCCTCA-1&quot;        &quot;AAGAACAAGCGTACAG-1&quot; 
+ AAGACTCGTTGCAACT-1.TDP2wON  AATCACGCAAATGGAT-1.TDP2wON 
+       &quot;AAGACTCGTTGCAACT-1&quot;        &quot;AATCACGCAAATGGAT-1&quot; 
+ AATCGTGTCCGTGGGT-1.TDP2wON  AATTCCTCACACAGCC-1.TDP2wON 
+       &quot;AATCGTGTCCGTGGGT-1&quot;        &quot;AATTCCTCACACAGCC-1&quot; 
+ ACCATTTAGGCTCCCA-1.TDP2wON  ACGGTCGCAACGAGGT-1.TDP2wON 
+       &quot;ACCATTTAGGCTCCCA-1&quot;        &quot;ACGGTCGCAACGAGGT-1&quot; 
+ ACTATGGAGCCATCCG-1.TDP2wON  ACTGATGCATAGATGA-1.TDP2wON 
+       &quot;ACTATGGAGCCATCCG-1&quot;        &quot;ACTGATGCATAGATGA-1&quot; 
+ AGCCAATGTCATGCAT-1.TDP2wON  AGCCACGGTGTACATC-1.TDP2wON 
+       &quot;AGCCAATGTCATGCAT-1&quot;        &quot;AGCCACGGTGTACATC-1&quot; 
+ AGGAGGTTCCGAAATC-1.TDP2wON  AGGGTTTAGTTGGGAC-1.TDP2wON 
+       &quot;AGGAGGTTCCGAAATC-1&quot;        &quot;AGGGTTTAGTTGGGAC-1&quot; 
+ ATACCGACAAGATTGA-1.TDP2wON  ATAGACCAGCATTTCG-1.TDP2wON 
+       &quot;ATACCGACAAGATTGA-1&quot;        &quot;ATAGACCAGCATTTCG-1&quot; 
+ ATCGGATGTGTGATGG-1.TDP2wON  ATGGATCAGCCAGAGT-1.TDP2wON 
+       &quot;ATCGGATGTGTGATGG-1&quot;        &quot;ATGGATCAGCCAGAGT-1&quot; 
+ ATTACCTAGTTGCCCG-1.TDP2wON  ATTACTCAGAAAGTCT-1.TDP2wON 
+       &quot;ATTACCTAGTTGCCCG-1&quot;        &quot;ATTACTCAGAAAGTCT-1&quot; 
+ ATTACTCTCCGGTTCT-1.TDP2wON  ATTCCCGAGGTTGGAC-1.TDP2wON 
+       &quot;ATTACTCTCCGGTTCT-1&quot;        &quot;ATTCCCGAGGTTGGAC-1&quot; 
+ ATTCCTAAGCTTTCCC-1.TDP2wON  CAACAACCAACCGACC-1.TDP2wON 
+       &quot;ATTCCTAAGCTTTCCC-1&quot;        &quot;CAACAACCAACCGACC-1&quot; 
+ CAACGATTCCCGTGAG-1.TDP2wON  CACTTCGCAACGTTAC-1.TDP2wON 
+       &quot;CAACGATTCCCGTGAG-1&quot;        &quot;CACTTCGCAACGTTAC-1&quot; 
+ CAGCCAGTCAATCTCT-1.TDP2wON  CAGGGCTCACCCTAGG-1.TDP2wON 
+       &quot;CAGCCAGTCAATCTCT-1&quot;        &quot;CAGGGCTCACCCTAGG-1&quot; 
+ CATGAGTCACCAAAGG-1.TDP2wON  CATTGAGGTACGTGAG-1.TDP2wON 
+       &quot;CATGAGTCACCAAAGG-1&quot;        &quot;CATTGAGGTACGTGAG-1&quot; 
+ CCTTCAGGTAGATCGG-1.TDP2wON  CGCCATTCACAGCTTA-1.TDP2wON 
+       &quot;CCTTCAGGTAGATCGG-1&quot;        &quot;CGCCATTCACAGCTTA-1&quot; 
+ CGTAAGTAGCAATTAG-1.TDP2wON  CGTCCATTCTTACTGT-1.TDP2wON 
+       &quot;CGTAAGTAGCAATTAG-1&quot;        &quot;CGTCCATTCTTACTGT-1&quot; 
+ CGTTAGAAGGCATGGT-1.TDP2wON  CGTTCTGTCTTCGTGC-1.TDP2wON 
+       &quot;CGTTAGAAGGCATGGT-1&quot;        &quot;CGTTCTGTCTTCGTGC-1&quot; 
+ CTAGACAGTCGAGTGA-1.TDP2wON  CTCAGAATCTAGTCAG-1.TDP2wON 
+       &quot;CTAGACAGTCGAGTGA-1&quot;        &quot;CTCAGAATCTAGTCAG-1&quot; 
+ CTCGAGGCAGCGTATT-1.TDP2wON  CTGAGCGAGGTCACAG-1.TDP2wON 
+       &quot;CTCGAGGCAGCGTATT-1&quot;        &quot;CTGAGCGAGGTCACAG-1&quot; 
+ CTGCAGGAGTACTGGG-1.TDP2wON  CTGCGAGAGACCTTTG-1.TDP2wON 
+       &quot;CTGCAGGAGTACTGGG-1&quot;        &quot;CTGCGAGAGACCTTTG-1&quot; 
+ CTTAGGAAGTTATGGA-1.TDP2wON  CTTCTCTAGCCTATCA-1.TDP2wON 
+       &quot;CTTAGGAAGTTATGGA-1&quot;        &quot;CTTCTCTAGCCTATCA-1&quot; 
+ GAAACCTGTGGTAATA-1.TDP2wON  GACCGTGGTAGTGGCA-1.TDP2wON 
+       &quot;GAAACCTGTGGTAATA-1&quot;        &quot;GACCGTGGTAGTGGCA-1&quot; 
+ GACTTCCAGGGCTTCC-1.TDP2wON  GAGGCAATCGGTAACT-1.TDP2wON 
+       &quot;GACTTCCAGGGCTTCC-1&quot;        &quot;GAGGCAATCGGTAACT-1&quot; 
+ GAGGGATTCCGTTGGG-1.TDP2wON  GAGTTGTTCCTGGTCT-1.TDP2wON 
+       &quot;GAGGGATTCCGTTGGG-1&quot;        &quot;GAGTTGTTCCTGGTCT-1&quot; 
+ GATAGCTCATCAGCTA-1.TDP2wON  GCTACCTGTCAGATTC-1.TDP2wON 
+       &quot;GATAGCTCATCAGCTA-1&quot;        &quot;GCTACCTGTCAGATTC-1&quot; 
+ GCTCAAACATCGATCA-1.TDP2wON  GCTGCAGCAACGCATT-1.TDP2wON 
+       &quot;GCTCAAACATCGATCA-1&quot;        &quot;GCTGCAGCAACGCATT-1&quot; 
+ GCTTTCGCACTACACA-1.TDP2wON  GGCTGTGCACTGCGTG-1.TDP2wON 
+       &quot;GCTTTCGCACTACACA-1&quot;        &quot;GGCTGTGCACTGCGTG-1&quot; 
+ GGCTTTCTCGTCAGAT-1.TDP2wON  GGGTTATGTTACAGCT-1.TDP2wON 
+       &quot;GGCTTTCTCGTCAGAT-1&quot;        &quot;GGGTTATGTTACAGCT-1&quot; 
+ GGTTAACAGGTCGACA-1.TDP2wON  GTAGTACAGTCGGGAT-1.TDP2wON 
+       &quot;GGTTAACAGGTCGACA-1&quot;        &quot;GTAGTACAGTCGGGAT-1&quot; 
+ GTCAAGTAGGACAAGA-1.TDP2wON  GTCATTTAGCTGGTGA-1.TDP2wON 
+       &quot;GTCAAGTAGGACAAGA-1&quot;        &quot;GTCATTTAGCTGGTGA-1&quot; 
+ GTCTAGACAATTGAAG-1.TDP2wON  GTGAGGAGTCGTTGGC-1.TDP2wON 
+       &quot;GTCTAGACAATTGAAG-1&quot;        &quot;GTGAGGAGTCGTTGGC-1&quot; 
+ GTGGTTACAAGATCCT-1.TDP2wON  GTGTAACAGAGCCGTA-1.TDP2wON 
+       &quot;GTGGTTACAAGATCCT-1&quot;        &quot;GTGTAACAGAGCCGTA-1&quot; 
+ TAACACGAGATTCGAA-1.TDP2wON  TACCCGTAGTTAGTAG-1.TDP2wON 
+       &quot;TAACACGAGATTCGAA-1&quot;        &quot;TACCCGTAGTTAGTAG-1&quot; 
+ TACTTCAGTGGTAACG-1.TDP2wON  TAGATCGCACGAAGAC-1.TDP2wON 
+       &quot;TACTTCAGTGGTAACG-1&quot;        &quot;TAGATCGCACGAAGAC-1&quot; 
+ TATCAGGTCGTTGCCT-1.TDP2wON  TCAATCTTCGCCAACG-1.TDP2wON 
+       &quot;TATCAGGTCGTTGCCT-1&quot;        &quot;TCAATCTTCGCCAACG-1&quot; 
+ TCACTCGCATGAGGGT-1.TDP2wON  TCAGGGCGTGAGACCA-1.TDP2wON 
+       &quot;TCACTCGCATGAGGGT-1&quot;        &quot;TCAGGGCGTGAGACCA-1&quot; 
+ TCAGTCCAGGGCCAAT-1.TDP2wON  TCATGGAGTCTCTCCA-1.TDP2wON 
+       &quot;TCAGTCCAGGGCCAAT-1&quot;        &quot;TCATGGAGTCTCTCCA-1&quot; 
+ TCCATCGCATTGTAGC-1.TDP2wON  TCGGGTGAGGTCGTCC-1.TDP2wON 
+       &quot;TCCATCGCATTGTAGC-1&quot;        &quot;TCGGGTGAGGTCGTCC-1&quot; 
+ TCGGGTGGTCGTCTCT-1.TDP2wON  TCTAACTAGCACTAGG-1.TDP2wON 
+       &quot;TCGGGTGGTCGTCTCT-1&quot;        &quot;TCTAACTAGCACTAGG-1&quot; 
+ TCTACATGTTGTCCCT-1.TDP2wON  TCTACCGGTTTCCATT-1.TDP2wON 
+       &quot;TCTACATGTTGTCCCT-1&quot;        &quot;TCTACCGGTTTCCATT-1&quot; 
+ TGAGCGCTCCATCGTC-1.TDP2wON  TGCAGTATCGCCGTGA-1.TDP2wON 
+       &quot;TGAGCGCTCCATCGTC-1&quot;        &quot;TGCAGTATCGCCGTGA-1&quot; 
+ TGCTCGTCAAAGACGC-1.TDP2wON  TGCTTCGAGCAGCAGT-1.TDP2wON 
+       &quot;TGCTCGTCAAAGACGC-1&quot;        &quot;TGCTTCGAGCAGCAGT-1&quot; 
+ TGGGAGACAGCGTGCT-1.TDP2wON  TGTCCTGAGGTCTTTG-1.TDP2wON 
+       &quot;TGGGAGACAGCGTGCT-1&quot;        &quot;TGTCCTGAGGTCTTTG-1&quot; 
+ TTCCAATAGCGACTTT-1.TDP2wON  TTCCTCTGTACCGGAA-1.TDP2wON 
+       &quot;TTCCAATAGCGACTTT-1&quot;        &quot;TTCCTCTGTACCGGAA-1&quot; 
+ TTCGCTGAGCTTTCCC-1.TDP2wON  TTGGATGAGCGGCTCT-1.TDP2wON 
+       &quot;TTCGCTGAGCTTTCCC-1&quot;        &quot;TTGGATGAGCGGCTCT-1&quot; 
+ TTGGGTAAGTATAGGT-1.TDP2wON  TTTACGTCACAGCCAC-1.TDP2wON 
+       &quot;TTGGGTAAGTATAGGT-1&quot;        &quot;TTTACGTCACAGCCAC-1&quot; 
+ TTTGACTGTTATGTCG-1.TDP2wON AACCCAACATTCTTCA-1.TDP4wOFF 
+       &quot;TTTGACTGTTATGTCG-1&quot;        &quot;AACCCAACATTCTTCA-1&quot; 
+ATTCCCGAGTGATGGC-1.TDP4wOFF CAGTTCCTCATGCCGG-1.TDP4wOFF 
+       &quot;ATTCCCGAGTGATGGC-1&quot;        &quot;CAGTTCCTCATGCCGG-1&quot; 
+AAAGGATTCGTCAAAC-1.TDP4wONa AATGGCTTCAGGGATG-1.TDP4wONa 
+       &quot;AAAGGATTCGTCAAAC-1&quot;        &quot;AATGGCTTCAGGGATG-1&quot; 
+ACAGAAACATCGGCCA-1.TDP4wONa ACGATCAGTCATAAAG-1.TDP4wONa 
+       &quot;ACAGAAACATCGGCCA-1&quot;        &quot;ACGATCAGTCATAAAG-1&quot; 
+ACTTTCATCCACATAG-1.TDP4wONa AGCGATTGTGGGTCAA-1.TDP4wONa 
+       &quot;ACTTTCATCCACATAG-1&quot;        &quot;AGCGATTGTGGGTCAA-1&quot; 
+AGGGCTCAGTTTCTTC-1.TDP4wONa AGTTAGCAGTGCTACT-1.TDP4wONa 
+       &quot;AGGGCTCAGTTTCTTC-1&quot;        &quot;AGTTAGCAGTGCTACT-1&quot; 
+ATAGAGAGTGTTGATC-1.TDP4wONa ATCGCCTAGCTAGAGC-1.TDP4wONa 
+       &quot;ATAGAGAGTGTTGATC-1&quot;        &quot;ATCGCCTAGCTAGAGC-1&quot; 
+ATGAGGGGTACGATCT-1.TDP4wONa ATGATCGCACCGGAAA-1.TDP4wONa 
+       &quot;ATGAGGGGTACGATCT-1&quot;        &quot;ATGATCGCACCGGAAA-1&quot; 
+ATTCAGGTCGGACAAG-1.TDP4wONa ATTTACCCATCACAGT-1.TDP4wONa 
+       &quot;ATTCAGGTCGGACAAG-1&quot;        &quot;ATTTACCCATCACAGT-1&quot; 
+ATTTCACAGAGTCACG-1.TDP4wONa CAACGATGTGAGACCA-1.TDP4wONa 
+       &quot;ATTTCACAGAGTCACG-1&quot;        &quot;CAACGATGTGAGACCA-1&quot; 
+CACCAAAGTTAACCTG-1.TDP4wONa CAGATACCACGGATCC-1.TDP4wONa 
+       &quot;CACCAAAGTTAACCTG-1&quot;        &quot;CAGATACCACGGATCC-1&quot; 
+CATCAAGTCCCAAGTA-1.TDP4wONa CCAATGAGTGCGGTAA-1.TDP4wONa 
+       &quot;CATCAAGTCCCAAGTA-1&quot;        &quot;CCAATGAGTGCGGTAA-1&quot; 
+CCGGTAGTCTCGGGAC-1.TDP4wONa CCTCATGCATAGGTAA-1.TDP4wONa 
+       &quot;CCGGTAGTCTCGGGAC-1&quot;        &quot;CCTCATGCATAGGTAA-1&quot; 
+CCTGCATAGAGCCGTA-1.TDP4wONa CGACAGCAGAGGCCAT-1.TDP4wONa 
+       &quot;CCTGCATAGAGCCGTA-1&quot;        &quot;CGACAGCAGAGGCCAT-1&quot; 
+CGGAGAAGTTCTGAGT-1.TDP4wONa CGGGTCACATTACTCT-1.TDP4wONa 
+       &quot;CGGAGAAGTTCTGAGT-1&quot;        &quot;CGGGTCACATTACTCT-1&quot; 
+CGTTAGAAGGCCACTC-1.TDP4wONa CTAGACAAGATCACCT-1.TDP4wONa 
+       &quot;CGTTAGAAGGCCACTC-1&quot;        &quot;CTAGACAAGATCACCT-1&quot; 
+CTCCCTCCATATGGCT-1.TDP4wONa CTCGAGGAGTTGCATC-1.TDP4wONa 
+       &quot;CTCCCTCCATATGGCT-1&quot;        &quot;CTCGAGGAGTTGCATC-1&quot; 
+CTGCCTATCAAAGACA-1.TDP4wONa CTGTCGTTCTACCAGA-1.TDP4wONa 
+       &quot;CTGCCTATCAAAGACA-1&quot;        &quot;CTGTCGTTCTACCAGA-1&quot; 
+CTTCTAACACCACATA-1.TDP4wONa GAAGCGAGTTGTCCCT-1.TDP4wONa 
+       &quot;CTTCTAACACCACATA-1&quot;        &quot;GAAGCGAGTTGTCCCT-1&quot; 
+GAAGTAAGTCCCAAAT-1.TDP4wONa GACCGTGGTCTTCCGT-1.TDP4wONa 
+       &quot;GAAGTAAGTCCCAAAT-1&quot;        &quot;GACCGTGGTCTTCCGT-1&quot; 
+GAGACCCTCGAGCACC-1.TDP4wONa GAGGGATCACGAGAAC-1.TDP4wONa 
+       &quot;GAGACCCTCGAGCACC-1&quot;        &quot;GAGGGATCACGAGAAC-1&quot; 
+GATAGCTGTACTGCGC-1.TDP4wONa GATGCTAGTCACTGAT-1.TDP4wONa 
+       &quot;GATAGCTGTACTGCGC-1&quot;        &quot;GATGCTAGTCACTGAT-1&quot; 
+GCAGTTAAGGTGGCTA-1.TDP4wONa GCATCTCGTAGTATAG-1.TDP4wONa 
+       &quot;GCAGTTAAGGTGGCTA-1&quot;        &quot;GCATCTCGTAGTATAG-1&quot; 
+GCATCTCTCCGGGACT-1.TDP4wONa GCCCAGATCTCCTGAC-1.TDP4wONa 
+       &quot;GCATCTCTCCGGGACT-1&quot;        &quot;GCCCAGATCTCCTGAC-1&quot; 
+GCTGGGTTCCCGAGAC-1.TDP4wONa GGAGAACGTAAGATTG-1.TDP4wONa 
+       &quot;GCTGGGTTCCCGAGAC-1&quot;        &quot;GGAGAACGTAAGATTG-1&quot; 
+GGGTATTCAAGCGCAA-1.TDP4wONa GGGTCTGTCGATACTG-1.TDP4wONa 
+       &quot;GGGTATTCAAGCGCAA-1&quot;        &quot;GGGTCTGTCGATACTG-1&quot; 
+GGTTCTCAGACCAAGC-1.TDP4wONa GTAGCTACATACAGGG-1.TDP4wONa 
+       &quot;GGTTCTCAGACCAAGC-1&quot;        &quot;GTAGCTACATACAGGG-1&quot; 
+GTAGTACAGTTGCCTA-1.TDP4wONa GTATTGGCATGATGCT-1.TDP4wONa 
+       &quot;GTAGTACAGTTGCCTA-1&quot;        &quot;GTATTGGCATGATGCT-1&quot; 
+GTCTACCGTACAGGTG-1.TDP4wONa GTCTCACCACCATATG-1.TDP4wONa 
+       &quot;GTCTACCGTACAGGTG-1&quot;        &quot;GTCTCACCACCATATG-1&quot; 
+GTCTTTATCAGCTCTC-1.TDP4wONa GTCTTTATCATCCTGC-1.TDP4wONa 
+       &quot;GTCTTTATCAGCTCTC-1&quot;        &quot;GTCTTTATCATCCTGC-1&quot; 
+GTGCAGCAGTCCTGCG-1.TDP4wONa GTGTTCCTCCAAGGGA-1.TDP4wONa 
+       &quot;GTGCAGCAGTCCTGCG-1&quot;        &quot;GTGTTCCTCCAAGGGA-1&quot; 
+GTTAGACTCGCTACGG-1.TDP4wONa GTTCGCTCACTGGACC-1.TDP4wONa 
+       &quot;GTTAGACTCGCTACGG-1&quot;        &quot;GTTCGCTCACTGGACC-1&quot; 
+TAACGACGTCTTCCGT-1.TDP4wONa TACAGGTAGTTGGGAC-1.TDP4wONa 
+       &quot;TAACGACGTCTTCCGT-1&quot;        &quot;TACAGGTAGTTGGGAC-1&quot; 
+TACCCACAGGGAGAAT-1.TDP4wONa TACGGGCTCGAAATCC-1.TDP4wONa 
+       &quot;TACCCACAGGGAGAAT-1&quot;        &quot;TACGGGCTCGAAATCC-1&quot; 
+TATATCCGTAGCCCTG-1.TDP4wONa TCACACCCATCACCAA-1.TDP4wONa 
+       &quot;TATATCCGTAGCCCTG-1&quot;        &quot;TCACACCCATCACCAA-1&quot; 
+TCACATTAGTCCGTCG-1.TDP4wONa TCACTCGCAACAGAGC-1.TDP4wONa 
+       &quot;TCACATTAGTCCGTCG-1&quot;        &quot;TCACTCGCAACAGAGC-1&quot; 
+TCCCATGCAATTGCGT-1.TDP4wONa TCTACCGGTAAGTTAG-1.TDP4wONa 
+       &quot;TCCCATGCAATTGCGT-1&quot;        &quot;TCTACCGGTAAGTTAG-1&quot; 
+TGACTCCTCCACCTCA-1.TDP4wONa TGAGACTAGGACACTG-1.TDP4wONa 
+       &quot;TGACTCCTCCACCTCA-1&quot;        &quot;TGAGACTAGGACACTG-1&quot; 
+TGCATCCGTTACGCCG-1.TDP4wONa TGCATGATCGCGATCG-1.TDP4wONa 
+       &quot;TGCATCCGTTACGCCG-1&quot;        &quot;TGCATGATCGCGATCG-1&quot; 
+TGTAAGCTCCGTGCGA-1.TDP4wONa TGTCAGAAGTTTGCTG-1.TDP4wONa 
+       &quot;TGTAAGCTCCGTGCGA-1&quot;        &quot;TGTCAGAAGTTTGCTG-1&quot; 
+TGTCCCAAGTGCAACG-1.TDP4wONa TGTGGCGAGCACTAGG-1.TDP4wONa 
+       &quot;TGTCCCAAGTGCAACG-1&quot;        &quot;TGTGGCGAGCACTAGG-1&quot; 
+TGTTCTACACATAGCT-1.TDP4wONa TTACGTTTCGCGTTTC-1.TDP4wONa 
+       &quot;TGTTCTACACATAGCT-1&quot;        &quot;TTACGTTTCGCGTTTC-1&quot; 
+TTAGTCTGTCCTGAAT-1.TDP4wONa TTCCTTCCAGTTCCAA-1.TDP4wONa 
+       &quot;TTAGTCTGTCCTGAAT-1&quot;        &quot;TTCCTTCCAGTTCCAA-1&quot; 
+TTCGATTTCTCAAAGC-1.TDP4wONa TTCTAGTAGAAGATCT-1.TDP4wONa 
+       &quot;TTCGATTTCTCAAAGC-1&quot;        &quot;TTCTAGTAGAAGATCT-1&quot; 
+TTCTCTCCAGCGAGTA-1.TDP4wONa TTGGGCGAGGATCATA-1.TDP4wONa 
+       &quot;TTCTCTCCAGCGAGTA-1&quot;        &quot;TTGGGCGAGGATCATA-1&quot; 
+TTTACCAAGCGGGTTA-1.TDP4wONa TTTATGCAGCGAACTG-1.TDP4wONa 
+       &quot;TTTACCAAGCGGGTTA-1&quot;        &quot;TTTATGCAGCGAACTG-1&quot; 
+AATCGACGTTCGAGCC-1.TDP4wONb ACACTGAAGACGGATC-1.TDP4wONb 
+       &quot;AATCGACGTTCGAGCC-1&quot;        &quot;ACACTGAAGACGGATC-1&quot; 
+AGAACCTTCCCTATTA-1.TDP4wONb AGATGCTTCTGTCAGA-1.TDP4wONb 
+       &quot;AGAACCTTCCCTATTA-1&quot;        &quot;AGATGCTTCTGTCAGA-1&quot; 
+AGCGCTGTCAAGTGTC-1.TDP4wONb ATCCTATCAATAGTGA-1.TDP4wONb 
+       &quot;AGCGCTGTCAAGTGTC-1&quot;        &quot;ATCCTATCAATAGTGA-1&quot; 
+CAGGGCTAGGTCATAA-1.TDP4wONb CCCTAACCACCTTCGT-1.TDP4wONb 
+       &quot;CAGGGCTAGGTCATAA-1&quot;        &quot;CCCTAACCACCTTCGT-1&quot; 
+CGAAGTTAGACGGATC-1.TDP4wONb CGCCAGATCGCAACAT-1.TDP4wONb 
+       &quot;CGAAGTTAGACGGATC-1&quot;        &quot;CGCCAGATCGCAACAT-1&quot; 
+CGTAGTACAAGCTGTT-1.TDP4wONb CTCATCGAGTATAGGT-1.TDP4wONb 
+       &quot;CGTAGTACAAGCTGTT-1&quot;        &quot;CTCATCGAGTATAGGT-1&quot; 
+CTCATCGCAAGCAGGT-1.TDP4wONb CTCATTAGTAGGAGGG-1.TDP4wONb 
+       &quot;CTCATCGCAAGCAGGT-1&quot;        &quot;CTCATTAGTAGGAGGG-1&quot; 
+CTGAGGCTCCTCTAAT-1.TDP4wONb CTGCCATGTACGTGTT-1.TDP4wONb 
+       &quot;CTGAGGCTCCTCTAAT-1&quot;        &quot;CTGCCATGTACGTGTT-1&quot; 
+GAAATGACAAGGCTTT-1.TDP4wONb GAGTCATCAGAGTCAG-1.TDP4wONb 
+       &quot;GAAATGACAAGGCTTT-1&quot;        &quot;GAGTCATCAGAGTCAG-1&quot; 
+GCAGCTGTCACGGGCT-1.TDP4wONb GCCGATGCAATCACGT-1.TDP4wONb 
+       &quot;GCAGCTGTCACGGGCT-1&quot;        &quot;GCCGATGCAATCACGT-1&quot; 
+GGGAGTACAGCTGTTA-1.TDP4wONb GTAGAGGCATATCTGG-1.TDP4wONb 
+       &quot;GGGAGTACAGCTGTTA-1&quot;        &quot;GTAGAGGCATATCTGG-1&quot; 
+GTGTTCCCACGCCACA-1.TDP4wONb TAAGTCGAGATCGCCC-1.TDP4wONb 
+       &quot;GTGTTCCCACGCCACA-1&quot;        &quot;TAAGTCGAGATCGCCC-1&quot; 
+TCAGTGAAGCTGGCCT-1.TDP4wONb TCATACTTCAAGGACG-1.TDP4wONb 
+       &quot;TCAGTGAAGCTGGCCT-1&quot;        &quot;TCATACTTCAAGGACG-1&quot; 
+TCTACCGTCTCTGGTC-1.TDP4wONb TCTCACGCAATTGCTG-1.TDP4wONb 
+       &quot;TCTACCGTCTCTGGTC-1&quot;        &quot;TCTCACGCAATTGCTG-1&quot; 
+TGATCAGAGCTCCGAC-1.TDP4wONb TGCTTGCAGTGGACTG-1.TDP4wONb 
+       &quot;TGATCAGAGCTCCGAC-1&quot;        &quot;TGCTTGCAGTGGACTG-1&quot; 
+TGTTCCGGTACTCGAT-1.TDP4wONb TGTTTGTAGCCGAATG-1.TDP4wONb 
+       &quot;TGTTCCGGTACTCGAT-1&quot;        &quot;TGTTTGTAGCCGAATG-1&quot; 
+TTCATGTAGCATCCCG-1.TDP4wONb TTCATGTGTTGTTTGG-1.TDP4wONb 
+       &quot;TTCATGTAGCATCCCG-1&quot;        &quot;TTCATGTGTTGTTTGG-1&quot; 
+TTGCCTGAGCACTTTG-1.TDP4wONb TTGTTGTTCAGAGCAG-1.TDP4wONb 
+       &quot;TTGCCTGAGCACTTTG-1&quot;        &quot;TTGTTGTTCAGAGCAG-1&quot; </code></pre>
 </div>
 <div id="get-stathmin2-reads-of-selected-cells" class="section level1">
 <h1>Get stathmin2 reads of selected cells</h1>
@@ -909,7 +1396,6 @@ region_start &lt;- 79611100
 region_end &lt;- 79666200
 stmn2 &lt;- GRanges(chr, IRanges(region_start, region_end), &quot;+&quot;)
 
-
 # keep all reads from cells in cluster 12
 param &lt;- ScanBamParam(which=stmn2, what = c(&quot;qname&quot;), tag = &quot;CB&quot;, 
                       tagFilter = list(CB = clus12$barcode))
@@ -928,7 +1414,6 @@ eTrack &lt;- GeneRegionTrack(TxDb.Hsapiens.UCSC.hg38.knownGene,
                           chromosome = chr, start = region_start, 
                           end = region_end, name = &quot;annotation&quot;)
 
-# covs[[1]]$chr8[region_start:region_end]
 coords &lt;- 79611100:79666201
 dat &lt;- matrix(c(as.vector(covs[[1]]$chr8[region_start:region_end]),
                 as.vector(covs[[2]]$chr8[region_start:region_end]),
@@ -941,13 +1426,10 @@ dtrack &lt;- DataTrack(data = dat,
                     genome = &quot;hg38&quot;)
 
 plotTracks(c(dtrack, eTrack),  
-           # collapseTranscripts=&quot;meta&quot;, 
            type = &quot;histogram&quot;, showSampleNames = TRUE,
-           # chromosome = chr, from = region_start, to = region_end,
            shape = &quot;arrow&quot;, geneSymbols = TRUE, aggregateGroups=FALSE,
            groups = c(&quot;TDP4wOFF&quot;, &quot;TDP2wON&quot;, &quot;TDP4wONa&quot;, &quot;TDP4wONb&quot;),
-           stackedBars = FALSE, fontsize=13
-           )</code></pre>
+           stackedBars = FALSE, fontsize=13 )</code></pre>
 <p><img src="figure/TDP-07-01-STMN2_expression.Rmd/stmn2-clus12-coverage-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-stmn2-clus12-coverage-1">
@@ -973,6 +1455,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5340095cabde7838184cf8f540ac0978eb007f7c/docs/figure/TDP-07-01-STMN2_expression.Rmd/stmn2-clus12-coverage-1.png" target="_blank">5340095</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-19
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a7c4a5b9fc772bcb6014673ab5ad289bd80202a3/docs/figure/TDP-07-01-STMN2_expression.Rmd/stmn2-clus12-coverage-1.png" target="_blank">a7c4a5b</a>
 </td>
 <td>
@@ -995,7 +1488,6 @@ dats &lt;- list(&quot;4wOFF&quot; = matrix(as.vector(covs[[1]]$chr8[region_start
                               nrow = 1, byrow = TRUE),
              &quot;4wONb&quot; = matrix(as.vector(covs[[4]]$chr8[region_start:region_end]),
                               nrow = 1, byrow = TRUE))
-# dats &lt;- lapply(seq_along(dats), function(x) {rownames(dats[[x]]) &lt;- names(dats)[x]; dats[[x]]})
 
 # rownames(dat) &lt;- names(covs)
 dtrack_4wOFF &lt;- DataTrack(data = dats[[1]],
@@ -1011,14 +1503,10 @@ dtrack_4wONb &lt;- DataTrack(data = dats[[4]],
                     start = coords[-length(coords)], end = coords[-1], chromosome = chr,
                     genome = &quot;hg38&quot;, name = &quot;4wONb&quot;)
 
-plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, eTrack),  
-           # collapseTranscripts=&quot;meta&quot;, 
+plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, eTrack), 
            type = &quot;histogram&quot;, showSampleNames = TRUE,
-           # chromosome = chr, from = region_start, to = region_end,
            shape = &quot;arrow&quot;, geneSymbols = TRUE, aggregateGroups=FALSE,
-           # groups = c(&quot;TDP4wOFF&quot;, &quot;TDP2wON&quot;, &quot;TDP4wONa&quot;, &quot;TDP4wONb&quot;),
-           stackedBars = FALSE, fontsize=13
-           )</code></pre>
+           stackedBars = FALSE, fontsize=13)</code></pre>
 <p><img src="figure/TDP-07-01-STMN2_expression.Rmd/stmn2-clus12-coverage-2.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-stmn2-clus12-coverage-2">
@@ -1044,6 +1532,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5340095cabde7838184cf8f540ac0978eb007f7c/docs/figure/TDP-07-01-STMN2_expression.Rmd/stmn2-clus12-coverage-2.png" target="_blank">5340095</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-19
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a7c4a5b9fc772bcb6014673ab5ad289bd80202a3/docs/figure/TDP-07-01-STMN2_expression.Rmd/stmn2-clus12-coverage-2.png" target="_blank">a7c4a5b</a>
 </td>
 <td>
@@ -1062,14 +1561,11 @@ chr &lt;- &quot;chr8&quot;
 region_start &lt;- 79611100
 region_end &lt;- 79637000
 
-plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, eTrack),  
-           # collapseTranscripts=&quot;meta&quot;, 
+plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, eTrack),
            type = &quot;histogram&quot;, showSampleNames = TRUE,
            chromosome = chr, from = region_start, to = region_end,
            shape = &quot;arrow&quot;, geneSymbols = TRUE, aggregateGroups=FALSE,
-           # groups = c(&quot;TDP4wOFF&quot;, &quot;TDP2wON&quot;, &quot;TDP4wONa&quot;, &quot;TDP4wONb&quot;),
-           stackedBars = FALSE, fontsize=13
-           )</code></pre>
+           stackedBars = FALSE, fontsize=13)</code></pre>
 <p><img src="figure/TDP-07-01-STMN2_expression.Rmd/stmn2-clus12-coverage-3.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-stmn2-clus12-coverage-3">
@@ -1095,6 +1591,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/5340095cabde7838184cf8f540ac0978eb007f7c/docs/figure/TDP-07-01-STMN2_expression.Rmd/stmn2-clus12-coverage-3.png" target="_blank">5340095</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-19
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a7c4a5b9fc772bcb6014673ab5ad289bd80202a3/docs/figure/TDP-07-01-STMN2_expression.Rmd/stmn2-clus12-coverage-3.png" target="_blank">a7c4a5b</a>
 </td>
 <td>
@@ -1108,6 +1615,362 @@ khembach
 </table>
 </div>
 </div>
+<pre class="r"><code>## cryptic exon location: HG19 Chr8: 80,529,075-80,529,28
+## in hg38: chr8:79616840-79617049
+ce_start &lt;- 79616840
+ce_end &lt;- 79617049
+ceTrack &lt;- AnnotationTrack(start = ce_start, end = ce_end, chromosome = chr, 
+                          strand = &quot;*&quot;, genome = &quot;hg38&quot;, name = &quot;CE&quot;)
+plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, 
+             ceTrack, eTrack),
+           type = &quot;histogram&quot;, showSampleNames = TRUE,
+           chromosome = chr, from = region_start, to = region_end,
+           shape = &quot;arrow&quot;, geneSymbols = TRUE, aggregateGroups=FALSE,
+           stackedBars = FALSE, fontsize=13)</code></pre>
+<p><img src="figure/TDP-07-01-STMN2_expression.Rmd/stmn2-clus12-coverage-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<div id="splice-junctions" class="section level2">
+<h2>Splice junctions</h2>
+<p>Are there any splice junctions in the first intron?</p>
+<p>We define new functions that allow us to filter the BAM files basd on barcodes:</p>
+<pre class="r"><code>####### import only reads from cells of cluster 12
+## function is copid and modified from the Gviz package
+.import.bam.alignments.cells &lt;- function(file, selection) {
+    indNames &lt;- c(sub(&quot;\\.bam$&quot;, &quot;.bai&quot;, file), paste(file, &quot;bai&quot;, sep = &quot;.&quot;))
+    index &lt;- NULL
+    for (i in indNames) {
+        if (file.exists(i)) {
+            index &lt;- i
+            break
+        }
+    }
+    if (is.null(index)) {
+          stop(
+              &quot;Unable to find index for BAM file &#39;&quot;, file, &quot;&#39;. You can build an index using the following command:\n\t&quot;,
+              &quot;library(Rsamtools)\n\tindexBam(\&quot;&quot;, file, &quot;\&quot;)&quot;
+          )
+      }
+    pairedEnd &lt;- parent.env(environment())[[&quot;._isPaired&quot;]]
+    if (is.null(pairedEnd)) {
+          pairedEnd &lt;- TRUE
+      }
+    flag &lt;- parent.env(environment())[[&quot;._flag&quot;]]
+    if (is.null(flag)) {
+          flag &lt;- scanBamFlag(isUnmappedQuery = FALSE)
+      }
+    bf &lt;- BamFile(file, index = index, asMates = pairedEnd)
+    cells &lt;- parent.env(environment())[[&quot;._cells&quot;]]
+    if(!is.null(cells)){
+      param &lt;- ScanBamParam(which = selection, what = scanBamWhat(),
+                          tag = c(&quot;MD&quot;, &quot;CB&quot;), flag = flag, 
+                          tagFilter = list(CB = cells))
+    } else{
+      param &lt;- ScanBamParam(which = selection, what = scanBamWhat(), 
+                            tag = &quot;MD&quot;, flag = flag)
+    }
+    
+    reads &lt;- if (as.character(seqnames(selection)[1]) %in% names(scanBamHeader(bf)$targets)) scanBam(bf, param = param)[[1]] else list()
+    md &lt;- if (is.null(reads$tag$MD)) rep(as.character(NA), length(reads$pos)) else reads$tag$MD
+    if (length(reads$pos)) {
+        layed_seq &lt;- sequenceLayer(reads$seq, reads$cigar)
+        region &lt;- unlist(bamWhich(param), use.names = FALSE)
+        ans &lt;- stackStrings(layed_seq, start(region), end(region), shift = reads$pos - 1L, Lpadding.letter = &quot;+&quot;, Rpadding.letter = &quot;+&quot;)
+        names(ans) &lt;- seq_along(reads$qname)
+    } else {
+        ans &lt;- DNAStringSet()
+    }
+    return(GRanges(
+        seqnames = if (is.null(reads$rname)) character() else reads$rname,
+        strand = if (is.null(reads$strand)) character() else reads$strand,
+        ranges = IRanges(start = reads$pos, width = reads$qwidth),
+        id = if (is.null(reads$qname)) character() else reads$qname,
+        cigar = if (is.null(reads$cigar)) character() else reads$cigar,
+        mapq = if (is.null(reads$mapq)) integer() else reads$mapq,
+        flag = if (is.null(reads$flag)) integer() else reads$flag,
+        md = md, seq = ans,
+        isize = if (is.null(reads$isize)) integer() else reads$isize,
+        groupid = if (pairedEnd) if (is.null(reads$groupid)) integer() else reads$groupid else seq_along(reads$pos),
+        status = if (pairedEnd) {
+            if (is.null(reads$mate_status)) factor(levels = c(&quot;mated&quot;, &quot;ambiguous&quot;, &quot;unmated&quot;)) else reads$mate_status
+        } else {
+            rep(
+                factor(&quot;unmated&quot;, levels = c(&quot;mated&quot;, &quot;ambiguous&quot;, &quot;unmated&quot;)),
+                length(reads$pos)
+            )
+        }
+    ))
+}
+
+
+## Constructor
+AlignmentsTrack &lt;- function(range = NULL, start = NULL, end = NULL, width = NULL, strand, chromosome, genome,
+                            stacking = &quot;squish&quot;, id, cigar, mapq, flag = scanBamFlag(isUnmappedQuery = FALSE), isize, groupid, status, md, seqs,
+                            name = &quot;AlignmentsTrack&quot;, isPaired = TRUE, importFunction, referenceSequence, cells = NULL, ...) {
+    ## Some defaults
+    if (missing(importFunction)) {
+        importFunction &lt;- .import.bam.alignments
+    }
+    covars &lt;- Gviz:::.getCovars(range)
+    isStream &lt;- FALSE
+    if (!is.character(range)) {
+        n &lt;- max(c(length(start), length(end), length(width)), nrow(covars))
+        id &lt;- Gviz:::.covDefault(id, covars[[&quot;id&quot;]], paste(&quot;read&quot;, seq_len(n), sep = &quot;_&quot;))
+        cigar &lt;- Gviz:::.covDefault(cigar, covars[[&quot;cigar&quot;]], paste(if (is(range, &quot;GRangesOrIRanges&quot;)) width(range) else width, &quot;M&quot;, sep = &quot;&quot;))
+        mapq &lt;- Gviz:::.covDefault(mapq, covars[[&quot;mapq&quot;]], rep(as.integer(NA), n))
+        flag &lt;- Gviz:::.covDefault(flag, covars[[&quot;flag&quot;]], rep(as.integer(NA), n))
+        isize &lt;- Gviz:::.covDefault(isize, covars[[&quot;isize&quot;]], rep(as.integer(NA), n))
+        groupid &lt;- Gviz:::.covDefault(groupid, covars[[&quot;groupid&quot;]], seq_len(n))
+        md &lt;- Gviz:::.covDefault(md, covars[[&quot;md&quot;]], rep(as.character(NA), n))
+        status &lt;- Gviz:::.covDefault(status, covars[[&quot;status&quot;]], ifelse(groupid %in% groupid[duplicated(groupid)], &quot;mated&quot;, &quot;unmated&quot;))
+    }
+    ## Build a GRanges object from the inputs
+    Gviz:::.missingToNull(c(
+        &quot;strand&quot;, &quot;chromosome&quot;, &quot;importFunction&quot;, &quot;genome&quot;, &quot;id&quot;, &quot;cigar&quot;, &quot;mapq&quot;, &quot;flag&quot;, &quot;isize&quot;, &quot;groupid&quot;, &quot;status&quot;,
+        &quot;md&quot;, &quot;seqs&quot;, &quot;referenceSequence&quot;
+    ))
+    args &lt;- list(
+        id = id, cigar = cigar, mapq = mapq, flag = flag, isize = isize, groupid = groupid, status = status, strand = strand, md = md,
+        chromosome = chromosome, genome = genome
+    )
+    defs &lt;- list(
+        strand = &quot;*&quot;, chromosome = &quot;chrNA&quot;, genome = NA, id = as.character(NA), cigar = as.character(NA), mapq = as.integer(NA),
+        flag = as.integer(NA), isize = as.integer(NA), groupid = as.character(NA), status = as.character(NA), md = as.character(NA)
+    )
+    range &lt;- Gviz:::.buildRange(
+        range = range, start = start, end = end, width = width,
+        args = args, defaults = defs, chromosome = chromosome, trackType = &quot;AlignmentsTrack&quot;,
+        importFun = importFunction, stream = TRUE, autodetect = TRUE, ...
+    )
+    ## This is going to be a list if we have to stream data from a file, otherwise we can compute some additional values
+    if (is.list(range)) {
+        isStream &lt;- TRUE
+        slist &lt;- range
+        range &lt;- GRanges()
+        stackRanges &lt;- GRanges()
+        stacks &lt;- NULL
+        seqs &lt;- DNAStringSet()
+    } else {
+        if (is.null(seqs)) {
+            seqs &lt;- DNAStringSet(vapply(width(range), function(x) paste(rep(&quot;N&quot;, x), collapse = &quot;&quot;), character(1)))
+        }
+        addArgs &lt;- list(...)
+        if (&quot;showIndels&quot; %in% names(addArgs)) {
+            showIndels &lt;- addArgs$showIndels
+        } else {
+            showIndels &lt;- FALSE
+        }
+        tmp &lt;- .computeAlignments(range, drop.D.ranges = showIndels)
+        range &lt;- tmp$range
+        stackRanges &lt;- tmp$stackRange
+        stacks &lt;- tmp$stacks
+    }
+    ## If no chromosome was explicitly asked for we just take the first one in the GRanges object
+    if (missing(chromosome) || is.null(chromosome)) {
+        chromosome &lt;- if (length(range) &gt; 0) Gviz:::.chrName(as.character(seqnames(range)[1])) else &quot;chrNA&quot;
+    }
+    ## And finally the object instantiation
+    genome &lt;- Gviz:::.getGenomeFromGRange(range, ifelse(is.null(genome), character(), genome[1]))
+    if (!isStream) {
+        return(new(&quot;AlignmentsTrack&quot;,
+            chromosome = chromosome[1], range = range, stacks = stacks,
+            name = name, genome = genome, stacking = stacking, stackRanges = stackRanges, sequences = seqs,
+            referenceSequence = referenceSequence, ...
+        ))
+    } else {
+        ## A bit hackish but for some functions we may want to know which track type we need but at the
+        ## same time we do not want to enforce this as an additional argument
+        e &lt;- new.env()
+        e[[&quot;._trackType&quot;]] &lt;- &quot;AlignmentsTrack&quot;
+        e[[&quot;._isPaired&quot;]] &lt;- isPaired
+        e[[&quot;._flag&quot;]] &lt;- flag
+        e[[&quot;._cells&quot;]] &lt;- cells
+        environment(slist[[&quot;stream&quot;]]) &lt;- e
+        return(new(&quot;ReferenceAlignmentsTrack&quot;,
+            chromosome = chromosome[1], range = range, stackRanges = stackRanges,
+            name = name, genome = genome, stacking = stacking, stream = slist[[&quot;stream&quot;]], reference = slist[[&quot;reference&quot;]],
+            mapping = slist[[&quot;mapping&quot;]], args = args, defaults = defs, stacks = stacks, referenceSequence = referenceSequence, ...
+        ))
+    }
+}</code></pre>
+<pre class="r"><code>## STMN2 gene range
+chr &lt;- &quot;chr8&quot;
+region_start &lt;- 79611100
+region_end &lt;- 79666200
+
+# Create the alignments track
+alTrack_4wOFF &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP4wOFF&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == &quot;TDP4wOFF&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;4wOFF&quot;)
+alTrack_2wON &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP2wON&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == &quot;TDP2wON&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;2wON&quot;)
+alTrack_4wONa &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP4wONa&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == &quot;TDP4wONa&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;4wONa&quot;)
+alTrack_4wONb &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP4wONb&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == &quot;TDP4wONb&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;4wONb&quot;)
+
+## import GTF with gene annotation
+gtf &lt;- import(file.path(&quot;data&quot;, &quot;Homo_sapiens.GRCh38.98.sorted.gtf&quot;))
+### import GTF, transfort to TxDb and create GeneRegionTrack
+seqlevelsStyle(gtf) &lt;- &quot;UCSC&quot;
+txdb &lt;- makeTxDbFromGRanges(gtf)</code></pre>
+<pre><code>Warning in .get_cds_IDX(mcols0$type, mcols0$phase): The &quot;phase&quot; metadata column contains non-NA values for features of type
+  stop_codon. This information was ignored.</code></pre>
+<pre class="r"><code>gtftrack &lt;- GeneRegionTrack(txdb, name = &quot;annotation&quot;) 
+
+
+## Whole gene
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c(&quot;coverage&quot;, &quot;sashimi&quot;), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = &quot;transcript&quot;)</code></pre>
+<p><img src="figure/TDP-07-01-STMN2_expression.Rmd/stmn2-splice-junctions-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## only first intron 
+## zoom into intron 1 that contains the cryptic exon
+region_start &lt;- 79611100
+region_end &lt;- 79637000
+
+plotTracks(c(alTrack_4wOFF, 
+             alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c(&quot;coverage&quot;, &quot;sashimi&quot;), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = &quot;transcript&quot;)</code></pre>
+<p><img src="figure/TDP-07-01-STMN2_expression.Rmd/stmn2-splice-junctions-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="read-coverage-in-cells-with-low-and-high-tdp-ha-expression-from-cluster-12" class="section level2">
+<h2>Read coverage in cells with low and high TDP-HA expression from cluster 12</h2>
+<pre class="r"><code>## LOW ##
+chr &lt;- &quot;chr8&quot;
+region_start &lt;- 79611100
+region_end &lt;- 79666200
+
+# Create the alignments track
+alTrack_4wOFF &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP4wOFF&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = low$barcode[clus12$sample_id == &quot;TDP4wOFF&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;4wOFF&quot;)
+alTrack_2wON &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP2wON&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = low$barcode[clus12$sample_id == &quot;TDP2wON&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;2wON&quot;)
+alTrack_4wONa &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP4wONa&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = low$barcode[clus12$sample_id == &quot;TDP4wONa&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;4wONa&quot;)
+alTrack_4wONb &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP4wONb&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = low$barcode[clus12$sample_id == &quot;TDP4wONb&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;4wONb&quot;)
+
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c(&quot;coverage&quot;, &quot;sashimi&quot;), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = &quot;transcript&quot;)</code></pre>
+<p><img src="figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## show individual reads
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = &quot;transcript&quot;)</code></pre>
+<p><img src="figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## only first intron 
+## zoom into intron 1 that contains the cryptic exon
+region_start &lt;- 79611100
+region_end &lt;- 79637000
+
+plotTracks(c(alTrack_4wOFF, 
+             alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c(&quot;coverage&quot;, &quot;sashimi&quot;), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = &quot;transcript&quot;)</code></pre>
+<p><img src="figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## HIGH ##
+region_start &lt;- 79611100
+region_end &lt;- 79666200
+
+# Create the alignments track
+alTrack_4wOFF &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP4wOFF&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = high$barcode[clus12$sample_id == &quot;TDP4wOFF&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;4wOFF&quot;)
+alTrack_2wON &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP2wON&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = high$barcode[clus12$sample_id == &quot;TDP2wON&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;2wON&quot;)
+alTrack_4wONa &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP4wONa&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = high$barcode[clus12$sample_id == &quot;TDP4wONa&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;4wONa&quot;)
+alTrack_4wONb &lt;- AlignmentsTrack(
+  range = bams[[&quot;TDP4wONb&quot;]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = high$barcode[clus12$sample_id == &quot;TDP4wONb&quot;], 
+  importFunction = .import.bam.alignments.cells, name = &quot;4wONb&quot;)
+
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c(&quot;coverage&quot;, &quot;sashimi&quot;), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100, fontsize=13,
+           sizes = c(rep(3, 4), 1, 2),
+           transcriptAnnotation = &quot;transcript&quot;)</code></pre>
+<p><img src="figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100, fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = &quot;transcript&quot;)</code></pre>
+<p><img src="figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## only first intron 
+## zoom into intron 1 that contains the cryptic exon
+region_start &lt;- 79611100
+region_end &lt;- 79637000
+
+plotTracks(c(alTrack_4wOFF, 
+             alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c(&quot;coverage&quot;, &quot;sashimi&quot;), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100, fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = &quot;transcript&quot;)</code></pre>
+<p><img src="figure/TDP-07-01-STMN2_expression.Rmd/low-high-TDPHA-cells-6.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1137,27 +2000,28 @@ attached base packages:
  [8] datasets  methods   base     
 
 other attached packages:
- [1] GenomicAlignments_1.24.0                
- [2] Rsamtools_2.4.0                         
- [3] Biostrings_2.56.0                       
- [4] XVector_0.28.0                          
- [5] TxDb.Hsapiens.UCSC.hg38.knownGene_3.10.0
- [6] GenomicFeatures_1.40.0                  
- [7] AnnotationDbi_1.50.1                    
- [8] Gviz_1.32.0                             
- [9] dplyr_1.0.2                             
-[10] SingleCellExperiment_1.10.1             
-[11] SummarizedExperiment_1.18.1             
-[12] DelayedArray_0.14.0                     
-[13] matrixStats_0.56.0                      
-[14] Biobase_2.48.0                          
-[15] GenomicRanges_1.40.0                    
-[16] GenomeInfoDb_1.24.2                     
-[17] IRanges_2.22.2                          
-[18] S4Vectors_0.26.1                        
-[19] BiocGenerics_0.34.0                     
-[20] Seurat_3.1.5                            
-[21] workflowr_1.6.2                         
+ [1] rtracklayer_1.48.0                      
+ [2] GenomicAlignments_1.24.0                
+ [3] Rsamtools_2.4.0                         
+ [4] Biostrings_2.56.0                       
+ [5] XVector_0.28.0                          
+ [6] TxDb.Hsapiens.UCSC.hg38.knownGene_3.10.0
+ [7] GenomicFeatures_1.40.0                  
+ [8] AnnotationDbi_1.50.1                    
+ [9] Gviz_1.32.0                             
+[10] dplyr_1.0.2                             
+[11] SingleCellExperiment_1.10.1             
+[12] SummarizedExperiment_1.18.1             
+[13] DelayedArray_0.14.0                     
+[14] matrixStats_0.56.0                      
+[15] Biobase_2.48.0                          
+[16] GenomicRanges_1.40.0                    
+[17] GenomeInfoDb_1.24.2                     
+[18] IRanges_2.22.2                          
+[19] S4Vectors_0.26.1                        
+[20] BiocGenerics_0.34.0                     
+[21] Seurat_3.1.5                            
+[22] workflowr_1.6.2                         
 
 loaded via a namespace (and not attached):
   [1] backports_1.1.9          Hmisc_4.4-1              BiocFileCache_1.12.0    
@@ -1195,14 +2059,15 @@ loaded via a namespace (and not attached):
  [97] vctrs_0.3.4              pillar_1.4.6             lifecycle_0.2.0         
 [100] lmtest_0.9-37            RcppAnnoy_0.0.16         data.table_1.12.8       
 [103] cowplot_1.0.0            bitops_1.0-6             irlba_2.3.3             
-[106] httpuv_1.5.4             patchwork_1.0.1          rtracklayer_1.48.0      
-[109] R6_2.4.1                 latticeExtra_0.6-29      promises_1.1.1          
-[112] KernSmooth_2.23-17       gridExtra_2.3            codetools_0.2-16        
-[115] dichromat_2.0-0          MASS_7.3-51.6            assertthat_0.2.1        
-[118] openssl_1.4.2            rprojroot_1.3-2          sctransform_0.2.1       
-[121] GenomeInfoDbData_1.2.3   hms_0.5.3                rpart_4.1-15            
-[124] tidyr_1.1.0              rmarkdown_2.3            Rtsne_0.15              
-[127] biovizBase_1.36.0        git2r_0.27.1             base64enc_0.1-3         </code></pre>
+[106] httpuv_1.5.4             patchwork_1.0.1          R6_2.4.1                
+[109] latticeExtra_0.6-29      promises_1.1.1           KernSmooth_2.23-17      
+[112] gridExtra_2.3            codetools_0.2-16         dichromat_2.0-0         
+[115] MASS_7.3-51.6            assertthat_0.2.1         openssl_1.4.2           
+[118] rprojroot_1.3-2          sctransform_0.2.1        GenomeInfoDbData_1.2.3  
+[121] hms_0.5.3                rpart_4.1-15             tidyr_1.1.0             
+[124] rmarkdown_2.3            Rtsne_0.15               biovizBase_1.36.0       
+[127] git2r_0.27.1             base64enc_0.1-3         </code></pre>
+</div>
 </div>
 </div>
 
