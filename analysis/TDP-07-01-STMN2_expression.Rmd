@@ -1,7 +1,7 @@
 ---
-title: "Stathmin 2 expression"
+title: "Stathmin 2 read coverage"
 author: "Katharina Hembach"
-date: "21/01/2021"
+date: "25/02/2021"
 output: 
   html_document:
     toc: true,
@@ -23,12 +23,12 @@ library(Gviz)
 library(TxDb.Hsapiens.UCSC.hg38.knownGene)
 library(Rsamtools)
 library(GenomicAlignments)
+library(rtracklayer)
 ```
 
 # Load data & convert to SCE
 
 ```{r load-data}
-# so <- readRDS(file.path("output", "so_TDP-06-cluster-analysis.rds"))
 so <- readRDS(file.path("output", "so_TDP_05_plasmid_expression.rds"))
 so <- SetIdent(so, value = "RNA_snn_res.0.4")
 so@meta.data$cluster_id <- Idents(so)
@@ -46,11 +46,11 @@ clus12$sample_id %>% table
 dat_ha <- GetAssayData(object = clus12, slot = "data")["TDP43-HA",]
 summary(dat_ha)
 ## select cells with high TDP-HA expression
-high <- clus12$barcode[which(dat_ha > 3.5)]
-high
+high <- clus12[which(dat_ha > 3.5)]
+high$barcode
 ## cells with low TDP-HA expression
-low <- clus12$barcode[which(dat_ha < 0.5 & dat_ha > 0)]
-low 
+low <- clus12[which(dat_ha < 0.5 & dat_ha > 0)]
+low$barcode 
 ```
 
 # Get stathmin2 reads of selected cells
@@ -76,7 +76,6 @@ region_start <- 79611100
 region_end <- 79666200
 stmn2 <- GRanges(chr, IRanges(region_start, region_end), "+")
 
-
 # keep all reads from cells in cluster 12
 param <- ScanBamParam(which=stmn2, what = c("qname"), tag = "CB", 
                       tagFilter = list(CB = clus12$barcode))
@@ -98,7 +97,6 @@ eTrack <- GeneRegionTrack(TxDb.Hsapiens.UCSC.hg38.knownGene,
                           chromosome = chr, start = region_start, 
                           end = region_end, name = "annotation")
 
-# covs[[1]]$chr8[region_start:region_end]
 coords <- 79611100:79666201
 dat <- matrix(c(as.vector(covs[[1]]$chr8[region_start:region_end]),
                 as.vector(covs[[2]]$chr8[region_start:region_end]),
@@ -111,13 +109,10 @@ dtrack <- DataTrack(data = dat,
                     genome = "hg38")
 
 plotTracks(c(dtrack, eTrack),  
-           # collapseTranscripts="meta", 
            type = "histogram", showSampleNames = TRUE,
-           # chromosome = chr, from = region_start, to = region_end,
            shape = "arrow", geneSymbols = TRUE, aggregateGroups=FALSE,
            groups = c("TDP4wOFF", "TDP2wON", "TDP4wONa", "TDP4wONb"),
-           stackedBars = FALSE, fontsize=13
-           )
+           stackedBars = FALSE, fontsize=13 )
 
 ## one data track per sample
 dats <- list("4wOFF" = matrix(as.vector(covs[[1]]$chr8[region_start:region_end]),
@@ -128,7 +123,6 @@ dats <- list("4wOFF" = matrix(as.vector(covs[[1]]$chr8[region_start:region_end])
                               nrow = 1, byrow = TRUE),
              "4wONb" = matrix(as.vector(covs[[4]]$chr8[region_start:region_end]),
                               nrow = 1, byrow = TRUE))
-# dats <- lapply(seq_along(dats), function(x) {rownames(dats[[x]]) <- names(dats)[x]; dats[[x]]})
 
 # rownames(dat) <- names(covs)
 dtrack_4wOFF <- DataTrack(data = dats[[1]],
@@ -144,152 +138,384 @@ dtrack_4wONb <- DataTrack(data = dats[[4]],
                     start = coords[-length(coords)], end = coords[-1], chromosome = chr,
                     genome = "hg38", name = "4wONb")
 
-plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, eTrack),  
-           # collapseTranscripts="meta", 
+plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, eTrack), 
            type = "histogram", showSampleNames = TRUE,
-           # chromosome = chr, from = region_start, to = region_end,
            shape = "arrow", geneSymbols = TRUE, aggregateGroups=FALSE,
-           # groups = c("TDP4wOFF", "TDP2wON", "TDP4wONa", "TDP4wONb"),
-           stackedBars = FALSE, fontsize=13
-           )
+           stackedBars = FALSE, fontsize=13)
 
 ## zoom into intron 1 that contains the cryptic exon
 chr <- "chr8"
 region_start <- 79611100
 region_end <- 79637000
 
-plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, eTrack),  
-           # collapseTranscripts="meta", 
+plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, eTrack),
            type = "histogram", showSampleNames = TRUE,
            chromosome = chr, from = region_start, to = region_end,
            shape = "arrow", geneSymbols = TRUE, aggregateGroups=FALSE,
-           # groups = c("TDP4wOFF", "TDP2wON", "TDP4wONa", "TDP4wONb"),
-           stackedBars = FALSE, fontsize=13
-           )
+           stackedBars = FALSE, fontsize=13)
+
+
+## cryptic exon location: HG19 Chr8: 80,529,075-80,529,28
+## in hg38: chr8:79616840-79617049
+ce_start <- 79616840
+ce_end <- 79617049
+ceTrack <- AnnotationTrack(start = ce_start, end = ce_end, chromosome = chr, 
+                          strand = "*", genome = "hg38", name = "CE")
+plotTracks(c(dtrack_4wOFF, dtrack_2wON, dtrack_4wONa, dtrack_4wONb, 
+             ceTrack, eTrack),
+           type = "histogram", showSampleNames = TRUE,
+           chromosome = chr, from = region_start, to = region_end,
+           shape = "arrow", geneSymbols = TRUE, aggregateGroups=FALSE,
+           stackedBars = FALSE, fontsize=13)
+```
+
+## Splice junctions
+
+Are there any splice junctions in the first intron?
+
+We define new functions that allow us to filter the BAM files basd on barcodes:
+```{r Gviz-read-filtering}
+####### import only reads from cells of cluster 12
+## function is copid and modified from the Gviz package
+.import.bam.alignments.cells <- function(file, selection) {
+    indNames <- c(sub("\\.bam$", ".bai", file), paste(file, "bai", sep = "."))
+    index <- NULL
+    for (i in indNames) {
+        if (file.exists(i)) {
+            index <- i
+            break
+        }
+    }
+    if (is.null(index)) {
+          stop(
+              "Unable to find index for BAM file '", file, "'. You can build an index using the following command:\n\t",
+              "library(Rsamtools)\n\tindexBam(\"", file, "\")"
+          )
+      }
+    pairedEnd <- parent.env(environment())[["._isPaired"]]
+    if (is.null(pairedEnd)) {
+          pairedEnd <- TRUE
+      }
+    flag <- parent.env(environment())[["._flag"]]
+    if (is.null(flag)) {
+          flag <- scanBamFlag(isUnmappedQuery = FALSE)
+      }
+    bf <- BamFile(file, index = index, asMates = pairedEnd)
+    cells <- parent.env(environment())[["._cells"]]
+    if(!is.null(cells)){
+      param <- ScanBamParam(which = selection, what = scanBamWhat(),
+                          tag = c("MD", "CB"), flag = flag, 
+                          tagFilter = list(CB = cells))
+    } else{
+      param <- ScanBamParam(which = selection, what = scanBamWhat(), 
+                            tag = "MD", flag = flag)
+    }
+    
+    reads <- if (as.character(seqnames(selection)[1]) %in% names(scanBamHeader(bf)$targets)) scanBam(bf, param = param)[[1]] else list()
+    md <- if (is.null(reads$tag$MD)) rep(as.character(NA), length(reads$pos)) else reads$tag$MD
+    if (length(reads$pos)) {
+        layed_seq <- sequenceLayer(reads$seq, reads$cigar)
+        region <- unlist(bamWhich(param), use.names = FALSE)
+        ans <- stackStrings(layed_seq, start(region), end(region), shift = reads$pos - 1L, Lpadding.letter = "+", Rpadding.letter = "+")
+        names(ans) <- seq_along(reads$qname)
+    } else {
+        ans <- DNAStringSet()
+    }
+    return(GRanges(
+        seqnames = if (is.null(reads$rname)) character() else reads$rname,
+        strand = if (is.null(reads$strand)) character() else reads$strand,
+        ranges = IRanges(start = reads$pos, width = reads$qwidth),
+        id = if (is.null(reads$qname)) character() else reads$qname,
+        cigar = if (is.null(reads$cigar)) character() else reads$cigar,
+        mapq = if (is.null(reads$mapq)) integer() else reads$mapq,
+        flag = if (is.null(reads$flag)) integer() else reads$flag,
+        md = md, seq = ans,
+        isize = if (is.null(reads$isize)) integer() else reads$isize,
+        groupid = if (pairedEnd) if (is.null(reads$groupid)) integer() else reads$groupid else seq_along(reads$pos),
+        status = if (pairedEnd) {
+            if (is.null(reads$mate_status)) factor(levels = c("mated", "ambiguous", "unmated")) else reads$mate_status
+        } else {
+            rep(
+                factor("unmated", levels = c("mated", "ambiguous", "unmated")),
+                length(reads$pos)
+            )
+        }
+    ))
+}
+
+
+## Constructor
+AlignmentsTrack <- function(range = NULL, start = NULL, end = NULL, width = NULL, strand, chromosome, genome,
+                            stacking = "squish", id, cigar, mapq, flag = scanBamFlag(isUnmappedQuery = FALSE), isize, groupid, status, md, seqs,
+                            name = "AlignmentsTrack", isPaired = TRUE, importFunction, referenceSequence, cells = NULL, ...) {
+    ## Some defaults
+    if (missing(importFunction)) {
+        importFunction <- .import.bam.alignments
+    }
+    covars <- Gviz:::.getCovars(range)
+    isStream <- FALSE
+    if (!is.character(range)) {
+        n <- max(c(length(start), length(end), length(width)), nrow(covars))
+        id <- Gviz:::.covDefault(id, covars[["id"]], paste("read", seq_len(n), sep = "_"))
+        cigar <- Gviz:::.covDefault(cigar, covars[["cigar"]], paste(if (is(range, "GRangesOrIRanges")) width(range) else width, "M", sep = ""))
+        mapq <- Gviz:::.covDefault(mapq, covars[["mapq"]], rep(as.integer(NA), n))
+        flag <- Gviz:::.covDefault(flag, covars[["flag"]], rep(as.integer(NA), n))
+        isize <- Gviz:::.covDefault(isize, covars[["isize"]], rep(as.integer(NA), n))
+        groupid <- Gviz:::.covDefault(groupid, covars[["groupid"]], seq_len(n))
+        md <- Gviz:::.covDefault(md, covars[["md"]], rep(as.character(NA), n))
+        status <- Gviz:::.covDefault(status, covars[["status"]], ifelse(groupid %in% groupid[duplicated(groupid)], "mated", "unmated"))
+    }
+    ## Build a GRanges object from the inputs
+    Gviz:::.missingToNull(c(
+        "strand", "chromosome", "importFunction", "genome", "id", "cigar", "mapq", "flag", "isize", "groupid", "status",
+        "md", "seqs", "referenceSequence"
+    ))
+    args <- list(
+        id = id, cigar = cigar, mapq = mapq, flag = flag, isize = isize, groupid = groupid, status = status, strand = strand, md = md,
+        chromosome = chromosome, genome = genome
+    )
+    defs <- list(
+        strand = "*", chromosome = "chrNA", genome = NA, id = as.character(NA), cigar = as.character(NA), mapq = as.integer(NA),
+        flag = as.integer(NA), isize = as.integer(NA), groupid = as.character(NA), status = as.character(NA), md = as.character(NA)
+    )
+    range <- Gviz:::.buildRange(
+        range = range, start = start, end = end, width = width,
+        args = args, defaults = defs, chromosome = chromosome, trackType = "AlignmentsTrack",
+        importFun = importFunction, stream = TRUE, autodetect = TRUE, ...
+    )
+    ## This is going to be a list if we have to stream data from a file, otherwise we can compute some additional values
+    if (is.list(range)) {
+        isStream <- TRUE
+        slist <- range
+        range <- GRanges()
+        stackRanges <- GRanges()
+        stacks <- NULL
+        seqs <- DNAStringSet()
+    } else {
+        if (is.null(seqs)) {
+            seqs <- DNAStringSet(vapply(width(range), function(x) paste(rep("N", x), collapse = ""), character(1)))
+        }
+        addArgs <- list(...)
+        if ("showIndels" %in% names(addArgs)) {
+            showIndels <- addArgs$showIndels
+        } else {
+            showIndels <- FALSE
+        }
+        tmp <- .computeAlignments(range, drop.D.ranges = showIndels)
+        range <- tmp$range
+        stackRanges <- tmp$stackRange
+        stacks <- tmp$stacks
+    }
+    ## If no chromosome was explicitly asked for we just take the first one in the GRanges object
+    if (missing(chromosome) || is.null(chromosome)) {
+        chromosome <- if (length(range) > 0) Gviz:::.chrName(as.character(seqnames(range)[1])) else "chrNA"
+    }
+    ## And finally the object instantiation
+    genome <- Gviz:::.getGenomeFromGRange(range, ifelse(is.null(genome), character(), genome[1]))
+    if (!isStream) {
+        return(new("AlignmentsTrack",
+            chromosome = chromosome[1], range = range, stacks = stacks,
+            name = name, genome = genome, stacking = stacking, stackRanges = stackRanges, sequences = seqs,
+            referenceSequence = referenceSequence, ...
+        ))
+    } else {
+        ## A bit hackish but for some functions we may want to know which track type we need but at the
+        ## same time we do not want to enforce this as an additional argument
+        e <- new.env()
+        e[["._trackType"]] <- "AlignmentsTrack"
+        e[["._isPaired"]] <- isPaired
+        e[["._flag"]] <- flag
+        e[["._cells"]] <- cells
+        environment(slist[["stream"]]) <- e
+        return(new("ReferenceAlignmentsTrack",
+            chromosome = chromosome[1], range = range, stackRanges = stackRanges,
+            name = name, genome = genome, stacking = stacking, stream = slist[["stream"]], reference = slist[["reference"]],
+            mapping = slist[["mapping"]], args = args, defaults = defs, stacks = stacks, referenceSequence = referenceSequence, ...
+        ))
+    }
+}
 ```
 
 
-
-
-```{r get-reads, eval = FALSE, include = FALSE}
-
-lim <- c(26700000, 26750000)
-coords <- sort(c(lim[1], 
-                 sample(seq(from = lim[1], to = lim[2]), 99), 
-                 lim[2]))
-dat <- runif(100, min = -10, max = 10)
-dtrack <- DataTrack(data = dat, start = coords[-length(coords)],
-                    end = coords[-1], chromosome = chr, genome = gen, 
-                    name = "Uniform")
-plotTracks(list(itrack, gtrack, atrack, grtrack, dtrack), 
-           from = lim[1], to = lim[2])
-
-
-
-
-## we need the read coverage in the stathmin2 genomic region for plotting
-alTrack <- AlignmentsTrack(
-  file.path("data", "Sep2020", "CellRangerCount_50076_2020-09-22--15-40-54",
-            "no3_Neural_cuture_d_96_TDP-43-HA_4w_DOXONa",
-            "possorted_genome_bam.bam"),
-  chromosome = chr, from = region_start, to = region_end,
-  isPaired = FALSE)
-
-pdf()
-plotTracks(list(alTrack, eTrack),  
-           # collapseTranscripts="meta", 
-           type = "coverage", 
-           chromosome = chr, from = region_start, to = region_end,
-           coverageHeight = 0.5, shape = "arrow", geneSymbols = TRUE)
-dev.off()
-
-
-# 
-# 
-# edb <- EnsDb.Hsapiens.v86
-# seqlevelsStyle(edb) <- "UCSC"
-# options(ensembldb.seqnameNotFound=NA)
-# # seqlevels(edb)[1:30]
-# 
-# # options(ucscChromosomeNames = TRUE)
-# eTrack <- GeneRegionTrack(edb, chromosome = "chr3", start = region_start, 
-#                           end = region_end)
-# chromosome(eTrack) <- "chr3" ## change to UCSC naming
-# pdf()
-# plotTracks(eTrack, transcriptAnnotation = "symbol", collapseTranscripts="meta")
-# dev.off()
-
-
-
-## Plot the stathmin2 gene model
-## annotation track with stathmin2 gene which is on Chromosome 8: 79,611,117-79,666,158
+```{r stmn2-splice-junctions, fig.width = 12}
+## STMN2 gene range
 chr <- "chr8"
 region_start <- 79611100
 region_end <- 79666200
-## gene annotations from UCSC
-options(ucscChromosomeNames = FALSE)
-eTrack <- GeneRegionTrack(TxDb.Hsapiens.UCSC.hg38.knownGene, 
-                          chromosome = chr, start = region_start, 
-                          end = region_end)
 
-## we need the read coverage in the stathmin2 genomic region for plotting
-alTrack <- AlignmentsTrack(
-  file.path("data", "Sep2020", "CellRangerCount_50076_2020-09-22--15-40-54",
-            "no3_Neural_cuture_d_96_TDP-43-HA_4w_DOXONa",
-            "possorted_genome_bam.bam"),
-  chromosome = chr, from = region_start, to = region_end,
-  isPaired = FALSE)
+# Create the alignments track
+alTrack_4wOFF <- AlignmentsTrack(
+  range = bams[["TDP4wOFF"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == "TDP4wOFF"], 
+  importFunction = .import.bam.alignments.cells, name = "4wOFF")
+alTrack_2wON <- AlignmentsTrack(
+  range = bams[["TDP2wON"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == "TDP2wON"], 
+  importFunction = .import.bam.alignments.cells, name = "2wON")
+alTrack_4wONa <- AlignmentsTrack(
+  range = bams[["TDP4wONa"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == "TDP4wONa"], 
+  importFunction = .import.bam.alignments.cells, name = "4wONa")
+alTrack_4wONb <- AlignmentsTrack(
+  range = bams[["TDP4wONb"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == "TDP4wONb"], 
+  importFunction = .import.bam.alignments.cells, name = "4wONb")
 
-pdf()
-plotTracks(list(alTrack, eTrack),  
-           # collapseTranscripts="meta", 
-           type = "coverage", 
+## import GTF with gene annotation
+gtf <- import(file.path("data", "Homo_sapiens.GRCh38.98.sorted.gtf"))
+### import GTF, transfort to TxDb and create GeneRegionTrack
+seqlevelsStyle(gtf) <- "UCSC"
+txdb <- makeTxDbFromGRanges(gtf)
+gtftrack <- GeneRegionTrack(txdb, name = "annotation") 
+
+
+## Whole gene
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c("coverage", "sashimi"), 
            chromosome = chr, from = region_start, to = region_end,
-           coverageHeight = 0.5, shape = "arrow", geneSymbols = TRUE)
-dev.off()
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = "transcript")
 
+## only first intron 
+## zoom into intron 1 that contains the cryptic exon
+region_start <- 79611100
+region_end <- 79637000
 
-
-## import stmn2 region from all four bam files and filter reads
-## compute coverage
-## plot annotation together with the 4 coverage tracks
-
-
-## using biomart
-library(biomaRt)
-bm <- useMart(biomart = "ENSEMBL_MART_ENSEMBL", 
-              dataset = "hsapiens_gene_ensembl")
-biomTrack <- BiomartGeneRegionTrack(genome = "hg38", chromosome = "3", 
-                                    start = region_start, end = region_end,
-                                    name = "ENSEMBL", biomart = bm)
-
-
-pdf()
-plotTracks(list(alTrack, biomTrack),  
-           # collapseTranscripts="meta", 
-           type = "coverage", 
-           # chromosome = "chr3", from = region_start, to = region_end,
-           coverageHeight = 0.5, shape = "arrow", geneSymbols = TRUE)
-dev.off()
-
-
-
-grtrack <- GeneRegionTrack(geneModels, genome = gen,
-                           chromosome = chr, name = "Gene Model")
-plotTracks(list(itrack, gtrack, atrack, grtrack),)
-
-## http://www.sthda.com/english/wiki/visualize-ngs-data-with-r-and-bioconductor
-## https://www.bioconductor.org/packages/devel/bioc/vignettes/Gviz/inst/doc/Gviz.html
-## rsamtools
-## ggbio
-## Gviz:
-## write an import functions that only keeps reads from the selected cells?
-myImportFun <- function(file, selection){
-    ## do something here
-}
-DataTrack(range = bamFile, genome = "hg19", type = "l",
-          name = "Coverage", window = -1, chromosome = "chr1",
-          importFunction = myImportFun, stream = TRUE)
+plotTracks(c(alTrack_4wOFF, 
+             alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c("coverage", "sashimi"), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = "transcript")
 ```
 
+
+## Read coverage in cells with low and high TDP-HA expression from cluster 12
+
+```{r low-high-TDPHA-cells}
+## LOW ##
+chr <- "chr8"
+region_start <- 79611100
+region_end <- 79666200
+
+# Create the alignments track
+alTrack_4wOFF <- AlignmentsTrack(
+  range = bams[["TDP4wOFF"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = low$barcode[clus12$sample_id == "TDP4wOFF"], 
+  importFunction = .import.bam.alignments.cells, name = "4wOFF")
+alTrack_2wON <- AlignmentsTrack(
+  range = bams[["TDP2wON"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = low$barcode[clus12$sample_id == "TDP2wON"], 
+  importFunction = .import.bam.alignments.cells, name = "2wON")
+alTrack_4wONa <- AlignmentsTrack(
+  range = bams[["TDP4wONa"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = low$barcode[clus12$sample_id == "TDP4wONa"], 
+  importFunction = .import.bam.alignments.cells, name = "4wONa")
+alTrack_4wONb <- AlignmentsTrack(
+  range = bams[["TDP4wONb"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = low$barcode[clus12$sample_id == "TDP4wONb"], 
+  importFunction = .import.bam.alignments.cells, name = "4wONb")
+
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c("coverage", "sashimi"), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = "transcript")
+
+## show individual reads
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = "transcript")
+
+## only first intron 
+## zoom into intron 1 that contains the cryptic exon
+region_start <- 79611100
+region_end <- 79637000
+
+plotTracks(c(alTrack_4wOFF, 
+             alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c("coverage", "sashimi"), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = "transcript")
+
+## HIGH ##
+region_start <- 79611100
+region_end <- 79666200
+
+# Create the alignments track
+alTrack_4wOFF <- AlignmentsTrack(
+  range = bams[["TDP4wOFF"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = high$barcode[clus12$sample_id == "TDP4wOFF"], 
+  importFunction = .import.bam.alignments.cells, name = "4wOFF")
+alTrack_2wON <- AlignmentsTrack(
+  range = bams[["TDP2wON"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = high$barcode[clus12$sample_id == "TDP2wON"], 
+  importFunction = .import.bam.alignments.cells, name = "2wON")
+alTrack_4wONa <- AlignmentsTrack(
+  range = bams[["TDP4wONa"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = high$barcode[clus12$sample_id == "TDP4wONa"], 
+  importFunction = .import.bam.alignments.cells, name = "4wONa")
+alTrack_4wONb <- AlignmentsTrack(
+  range = bams[["TDP4wONb"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = high$barcode[clus12$sample_id == "TDP4wONb"], 
+  importFunction = .import.bam.alignments.cells, name = "4wONb")
+
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c("coverage", "sashimi"), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100, fontsize=13,
+           sizes = c(rep(3, 4), 1, 2),
+           transcriptAnnotation = "transcript")
+
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100, fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = "transcript")
+
+## only first intron 
+## zoom into intron 1 that contains the cryptic exon
+region_start <- 79611100
+region_end <- 79637000
+
+plotTracks(c(alTrack_4wOFF, 
+             alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c("coverage", "sashimi"), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100, fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = "transcript")
+```
 
