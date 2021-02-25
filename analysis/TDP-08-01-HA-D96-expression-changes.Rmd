@@ -1,0 +1,213 @@
+---
+title: "Gene expression changes in TDP-HA cultures"
+author: "Katharina Hembach"
+date: "2/25/2021"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+### Load packages
+
+```{r load-libs, message = FALSE, warning = FALSE}
+library(Seurat)
+library(SingleCellExperiment)
+library(dplyr)
+library(scran)
+library(Seurat)
+library(ComplexHeatmap)
+library(cowplot)
+library(ggplot2)
+library(muscat)
+library(purrr)
+library(RColorBrewer)
+library(viridis)
+library(edgeR)
+```
+
+# Load data & convert to SCE
+
+```{r load-data}
+so <- readRDS(file.path("output", "so_08-00_clustering_HA_D96.rds"))
+sce <- as.SingleCellExperiment(so, assay = "RNA")
+colData(sce) <- as.data.frame(colData(sce)) %>% 
+    mutate_if(is.character, as.factor) %>% 
+    DataFrame(row.names = colnames(sce))
+```
+
+
+# Cluster-sample counts
+
+```{r}
+# set cluster IDs to resolution 0.4 clustering
+so <- SetIdent(so, value = "RNA_snn_res.0.4")
+so@meta.data$cluster_id <- Idents(so)
+sce$cluster_id <- Idents(so)
+(n_cells <- table(sce$cluster_id, sce$sample_id))
+```
+
+# Relative cluster-abundances
+How are the samples distributed across clusters?
+```{r fig.width = 6, fig.height = 5}
+fqs <- prop.table(n_cells, margin = 2)
+mat <- as.matrix(unclass(fqs))
+Heatmap(mat,
+    col = rev(magma(12))[-c(1,2)],
+    name = "Frequency",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "cluster_id",
+    column_title = "sample_id",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
+            gp = gpar(col = "white", fontsize = 8)))
+```
+
+
+# DR colored by cluster ID {.tabset}
+
+```{r dim-red, results = "asis", fig.width = 12}
+cs <- sample(colnames(so), 1e4)
+.plot_dr <- function(so, dr, id)
+    DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+ids <- c("group_id", "sample_id", "ident")
+for (id in ids) {
+    cat("## ", id, "\n")
+    p1 <- .plot_dr(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none")
+    p2 <- .plot_dr(so, "umap", id) + theme(legend.position = "none")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
+
+
+## DR colored by cluster ID per sample
+
+To better see how the cells from different clusters overlap, we only plot the cells from one samples at a time.
+
+```{r UMAP-split-by-sample, results = "asis", fig.width = 12}
+
+.plot_dr <- function(so, dr, id, cs) {
+    DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4, cols = ) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1) +
+        theme(plot.title = element_text(hjust = 0.5))}
+# ids <- unique(so$sample_id)
+
+p1 <- .plot_dr(so, "umap", "ident", colnames(so[,so$sample_id == "5NC96"])) + 
+  theme(legend.position = "none") + ggtitle("5NC96")
+p2 <- .plot_dr(so, "umap", "ident", colnames(so[,so$sample_id == "6NC96"])) + 
+  theme(legend.position = "none") + ggtitle("6NC96")
+p3 <- .plot_dr(so, "umap", "ident", colnames(so[,so$sample_id == "TDP4wOFF"])) + 
+  theme(legend.position = "none") + ggtitle("TDP4wOFF")
+p4 <- .plot_dr(so, "umap", "ident", colnames(so[,so$sample_id == "TDP2wON"])) + 
+  theme(legend.position = "none") + ggtitle("TDP2wON")
+p5 <- .plot_dr(so, "umap", "ident", colnames(so[,so$sample_id == "TDP4wONa"])) + 
+  theme(legend.position = "none") + ggtitle("TDP4wONa")
+p6 <- .plot_dr(so, "umap", "ident", colnames(so[,so$sample_id == "TDP4wONb"])) + 
+  theme(legend.position = "none") + ggtitle("TDP4wONb")
+ps <- plot_grid(plotlist = list(p1, p2, p3, p4, p5, p6), nrow = 2)
+lgd <- get_legend(p5)
+p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+p
+```
+
+
+# DE analysis
+
+We want to test for differences in gene expression between cells from D96 samples and the TDP-HA expressing samples. We test for differences in the neuronal cells (right cell cloud in UMAP).
+
+## Preprocessing with muscat
+
+We filter and only keep cells from D96 and 4wON.
+
+```{r muscat-preprocessing}
+## TODO subset cells
+
+sce$id <- sce$sample_id
+levels(sce$id) <- c("D96", "D96", "ON2w", "OFF4w", "ON4w", "ON4w")
+(sce <- prepSCE(sce, 
+    kid = "cluster_id", # subpopulation assignments
+    gid = "id",  # group IDs (ctrl/stim)
+    sid = "sample_id",   # sample IDs (ctrl/stim.1234)
+    drop = FALSE))  # drop all other colData columns
+
+nk <- length(kids <- levels(sce$cluster_id))
+ns <- length(sids <- levels(sce$sample_id))
+names(kids) <- kids; names(sids) <- sids
+
+# nb. of cells per cluster-sample
+t(table(sce$cluster_id, sce$sample_id))
+
+```
+
+
+## Compute pseudobulk counts
+
+We sum the gene counts per cluster
+```{r pseudobulk}
+pb <- aggregateData(sce, assay = "counts", by = c("cluster_id", "sample_id"), 
+                    fun = "sum")
+
+# one sheet per subpopulation = cluster
+assayNames(pb)
+# pseudobulks for 1st cluster
+t(head(assay(pb)))
+```
+
+
+## Pseudobulk MDS plot
+
+```{r MDS}
+(pb_mds <- pbMDS(pb))
+```
+
+
+## Pseudobulk differential state analysis
+
+```{r ds-pseudobulk}
+# # run DS analysis
+# res <- pbDS(pb, verbose = FALSE)
+# # access results table for 1st comparison
+# tbl <- res$table[[1]]
+# # one data.frame per cluster
+# names(tbl)
+# 
+# # view results for 1st cluster
+# k1 <- tbl[[1]]
+# head(format(k1[, -ncol(k1)], digits = 2))
+```
+
+
+
+## Prepare DGEList for edgeR
+```{r prepare-DGEList}
+# Creating up a DGEList object for use in edgeR:
+
+# y <- DGEList(counts(current), samples=colData(current))
+# y
+
+```
+
+
+
+
+
+
