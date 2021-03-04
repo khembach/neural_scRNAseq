@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-02-25
+<strong>Last updated:</strong> 2021-03-04
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreed8a5aa41f689c117c0c689d9f98287d0d5d1a2fetargetblankd8a5aa4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/d8a5aa41f689c117c0c689d9f98287d0d5d1a2fe" target="_blank">d8a5aa4</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreede2f7b275bfbb452deecf94d0f0266ae7f39842ctargetblankde2f7b2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/de2f7b275bfbb452deecf94d0f0266ae7f39842c" target="_blank">de2f7b2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreed8a5aa41f689c117c0c689d9f98287d0d5d1a2fetargetblankd8a5aa4a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreede2f7b275bfbb452deecf94d0f0266ae7f39842ctargetblankde2f7b2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/d8a5aa41f689c117c0c689d9f98287d0d5d1a2fe" target="_blank">d8a5aa4</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/de2f7b275bfbb452deecf94d0f0266ae7f39842c" target="_blank">de2f7b2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -594,7 +594,6 @@ Ignored files:
     Ignored:    analysis/TDP-07-01-STMN2_expression_cache/
     Ignored:    analysis/TDP-07-cluster_12_cache/
     Ignored:    analysis/TDP-08-00-clustering-HA-D96_cache/
-    Ignored:    analysis/TDP-08-01-HA-D96-expression-changes_cache/
     Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
@@ -802,6 +801,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/de2f7b275bfbb452deecf94d0f0266ae7f39842c/analysis/TDP-08-01-HA-D96-expression-changes.Rmd" target="_blank">de2f7b2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+<td>
+DS analysis with muscat
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/3c440f582ec3959d70fdb0d95b19c701e98711a8/docs/TDP-08-01-HA-D96-expression-changes.html" target="_blank">3c440f5</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/d8a5aa41f689c117c0c689d9f98287d0d5d1a2fe/analysis/TDP-08-01-HA-D96-expression-changes.Rmd" target="_blank">d8a5aa4</a>
 </td>
 <td>
@@ -835,7 +868,10 @@ library(muscat)
 library(purrr)
 library(RColorBrewer)
 library(viridis)
-library(edgeR)</code></pre>
+library(edgeR)
+library(stringr)
+library(UpSetR)
+library(scater)</code></pre>
 </div>
 <div id="load-data-convert-to-sce" class="section level1">
 <h1>Load data &amp; convert to SCE</h1>
@@ -890,6 +926,43 @@ Heatmap(mat,
         grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
             gp = gpar(col = &quot;white&quot;, fontsize = 8)))</code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/3c440f582ec3959d70fdb0d95b19c701e98711a8/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/unnamed-chunk-2-1.png" target="_blank">3c440f5</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="dr-colored-by-cluster-id" class="section level1 tabset">
 <h1>DR colored by cluster ID</h1>
@@ -914,17 +987,129 @@ for (id in ids) {
 <div id="group_id" class="section level2">
 <h2>group_id</h2>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/dim-red-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-1">
+Past versions of dim-red-1.png
+</button>
+</p>
+<div id="fig-dim-red-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/3c440f582ec3959d70fdb0d95b19c701e98711a8/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/dim-red-1.png" target="_blank">3c440f5</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="sample_id" class="section level2">
 <h2>sample_id</h2>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/dim-red-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-2">
+Past versions of dim-red-2.png
+</button>
+</p>
+<div id="fig-dim-red-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/3c440f582ec3959d70fdb0d95b19c701e98711a8/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/dim-red-2.png" target="_blank">3c440f5</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="ident" class="section level2">
 <h2>ident</h2>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/dim-red-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-3">
+Past versions of dim-red-3.png
+</button>
+</p>
+<div id="fig-dim-red-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/3c440f582ec3959d70fdb0d95b19c701e98711a8/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/dim-red-3.png" target="_blank">3c440f5</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="dr-colored-by-cluster-id-per-sample" class="section level2">
-<h2>DR colored by cluster ID per sample</h2>
+</div>
+</div>
+</div>
+<div id="dr-colored-by-cluster-id-per-sample" class="section level1">
+<h1>DR colored by cluster ID per sample</h1>
 <p>To better see how the cells from different clusters overlap, we only plot the cells from one samples at a time.</p>
 <pre class="r"><code>.plot_dr &lt;- function(so, dr, id, cs) {
     DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4, cols = ) +
@@ -951,6 +1136,42 @@ lgd &lt;- get_legend(p5)
 p &lt;- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
 p</code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/UMAP-split-by-sample-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-UMAP-split-by-sample-1">
+Past versions of UMAP-split-by-sample-1.png
+</button>
+</p>
+<div id="fig-UMAP-split-by-sample-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/3c440f582ec3959d70fdb0d95b19c701e98711a8/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/UMAP-split-by-sample-1.png" target="_blank">3c440f5</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <div id="de-analysis" class="section level1">
@@ -959,9 +1180,7 @@ p</code></pre>
 <div id="preprocessing-with-muscat" class="section level2">
 <h2>Preprocessing with muscat</h2>
 <p>We filter and only keep cells from D96 and 4wON.</p>
-<pre class="r"><code>## TODO subset cells
-
-sce$id &lt;- sce$sample_id
+<pre class="r"><code>sce$id &lt;- sce$sample_id
 levels(sce$id) &lt;- c(&quot;D96&quot;, &quot;D96&quot;, &quot;ON2w&quot;, &quot;OFF4w&quot;, &quot;ON4w&quot;, &quot;ON4w&quot;)
 (sce &lt;- prepSCE(sce, 
     kid = &quot;cluster_id&quot;, # subpopulation assignments
@@ -1034,28 +1253,651 @@ TDP4wONb                 8302                  1522                 1253</code><
 </div>
 <div id="pseudobulk-mds-plot" class="section level2">
 <h2>Pseudobulk MDS plot</h2>
-<pre class="r"><code>(pb_mds &lt;- pbMDS(pb))</code></pre>
+<pre class="r"><code>## modified version of the muscat function to plot different MDS dimensions 
+pbMDS_mod &lt;- function(x, dim1 = 1, dim2 = 2) {
+    # check validity of input pseudobulk-SCE
+    # (cells should have been aggregated by cluster-sample)
+    muscat:::.check_pbs(x, check_by = TRUE)
+    
+    y &lt;- as.list(assays(x))
+    y &lt;- do.call(&quot;cbind&quot;, y)
+    y &lt;- y[, (j &lt;- c(t(metadata(x)$n_cells)) != 0)]
+    d &lt;- DGEList(unname(y), remove.zeros = TRUE)
+    d &lt;- calcNormFactors(d)
+    
+    mds &lt;- plotMDS.DGEList(d, plot = FALSE, dim.plot = c(dim1, dim2))
+    nk &lt;- length(kids &lt;- assayNames(x))
+
+    ss &lt;- rep(colnames(x), nk)
+    ks &lt;- rep(kids, each = ncol(x))
+    
+    if (any(!j)) {
+        txt &lt;- paste(sQuote(ks[!j]), sQuote(ss[!j]), sep = &quot;-&quot;)
+        message(&quot;Removing cluster-sample instance(s) &quot;, 
+            paste(txt, collapse = &quot;, &quot;))
+    }
+
+    df &lt;- data.frame(
+        MDS1 = mds$x, MDS2 = mds$y, 
+        cluster_id = factor(ks[j], levels = kids), 
+        group_id = rep(x$group_id, nk)[j])
+    
+    cols &lt;- muscat:::.cluster_colors
+    if (nk &gt; length(cols)) 
+        cols &lt;- colorRampPalette(cols)(nk)
+    
+    ggplot(df, aes_string(x = &quot;MDS1&quot;, y = &quot;MDS2&quot;, 
+        col = &quot;cluster_id&quot;, shape = &quot;group_id&quot;)) +
+        scale_color_manual(values = cols) +
+        geom_point(size = 3, alpha = 0.8) + 
+        guides(color = guide_legend(override.aes = list(alpha = 1))) +
+        theme_bw() + theme(aspect.ratio = 1,
+            axis.text = element_text(color = &quot;black&quot;),
+            panel.grid.minor = element_blank(),
+            panel.grid.major = element_line(size = 0.2, color = &quot;lightgrey&quot;)) + 
+        labs(x = paste0(&quot;MDS&quot;, dim1), y = paste0(&quot;MDS&quot;, dim2))
+}
+
+pbMDS(pb) + guides(col = guide_legend(nrow = 10)) + theme_bw(base_size = 14) </code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-MDS-1">
+Past versions of MDS-1.png
+</button>
+</p>
+<div id="fig-MDS-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/3c440f582ec3959d70fdb0d95b19c701e98711a8/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-1.png" target="_blank">3c440f5</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-02-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>pbMDS_mod(pb, 1, 3)  +  guides(col = guide_legend(nrow = 10)) + 
+  theme_bw(base_size = 14) </code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pbMDS_mod(pb, 1, 4) + guides(col = guide_legend(nrow = 10)) + 
+  theme_bw(base_size = 14) </code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="subsetting-of-d96-and-on4w-samples" class="section level1">
+<h1>Subsetting of D96 and ON4w samples</h1>
+<p>We only keep the two replicates of the D96 and ON4w groups because ON2w and OFF4w do not have any replicates.</p>
+<pre class="r"><code>sce_sub &lt;- sce[, sce$group_id %in% c(&quot;D96&quot;, &quot;ON4w&quot;)]
+sce_sub$sample_id &lt;- droplevels(sce_sub$sample_id)
+sce_sub$id &lt;- sce_sub$sample_id
+levels(sce_sub$id) &lt;- c(&quot;D96&quot;, &quot;D96&quot;, &quot;ON4w&quot;, &quot;ON4w&quot;)
+(sce_sub &lt;- prepSCE(sce_sub, 
+    kid = &quot;cluster_id&quot;, # subpopulation assignments
+    gid = &quot;id&quot;,  # group IDs (ctrl/stim)
+    sid = &quot;sample_id&quot;,   # sample IDs (ctrl/stim.1234)
+    drop = FALSE))  # drop all other colData columns</code></pre>
+<pre><code>class: SingleCellExperiment 
+dim: 14073 25520 
+metadata(1): experiment_info
+assays(2): counts logcounts
+rownames(14073): ENSG00000187634.SAMD11 ENSG00000188976.NOC2L ...
+  ENSG00000227234.SPANXB1 ENSG00000198573.SPANXC
+rowData names(5): vst.mean vst.variance vst.variance.expected
+  vst.variance.standardized vst.variable
+colnames(25520): tdp_ha_AAACCCACAGGATCTT-1.TDP4wONa
+  tdp_ha_AAACCCAGTCTCTCTG-1.TDP4wONa ... D96_TTTGTTGCACTCGATA-1.6NC96
+  D96_TTTGTTGTCGTGTGAT-1.6NC96
+colData names(45): cluster_id sample_id ... integrated_snn_res.2 ident
+reducedDimNames(3): PCA TSNE UMAP
+altExpNames(0):</code></pre>
+<pre class="r"><code>nk &lt;- length(kids &lt;- levels(sce_sub$cluster_id))
+ns &lt;- length(sids &lt;- levels(sce_sub$sample_id))
+names(kids) &lt;- kids; names(sids) &lt;- sids
+
+# nb. of cells per cluster-sample
+t(table(sce_sub$cluster_id, sce_sub$sample_id))</code></pre>
+<pre><code>          
+              0    1    2    3    4    5    6    7    8    9   10   11   12
+  5NC96     770  443  306  355  185  219  150  221  111   53  465   59   63
+  6NC96    1028  631  525  289  311  307  216  293  170   94  415   95   98
+  TDP4wONa 1586 1580 1101 1000  916  718  559  479  532  387   70  320  240
+  TDP4wONb  934 1362 1118  802  750  763  505  241  434  303   22  258  145
+          
+             13   14   15
+  5NC96     134    3    1
+  6NC96     118    5    0
+  TDP4wONa   91   44   42
+  TDP4wONb   53   31    1</code></pre>
+<div id="compute-pseudobulk-counts-1" class="section level2">
+<h2>Compute pseudobulk counts</h2>
+<p>We sum the gene counts per cluster.</p>
+<pre class="r"><code>pb &lt;- aggregateData(sce_sub, assay = &quot;counts&quot;, by = c(&quot;cluster_id&quot;, &quot;sample_id&quot;), 
+                    fun = &quot;sum&quot;)
+
+# one sheet per subpopulation = cluster
+assayNames(pb)</code></pre>
+<pre><code> [1] &quot;0&quot;  &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot; &quot;14&quot;
+[16] &quot;15&quot;</code></pre>
+<pre class="r"><code># pseudobulks for 1st cluster
+t(head(assay(pb)))</code></pre>
+<pre><code>         ENSG00000187634.SAMD11 ENSG00000188976.NOC2L ENSG00000187961.KLHL17
+5NC96                       125                   286                     79
+6NC96                       179                   400                    106
+TDP4wONa                    105                   416                    109
+TDP4wONb                     84                   362                     78
+         ENSG00000188290.HES4 ENSG00000187608.ISG15 ENSG00000188157.AGRN
+5NC96                    3784                   641                  985
+6NC96                    6195                   897                 1442
+TDP4wONa                12971                  2232                 1804
+TDP4wONb                 8302                  1522                 1253</code></pre>
+</div>
+<div id="pseudobulk-mds-plot-1" class="section level2">
+<h2>Pseudobulk MDS plot</h2>
+<pre class="r"><code>pbMDS(pb) + guides(col = guide_legend(nrow = 10)) + theme_bw(base_size = 14) </code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-sub-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pbMDS_mod(pb, 1, 3)  +  guides(col = guide_legend(nrow = 10)) + 
+  theme_bw(base_size = 14) </code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-sub-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pbMDS_mod(pb, 1, 4) + guides(col = guide_legend(nrow = 10)) + 
+  theme_bw(base_size = 14) </code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-sub-3.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="pseudobulk-differential-state-analysis" class="section level2">
 <h2>Pseudobulk differential state analysis</h2>
-<pre class="r"><code># # run DS analysis
+<pre class="r"><code># run DS analysis
 # res &lt;- pbDS(pb, verbose = FALSE)
-# # access results table for 1st comparison
-# tbl &lt;- res$table[[1]]
-# # one data.frame per cluster
-# names(tbl)
-# 
-# # view results for 1st cluster
-# k1 &lt;- tbl[[1]]
-# head(format(k1[, -ncol(k1)], digits = 2))</code></pre>
-</div>
-<div id="prepare-dgelist-for-edger" class="section level2">
-<h2>Prepare DGEList for edgeR</h2>
-<pre class="r"><code># Creating up a DGEList object for use in edgeR:
 
-# y &lt;- DGEList(counts(current), samples=colData(current))
-# y</code></pre>
+# construct design &amp; contrast matrix
+ei &lt;- metadata(sce_sub)$experiment_info
+mm &lt;- model.matrix(~ 0 + ei$group_id)
+dimnames(mm) &lt;- list(ei$sample_id, levels(ei$group_id))
+contrast &lt;- makeContrasts(&quot;ON4w-D96&quot;, levels = mm)
+mm</code></pre>
+<pre><code>         D96 ON4w
+TDP4wONa   0    1
+TDP4wONb   0    1
+5NC96      1    0
+6NC96      1    0
+attr(,&quot;assign&quot;)
+[1] 1 1
+attr(,&quot;contrasts&quot;)
+attr(,&quot;contrasts&quot;)$`ei$group_id`
+[1] &quot;contr.treatment&quot;</code></pre>
+<pre class="r"><code>contrast</code></pre>
+<pre><code>      Contrasts
+Levels ON4w-D96
+  D96        -1
+  ON4w        1</code></pre>
+<pre class="r"><code># run DS analysis
+res &lt;- pbDS(pb, design = mm, contrast = contrast, verbose = FALSE)
+
+# access results table for 1st comparison
+tbl &lt;- res$table[[1]]
+# one data.frame per cluster
+names(tbl)</code></pre>
+<pre><code> [1] &quot;0&quot;  &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot;</code></pre>
+<pre class="r"><code># view results for 1st cluster
+k1 &lt;- tbl[[1]]
+head(format(k1[, -ncol(k1)], digits = 2))</code></pre>
+<pre><code>                    gene cluster_id    logFC  logCPM       F   p_val p_adj.loc
+1 ENSG00000187634.SAMD11          0 -8.3e-01  3.0389 3.8e+01 2.3e-04   1.3e-03
+2  ENSG00000188976.NOC2L          0  3.9e-02  4.5922 1.5e-01 7.1e-01   7.7e-01
+3 ENSG00000187961.KLHL17          0 -1.4e-01  2.6335 7.4e-01 4.1e-01   5.0e-01
+4   ENSG00000188290.HES4          0  9.4e-01  8.9569 7.9e+01 1.6e-05   2.3e-04
+5  ENSG00000187608.ISG15          0  1.1e+00  6.4075 1.9e+02 5.2e-07   6.8e-05
+6   ENSG00000188157.AGRN          0  1.8e-01  6.4783 6.0e+00 3.9e-02   7.1e-02
+  p_adj.glb
+1   1.0e+00
+2   1.0e+00
+3   1.0e+00
+4   1.0e+00
+5   8.9e-02
+6   1.0e+00</code></pre>
+</div>
+<div id="results-filtering" class="section level2">
+<h2>Results filtering</h2>
+<pre class="r"><code># filter FDR &lt; 5%, abs(logFC) &gt; 1 &amp; sort by adj. p-value
+tbl_fil &lt;- lapply(tbl, function(u) {
+  u &lt;- dplyr::filter(u, p_adj.loc &lt; 0.01, abs(logFC) &gt; 1)
+  dplyr::arrange(u, p_adj.loc)
+})
+
+# nb. of DS genes &amp; % of total by cluster
+n_de &lt;- vapply(tbl_fil, nrow, numeric(1))
+p_de &lt;- format(n_de / nrow(sce_sub) * 100, digits = 3)
+data.frame(&quot;#DS&quot; = n_de, &quot;%DS&quot; = p_de, check.names = FALSE)</code></pre>
+<pre><code>   #DS  %DS
+0  836 5.94
+1  782 5.56
+2  758 5.39
+3  864 6.14
+4  713 5.07
+5  663 4.71
+6  459 3.26
+7  471 3.35
+8  545 3.87
+9  502 3.57
+10 318 2.26
+11 341 2.42
+12 493 3.50
+13 817 5.81</code></pre>
+<pre class="r"><code># view top 3 hits in each cluster
+top2 &lt;- bind_rows(lapply(tbl_fil, slice_min, p_adj.loc, n = 3))
+# top2$gene &lt;- str_split(top2$gene, pattern = &quot;\\.&quot;, simplify = TRUE)[,2]
+# increase line width for printing of the full table
+options(width = 100)
+format(top2[, -ncol(top2)], digits = 2)</code></pre>
+<pre><code>                            gene cluster_id logFC logCPM    F   p_val p_adj.loc p_adj.glb
+1          ENSG00000149591.TAGLN          0   2.4    7.2 1112 3.7e-10   4.7e-06   6.4e-05
+2         ENSG00000121900.TMEM54          0   1.8    5.9  602 4.6e-09   3.0e-05   8.0e-04
+3         ENSG00000158710.TAGLN2          0   1.7    7.3  480 1.2e-08   4.0e-05   2.0e-03
+4         ENSG00000267855.NDUFA7          0  -2.1    5.3  474 1.2e-08   4.0e-05   2.1e-03
+5           ENSG00000049247.UTS2          1   1.9    9.5  542 4.4e-11   5.8e-07   7.7e-06
+6         ENSG00000181649.PHLDA2          1   1.8    7.1  429 1.7e-10   6.3e-07   2.9e-05
+7          ENSG00000217930.PAM16          1   2.7    4.5  437 1.5e-10   6.3e-07   2.6e-05
+8            ENSG00000240972.MIF          1   2.5   10.0  418 1.9e-10   6.3e-07   3.3e-05
+9          ENSG00000168843.FSTL5          2  -1.7    5.9  423 6.2e-11   1.6e-07   1.1e-05
+10          ENSG00000004059.ARF5          2   2.0    8.0  430 5.7e-11   1.6e-07   9.8e-06
+11           ENSG00000147571.CRH          2   2.6    8.4  452 4.2e-11   1.6e-07   7.2e-06
+12        ENSG00000181649.PHLDA2          2   2.2    6.4  489 2.6e-11   1.6e-07   4.5e-06
+13           ENSG00000240972.MIF          2   2.5   10.1  477 3.0e-11   1.6e-07   5.2e-06
+14        ENSG00000189184.PCDH18          3  -1.6    5.7  324 2.7e-08   6.3e-05   4.6e-03
+15         ENSG00000168843.FSTL5          3  -1.7    4.7  283 4.8e-08   6.3e-05   8.2e-03
+16          ENSG00000004059.ARF5          3   1.9    8.1  340 2.2e-08   6.3e-05   3.7e-03
+17          ENSG00000159167.STC1          3   1.6    7.7  344 2.1e-08   6.3e-05   3.6e-03
+18         ENSG00000147655.RSPO2          3  -2.1    3.5  283 4.8e-08   6.3e-05   8.2e-03
+19         ENSG00000171246.NPTX1          3   2.0    5.4  367 1.5e-08   6.3e-05   2.7e-03
+20         ENSG00000176014.TUBB6          3   1.7    5.3  312 3.1e-08   6.3e-05   5.4e-03
+21          ENSG00000081138.CDH7          3  -1.6    6.8  293 4.1e-08   6.3e-05   7.1e-03
+22           ENSG00000240972.MIF          3   2.4   10.2  454 6.1e-09   6.3e-05   1.1e-03
+23 ENSG00000120948.TARDBP-alevin          3  10.8    3.2  416 4.1e-08   6.3e-05   7.1e-03
+24           ENSG00000240972.MIF          4   2.6   10.2  471 3.6e-12   4.6e-08   6.1e-07
+25           ENSG00000147571.CRH          4   2.0    9.4  364 2.0e-11   1.3e-07   3.5e-06
+26          ENSG00000049247.UTS2          4   1.8    9.8  272 1.4e-10   2.3e-07   2.5e-05
+27         ENSG00000265972.TXNIP          4  -1.5    5.8  276 1.3e-10   2.3e-07   2.3e-05
+28          ENSG00000196230.TUBB          4   1.6   11.1  276 1.3e-10   2.3e-07   2.3e-05
+29          ENSG00000004059.ARF5          4   2.2    8.0  291 9.2e-11   2.3e-07   1.6e-05
+30        ENSG00000181649.PHLDA2          4   2.0    7.8  275 1.3e-10   2.3e-07   2.3e-05
+31         ENSG00000105649.RAB3A          4   1.5    7.9  271 1.5e-10   2.3e-07   2.5e-05
+32      ENSG00000135919.SERPINE2          5   1.9    7.8  461 5.9e-12   3.3e-08   1.0e-06
+33           ENSG00000134363.FST          5   2.1    6.9  423 1.0e-11   3.3e-08   1.8e-06
+34          ENSG00000197406.DIO3          5   2.2    7.9  437 8.5e-12   3.3e-08   1.5e-06
+35           ENSG00000240972.MIF          5   2.7   10.2  519 2.7e-12   3.3e-08   4.6e-07
+36          ENSG00000004059.ARF5          6   2.0    8.0  447 8.6e-11   5.3e-07   1.5e-05
+37           ENSG00000240972.MIF          6   2.6   10.3  485 5.4e-11   5.3e-07   9.2e-06
+38        ENSG00000181649.PHLDA2          6   1.8    6.7  303 8.1e-10   3.3e-06   1.4e-04
+39           ENSG00000240972.MIF          7   2.6   10.3  362 1.4e-17   1.6e-13   2.4e-12
+40          ENSG00000004059.ARF5          7   1.9    7.2  298 1.7e-16   1.0e-12   3.0e-11
+41          ENSG00000125740.FOSB          7  -2.0    5.8  250 1.6e-15   6.3e-12   2.8e-10
+42           ENSG00000240972.MIF          8   2.4   10.1  388 3.1e-13   3.9e-09   5.4e-08
+43         ENSG00000124614.RPS10          8  -1.5    7.9  241 1.5e-11   9.5e-08   2.6e-06
+44         ENSG00000217930.PAM16          8   3.0    4.6  211 4.5e-11   1.4e-07   7.7e-06
+45        ENSG00000128228.SDF2L1          8   1.7    6.1  211 4.5e-11   1.4e-07   7.7e-06
+46          ENSG00000004059.ARF5          9   1.9    8.0  294 1.0e-11   6.5e-08   1.8e-06
+47           ENSG00000240972.MIF          9   2.3   10.3  312 6.7e-12   6.5e-08   1.2e-06
+48         ENSG00000124614.RPS10          9  -1.7    8.1  249 3.7e-11   1.5e-07   6.3e-06
+49       ENSG00000111799.COL12A1         10   2.9    5.8  397 2.6e-08   1.6e-04   4.5e-03
+50          ENSG00000160180.TFF3         10   3.9    8.3  405 2.4e-08   1.6e-04   4.2e-03
+51        ENSG00000164692.COL1A2         10   4.3    8.6  328 5.7e-08   1.8e-04   9.8e-03
+52        ENSG00000142173.COL6A2         10   2.5    9.1  322 6.2e-08   1.8e-04   1.1e-02
+53        ENSG00000164326.CARTPT         11   3.4    8.3  214 4.3e-09   2.4e-05   7.5e-04
+54          ENSG00000004059.ARF5         11   1.9    7.9  193 7.9e-09   2.4e-05   1.4e-03
+55         ENSG00000103888.CEMIP         11   2.2    6.8  202 6.0e-09   2.4e-05   1.0e-03
+56           ENSG00000240972.MIF         11   2.6   10.5  219 3.8e-09   2.4e-05   6.5e-04
+57           ENSG00000177606.JUN         12  -1.8    7.6  277 2.0e-15   1.2e-11   3.4e-10
+58           ENSG00000240972.MIF         12   2.2   10.1  276 2.1e-15   1.2e-11   3.6e-10
+59          ENSG00000004059.ARF5         12   1.8    8.1  224 2.4e-14   9.5e-11   4.2e-09
+60         ENSG00000156427.FGF18         13   8.9    8.7  518 4.8e-12   2.2e-08   8.3e-07
+61          ENSG00000108001.EBF3         13   4.8    7.3  498 6.2e-12   2.2e-08   1.1e-06
+62                      TDP43-HA         13  12.8    8.2  654 4.8e-12   2.2e-08   8.3e-07</code></pre>
+</div>
+<div id="calculating-expression-frequency" class="section level2">
+<h2>Calculating expression frequency</h2>
+<p>We filter out genes that are not expressed in at least 10% of cells of one group.</p>
+<pre class="r"><code>frq &lt;- calcExprFreqs(sce_sub, assay = &quot;counts&quot;, th = 0)
+# one sheet per cluster
+assayNames(frq)</code></pre>
+<pre><code> [1] &quot;0&quot;  &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot; &quot;14&quot; &quot;15&quot;</code></pre>
+<pre class="r"><code># expression frequencies in each
+# sample &amp; group; 1st cluster
+t(head(assay(frq), 5))</code></pre>
+<pre><code>         ENSG00000187634.SAMD11 ENSG00000188976.NOC2L ENSG00000187961.KLHL17 ENSG00000188290.HES4
+5NC96                0.10519481             0.2974026             0.09480519            0.8922078
+6NC96                0.11867704             0.3112840             0.09630350            0.9027237
+TDP4wONa             0.05233291             0.2307692             0.06809584            0.9590164
+TDP4wONb             0.06316916             0.3211991             0.08029979            0.9635974
+D96                  0.11290323             0.3053393             0.09566185            0.8982202
+ON4w                 0.05634921             0.2642857             0.07261905            0.9607143
+         ENSG00000187608.ISG15
+5NC96                0.4818182
+6NC96                0.5126459
+TDP4wONa             0.6532156
+TDP4wONb             0.6937901
+D96                  0.4994438
+ON4w                 0.6682540</code></pre>
+<pre class="r"><code># We can use the obtained frequencies to, for instance, only retain genes that 
+# are expressed in an average of 10% of cells in at least 1 group:
+gids &lt;- levels(sce_sub$group_id)
+frq10 &lt;- vapply(as.list(assays(frq)), 
+  function(u) apply(u[, gids] &gt; 0.1, 1, any), 
+  logical(nrow(sce_sub)))
+t(head(frq10))</code></pre>
+<pre><code>   ENSG00000187634.SAMD11 ENSG00000188976.NOC2L ENSG00000187961.KLHL17 ENSG00000188290.HES4
+0                    TRUE                  TRUE                  FALSE                 TRUE
+1                    TRUE                  TRUE                   TRUE                 TRUE
+2                    TRUE                  TRUE                   TRUE                 TRUE
+3                    TRUE                  TRUE                   TRUE                 TRUE
+4                   FALSE                  TRUE                   TRUE                 TRUE
+5                    TRUE                  TRUE                   TRUE                 TRUE
+6                   FALSE                  TRUE                   TRUE                 TRUE
+7                   FALSE                  TRUE                  FALSE                 TRUE
+8                    TRUE                  TRUE                   TRUE                 TRUE
+9                    TRUE                  TRUE                   TRUE                 TRUE
+10                   TRUE                  TRUE                   TRUE                 TRUE
+11                   TRUE                  TRUE                   TRUE                 TRUE
+12                   TRUE                  TRUE                   TRUE                 TRUE
+13                  FALSE                  TRUE                   TRUE                 TRUE
+14                   TRUE                  TRUE                  FALSE                 TRUE
+15                  FALSE                  TRUE                  FALSE                 TRUE
+   ENSG00000187608.ISG15 ENSG00000188157.AGRN
+0                   TRUE                 TRUE
+1                   TRUE                 TRUE
+2                   TRUE                 TRUE
+3                   TRUE                 TRUE
+4                   TRUE                 TRUE
+5                   TRUE                 TRUE
+6                   TRUE                 TRUE
+7                   TRUE                 TRUE
+8                   TRUE                 TRUE
+9                   TRUE                 TRUE
+10                  TRUE                 TRUE
+11                  TRUE                 TRUE
+12                  TRUE                 TRUE
+13                  TRUE                 TRUE
+14                  TRUE                 TRUE
+15                  TRUE                 TRUE</code></pre>
+<pre class="r"><code>tbl_fil2 &lt;- lapply(names(tbl_fil), function(k)
+  dplyr::filter(tbl_fil[[k]], 
+    gene %in% names(which(frq10[, k]))))
+names(tbl_fil2) &lt;- names(tbl_fil)
+
+# nb. of DS genes &amp; % of total by cluster
+n_de &lt;- vapply(tbl_fil2, nrow, numeric(1))
+p_de &lt;- format(n_de / nrow(sce_sub) * 100, digits = 3)
+data.frame(&quot;#DS&quot; = n_de, &quot;%DS&quot; = p_de, check.names = FALSE)</code></pre>
+<pre><code>   #DS  %DS
+0  360 2.56
+1  240 1.71
+2  291 2.07
+3  349 2.48
+4  320 2.27
+5  388 2.76
+6  281 2.00
+7  309 2.20
+8  308 2.19
+9  337 2.39
+10 315 2.24
+11 294 2.09
+12 456 3.24
+13 802 5.70</code></pre>
+<pre class="r"><code>top2 &lt;- bind_rows(lapply(tbl_fil2, slice_min, p_adj.loc, n = 3))
+format(top2[, -ncol(top2)], digits = 2)</code></pre>
+<pre><code>                            gene cluster_id logFC logCPM    F   p_val p_adj.loc p_adj.glb
+1          ENSG00000149591.TAGLN          0   2.4    7.2 1112 3.7e-10   4.7e-06   6.4e-05
+2         ENSG00000121900.TMEM54          0   1.8    5.9  602 4.6e-09   3.0e-05   8.0e-04
+3         ENSG00000158710.TAGLN2          0   1.7    7.3  480 1.2e-08   4.0e-05   2.0e-03
+4         ENSG00000267855.NDUFA7          0  -2.1    5.3  474 1.2e-08   4.0e-05   2.1e-03
+5           ENSG00000049247.UTS2          1   1.9    9.5  542 4.4e-11   5.8e-07   7.7e-06
+6         ENSG00000181649.PHLDA2          1   1.8    7.1  429 1.7e-10   6.3e-07   2.9e-05
+7          ENSG00000217930.PAM16          1   2.7    4.5  437 1.5e-10   6.3e-07   2.6e-05
+8            ENSG00000240972.MIF          1   2.5   10.0  418 1.9e-10   6.3e-07   3.3e-05
+9          ENSG00000168843.FSTL5          2  -1.7    5.9  423 6.2e-11   1.6e-07   1.1e-05
+10          ENSG00000004059.ARF5          2   2.0    8.0  430 5.7e-11   1.6e-07   9.8e-06
+11           ENSG00000147571.CRH          2   2.6    8.4  452 4.2e-11   1.6e-07   7.2e-06
+12        ENSG00000181649.PHLDA2          2   2.2    6.4  489 2.6e-11   1.6e-07   4.5e-06
+13           ENSG00000240972.MIF          2   2.5   10.1  477 3.0e-11   1.6e-07   5.2e-06
+14        ENSG00000189184.PCDH18          3  -1.6    5.7  324 2.7e-08   6.3e-05   4.6e-03
+15         ENSG00000168843.FSTL5          3  -1.7    4.7  283 4.8e-08   6.3e-05   8.2e-03
+16          ENSG00000004059.ARF5          3   1.9    8.1  340 2.2e-08   6.3e-05   3.7e-03
+17          ENSG00000159167.STC1          3   1.6    7.7  344 2.1e-08   6.3e-05   3.6e-03
+18         ENSG00000147655.RSPO2          3  -2.1    3.5  283 4.8e-08   6.3e-05   8.2e-03
+19         ENSG00000171246.NPTX1          3   2.0    5.4  367 1.5e-08   6.3e-05   2.7e-03
+20         ENSG00000176014.TUBB6          3   1.7    5.3  312 3.1e-08   6.3e-05   5.4e-03
+21          ENSG00000081138.CDH7          3  -1.6    6.8  293 4.1e-08   6.3e-05   7.1e-03
+22           ENSG00000240972.MIF          3   2.4   10.2  454 6.1e-09   6.3e-05   1.1e-03
+23 ENSG00000120948.TARDBP-alevin          3  10.8    3.2  416 4.1e-08   6.3e-05   7.1e-03
+24           ENSG00000240972.MIF          4   2.6   10.2  471 3.6e-12   4.6e-08   6.1e-07
+25           ENSG00000147571.CRH          4   2.0    9.4  364 2.0e-11   1.3e-07   3.5e-06
+26          ENSG00000049247.UTS2          4   1.8    9.8  272 1.4e-10   2.3e-07   2.5e-05
+27         ENSG00000265972.TXNIP          4  -1.5    5.8  276 1.3e-10   2.3e-07   2.3e-05
+28          ENSG00000196230.TUBB          4   1.6   11.1  276 1.3e-10   2.3e-07   2.3e-05
+29          ENSG00000004059.ARF5          4   2.2    8.0  291 9.2e-11   2.3e-07   1.6e-05
+30        ENSG00000181649.PHLDA2          4   2.0    7.8  275 1.3e-10   2.3e-07   2.3e-05
+31         ENSG00000105649.RAB3A          4   1.5    7.9  271 1.5e-10   2.3e-07   2.5e-05
+32      ENSG00000135919.SERPINE2          5   1.9    7.8  461 5.9e-12   3.3e-08   1.0e-06
+33           ENSG00000134363.FST          5   2.1    6.9  423 1.0e-11   3.3e-08   1.8e-06
+34          ENSG00000197406.DIO3          5   2.2    7.9  437 8.5e-12   3.3e-08   1.5e-06
+35           ENSG00000240972.MIF          5   2.7   10.2  519 2.7e-12   3.3e-08   4.6e-07
+36          ENSG00000004059.ARF5          6   2.0    8.0  447 8.6e-11   5.3e-07   1.5e-05
+37           ENSG00000240972.MIF          6   2.6   10.3  485 5.4e-11   5.3e-07   9.2e-06
+38        ENSG00000181649.PHLDA2          6   1.8    6.7  303 8.1e-10   3.3e-06   1.4e-04
+39           ENSG00000240972.MIF          7   2.6   10.3  362 1.4e-17   1.6e-13   2.4e-12
+40          ENSG00000004059.ARF5          7   1.9    7.2  298 1.7e-16   1.0e-12   3.0e-11
+41          ENSG00000125740.FOSB          7  -2.0    5.8  250 1.6e-15   6.3e-12   2.8e-10
+42           ENSG00000240972.MIF          8   2.4   10.1  388 3.1e-13   3.9e-09   5.4e-08
+43         ENSG00000124614.RPS10          8  -1.5    7.9  241 1.5e-11   9.5e-08   2.6e-06
+44         ENSG00000217930.PAM16          8   3.0    4.6  211 4.5e-11   1.4e-07   7.7e-06
+45        ENSG00000128228.SDF2L1          8   1.7    6.1  211 4.5e-11   1.4e-07   7.7e-06
+46          ENSG00000004059.ARF5          9   1.9    8.0  294 1.0e-11   6.5e-08   1.8e-06
+47           ENSG00000240972.MIF          9   2.3   10.3  312 6.7e-12   6.5e-08   1.2e-06
+48         ENSG00000124614.RPS10          9  -1.7    8.1  249 3.7e-11   1.5e-07   6.3e-06
+49       ENSG00000111799.COL12A1         10   2.9    5.8  397 2.6e-08   1.6e-04   4.5e-03
+50          ENSG00000160180.TFF3         10   3.9    8.3  405 2.4e-08   1.6e-04   4.2e-03
+51        ENSG00000164692.COL1A2         10   4.3    8.6  328 5.7e-08   1.8e-04   9.8e-03
+52        ENSG00000142173.COL6A2         10   2.5    9.1  322 6.2e-08   1.8e-04   1.1e-02
+53        ENSG00000164326.CARTPT         11   3.4    8.3  214 4.3e-09   2.4e-05   7.5e-04
+54          ENSG00000004059.ARF5         11   1.9    7.9  193 7.9e-09   2.4e-05   1.4e-03
+55         ENSG00000103888.CEMIP         11   2.2    6.8  202 6.0e-09   2.4e-05   1.0e-03
+56           ENSG00000240972.MIF         11   2.6   10.5  219 3.8e-09   2.4e-05   6.5e-04
+57           ENSG00000177606.JUN         12  -1.8    7.6  277 2.0e-15   1.2e-11   3.4e-10
+58           ENSG00000240972.MIF         12   2.2   10.1  276 2.1e-15   1.2e-11   3.6e-10
+59          ENSG00000004059.ARF5         12   1.8    8.1  224 2.4e-14   9.5e-11   4.2e-09
+60         ENSG00000156427.FGF18         13   8.9    8.7  518 4.8e-12   2.2e-08   8.3e-07
+61          ENSG00000108001.EBF3         13   4.8    7.3  498 6.2e-12   2.2e-08   1.1e-06
+62                      TDP43-HA         13  12.8    8.2  654 4.8e-12   2.2e-08   8.3e-07</code></pre>
+</div>
+</div>
+<div id="visualization" class="section level1">
+<h1>Visualization</h1>
+<div id="between-cluster-concordance" class="section level2">
+<h2>Between-cluster concordance</h2>
+<pre class="r"><code>de_gs_by_k &lt;- map(tbl_fil2, &quot;gene&quot;)
+upset(fromList(de_gs_by_k), nsets = length(de_gs_by_k), nintersects = 40)</code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/upset-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>upset(fromList(de_gs_by_k))</code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/upset-2.png" width="1920" style="display: block; margin: auto;" /></p>
+</div>
+<div id="dr-colored-by-expression" class="section level2">
+<h2>DR colored by expression</h2>
+<pre class="r"><code>.plot_dr &lt;- function(sce, dr, col)
+  plotReducedDim(sce, dimred = dr, colour_by = col) +
+    guides(fill = guide_legend(override.aes = list(alpha = 1, size = 1))) +
+    theme_minimal() + theme(aspect.ratio = 1)
+
+
+# downsample to max. 100 cells per cluster
+cs_by_k &lt;- split(colnames(sce_sub), sce_sub$cluster_id)
+cs100 &lt;- unlist(sapply(cs_by_k, function(u) 
+  sample(u, min(length(u), 100))))
+
+## pull the top 2 genes of each cluster
+top &lt;-  bind_rows(tbl_fil2) %&gt;% group_by(cluster_id) %&gt;% 
+  dplyr::arrange(p_adj.loc) %&gt;% 
+  slice_min(order_by = p_adj.loc, n = 2) 
+print(top, n = nrow(top))</code></pre>
+<pre><code># A tibble: 46 x 9
+# Groups:   cluster_id [14]
+   gene                          cluster_id logFC logCPM     F    p_val p_adj.loc p_adj.glb contrast
+   &lt;chr&gt;                         &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+ 1 ENSG00000149591.TAGLN         0           2.41   7.23 1112. 3.70e-10  4.75e- 6  6.38e- 5 ON4w-D96
+ 2 ENSG00000121900.TMEM54        0           1.76   5.88  602. 4.64e- 9  2.98e- 5  8.00e- 4 ON4w-D96
+ 3 ENSG00000049247.UTS2          1           1.92   9.47  542. 4.44e-11  5.82e- 7  7.66e- 6 ON4w-D96
+ 4 ENSG00000181649.PHLDA2        1           1.77   7.12  429. 1.67e-10  6.31e- 7  2.88e- 5 ON4w-D96
+ 5 ENSG00000217930.PAM16         1           2.72   4.48  437. 1.49e-10  6.31e- 7  2.58e- 5 ON4w-D96
+ 6 ENSG00000240972.MIF           1           2.46  10.0   418. 1.93e-10  6.31e- 7  3.32e- 5 ON4w-D96
+ 7 ENSG00000111799.COL12A1       10          2.86   5.80  397. 2.64e- 8  1.57e- 4  4.53e- 3 ON4w-D96
+ 8 ENSG00000160180.TFF3          10          3.91   8.32  405. 2.44e- 8  1.57e- 4  4.19e- 3 ON4w-D96
+ 9 ENSG00000164326.CARTPT        11          3.44   8.33  214. 4.34e- 9  2.36e- 5  7.48e- 4 ON4w-D96
+10 ENSG00000004059.ARF5          11          1.92   7.91  193. 7.87e- 9  2.36e- 5  1.35e- 3 ON4w-D96
+11 ENSG00000103888.CEMIP         11          2.20   6.82  202. 5.95e- 9  2.36e- 5  1.02e- 3 ON4w-D96
+12 ENSG00000240972.MIF           11          2.56  10.5   219. 3.77e- 9  2.36e- 5  6.49e- 4 ON4w-D96
+13 ENSG00000177606.JUN           12         -1.79   7.63  277. 1.99e-15  1.23e-11  3.44e-10 ON4w-D96
+14 ENSG00000240972.MIF           12          2.23  10.1   276. 2.09e-15  1.23e-11  3.61e-10 ON4w-D96
+15 ENSG00000156427.FGF18         13          8.90   8.74  518. 4.81e-12  2.22e- 8  8.31e- 7 ON4w-D96
+16 ENSG00000108001.EBF3          13          4.80   7.33  498. 6.24e-12  2.22e- 8  1.08e- 6 ON4w-D96
+17 TDP43-HA                      13         12.8    8.17  654. 4.83e-12  2.22e- 8  8.34e- 7 ON4w-D96
+18 ENSG00000168843.FSTL5         2          -1.69   5.89  423. 6.20e-11  1.60e- 7  1.07e- 5 ON4w-D96
+19 ENSG00000004059.ARF5          2           2.05   8.05  430. 5.66e-11  1.60e- 7  9.76e- 6 ON4w-D96
+20 ENSG00000147571.CRH           2           2.55   8.39  452. 4.19e-11  1.60e- 7  7.22e- 6 ON4w-D96
+21 ENSG00000181649.PHLDA2        2           2.17   6.43  489. 2.59e-11  1.60e- 7  4.47e- 6 ON4w-D96
+22 ENSG00000240972.MIF           2           2.47  10.1   477. 3.01e-11  1.60e- 7  5.20e- 6 ON4w-D96
+23 ENSG00000189184.PCDH18        3          -1.57   5.66  324. 2.66e- 8  6.28e- 5  4.58e- 3 ON4w-D96
+24 ENSG00000168843.FSTL5         3          -1.69   4.73  283. 4.78e- 8  6.28e- 5  8.20e- 3 ON4w-D96
+25 ENSG00000004059.ARF5          3           1.93   8.05  340. 2.17e- 8  6.28e- 5  3.74e- 3 ON4w-D96
+26 ENSG00000159167.STC1          3           1.57   7.67  344. 2.07e- 8  6.28e- 5  3.55e- 3 ON4w-D96
+27 ENSG00000147655.RSPO2         3          -2.09   3.50  283. 4.79e- 8  6.28e- 5  8.22e- 3 ON4w-D96
+28 ENSG00000171246.NPTX1         3           1.96   5.38  367. 1.55e- 8  6.28e- 5  2.66e- 3 ON4w-D96
+29 ENSG00000176014.TUBB6         3           1.73   5.34  312. 3.14e- 8  6.28e- 5  5.39e- 3 ON4w-D96
+30 ENSG00000081138.CDH7          3          -1.58   6.77  293. 4.11e- 8  6.28e- 5  7.06e- 3 ON4w-D96
+31 ENSG00000240972.MIF           3           2.36  10.2   454. 6.12e- 9  6.28e- 5  1.05e- 3 ON4w-D96
+32 ENSG00000120948.TARDBP-alevin 3          10.8    3.23  416. 4.12e- 8  6.28e- 5  7.07e- 3 ON4w-D96
+33 ENSG00000240972.MIF           4           2.58  10.2   471. 3.56e-12  4.55e- 8  6.15e- 7 ON4w-D96
+34 ENSG00000147571.CRH           4           2.01   9.42  364. 2.02e-11  1.29e- 7  3.49e- 6 ON4w-D96
+35 ENSG00000135919.SERPINE2      5           1.87   7.80  461. 5.95e-12  3.31e- 8  1.03e- 6 ON4w-D96
+36 ENSG00000134363.FST           5           2.12   6.89  423. 1.05e-11  3.31e- 8  1.81e- 6 ON4w-D96
+37 ENSG00000197406.DIO3          5           2.20   7.89  437. 8.46e-12  3.31e- 8  1.46e- 6 ON4w-D96
+38 ENSG00000240972.MIF           5           2.72  10.2   519. 2.68e-12  3.31e- 8  4.63e- 7 ON4w-D96
+39 ENSG00000004059.ARF5          6           1.96   8.02  447. 8.65e-11  5.30e- 7  1.49e- 5 ON4w-D96
+40 ENSG00000240972.MIF           6           2.58  10.3   485. 5.35e-11  5.30e- 7  9.24e- 6 ON4w-D96
+41 ENSG00000240972.MIF           7           2.65  10.3   362. 1.37e-17  1.60e-13  2.36e-12 ON4w-D96
+42 ENSG00000004059.ARF5          7           1.93   7.19  298. 1.73e-16  1.02e-12  2.99e-11 ON4w-D96
+43 ENSG00000240972.MIF           8           2.43  10.1   388. 3.14e-13  3.92e- 9  5.42e- 8 ON4w-D96
+44 ENSG00000124614.RPS10         8          -1.53   7.88  241. 1.52e-11  9.49e- 8  2.62e- 6 ON4w-D96
+45 ENSG00000004059.ARF5          9           1.90   8.02  294. 1.04e-11  6.51e- 8  1.80e- 6 ON4w-D96
+46 ENSG00000240972.MIF           9           2.29  10.3   312. 6.68e-12  6.51e- 8  1.15e- 6 ON4w-D96</code></pre>
+<pre class="r"><code>top &lt;- top %&gt;% pull(&quot;gene&quot;) %&gt;% unique
+
+# for ea. gene in &#39;top8&#39;, plot t-SNE colored by its expression 
+ps &lt;- lapply(top, function(g)
+  .plot_dr(sce_sub[, cs100], &quot;UMAP&quot;, g) + 
+    ggtitle(if(length(str_split(g, &quot;\\.&quot;, simplify = TRUE)) ==2) 
+      str_split(g, &quot;\\.&quot;, simplify = TRUE)[,2] else g) + 
+    theme(legend.position = &quot;none&quot;))
+
+# arrange plots
+plot_grid(plotlist = ps, ncol = 4, align = &quot;vh&quot;)</code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/plot-top-genes-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cell-level-visualization" class="section level2 tabset">
+<h2>Cell-level visualization</h2>
+<p>Plot the top 6</p>
+<pre class="r"><code>for(i in names(tbl_fil2)) {
+   cat(&quot;### &quot;, i, &quot;\n&quot;)
+  p &lt;- plotExpression(sce_sub[, sce_sub$cluster_id == i],
+  features = tbl_fil2[[i]]$gene[seq_len(6)],
+  x = &quot;sample_id&quot;, colour_by = &quot;group_id&quot;, ncol = 3) +
+  guides(fill = guide_legend(override.aes = list(size = 5, alpha = 1))) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  print(p)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="section" class="section level3">
+<h3>0</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-1" class="section level3">
+<h3>1</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-2" class="section level3">
+<h3>2</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-3" class="section level3">
+<h3>3</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-4.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-4" class="section level3">
+<h3>4</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-5.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-5" class="section level3">
+<h3>5</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-6.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-6" class="section level3">
+<h3>6</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-7.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-7" class="section level3">
+<h3>7</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-8.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-8" class="section level3">
+<h3>8</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-9.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-9" class="section level3">
+<h3>9</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-10.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-10" class="section level3">
+<h3>10</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-11.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-11" class="section level3">
+<h3>11</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-12.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-12" class="section level3">
+<h3>12</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-13.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-13" class="section level3">
+<h3>13</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-14.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="sample-level-visualization" class="section level2">
+<h2>Sample-level visualization</h2>
+<pre class="r"><code>pbHeatmap(sce_sub, res, top_n = 5)</code></pre>
+<pre><code>Warning: `filter_()` is deprecated as of dplyr 0.7.0.
+Please use `filter()` instead.
+See vignette(&#39;programming&#39;) for more help
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/sample-level-1.png" width="960" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1073,104 +1915,76 @@ BLAS:   /usr/local/R/R-4.0.0/lib/libRblas.so
 LAPACK: /usr/local/R/R-4.0.0/lib/libRlapack.so
 
 locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
- [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
+ [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
+[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
- [1] grid      parallel  stats4    stats     graphics  grDevices utils    
- [8] datasets  methods   base     
+ [1] grid      parallel  stats4    stats     graphics  grDevices utils     datasets  methods  
+[10] base     
 
 other attached packages:
- [1] edgeR_3.30.3                limma_3.44.3               
- [3] viridis_0.5.1               viridisLite_0.3.0          
- [5] RColorBrewer_1.1-2          purrr_0.3.4                
- [7] muscat_1.2.1                ggplot2_3.3.2              
- [9] cowplot_1.0.0               ComplexHeatmap_2.4.2       
-[11] scran_1.16.0                dplyr_1.0.2                
-[13] SingleCellExperiment_1.10.1 SummarizedExperiment_1.18.1
-[15] DelayedArray_0.14.0         matrixStats_0.56.0         
-[17] Biobase_2.48.0              GenomicRanges_1.40.0       
-[19] GenomeInfoDb_1.24.2         IRanges_2.22.2             
-[21] S4Vectors_0.26.1            BiocGenerics_0.34.0        
-[23] Seurat_3.1.5                workflowr_1.6.2            
+ [1] scater_1.16.2               UpSetR_1.4.0                stringr_1.4.0              
+ [4] edgeR_3.30.3                limma_3.44.3                viridis_0.5.1              
+ [7] viridisLite_0.3.0           RColorBrewer_1.1-2          purrr_0.3.4                
+[10] muscat_1.2.1                ggplot2_3.3.2               cowplot_1.0.0              
+[13] ComplexHeatmap_2.4.2        scran_1.16.0                dplyr_1.0.2                
+[16] SingleCellExperiment_1.10.1 SummarizedExperiment_1.18.1 DelayedArray_0.14.0        
+[19] matrixStats_0.56.0          Biobase_2.48.0              GenomicRanges_1.40.0       
+[22] GenomeInfoDb_1.24.2         IRanges_2.22.2              S4Vectors_0.26.1           
+[25] BiocGenerics_0.34.0         Seurat_3.1.5                workflowr_1.6.2            
 
 loaded via a namespace (and not attached):
-  [1] reticulate_1.16           tidyselect_1.1.0         
-  [3] lme4_1.1-23               RSQLite_2.2.0            
-  [5] AnnotationDbi_1.50.1      htmlwidgets_1.5.1        
-  [7] BiocParallel_1.22.0       Rtsne_0.15               
-  [9] munsell_0.5.0             codetools_0.2-16         
- [11] ica_1.0-2                 statmod_1.4.34           
- [13] future_1.17.0             withr_2.2.0              
- [15] colorspace_1.4-1          knitr_1.29               
- [17] ROCR_1.0-11               listenv_0.8.0            
- [19] labeling_0.3              git2r_0.27.1             
- [21] GenomeInfoDbData_1.2.3    farver_2.0.3             
- [23] bit64_0.9-7               glmmTMB_1.0.2.1          
- [25] rprojroot_1.3-2           vctrs_0.3.4              
- [27] generics_0.0.2            xfun_0.15                
- [29] R6_2.4.1                  doParallel_1.0.15        
- [31] ggbeeswarm_0.6.0          clue_0.3-57              
- [33] rsvd_1.0.3                locfit_1.5-9.4           
- [35] bitops_1.0-6              promises_1.1.1           
- [37] scales_1.1.1              beeswarm_0.2.3           
- [39] gtable_0.3.0              globals_0.12.5           
- [41] rlang_0.4.7               genefilter_1.70.0        
- [43] GlobalOptions_0.1.2       splines_4.0.0            
- [45] TMB_1.7.16                lazyeval_0.2.2           
- [47] yaml_2.2.1                reshape2_1.4.4           
- [49] backports_1.1.9           httpuv_1.5.4             
- [51] tools_4.0.0               ellipsis_0.3.1           
- [53] gplots_3.0.4              ggridges_0.5.2           
- [55] Rcpp_1.0.5                plyr_1.8.6               
- [57] progress_1.2.2            zlibbioc_1.34.0          
- [59] RCurl_1.98-1.2            prettyunits_1.1.1        
- [61] pbapply_1.4-2             GetoptLong_1.0.1         
- [63] zoo_1.8-8                 ggrepel_0.8.2            
- [65] cluster_2.1.0             colorRamps_2.3           
- [67] fs_1.4.2                  variancePartition_1.18.2 
- [69] magrittr_1.5              data.table_1.12.8        
- [71] lmerTest_3.1-2            circlize_0.4.10          
- [73] lmtest_0.9-37             RANN_2.6.1               
- [75] whisker_0.4               fitdistrplus_1.1-1       
- [77] hms_0.5.3                 patchwork_1.0.1          
- [79] evaluate_0.14             xtable_1.8-4             
- [81] pbkrtest_0.4-8.6          XML_3.99-0.4             
- [83] gridExtra_2.3             shape_1.4.4              
- [85] compiler_4.0.0            scater_1.16.2            
- [87] tibble_3.0.3              KernSmooth_2.23-17       
- [89] crayon_1.3.4              minqa_1.2.4              
- [91] htmltools_0.5.0           later_1.1.0.1            
- [93] tidyr_1.1.0               geneplotter_1.66.0       
- [95] DBI_1.1.0                 MASS_7.3-51.6            
- [97] rappdirs_0.3.1            boot_1.3-25              
- [99] Matrix_1.2-18             gdata_2.18.0             
-[101] igraph_1.2.5              pkgconfig_2.0.3          
-[103] numDeriv_2016.8-1.1       plotly_4.9.2.1           
-[105] foreach_1.5.0             annotate_1.66.0          
-[107] vipor_0.4.5               dqrng_0.2.1              
-[109] blme_1.0-4                XVector_0.28.0           
-[111] stringr_1.4.0             digest_0.6.25            
-[113] sctransform_0.2.1         RcppAnnoy_0.0.16         
-[115] tsne_0.1-3                rmarkdown_2.3            
-[117] leiden_0.3.3              uwot_0.1.8               
-[119] DelayedMatrixStats_1.10.1 gtools_3.8.2             
-[121] rjson_0.2.20              nloptr_1.2.2.2           
-[123] lifecycle_0.2.0           nlme_3.1-148             
-[125] jsonlite_1.7.0            BiocNeighbors_1.6.0      
-[127] pillar_1.4.6              lattice_0.20-41          
-[129] httr_1.4.1                survival_3.2-3           
-[131] glue_1.4.2                png_0.1-7                
-[133] iterators_1.0.12          bit_1.1-15.2             
-[135] stringi_1.4.6             blob_1.2.1               
-[137] DESeq2_1.28.1             BiocSingular_1.4.0       
-[139] caTools_1.18.0            memoise_1.1.0            
-[141] irlba_2.3.3               future.apply_1.6.0       
-[143] ape_5.4                  </code></pre>
+  [1] utf8_1.1.4                reticulate_1.16           tidyselect_1.1.0         
+  [4] lme4_1.1-23               RSQLite_2.2.0             AnnotationDbi_1.50.1     
+  [7] htmlwidgets_1.5.1         BiocParallel_1.22.0       Rtsne_0.15               
+ [10] munsell_0.5.0             codetools_0.2-16          ica_1.0-2                
+ [13] statmod_1.4.34            future_1.17.0             withr_2.2.0              
+ [16] colorspace_1.4-1          knitr_1.29                ROCR_1.0-11              
+ [19] listenv_0.8.0             labeling_0.3              git2r_0.27.1             
+ [22] GenomeInfoDbData_1.2.3    farver_2.0.3              bit64_0.9-7              
+ [25] glmmTMB_1.0.2.1           rprojroot_1.3-2           vctrs_0.3.4              
+ [28] generics_0.0.2            xfun_0.15                 R6_2.4.1                 
+ [31] doParallel_1.0.15         ggbeeswarm_0.6.0          clue_0.3-57              
+ [34] rsvd_1.0.3                locfit_1.5-9.4            bitops_1.0-6             
+ [37] assertthat_0.2.1          promises_1.1.1            scales_1.1.1             
+ [40] beeswarm_0.2.3            gtable_0.3.0              globals_0.12.5           
+ [43] rlang_0.4.7               genefilter_1.70.0         GlobalOptions_0.1.2      
+ [46] splines_4.0.0             TMB_1.7.16                lazyeval_0.2.2           
+ [49] yaml_2.2.1                reshape2_1.4.4            backports_1.1.9          
+ [52] httpuv_1.5.4              tools_4.0.0               ellipsis_0.3.1           
+ [55] gplots_3.0.4              ggridges_0.5.2            Rcpp_1.0.5               
+ [58] plyr_1.8.6                progress_1.2.2            zlibbioc_1.34.0          
+ [61] RCurl_1.98-1.2            prettyunits_1.1.1         pbapply_1.4-2            
+ [64] GetoptLong_1.0.1          zoo_1.8-8                 ggrepel_0.8.2            
+ [67] cluster_2.1.0             colorRamps_2.3            fs_1.4.2                 
+ [70] variancePartition_1.18.2  magrittr_1.5              data.table_1.12.8        
+ [73] lmerTest_3.1-2            circlize_0.4.10           lmtest_0.9-37            
+ [76] RANN_2.6.1                whisker_0.4               fitdistrplus_1.1-1       
+ [79] hms_0.5.3                 patchwork_1.0.1           evaluate_0.14            
+ [82] xtable_1.8-4              pbkrtest_0.4-8.6          XML_3.99-0.4             
+ [85] gridExtra_2.3             shape_1.4.4               compiler_4.0.0           
+ [88] tibble_3.0.3              KernSmooth_2.23-17        crayon_1.3.4             
+ [91] minqa_1.2.4               htmltools_0.5.0           later_1.1.0.1            
+ [94] tidyr_1.1.0               geneplotter_1.66.0        DBI_1.1.0                
+ [97] MASS_7.3-51.6             rappdirs_0.3.1            boot_1.3-25              
+[100] Matrix_1.2-18             cli_2.0.2                 gdata_2.18.0             
+[103] igraph_1.2.5              pkgconfig_2.0.3           numDeriv_2016.8-1.1      
+[106] plotly_4.9.2.1            foreach_1.5.0             annotate_1.66.0          
+[109] vipor_0.4.5               dqrng_0.2.1               blme_1.0-4               
+[112] XVector_0.28.0            digest_0.6.25             sctransform_0.2.1        
+[115] RcppAnnoy_0.0.16          tsne_0.1-3                rmarkdown_2.3            
+[118] leiden_0.3.3              uwot_0.1.8                DelayedMatrixStats_1.10.1
+[121] gtools_3.8.2              rjson_0.2.20              nloptr_1.2.2.2           
+[124] lifecycle_0.2.0           nlme_3.1-148              jsonlite_1.7.0           
+[127] BiocNeighbors_1.6.0       fansi_0.4.1               pillar_1.4.6             
+[130] lattice_0.20-41           httr_1.4.1                survival_3.2-3           
+[133] glue_1.4.2                png_0.1-7                 iterators_1.0.12         
+[136] bit_1.1-15.2              stringi_1.4.6             blob_1.2.1               
+[139] DESeq2_1.28.1             BiocSingular_1.4.0        caTools_1.18.0           
+[142] memoise_1.1.0             irlba_2.3.3               future.apply_1.6.0       
+[145] ape_5.4                  </code></pre>
 </div>
 </div>
 </div>
