@@ -23,6 +23,9 @@ library(ggplot2)
 library(Seurat)
 library(SingleCellExperiment)
 library(future)
+library(ComplexHeatmap)
+library(RColorBrewer)
+library(viridis)
 ```
 
 ## Load data
@@ -139,8 +142,98 @@ for (id in ids) {
 }
 ```
 
-## Save Seurat object to RDS
+# DR with cells colored by individial clustering {.tabset}
+
+We show the cluster membership of the individual clustering in the combined UMAP.
+```{r dr-individual-clusters, results = "asis", fig.width = 12}
+## combined clustering so$RNA_snn_res.0.4
+## individual clustering so$integrated_snn_res.0.4 (D96)
+## so_tdp$RNA_snn_res.0.4 (TDP-HA)
+# we lost the individual clustering of the TDP-HA samples, 
+# and will add them to the so object
+so$TDPHA_snn_res.0.4 <- NA
+## iterate throuth each sample and add the corresponding cluster ids
+for( s in unique(so_tdp$sample_id)){
+  ind <- so$sample_id == s
+  ind_tdp <- so_tdp$sample_id == s
+  so$TDPHA_snn_res.0.4[ind] <- as.character(so_tdp$RNA_snn_res.0.4)[match(so$barcode[ind], 
+                                                      so_tdp$barcode[ind_tdp])]
+}
+so$TDPHA_snn_res.0.4 <- factor(so$TDPHA_snn_res.0.4, 
+                               levels = as.character(0:16))
+
+so$integrated_snn_res.0.4  <- factor(so$integrated_snn_res.0.4, 
+                                     levels = as.character(0:16))
+
+cs <- sample(colnames(so), 1e4)
+.plot_dr <- function(so, dr, id)
+    DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+
+ids <- c("group_id", "sample_id", "ident", "TDPHA_snn_res.0.4", "integrated_snn_res.0.4")
+for (id in ids) {
+    cat("## ", id, "\n")
+    p1 <- .plot_dr(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none")
+    p2 <- .plot_dr(so, "umap", id) + theme(legend.position = "none")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
+
+How are the individal clusters distributed in the combined clustering?
+```{r cluster-distr-combined}
+so$RNA_snn_res.0.4 %>% table
+so$integrated_snn_res.0.4 %>% table
+so$TDPHA_snn_res.0.4 %>% table
+
+## D96
+## check if cells from the same cluster are still in the same cluster
+(n_clusters <- table(so$RNA_snn_res.0.4, so$integrated_snn_res.0.4))
+fqs <- prop.table(n_clusters, margin = 2)
+mat <- as.matrix(unclass(fqs))
+Heatmap(mat,
+    col = rev(brewer.pal(11, "RdGy")[-6]),
+    name = "Frequency",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "combined clusters",
+    column_title = "individual clusters",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
+            gp = gpar(col = "white", fontsize = 8)))
+
+## TDP-HA experiment
+(n_clusters <- table(so$RNA_snn_res.0.4, so$TDPHA_snn_res.0.4))
+fqs <- prop.table(n_clusters, margin = 2)
+mat <- as.matrix(unclass(fqs))
+Heatmap(mat,
+    col = rev(brewer.pal(11, "RdGy")[-6]),
+    name = "Frequency",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "combined clusters",
+    column_title = "individual clusters",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
+            gp = gpar(col = "white", fontsize = 8)))
+```
+
+
+# Save Seurat object to RDS
 
 ```{r}
 saveRDS(so, file.path("output", "so_08-00_clustering_HA_D96.rds"))
 ```
+
