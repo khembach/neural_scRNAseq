@@ -152,12 +152,12 @@ We show the cluster membership of the individual clustering in the combined UMAP
 # we lost the individual clustering of the TDP-HA samples, 
 # and will add them to the so object
 so$TDPHA_snn_res.0.4 <- NA
-## iterate throuth each sample and add the corresponding cluster ids
+## iterate through each sample and add the corresponding cluster ids
 for( s in unique(so_tdp$sample_id)){
   ind <- so$sample_id == s
   ind_tdp <- so_tdp$sample_id == s
-  so$TDPHA_snn_res.0.4[ind] <- as.character(so_tdp$RNA_snn_res.0.4)[match(so$barcode[ind], 
-                                                      so_tdp$barcode[ind_tdp])]
+  so$TDPHA_snn_res.0.4[ind] <- as.character(so_tdp$RNA_snn_res.0.4[ind_tdp][match(so$barcode[ind], 
+                                                      so_tdp$barcode[ind_tdp])])
 }
 so$TDPHA_snn_res.0.4 <- factor(so$TDPHA_snn_res.0.4, 
                                levels = as.character(0:16))
@@ -186,7 +186,7 @@ for (id in ids) {
 }
 ```
 
-How are the individal clusters distributed in the combined clustering?
+# How are the individal clusters distributed in the combined clustering?
 ```{r cluster-distr-combined}
 so$RNA_snn_res.0.4 %>% table
 so$integrated_snn_res.0.4 %>% table
