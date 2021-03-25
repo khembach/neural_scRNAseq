@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-03-04
+<strong>Last updated:</strong> 2021-03-25
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreede2f7b275bfbb452deecf94d0f0266ae7f39842ctargetblankde2f7b2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/de2f7b275bfbb452deecf94d0f0266ae7f39842c" target="_blank">de2f7b2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree3b89036c3d8194c15f215a76d724dd6ef379c4c5targetblank3b89036a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/3b89036c3d8194c15f215a76d724dd6ef379c4c5" target="_blank">3b89036</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreede2f7b275bfbb452deecf94d0f0266ae7f39842ctargetblankde2f7b2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree3b89036c3d8194c15f215a76d724dd6ef379c4c5targetblank3b89036a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/de2f7b275bfbb452deecf94d0f0266ae7f39842c" target="_blank">de2f7b2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/3b89036c3d8194c15f215a76d724dd6ef379c4c5" target="_blank">3b89036</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -530,6 +530,9 @@ Ignored files:
     Ignored:    ._coverage_sashimi.pdf
     Ignored:    ._coverage_sashimi.png
     Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    ._pbDS_cell_level.pdf
+    Ignored:    ._pbDS_top_expr_umap.pdf
+    Ignored:    ._pbDS_upset.pdf
     Ignored:    ._sashimi.pdf
     Ignored:    ._stmn2.pdf
     Ignored:    ._tdp.pdf
@@ -597,6 +600,7 @@ Ignored files:
     Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/figure/
     Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
     Ignored:    analysis/organoid-01-clustering_cache/
     Ignored:    analysis/organoid-02-integration_cache/
@@ -731,7 +735,6 @@ Untracked files:
     Untracked:  analysis/organoid-08-conos-comparison.Rmd
     Untracked:  analysis/organoid-0x-sample_integration.Rmd
     Untracked:  analysis/sample5_QC.Rmd
-    Untracked:  ce$id <- sce$sample_id
     Untracked:  coverage.pdf
     Untracked:  coverage_sashimi.pdf
     Untracked:  coverage_sashimi.png
@@ -742,8 +745,13 @@ Untracked files:
     Untracked:  data/reference/
     Untracked:  data/virus_cell_tropism_markers.R
     Untracked:  data/~$Reactive_astrocytes_markers.xlsx
+    Untracked:  pbDS_cell_level.pdf
+    Untracked:  pbDS_heatmap.pdf
+    Untracked:  pbDS_top_expr_umap.pdf
+    Untracked:  pbDS_upset.pdf
     Untracked:  sashimi.pdf
     Untracked:  scripts/bu_Rcode.R
+    Untracked:  scripts/bu_code.Rmd
     Untracked:  scripts/salmon-latest_linux_x86_64/
     Untracked:  stmn2.pdf
     Untracked:  tdp.pdf
@@ -796,6 +804,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/3b89036c3d8194c15f215a76d724dd6ef379c4c5/analysis/TDP-08-01-HA-D96-expression-changes.Rmd" target="_blank">3b89036</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-25
+</td>
+<td>
+include 4wOFF sample and correct batch efffects
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/33f8c13abbc23ef36d446bedab759573dda46a66/docs/TDP-08-01-HA-D96-expression-changes.html" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -871,7 +913,8 @@ library(viridis)
 library(edgeR)
 library(stringr)
 library(UpSetR)
-library(scater)</code></pre>
+library(scater)
+library(BiocParallel)</code></pre>
 </div>
 <div id="load-data-convert-to-sce" class="section level1">
 <h1>Load data &amp; convert to SCE</h1>
@@ -1198,7 +1241,7 @@ rowData names(5): vst.mean vst.variance vst.variance.expected
 colnames(39003): tdp_ha_AAACCCACATGTCTAG-1.TDP2wON
   tdp_ha_AAACCCATCACGTAGT-1.TDP2wON ... D96_TTTGTTGCACTCGATA-1.6NC96
   D96_TTTGTTGTCGTGTGAT-1.6NC96
-colData names(44): cluster_id sample_id ... integrated_snn_res.2 ident
+colData names(45): cluster_id sample_id ... TDPHA_snn_res.0.4 ident
 reducedDimNames(3): PCA TSNE UMAP
 altExpNames(0):</code></pre>
 <pre class="r"><code>nk &lt;- length(kids &lt;- levels(sce$cluster_id))
@@ -1324,6 +1367,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-1.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/3c440f582ec3959d70fdb0d95b19c701e98711a8/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-1.png" target="_blank">3c440f5</a>
 </td>
 <td>
@@ -1340,9 +1394,83 @@ khembach
 <pre class="r"><code>pbMDS_mod(pb, 1, 3)  +  guides(col = guide_legend(nrow = 10)) + 
   theme_bw(base_size = 14) </code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-MDS-2">
+Past versions of MDS-2.png
+</button>
+</p>
+<div id="fig-MDS-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-2.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>pbMDS_mod(pb, 1, 4) + guides(col = guide_legend(nrow = 10)) + 
   theme_bw(base_size = 14) </code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-MDS-3">
+Past versions of MDS-3.png
+</button>
+</p>
+<div id="fig-MDS-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-3.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="subsetting-of-d96-and-on4w-samples" class="section level1">
@@ -1368,7 +1496,7 @@ rowData names(5): vst.mean vst.variance vst.variance.expected
 colnames(25520): tdp_ha_AAACCCACAGGATCTT-1.TDP4wONa
   tdp_ha_AAACCCAGTCTCTCTG-1.TDP4wONa ... D96_TTTGTTGCACTCGATA-1.6NC96
   D96_TTTGTTGTCGTGTGAT-1.6NC96
-colData names(45): cluster_id sample_id ... integrated_snn_res.2 ident
+colData names(46): cluster_id sample_id ... TDPHA_snn_res.0.4 ident
 reducedDimNames(3): PCA TSNE UMAP
 altExpNames(0):</code></pre>
 <pre class="r"><code>nk &lt;- length(kids &lt;- levels(sce_sub$cluster_id))
@@ -1416,18 +1544,127 @@ TDP4wONb                 8302                  1522                 1253</code><
 <h2>Pseudobulk MDS plot</h2>
 <pre class="r"><code>pbMDS(pb) + guides(col = guide_legend(nrow = 10)) + theme_bw(base_size = 14) </code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-sub-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-MDS-sub-1">
+Past versions of MDS-sub-1.png
+</button>
+</p>
+<div id="fig-MDS-sub-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-sub-1.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>pbMDS_mod(pb, 1, 3)  +  guides(col = guide_legend(nrow = 10)) + 
   theme_bw(base_size = 14) </code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-sub-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-MDS-sub-2">
+Past versions of MDS-sub-2.png
+</button>
+</p>
+<div id="fig-MDS-sub-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-sub-2.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>pbMDS_mod(pb, 1, 4) + guides(col = guide_legend(nrow = 10)) + 
   theme_bw(base_size = 14) </code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-sub-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-MDS-sub-3">
+Past versions of MDS-sub-3.png
+</button>
+</p>
+<div id="fig-MDS-sub-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/MDS-sub-3.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="pseudobulk-differential-state-analysis" class="section level2">
 <h2>Pseudobulk differential state analysis</h2>
 <pre class="r"><code># run DS analysis
-# res &lt;- pbDS(pb, verbose = FALSE)
-
 # construct design &amp; contrast matrix
 ei &lt;- metadata(sce_sub)$experiment_info
 mm &lt;- model.matrix(~ 0 + ei$group_id)
@@ -1735,8 +1972,82 @@ format(top2[, -ncol(top2)], digits = 2)</code></pre>
 <pre class="r"><code>de_gs_by_k &lt;- map(tbl_fil2, &quot;gene&quot;)
 upset(fromList(de_gs_by_k), nsets = length(de_gs_by_k), nintersects = 40)</code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/upset-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-upset-1">
+Past versions of upset-1.png
+</button>
+</p>
+<div id="fig-upset-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/upset-1.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>upset(fromList(de_gs_by_k))</code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/upset-2.png" width="1920" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-upset-2">
+Past versions of upset-2.png
+</button>
+</p>
+<div id="fig-upset-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/upset-2.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="dr-colored-by-expression" class="section level2">
 <h2>DR colored by expression</h2>
@@ -1818,13 +2129,50 @@ ps &lt;- lapply(top, function(g)
 # arrange plots
 plot_grid(plotlist = ps, ncol = 4, align = &quot;vh&quot;)</code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/plot-top-genes-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot-top-genes-1">
+Past versions of plot-top-genes-1.png
+</button>
+</p>
+<div id="fig-plot-top-genes-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/plot-top-genes-1.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="cell-level-visualization" class="section level2 tabset">
 <h2>Cell-level visualization</h2>
 <p>Plot the top 6</p>
 <pre class="r"><code>for(i in names(tbl_fil2)) {
    cat(&quot;### &quot;, i, &quot;\n&quot;)
-  p &lt;- plotExpression(sce_sub[, sce_sub$cluster_id == i],
+  p &lt;- plotExpression(sce[, sce$cluster_id == i],
   features = tbl_fil2[[i]]$gene[seq_len(6)],
   x = &quot;sample_id&quot;, colour_by = &quot;group_id&quot;, ncol = 3) +
   guides(fill = guide_legend(override.aes = list(size = 5, alpha = 1))) +
@@ -1835,58 +2183,576 @@ plot_grid(plotlist = ps, ncol = 4, align = &quot;vh&quot;)</code></pre>
 <div id="section" class="section level3">
 <h3>0</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-1">
+Past versions of cell-level-plot-1.png
+</button>
+</p>
+<div id="fig-cell-level-plot-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-1.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-1" class="section level3">
 <h3>1</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-2">
+Past versions of cell-level-plot-2.png
+</button>
+</p>
+<div id="fig-cell-level-plot-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-2.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-2" class="section level3">
 <h3>2</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-3">
+Past versions of cell-level-plot-3.png
+</button>
+</p>
+<div id="fig-cell-level-plot-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-3.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-3" class="section level3">
 <h3>3</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-4">
+Past versions of cell-level-plot-4.png
+</button>
+</p>
+<div id="fig-cell-level-plot-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-4.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-4" class="section level3">
 <h3>4</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-5">
+Past versions of cell-level-plot-5.png
+</button>
+</p>
+<div id="fig-cell-level-plot-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-5.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-5" class="section level3">
 <h3>5</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-6">
+Past versions of cell-level-plot-6.png
+</button>
+</p>
+<div id="fig-cell-level-plot-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-6.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-6" class="section level3">
 <h3>6</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-7">
+Past versions of cell-level-plot-7.png
+</button>
+</p>
+<div id="fig-cell-level-plot-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-7.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-7" class="section level3">
 <h3>7</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-8">
+Past versions of cell-level-plot-8.png
+</button>
+</p>
+<div id="fig-cell-level-plot-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-8.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-8" class="section level3">
 <h3>8</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-9.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-9">
+Past versions of cell-level-plot-9.png
+</button>
+</p>
+<div id="fig-cell-level-plot-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-9.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-9" class="section level3">
 <h3>9</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-10.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-10">
+Past versions of cell-level-plot-10.png
+</button>
+</p>
+<div id="fig-cell-level-plot-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-10.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-10" class="section level3">
 <h3>10</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-11.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-11">
+Past versions of cell-level-plot-11.png
+</button>
+</p>
+<div id="fig-cell-level-plot-11" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-11.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-11" class="section level3">
 <h3>11</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-12.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-12">
+Past versions of cell-level-plot-12.png
+</button>
+</p>
+<div id="fig-cell-level-plot-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-12.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-12" class="section level3">
 <h3>12</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-13.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-13">
+Past versions of cell-level-plot-13.png
+</button>
+</p>
+<div id="fig-cell-level-plot-13" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-13.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="section-13" class="section level3">
 <h3>13</h3>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-14.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cell-level-plot-14">
+Past versions of cell-level-plot-14.png
+</button>
+</p>
+<div id="fig-cell-level-plot-14" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-14.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="sample-level-visualization" class="section level2">
@@ -1898,6 +2764,590 @@ See vignette(&#39;programming&#39;) for more help
 This warning is displayed once every 8 hours.
 Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 <p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/sample-level-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-sample-level-1">
+Past versions of sample-level-1.png
+</button>
+</p>
+<div id="fig-sample-level-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/33f8c13abbc23ef36d446bedab759573dda46a66/docs/figure/TDP-08-01-HA-D96-expression-changes.Rmd/sample-level-1.png" target="_blank">33f8c13</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-03-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="include-the-4woff-but-not-the-2won-sample" class="section level1">
+<h1>Include the 4wOFF but not the 2wON sample</h1>
+<p>We include the 4wOFF sample and correct for batch effects.</p>
+<div id="pseudobulk-differential-state-analysis-1" class="section level2">
+<h2>Pseudobulk differential state analysis</h2>
+<pre class="r"><code>sce_sub &lt;- sce[, sce$group_id %in% c(&quot;D96&quot;, &quot;OFF4w&quot;, &quot;ON4w&quot;)]
+sce_sub$sample_id &lt;- droplevels(sce_sub$sample_id)
+sce_sub$id &lt;- sce_sub$sample_id
+levels(sce_sub$id) &lt;- c(&quot;no_TDP_HA&quot;, &quot;no_TDP_HA&quot;, &quot;no_TDP_HA&quot;, &quot;TDP_HA&quot;, &quot;TDP_HA&quot;)
+
+(sce_sub &lt;- prepSCE(sce_sub, 
+    kid = &quot;cluster_id&quot;, # subpopulation assignments
+    gid = &quot;id&quot;,  # group IDs (ctrl/stim)
+    sid = &quot;sample_id&quot;,   # sample IDs (ctrl/stim.1234)
+    drop = FALSE))  # drop all other colData columns</code></pre>
+<pre><code>class: SingleCellExperiment 
+dim: 14073 31597 
+metadata(1): experiment_info
+assays(2): counts logcounts
+rownames(14073): ENSG00000187634.SAMD11 ENSG00000188976.NOC2L ... ENSG00000227234.SPANXB1
+  ENSG00000198573.SPANXC
+rowData names(5): vst.mean vst.variance vst.variance.expected vst.variance.standardized
+  vst.variable
+colnames(31597): tdp_ha_AAACGAAGTAGAATGT-1.TDP4wOFF tdp_ha_AAACGAAGTATAGCTC-1.TDP4wOFF
+  ... D96_TTTGTTGCACTCGATA-1.6NC96 D96_TTTGTTGTCGTGTGAT-1.6NC96
+colData names(46): cluster_id sample_id ... TDPHA_snn_res.0.4 ident
+reducedDimNames(3): PCA TSNE UMAP
+altExpNames(0):</code></pre>
+<pre class="r"><code>nk &lt;- length(kids &lt;- levels(sce_sub$cluster_id))
+ns &lt;- length(sids &lt;- levels(sce_sub$sample_id))
+names(kids) &lt;- kids; names(sids) &lt;- sids
+
+# nb. of cells per cluster-sample
+t(table(sce_sub$cluster_id, sce_sub$sample_id))</code></pre>
+<pre><code>          
+              0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15
+  5NC96     770  443  306  355  185  219  150  221  111   53  465   59   63  134    3    1
+  6NC96    1028  631  525  289  311  307  216  293  170   94  415   95   98  118    5    0
+  TDP4wOFF  803 1003  816  582  605  502  383  413  347  179  158  187   63   25   11    0
+  TDP4wONa 1586 1580 1101 1000  916  718  559  479  532  387   70  320  240   91   44   42
+  TDP4wONb  934 1362 1118  802  750  763  505  241  434  303   22  258  145   53   31    1</code></pre>
+<pre class="r"><code>metadata(sce_sub)$experiment_info$batch &lt;- factor(c(&quot;TDP_exp&quot;, &quot;TDP_exp&quot;, &quot;TDP_exp&quot;, &quot;WT&quot;, &quot;WT&quot; ))
+
+## get pseudocounts
+pb &lt;- aggregateData(sce_sub, assay = &quot;counts&quot;, by = c(&quot;cluster_id&quot;, &quot;sample_id&quot;), 
+                    fun = &quot;sum&quot;)
+# tabulate number of cells
+cd &lt;- data.frame(colData(sce_sub)[, &quot;cluster_id&quot;])
+for (i in names(cd))
+    if (is.factor(cd[[i]]))
+        cd[[i]] &lt;- droplevels(cd[[i]])
+ns &lt;- table(cd)
+ns &lt;- c(unclass(ns))
+metadata(pb)$n_cells &lt;- ns
+    
+# construct design &amp; contrast matrix
+ei &lt;- metadata(sce_sub)$experiment_info
+mm &lt;- model.matrix(~ batch + group_id, data = ei)
+rownames(mm) &lt;- ei$sample_id
+mm</code></pre>
+<pre><code>         (Intercept) batchWT group_idTDP_HA
+TDP4wOFF           1       0              0
+TDP4wONa           1       0              1
+TDP4wONb           1       0              1
+5NC96              1       1              0
+6NC96              1       1              0
+attr(,&quot;assign&quot;)
+[1] 0 1 2
+attr(,&quot;contrasts&quot;)
+attr(,&quot;contrasts&quot;)$batch
+[1] &quot;contr.treatment&quot;
+
+attr(,&quot;contrasts&quot;)$group_id
+[1] &quot;contr.treatment&quot;</code></pre>
+<pre class="r"><code>## edgeR automatically test the last colum if we don&#39;t specify a contrast, 
+## i.e. TDP-HA vs. no TDP-HA</code></pre>
+<pre class="r"><code>.n_cells_mod &lt;- function(x) {
+    y &lt;- metadata(x)$n_cells
+    if (is.null(y)) return(NULL)
+    if (length(metadata(x)$agg_pars$by) == 2)
+        y &lt;- as.matrix(data.frame(y, check.names = FALSE))
+    return(as.table(y))
+}</code></pre>
+<pre class="r"><code># this is the pbDS code, fixed so it runs for our data
+method &lt;- &quot;edgeR&quot;
+filter &lt;- &quot;both&quot;
+min_cells &lt;- 10
+treat &lt;- FALSE
+# muscat:::.check_pbs(pb, check_by = TRUE)
+BPPARAM &lt;- SerialParam(progressbar = TRUE)
+design &lt;- mm
+coef &lt;- NULL
+contrast &lt;- NULL
+
+if (is.null(design)) {
+    formula &lt;- ~ group_id
+    cd &lt;- as.data.frame(colData(pb))
+    design &lt;- model.matrix(formula, cd)
+    colnames(design) &lt;- levels(pb$group_id)
+    # args$design &lt;- design
+}
+if (is.null(coef) &amp; is.null(contrast)) {
+    c &lt;- colnames(design)[ncol(design)]
+    contrast &lt;- makeContrasts(contrasts = c, levels = design)
+    # args$contrast &lt;- contrast
+}</code></pre>
+<pre><code>Warning in makeContrasts(contrasts = c, levels = design): Renaming (Intercept) to Intercept</code></pre>
+<pre class="r"><code># ct: type of comparison - &quot;contrast&quot; or &quot;coef&quot;
+# cs: named list of &#39;coef&#39;s or &#39;contrast&#39;s
+if (!is.null(contrast)) {
+    coef &lt;- NULL
+    names(cs) &lt;- cs &lt;- colnames(contrast)
+} else if (!is.null(coef)) {
+    if (!is.list(coef)) 
+        coef &lt;- list(coef)
+    cs &lt;- vapply(coef, function(i)
+        paste(colnames(design)[i], collapse = &quot;-&quot;),
+        character(1))
+    names(cs) &lt;- names(coef) &lt;- cs
+}
+ct &lt;- ifelse(is.null(coef), &quot;contrast&quot;, &quot;coef&quot;)
+
+if (!is.function(method)) {
+    fun &lt;- switch(method,
+        &quot;DESeq2&quot; = muscat:::.DESeq2,
+        &quot;edgeR&quot; = muscat:::.edgeR, 
+        &quot;limma-trend&quot; = muscat:::.limma_trend, 
+        &quot;limma-voom&quot; = muscat:::.limma_voom)
+} else {
+    fun_call &lt;- 1
+}
+fun_args &lt;- names(as.list(args(fun)))
+fun_args &lt;- fun_args[-length(fun_args)]
+
+# for ea. cluster, run DEA
+n_cells &lt;- .n_cells_mod(pb)
+names(kids) &lt;- kids &lt;- assayNames(pb)
+res &lt;- bplapply(
+    BPPARAM = BPPARAM, 
+    kids, function (k) {
+    rmv &lt;- n_cells[k, ] &lt; min_cells
+    d &lt;- design[colnames(y &lt;- pb[ , !rmv]), , drop = FALSE]
+    if (filter %in% c(&quot;samples&quot;, &quot;both&quot;)) {
+        ls &lt;- colSums(assay(y, k))
+        ol &lt;- isOutlier(ls, log = TRUE, type = &quot;lower&quot;, nmads = 3)
+        d &lt;- d[colnames(y &lt;- y[, !ol]), , drop = FALSE]
+    }
+    if (any(tabulate(y$group_id) &lt; 2) 
+        || qr(d)$rank == nrow(d) 
+        || qr(d)$rank &lt; ncol(d)) 
+        return(NULL)
+    y &lt;- y[rowSums(assay(y, k)) != 0, ]
+    if (filter %in% c(&quot;genes&quot;, &quot;both&quot;) &amp; max(assay(y, k)) &gt; 100) 
+        y &lt;- y[filterByExpr(assay(y, k), d), ]
+    args &lt;- list(x = y, k = k, design = d, coef = coef, 
+        contrast = contrast, ct = ct, cs = cs, treat = treat)
+    args &lt;- args[intersect(names(args), fun_args)]
+    suppressWarnings(do.call(fun, args))
+})</code></pre>
+<pre><code>
+  |                                                                                                
+  |                                                                                          |   0%
+  |                                                                                                
+  |======                                                                                    |   6%
+  |                                                                                                
+  |===========                                                                               |  12%
+  |                                                                                                
+  |=================                                                                         |  19%
+  |                                                                                                
+  |======================                                                                    |  25%
+  |                                                                                                
+  |============================                                                              |  31%
+  |                                                                                                
+  |==================================                                                        |  38%
+  |                                                                                                
+  |=======================================                                                   |  44%
+  |                                                                                                
+  |=============================================                                             |  50%
+  |                                                                                                
+  |===================================================                                       |  56%
+  |                                                                                                
+  |========================================================                                  |  62%
+  |                                                                                                
+  |==============================================================                            |  69%
+  |                                                                                                
+  |====================================================================                      |  75%
+  |                                                                                                
+  |=========================================================================                 |  81%
+  |                                                                                                
+  |===============================================================================           |  88%
+  |                                                                                                
+  |====================================================================================      |  94%
+  |                                                                                                
+  |==========================================================================================| 100%</code></pre>
+<pre class="r"><code># remove empty clusters
+rmv &lt;- vapply(res, is.null, logical(1))
+res &lt;- res[!rmv]
+kids &lt;- kids[names(res)]
+
+# reorganize &amp; do global p-value adjustment
+names(i) &lt;- i &lt;- c(&quot;table&quot;, &quot;data&quot;, &quot;fit&quot;)
+res &lt;- lapply(i, map, .x = res)
+res$table &lt;- muscat:::.p_adj_global(res$table)
+# return(c(res, list(args = args)))
+res2 &lt;- c(res, list(args = args))
+
+# access results table for 1st comparison
+tbl &lt;- res2$table[[1]]
+# one data.frame per cluster
+names(tbl)</code></pre>
+<pre><code> [1] &quot;0&quot;  &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot; &quot;14&quot;</code></pre>
+<pre class="r"><code># view results for 1st cluster
+k1 &lt;- tbl[[1]]
+head(format(k1[, -ncol(k1)], digits = 2))</code></pre>
+<pre><code>                    gene cluster_id    logFC   logCPM       F   p_val p_adj.loc p_adj.glb
+1 ENSG00000187634.SAMD11          0 -2.1e-01  2.97758 1.3e+00 2.9e-01     0.907       1.0
+2  ENSG00000188976.NOC2L          0 -1.9e-01  4.61278 2.5e+00 1.5e-01     0.872       1.0
+3 ENSG00000187961.KLHL17          0 -1.7e-01  2.63158 7.2e-01 4.2e-01     0.935       1.0
+4   ENSG00000188290.HES4          0  4.3e-01  8.92933 1.0e+01 1.1e-02     0.872       1.0
+5  ENSG00000187608.ISG15          0  6.7e-01  6.34646 4.2e+01 1.3e-04     0.557       1.0
+6   ENSG00000188157.AGRN          0  1.6e-01  6.44294 2.8e+00 1.3e-01     0.872       1.0</code></pre>
+</div>
+<div id="results-filtering-1" class="section level2">
+<h2>Results filtering</h2>
+<pre class="r"><code># filter FDR &lt; 5%, abs(logFC) &gt; 1 &amp; sort by adj. p-value
+tbl_fil &lt;- lapply(tbl, function(u) {
+  u &lt;- dplyr::filter(u, p_adj.loc &lt; 0.05, abs(logFC) &gt; 0.5)
+  dplyr::arrange(u, p_adj.loc)
+})
+## remove clusters without genes after filtering
+tbl_fil &lt;- tbl_fil[lapply(tbl_fil, nrow) &gt; 0]
+
+# nb. of DS genes &amp; % of total by cluster
+n_de &lt;- vapply(tbl_fil, nrow, numeric(1))
+p_de &lt;- format(n_de / nrow(sce) * 100, digits = 3)
+data.frame(&quot;#DS&quot; = n_de, &quot;%DS&quot; = p_de, check.names = FALSE)</code></pre>
+<pre><code>   #DS     %DS
+0    1 0.00711
+1    2 0.01421
+2    1 0.00711
+5    7 0.04974
+7    9 0.06395
+8    4 0.02842
+9    1 0.00711
+10  62 0.44056
+11   4 0.02842
+12  74 0.52583
+13 249 1.76935
+14  28 0.19896</code></pre>
+<pre class="r"><code># view top 3 hits in each cluster
+top2 &lt;- bind_rows(lapply(tbl_fil, slice_min, p_adj.loc, n = 3))
+# top2$gene &lt;- str_split(top2$gene, pattern = &quot;\\.&quot;, simplify = TRUE)[,2]
+# increase line width for printing of the full table
+options(width = 100)
+format(top2[, -ncol(top2)], digits = 2)</code></pre>
+<pre><code>                      gene cluster_id logFC logCPM   F   p_val p_adj.loc p_adj.glb
+1    ENSG00000149591.TAGLN          0  0.94   7.18 111 2.7e-06   3.6e-02   5.0e-01
+2  ENSG00000197747.S100A10          1  0.84   6.43  82 1.0e-06   6.8e-03   1.8e-01
+3   ENSG00000189292.ALKAL2          1  0.90   5.68  88 6.8e-07   6.8e-03   1.2e-01
+4      ENSG00000133636.NTS          2 -1.01   4.00  59 3.6e-06   4.7e-02   6.5e-01
+5     ENSG00000171476.HOPX          5  1.00   6.16  61 1.1e-06   1.1e-02   2.0e-01
+6   ENSG00000008196.TFAP2B          5 -1.19   4.86  56 1.7e-06   1.1e-02   3.1e-01
+7  ENSG00000102290.PCDH11X          5 -0.87   5.15  53 2.5e-06   1.1e-02   4.6e-01
+8    ENSG00000134817.APLNR          7  1.25   5.13  63 3.7e-08   4.5e-04   6.7e-03
+9  ENSG00000204287.HLA-DRA          7 -5.83   1.30  59 8.7e-08   5.4e-04   1.6e-02
+10   ENSG00000187608.ISG15          7  1.05   5.87  45 6.0e-07   2.5e-03   1.1e-01
+11     ENSG00000133636.NTS          8 -1.68   3.89  67 2.3e-07   2.9e-03   4.1e-02
+12    ENSG00000160349.LCN1          8  0.87   4.84  41 6.3e-06   4.0e-02   1.0e+00
+13    ENSG00000178602.OTOS          8  1.35   3.86  37 1.1e-05   4.7e-02   1.0e+00
+14   ENSG00000099260.PALMD          9 -4.66   0.84  53 1.0e-06   1.3e-02   1.9e-01
+15  ENSG00000164692.COL1A2         10  6.95   8.26 294 5.8e-08   7.0e-04   1.1e-02
+16 ENSG00000111799.COL12A1         10  2.67   5.56 189 3.7e-07   2.2e-03   6.7e-02
+17  ENSG00000065911.MTHFD2         10  2.38   5.36 131 1.7e-06   4.5e-03   3.0e-01
+18    ENSG00000153071.DAB2         10  2.75   4.55 127 1.8e-06   4.5e-03   3.4e-01
+19    ENSG00000160180.TFF3         10  2.91   8.06 140 1.3e-06   4.5e-03   2.3e-01
+20     ENSG00000157005.SST         11 -2.21   8.86 179 5.6e-09   7.0e-05   1.0e-03
+21  ENSG00000197956.S100A6         11 -8.84   1.72 110 4.7e-07   2.9e-03   8.6e-02
+22   ENSG00000143333.RGS16         11 -0.96   5.89  46 1.3e-05   4.8e-02   1.0e+00
+23    ENSG00000196611.MMP1         11  2.10   3.84  45 1.5e-05   4.8e-02   1.0e+00
+24 ENSG00000197747.S100A10         12  5.53   6.56 278 1.2e-16   1.4e-12   2.2e-11
+25    ENSG00000254656.RTL1         12  1.70   6.39  81 5.2e-10   3.0e-06   9.5e-05
+26    ENSG00000049247.UTS2         12  1.46   6.76  75 1.3e-09   3.1e-06   2.4e-04
+27     ENSG00000163794.UCN         12  3.20   4.63  75 1.2e-09   3.1e-06   2.2e-04
+28   ENSG00000132329.RAMP1         12  2.43   5.55  75 1.3e-09   3.1e-06   2.4e-04
+29   ENSG00000106236.NPTX2         13  6.74   9.82 165 1.8e-09   1.0e-05   3.3e-04
+30    ENSG00000185559.DLK1         13 -2.92   8.18 168 1.6e-09   1.0e-05   2.9e-04
+31   ENSG00000156427.FGF18         13  6.47   8.51 127 1.1e-08   3.2e-05   2.0e-03
+32    ENSG00000108001.EBF3         13  5.66   7.16 126 1.1e-08   3.2e-05   2.1e-03
+33    ENSG00000183036.PCP4         14 -3.56   7.15 134 3.0e-11   1.5e-07   5.4e-06
+34    ENSG00000144485.HES6         14 -2.88   8.24  85 2.5e-09   6.4e-06   4.6e-04
+35    ENSG00000197921.HES5         14 -2.72   7.63  75 7.7e-09   1.3e-05   1.4e-03</code></pre>
+</div>
+<div id="calculating-expression-frequency-1" class="section level2">
+<h2>Calculating expression frequency</h2>
+<p>We filter out genes that are not expressed in at least 10% of cells of one group.</p>
+<pre class="r"><code>frq &lt;- calcExprFreqs(sce_sub, assay = &quot;counts&quot;, th = 0)
+# one sheet per cluster
+assayNames(frq)</code></pre>
+<pre><code> [1] &quot;0&quot;  &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot; &quot;14&quot; &quot;15&quot;</code></pre>
+<pre class="r"><code># expression frequencies in each
+# sample &amp; group; 1st cluster
+t(head(assay(frq), 5))</code></pre>
+<pre><code>          ENSG00000187634.SAMD11 ENSG00000188976.NOC2L ENSG00000187961.KLHL17 ENSG00000188290.HES4
+5NC96                 0.10519481             0.2974026             0.09480519            0.8922078
+6NC96                 0.11867704             0.3112840             0.09630350            0.9027237
+TDP4wOFF              0.07596513             0.3349938             0.09339975            0.9339975
+TDP4wONa              0.05233291             0.2307692             0.06809584            0.9590164
+TDP4wONb              0.06316916             0.3211991             0.08029979            0.9635974
+no_TDP_HA             0.10149942             0.3144944             0.09496348            0.9092657
+TDP_HA                0.05634921             0.2642857             0.07261905            0.9607143
+          ENSG00000187608.ISG15
+5NC96                 0.4818182
+6NC96                 0.5126459
+TDP4wOFF              0.5790785
+TDP4wONa              0.6532156
+TDP4wONb              0.6937901
+no_TDP_HA             0.5240292
+TDP_HA                0.6682540</code></pre>
+<pre class="r"><code># We can use the obtained frequencies to, for instance, only retain genes that 
+# are expressed in an average of 10% of cells in at least 1 group:
+gids &lt;- levels(sce_sub$group_id)
+frq10 &lt;- vapply(as.list(assays(frq)), 
+  function(u) apply(u[, gids] &gt; 0.1, 1, any), 
+  logical(nrow(sce_sub)))
+t(head(frq10))</code></pre>
+<pre><code>   ENSG00000187634.SAMD11 ENSG00000188976.NOC2L ENSG00000187961.KLHL17 ENSG00000188290.HES4
+0                    TRUE                  TRUE                  FALSE                 TRUE
+1                    TRUE                  TRUE                   TRUE                 TRUE
+2                    TRUE                  TRUE                   TRUE                 TRUE
+3                    TRUE                  TRUE                   TRUE                 TRUE
+4                   FALSE                  TRUE                   TRUE                 TRUE
+5                    TRUE                  TRUE                   TRUE                 TRUE
+6                    TRUE                  TRUE                   TRUE                 TRUE
+7                   FALSE                  TRUE                  FALSE                 TRUE
+8                    TRUE                  TRUE                   TRUE                 TRUE
+9                    TRUE                  TRUE                   TRUE                 TRUE
+10                   TRUE                  TRUE                   TRUE                 TRUE
+11                   TRUE                  TRUE                   TRUE                 TRUE
+12                   TRUE                  TRUE                   TRUE                 TRUE
+13                  FALSE                  TRUE                   TRUE                 TRUE
+14                   TRUE                  TRUE                   TRUE                 TRUE
+15                  FALSE                  TRUE                  FALSE                 TRUE
+   ENSG00000187608.ISG15 ENSG00000188157.AGRN
+0                   TRUE                 TRUE
+1                   TRUE                 TRUE
+2                   TRUE                 TRUE
+3                   TRUE                 TRUE
+4                   TRUE                 TRUE
+5                   TRUE                 TRUE
+6                   TRUE                 TRUE
+7                   TRUE                 TRUE
+8                   TRUE                 TRUE
+9                   TRUE                 TRUE
+10                  TRUE                 TRUE
+11                  TRUE                 TRUE
+12                  TRUE                 TRUE
+13                  TRUE                 TRUE
+14                  TRUE                 TRUE
+15                  TRUE                 TRUE</code></pre>
+<pre class="r"><code>tbl_fil2 &lt;- lapply(names(tbl_fil), function(k)
+  dplyr::filter(tbl_fil[[k]], 
+    gene %in% names(which(frq10[, k]))))
+names(tbl_fil2) &lt;- names(tbl_fil)
+## remove clusters without genes after filtering
+tbl_fil2 &lt;- tbl_fil2[lapply(tbl_fil2, nrow) &gt; 0]
+
+# nb. of DS genes &amp; % of total by cluster
+n_de &lt;- vapply(tbl_fil2, nrow, numeric(1))
+p_de &lt;- format(n_de / nrow(sce_sub) * 100, digits = 3)
+data.frame(&quot;#DS&quot; = n_de, &quot;%DS&quot; = p_de, check.names = FALSE)</code></pre>
+<pre><code>   #DS     %DS
+0    1 0.00711
+1    2 0.01421
+5    6 0.04263
+7    7 0.04974
+8    4 0.02842
+10  60 0.42635
+11   3 0.02132
+12  71 0.50451
+13 247 1.75513
+14  28 0.19896</code></pre>
+<pre class="r"><code>top2 &lt;- bind_rows(lapply(tbl_fil2, slice_min, p_adj.loc, n = 3))
+format(top2[, -ncol(top2)], digits = 2)</code></pre>
+<pre><code>                      gene cluster_id logFC logCPM   F   p_val p_adj.loc p_adj.glb
+1    ENSG00000149591.TAGLN          0  0.94    7.2 111 2.7e-06   3.6e-02   5.0e-01
+2  ENSG00000197747.S100A10          1  0.84    6.4  82 1.0e-06   6.8e-03   1.8e-01
+3   ENSG00000189292.ALKAL2          1  0.90    5.7  88 6.8e-07   6.8e-03   1.2e-01
+4     ENSG00000171476.HOPX          5  1.00    6.2  61 1.1e-06   1.1e-02   2.0e-01
+5   ENSG00000008196.TFAP2B          5 -1.19    4.9  56 1.7e-06   1.1e-02   3.1e-01
+6  ENSG00000102290.PCDH11X          5 -0.87    5.2  53 2.5e-06   1.1e-02   4.6e-01
+7    ENSG00000134817.APLNR          7  1.25    5.1  63 3.7e-08   4.5e-04   6.7e-03
+8    ENSG00000187608.ISG15          7  1.05    5.9  45 6.0e-07   2.5e-03   1.1e-01
+9  ENSG00000119669.IRF2BPL          7 -0.70    6.1  31 9.3e-06   2.3e-02   1.0e+00
+10     ENSG00000133636.NTS          8 -1.68    3.9  67 2.3e-07   2.9e-03   4.1e-02
+11    ENSG00000160349.LCN1          8  0.87    4.8  41 6.3e-06   4.0e-02   1.0e+00
+12    ENSG00000178602.OTOS          8  1.35    3.9  37 1.1e-05   4.7e-02   1.0e+00
+13  ENSG00000164692.COL1A2         10  6.95    8.3 294 5.8e-08   7.0e-04   1.1e-02
+14 ENSG00000111799.COL12A1         10  2.67    5.6 189 3.7e-07   2.2e-03   6.7e-02
+15  ENSG00000065911.MTHFD2         10  2.38    5.4 131 1.7e-06   4.5e-03   3.0e-01
+16    ENSG00000153071.DAB2         10  2.75    4.6 127 1.8e-06   4.5e-03   3.4e-01
+17    ENSG00000160180.TFF3         10  2.91    8.1 140 1.3e-06   4.5e-03   2.3e-01
+18     ENSG00000157005.SST         11 -2.21    8.9 179 5.6e-09   7.0e-05   1.0e-03
+19   ENSG00000143333.RGS16         11 -0.96    5.9  46 1.3e-05   4.8e-02   1.0e+00
+20    ENSG00000196611.MMP1         11  2.10    3.8  45 1.5e-05   4.8e-02   1.0e+00
+21 ENSG00000197747.S100A10         12  5.53    6.6 278 1.2e-16   1.4e-12   2.2e-11
+22    ENSG00000254656.RTL1         12  1.70    6.4  81 5.2e-10   3.0e-06   9.5e-05
+23    ENSG00000049247.UTS2         12  1.46    6.8  75 1.3e-09   3.1e-06   2.4e-04
+24     ENSG00000163794.UCN         12  3.20    4.6  75 1.2e-09   3.1e-06   2.2e-04
+25   ENSG00000132329.RAMP1         12  2.43    5.6  75 1.3e-09   3.1e-06   2.4e-04
+26   ENSG00000106236.NPTX2         13  6.74    9.8 165 1.8e-09   1.0e-05   3.3e-04
+27    ENSG00000185559.DLK1         13 -2.92    8.2 168 1.6e-09   1.0e-05   2.9e-04
+28   ENSG00000156427.FGF18         13  6.47    8.5 127 1.1e-08   3.2e-05   2.0e-03
+29    ENSG00000108001.EBF3         13  5.66    7.2 126 1.1e-08   3.2e-05   2.1e-03
+30    ENSG00000183036.PCP4         14 -3.56    7.2 134 3.0e-11   1.5e-07   5.4e-06
+31    ENSG00000144485.HES6         14 -2.88    8.2  85 2.5e-09   6.4e-06   4.6e-04
+32    ENSG00000197921.HES5         14 -2.72    7.6  75 7.7e-09   1.3e-05   1.4e-03</code></pre>
+</div>
+</div>
+<div id="visualization-1" class="section level1">
+<h1>Visualization</h1>
+<div id="between-cluster-concordance-1" class="section level2">
+<h2>Between-cluster concordance</h2>
+<pre class="r"><code>de_gs_by_k &lt;- map(tbl_fil2, &quot;gene&quot;)
+upset(fromList(de_gs_by_k), nsets = length(de_gs_by_k), nintersects = 40)</code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/upset-all-1.png" width="1920" style="display: block; margin: auto;" /></p>
+</div>
+<div id="dr-colored-by-expression-1" class="section level2">
+<h2>DR colored by expression</h2>
+<pre class="r"><code># downsample to max. 100 cells per cluster
+cs_by_k &lt;- split(colnames(sce), sce$cluster_id)
+cs100 &lt;- unlist(sapply(cs_by_k, function(u) 
+  sample(u, min(length(u), 100))))
+
+## pull the top 2 genes of each cluster
+top &lt;-  bind_rows(tbl_fil2) %&gt;% group_by(cluster_id) %&gt;% 
+  dplyr::arrange(p_adj.loc) %&gt;% 
+  slice_min(order_by = p_adj.loc, n = 2) 
+print(top, n = nrow(top))</code></pre>
+<pre><code># A tibble: 20 x 9
+# Groups:   cluster_id [10]
+   gene                    cluster_id  logFC logCPM     F    p_val p_adj.loc p_adj.glb contrast     
+   &lt;chr&gt;                   &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;        
+ 1 ENSG00000149591.TAGLN   0           0.941   7.18 111.  2.73e- 6  3.58e- 2  5.00e- 1 group_idTDP_…
+ 2 ENSG00000197747.S100A10 1           0.840   6.43  82.0 1.01e- 6  6.76e- 3  1.85e- 1 group_idTDP_…
+ 3 ENSG00000189292.ALKAL2  1           0.904   5.68  88.4 6.79e- 7  6.76e- 3  1.24e- 1 group_idTDP_…
+ 4 ENSG00000164692.COL1A2  10          6.95    8.26 294.  5.78e- 8  7.02e- 4  1.06e- 2 group_idTDP_…
+ 5 ENSG00000111799.COL12A1 10          2.67    5.56 189.  3.67e- 7  2.23e- 3  6.72e- 2 group_idTDP_…
+ 6 ENSG00000157005.SST     11         -2.21    8.86 179.  5.59e- 9  6.99e- 5  1.02e- 3 group_idTDP_…
+ 7 ENSG00000143333.RGS16   11         -0.958   5.89  46.0 1.31e- 5  4.79e- 2  1.00e+ 0 group_idTDP_…
+ 8 ENSG00000196611.MMP1    11          2.10    3.84  44.6 1.53e- 5  4.79e- 2  1.00e+ 0 group_idTDP_…
+ 9 ENSG00000197747.S100A10 12          5.53    6.56 278.  1.20e-16  1.40e-12  2.19e-11 group_idTDP_…
+10 ENSG00000254656.RTL1    12          1.70    6.39  81.3 5.19e-10  3.03e- 6  9.49e- 5 group_idTDP_…
+11 ENSG00000106236.NPTX2   13          6.74    9.82 165.  1.81e- 9  1.02e- 5  3.31e- 4 group_idTDP_…
+12 ENSG00000185559.DLK1    13         -2.92    8.18 168.  1.57e- 9  1.02e- 5  2.87e- 4 group_idTDP_…
+13 ENSG00000183036.PCP4    14         -3.56    7.15 134.  2.97e-11  1.51e- 7  5.44e- 6 group_idTDP_…
+14 ENSG00000144485.HES6    14         -2.88    8.24  85.0 2.53e- 9  6.44e- 6  4.63e- 4 group_idTDP_…
+15 ENSG00000171476.HOPX    5           1.00    6.16  60.7 1.08e- 6  1.09e- 2  1.97e- 1 group_idTDP_…
+16 ENSG00000008196.TFAP2B  5          -1.19    4.86  56.5 1.67e- 6  1.09e- 2  3.05e- 1 group_idTDP_…
+17 ENSG00000134817.APLNR   7           1.25    5.13  62.7 3.68e- 8  4.54e- 4  6.74e- 3 group_idTDP_…
+18 ENSG00000187608.ISG15   7           1.05    5.87  45.0 6.05e- 7  2.48e- 3  1.11e- 1 group_idTDP_…
+19 ENSG00000133636.NTS     8          -1.68    3.89  67.3 2.26e- 7  2.92e- 3  4.13e- 2 group_idTDP_…
+20 ENSG00000160349.LCN1    8           0.874   4.84  40.7 6.27e- 6  4.05e- 2  1.00e+ 0 group_idTDP_…</code></pre>
+<pre class="r"><code>top &lt;- top %&gt;% pull(&quot;gene&quot;) %&gt;% unique
+
+# for ea. gene in &#39;top8&#39;, plot t-SNE colored by its expression 
+ps &lt;- lapply(top, function(g)
+  .plot_dr(sce[, cs100], &quot;UMAP&quot;, g) + 
+    ggtitle(if(length(str_split(g, &quot;\\.&quot;, simplify = TRUE)) ==2) 
+      str_split(g, &quot;\\.&quot;, simplify = TRUE)[,2] else g) + 
+    theme(legend.position = &quot;none&quot;))
+
+# arrange plots
+plot_grid(plotlist = ps, ncol = 3, align = &quot;vh&quot;)</code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/plot-top-genes-all-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cell-level-visualization-1" class="section level2 tabset">
+<h2>Cell-level visualization</h2>
+<p>Plot the top 6</p>
+<pre class="r"><code>for(i in names(tbl_fil2)) {
+   cat(&quot;### &quot;, i, &quot;\n&quot;)
+  p &lt;- plotExpression(sce[, sce$cluster_id == i],
+  features = tbl_fil2[[i]]$gene[if (length(tbl_fil2[[i]]$gene) &lt; 6) {
+    seq_len(length(tbl_fil2[[i]]$gene))}
+    else {seq_len(6)}],
+  x = &quot;sample_id&quot;, colour_by = &quot;group_id&quot;, ncol = 3) +
+  guides(fill = guide_legend(override.aes = list(size = 5, alpha = 1))) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  print(p)
+  cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="section-14" class="section level3">
+<h3>0</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-all-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-15" class="section level3">
+<h3>1</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-all-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-16" class="section level3">
+<h3>5</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-all-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-17" class="section level3">
+<h3>7</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-all-4.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-18" class="section level3">
+<h3>8</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-all-5.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-19" class="section level3">
+<h3>10</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-all-6.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-20" class="section level3">
+<h3>11</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-all-7.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-21" class="section level3">
+<h3>12</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-all-8.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-22" class="section level3">
+<h3>13</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-all-9.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section-23" class="section level3">
+<h3>14</h3>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/cell-level-plot-all-10.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="sample-level-visualization-1" class="section level2">
+<h2>Sample-level visualization</h2>
+<pre class="r"><code>pbHeatmap(sce, res2, k = c(&quot;5&quot;, &quot;7&quot;, &quot;10&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;), top_n = 5)</code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/sample-level-all-1.png" width="960" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># top-20 DS genes for cluster 13
+pbHeatmap(sce, res2, k = &quot;13&quot;)</code></pre>
+<p><img src="figure/TDP-08-01-HA-D96-expression-changes.Rmd/sample-level-all-2.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="save-results-to-rds" class="section level1">
+<h1>Save results to RDS</h1>
+<pre class="r"><code>saveRDS(res2, file.path(&quot;output&quot;, &quot;res_TDP-08-01-muscat.rds&quot;))
+saveRDS(sce, file.path(&quot;output&quot;, &quot;sce_TDP-08-01-muscat.rds&quot;))
+saveRDS(tbl_fil2, file.path(&quot;output&quot;, &quot;tbl_TDP-08-01-muscat.rds&quot;))</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1925,67 +3375,66 @@ attached base packages:
 [10] base     
 
 other attached packages:
- [1] scater_1.16.2               UpSetR_1.4.0                stringr_1.4.0              
- [4] edgeR_3.30.3                limma_3.44.3                viridis_0.5.1              
- [7] viridisLite_0.3.0           RColorBrewer_1.1-2          purrr_0.3.4                
-[10] muscat_1.2.1                ggplot2_3.3.2               cowplot_1.0.0              
-[13] ComplexHeatmap_2.4.2        scran_1.16.0                dplyr_1.0.2                
-[16] SingleCellExperiment_1.10.1 SummarizedExperiment_1.18.1 DelayedArray_0.14.0        
-[19] matrixStats_0.56.0          Biobase_2.48.0              GenomicRanges_1.40.0       
-[22] GenomeInfoDb_1.24.2         IRanges_2.22.2              S4Vectors_0.26.1           
-[25] BiocGenerics_0.34.0         Seurat_3.1.5                workflowr_1.6.2            
+ [1] BiocParallel_1.22.0         scater_1.16.2               UpSetR_1.4.0               
+ [4] stringr_1.4.0               edgeR_3.30.3                limma_3.44.3               
+ [7] viridis_0.5.1               viridisLite_0.3.0           RColorBrewer_1.1-2         
+[10] purrr_0.3.4                 muscat_1.2.1                ggplot2_3.3.2              
+[13] cowplot_1.0.0               ComplexHeatmap_2.4.2        scran_1.16.0               
+[16] dplyr_1.0.2                 SingleCellExperiment_1.10.1 SummarizedExperiment_1.18.1
+[19] DelayedArray_0.14.0         matrixStats_0.56.0          Biobase_2.48.0             
+[22] GenomicRanges_1.40.0        GenomeInfoDb_1.24.2         IRanges_2.22.2             
+[25] S4Vectors_0.26.1            BiocGenerics_0.34.0         Seurat_3.1.5               
+[28] workflowr_1.6.2            
 
 loaded via a namespace (and not attached):
   [1] utf8_1.1.4                reticulate_1.16           tidyselect_1.1.0         
   [4] lme4_1.1-23               RSQLite_2.2.0             AnnotationDbi_1.50.1     
-  [7] htmlwidgets_1.5.1         BiocParallel_1.22.0       Rtsne_0.15               
- [10] munsell_0.5.0             codetools_0.2-16          ica_1.0-2                
- [13] statmod_1.4.34            future_1.17.0             withr_2.2.0              
- [16] colorspace_1.4-1          knitr_1.29                ROCR_1.0-11              
- [19] listenv_0.8.0             labeling_0.3              git2r_0.27.1             
- [22] GenomeInfoDbData_1.2.3    farver_2.0.3              bit64_0.9-7              
- [25] glmmTMB_1.0.2.1           rprojroot_1.3-2           vctrs_0.3.4              
- [28] generics_0.0.2            xfun_0.15                 R6_2.4.1                 
- [31] doParallel_1.0.15         ggbeeswarm_0.6.0          clue_0.3-57              
- [34] rsvd_1.0.3                locfit_1.5-9.4            bitops_1.0-6             
- [37] assertthat_0.2.1          promises_1.1.1            scales_1.1.1             
- [40] beeswarm_0.2.3            gtable_0.3.0              globals_0.12.5           
- [43] rlang_0.4.7               genefilter_1.70.0         GlobalOptions_0.1.2      
- [46] splines_4.0.0             TMB_1.7.16                lazyeval_0.2.2           
- [49] yaml_2.2.1                reshape2_1.4.4            backports_1.1.9          
- [52] httpuv_1.5.4              tools_4.0.0               ellipsis_0.3.1           
- [55] gplots_3.0.4              ggridges_0.5.2            Rcpp_1.0.5               
- [58] plyr_1.8.6                progress_1.2.2            zlibbioc_1.34.0          
- [61] RCurl_1.98-1.2            prettyunits_1.1.1         pbapply_1.4-2            
- [64] GetoptLong_1.0.1          zoo_1.8-8                 ggrepel_0.8.2            
- [67] cluster_2.1.0             colorRamps_2.3            fs_1.4.2                 
- [70] variancePartition_1.18.2  magrittr_1.5              data.table_1.12.8        
- [73] lmerTest_3.1-2            circlize_0.4.10           lmtest_0.9-37            
- [76] RANN_2.6.1                whisker_0.4               fitdistrplus_1.1-1       
- [79] hms_0.5.3                 patchwork_1.0.1           evaluate_0.14            
- [82] xtable_1.8-4              pbkrtest_0.4-8.6          XML_3.99-0.4             
- [85] gridExtra_2.3             shape_1.4.4               compiler_4.0.0           
- [88] tibble_3.0.3              KernSmooth_2.23-17        crayon_1.3.4             
- [91] minqa_1.2.4               htmltools_0.5.0           later_1.1.0.1            
- [94] tidyr_1.1.0               geneplotter_1.66.0        DBI_1.1.0                
- [97] MASS_7.3-51.6             rappdirs_0.3.1            boot_1.3-25              
-[100] Matrix_1.2-18             cli_2.0.2                 gdata_2.18.0             
-[103] igraph_1.2.5              pkgconfig_2.0.3           numDeriv_2016.8-1.1      
-[106] plotly_4.9.2.1            foreach_1.5.0             annotate_1.66.0          
-[109] vipor_0.4.5               dqrng_0.2.1               blme_1.0-4               
-[112] XVector_0.28.0            digest_0.6.25             sctransform_0.2.1        
-[115] RcppAnnoy_0.0.16          tsne_0.1-3                rmarkdown_2.3            
-[118] leiden_0.3.3              uwot_0.1.8                DelayedMatrixStats_1.10.1
-[121] gtools_3.8.2              rjson_0.2.20              nloptr_1.2.2.2           
-[124] lifecycle_0.2.0           nlme_3.1-148              jsonlite_1.7.0           
-[127] BiocNeighbors_1.6.0       fansi_0.4.1               pillar_1.4.6             
-[130] lattice_0.20-41           httr_1.4.1                survival_3.2-3           
-[133] glue_1.4.2                png_0.1-7                 iterators_1.0.12         
-[136] bit_1.1-15.2              stringi_1.4.6             blob_1.2.1               
-[139] DESeq2_1.28.1             BiocSingular_1.4.0        caTools_1.18.0           
-[142] memoise_1.1.0             irlba_2.3.3               future.apply_1.6.0       
-[145] ape_5.4                  </code></pre>
-</div>
+  [7] htmlwidgets_1.5.1         Rtsne_0.15                munsell_0.5.0            
+ [10] codetools_0.2-16          ica_1.0-2                 statmod_1.4.34           
+ [13] future_1.17.0             withr_2.2.0               colorspace_1.4-1         
+ [16] knitr_1.29                ROCR_1.0-11               listenv_0.8.0            
+ [19] labeling_0.3              git2r_0.27.1              GenomeInfoDbData_1.2.3   
+ [22] farver_2.0.3              bit64_0.9-7               glmmTMB_1.0.2.1          
+ [25] rprojroot_1.3-2           vctrs_0.3.4               generics_0.0.2           
+ [28] xfun_0.15                 R6_2.4.1                  doParallel_1.0.15        
+ [31] ggbeeswarm_0.6.0          clue_0.3-57               rsvd_1.0.3               
+ [34] locfit_1.5-9.4            bitops_1.0-6              assertthat_0.2.1         
+ [37] promises_1.1.1            scales_1.1.1              beeswarm_0.2.3           
+ [40] gtable_0.3.0              globals_0.12.5            rlang_0.4.7              
+ [43] genefilter_1.70.0         GlobalOptions_0.1.2       splines_4.0.0            
+ [46] TMB_1.7.16                lazyeval_0.2.2            yaml_2.2.1               
+ [49] reshape2_1.4.4            backports_1.1.9           httpuv_1.5.4             
+ [52] tools_4.0.0               ellipsis_0.3.1            gplots_3.0.4             
+ [55] ggridges_0.5.2            Rcpp_1.0.5                plyr_1.8.6               
+ [58] progress_1.2.2            zlibbioc_1.34.0           RCurl_1.98-1.2           
+ [61] prettyunits_1.1.1         pbapply_1.4-2             GetoptLong_1.0.1         
+ [64] zoo_1.8-8                 ggrepel_0.8.2             cluster_2.1.0            
+ [67] colorRamps_2.3            fs_1.4.2                  variancePartition_1.18.2 
+ [70] magrittr_1.5              data.table_1.12.8         lmerTest_3.1-2           
+ [73] circlize_0.4.10           lmtest_0.9-37             RANN_2.6.1               
+ [76] whisker_0.4               fitdistrplus_1.1-1        hms_0.5.3                
+ [79] patchwork_1.0.1           evaluate_0.14             xtable_1.8-4             
+ [82] pbkrtest_0.4-8.6          XML_3.99-0.4              gridExtra_2.3            
+ [85] shape_1.4.4               compiler_4.0.0            tibble_3.0.3             
+ [88] KernSmooth_2.23-17        crayon_1.3.4              minqa_1.2.4              
+ [91] htmltools_0.5.0           later_1.1.0.1             tidyr_1.1.0              
+ [94] geneplotter_1.66.0        DBI_1.1.0                 MASS_7.3-51.6            
+ [97] rappdirs_0.3.1            boot_1.3-25               Matrix_1.2-18            
+[100] cli_2.0.2                 gdata_2.18.0              igraph_1.2.5             
+[103] pkgconfig_2.0.3           numDeriv_2016.8-1.1       plotly_4.9.2.1           
+[106] foreach_1.5.0             annotate_1.66.0           vipor_0.4.5              
+[109] dqrng_0.2.1               blme_1.0-4                XVector_0.28.0           
+[112] digest_0.6.25             sctransform_0.2.1         RcppAnnoy_0.0.16         
+[115] tsne_0.1-3                rmarkdown_2.3             leiden_0.3.3             
+[118] uwot_0.1.8                DelayedMatrixStats_1.10.1 gtools_3.8.2             
+[121] rjson_0.2.20              nloptr_1.2.2.2            lifecycle_0.2.0          
+[124] nlme_3.1-148              jsonlite_1.7.0            BiocNeighbors_1.6.0      
+[127] fansi_0.4.1               pillar_1.4.6              lattice_0.20-41          
+[130] httr_1.4.1                survival_3.2-3            glue_1.4.2               
+[133] png_0.1-7                 iterators_1.0.12          bit_1.1-15.2             
+[136] stringi_1.4.6             blob_1.2.1                DESeq2_1.28.1            
+[139] BiocSingular_1.4.0        caTools_1.18.0            memoise_1.1.0            
+[142] irlba_2.3.3               future.apply_1.6.0        ape_5.4                  </code></pre>
 </div>
 </div>
 
