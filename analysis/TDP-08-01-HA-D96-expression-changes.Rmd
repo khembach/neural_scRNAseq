@@ -32,6 +32,7 @@ library(edgeR)
 library(stringr)
 library(UpSetR)
 library(scater)
+library(BiocParallel)
 ```
 
 # Load data & convert to SCE
@@ -280,8 +281,6 @@ pbMDS_mod(pb, 1, 4) + guides(col = guide_legend(nrow = 10)) +
 
 ```{r ds-pseudobulk}
 # run DS analysis
-# res <- pbDS(pb, verbose = FALSE)
-
 # construct design & contrast matrix
 ei <- metadata(sce_sub)$experiment_info
 mm <- model.matrix(~ 0 + ei$group_id)
@@ -404,7 +403,7 @@ Plot the top 6
 ```{r cell-level-plot,results = "asis"}
 for(i in names(tbl_fil2)) {
    cat("### ", i, "\n")
-  p <- plotExpression(sce_sub[, sce_sub$cluster_id == i],
+  p <- plotExpression(sce[, sce$cluster_id == i],
   features = tbl_fil2[[i]]$gene[seq_len(6)],
   x = "sample_id", colour_by = "group_id", ncol = 3) +
   guides(fill = guide_legend(override.aes = list(size = 5, alpha = 1))) +
@@ -419,5 +418,294 @@ for(i in names(tbl_fil2)) {
 
 ```{r sample-level, fig.width = 10, fig.height = 14}
 pbHeatmap(sce_sub, res, top_n = 5)
+```
+
+
+# Include the 4wOFF but not the 2wON sample
+We include the 4wOFF sample and correct for batch effects.
+
+## Pseudobulk differential state analysis
+
+```{r subsetting2}
+sce_sub <- sce[, sce$group_id %in% c("D96", "OFF4w", "ON4w")]
+sce_sub$sample_id <- droplevels(sce_sub$sample_id)
+sce_sub$id <- sce_sub$sample_id
+levels(sce_sub$id) <- c("no_TDP_HA", "no_TDP_HA", "no_TDP_HA", "TDP_HA", "TDP_HA")
+
+(sce_sub <- prepSCE(sce_sub, 
+    kid = "cluster_id", # subpopulation assignments
+    gid = "id",  # group IDs (ctrl/stim)
+    sid = "sample_id",   # sample IDs (ctrl/stim.1234)
+    drop = FALSE))  # drop all other colData columns
+
+nk <- length(kids <- levels(sce_sub$cluster_id))
+ns <- length(sids <- levels(sce_sub$sample_id))
+names(kids) <- kids; names(sids) <- sids
+
+# nb. of cells per cluster-sample
+t(table(sce_sub$cluster_id, sce_sub$sample_id))
+```
+
+
+```{r ds-pseudobulk-2}
+metadata(sce_sub)$experiment_info$batch <- factor(c("TDP_exp", "TDP_exp", "TDP_exp", "WT", "WT" ))
+
+## get pseudocounts
+pb <- aggregateData(sce_sub, assay = "counts", by = c("cluster_id", "sample_id"), 
+                    fun = "sum")
+# tabulate number of cells
+cd <- data.frame(colData(sce_sub)[, "cluster_id"])
+for (i in names(cd))
+    if (is.factor(cd[[i]]))
+        cd[[i]] <- droplevels(cd[[i]])
+ns <- table(cd)
+ns <- c(unclass(ns))
+metadata(pb)$n_cells <- ns
+    
+# construct design & contrast matrix
+ei <- metadata(sce_sub)$experiment_info
+mm <- model.matrix(~ batch + group_id, data = ei)
+rownames(mm) <- ei$sample_id
+mm
+## edgeR automatically test the last colum if we don't specify a contrast, 
+## i.e. TDP-HA vs. no TDP-HA
+```
+
+```{r helper-function}
+.n_cells_mod <- function(x) {
+    y <- metadata(x)$n_cells
+    if (is.null(y)) return(NULL)
+    if (length(metadata(x)$agg_pars$by) == 2)
+        y <- as.matrix(data.frame(y, check.names = FALSE))
+    return(as.table(y))
+}
+```
+
+```{r pbDS-function}
+# this is the pbDS code, fixed so it runs for our data
+method <- "edgeR"
+filter <- "both"
+min_cells <- 10
+treat <- FALSE
+# muscat:::.check_pbs(pb, check_by = TRUE)
+BPPARAM <- SerialParam(progressbar = TRUE)
+design <- mm
+coef <- NULL
+contrast <- NULL
+
+if (is.null(design)) {
+    formula <- ~ group_id
+    cd <- as.data.frame(colData(pb))
+    design <- model.matrix(formula, cd)
+    colnames(design) <- levels(pb$group_id)
+    # args$design <- design
+}
+if (is.null(coef) & is.null(contrast)) {
+    c <- colnames(design)[ncol(design)]
+    contrast <- makeContrasts(contrasts = c, levels = design)
+    # args$contrast <- contrast
+}
+
+# ct: type of comparison - "contrast" or "coef"
+# cs: named list of 'coef's or 'contrast's
+if (!is.null(contrast)) {
+    coef <- NULL
+    names(cs) <- cs <- colnames(contrast)
+} else if (!is.null(coef)) {
+    if (!is.list(coef)) 
+        coef <- list(coef)
+    cs <- vapply(coef, function(i)
+        paste(colnames(design)[i], collapse = "-"),
+        character(1))
+    names(cs) <- names(coef) <- cs
+}
+ct <- ifelse(is.null(coef), "contrast", "coef")
+
+if (!is.function(method)) {
+    fun <- switch(method,
+        "DESeq2" = muscat:::.DESeq2,
+        "edgeR" = muscat:::.edgeR, 
+        "limma-trend" = muscat:::.limma_trend, 
+        "limma-voom" = muscat:::.limma_voom)
+} else {
+    fun_call <- 1
+}
+fun_args <- names(as.list(args(fun)))
+fun_args <- fun_args[-length(fun_args)]
+
+# for ea. cluster, run DEA
+n_cells <- .n_cells_mod(pb)
+names(kids) <- kids <- assayNames(pb)
+res <- bplapply(
+    BPPARAM = BPPARAM, 
+    kids, function (k) {
+    rmv <- n_cells[k, ] < min_cells
+    d <- design[colnames(y <- pb[ , !rmv]), , drop = FALSE]
+    if (filter %in% c("samples", "both")) {
+        ls <- colSums(assay(y, k))
+        ol <- isOutlier(ls, log = TRUE, type = "lower", nmads = 3)
+        d <- d[colnames(y <- y[, !ol]), , drop = FALSE]
+    }
+    if (any(tabulate(y$group_id) < 2) 
+        || qr(d)$rank == nrow(d) 
+        || qr(d)$rank < ncol(d)) 
+        return(NULL)
+    y <- y[rowSums(assay(y, k)) != 0, ]
+    if (filter %in% c("genes", "both") & max(assay(y, k)) > 100) 
+        y <- y[filterByExpr(assay(y, k), d), ]
+    args <- list(x = y, k = k, design = d, coef = coef, 
+        contrast = contrast, ct = ct, cs = cs, treat = treat)
+    args <- args[intersect(names(args), fun_args)]
+    suppressWarnings(do.call(fun, args))
+})
+
+# remove empty clusters
+rmv <- vapply(res, is.null, logical(1))
+res <- res[!rmv]
+kids <- kids[names(res)]
+
+# reorganize & do global p-value adjustment
+names(i) <- i <- c("table", "data", "fit")
+res <- lapply(i, map, .x = res)
+res$table <- muscat:::.p_adj_global(res$table)
+# return(c(res, list(args = args)))
+res2 <- c(res, list(args = args))
+
+# access results table for 1st comparison
+tbl <- res2$table[[1]]
+# one data.frame per cluster
+names(tbl)
+# view results for 1st cluster
+k1 <- tbl[[1]]
+head(format(k1[, -ncol(k1)], digits = 2))
+```
+
+
+## Results filtering
+
+```{r filter-results-all}
+# filter FDR < 5%, abs(logFC) > 1 & sort by adj. p-value
+tbl_fil <- lapply(tbl, function(u) {
+  u <- dplyr::filter(u, p_adj.loc < 0.05, abs(logFC) > 0.5)
+  dplyr::arrange(u, p_adj.loc)
+})
+## remove clusters without genes after filtering
+tbl_fil <- tbl_fil[lapply(tbl_fil, nrow) > 0]
+
+# nb. of DS genes & % of total by cluster
+n_de <- vapply(tbl_fil, nrow, numeric(1))
+p_de <- format(n_de / nrow(sce) * 100, digits = 3)
+data.frame("#DS" = n_de, "%DS" = p_de, check.names = FALSE)
+
+# view top 3 hits in each cluster
+top2 <- bind_rows(lapply(tbl_fil, slice_min, p_adj.loc, n = 3))
+# top2$gene <- str_split(top2$gene, pattern = "\\.", simplify = TRUE)[,2]
+# increase line width for printing of the full table
+options(width = 100)
+format(top2[, -ncol(top2)], digits = 2)
+```
+
+
+## Calculating expression frequency
+We filter out genes that are not expressed in at least 10% of cells of one group.
+```{r expression-freq-all}
+frq <- calcExprFreqs(sce_sub, assay = "counts", th = 0)
+# one sheet per cluster
+assayNames(frq)
+# expression frequencies in each
+# sample & group; 1st cluster
+t(head(assay(frq), 5))
+
+# We can use the obtained frequencies to, for instance, only retain genes that 
+# are expressed in an average of 10% of cells in at least 1 group:
+gids <- levels(sce_sub$group_id)
+frq10 <- vapply(as.list(assays(frq)), 
+  function(u) apply(u[, gids] > 0.1, 1, any), 
+  logical(nrow(sce_sub)))
+t(head(frq10))
+
+tbl_fil2 <- lapply(names(tbl_fil), function(k)
+  dplyr::filter(tbl_fil[[k]], 
+    gene %in% names(which(frq10[, k]))))
+names(tbl_fil2) <- names(tbl_fil)
+## remove clusters without genes after filtering
+tbl_fil2 <- tbl_fil2[lapply(tbl_fil2, nrow) > 0]
+
+# nb. of DS genes & % of total by cluster
+n_de <- vapply(tbl_fil2, nrow, numeric(1))
+p_de <- format(n_de / nrow(sce_sub) * 100, digits = 3)
+data.frame("#DS" = n_de, "%DS" = p_de, check.names = FALSE)
+
+top2 <- bind_rows(lapply(tbl_fil2, slice_min, p_adj.loc, n = 3))
+format(top2[, -ncol(top2)], digits = 2)
+```
+
+
+# Visualization
+
+## Between-cluster concordance
+
+```{r upset-all, fig.width=20, fig.height = 10}
+de_gs_by_k <- map(tbl_fil2, "gene")
+upset(fromList(de_gs_by_k), nsets = length(de_gs_by_k), nintersects = 40)
+```
+
+## DR colored by expression
+```{r plot-top-genes-all, fig.width = 12, fig.height = 12}
+# downsample to max. 100 cells per cluster
+cs_by_k <- split(colnames(sce), sce$cluster_id)
+cs100 <- unlist(sapply(cs_by_k, function(u) 
+  sample(u, min(length(u), 100))))
+
+## pull the top 2 genes of each cluster
+top <-  bind_rows(tbl_fil2) %>% group_by(cluster_id) %>% 
+  dplyr::arrange(p_adj.loc) %>% 
+  slice_min(order_by = p_adj.loc, n = 2) 
+print(top, n = nrow(top))
+top <- top %>% pull("gene") %>% unique
+
+# for ea. gene in 'top8', plot t-SNE colored by its expression 
+ps <- lapply(top, function(g)
+  .plot_dr(sce[, cs100], "UMAP", g) + 
+    ggtitle(if(length(str_split(g, "\\.", simplify = TRUE)) ==2) 
+      str_split(g, "\\.", simplify = TRUE)[,2] else g) + 
+    theme(legend.position = "none"))
+
+# arrange plots
+plot_grid(plotlist = ps, ncol = 3, align = "vh")
+```
+
+## Cell-level visualization {.tabset}
+Plot the top 6 
+```{r cell-level-plot-all, results = "asis"}
+for(i in names(tbl_fil2)) {
+   cat("### ", i, "\n")
+  p <- plotExpression(sce[, sce$cluster_id == i],
+  features = tbl_fil2[[i]]$gene[if (length(tbl_fil2[[i]]$gene) < 6) {
+    seq_len(length(tbl_fil2[[i]]$gene))}
+    else {seq_len(6)}],
+  x = "sample_id", colour_by = "group_id", ncol = 3) +
+  guides(fill = guide_legend(override.aes = list(size = 5, alpha = 1))) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  print(p)
+  cat("\n\n")
+}
+```
+
+
+## Sample-level visualization
+
+```{r sample-level-all, fig.width = 10, fig.height = 14}
+pbHeatmap(sce, res2, k = c("5", "7", "10", "12", "13", "14"), top_n = 5)
+# top-20 DS genes for cluster 13
+pbHeatmap(sce, res2, k = "13")
+```
+
+# Save results to RDS
+
+```{r save-rds}
+saveRDS(res2, file.path("output", "res_TDP-08-01-muscat.rds"))
+saveRDS(sce, file.path("output", "sce_TDP-08-01-muscat.rds"))
+saveRDS(tbl_fil2, file.path("output", "tbl_TDP-08-01-muscat.rds"))
 ```
 
