@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Katharina Hembach" />
 
 
-<title>Home</title>
+<title>Analysis TDP-43 target among DE genes</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -258,6 +262,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -265,6 +332,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -308,7 +385,9 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Home</h1>
+<h1 class="title toc-ignore">Analysis TDP-43 target among DE genes</h1>
+<h4 class="author">Katharina Hembach</h4>
+<h4 class="date">3/31/2021</h4>
 
 </div>
 
@@ -336,7 +415,7 @@ $(document).ready(function () {
 <strong>Last updated:</strong> 2021-03-31
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -358,6 +437,66 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
 <p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it's best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200522code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200522)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200522code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200522)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
@@ -460,7 +599,6 @@ Ignored files:
     Ignored:    analysis/TDP-07-cluster_12_cache/
     Ignored:    analysis/TDP-08-00-clustering-HA-D96_cache/
     Ignored:    analysis/TDP-08-01-HA-D96-expression-changes_cache/
-    Ignored:    analysis/TDP-08-02-TDP_target_genes_cache/
     Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
@@ -680,7 +818,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in th
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML (<code>docs/index.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/TDP-08-02-TDP_target_genes.Rmd</code>) and HTML (<code>docs/TDP-08-02-TDP_target_genes.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -709,7 +847,7 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/cd4dc12e95367cbce22f12969a3dc971c6c13b03/analysis/index.Rmd" target="_blank">cd4dc12</a>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/cd4dc12e95367cbce22f12969a3dc971c6c13b03/analysis/TDP-08-02-TDP_target_genes.Rmd" target="_blank">cd4dc12</a>
 </td>
 <td>
 khembach
@@ -721,1145 +859,6 @@ khembach
 compare DE genes to HEK cell TDP CLIP-seq targets
 </td>
 </tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/d888b55038b2313882c118e8b22c286f40234362/docs/index.html" target="_blank">d888b55</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2021-03-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/6c73bee0b8b31e36b3fef71ef2b623246bad5c4e/analysis/index.Rmd" target="_blank">6c73bee</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2021-03-18
-</td>
-<td>
-highlight individual sample clustering in UMAP and heatmap
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/5356edd1be7f07c5d3097ef29fac35c1d6a432fb/docs/index.html" target="_blank">5356edd</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2021-02-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/71f5f31c7889a0d6cf4c2934cdb2b1d3b5a60b25/analysis/index.Rmd" target="_blank">71f5f31</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2021-02-26
-</td>
-<td>
-update index.Rmd
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/3c440f582ec3959d70fdb0d95b19c701e98711a8/docs/index.html" target="_blank">3c440f5</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2021-02-25
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/a7c4a5b9fc772bcb6014673ab5ad289bd80202a3/docs/index.html" target="_blank">a7c4a5b</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2021-02-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/1755a273dea1064cbda0362daca89c86cf476e36/analysis/index.Rmd" target="_blank">1755a27</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2021-02-18
-</td>
-<td>
-plot stathmin2 read coverage of cells from cluster 12
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/d20fa7718e225863f1e0e533ef74fcf68b250ea3/docs/index.html" target="_blank">d20fa77</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2021-01-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/e6766a6f86054ca3cf1d2697e6bc3fceb3d9a57c/analysis/index.Rmd" target="_blank">e6766a6</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2021-01-28
-</td>
-<td>
-cluster TDP experiment together with D96 samples
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/299088e2e3c62e33fe5af50c16936b83224ead27/docs/index.html" target="_blank">299088e</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2021-01-21
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/417e7b2e0a934298aad9ae8fd20ba437eabbe506/analysis/index.Rmd" target="_blank">417e7b2</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2021-01-21
-</td>
-<td>
-cluster TDP-HA samples together with timeline samples
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/390fedee342dc10cd322203fefb3612cc22c2ed6/docs/index.html" target="_blank">390fede</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-11-19
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/21d8e8c0fbdde729444ade624e91d09097911c36/analysis/index.Rmd" target="_blank">21d8e8c</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-11-19
-</td>
-<td>
-find markers for cluster 12
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/0d1ba85064bdf03448f69aacd3eda1265cfc63bf/docs/index.html" target="_blank">0d1ba85</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-11-10
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/68d329db6494067d9ec4a873fdf38ebdb1191e18/analysis/index.Rmd" target="_blank">68d329d</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-11-10
-</td>
-<td>
-analyse clusters of all timepoints
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/313dba727783ef82f94f4e786b682880487e8547/docs/index.html" target="_blank">313dba7</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/fabdbdaca1890bf511934a321f6e73641f9a62e5/analysis/index.Rmd" target="_blank">fabdbda</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-29
-</td>
-<td>
-integrate all time points with the organoid data
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/3a0cb5ca900ae25ecd1fb6417f925d81513f4381/docs/index.html" target="_blank">3a0cb5c</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/a528e83a7f52782f0a5a6aa9bccd103efc4df1f7/analysis/index.Rmd" target="_blank">a528e83</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-16
-</td>
-<td>
-cluster analysis TDP experiment
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/80e0ebe1dd10b427cd5a7c8052f53dfc8cfbe7d9/docs/index.html" target="_blank">80e0ebe</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-15
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/6d7e3c30fbc1dc0792cc59a27c3ad47900745537/analysis/index.Rmd" target="_blank">6d7e3c3</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-15
-</td>
-<td>
-TDP-43-HA expression in filtered cells
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/3c1f2aaacd8856bcde7b777e8a97e7e3224dd4f0/docs/index.html" target="_blank">3c1f2aa</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-15
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/e6e671087695fd00922d98528ff5a300c66eb448/analysis/index.Rmd" target="_blank">e6e6710</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-15
-</td>
-<td>
-cluster old samples with D223 sample (no integration)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/4cda3026778c89b1d27a16204998ba1c141413d8/docs/index.html" target="_blank">4cda302</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-14
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/10a776297db206bccea379a6a94a6b13fafbad1b/analysis/index.Rmd" target="_blank">10a7762</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-14
-</td>
-<td>
-include alevin quants for plasmid
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/4260970c5a888474e7226aeae585e50207c9f271/docs/index.html" target="_blank">4260970</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-12
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/55cc8fa7fc96e93cfcb4f776ac542b71f6d33596/analysis/index.Rmd" target="_blank">55cc8fa</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-12
-</td>
-<td>
-clustering without integration
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/5a50966b6a494a660c2401240f8f6ae5ca28676f/docs/index.html" target="_blank">5a50966</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/e5acfd97b84338c7e756e8bb659a44343b6383b4/analysis/index.Rmd" target="_blank">e5acfd9</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-07
-</td>
-<td>
-Cell filtering of TDP experiment
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/5a9448e7b3de4f117ee328d6c85fe589255a488c/docs/index.html" target="_blank">5a9448e</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/6b396987d4aaead02f00b57a7bd9ff0546007cdb/analysis/index.Rmd" target="_blank">6b39698</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-07
-</td>
-<td>
-quality control of TDP experiment
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/e6cb7c642def4422c31bc7e15a0ebedcdf3b1cda/docs/index.html" target="_blank">e6cb7c6</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/d4257298634791ccae8e144c1cb4184feb1004b0/analysis/index.Rmd" target="_blank">d425729</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-10-07
-</td>
-<td>
-preprocessing of new sequencing data
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/ff520aefa753dff305aab2255f2cfae85084232f/docs/index.html" target="_blank">ff520ae</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-20
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/f91df7bcab4cf89c5ed6dc14c87cccf175555083/analysis/index.Rmd" target="_blank">f91df7b</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-20
-</td>
-<td>
-cluster abundances of cell line and stage integration
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/efe6216759cb454049b69695d92de2d39ba28fe5/docs/index.html" target="_blank">efe6216</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-18
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/d1615eb6c0884c39c3704c88daf468074ec5a74b/analysis/index.Rmd" target="_blank">d1615eb</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-18
-</td>
-<td>
-integrate by cell line and stage
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/031fd4c05732f789c5dc8242d452161e1002d90c/docs/index.html" target="_blank">031fd4c</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/ec8eba65035fe2c56da727e15c960a43465f1359/analysis/index.Rmd" target="_blank">ec8eba6</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-16
-</td>
-<td>
-conos analysis with cell line integration
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/29d2b15cbb8a119d31f909c15cceb8602a215e1c/docs/index.html" target="_blank">29d2b15</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-11
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/dfbc9a87ba59b4e78b204b68536124a24f19bcb7/analysis/index.Rmd" target="_blank">dfbc9a8</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-11
-</td>
-<td>
-Conos analysis with different parameters and label propagation
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/600041014d85335fed74f39881de26b750a0a686/docs/index.html" target="_blank">6000410</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-09
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/88fccd1505e44a2d5fd5e16060bd50f1b3411f37/analysis/index.Rmd" target="_blank">88fccd1</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-09
-</td>
-<td>
-Prepare sce object for conos
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/947869a6d22b6f51ad90879c94508f10c9f1651e/docs/index.html" target="_blank">947869a</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/b93b07d596d4aff9a076829c30512766cdf87455/docs/index.html" target="_blank">b93b07d</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-02
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/043115f530696831ee46d91395e39ef00c26bd56/analysis/index.Rmd" target="_blank">043115f</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-09-02
-</td>
-<td>
-group organoid integration cluster abundances
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/b9603562404d94cfff7d0166693f6e0c36d6dcfa/docs/index.html" target="_blank">b960356</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-08-15
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/6405fad19256342fc9850e45caddfecfe3fc970b/docs/index.html" target="_blank">6405fad</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-08-14
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/638915fa4f8e11001cf1f113dfd8534778aa8561/analysis/index.Rmd" target="_blank">638915f</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-08-14
-</td>
-<td>
-organoid clustering
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/a1ebb78b453525afd0dfe7d1a4ef2bc273e3cc56/docs/index.html" target="_blank">a1ebb78</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-07-08
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/d8bd3397b3cf440d3c7ec628b677f7858c001011/analysis/index.Rmd" target="_blank">d8bd339</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-07-08
-</td>
-<td>
-NSC integration with NES from Lam et al.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/0afd60fadaa6239c9911a02709624f7fd1e96f25/docs/index.html" target="_blank">0afd60f</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-07-02
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/6d0742b9e3e10aed885ebd9b344e08b1c9c70671/analysis/index.Rmd" target="_blank">6d0742b</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-07-02
-</td>
-<td>
-wflow_publish(c(&quot;analysis/NSC-1-clustering.Rmd&quot;, &quot;analysis/NSC-2-annotation.Rmd&quot;,
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/06330b1011cec1a8d34ea6066f9daf64239bef92/docs/index.html" target="_blank">06330b1</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-06-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/f349423edbc451916f37bad9b1fb160941f65399/analysis/index.Rmd" target="_blank">f349423</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-06-21
-</td>
-<td>
-regress out number of UMIs and perc mitochondrial features; cyclone
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/a4d0e04302b05ad6152378accb91e9c994394e42/docs/index.html" target="_blank">a4d0e04</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/97d5a52e05366f9053223a3c456d563d00891f5a/analysis/index.Rmd" target="_blank">97d5a52</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-29
-</td>
-<td>
-cluster analysis
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/a94efaa06c73e3bbbade733cc7a4f81c1e5f8f8f/docs/index.html" target="_blank">a94efaa</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-29
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/7f5c1f8969a92432bc9ea0065cd5d31bbccd3137/analysis/index.Rmd" target="_blank">7f5c1f8</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-29
-</td>
-<td>
-dimension reduction and clustering
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/6d822af9ff45e71aaae0b22865306f8d3e6b49ee/docs/index.html" target="_blank">6d822af</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-28
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/a7ced5960ae11be3e8967081abc689d3b9b21849/analysis/index.Rmd" target="_blank">a7ced59</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-28
-</td>
-<td>
-cell and gene filtering
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/1230f084e4ff4a62804f1043579a1e5872955e48/docs/index.html" target="_blank">1230f08</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-27
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/6be1a5aafda94cebab5b9d59dcf579d4011e825f/analysis/index.Rmd" target="_blank">6be1a5a</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-27
-</td>
-<td>
-rebuild without cache and SampleQC report
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/bb957e863e5efb7c321d4119303797396e632128/docs/index.html" target="_blank">bb957e8</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-26
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/4acc3c469ecb3c8952594c53fac61694178eaefd/analysis/index.Rmd" target="_blank">4acc3c4</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-26
-</td>
-<td>
-Link to preprocessing and QC
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/16fe492900d72fea08e421f85a4c2ccd3236fbe6/docs/index.html" target="_blank">16fe492</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-22
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/khembach/neural_scRNAseq/blob/e4c9cd13410f593acca709a278cf6feb318e33a4/analysis/index.Rmd" target="_blank">e4c9cd1</a>
-</td>
-<td>
-khembach
-</td>
-<td>
-2020-05-22
-</td>
-<td>
-Start workflowr project.
-</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -1867,93 +866,276 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<p>This analysis includes following steps:</p>
-<ul>
-<li><a href="01-preprocessing.html">Preprocessing</a></li>
-<li><a href="02-quality_control.html">Quality control</a>
-<ul>
-<li><a href="02.1-SampleQC.html">SampleQC</a></li>
-</ul></li>
-<li><a href="03-filtering.html">Filtering</a></li>
-</ul>
-<p>Analysis of the two NSC samples:</p>
-<ul>
-<li><a href="NSC-1-clustering.html">NSC clustering</a></li>
-<li><a href="NSC-2-annotation.html">NSC annotation</a></li>
-</ul>
-<p>Integrated analysis of all 6 samples:</p>
-<ul>
-<li><a href="04-clustering.html">Clustering</a>
-<ul>
-<li><a href="04.1-cell_cycle.html">Cell cycle</a></li>
-</ul></li>
-<li><a href="05-annotation.html">Annotation</a></li>
-</ul>
-<p>Integration with Lam et al. 2019. Neuroepithelial stem (NES) cells:</p>
-<ul>
-<li><a href="Lam-01-NSC_integration.html">Integration</a></li>
-<li><a href="Lam-02-NSC_annotation.html">Cluster comparison</a></li>
-</ul>
-<p>Integration with Kanton et al. 2019. Cerebral organoids:</p>
-<ul>
-<li><a href="organoid-01-clustering.html">Clustering</a></li>
-<li><a href="organoid-02-integration.html">DR without integration</a>
-<ul>
-<li><a href="organoid-03-cluster_analysis.html">Cluster abundances</a></li>
-</ul></li>
-<li><a href="organoid-04-group_integration.html">Group integration</a>
-<ul>
-<li><a href="organoid-05-group_integration_cluster_analysis.html">Cluster abundances</a></li>
-</ul></li>
-<li><a href="organoid-04-stage_integration.html">Stage integration</a>
-<ul>
-<li><a href="organoid-05-stage_integration_cluster_analysis.html">Cluster abundances</a></li>
-</ul></li>
-</ul>
-<p>Integration with Conos:</p>
-<ul>
-<li><a href="organoid-06-1-prepare-sce.html">Preprocessing of sce object</a></li>
-<li><a href="organoid-06-conos-analysis.html">Conos integration</a></li>
-<li><a href="organoid-06-group-integration-conos-analysis.html">Conos group integration</a></li>
-</ul>
-<p>We additionally sequenced neural cultures at 223 days and performed a TDP-43 overexpression experiment (at 96 days):</p>
-<ul>
-<li><a href="TDP-01-preprocessing.html">Preprocessing</a></li>
-<li><a href="TDP-02-quality_control.html">Quality control</a></li>
-<li><a href="TDP-03-filtering.html">Filtering</a></li>
-<li><a href="TDP-04-clustering.html">Clustering (no integration)</a></li>
-</ul>
-<p>We quantified the transcript encoded by the plasmid and the endogenous TDP-43 with alevin and include the counts in the analysis.</p>
-<ul>
-<li><a href="TDP-05-00-filtering-plasmid-QC.html">Filtering and TDP-43 HA expression</a></li>
-<li><a href="TDP-05-plasmid_expression.html">Clustering (no integration)</a></li>
-<li><a href="TDP-06-cluster_analysis.html">Cluster analysis</a>
-<ul>
-<li><a href="TDP-07-cluster_12.html">Analysis of cluster 12 (TDP-HA positive)</a></li>
-<li><a href="TDP-07-01-STMN2_expression.html">STMN2 read coverage in cluster 12</a></li>
-</ul></li>
-</ul>
-<p>We combine the TDP-HA samples with the D96 samples as controls (all samples are D96):</p>
-<ul>
-<li><a href="TDP-08-00-clustering-HA-D96.html">Clustering (no integration)</a></li>
-<li><a href="TDP-08-01-HA-D96-expression-changes.html">Expression changes</a>
-<ul>
-<li><a href="TDP-08-02-TDP_target_genes.html">Comparison of DE genes with HEK cell TDP-43 targets</a></li>
-</ul></li>
-</ul>
-<p>TDP-HA samples and all other samples:</p>
-<ul>
-<li><a href="TDP-08-clustering-timeline-HA.html">Clustering (no integration)</a></li>
-</ul>
-<p>We combine the D223 samples with the P22, D56 and D96 samples:</p>
-<ul>
-<li><a href="06-clustering-all-timepoints.html">Clustering (no integration)</a></li>
-<li><a href="07-cluster-analysis-all-timepoints.html">Cluster analysis</a></li>
-</ul>
-<p>We also integrate the organoid samples:</p>
-<ul>
-<li><a href="timepoints-01-organoid-integration.html">Clustering</a></li>
-</ul>
+<div id="load-packages" class="section level3">
+<h3>Load packages</h3>
+<pre class="r"><code>library(dplyr)
+library(cowplot)
+library(ggplot2)
+library(stringr)</code></pre>
+</div>
+<div id="load-data" class="section level1">
+<h1>Load data</h1>
+<pre class="r"><code>tbl_fil2 &lt;- readRDS(file.path(&quot;output&quot;, &quot;tbl_TDP-08-01-muscat.rds&quot;))
+
+## TDP-43 CLIP-seq of HEK cells target list
+gdf &lt;- read.table(&quot;/home/kathi/Manu_TDP_CLIP/analysis/clipper_analysis/gene_cluster_count_merge_peaks.txt&quot;,
+                  header = TRUE)
+## we only keep the genes that are bound by WT
+targets &lt;- gdf %&gt;% dplyr::filter(nclus_WT &gt; 0) 
+dim(targets)</code></pre>
+<pre><code>[1] 4923   18</code></pre>
+</div>
+<div id="overlap-de-genes-with-targets" class="section level1">
+<h1>Overlap DE genes with targets</h1>
+<p>We compare the DE genes per cluster with the list of WT TDP-43 target genes.</p>
+<pre class="r"><code>tbl_fil2 &lt;- lapply(tbl_fil2, function(x) {
+  x$gene_id &lt;- str_split(x$gene, pattern = &quot;\\.&quot;, simplify = TRUE)[,1]
+  x$target_hek &lt;- x$gene_id %in% targets$gene_id
+  x
+})
+
+## how many of the DE genes are also TDP-43 targets in HEK cells?
+lapply(tbl_fil2, function(x) table(x$target_hek))</code></pre>
+<pre><code>$`0`
+
+FALSE 
+    1 
+
+$`1`
+
+FALSE  TRUE 
+    1     1 
+
+$`5`
+
+FALSE 
+    6 
+
+$`7`
+
+FALSE 
+    7 
+
+$`8`
+
+FALSE 
+    4 
+
+$`10`
+
+FALSE  TRUE 
+   48    12 
+
+$`11`
+
+FALSE 
+    3 
+
+$`12`
+
+FALSE  TRUE 
+   55    16 
+
+$`13`
+
+FALSE  TRUE 
+  166    81 
+
+$`14`
+
+FALSE  TRUE 
+   23     5 </code></pre>
+<pre class="r"><code>## what are the DE target genes and what&#39;s the percentage of all DE genes?
+res &lt;- lapply(tbl_fil2, function(x) {
+    list(&quot;percentage&quot; = round(sum(x$target_hek)/nrow(x)*100, 2), 
+         &quot;targets&quot; = x$gene[x$target_hek])
+})
+res</code></pre>
+<pre><code>$`0`
+$`0`$percentage
+[1] 0
+
+$`0`$targets
+character(0)
+
+
+$`1`
+$`1`$percentage
+[1] 50
+
+$`1`$targets
+[1] &quot;ENSG00000197747.S100A10&quot;
+
+
+$`5`
+$`5`$percentage
+[1] 0
+
+$`5`$targets
+character(0)
+
+
+$`7`
+$`7`$percentage
+[1] 0
+
+$`7`$targets
+character(0)
+
+
+$`8`
+$`8`$percentage
+[1] 0
+
+$`8`$targets
+character(0)
+
+
+$`10`
+$`10`$percentage
+[1] 20
+
+$`10`$targets
+ [1] &quot;ENSG00000065911.MTHFD2&quot; &quot;ENSG00000054598.FOXC1&quot;  &quot;ENSG00000106105.GARS&quot;  
+ [4] &quot;ENSG00000105281.SLC1A5&quot; &quot;ENSG00000265972.TXNIP&quot;  &quot;ENSG00000113739.STC2&quot;  
+ [7] &quot;ENSG00000138829.FBN2&quot;   &quot;ENSG00000163430.FSTL1&quot;  &quot;ENSG00000113161.HMGCR&quot; 
+[10] &quot;ENSG00000070669.ASNS&quot;   &quot;ENSG00000147889.CDKN2A&quot; &quot;ENSG00000196305.IARS&quot;  
+
+
+$`11`
+$`11`$percentage
+[1] 0
+
+$`11`$targets
+character(0)
+
+
+$`12`
+$`12`$percentage
+[1] 22.54
+
+$`12`$targets
+ [1] &quot;ENSG00000197747.S100A10&quot; &quot;ENSG00000160752.FDPS&quot;   
+ [3] &quot;ENSG00000099194.SCD&quot;     &quot;ENSG00000175183.CSRP2&quot;  
+ [5] &quot;ENSG00000120075.HOXB5&quot;   &quot;ENSG00000104549.SQLE&quot;   
+ [7] &quot;ENSG00000112972.HMGCS1&quot;  &quot;ENSG00000079459.FDFT1&quot;  
+ [9] &quot;ENSG00000188229.TUBB4B&quot;  &quot;ENSG00000120437.ACAT2&quot;  
+[11] &quot;ENSG00000141682.PMAIP1&quot;  &quot;ENSG00000184486.POU3F2&quot; 
+[13] &quot;ENSG00000110492.MDK&quot;     &quot;ENSG00000134824.FADS2&quot;  
+[15] &quot;ENSG00000114861.FOXP1&quot;   &quot;ENSG00000113161.HMGCR&quot;  
+
+
+$`13`
+$`13`$percentage
+[1] 32.79
+
+$`13`$targets
+ [1] &quot;ENSG00000068305.MEF2A&quot;     &quot;ENSG00000168209.DDIT4&quot;    
+ [3] &quot;ENSG00000187240.DYNC2H1&quot;   &quot;ENSG00000165891.E2F7&quot;     
+ [5] &quot;ENSG00000176890.TYMS&quot;      &quot;ENSG00000102172.SMS&quot;      
+ [7] &quot;ENSG00000137720.C11orf1&quot;   &quot;ENSG00000129521.EGLN3&quot;    
+ [9] &quot;ENSG00000145335.SNCA&quot;      &quot;ENSG00000047579.DTNBP1&quot;   
+[11] &quot;ENSG00000116584.ARHGEF2&quot;   &quot;ENSG00000114861.FOXP1&quot;    
+[13] &quot;ENSG00000276644.DACH1&quot;     &quot;ENSG00000167740.CYB5D2&quot;   
+[15] &quot;ENSG00000169738.DCXR&quot;      &quot;ENSG00000214078.CPNE1&quot;    
+[17] &quot;ENSG00000114120.SLC25A36&quot;  &quot;ENSG00000176171.BNIP3&quot;    
+[19] &quot;ENSG00000155846.PPARGC1B&quot;  &quot;ENSG00000186020.ZNF529&quot;   
+[21] &quot;ENSG00000164292.RHOBTB3&quot;   &quot;ENSG00000105849.TWISTNB&quot;  
+[23] &quot;ENSG00000188229.TUBB4B&quot;    &quot;ENSG00000167085.PHB&quot;      
+[25] &quot;ENSG00000130522.JUND&quot;      &quot;ENSG00000075391.RASAL2&quot;   
+[27] &quot;ENSG00000198712.MT-CO2&quot;    &quot;ENSG00000197958.RPL12&quot;    
+[29] &quot;ENSG00000243927.MRPS6&quot;     &quot;ENSG00000124766.SOX4&quot;     
+[31] &quot;ENSG00000170004.CHD3&quot;      &quot;ENSG00000108511.HOXB6&quot;    
+[33] &quot;ENSG00000160014.CALM3&quot;     &quot;ENSG00000120889.TNFRSF10B&quot;
+[35] &quot;ENSG00000108587.GOSR1&quot;     &quot;ENSG00000163602.RYBP&quot;     
+[37] &quot;ENSG00000126953.TIMM8A&quot;    &quot;ENSG00000115963.RND3&quot;     
+[39] &quot;ENSG00000126267.COX6B1&quot;    &quot;ENSG00000101079.NDRG3&quot;    
+[41] &quot;ENSG00000198743.SLC5A3&quot;    &quot;ENSG00000198899.MT-ATP6&quot;  
+[43] &quot;ENSG00000159164.SV2A&quot;      &quot;ENSG00000134308.YWHAQ&quot;    
+[45] &quot;ENSG00000104763.ASAH1&quot;     &quot;ENSG00000176105.YES1&quot;     
+[47] &quot;ENSG00000116729.WLS&quot;       &quot;ENSG00000102024.PLS3&quot;     
+[49] &quot;ENSG00000130770.ATP5IF1&quot;   &quot;ENSG00000151729.SLC25A4&quot;  
+[51] &quot;ENSG00000117614.SYF2&quot;      &quot;ENSG00000136758.YME1L1&quot;   
+[53] &quot;ENSG00000196498.NCOR2&quot;     &quot;ENSG00000183684.ALYREF&quot;   
+[55] &quot;ENSG00000171130.ATP6V0E2&quot;  &quot;ENSG00000156650.KAT6B&quot;    
+[57] &quot;ENSG00000177885.GRB2&quot;      &quot;ENSG00000101361.NOP56&quot;    
+[59] &quot;ENSG00000100836.PABPN1&quot;    &quot;ENSG00000166170.BAG5&quot;     
+[61] &quot;ENSG00000198727.MT-CYB&quot;    &quot;ENSG00000114503.NCBP2&quot;    
+[63] &quot;ENSG00000125304.TM9SF2&quot;    &quot;ENSG00000067225.PKM&quot;      
+[65] &quot;ENSG00000198938.MT-CO3&quot;    &quot;ENSG00000150779.TIMM8B&quot;   
+[67] &quot;ENSG00000182541.LIMK2&quot;     &quot;ENSG00000186260.MRTFB&quot;    
+[69] &quot;ENSG00000149313.AASDHPPT&quot;  &quot;ENSG00000111716.LDHB&quot;     
+[71] &quot;ENSG00000185658.BRWD1&quot;     &quot;ENSG00000196405.EVL&quot;      
+[73] &quot;ENSG00000197746.PSAP&quot;      &quot;ENSG00000113739.STC2&quot;     
+[75] &quot;ENSG00000089157.RPLP0&quot;     &quot;ENSG00000123106.CCDC91&quot;   
+[77] &quot;ENSG00000033178.UBA6&quot;      &quot;ENSG00000167081.PBX3&quot;     
+[79] &quot;ENSG00000198886.MT-ND4&quot;    &quot;ENSG00000122705.CLTA&quot;     
+[81] &quot;ENSG00000170689.HOXB9&quot;    
+
+
+$`14`
+$`14`$percentage
+[1] 17.86
+
+$`14`$targets
+[1] &quot;ENSG00000197747.S100A10&quot; &quot;ENSG00000182481.KPNA2&quot;  
+[3] &quot;ENSG00000124766.SOX4&quot;    &quot;ENSG00000134057.CCNB1&quot;  
+[5] &quot;ENSG00000101224.CDC25B&quot; </code></pre>
+<p>We save the tables to file.</p>
+<pre class="r"><code>for( i in names(tbl_fil2)){
+  write.table(tbl_fil2[[i]], 
+              file.path(&quot;output&quot;, 
+                        paste0(&quot;tbl_TDP-08-02-targets_hek_cluster_&quot;, i, &quot;.txt&quot;)),
+              sep = &quot;\t&quot;, row.names = FALSE, quote = FALSE)
+}</code></pre>
+</div>
+<div id="save-results-to-rds" class="section level1">
+<h1>Save results to RDS</h1>
+<pre class="r"><code>saveRDS(tbl_fil2, file.path(&quot;output&quot;, &quot;tbl_TDP-08-02-targets_hek.rds&quot;))</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.0 (2020-04-24)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 16.04.7 LTS
+
+Matrix products: default
+BLAS:   /usr/local/R/R-4.0.0/lib/libRblas.so
+LAPACK: /usr/local/R/R-4.0.0/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] stringr_1.4.0   ggplot2_3.3.2   cowplot_1.0.0   dplyr_1.0.2    
+[5] workflowr_1.6.2
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.5       pillar_1.4.6     compiler_4.0.0   later_1.1.0.1   
+ [5] git2r_0.27.1     tools_4.0.0      digest_0.6.25    evaluate_0.14   
+ [9] lifecycle_0.2.0  tibble_3.0.3     gtable_0.3.0     pkgconfig_2.0.3 
+[13] rlang_0.4.7      yaml_2.2.1       xfun_0.15        withr_2.2.0     
+[17] knitr_1.29       generics_0.0.2   fs_1.4.2         vctrs_0.3.4     
+[21] rprojroot_1.3-2  grid_4.0.0       tidyselect_1.1.0 glue_1.4.2      
+[25] R6_2.4.1         rmarkdown_2.3    purrr_0.3.4      magrittr_1.5    
+[29] whisker_0.4      codetools_0.2-16 backports_1.1.9  scales_1.1.1    
+[33] promises_1.1.1   ellipsis_0.3.1   htmltools_0.5.0  colorspace_1.4-1
+[37] httpuv_1.5.4     stringi_1.4.6    munsell_0.5.0    crayon_1.3.4    </code></pre>
+</div>
+</div>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -1969,6 +1151,8 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
+</div>
+</div>
 
 </div>
 
@@ -2001,6 +1185,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
