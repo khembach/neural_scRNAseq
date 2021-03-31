@@ -1,0 +1,75 @@
+---
+title: "Analysis TDP-43 target among DE genes"
+author: "Katharina Hembach"
+date: "3/31/2021"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+### Load packages
+
+```{r load-libs, message = FALSE, warning = FALSE}
+library(dplyr)
+library(cowplot)
+library(ggplot2)
+library(stringr)
+```
+
+# Load data
+```{r load-data}
+tbl_fil2 <- readRDS(file.path("output", "tbl_TDP-08-01-muscat.rds"))
+
+## TDP-43 CLIP-seq of HEK cells target list
+gdf <- read.table("/home/kathi/Manu_TDP_CLIP/analysis/clipper_analysis/gene_cluster_count_merge_peaks.txt",
+                  header = TRUE)
+## we only keep the genes that are bound by WT
+targets <- gdf %>% dplyr::filter(nclus_WT > 0) 
+dim(targets)
+```
+
+# Overlap DE genes with targets
+
+We compare the DE genes per cluster with the list of WT TDP-43 target genes.
+```{r compare-DE-targets}
+tbl_fil2 <- lapply(tbl_fil2, function(x) {
+  x$gene_id <- str_split(x$gene, pattern = "\\.", simplify = TRUE)[,1]
+  x$target_hek <- x$gene_id %in% targets$gene_id
+  x
+})
+
+## how many of the DE genes are also TDP-43 targets in HEK cells?
+lapply(tbl_fil2, function(x) table(x$target_hek))
+## what are the DE target genes and what's the percentage of all DE genes?
+res <- lapply(tbl_fil2, function(x) {
+    list("percentage" = round(sum(x$target_hek)/nrow(x)*100, 2), 
+         "targets" = x$gene[x$target_hek])
+})
+res
+```
+
+We save the tables to file.
+```{r save-filtered-res-table}
+for( i in names(tbl_fil2)){
+  write.table(tbl_fil2[[i]], 
+              file.path("output", 
+                        paste0("tbl_TDP-08-02-targets_hek_cluster_", i, ".txt")),
+              sep = "\t", row.names = FALSE, quote = FALSE)
+}
+```
+
+# Save results to RDS
+
+```{r save-rds}
+saveRDS(tbl_fil2, file.path("output", "tbl_TDP-08-02-targets_hek.rds"))
+```
+
+
+

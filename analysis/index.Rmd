@@ -69,6 +69,7 @@ We combine the TDP-HA samples with the D96 samples as controls (all samples are 
 
 - [Clustering (no integration)](TDP-08-00-clustering-HA-D96.html)
 - [Expression changes](TDP-08-01-HA-D96-expression-changes.html)
+    - [Comparison of DE genes with HEK cell TDP-43 targets](TDP-08-02-TDP_target_genes.html)
 
 TDP-HA samples and all other samples: 
 
