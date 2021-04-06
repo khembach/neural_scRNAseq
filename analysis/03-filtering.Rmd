@@ -228,7 +228,23 @@ dim(sce)
 ## we filter genes and require > 1 count in at least 20 cells
 sce_filtered <- sce[rowSums(counts(sce) > 1) >= 20, ]
 dim(sce_filtered)
+
+## number of cells per sample
+sce_filtered$sample_id %>% table
+
+## number of UMIs per cells and sample
+colData(sce_filtered) %>% as.data.frame %>% 
+  dplyr::group_by(sample_id) %>% 
+  summarize(min = min(sum), median = median(sum), 
+            mean = mean(sum), max = max(sum))
+
+# number of detected genes per cell and sample
+colData(sce_filtered) %>% as.data.frame %>% 
+  dplyr::group_by(sample_id) %>% 
+  summarize(min = min(detected), median = median(detected), 
+            mean = mean(detected), max = max(detected))
 ```
+
 
 
 ## Save data to RDS
