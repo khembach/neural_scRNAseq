@@ -156,7 +156,8 @@ cs <- sample(colnames(so), 10e3)
         guides(col = guide_legend(nrow = 11, 
             override.aes = list(size = 3, alpha = 1))) +
         theme_void() + theme(aspect.ratio = 1)
-ids <- c("integration_group", "sample_id", "group_id", "cl_FullLineage", "ident")
+ids <- c("integration_group", "sample_id", "group_id", "Stage", 
+         "cl_FullLineage", "cl_LineComp", "PredCellType", "ident")
 for (id in ids) {
     cat("### ", id, "\n")
     p1 <- .plot_dr(so, "tsne", id)
@@ -199,6 +200,6 @@ for (id in ids) {
 ## Save Seurat object to RDS
 
 ```{r save-so}
-saveRDS(so, file.path("output", "so_04-group_integration.rds"))
+saveRDS(so, file.path("output", "so_timepoints-01-organoid_integration.rds"))
 ```
 
