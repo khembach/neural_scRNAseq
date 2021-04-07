@@ -351,15 +351,16 @@ for (m in seq_along(genes)) {
 ```
 
 We plot the gene expression of some selected markers for the paper.
-```{r paper-figures, fig.width = 12, fig.height = 6}
-#  SOX2 and NQO1 (NSCs), GFAP (astrocytic), PTPRZ1 (OPCs), DCN (pericytes), SYP (neuronal), SLC32A1 (GABAergic) or SLC17A6 (Glutamatergic)
+```{r paper-figures, fig.width = 9, fig.height = 9}
+#  SOX2 and NQO1 (NSCs), GFAP (astrocytic), PTPRZ1 (OPCs), DCN (pericytes), 
+#  SYP (neuronal), SLC32A1 (GABAergic) or SLC17A6 (Glutamatergic)
 g <- c("SOX2","NQO1",  "GFAP", "PTPRZ1", "DCN", "SYP", "SLC32A1", "SLC17A6")
 genes <- lapply(g, sapply, function(i)
     grep(pattern = paste0("\\.", i, "$"), rownames(sce), value = TRUE)
   )
 names(genes) <- g
 
-ps <- lapply(names(genes)[1:4], function(i) {
+ps <- lapply(names(genes)[1:2], function(i) {
         FeaturePlot(sub, features = genes[[i]], reduction = "umap", pt.size = 0.4,
                     max.cutoff = 3) +
             ggtitle(i) + theme_void() + theme(aspect.ratio = 1,
@@ -370,9 +371,9 @@ ps <- lapply(names(genes)[1:4], function(i) {
   ps1 <- plot_grid(plotlist = ps, nrow = 1)
   p1 <- plot_grid(ps1, lgd1, nrow = 1, label_size = 10, rel_widths = c(1, 0.1))
     
- ps <- lapply(names(genes)[5:8], function(i) {
+ ps <- lapply(names(genes)[3:5], function(i) {
         FeaturePlot(sub, features = genes[[i]], reduction = "umap", pt.size = 0.4,
-                    min.cutoff = 0, max.cutoff = 2.5) +
+                    min.cutoff = 0, max.cutoff = 3.5) +
             ggtitle(i) + theme_void() + theme(aspect.ratio = 1,
                                               plot.title = element_text(hjust = 0.5))
     })
@@ -381,6 +382,19 @@ ps <- lapply(names(genes)[1:4], function(i) {
   ps2 <- plot_grid(plotlist = ps, nrow = 1)
   p2 <- plot_grid(ps2, lgd2, nrow = 1, label_size = 10, rel_widths = c(1, 0.1))
   p <- plot_grid(p1, p2, nrow = 2)
+  
+ ps <- lapply(names(genes)[6:8], function(i) {
+        FeaturePlot(sub, features = genes[[i]], reduction = "umap", pt.size = 0.4,
+                    min.cutoff = 0, max.cutoff = 2.5) +
+            ggtitle(i) + theme_void() + theme(aspect.ratio = 1,
+                                              plot.title = element_text(hjust = 0.5))
+    })
+  lgd3 <- get_legend(ps[[1]])
+  ps <- lapply(ps, function(x) x + theme(legend.position = "none"))
+  ps3 <- plot_grid(plotlist = ps, nrow = 1)
+  p3 <- plot_grid(ps3, lgd3, nrow = 1, label_size = 10, rel_widths = c(1, 0.1))
+  p <- plot_grid(p1, p2, p3, nrow = 3)
+  
   print(p)
 ```
 
