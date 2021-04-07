@@ -504,16 +504,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree3c93c4e54e275e91eb92c77445deae7a80ebb553targetblank3c93c4ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/3c93c4e54e275e91eb92c77445deae7a80ebb553" target="_blank">3c93c4e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree000bc40ac2a53dc1f88a2e3cd525836c2a7a305dtargetblank000bc40a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/000bc40ac2a53dc1f88a2e3cd525836c2a7a305d" target="_blank">000bc40</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree3c93c4e54e275e91eb92c77445deae7a80ebb553targetblank3c93c4ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree000bc40ac2a53dc1f88a2e3cd525836c2a7a305dtargetblank000bc40a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/3c93c4e54e275e91eb92c77445deae7a80ebb553" target="_blank">3c93c4e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/000bc40ac2a53dc1f88a2e3cd525836c2a7a305d" target="_blank">000bc40</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -725,7 +725,6 @@ Ignored files:
     Ignored:    output/sce_TDP_03_filtering_all_genes.rds
     Ignored:    output/sce_organoid-01-clustering.rds
     Ignored:    output/sce_preprocessing.rds
-    Ignored:    output/so_04-group_integration.rds
     Ignored:    output/so_04-stage_integration.rds
     Ignored:    output/so_04_1_cell_cycle.rds
     Ignored:    output/so_04_clustering.rds
@@ -741,6 +740,7 @@ Ignored files:
     Ignored:    output/so_merged_organoid-02-integration.rds
     Ignored:    output/so_organoid-01-clustering.rds
     Ignored:    output/so_sample_organoid-01-clustering.rds
+    Ignored:    output/so_timepoints-01-organoid_integration.rds
     Ignored:    output/tbl_TDP-08-01-muscat.rds
     Ignored:    output/tbl_TDP-08-01-muscat_cluster_0.txt
     Ignored:    output/tbl_TDP-08-01-muscat_cluster_1.txt
@@ -788,6 +788,7 @@ Untracked files:
     Untracked:  analysis/organoid-08-conos-comparison.Rmd
     Untracked:  analysis/organoid-0x-sample_integration.Rmd
     Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  analysis/timepoints-02-cluster-analysis.Rmd
     Untracked:  coverage.pdf
     Untracked:  coverage_sashimi.pdf
     Untracked:  coverage_sashimi.png
@@ -857,6 +858,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/000bc40ac2a53dc1f88a2e3cd525836c2a7a305d/analysis/07-cluster-analysis-all-timepoints.Rmd" target="_blank">000bc40</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-07
+</td>
+<td>
+fix heatmap
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/119d6d986fefa9efe00323fffc267d6601c2e90d/docs/07-cluster-analysis-all-timepoints.html" target="_blank">119d6d9</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1060,7 +1095,7 @@ Heatmap(mat,
     column_title_side = &quot;bottom&quot;,
     rect_gp = gpar(col = &quot;white&quot;),
     cell_fun = function(i, j, x, y, width, height, fill)
-        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
+        grid.text(mat[j, i], x = x, y = y, 
             gp = gpar(col = &quot;black&quot;, fontsize = 8)))</code></pre>
 <p><img src="figure/07-cluster-analysis-all-timepoints.Rmd/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>
@@ -2665,6 +2700,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/119d6d986fefa9efe00323fffc267d6601c2e90d/docs/figure/07-cluster-analysis-all-timepoints.Rmd/paper-figures-1.png" target="_blank">119d6d9</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-07
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/e7f56c52d47ab94b576be8a531dc40fc2d512382/docs/figure/07-cluster-analysis-all-timepoints.Rmd/paper-figures-1.png" target="_blank">e7f56c5</a>
