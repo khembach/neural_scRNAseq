@@ -1,0 +1,216 @@
+---
+title: "Cluster analysis"
+author: "Katharina Hembach"
+date: "4/7/2021"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+### Load packages
+
+```{r load-libs, message = FALSE, warning = FALSE}
+library(ComplexHeatmap)
+library(cowplot)
+library(ggplot2)
+library(dplyr)
+library(muscat)
+library(RColorBrewer)
+library(Seurat)
+library(SingleCellExperiment)
+```
+
+# Load data & convert to SCE
+
+```{r load-data}
+so <- readRDS(file.path("output", "so_timepoints-01-organoid_integration.rds"))
+sce <- as.SingleCellExperiment(so, assay = "RNA")
+colData(sce) <- as.data.frame(colData(sce)) %>% 
+    mutate_if(is.character, as.factor) %>% 
+    DataFrame(row.names = colnames(sce))
+levels(sce$integration_group)[levels(sce$integration_group) == "NC"] <- "iCoMoNSC"
+sce$integration_group <- relevel(sce$integration_group, "iCoMoNSC")
+```
+
+# Cluster-sample counts
+
+```{r}
+(n_cells <- table(sce$cluster_id, sce$integration_group))
+```
+
+# Relative cluster-abundances
+
+```{r fig.width = 5, fig.height = 8}
+fqs <- prop.table(n_cells, margin = 2)
+mat <- round(as.matrix(unclass(fqs))*100, 2)
+colfunc <- colorRampPalette(c("ghostwhite", "deepskyblue4"))
+Heatmap(mat,
+    col = colfunc(10),
+    name = "Percentage\nof cells",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "cluster ID",
+    column_title = "cell line",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i] , x = x, y = y, 
+            gp = gpar(col = "black", fontsize = 10)))
+```
+
+```{r fig.width = 7, fig.height = 7}
+(n_cells_group <- table(sce$cluster_id, sce$Stage))
+fqs <- prop.table(n_cells_group, margin = 2)
+mat <- round(as.matrix(unclass(fqs))*100, 2)
+Heatmap(mat,
+    col = colfunc(10),
+    name = "Percentage\nof cells",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "cluster ID",
+    column_title = "time point",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i] , x = x, y = y, 
+            gp = gpar(col = "black", fontsize = 10)))
+```
+
+Heatmap with the lineage labels from the Kanton et al. paper. Cells without the label (all iCoMoNSCs) are excluded from the heatmap!
+
+```{r fig.width = 8, fig.height = 8}
+(n_cells_lineage <- table(sce$cluster_id, sce$cl_FullLineage))
+fqs <- prop.table(n_cells_lineage, margin = 2)
+mat <- round(as.matrix(unclass(fqs))*100, 2)
+cn <- colnames(mat)
+Heatmap(mat,
+    col = colfunc(10),
+    name = "Percentage\nof cells",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    show_column_names = FALSE, 
+    row_names_side = "left",
+    row_title = "cluster ID",
+    column_title = "Lineage",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = "black", fontsize = 10)),
+    bottom_annotation = HeatmapAnnotation(
+      text = anno_text(cn, rot = 80, just = "right")))
+
+(n_cells_lineage <- table(sce$cl_FullLineage, sce$cluster_id))
+fqs <- prop.table(n_cells_lineage, margin = 2)
+mat <- round(as.matrix(unclass(fqs))*100, 2)
+Heatmap(mat,
+    col = colfunc(10),
+    name = "Percentage\nof cells",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "Lineage",
+    row_names_rot = 10,
+    column_title = "cluster ID",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = "black", fontsize = 10)))
+```
+
+Heatmap with the line labels from the Kanton et. al paper. Cell without the label, are excluded from the heatmap!
+
+```{r fig.width = 8, fig.height = 8}
+(n_cells_linecomp <- table(sce$cluster_id, sce$cl_LineComp))
+fqs <- prop.table(n_cells_linecomp, margin = 2)
+mat <- round(as.matrix(unclass(fqs))*100, 2)
+cn <- colnames(mat)
+Heatmap(mat,
+    col = colfunc(10),
+    name = "Percentage\nof cells",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    show_column_names = FALSE, 
+    row_names_side = "left",
+    row_title = "cluster ID",
+    column_title = "line ",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = "black", fontsize = 10)),
+    bottom_annotation = HeatmapAnnotation(
+      text = anno_text(cn, rot = 80, just = "right")))
+
+(n_cells_linecomp <- table(sce$cl_LineComp, sce$cluster_id))
+fqs <- prop.table(n_cells_linecomp, margin = 2)
+mat <- round(as.matrix(unclass(fqs))*100, 2)
+Heatmap(mat,
+    col = colfunc(10),
+    name = "Percentage\nof cells",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "Lineage",
+    row_names_rot = 10,
+    column_title = "line",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = "black", fontsize = 10)))
+```
+
+Heatmap with the cell type labels from the Kanton et. al paper. Cell without the label, are excluded from the heatmap!
+
+```{r fig.width = 8, fig.height = 8}
+(n_cells_predcell <- table(sce$cluster_id, sce$PredCellType))
+fqs <- prop.table(n_cells_predcell, margin = 2)
+mat <- round(as.matrix(unclass(fqs))*100, 2)
+cn <- colnames(mat)
+Heatmap(mat,
+    col = colfunc(10),
+    name = "Percentage\nof cells",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    show_column_names = FALSE, 
+    row_names_side = "left",
+    row_title = "cluster ID",
+    column_title = "cell type",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = "black", fontsize = 10)),
+    bottom_annotation = HeatmapAnnotation(
+      text = anno_text(cn, rot = 80, just = "right")))
+
+(n_cells_predcell <- table(sce$PredCellType, sce$cluster_id))
+fqs <- prop.table(n_cells_predcell, margin = 2)
+mat <- round(as.matrix(unclass(fqs))*100, 2)
+Heatmap(mat,
+    col = colfunc(10),
+    name = "Percentage\nof cells",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "cell type",
+    row_names_rot = 10,
+    column_title = "line",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = "black", fontsize = 10)))
+```
+
