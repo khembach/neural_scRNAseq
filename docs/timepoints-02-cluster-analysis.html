@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Katharina Hembach" />
+
+
+<title>Cluster analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">neural_scRNAseq</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/khembach/neural_scRNAseq">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Cluster analysis</h1>
+<h4 class="author">Katharina Hembach</h4>
+<h4 class="date">4/7/2021</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-04-08
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it's best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200522code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200522)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200522code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200522)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6525819c6357cf1c0ac72cbb60d2b344d79f7103targetblank6525819a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6525819c6357cf1c0ac72cbb60d2b344d79f7103" target="_blank">6525819</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6525819c6357cf1c0ac72cbb60d2b344d79f7103targetblank6525819a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6525819c6357cf1c0ac72cbb60d2b344d79f7103" target="_blank">6525819</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    ._.DS_Store
+    Ignored:    ._Filtered.pdf
+    Ignored:    ._Rplots.pdf
+    Ignored:    ._Unfiltered.pdf
+    Ignored:    .__workflowr.yml
+    Ignored:    ._coverage.pdf
+    Ignored:    ._coverage_sashimi.pdf
+    Ignored:    ._coverage_sashimi.png
+    Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    ._pbDS_cell_level.pdf
+    Ignored:    ._pbDS_top_expr_umap.pdf
+    Ignored:    ._pbDS_upset.pdf
+    Ignored:    ._sashimi.pdf
+    Ignored:    ._stmn2.pdf
+    Ignored:    ._tdp.pdf
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/._.DS_Store
+    Ignored:    analysis/._01-preprocessing.Rmd
+    Ignored:    analysis/._01-preprocessing.html
+    Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._03-filtering.Rmd
+    Ignored:    analysis/._04-clustering.Rmd
+    Ignored:    analysis/._04-clustering.knit.md
+    Ignored:    analysis/._04.1-cell_cycle.Rmd
+    Ignored:    analysis/._05-annotation.Rmd
+    Ignored:    analysis/._07-cluster-analysis-all-timepoints.Rmd
+    Ignored:    analysis/._Lam-0-NSC_no_integration.Rmd
+    Ignored:    analysis/._Lam-01-NSC_integration.Rmd
+    Ignored:    analysis/._Lam-02-NSC_annotation.Rmd
+    Ignored:    analysis/._NSC-1-clustering.Rmd
+    Ignored:    analysis/._NSC-2-annotation.Rmd
+    Ignored:    analysis/.__site.yml
+    Ignored:    analysis/._additional_filtering.Rmd
+    Ignored:    analysis/._additional_filtering_clustering.Rmd
+    Ignored:    analysis/._index.Rmd
+    Ignored:    analysis/._organoid-01-1-qualtiy-control.Rmd
+    Ignored:    analysis/._organoid-01-clustering.Rmd
+    Ignored:    analysis/._organoid-02-integration.Rmd
+    Ignored:    analysis/._organoid-03-cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-04-group_integration.Rmd
+    Ignored:    analysis/._organoid-04-stage_integration.Rmd
+    Ignored:    analysis/._organoid-05-group_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-05-stage_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-06-1-prepare-sce.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-Seurat.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-function.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-06-group-integration-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-07-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-07-group-integration-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-08-conos-comparison.Rmd
+    Ignored:    analysis/._organoid-0x-sample_integration.Rmd
+    Ignored:    analysis/01-preprocessing_cache/
+    Ignored:    analysis/02-1-SampleQC_cache/
+    Ignored:    analysis/02-quality_control_cache/
+    Ignored:    analysis/02.1-SampleQC_cache/
+    Ignored:    analysis/03-filtering_cache/
+    Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/04.1-cell_cycle_cache/
+    Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/06-clustering-all-timepoints_cache/
+    Ignored:    analysis/07-cluster-analysis-all-timepoints_cache/
+    Ignored:    analysis/Lam-01-NSC_integration_cache/
+    Ignored:    analysis/Lam-02-NSC_annotation_cache/
+    Ignored:    analysis/NSC-1-clustering_cache/
+    Ignored:    analysis/NSC-2-annotation_cache/
+    Ignored:    analysis/TDP-01-preprocessing_cache/
+    Ignored:    analysis/TDP-02-quality_control_cache/
+    Ignored:    analysis/TDP-03-filtering_cache/
+    Ignored:    analysis/TDP-04-clustering_cache/
+    Ignored:    analysis/TDP-05-00-filtering-plasmid-QC_cache/
+    Ignored:    analysis/TDP-05-plasmid_expression_cache/
+    Ignored:    analysis/TDP-06-cluster_analysis_cache/
+    Ignored:    analysis/TDP-07-01-STMN2_expression_cache/
+    Ignored:    analysis/TDP-07-cluster_12_cache/
+    Ignored:    analysis/TDP-08-00-clustering-HA-D96_cache/
+    Ignored:    analysis/TDP-08-01-HA-D96-expression-changes_cache/
+    Ignored:    analysis/TDP-08-02-TDP_target_genes_cache/
+    Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
+    Ignored:    analysis/additional_filtering_cache/
+    Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
+    Ignored:    analysis/organoid-01-clustering_cache/
+    Ignored:    analysis/organoid-02-integration_cache/
+    Ignored:    analysis/organoid-03-cluster_analysis_cache/
+    Ignored:    analysis/organoid-04-group_integration_cache/
+    Ignored:    analysis/organoid-04-stage_integration_cache/
+    Ignored:    analysis/organoid-05-group_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-05-stage_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_test_cache/
+    Ignored:    analysis/organoid-06-group-integration-conos-analysis_cache/
+    Ignored:    analysis/organoid-07-conos-visualization_cache/
+    Ignored:    analysis/organoid-07-group-integration-conos-visualization_cache/
+    Ignored:    analysis/organoid-08-conos-comparison_cache/
+    Ignored:    analysis/organoid-0x-sample_integration_cache/
+    Ignored:    analysis/sample5_QC_cache/
+    Ignored:    analysis/timepoints-01-organoid-integration_cache/
+    Ignored:    data/.DS_Store
+    Ignored:    data/._.DS_Store
+    Ignored:    data/._.smbdeleteAAA17ed8b4b
+    Ignored:    data/._Lam_figure2_markers.R
+    Ignored:    data/._Reactive_astrocytes_markers.xlsx
+    Ignored:    data/._known_NSC_markers.R
+    Ignored:    data/._known_cell_type_markers.R
+    Ignored:    data/._metadata.csv
+    Ignored:    data/._virus_cell_tropism_markers.R
+    Ignored:    data/._~$Reactive_astrocytes_markers.xlsx
+    Ignored:    data/data_sushi/
+    Ignored:    data/filtered_feature_matrices/
+    Ignored:    output/.DS_Store
+    Ignored:    output/._.DS_Store
+    Ignored:    output/._NSC_cluster2_marker_genes.txt
+    Ignored:    output/._TDP-06-no_integration_cluster12_marker_genes.txt
+    Ignored:    output/._TDP-06-no_integration_cluster13_marker_genes.txt
+    Ignored:    output/._organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_0.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_1.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_10.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_11.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_12.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_13.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_14.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_5.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_7.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_8.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_all.xlsx
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_0.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_1.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_10.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_11.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_12.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_13.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_14.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_5.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_7.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_8.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/._~$tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/Lam-01-clustering.rds
+    Ignored:    output/NSC_1_clustering.rds
+    Ignored:    output/NSC_cluster1_marker_genes.txt
+    Ignored:    output/NSC_cluster2_marker_genes.txt
+    Ignored:    output/NSC_cluster3_marker_genes.txt
+    Ignored:    output/NSC_cluster4_marker_genes.txt
+    Ignored:    output/NSC_cluster5_marker_genes.txt
+    Ignored:    output/NSC_cluster6_marker_genes.txt
+    Ignored:    output/NSC_cluster7_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster0_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster10_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster11_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster12_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster13_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster14_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster15_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster16_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster17_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster1_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster2_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster3_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster4_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster5_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster6_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster7_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster8_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster9_marker_genes.txt
+    Ignored:    output/TDP-06_scran_markers.rds
+    Ignored:    output/additional_filtering.rds
+    Ignored:    output/conos/
+    Ignored:    output/conos_organoid-06-conos-analysis.rds
+    Ignored:    output/conos_organoid-06-group-integration-conos-analysis.rds
+    Ignored:    output/figures/
+    Ignored:    output/organoid_integration_cluster10_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster11_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster12_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster13_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster14_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster15_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster16_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster17_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster2_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster3_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster4_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster5_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster6_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster7_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster8_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster9_marker_genes.txt
+    Ignored:    output/res_TDP-08-01-muscat.rds
+    Ignored:    output/sce_01_preprocessing.rds
+    Ignored:    output/sce_02_quality_control.rds
+    Ignored:    output/sce_03_filtering.rds
+    Ignored:    output/sce_03_filtering_all_genes.rds
+    Ignored:    output/sce_06-1-prepare-sce.rds
+    Ignored:    output/sce_TDP-08-01-muscat.rds
+    Ignored:    output/sce_TDP_01_preprocessing.rds
+    Ignored:    output/sce_TDP_02_quality_control.rds
+    Ignored:    output/sce_TDP_03_filtering.rds
+    Ignored:    output/sce_TDP_03_filtering_all_genes.rds
+    Ignored:    output/sce_organoid-01-clustering.rds
+    Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04-stage_integration.rds
+    Ignored:    output/so_04_1_cell_cycle.rds
+    Ignored:    output/so_04_clustering.rds
+    Ignored:    output/so_06-clustering_all_timepoints.rds
+    Ignored:    output/so_08-00_clustering_HA_D96.rds
+    Ignored:    output/so_08-clustering_timeline_HA.rds
+    Ignored:    output/so_0x-sample_integration.rds
+    Ignored:    output/so_TDP-06-cluster-analysis.rds
+    Ignored:    output/so_TDP_04_clustering.rds
+    Ignored:    output/so_TDP_05_plasmid_expression.rds
+    Ignored:    output/so_additional_filtering_clustering.rds
+    Ignored:    output/so_integrated_organoid-02-integration.rds
+    Ignored:    output/so_merged_organoid-02-integration.rds
+    Ignored:    output/so_organoid-01-clustering.rds
+    Ignored:    output/so_sample_organoid-01-clustering.rds
+    Ignored:    output/so_timepoints-01-organoid_integration.rds
+    Ignored:    output/tbl_TDP-08-01-muscat.rds
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_0.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_1.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_10.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_11.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_12.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_13.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_14.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_5.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_7.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_8.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_all.xlsx
+    Ignored:    output/tbl_TDP-08-02-targets_hek.rds
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_0.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_1.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_10.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_11.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_12.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_13.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_14.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_5.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_7.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_8.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/~$tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    scripts/.DS_Store
+    Ignored:    scripts/._.DS_Store
+    Ignored:    scripts/._bu_Rcode.R
+    Ignored:    scripts/._plasmid_expression.sh
+
+Untracked files:
+    Untracked:  Filtered.pdf
+    Untracked:  Rplots.pdf
+    Untracked:  Unfiltered
+    Untracked:  Unfiltered.pdf
+    Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
+    Untracked:  analysis/TDP-07-01-STMN2_expression copy.Rmd
+    Untracked:  analysis/additional_filtering.Rmd
+    Untracked:  analysis/additional_filtering_clustering.Rmd
+    Untracked:  analysis/organoid-01-1-qualtiy-control.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-Seurat.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-function.Rmd
+    Untracked:  analysis/organoid-07-conos-visualization.Rmd
+    Untracked:  analysis/organoid-07-group-integration-conos-visualization.Rmd
+    Untracked:  analysis/organoid-08-conos-comparison.Rmd
+    Untracked:  analysis/organoid-0x-sample_integration.Rmd
+    Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  coverage.pdf
+    Untracked:  coverage_sashimi.pdf
+    Untracked:  coverage_sashimi.png
+    Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
+    Untracked:  data/Kanton_et_al/
+    Untracked:  data/Lam_et_al/
+    Untracked:  data/Sep2020/
+    Untracked:  data/reference/
+    Untracked:  data/virus_cell_tropism_markers.R
+    Untracked:  data/~$Reactive_astrocytes_markers.xlsx
+    Untracked:  pbDS_cell_level.pdf
+    Untracked:  pbDS_heatmap.pdf
+    Untracked:  pbDS_top_expr_umap.pdf
+    Untracked:  pbDS_upset.pdf
+    Untracked:  sashimi.pdf
+    Untracked:  scripts/bu_Rcode.R
+    Untracked:  scripts/bu_code.Rmd
+    Untracked:  scripts/salmon-latest_linux_x86_64/
+    Untracked:  stmn2.pdf
+    Untracked:  tdp.pdf
+
+Unstaged changes:
+    Modified:   analysis/05-annotation.Rmd
+    Modified:   analysis/TDP-04-clustering.Rmd
+    Modified:   analysis/TDP-06-cluster_analysis.Rmd
+    Modified:   analysis/TDP-08-01-HA-D96-expression-changes.Rmd
+    Modified:   analysis/_site.yml
+    Modified:   analysis/organoid-02-integration.Rmd
+    Modified:   analysis/organoid-04-group_integration.Rmd
+    Modified:   analysis/organoid-06-conos-analysis.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/timepoints-02-cluster-analysis.Rmd</code>) and HTML (<code>docs/timepoints-02-cluster-analysis.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/6525819c6357cf1c0ac72cbb60d2b344d79f7103/analysis/timepoints-02-cluster-analysis.Rmd" target="_blank">6525819</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-08
+</td>
+<td>
+cluster analysis of integrated full timeline and organoid data
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-packages" class="section level3">
+<h3>Load packages</h3>
+<pre class="r"><code>library(ComplexHeatmap)
+library(cowplot)
+library(ggplot2)
+library(dplyr)
+library(muscat)
+library(RColorBrewer)
+library(Seurat)
+library(SingleCellExperiment)</code></pre>
+</div>
+<div id="load-data-convert-to-sce" class="section level1">
+<h1>Load data &amp; convert to SCE</h1>
+<pre class="r"><code>so &lt;- readRDS(file.path(&quot;output&quot;, &quot;so_timepoints-01-organoid_integration.rds&quot;))
+sce &lt;- as.SingleCellExperiment(so, assay = &quot;RNA&quot;)
+colData(sce) &lt;- as.data.frame(colData(sce)) %&gt;% 
+    mutate_if(is.character, as.factor) %&gt;% 
+    DataFrame(row.names = colnames(sce))
+levels(sce$integration_group)[levels(sce$integration_group) == &quot;NC&quot;] &lt;- &quot;iCoMoNSC&quot;
+sce$integration_group &lt;- relevel(sce$integration_group, &quot;iCoMoNSC&quot;)</code></pre>
+</div>
+<div id="cluster-sample-counts" class="section level1">
+<h1>Cluster-sample counts</h1>
+<pre class="r"><code>(n_cells &lt;- table(sce$cluster_id, sce$integration_group))</code></pre>
+<pre><code>    
+     iCoMoNSC 409b2   H9
+  0      9355  1455 2356
+  1      9548   303  345
+  2       241  2504 4353
+  3      6838    84   88
+  4      5809   544  412
+  5      2992  1787 1074
+  6        73  2623 2972
+  7      4028  1097  454
+  8       732  1495 3199
+  9      4260   533  443
+  10     1170  2061 1611
+  11      139  1747 1759
+  12     1644   581  427
+  13      209  1263 1045
+  14     2358     5    2
+  15     1245   461  582
+  16      227   760  933
+  17      292   494  640
+  18     1410     5    2
+  19      959   115   53
+  20       12   301  448
+  21      169    54   28</code></pre>
+</div>
+<div id="relative-cluster-abundances" class="section level1">
+<h1>Relative cluster-abundances</h1>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells, margin = 2)
+mat &lt;- round(as.matrix(unclass(fqs))*100, 2)
+colfunc &lt;- colorRampPalette(c(&quot;ghostwhite&quot;, &quot;deepskyblue4&quot;))
+Heatmap(mat,
+    col = colfunc(10),
+    name = &quot;Percentage\nof cells&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cluster ID&quot;,
+    column_title = &quot;cell line&quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i] , x = x, y = y, 
+            gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>(n_cells_group &lt;- table(sce$cluster_id, sce$Stage))</code></pre>
+<pre><code>    
+      P22  D52  D96 D223 iPSCs   EB Neuroectoderm Neuroepithelium Organoid-1M
+  0     0 9222   96   37     0    0             0               0         201
+  1  9548    0    0    0   271  123            38              44         148
+  2   241    0    0    0  3376 3103           197              69         107
+  3  6838    0    0    0    10   25            13              19          91
+  4     0   17 2607 3185     0    0             0               0           1
+  5     0 2981   10    1     0    0             0               0         175
+  6    73    0    0    0    50    8          2101             885        2274
+  7    23   39 1949 2017     0    0             1               1         697
+  8     0  473  197   62     0    0             0               2          98
+  9     0    1   12 4247     0    0             0               0           6
+  10    0  855  271   44     0    0             0               0           6
+  11    4  118    4   13     0    0             1               0         144
+  12    0    5 1611   28     0    0             0               0           9
+  13    0    6   42  161     0    0             0               0          13
+  14    0    4   13 2341     0    0             0               0           0
+  15    0  501  685   59     0    0             0               0         672
+  16    0  204   17    6     0    0             0               0          80
+  17    0  186   71   35     1    2           346             292         317
+  18    0 1384   17    9     0    0             0               0           4
+  19    0   37  479  443     0    0             0               1          12
+  20   12    0    0    0   592   39            60              50           6
+  21    0   92   52   25     0    0             0               0           9
+    
+     Organoid-2M Organoid-4M
+  0         2696         914
+  1           24           0
+  2            5           0
+  3           10           4
+  4          467         488
+  5         2336         350
+  6          274           3
+  7          828          24
+  8         1429        3165
+  9          302         668
+  10        2460        1206
+  11        2472         889
+  12         691         308
+  13        1624         671
+  14           2           5
+  15         244         127
+  16        1086         527
+  17         135          41
+  18           3           0
+  19          95          60
+  20           1           1
+  21          36          37</code></pre>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells_group, margin = 2)
+mat &lt;- round(as.matrix(unclass(fqs))*100, 2)
+Heatmap(mat,
+    col = colfunc(10),
+    name = &quot;Percentage\nof cells&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cluster ID&quot;,
+    column_title = &quot;time point&quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i] , x = x, y = y, 
+            gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Heatmap with the lineage labels from the Kanton et al. paper. Cells without the label (all iCoMoNSCs) are excluded from the heatmap!</p>
+<pre class="r"><code>(n_cells_lineage &lt;- table(sce$cluster_id, sce$cl_FullLineage))</code></pre>
+<pre><code>    
+     choroid plexus/mesenchymal-like cells cortical neurons
+  0                                      0               26
+  1                                     91                0
+  2                                      0                0
+  3                                      1                0
+  4                                      0              928
+  5                                      0                7
+  6                                      2                1
+  7                                      0               34
+  8                                      0              366
+  9                                      1                7
+  10                                     0             2748
+  11                                     0               27
+  12                                     0                2
+  13                                     0             1189
+  14                                     0                0
+  15                                   191                0
+  16                                     0              187
+  17                                     4                1
+  18                                     0                0
+  19                                     0                1
+  20                                     0                0
+  21                                    81                0
+    
+     cycling dorsal progenitors cycling ventral progenitors
+  0                           0                           0
+  1                           0                           0
+  2                           0                           0
+  3                          52                           0
+  4                           0                           0
+  5                           2                           1
+  6                         259                           1
+  7                           0                           0
+  8                           0                           0
+  9                           0                          12
+  10                          2                           0
+  11                       1377                         989
+  12                          0                           0
+  13                          0                           0
+  14                          0                           0
+  15                          2                           0
+  16                          7                          19
+  17                          0                           0
+  18                          0                           0
+  19                          0                           0
+  20                          0                           0
+  21                          0                           0
+    
+     ectodermal/neuroectodermal-like cells gliogenic/outer RGCs and astrocytes
+  0                                      0                                   0
+  1                                     18                                   1
+  2                                     19                                   0
+  3                                      5                                   0
+  4                                      0                                   0
+  5                                      1                                 349
+  6                                    496                                   0
+  7                                      0                                   0
+  8                                      0                                   1
+  9                                      1                                 922
+  10                                     0                                   0
+  11                                     4                                  75
+  12                                     0                                 429
+  13                                     0                                   0
+  14                                     0                                   1
+  15                                     0                                   0
+  16                                     0                                 131
+  17                                   294                                  22
+  18                                     0                                   0
+  19                                     1                                   5
+  20                                    30                                   0
+  21                                     1                                   0
+    
+     IPs and early cortical neurons midbrain/hindbrain cells
+  0                               2                     1027
+  1                               0                        1
+  2                               0                        0
+  3                               0                        0
+  4                               4                        7
+  5                               3                        1
+  6                               4                       56
+  7                               0                     1443
+  8                              59                      190
+  9                               0                        1
+  10                            859                       42
+  11                             11                       12
+  12                              0                        0
+  13                              0                      462
+  14                              0                        0
+  15                              0                        5
+  16                            768                       33
+  17                              0                        8
+  18                              0                        7
+  19                              0                        1
+  20                              0                        0
+  21                              0                        0
+    
+     neuroepithelial-like cells retina progenitors RGCs RGCs early stem cells
+  0                           3                  0    0          0          1
+  1                          96                 58    1         17        365
+  2                         253                 53    0         64       6468
+  3                          41                 40    1          8         23
+  4                           0                  0    1          0          0
+  5                           0                  1 1877        619          0
+  6                        2466                915   20       1327         44
+  7                           2                  1    0          8          0
+  8                           3                  0    5         37          1
+  9                           0                  0   17         15          0
+  10                          2                  0    4          0          0
+  11                          1                  1  909         70          0
+  12                          0                  0  559         17          0
+  13                          0                  0    0          0          0
+  14                          0                  0    0          6          0
+  15                          0                 73    0        772          0
+  16                          0                  0   72          9          0
+  17                        318                  3   95        357         28
+  18                          0                  0    0          0          0
+  19                          0                  0    1        157          1
+  20                         45                  0    0          2        672
+  21                          0                  0    0          0          0
+    
+     ventral progenitors and neurons
+  0                             2752
+  1                                0
+  2                                0
+  3                                1
+  4                               16
+  5                                0
+  6                                4
+  7                               63
+  8                             4032
+  9                                0
+  10                              15
+  11                              30
+  12                               1
+  13                             657
+  14                               0
+  15                               0
+  16                             467
+  17                               4
+  18                               0
+  19                               1
+  20                               0
+  21                               0</code></pre>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells_lineage, margin = 2)
+mat &lt;- round(as.matrix(unclass(fqs))*100, 2)
+cn &lt;- colnames(mat)
+Heatmap(mat,
+    col = colfunc(10),
+    name = &quot;Percentage\nof cells&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    show_column_names = FALSE, 
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cluster ID&quot;,
+    column_title = &quot;Lineage&quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = &quot;black&quot;, fontsize = 10)),
+    bottom_annotation = HeatmapAnnotation(
+      text = anno_text(cn, rot = 80, just = &quot;right&quot;)))</code></pre>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>(n_cells_lineage &lt;- table(sce$cl_FullLineage, sce$cluster_id))</code></pre>
+<pre><code>                                       
+                                           0    1    2    3    4    5    6    7
+  choroid plexus/mesenchymal-like cells    0   91    0    1    0    0    2    0
+  cortical neurons                        26    0    0    0  928    7    1   34
+  cycling dorsal progenitors               0    0    0   52    0    2  259    0
+  cycling ventral progenitors              0    0    0    0    0    1    1    0
+  ectodermal/neuroectodermal-like cells    0   18   19    5    0    1  496    0
+  gliogenic/outer RGCs and astrocytes      0    1    0    0    0  349    0    0
+  IPs and early cortical neurons           2    0    0    0    4    3    4    0
+  midbrain/hindbrain cells              1027    1    0    0    7    1   56 1443
+  neuroepithelial-like cells               3   96  253   41    0    0 2466    2
+  retina progenitors                       0   58   53   40    0    1  915    1
+  RGCs                                     0    1    0    1    1 1877   20    0
+  RGCs early                               0   17   64    8    0  619 1327    8
+  stem cells                               1  365 6468   23    0    0   44    0
+  ventral progenitors and neurons       2752    0    0    1   16    0    4   63
+                                       
+                                           8    9   10   11   12   13   14   15
+  choroid plexus/mesenchymal-like cells    0    1    0    0    0    0    0  191
+  cortical neurons                       366    7 2748   27    2 1189    0    0
+  cycling dorsal progenitors               0    0    2 1377    0    0    0    2
+  cycling ventral progenitors              0   12    0  989    0    0    0    0
+  ectodermal/neuroectodermal-like cells    0    1    0    4    0    0    0    0
+  gliogenic/outer RGCs and astrocytes      1  922    0   75  429    0    1    0
+  IPs and early cortical neurons          59    0  859   11    0    0    0    0
+  midbrain/hindbrain cells               190    1   42   12    0  462    0    5
+  neuroepithelial-like cells               3    0    2    1    0    0    0    0
+  retina progenitors                       0    0    0    1    0    0    0   73
+  RGCs                                     5   17    4  909  559    0    0    0
+  RGCs early                              37   15    0   70   17    0    6  772
+  stem cells                               1    0    0    0    0    0    0    0
+  ventral progenitors and neurons       4032    0   15   30    1  657    0    0
+                                       
+                                          16   17   18   19   20   21
+  choroid plexus/mesenchymal-like cells    0    4    0    0    0   81
+  cortical neurons                       187    1    0    1    0    0
+  cycling dorsal progenitors               7    0    0    0    0    0
+  cycling ventral progenitors             19    0    0    0    0    0
+  ectodermal/neuroectodermal-like cells    0  294    0    1   30    1
+  gliogenic/outer RGCs and astrocytes    131   22    0    5    0    0
+  IPs and early cortical neurons         768    0    0    0    0    0
+  midbrain/hindbrain cells                33    8    7    1    0    0
+  neuroepithelial-like cells               0  318    0    0   45    0
+  retina progenitors                       0    3    0    0    0    0
+  RGCs                                    72   95    0    1    0    0
+  RGCs early                               9  357    0  157    2    0
+  stem cells                               0   28    0    1  672    0
+  ventral progenitors and neurons        467    4    0    1    0    0</code></pre>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells_lineage, margin = 2)
+mat &lt;- round(as.matrix(unclass(fqs))*100, 2)
+Heatmap(mat,
+    col = colfunc(10),
+    name = &quot;Percentage\nof cells&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;Lineage&quot;,
+    row_names_rot = 10,
+    column_title = &quot;cluster ID&quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-4-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Heatmap with the line labels from the Kanton et. al paper. Cell without the label, are excluded from the heatmap!</p>
+<pre class="r"><code>(n_cells_linecomp &lt;- table(sce$cluster_id, sce$cl_LineComp))</code></pre>
+<pre><code>    
+     Cerebellar glutamatergic neurons 1 Cerebellar glutamatergic neurons 2
+  0                                 501                                341
+  1                                   1                                  0
+  2                                   0                                  0
+  3                                   0                                  0
+  4                                   4                                  3
+  5                                   1                                  1
+  6                                   0                                 10
+  7                                 558                                196
+  8                                  54                                 63
+  9                                   0                                  0
+  10                                 32                                  4
+  11                                  2                                  6
+  12                                  0                                  0
+  13                                126                                294
+  14                                  0                                  0
+  15                                  1                                  0
+  16                                  6                                  1
+  17                                  0                                  0
+  18                                  2                                  1
+  19                                  0                                  0
+  20                                  0                                  0
+  21                                  0                                  0
+    
+     Cortical IPs Cortical neurons Cortical NPCs LGE interneurons
+  0             2                5             0              466
+  1             0                0             0                0
+  2             0                0             0                0
+  3             0                0             0                0
+  4            85              349             0                0
+  5           198                0          1433                0
+  6             1                0            10                0
+  7             3                3             0                1
+  8           116               69             0                9
+  9             7                0             4                0
+  10          557             1835             0                4
+  11          319                0          1231                2
+  12           71                0           460                0
+  13            1              682             0               55
+  14            0                0             0                0
+  15            1                0             1                0
+  16          752                0            17                0
+  17            4                0            56                0
+  18            0                0             0                0
+  19            0                0             0                0
+  20            0                0             0                0
+  21            0                0             0                0
+    
+     MGE/CGE interneurons Mid-hindbrain NPCs Midbrain GABAergic interneurons
+  0                  1157                  1                             127
+  1                     0                  5                               0
+  2                     0                  4                               0
+  3                     0                  9                               0
+  4                     3                  0                               0
+  5                     5                354                               1
+  6                     0                246                               0
+  7                     3                 34                               6
+  8                   901                  2                              48
+  9                     2                  3                               0
+  10                    6                  1                               0
+  11                   11                192                               0
+  12                    2                  5                               0
+  13                  275                  0                               0
+  14                    0                  1                               0
+  15                    0                 62                               0
+  16                  235                 12                               1
+  17                    0                 48                               0
+  18                    0                  0                               0
+  19                    1                  5                               0
+  20                    0                  0                               0
+  21                    0                  4                               0
+    
+     Purkinje cells Ventral NPCs
+  0               1            0
+  1               0            0
+  2               0            0
+  3               0            0
+  4               1            0
+  5               0           96
+  6               0            1
+  7               3            0
+  8               0            1
+  9               0          229
+  10              2            1
+  11              0          602
+  12              0           93
+  13             38            0
+  14              0            1
+  15              0            0
+  16              0           40
+  17              0            6
+  18              0            0
+  19              0            1
+  20              0            0
+  21              0            0</code></pre>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells_linecomp, margin = 2)
+mat &lt;- round(as.matrix(unclass(fqs))*100, 2)
+cn &lt;- colnames(mat)
+Heatmap(mat,
+    col = colfunc(10),
+    name = &quot;Percentage\nof cells&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    show_column_names = FALSE, 
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cluster ID&quot;,
+    column_title = &quot;line &quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = &quot;black&quot;, fontsize = 10)),
+    bottom_annotation = HeatmapAnnotation(
+      text = anno_text(cn, rot = 80, just = &quot;right&quot;)))</code></pre>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>(n_cells_linecomp &lt;- table(sce$cl_LineComp, sce$cluster_id))</code></pre>
+<pre><code>                                    
+                                        0    1    2    3    4    5    6    7
+  Cerebellar glutamatergic neurons 1  501    1    0    0    4    1    0  558
+  Cerebellar glutamatergic neurons 2  341    0    0    0    3    1   10  196
+  Cortical IPs                          2    0    0    0   85  198    1    3
+  Cortical neurons                      5    0    0    0  349    0    0    3
+  Cortical NPCs                         0    0    0    0    0 1433   10    0
+  LGE interneurons                    466    0    0    0    0    0    0    1
+  MGE/CGE interneurons               1157    0    0    0    3    5    0    3
+  Mid-hindbrain NPCs                    1    5    4    9    0  354  246   34
+  Midbrain GABAergic interneurons     127    0    0    0    0    1    0    6
+  Purkinje cells                        1    0    0    0    1    0    0    3
+  Ventral NPCs                          0    0    0    0    0   96    1    0
+                                    
+                                        8    9   10   11   12   13   14   15
+  Cerebellar glutamatergic neurons 1   54    0   32    2    0  126    0    1
+  Cerebellar glutamatergic neurons 2   63    0    4    6    0  294    0    0
+  Cortical IPs                        116    7  557  319   71    1    0    1
+  Cortical neurons                     69    0 1835    0    0  682    0    0
+  Cortical NPCs                         0    4    0 1231  460    0    0    1
+  LGE interneurons                      9    0    4    2    0   55    0    0
+  MGE/CGE interneurons                901    2    6   11    2  275    0    0
+  Mid-hindbrain NPCs                    2    3    1  192    5    0    1   62
+  Midbrain GABAergic interneurons      48    0    0    0    0    0    0    0
+  Purkinje cells                        0    0    2    0    0   38    0    0
+  Ventral NPCs                          1  229    1  602   93    0    1    0
+                                    
+                                       16   17   18   19   20   21
+  Cerebellar glutamatergic neurons 1    6    0    2    0    0    0
+  Cerebellar glutamatergic neurons 2    1    0    1    0    0    0
+  Cortical IPs                        752    4    0    0    0    0
+  Cortical neurons                      0    0    0    0    0    0
+  Cortical NPCs                        17   56    0    0    0    0
+  LGE interneurons                      0    0    0    0    0    0
+  MGE/CGE interneurons                235    0    0    1    0    0
+  Mid-hindbrain NPCs                   12   48    0    5    0    4
+  Midbrain GABAergic interneurons       1    0    0    0    0    0
+  Purkinje cells                        0    0    0    0    0    0
+  Ventral NPCs                         40    6    0    1    0    0</code></pre>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells_linecomp, margin = 2)
+mat &lt;- round(as.matrix(unclass(fqs))*100, 2)
+Heatmap(mat,
+    col = colfunc(10),
+    name = &quot;Percentage\nof cells&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;Lineage&quot;,
+    row_names_rot = 10,
+    column_title = &quot;line&quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-5-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Heatmap with the cell type labels from the Kanton et. al paper. Cell without the label, are excluded from the heatmap!</p>
+<pre class="r"><code>(n_cells_predcell &lt;- table(sce$cluster_id, sce$PredCellType))</code></pre>
+<pre><code>    
+     Astrocyte Astrocyte/RG Choroid Choroid/RG   EN EN/Glyc EN/IN Endothelial
+  0          0            0       0          0 2356       2     3           0
+  1          8            0       5          0    1       0     1           0
+  2          0            0       9          0    0       0     0           0
+  3          0            0       0          0    0       0     0           0
+  4          0            0       0          0  939       0     0           0
+  5         89            0      12          1   22       0     0           0
+  6          3            0      61          0   24       0     0           0
+  7          0            0       0          0 1109       0     0           0
+  8          0            0       0          0 1102       2     0           0
+  9        149            1       2          0   18       0     0           0
+  10         0            0       0          0 3624       0     0           0
+  11         2            0       0          0    5       0     0           0
+  12        24            0       0          0    6       0     0           0
+  13         0            0       0          0 2107       3     1           0
+  14         1            1       1          0    0       0     0           0
+  15        21            1     452          0    3       0     0           0
+  16        40            1       0          0  837       0     1           0
+  17         2            0      38          0    2       0     0           4
+  18         0            0       0          0    6       0     0           0
+  19        10            0       1          0    0       0     0           0
+  20         1            0       1          0    0       0     0           0
+  21         0            0       0          0    2       0     0           1
+    
+     Glyc Glyc/IN Glyc/Mural Glyc/RG   IN IN/Microglia  IPC IPC/RG Microglia
+  0    16       0          0       0 1433            0    1      0         0
+  1   113       0          0       0   72            0  257      0        29
+  2   210       0          0       0    6            0 4493      0         4
+  3     0       0          0       0    5            0  162      0         0
+  4     0       0          0       0   17            0    0      0         0
+  5    62       0          0       0  193            0   13      0         0
+  6   669       0          0       0  127            0 2025      0         2
+  7   247       0          0       0  176            0   17      0         0
+  8    34       0          0       0 3533            0   23      0         0
+  9     0       0          0       0   25            0    2      0         0
+  10    0       0          0       0   37            0    5      0         0
+  11    3       0          0       0   38            0 2457      1         0
+  12    3       0          0       0   60            0    3      0         1
+  13    1       0          0       0  196            0    0      0         0
+  14    0       0          0       0    0            0    0      0         0
+  15  285       0          0       0   33            0    9      0         1
+  16   34       0          0       0  250            0  343      0         0
+  17  565       0          0       1  197            0   81      0        44
+  18    1       0          0       0    0            0    0      0         0
+  19    0       1          0       0  149            0    0      0         0
+  20   27       0          0       0  217            0  307      0       189
+  21    0       0          1       0    1            1    6      0         7
+    
+     Mural  OPC   RG
+  0      0    0    0
+  1      1    0  161
+  2      0    0 2135
+  3      0    0    5
+  4      0    0    0
+  5      0    0 2469
+  6      0    0 2684
+  7      0    0    2
+  8      0    0    0
+  9      0   11  768
+  10     0    0    6
+  11     0    4  996
+  12     0    0  911
+  13     0    0    0
+  14     0    0    4
+  15     0    0  238
+  16     0   28  159
+  17     0    0  200
+  18     0    0    0
+  19     0    0    7
+  20     0    0    7
+  21    58    0    5</code></pre>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells_predcell, margin = 2)
+mat &lt;- round(as.matrix(unclass(fqs))*100, 2)
+cn &lt;- colnames(mat)
+Heatmap(mat,
+    col = colfunc(10),
+    name = &quot;Percentage\nof cells&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    show_column_names = FALSE, 
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cluster ID&quot;,
+    column_title = &quot;cell type&quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = &quot;black&quot;, fontsize = 10)),
+    bottom_annotation = HeatmapAnnotation(
+      text = anno_text(cn, rot = 80, just = &quot;right&quot;)))</code></pre>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>(n_cells_predcell &lt;- table(sce$PredCellType, sce$cluster_id))</code></pre>
+<pre><code>              
+                  0    1    2    3    4    5    6    7    8    9   10   11   12
+  Astrocyte       0    8    0    0    0   89    3    0    0  149    0    2   24
+  Astrocyte/RG    0    0    0    0    0    0    0    0    0    1    0    0    0
+  Choroid         0    5    9    0    0   12   61    0    0    2    0    0    0
+  Choroid/RG      0    0    0    0    0    1    0    0    0    0    0    0    0
+  EN           2356    1    0    0  939   22   24 1109 1102   18 3624    5    6
+  EN/Glyc         2    0    0    0    0    0    0    0    2    0    0    0    0
+  EN/IN           3    1    0    0    0    0    0    0    0    0    0    0    0
+  Endothelial     0    0    0    0    0    0    0    0    0    0    0    0    0
+  Glyc           16  113  210    0    0   62  669  247   34    0    0    3    3
+  Glyc/IN         0    0    0    0    0    0    0    0    0    0    0    0    0
+  Glyc/Mural      0    0    0    0    0    0    0    0    0    0    0    0    0
+  Glyc/RG         0    0    0    0    0    0    0    0    0    0    0    0    0
+  IN           1433   72    6    5   17  193  127  176 3533   25   37   38   60
+  IN/Microglia    0    0    0    0    0    0    0    0    0    0    0    0    0
+  IPC             1  257 4493  162    0   13 2025   17   23    2    5 2457    3
+  IPC/RG          0    0    0    0    0    0    0    0    0    0    0    1    0
+  Microglia       0   29    4    0    0    0    2    0    0    0    0    0    1
+  Mural           0    1    0    0    0    0    0    0    0    0    0    0    0
+  OPC             0    0    0    0    0    0    0    0    0   11    0    4    0
+  RG              0  161 2135    5    0 2469 2684    2    0  768    6  996  911
+              
+                 13   14   15   16   17   18   19   20   21
+  Astrocyte       0    1   21   40    2    0   10    1    0
+  Astrocyte/RG    0    1    1    1    0    0    0    0    0
+  Choroid         0    1  452    0   38    0    1    1    0
+  Choroid/RG      0    0    0    0    0    0    0    0    0
+  EN           2107    0    3  837    2    6    0    0    2
+  EN/Glyc         3    0    0    0    0    0    0    0    0
+  EN/IN           1    0    0    1    0    0    0    0    0
+  Endothelial     0    0    0    0    4    0    0    0    1
+  Glyc            1    0  285   34  565    1    0   27    0
+  Glyc/IN         0    0    0    0    0    0    1    0    0
+  Glyc/Mural      0    0    0    0    0    0    0    0    1
+  Glyc/RG         0    0    0    0    1    0    0    0    0
+  IN            196    0   33  250  197    0  149  217    1
+  IN/Microglia    0    0    0    0    0    0    0    0    1
+  IPC             0    0    9  343   81    0    0  307    6
+  IPC/RG          0    0    0    0    0    0    0    0    0
+  Microglia       0    0    1    0   44    0    0  189    7
+  Mural           0    0    0    0    0    0    0    0   58
+  OPC             0    0    0   28    0    0    0    0    0
+  RG              0    4  238  159  200    0    7    7    5</code></pre>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells_predcell, margin = 2)
+mat &lt;- round(as.matrix(unclass(fqs))*100, 2)
+Heatmap(mat,
+    col = colfunc(10),
+    name = &quot;Percentage\nof cells&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cell type&quot;,
+    row_names_rot = 10,
+    column_title = &quot;line&quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-6-2.png" width="768" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.0 (2020-04-24)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 18.04.5 LTS
+
+Matrix products: default
+BLAS:   /usr/local/R/R-4.0.0/lib/libRblas.so
+LAPACK: /usr/local/R/R-4.0.0/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+ [1] parallel  stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] SingleCellExperiment_1.10.1 SummarizedExperiment_1.18.1
+ [3] DelayedArray_0.14.0         matrixStats_0.56.0         
+ [5] Biobase_2.48.0              GenomicRanges_1.40.0       
+ [7] GenomeInfoDb_1.24.2         IRanges_2.22.2             
+ [9] S4Vectors_0.26.1            BiocGenerics_0.34.0        
+[11] Seurat_3.1.5                RColorBrewer_1.1-2         
+[13] muscat_1.2.1                dplyr_1.0.2                
+[15] ggplot2_3.3.2               cowplot_1.0.0              
+[17] ComplexHeatmap_2.4.2        workflowr_1.6.2            
+
+loaded via a namespace (and not attached):
+  [1] backports_1.1.9           circlize_0.4.10          
+  [3] blme_1.0-4                igraph_1.2.5             
+  [5] plyr_1.8.6                lazyeval_0.2.2           
+  [7] TMB_1.7.16                splines_4.0.0            
+  [9] BiocParallel_1.22.0       listenv_0.8.0            
+ [11] scater_1.16.2             digest_0.6.25            
+ [13] foreach_1.5.0             htmltools_0.5.0          
+ [15] viridis_0.5.1             gdata_2.18.0             
+ [17] lmerTest_3.1-2            magrittr_1.5             
+ [19] memoise_1.1.0             cluster_2.1.0            
+ [21] doParallel_1.0.15         ROCR_1.0-11              
+ [23] limma_3.44.3              globals_0.12.5           
+ [25] annotate_1.66.0           prettyunits_1.1.1        
+ [27] colorspace_1.4-1          rappdirs_0.3.1           
+ [29] ggrepel_0.8.2             blob_1.2.1               
+ [31] xfun_0.15                 jsonlite_1.7.0           
+ [33] crayon_1.3.4              RCurl_1.98-1.3           
+ [35] genefilter_1.70.0         lme4_1.1-23              
+ [37] zoo_1.8-8                 ape_5.4                  
+ [39] survival_3.2-3            iterators_1.0.12         
+ [41] glue_1.4.2                gtable_0.3.0             
+ [43] zlibbioc_1.34.0           XVector_0.28.0           
+ [45] leiden_0.3.3              GetoptLong_1.0.1         
+ [47] BiocSingular_1.4.0        future.apply_1.6.0       
+ [49] shape_1.4.4               scales_1.1.1             
+ [51] DBI_1.1.0                 edgeR_3.30.3             
+ [53] Rcpp_1.0.5                viridisLite_0.3.0        
+ [55] xtable_1.8-4              progress_1.2.2           
+ [57] clue_0.3-57               reticulate_1.16          
+ [59] bit_1.1-15.2              rsvd_1.0.3               
+ [61] tsne_0.1-3                htmlwidgets_1.5.1        
+ [63] httr_1.4.1                gplots_3.0.4             
+ [65] ellipsis_0.3.1            ica_1.0-2                
+ [67] pkgconfig_2.0.3           XML_3.99-0.4             
+ [69] uwot_0.1.8                locfit_1.5-9.4           
+ [71] tidyselect_1.1.0          rlang_0.4.7              
+ [73] reshape2_1.4.4            later_1.1.0.1            
+ [75] AnnotationDbi_1.50.1      munsell_0.5.0            
+ [77] tools_4.0.0               generics_0.0.2           
+ [79] RSQLite_2.2.0             ggridges_0.5.2           
+ [81] evaluate_0.14             stringr_1.4.0            
+ [83] yaml_2.2.1                knitr_1.29               
+ [85] bit64_0.9-7               fs_1.4.2                 
+ [87] fitdistrplus_1.1-1        caTools_1.18.0           
+ [89] RANN_2.6.1                purrr_0.3.4              
+ [91] pbapply_1.4-2             future_1.17.0            
+ [93] nlme_3.1-148              whisker_0.4              
+ [95] pbkrtest_0.4-8.6          compiler_4.0.0           
+ [97] plotly_4.9.2.1            beeswarm_0.2.3           
+ [99] png_0.1-7                 variancePartition_1.18.2 
+[101] tibble_3.0.3              statmod_1.4.34           
+[103] geneplotter_1.66.0        stringi_1.4.6            
+[105] lattice_0.20-41           Matrix_1.2-18            
+[107] nloptr_1.2.2.2            vctrs_0.3.4              
+[109] pillar_1.4.6              lifecycle_0.2.0          
+[111] lmtest_0.9-37             GlobalOptions_0.1.2      
+[113] RcppAnnoy_0.0.16          BiocNeighbors_1.6.0      
+[115] data.table_1.12.8         bitops_1.0-6             
+[117] irlba_2.3.3               patchwork_1.0.1          
+[119] httpuv_1.5.4              colorRamps_2.3           
+[121] R6_2.4.1                  promises_1.1.1           
+[123] KernSmooth_2.23-17        gridExtra_2.3            
+[125] vipor_0.4.5               codetools_0.2-16         
+[127] boot_1.3-25               MASS_7.3-51.6            
+[129] gtools_3.8.2              DESeq2_1.28.1            
+[131] rprojroot_1.3-2           rjson_0.2.20             
+[133] withr_2.2.0               sctransform_0.2.1        
+[135] GenomeInfoDbData_1.2.3    hms_0.5.3                
+[137] tidyr_1.1.0               glmmTMB_1.0.2.1          
+[139] minqa_1.2.4               rmarkdown_2.3            
+[141] DelayedMatrixStats_1.10.1 Rtsne_0.15               
+[143] git2r_0.27.1              numDeriv_2016.8-1.1      
+[145] ggbeeswarm_0.6.0         </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
