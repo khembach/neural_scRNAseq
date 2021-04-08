@@ -47,9 +47,9 @@ sce$integration_group <- relevel(sce$integration_group, "iCoMoNSC")
 
 # Relative cluster-abundances
 
-```{r fig.width = 4, fig.height = 7}
+```{r fig.width = 3, fig.height = 7}
 fqs <- prop.table(n_cells, margin = 2)
-mat <- round(as.matrix(unclass(fqs))*100, 2)
+mat <- round(as.matrix(unclass(fqs))*100, 1)
 colfunc <- colorRampPalette(c("ghostwhite", "deepskyblue4"))
 Heatmap(mat,
     col = colfunc(10),
@@ -87,7 +87,7 @@ Heatmap(mat,
 
 Heatmap with the lineage labels from the Kanton et al. paper. Cells without the label (all iCoMoNSCs) are excluded from the heatmap!
 
-```{r fig.width = 10, fig.height = 6}
+```{r fig.width = 10, fig.height = 8}
 (n_cells_lineage <- table(sce$cluster_id, sce$cl_FullLineage))
 fqs <- prop.table(n_cells_lineage, margin = 2)
 mat <- round(as.matrix(unclass(fqs))*100, 2)
@@ -110,7 +110,7 @@ Heatmap(mat,
       text = anno_text(cn, rot = 80, just = "right")))
 ```
 
-```{r fig.width = 8, fig.height = 8}
+```{r fig.width = 12, fig.height = 7}
 (n_cells_lineage <- table(sce$cl_FullLineage, sce$cluster_id))
 fqs <- prop.table(n_cells_lineage, margin = 2)
 mat <- round(as.matrix(unclass(fqs))*100, 2)
@@ -132,7 +132,7 @@ Heatmap(mat,
 
 Heatmap with the line labels from the Kanton et. al paper. Cell without the label, are excluded from the heatmap!
 
-```{r fig.width = 10, fig.height = 6}
+```{r fig.width = 10, fig.height = 8}
 (n_cells_linecomp <- table(sce$cluster_id, sce$cl_LineComp))
 fqs <- prop.table(n_cells_linecomp, margin = 2)
 mat <- round(as.matrix(unclass(fqs))*100, 2)
@@ -155,7 +155,7 @@ Heatmap(mat,
       text = anno_text(cn, rot = 80, just = "right")))
 ```
 
-```{r fig.width = 9, fig.height = 8}
+```{r fig.width = 12, fig.height = 8}
 (n_cells_linecomp <- table(sce$cl_LineComp, sce$cluster_id))
 fqs <- prop.table(n_cells_linecomp, margin = 2)
 mat <- round(as.matrix(unclass(fqs))*100, 2)
@@ -177,7 +177,7 @@ Heatmap(mat,
 
 Heatmap with the cell type labels from the Kanton et. al paper. Cell without the label, are excluded from the heatmap!
 
-```{r fig.width = 10, fig.height = 8}
+```{r fig.width = 12, fig.height = 8}
 (n_cells_predcell <- table(sce$cluster_id, sce$PredCellType))
 fqs <- prop.table(n_cells_predcell, margin = 2)
 mat <- round(as.matrix(unclass(fqs))*100, 2)
