@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6525819c6357cf1c0ac72cbb60d2b344d79f7103targetblank6525819a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6525819c6357cf1c0ac72cbb60d2b344d79f7103" target="_blank">6525819</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree659479a325c3b8f4f200925b4b983eb781cd1095targetblank659479aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/659479a325c3b8f4f200925b4b983eb781cd1095" target="_blank">659479a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6525819c6357cf1c0ac72cbb60d2b344d79f7103targetblank6525819a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree659479a325c3b8f4f200925b4b983eb781cd1095targetblank659479aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6525819c6357cf1c0ac72cbb60d2b344d79f7103" target="_blank">6525819</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/659479a325c3b8f4f200925b4b983eb781cd1095" target="_blank">659479a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -861,6 +861,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/659479a325c3b8f4f200925b4b983eb781cd1095/analysis/timepoints-02-cluster-analysis.Rmd" target="_blank">659479a</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-08
+</td>
+<td>
+adjust heatmap sizes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/f219ac67a5e3ca8e82b50623622131ce178d0e40/docs/timepoints-02-cluster-analysis.html" target="_blank">f219ac6</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/6525819c6357cf1c0ac72cbb60d2b344d79f7103/analysis/timepoints-02-cluster-analysis.Rmd" target="_blank">6525819</a>
 </td>
 <td>
@@ -947,7 +981,44 @@ Heatmap(mat,
     cell_fun = function(i, j, x, y, width, height, fill)
         grid.text(mat[j, i] , x = x, y = y, 
             gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
-<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-2-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f219ac67a5e3ca8e82b50623622131ce178d0e40/docs/figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-2-1.png" target="_blank">f219ac6</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>(n_cells_group &lt;- table(sce$cluster_id, sce$Stage))</code></pre>
 <pre><code>    
       P22  D52  D96 D223 iPSCs   EB Neuroectoderm Neuroepithelium Organoid-1M
@@ -1013,6 +1084,43 @@ Heatmap(mat,
         grid.text(mat[j, i] , x = x, y = y, 
             gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
 <p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f219ac67a5e3ca8e82b50623622131ce178d0e40/docs/figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-3-1.png" target="_blank">f219ac6</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Heatmap with the lineage labels from the Kanton et al. paper. Cells without the label (all iCoMoNSCs) are excluded from the heatmap!</p>
 <pre class="r"><code>(n_cells_lineage &lt;- table(sce$cluster_id, sce$cl_FullLineage))</code></pre>
 <pre><code>    
@@ -1178,7 +1286,44 @@ Heatmap(mat,
             gp = gpar(col = &quot;black&quot;, fontsize = 10)),
     bottom_annotation = HeatmapAnnotation(
       text = anno_text(cn, rot = 80, just = &quot;right&quot;)))</code></pre>
-<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-4-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f219ac67a5e3ca8e82b50623622131ce178d0e40/docs/figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-4-1.png" target="_blank">f219ac6</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>(n_cells_lineage &lt;- table(sce$cl_FullLineage, sce$cluster_id))</code></pre>
 <pre><code>                                       
                                            0    1    2    3    4    5    6    7
@@ -1244,7 +1389,44 @@ Heatmap(mat,
     cell_fun = function(i, j, x, y, width, height, fill)
         grid.text(mat[j, i], x = x, y = y, 
             gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
-<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-4-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f219ac67a5e3ca8e82b50623622131ce178d0e40/docs/figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-5-1.png" target="_blank">f219ac6</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Heatmap with the line labels from the Kanton et. al paper. Cell without the label, are excluded from the heatmap!</p>
 <pre class="r"><code>(n_cells_linecomp &lt;- table(sce$cluster_id, sce$cl_LineComp))</code></pre>
 <pre><code>    
@@ -1362,7 +1544,44 @@ Heatmap(mat,
             gp = gpar(col = &quot;black&quot;, fontsize = 10)),
     bottom_annotation = HeatmapAnnotation(
       text = anno_text(cn, rot = 80, just = &quot;right&quot;)))</code></pre>
-<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f219ac67a5e3ca8e82b50623622131ce178d0e40/docs/figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-6-1.png" target="_blank">f219ac6</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-08
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>(n_cells_linecomp &lt;- table(sce$cl_LineComp, sce$cluster_id))</code></pre>
 <pre><code>                                    
                                         0    1    2    3    4    5    6    7
@@ -1419,7 +1638,7 @@ Heatmap(mat,
     cell_fun = function(i, j, x, y, width, height, fill)
         grid.text(mat[j, i], x = x, y = y, 
             gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
-<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-5-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-7-1.png" width="864" style="display: block; margin: auto;" /></p>
 <p>Heatmap with the cell type labels from the Kanton et. al paper. Cell without the label, are excluded from the heatmap!</p>
 <pre class="r"><code>(n_cells_predcell &lt;- table(sce$cluster_id, sce$PredCellType))</code></pre>
 <pre><code>    
@@ -1513,7 +1732,7 @@ Heatmap(mat,
             gp = gpar(col = &quot;black&quot;, fontsize = 10)),
     bottom_annotation = HeatmapAnnotation(
       text = anno_text(cn, rot = 80, just = &quot;right&quot;)))</code></pre>
-<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-8-1.png" width="960" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>(n_cells_predcell &lt;- table(sce$PredCellType, sce$cluster_id))</code></pre>
 <pre><code>              
                   0    1    2    3    4    5    6    7    8    9   10   11   12
@@ -1575,7 +1794,7 @@ Heatmap(mat,
     cell_fun = function(i, j, x, y, width, height, fill)
         grid.text(mat[j, i], x = x, y = y, 
             gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
-<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-6-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/timepoints-02-cluster-analysis.Rmd/unnamed-chunk-8-2.png" width="960" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
