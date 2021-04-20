@@ -64,20 +64,22 @@ sce$cluster_id <- Idents(so)
 
 ```{r fig.width = 6, fig.height = 5}
 fqs <- prop.table(n_cells, margin = 2)
-mat <- as.matrix(unclass(fqs))
+mat <- round(as.matrix(unclass(fqs))*100, 2)
+colfunc <- colorRampPalette(c("ghostwhite", "deepskyblue4"))
 Heatmap(mat,
-    col = rev(brewer.pal(11, "RdGy")[-6]),
-    name = "Frequency",
+    # col = rev(brewer.pal(11, "RdGy")[-6]),
+    col = colfunc(10),
+    name = "Percentage\nof cells",
     cluster_rows = FALSE,
     cluster_columns = FALSE,
     row_names_side = "left",
-    row_title = "cluster_id",
-    column_title = "sample_id",
+    row_title = "cluster ID",
+    column_title = "sample ID",
     column_title_side = "bottom",
     rect_gp = gpar(col = "white"),
     cell_fun = function(i, j, x, y, width, height, fill)
-        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
-            gp = gpar(col = "white", fontsize = 8)))
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = "black", fontsize = 10)))
 ```
 
 
@@ -189,9 +191,12 @@ Heatmap(mat,
 
 # Known marker genes
 
+Apart from the usual marker genes, we also want to analyse the expression of Casein Kinase 1 Epsilon (CSNK1E).
+
 ```{r}
 ## source file with list of known marker genes
 source(file.path("data", "known_cell_type_markers.R"))
+fs[["kinase"]] <- "CSNK1E"
 
 fs <- lapply(fs, sapply, function(g)
     grep(pattern = paste0("\\.", g, "$"), rownames(sce), value = TRUE)
@@ -456,7 +461,7 @@ labs <- lapply(fs, function(x) gsub(".*\\.", "",x))
 
 ## Heatmap of virus cell tropism markers
 
-```{r virus-markers-heatmap, fig.width = 9, fig.height = 15}
+```{r virus-markers-heatmap, fig.width = 9, fig.height = 10}
 # compute cluster-marker means
 ms_by_cluster <- lapply(fs, function(gs) vapply(cs_by_k, function(i)
         Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
@@ -501,6 +506,7 @@ hm <- Heatmap(mat,
     top_annotation = col_anno)
 draw(hm, annotation_legend_list = list(col_lgd))
 ```
+
 
 
 ## Save cluster markers to RDS
