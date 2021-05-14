@@ -333,7 +333,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-08
+<strong>Last updated:</strong> 2021-05-14
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -364,16 +364,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6525819c6357cf1c0ac72cbb60d2b344d79f7103targetblank6525819a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/6525819c6357cf1c0ac72cbb60d2b344d79f7103" target="_blank">6525819</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreed03901f2aaa95bf1a2c0401c85bf9e82f3d87a1dtargetblankd03901fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/d03901f2aaa95bf1a2c0401c85bf9e82f3d87a1d" target="_blank">d03901f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree6525819c6357cf1c0ac72cbb60d2b344d79f7103targetblank6525819a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreed03901f2aaa95bf1a2c0401c85bf9e82f3d87a1dtargetblankd03901fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/6525819c6357cf1c0ac72cbb60d2b344d79f7103" target="_blank">6525819</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/d03901f2aaa95bf1a2c0401c85bf9e82f3d87a1d" target="_blank">d03901f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -446,6 +446,7 @@ Ignored files:
     Ignored:    analysis/05-annotation_cache/
     Ignored:    analysis/06-clustering-all-timepoints_cache/
     Ignored:    analysis/07-cluster-analysis-all-timepoints_cache/
+    Ignored:    analysis/CH-test-01-preprocessing_cache/
     Ignored:    analysis/Lam-01-NSC_integration_cache/
     Ignored:    analysis/Lam-02-NSC_annotation_cache/
     Ignored:    analysis/NSC-1-clustering_cache/
@@ -487,6 +488,7 @@ Ignored files:
     Ignored:    data/._.DS_Store
     Ignored:    data/._.smbdeleteAAA17ed8b4b
     Ignored:    data/._Lam_figure2_markers.R
+    Ignored:    data/._README.md
     Ignored:    data/._Reactive_astrocytes_markers.xlsx
     Ignored:    data/._known_NSC_markers.R
     Ignored:    data/._known_cell_type_markers.R
@@ -524,6 +526,7 @@ Ignored files:
     Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_8.txt
     Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_all.xlsx
     Ignored:    output/._~$tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/CH-test-01-preprocessing.rds
     Ignored:    output/Lam-01-clustering.rds
     Ignored:    output/NSC_1_clustering.rds
     Ignored:    output/NSC_cluster1_marker_genes.txt
@@ -632,6 +635,9 @@ Ignored files:
     Ignored:    scripts/._.DS_Store
     Ignored:    scripts/._bu_Rcode.R
     Ignored:    scripts/._plasmid_expression.sh
+    Ignored:    scripts/._plasmid_expression_cell_hashing_test.sh
+    Ignored:    scripts/._prepare_salmon_transcripts.R
+    Ignored:    scripts/._prepare_salmon_transcripts_cell_hashing_test.R
 
 Untracked files:
     Untracked:  Filtered.pdf
@@ -657,6 +663,7 @@ Untracked files:
     Untracked:  data/Kanton_et_al/
     Untracked:  data/Lam_et_al/
     Untracked:  data/Sep2020/
+    Untracked:  data/cell_hashing_test/
     Untracked:  data/reference/
     Untracked:  data/virus_cell_tropism_markers.R
     Untracked:  data/~$Reactive_astrocytes_markers.xlsx
@@ -667,6 +674,8 @@ Untracked files:
     Untracked:  sashimi.pdf
     Untracked:  scripts/bu_Rcode.R
     Untracked:  scripts/bu_code.Rmd
+    Untracked:  scripts/plasmid_expression_cell_hashing_test.sh
+    Untracked:  scripts/prepare_salmon_transcripts_cell_hashing_test.R
     Untracked:  scripts/salmon-latest_linux_x86_64/
     Untracked:  stmn2.pdf
     Untracked:  tdp.pdf
@@ -674,7 +683,6 @@ Untracked files:
 Unstaged changes:
     Modified:   analysis/05-annotation.Rmd
     Modified:   analysis/TDP-04-clustering.Rmd
-    Modified:   analysis/TDP-06-cluster_analysis.Rmd
     Modified:   analysis/TDP-08-01-HA-D96-expression-changes.Rmd
     Modified:   analysis/_site.yml
     Modified:   analysis/organoid-02-integration.Rmd
@@ -718,6 +726,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d03901f2aaa95bf1a2c0401c85bf9e82f3d87a1d/analysis/index.Rmd" target="_blank">d03901f</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+<td>
+preprocessing and quality control of HTO test experiment
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/f219ac67a5e3ca8e82b50623622131ce178d0e40/docs/index.html" target="_blank">f219ac6</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -2021,6 +2063,10 @@ Start workflowr project.
 <ul>
 <li><a href="timepoints-02-cluster-analysis.html">Cluster analysis</a></li>
 </ul></li>
+</ul>
+<p>Test experiment for demultiplexing with hashtag oligos</p>
+<ul>
+<li><a href="CH-test-01-preprocessing.html">Preprocessing and quality control</a></li>
 </ul>
 
 
