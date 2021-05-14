@@ -84,3 +84,9 @@ We also integrate the organoid samples:
 
 - [Clustering](timepoints-01-organoid-integration.html)
     - [Cluster analysis](timepoints-02-cluster-analysis.html)
+
+
+
+Test experiment for demultiplexing with hashtag oligos
+
+- [Preprocessing and quality control](CH-test-01-preprocessing.html)

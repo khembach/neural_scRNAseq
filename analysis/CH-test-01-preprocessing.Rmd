@@ -1,0 +1,303 @@
+---
+title: "Cell hashing test quality control"
+author: "Katharina Hembach"
+date: "5/14/2021"
+output: 
+  html_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")),
+                      message = FALSE)
+```
+
+### Load packages
+```{r, message = FALSE}
+library(DropletUtils)
+library(BiocParallel)
+library(ggplot2)
+library(scater)
+library(readxl)
+library(Seurat)
+library(scales)
+library(viridis)
+library(dplyr)
+```
+
+# Importing CellRanger output and metadata
+```{r import}
+fs <- file.path("data", "cell_hashing_test", 
+                "CellRangerCount_57443_2021-05-12--11-37-28", "HashTag_test", 
+                "filtered_feature_bc_matrix.h5")
+names(fs) <- "cell_hashing_test"
+sce_raw <- read10xCounts(samples = fs)
+
+# rename colnames and dimnames
+rowData(sce_raw)$Type <- NULL
+names(rowData(sce_raw)) <- c("ensembl_id", "symbol")
+names(colData(sce_raw)) <- c("sample_id", "barcode")
+sce_raw$sample_id <- factor(sce_raw$sample_id)
+
+# load metadata
+meta <- read_excel(file.path("data", "cell_hashing_test", "SampleName_feature_ref_MHP.xlsm"))
+m <- match(meta$name, rowData(sce_raw)$symbol)
+
+## separate gene counts from HTO counts
+rowData(sce_raw) %>% tail
+sce <- sce_raw[-m,]
+dimnames(sce) <- list(with(rowData(sce), paste(ensembl_id, symbol, sep = ".")),
+                      with(colData(sce), paste(barcode, sample_id, sep = ".")))
+```
+
+
+# Quality control
+We compute cell-level QC.
+```{r QC, message = FALSE}
+# remove empty rows
+sce <- sce[rowSums(counts(sce) > 0) > 0, ]
+dim(sce)
+
+(mito <- grep("MT-", rownames(sce), value = TRUE))
+sce <- addPerCellQC(sce, subsets = list(Mt = mito))
+# we compute the fraction of mitochondrial genes and the logit of it 
+sce$subsets_Mt_fraction <- (sce$subsets_Mt_percent + 0.001) /100
+sce$subsets_Mt_fraction_logit <- qlogis(sce$subsets_Mt_fraction + 0.001)
+# library size
+summary(sce$sum)
+# number of detected genes per cell
+summary(sce$detected)
+# percentage of counts that come from mitochondrial genes:
+summary(sce$subsets_Mt_percent)
+```
+
+## Diagnostic plots
+
+The number of counts per cell:
+```{r}
+plotColData(sce, x = "sample_id", y = "sum") + scale_y_log10()
+```
+
+The number of genes:
+```{r}
+plotColData(sce, x = "sample_id", y = "detected") + scale_y_log10() 
+```
+
+The percentage of mitochondrial genes:
+```{r}
+plotColData(sce, x = "sample_id", y = "subsets_Mt_percent")
+```
+
+We plot the total number of counts against the number of detected genes and color by the fraction of mitochondrial genes:
+```{r}
+cd <- data.frame(colData(sce))
+ggplot(cd, aes(x = sum, y = detected, color = subsets_Mt_fraction)) +
+  geom_point(alpha = 0.7) + 
+  geom_density_2d(color = "grey", bins = 6) +
+  scale_x_log10() +
+  scale_y_log10() +
+  facet_wrap(~sample_id) + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("sum of counts") + 
+  ylab("number of detected genes") + 
+  labs(color = "mitochondrial fraction") +
+  scale_color_viridis(trans = "logit", breaks = c(0.01, 0.1, 0.25, 0.5, 0.75))
+```
+
+We plot the total number of counts against the mitochondrial content. Well-behaved cells should have many expressed genes and a low fraction of mitochondrial genes. High mitochondrial content indicates empty or damaged cells. 
+```{r}
+ggplot(cd, aes(x = sum, y = subsets_Mt_fraction)) +
+  geom_point(color = "darkgrey", alpha = 0.3) + 
+  geom_density_2d(color = "lightblue") +
+  scale_x_log10() +
+  scale_y_continuous(trans = 'logit', 
+                     breaks = c(0.01, 0.05, 0.1, 0.2, 0.5, 0.75)) +
+  facet_wrap(~sample_id) + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  xlab("sum of counts") + 
+  ylab("logit(mitochondrial fraction)")
+```
+
+
+## Identification of outlier cells
+
+Based on the QC metrics, we now identify outlier cells:
+
+```{r outlier-identification}
+cols <- c("sum", "detected", "subsets_Mt_percent")
+log <- c(TRUE, TRUE, FALSE)
+type <- c("lower", "lower", "higher")
+
+drop_cols <- paste0(cols, "_drop")
+for (i in seq_along(cols))
+    colData(sce)[[drop_cols[i]]] <- isOutlier(sce[[cols[i]]], 
+        nmads = 1, type = type[i], log = log[i], batch = sce$sample_id)
+
+# Overlap of outlier cells from two metrics
+sapply(drop_cols, function(i) 
+    sapply(drop_cols, function(j)
+        sum(sce[[i]] & sce[[j]])))
+
+colData(sce)$discard <- rowSums(data.frame(colData(sce)[,drop_cols])) > 0
+table(colData(sce)$discard)
+
+## Plot the metrics and highlight the discarded cells
+plotColData(sce, x = "sample_id", y = "sum", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "detected", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "subsets_Mt_percent", 
+            colour_by = "discard")
+
+
+## we manually filter filter the cells with less than 2000 UMIs
+colData(sce)$manual_discard_sum <- colData(sce)$sum < 1000 
+## filter the cells with less than 800 detected genes
+colData(sce)$manual_discard_detected <- colData(sce)$detected < 800 
+
+
+## highlight all manually discarded cells
+colData(sce)$manual_discard <- colData(sce)$manual_discard_sum |
+                                   colData(sce)$manual_discard_detected
+plotColData(sce, x = "sample_id", y = "sum", colour_by = "manual_discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "detected", colour_by = "manual_discard") + 
+  scale_y_log10()
+
+## highlight all discarded cells
+colData(sce)$discard <- colData(sce)$manual_discard |
+                                   colData(sce)$discard
+plotColData(sce, x = "sample_id", y = "detected", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "sum", colour_by = "discard") + 
+  scale_y_log10()
+plotColData(sce, x = "sample_id", y = "subsets_Mt_percent", 
+            colour_by = "discard")
+table(colData(sce)$discard)
+```
+
+We discard the outlier cells
+```{r discard-outliers}
+dim(sce)
+sce_filtered <- sce[,!sce$discard]
+dim(sce_filtered)
+```
+
+
+# Create Seurat object and split gene and HTO counts
+```{r create-so}
+## convert DDelayedMatrix to dgCMatrix for import into Seurat object
+counts <- as(counts(sce_filtered, withDimnames = FALSE), "dgCMatrix")
+colnames(counts) <- colnames(counts(sce_filtered))
+rownames(counts) <- rownames(counts(sce_filtered))
+                             
+so <- CreateSeuratObject(
+    counts = counts,
+    meta.data = data.frame(colData(sce_filtered)),
+    project = "cell_hashing_test")
+## add HTO data as independent assay
+hto_counts <- as(counts(sce_raw, withDimnames = FALSE)[m,with(colData(sce), 
+                                    paste(barcode, sample_id, sep = ".")) %in% 
+                                colnames(sce_filtered)], "dgCMatrix")
+colnames(hto_counts) <- colnames(sce_filtered)
+rownames(hto_counts) <- rownames(sce_raw)[m]
+so[["HTO"]] <- CreateAssayObject(counts = hto_counts)
+```
+
+# Data normalization
+```{r normalize-data}
+DefaultAssay(so) <- "RNA"
+# Normalize RNA data with log normalization
+so <- NormalizeData(so)
+# Find and scale variable features
+so <- FindVariableFeatures(so, selection.method = "mean.var.plot")
+so <- ScaleData(so, features = VariableFeatures(so))
+
+# Normalize HTO data, here we use centered log-ratio (CLR) transformation
+so <- NormalizeData(so, assay = "HTO", normalization.method = "CLR")
+```
+
+
+# Demultiplex cells based on HTO enrichment
+
+```{r demultiplex-hto}
+so <- HTODemux(so, assay = "HTO", positive.quantile = 0.99)
+```
+
+## Visualize results
+
+```{r demultiplexing-viz}
+# Global classification results
+table(so$HTO_classification.global)
+
+# Group cells based on the max HTO signal
+Idents(so) <- "HTO_maxID"
+# Group cells based on the max HTO signal
+RidgePlot(so, assay = "HTO", features = rownames(so[["HTO"]]), ncol = 3)
+
+# Visualize pairs of HTO signals to check mutual exclusivity in singlets
+DefaultAssay(object = so) <- "HTO"
+FeatureScatter(so, feature1 = "B0253", feature2 = "B0254")
+FeatureScatter(so, feature1 = "B0257", feature2 = "B0254")
+FeatureScatter(so, feature1 = "B0253", feature2 = "B0257")
+
+## compare number of UMIs for singlet's, doublets and negative cells
+Idents(so) <- "HTO_classification.global"
+VlnPlot(so, features = "nCount_HTO", pt.size = 0.1, log = TRUE)
+VlnPlot(so, features = "nCount_RNA", pt.size = 0.1, log = TRUE)
+
+## tSNE for HTOs
+# First, we will remove negative cells from the object
+subs <- subset(so, idents = "Negative", invert = TRUE)
+subs$HTO_classification %>% table
+# Calculate a tSNE embedding of the HTO data
+DefaultAssay(subs) <- "HTO"
+subs <- ScaleData(subs, features = rownames(subs), 
+    verbose = FALSE)
+subs <- RunPCA(subs, features = rownames(subs), approx = FALSE)
+subs <- RunTSNE(subs, dims = 1:3, perplexity = 100)
+Idents(subs) <- "HTO_classification.global"
+DimPlot(subs)
+Idents(subs) <- 'HTO_classification'
+DimPlot(subs)
+
+# HTO heatmap
+HTOHeatmap(so, assay = "HTO", ncells = 5000)
+```
+
+
+## Cluster based on gene counts and visualize cells
+```{r gene-count-clustering}
+DefaultAssay(so) <- "RNA"
+# Extract the singlets
+subs <- subset(so, idents = "Singlet")
+subs$HTO_classification %>% table
+# Select the top 1000 most variable features
+subs <- FindVariableFeatures(subs, selection.method = "mean.var.plot")
+# Scaling RNA data, we only scale the variable features here for efficiency
+subs <- ScaleData(subs, features = VariableFeatures(subs))
+# Run PCA
+subs <- RunPCA(subs, features = VariableFeatures(subs))
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+subs <- FindNeighbors(subs, reduction = "pca", dims = 1:10)
+subs <- FindClusters(subs, resolution = 0.6, verbose = FALSE)
+subs <- RunTSNE(subs, reduction = "pca", dims = 1:10)
+subs <- RunUMAP(subs, reduction = "pca", dims = 1:10)
+
+# Projecting singlet identities on TSNE visualization
+DimPlot(subs, group.by = "HTO_classification", reduction = "tsne")
+DimPlot(subs, group.by = "HTO_classification", reduction = "umap")
+```
+
+## Save data to RDS
+```{r save-data}
+saveRDS(sce, file.path("output", "CH-test-01-preprocessing.rds"))
+```
