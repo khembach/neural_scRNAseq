@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-05-14
+<strong>Last updated:</strong> 2021-05-17
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreed03901f2aaa95bf1a2c0401c85bf9e82f3d87a1dtargetblankd03901fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/d03901f2aaa95bf1a2c0401c85bf9e82f3d87a1d" target="_blank">d03901f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7c1517d2413f7359650ee98effa5fdcd14ac0e54targetblank7c1517da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/7c1517d2413f7359650ee98effa5fdcd14ac0e54" target="_blank">7c1517d</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreed03901f2aaa95bf1a2c0401c85bf9e82f3d87a1dtargetblankd03901fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree7c1517d2413f7359650ee98effa5fdcd14ac0e54targetblank7c1517da" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/d03901f2aaa95bf1a2c0401c85bf9e82f3d87a1d" target="_blank">d03901f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/7c1517d2413f7359650ee98effa5fdcd14ac0e54" target="_blank">7c1517d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -604,7 +604,6 @@ Ignored files:
     Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
-    Ignored:    analysis/figure/
     Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
     Ignored:    analysis/organoid-01-clustering_cache/
     Ignored:    analysis/organoid-02-integration_cache/
@@ -665,6 +664,7 @@ Ignored files:
     Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_8.txt
     Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_all.xlsx
     Ignored:    output/._~$tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/CH-test-01-preprocessing.rds
     Ignored:    output/Lam-01-clustering.rds
     Ignored:    output/NSC_1_clustering.rds
     Ignored:    output/NSC_cluster1_marker_genes.txt
@@ -869,6 +869,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7c1517d2413f7359650ee98effa5fdcd14ac0e54/analysis/CH-test-01-preprocessing.Rmd" target="_blank">7c1517d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-17
+</td>
+<td>
+run HTO demultipxing before and after filtering of low quality cells
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/4f37f3dacba728572ad1ef547318c76df8f61413/docs/CH-test-01-preprocessing.html" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/d03901f2aaa95bf1a2c0401c85bf9e82f3d87a1d/analysis/CH-test-01-preprocessing.Rmd" target="_blank">d03901f</a>
 </td>
 <td>
@@ -981,12 +1015,123 @@ summary(sce$subsets_Mt_percent)</code></pre>
 <p>The number of counts per cell:</p>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;) + scale_y_log10()</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/unnamed-chunk-3-1.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The number of genes:</p>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;) + scale_y_log10() </code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/unnamed-chunk-4-1.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The percentage of mitochondrial genes:</p>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;subsets_Mt_percent&quot;)</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/unnamed-chunk-5-1.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>We plot the total number of counts against the number of detected genes and color by the fraction of mitochondrial genes:</p>
 <pre class="r"><code>cd &lt;- data.frame(colData(sce))
 ggplot(cd, aes(x = sum, y = detected, color = subsets_Mt_fraction)) +
@@ -1002,6 +1147,43 @@ ggplot(cd, aes(x = sum, y = detected, color = subsets_Mt_fraction)) +
   labs(color = &quot;mitochondrial fraction&quot;) +
   scale_color_viridis(trans = &quot;logit&quot;, breaks = c(0.01, 0.1, 0.25, 0.5, 0.75))</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/unnamed-chunk-6-1.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>We plot the total number of counts against the mitochondrial content. Well-behaved cells should have many expressed genes and a low fraction of mitochondrial genes. High mitochondrial content indicates empty or damaged cells.</p>
 <pre class="r"><code>ggplot(cd, aes(x = sum, y = subsets_Mt_fraction)) +
   geom_point(color = &quot;darkgrey&quot;, alpha = 0.3) + 
@@ -1015,10 +1197,583 @@ ggplot(cd, aes(x = sum, y = detected, color = subsets_Mt_fraction)) +
   xlab(&quot;sum of counts&quot;) + 
   ylab(&quot;logit(mitochondrial fraction)&quot;)</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/unnamed-chunk-7-1.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="identification-of-outlier-cells" class="section level2">
-<h2>Identification of outlier cells</h2>
-<p>Based on the QC metrics, we now identify outlier cells:</p>
+</div>
+</div>
+</div>
+<div id="create-seurat-object-and-split-gene-and-hto-counts" class="section level1">
+<h1>Create Seurat object and split gene and HTO counts</h1>
+<pre class="r"><code>## convert DDelayedMatrix to dgCMatrix for import into Seurat object
+counts &lt;- as(counts(sce, withDimnames = FALSE), &quot;dgCMatrix&quot;)
+colnames(counts) &lt;- colnames(counts(sce))
+rownames(counts) &lt;- rownames(counts(sce))
+                             
+so &lt;- CreateSeuratObject(
+    counts = counts,
+    meta.data = data.frame(colData(sce)),
+    project = &quot;cell_hashing_test&quot;)</code></pre>
+<pre><code>Warning: Feature names cannot have underscores (&#39;_&#39;), replacing with dashes
+(&#39;-&#39;)</code></pre>
+<pre class="r"><code>## add HTO data as independent assay
+hto_counts &lt;- as(counts(sce_raw, withDimnames = FALSE)[m,with(colData(sce), 
+                                    paste(barcode, sample_id, sep = &quot;.&quot;)) %in% 
+                                colnames(sce)], &quot;dgCMatrix&quot;)
+colnames(hto_counts) &lt;- colnames(sce)
+rownames(hto_counts) &lt;- rownames(sce_raw)[m]
+so[[&quot;HTO&quot;]] &lt;- CreateAssayObject(counts = hto_counts)</code></pre>
+</div>
+<div id="data-normalization" class="section level1">
+<h1>Data normalization</h1>
+<pre class="r"><code>DefaultAssay(so) &lt;- &quot;RNA&quot;
+# Normalize RNA data with log normalization
+so &lt;- NormalizeData(so)
+# Find and scale variable features
+so &lt;- FindVariableFeatures(so, selection.method = &quot;mean.var.plot&quot;)
+so &lt;- ScaleData(so, features = VariableFeatures(so))
+
+# Normalize HTO data, here we use centered log-ratio (CLR) transformation
+so &lt;- NormalizeData(so, assay = &quot;HTO&quot;, normalization.method = &quot;CLR&quot;)</code></pre>
+</div>
+<div id="demultiplex-cells-based-on-hto-enrichment" class="section level1">
+<h1>Demultiplex cells based on HTO enrichment</h1>
+<pre class="r"><code>so &lt;- HTODemux(so, assay = &quot;HTO&quot;, positive.quantile = 0.99)</code></pre>
+<pre><code>Cutoff for B0253 : 312 reads</code></pre>
+<pre><code>Cutoff for B0254 : 446 reads</code></pre>
+<pre><code>Cutoff for B0257 : 369 reads</code></pre>
+<div id="visualize-results" class="section level2">
+<h2>Visualize results</h2>
+<pre class="r"><code># Global classification results
+table(so$HTO_classification.global)</code></pre>
+<pre><code>
+ Doublet Negative  Singlet 
+    2861    10318     4452 </code></pre>
+<pre class="r"><code># Group cells based on the max HTO signal
+Idents(so) &lt;- &quot;HTO_maxID&quot;
+# Group cells based on the max HTO signal
+RidgePlot(so, assay = &quot;HTO&quot;, features = rownames(so[[&quot;HTO&quot;]]), ncol = 3)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-demultiplexing-viz-1">
+Past versions of demultiplexing-viz-1.png
+</button>
+</p>
+<div id="fig-demultiplexing-viz-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-1.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code># Visualize pairs of HTO signals to check mutual exclusivity in singlets
+DefaultAssay(object = so) &lt;- &quot;HTO&quot;
+FeatureScatter(so, feature1 = &quot;B0253&quot;, feature2 = &quot;B0254&quot;)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-demultiplexing-viz-2">
+Past versions of demultiplexing-viz-2.png
+</button>
+</p>
+<div id="fig-demultiplexing-viz-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-2.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>FeatureScatter(so, feature1 = &quot;B0257&quot;, feature2 = &quot;B0254&quot;)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-demultiplexing-viz-3">
+Past versions of demultiplexing-viz-3.png
+</button>
+</p>
+<div id="fig-demultiplexing-viz-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-3.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>FeatureScatter(so, feature1 = &quot;B0253&quot;, feature2 = &quot;B0257&quot;)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-demultiplexing-viz-4">
+Past versions of demultiplexing-viz-4.png
+</button>
+</p>
+<div id="fig-demultiplexing-viz-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-4.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>## compare number of UMIs for singlet&#39;s, doublets and negative cells
+Idents(so) &lt;- &quot;HTO_classification.global&quot;
+VlnPlot(so, features = &quot;nCount_HTO&quot;, pt.size = 0.1, log = TRUE)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-demultiplexing-viz-5">
+Past versions of demultiplexing-viz-5.png
+</button>
+</p>
+<div id="fig-demultiplexing-viz-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-5.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>VlnPlot(so, features = &quot;nCount_RNA&quot;, pt.size = 0.1, log = TRUE)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-demultiplexing-viz-6">
+Past versions of demultiplexing-viz-6.png
+</button>
+</p>
+<div id="fig-demultiplexing-viz-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-6.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>## tSNE for HTOs
+# First, we will remove negative cells from the object
+subs &lt;- subset(so, idents = &quot;Negative&quot;, invert = TRUE)
+subs$HTO_classification %&gt;% table</code></pre>
+<pre><code>.
+      B0253 B0253_B0254 B0253_B0257       B0254 B0254_B0257       B0257 
+       1424         916         875        1329        1070        1699 </code></pre>
+<pre class="r"><code># Calculate a tSNE embedding of the HTO data
+DefaultAssay(subs) &lt;- &quot;HTO&quot;
+subs &lt;- ScaleData(subs, features = rownames(subs), 
+    verbose = FALSE)
+subs &lt;- RunPCA(subs, features = rownames(subs), approx = FALSE, npcs = 3)</code></pre>
+<pre><code>Warning in print.DimReduc(x = reduction.data, dims = ndims.print, nfeatures =
+nfeatures.print): Only 3 dimensions have been computed.</code></pre>
+<pre><code>Warning: Requested number is larger than the number of available items (3).
+Setting to 3.
+
+Warning: Requested number is larger than the number of available items (3).
+Setting to 3.
+
+Warning: Requested number is larger than the number of available items (3).
+Setting to 3.</code></pre>
+<pre class="r"><code>subs &lt;- RunTSNE(subs, dims = 1:3, perplexity = 100)
+Idents(subs) &lt;- &quot;HTO_classification.global&quot;
+DimPlot(subs)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-demultiplexing-viz-7">
+Past versions of demultiplexing-viz-7.png
+</button>
+</p>
+<div id="fig-demultiplexing-viz-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-7.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>Idents(subs) &lt;- &#39;HTO_classification&#39;
+DimPlot(subs)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-demultiplexing-viz-8">
+Past versions of demultiplexing-viz-8.png
+</button>
+</p>
+<div id="fig-demultiplexing-viz-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-8.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code># HTO heatmap
+HTOHeatmap(so, assay = &quot;HTO&quot;, ncells = 5000)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-9.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-demultiplexing-viz-9">
+Past versions of demultiplexing-viz-9.png
+</button>
+</p>
+<div id="fig-demultiplexing-viz-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-9.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="cluster-based-on-gene-counts-and-visualize-cells" class="section level2">
+<h2>Cluster based on gene counts and visualize cells</h2>
+<pre class="r"><code>DefaultAssay(so) &lt;- &quot;RNA&quot;
+# Extract the singlets
+singlets &lt;- subset(so, idents = &quot;Singlet&quot;)
+singlets$HTO_classification %&gt;% table</code></pre>
+<pre><code>.
+B0253 B0254 B0257 
+ 1424  1329  1699 </code></pre>
+<pre class="r"><code># Select the top 1000 most variable features
+singlets &lt;- FindVariableFeatures(singlets, selection.method = &quot;mean.var.plot&quot;)
+# Scaling RNA data, we only scale the variable features here for efficiency
+singlets &lt;- ScaleData(singlets, features = VariableFeatures(singlets))
+# Run PCA
+singlets &lt;- RunPCA(singlets, features = VariableFeatures(singlets))
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+singlets &lt;- FindNeighbors(singlets, reduction = &quot;pca&quot;, dims = 1:10)
+singlets &lt;- FindClusters(singlets, resolution = 0.6, verbose = FALSE)
+singlets &lt;- RunTSNE(singlets, reduction = &quot;pca&quot;, dims = 1:10)
+singlets &lt;- RunUMAP(singlets, reduction = &quot;pca&quot;, dims = 1:10)</code></pre>
+<pre><code>Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
+To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
+This message will be shown once per session</code></pre>
+<pre class="r"><code># Projecting singlet identities on TSNE visualization
+DimPlot(singlets, group.by = &quot;HTO_classification&quot;, reduction = &quot;tsne&quot;)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/gene-count-clustering-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-gene-count-clustering-1">
+Past versions of gene-count-clustering-1.png
+</button>
+</p>
+<div id="fig-gene-count-clustering-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/gene-count-clustering-1.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>DimPlot(singlets, group.by = &quot;HTO_classification&quot;, reduction = &quot;umap&quot;)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/gene-count-clustering-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-gene-count-clustering-2">
+Past versions of gene-count-clustering-2.png
+</button>
+</p>
+<div id="fig-gene-count-clustering-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/gene-count-clustering-2.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="identification-of-low-quality-cells" class="section level2">
+<h2>Identification of low quality cells</h2>
+<p>Based on the QC metrics, we identify cells with lower quality:</p>
 <pre class="r"><code>cols &lt;- c(&quot;sum&quot;, &quot;detected&quot;, &quot;subsets_Mt_percent&quot;)
 log &lt;- c(TRUE, TRUE, FALSE)
 type &lt;- c(&quot;lower&quot;, &quot;lower&quot;, &quot;higher&quot;)
@@ -1045,12 +1800,123 @@ FALSE  TRUE
 plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;, colour_by = &quot;discard&quot;) + 
   scale_y_log10()</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/outlier-identification-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outlier-identification-1">
+Past versions of outlier-identification-1.png
+</button>
+</p>
+<div id="fig-outlier-identification-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/outlier-identification-1.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;, colour_by = &quot;discard&quot;) + 
   scale_y_log10()</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/outlier-identification-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outlier-identification-2">
+Past versions of outlier-identification-2.png
+</button>
+</p>
+<div id="fig-outlier-identification-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/outlier-identification-2.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;subsets_Mt_percent&quot;, 
             colour_by = &quot;discard&quot;)</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/outlier-identification-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outlier-identification-3">
+Past versions of outlier-identification-3.png
+</button>
+</p>
+<div id="fig-outlier-identification-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/outlier-identification-3.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## we manually filter filter the cells with less than 2000 UMIs
 colData(sce)$manual_discard_sum &lt;- colData(sce)$sum &lt; 1000 
 ## filter the cells with less than 800 detected genes
@@ -1063,21 +1929,206 @@ colData(sce)$manual_discard &lt;- colData(sce)$manual_discard_sum |
 plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;, colour_by = &quot;manual_discard&quot;) + 
   scale_y_log10()</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/outlier-identification-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outlier-identification-4">
+Past versions of outlier-identification-4.png
+</button>
+</p>
+<div id="fig-outlier-identification-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/outlier-identification-4.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;, colour_by = &quot;manual_discard&quot;) + 
   scale_y_log10()</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/outlier-identification-5.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outlier-identification-5">
+Past versions of outlier-identification-5.png
+</button>
+</p>
+<div id="fig-outlier-identification-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/outlier-identification-5.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## highlight all discarded cells
 colData(sce)$discard &lt;- colData(sce)$manual_discard |
                                    colData(sce)$discard
 plotColData(sce, x = &quot;sample_id&quot;, y = &quot;detected&quot;, colour_by = &quot;discard&quot;) + 
   scale_y_log10()</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/outlier-identification-6.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outlier-identification-6">
+Past versions of outlier-identification-6.png
+</button>
+</p>
+<div id="fig-outlier-identification-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/outlier-identification-6.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;sum&quot;, colour_by = &quot;discard&quot;) + 
   scale_y_log10()</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/outlier-identification-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outlier-identification-7">
+Past versions of outlier-identification-7.png
+</button>
+</p>
+<div id="fig-outlier-identification-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/outlier-identification-7.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>plotColData(sce, x = &quot;sample_id&quot;, y = &quot;subsets_Mt_percent&quot;, 
             colour_by = &quot;discard&quot;)</code></pre>
 <p><img src="figure/CH-test-01-preprocessing.Rmd/outlier-identification-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-outlier-identification-8">
+Past versions of outlier-identification-8.png
+</button>
+</p>
+<div id="fig-outlier-identification-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4f37f3dacba728572ad1ef547318c76df8f61413/docs/figure/CH-test-01-preprocessing.Rmd/outlier-identification-8.png" target="_blank">4f37f3d</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>table(colData(sce)$discard)</code></pre>
 <pre><code>
 FALSE  TRUE 
@@ -1090,14 +2141,14 @@ dim(sce_filtered)</code></pre>
 <pre><code>[1] 18824  5542</code></pre>
 </div>
 </div>
-<div id="create-seurat-object-and-split-gene-and-hto-counts" class="section level1">
+<div id="create-seurat-object-and-split-gene-and-hto-counts-1" class="section level1">
 <h1>Create Seurat object and split gene and HTO counts</h1>
 <pre class="r"><code>## convert DDelayedMatrix to dgCMatrix for import into Seurat object
 counts &lt;- as(counts(sce_filtered, withDimnames = FALSE), &quot;dgCMatrix&quot;)
 colnames(counts) &lt;- colnames(counts(sce_filtered))
 rownames(counts) &lt;- rownames(counts(sce_filtered))
                              
-so &lt;- CreateSeuratObject(
+so_filtered &lt;- CreateSeuratObject(
     counts = counts,
     meta.data = data.frame(colData(sce_filtered)),
     project = &quot;cell_hashing_test&quot;)</code></pre>
@@ -1109,52 +2160,55 @@ hto_counts &lt;- as(counts(sce_raw, withDimnames = FALSE)[m,with(colData(sce),
                                 colnames(sce_filtered)], &quot;dgCMatrix&quot;)
 colnames(hto_counts) &lt;- colnames(sce_filtered)
 rownames(hto_counts) &lt;- rownames(sce_raw)[m]
-so[[&quot;HTO&quot;]] &lt;- CreateAssayObject(counts = hto_counts)</code></pre>
+so_filtered[[&quot;HTO&quot;]] &lt;- CreateAssayObject(counts = hto_counts)</code></pre>
 </div>
-<div id="data-normalization" class="section level1">
+<div id="data-normalization-1" class="section level1">
 <h1>Data normalization</h1>
-<pre class="r"><code>DefaultAssay(so) &lt;- &quot;RNA&quot;
+<pre class="r"><code>DefaultAssay(so_filtered) &lt;- &quot;RNA&quot;
 # Normalize RNA data with log normalization
-so &lt;- NormalizeData(so)
+so_filtered &lt;- NormalizeData(so_filtered)
 # Find and scale variable features
-so &lt;- FindVariableFeatures(so, selection.method = &quot;mean.var.plot&quot;)
-so &lt;- ScaleData(so, features = VariableFeatures(so))
+so_filtered &lt;- FindVariableFeatures(so_filtered, selection.method = &quot;mean.var.plot&quot;)
+so_filtered &lt;- ScaleData(so_filtered, features = VariableFeatures(so_filtered))
 
 # Normalize HTO data, here we use centered log-ratio (CLR) transformation
-so &lt;- NormalizeData(so, assay = &quot;HTO&quot;, normalization.method = &quot;CLR&quot;)</code></pre>
+so_filtered &lt;- NormalizeData(so_filtered, assay = &quot;HTO&quot;, normalization.method = &quot;CLR&quot;)</code></pre>
 </div>
-<div id="demultiplex-cells-based-on-hto-enrichment" class="section level1">
+<div id="demultiplex-cells-based-on-hto-enrichment-1" class="section level1">
 <h1>Demultiplex cells based on HTO enrichment</h1>
-<pre class="r"><code>so &lt;- HTODemux(so, assay = &quot;HTO&quot;, positive.quantile = 0.99)</code></pre>
-<div id="visualize-results" class="section level2">
+<pre class="r"><code>so_filtered &lt;- HTODemux(so_filtered, assay = &quot;HTO&quot;, positive.quantile = 0.99)</code></pre>
+<pre><code>Cutoff for B0253 : 801 reads</code></pre>
+<pre><code>Cutoff for B0254 : 1097 reads</code></pre>
+<pre><code>Cutoff for B0257 : 993 reads</code></pre>
+<div id="visualize-results-1" class="section level2">
 <h2>Visualize results</h2>
 <pre class="r"><code># Global classification results
-table(so$HTO_classification.global)</code></pre>
+table(so_filtered$HTO_classification.global)</code></pre>
 <pre><code>
  Doublet Negative  Singlet 
      656     2119     2767 </code></pre>
 <pre class="r"><code># Group cells based on the max HTO signal
-Idents(so) &lt;- &quot;HTO_maxID&quot;
+Idents(so_filtered) &lt;- &quot;HTO_maxID&quot;
 # Group cells based on the max HTO signal
-RidgePlot(so, assay = &quot;HTO&quot;, features = rownames(so[[&quot;HTO&quot;]]), ncol = 3)</code></pre>
-<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-1.png" width="672" style="display: block; margin: auto;" /></p>
+RidgePlot(so_filtered, assay = &quot;HTO&quot;, features = rownames(so_filtered[[&quot;HTO&quot;]]), ncol = 3)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-filtered-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Visualize pairs of HTO signals to check mutual exclusivity in singlets
-DefaultAssay(object = so) &lt;- &quot;HTO&quot;
-FeatureScatter(so, feature1 = &quot;B0253&quot;, feature2 = &quot;B0254&quot;)</code></pre>
-<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-2.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>FeatureScatter(so, feature1 = &quot;B0257&quot;, feature2 = &quot;B0254&quot;)</code></pre>
-<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-3.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>FeatureScatter(so, feature1 = &quot;B0253&quot;, feature2 = &quot;B0257&quot;)</code></pre>
-<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-4.png" width="672" style="display: block; margin: auto;" /></p>
+DefaultAssay(object = so_filtered) &lt;- &quot;HTO&quot;
+FeatureScatter(so_filtered, feature1 = &quot;B0253&quot;, feature2 = &quot;B0254&quot;)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-filtered-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeatureScatter(so_filtered, feature1 = &quot;B0257&quot;, feature2 = &quot;B0254&quot;)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-filtered-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeatureScatter(so_filtered, feature1 = &quot;B0253&quot;, feature2 = &quot;B0257&quot;)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-filtered-4.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>## compare number of UMIs for singlet&#39;s, doublets and negative cells
-Idents(so) &lt;- &quot;HTO_classification.global&quot;
-VlnPlot(so, features = &quot;nCount_HTO&quot;, pt.size = 0.1, log = TRUE)</code></pre>
-<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-5.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>VlnPlot(so, features = &quot;nCount_RNA&quot;, pt.size = 0.1, log = TRUE)</code></pre>
-<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-6.png" width="672" style="display: block; margin: auto;" /></p>
+Idents(so_filtered) &lt;- &quot;HTO_classification.global&quot;
+VlnPlot(so_filtered, features = &quot;nCount_HTO&quot;, pt.size = 0.1, log = TRUE)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-filtered-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>VlnPlot(so_filtered, features = &quot;nCount_RNA&quot;, pt.size = 0.1, log = TRUE)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-filtered-6.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>## tSNE for HTOs
 # First, we will remove negative cells from the object
-subs &lt;- subset(so, idents = &quot;Negative&quot;, invert = TRUE)
+subs &lt;- subset(so_filtered, idents = &quot;Negative&quot;, invert = TRUE)
 subs$HTO_classification %&gt;% table</code></pre>
 <pre><code>.
       B0253 B0253_B0254 B0253_B0257       B0254 B0254_B0257       B0257 
@@ -1163,7 +2217,7 @@ subs$HTO_classification %&gt;% table</code></pre>
 DefaultAssay(subs) &lt;- &quot;HTO&quot;
 subs &lt;- ScaleData(subs, features = rownames(subs), 
     verbose = FALSE)
-subs &lt;- RunPCA(subs, features = rownames(subs), approx = FALSE)</code></pre>
+subs &lt;- RunPCA(subs, features = rownames(subs), approx = FALSE, npcs = 3)</code></pre>
 <pre><code>Warning in print.DimReduc(x = reduction.data, dims = ndims.print, nfeatures =
 nfeatures.print): Only 3 dimensions have been computed.</code></pre>
 <pre><code>Warning: Requested number is larger than the number of available items (3).
@@ -1177,47 +2231,49 @@ Setting to 3.</code></pre>
 <pre class="r"><code>subs &lt;- RunTSNE(subs, dims = 1:3, perplexity = 100)
 Idents(subs) &lt;- &quot;HTO_classification.global&quot;
 DimPlot(subs)</code></pre>
-<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-7.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-filtered-7.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>Idents(subs) &lt;- &#39;HTO_classification&#39;
 DimPlot(subs)</code></pre>
-<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-8.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-filtered-8.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># HTO heatmap
-HTOHeatmap(so, assay = &quot;HTO&quot;, ncells = 5000)</code></pre>
-<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-9.png" width="672" style="display: block; margin: auto;" /></p>
+HTOHeatmap(so_filtered, assay = &quot;HTO&quot;, ncells = 5000)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/demultiplexing-viz-filtered-9.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="cluster-based-on-gene-counts-and-visualize-cells" class="section level2">
+<div id="cluster-based-on-gene-counts-and-visualize-cells-1" class="section level2">
 <h2>Cluster based on gene counts and visualize cells</h2>
-<pre class="r"><code>DefaultAssay(so) &lt;- &quot;RNA&quot;
+<pre class="r"><code>DefaultAssay(so_filtered) &lt;- &quot;RNA&quot;
 # Extract the singlets
-subs &lt;- subset(so, idents = &quot;Singlet&quot;)
-subs$HTO_classification %&gt;% table</code></pre>
+singlets_filtered &lt;- subset(so_filtered, idents = &quot;Singlet&quot;)
+singlets_filtered$HTO_classification %&gt;% table</code></pre>
 <pre><code>.
 B0253 B0254 B0257 
   830   939   998 </code></pre>
 <pre class="r"><code># Select the top 1000 most variable features
-subs &lt;- FindVariableFeatures(subs, selection.method = &quot;mean.var.plot&quot;)
+singlets_filtered &lt;- FindVariableFeatures(singlets_filtered, selection.method = &quot;mean.var.plot&quot;)
 # Scaling RNA data, we only scale the variable features here for efficiency
-subs &lt;- ScaleData(subs, features = VariableFeatures(subs))
+singlets_filtered &lt;- ScaleData(singlets_filtered, features = VariableFeatures(singlets_filtered))
 # Run PCA
-subs &lt;- RunPCA(subs, features = VariableFeatures(subs))
+singlets_filtered &lt;- RunPCA(singlets_filtered, features = VariableFeatures(singlets_filtered))
 
 # We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
-subs &lt;- FindNeighbors(subs, reduction = &quot;pca&quot;, dims = 1:10)
-subs &lt;- FindClusters(subs, resolution = 0.6, verbose = FALSE)
-subs &lt;- RunTSNE(subs, reduction = &quot;pca&quot;, dims = 1:10)
-subs &lt;- RunUMAP(subs, reduction = &quot;pca&quot;, dims = 1:10)</code></pre>
-<pre><code>Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
-To use Python UMAP via reticulate, set umap.method to &#39;umap-learn&#39; and metric to &#39;correlation&#39;
-This message will be shown once per session</code></pre>
-<pre class="r"><code># Projecting singlet identities on TSNE visualization
-DimPlot(subs, group.by = &quot;HTO_classification&quot;, reduction = &quot;tsne&quot;)</code></pre>
-<p><img src="figure/CH-test-01-preprocessing.Rmd/gene-count-clustering-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>DimPlot(subs, group.by = &quot;HTO_classification&quot;, reduction = &quot;umap&quot;)</code></pre>
-<p><img src="figure/CH-test-01-preprocessing.Rmd/gene-count-clustering-2.png" width="672" style="display: block; margin: auto;" /></p>
+singlets_filtered &lt;- FindNeighbors(singlets_filtered, reduction = &quot;pca&quot;, dims = 1:10)
+singlets_filtered &lt;- FindClusters(singlets_filtered, resolution = 0.6, verbose = FALSE)
+singlets_filtered &lt;- RunTSNE(singlets_filtered, reduction = &quot;pca&quot;, dims = 1:10)
+singlets_filtered &lt;- RunUMAP(singlets_filtered, reduction = &quot;pca&quot;, dims = 1:10)
+
+# Projecting singlet identities on TSNE visualization
+DimPlot(singlets_filtered, group.by = &quot;HTO_classification&quot;, reduction = &quot;tsne&quot;)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/gene-count-clustering-filtered-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(singlets_filtered, group.by = &quot;HTO_classification&quot;, reduction = &quot;umap&quot;)</code></pre>
+<p><img src="figure/CH-test-01-preprocessing.Rmd/gene-count-clustering-filtered-2.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="save-data-to-rds" class="section level2">
 <h2>Save data to RDS</h2>
-<pre class="r"><code>saveRDS(sce, file.path(&quot;output&quot;, &quot;CH-test-01-preprocessing.rds&quot;))</code></pre>
+<pre class="r"><code>saveRDS(sce, file.path(&quot;output&quot;, &quot;CH-test-01-preprocessing.rds&quot;))
+saveRDS(singlets, file.path(&quot;output&quot;, &quot;CH-test-01-preprocessing_singlets.rds&quot;))
+saveRDS(so, file.path(&quot;output&quot;, &quot;CH-test-01-preprocessing_so.rds&quot;))
+saveRDS(singlets_filtered, file.path(&quot;output&quot;, &quot;CH-test-01-preprocessing_singlets_filtered.rds&quot;))
+saveRDS(so_filtered, file.path(&quot;output&quot;, &quot;CH-test-01-preprocessing_so_filtered.rds&quot;))</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
