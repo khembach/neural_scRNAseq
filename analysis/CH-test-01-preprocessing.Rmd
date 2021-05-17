@@ -126,9 +126,116 @@ ggplot(cd, aes(x = sum, y = subsets_Mt_fraction)) +
 ```
 
 
-## Identification of outlier cells
+# Create Seurat object and split gene and HTO counts
+```{r create-so}
+## convert DDelayedMatrix to dgCMatrix for import into Seurat object
+counts <- as(counts(sce, withDimnames = FALSE), "dgCMatrix")
+colnames(counts) <- colnames(counts(sce))
+rownames(counts) <- rownames(counts(sce))
+                             
+so <- CreateSeuratObject(
+    counts = counts,
+    meta.data = data.frame(colData(sce)),
+    project = "cell_hashing_test")
+## add HTO data as independent assay
+hto_counts <- as(counts(sce_raw, withDimnames = FALSE)[m,with(colData(sce), 
+                                    paste(barcode, sample_id, sep = ".")) %in% 
+                                colnames(sce)], "dgCMatrix")
+colnames(hto_counts) <- colnames(sce)
+rownames(hto_counts) <- rownames(sce_raw)[m]
+so[["HTO"]] <- CreateAssayObject(counts = hto_counts)
+```
 
-Based on the QC metrics, we now identify outlier cells:
+# Data normalization
+```{r normalize-data}
+DefaultAssay(so) <- "RNA"
+# Normalize RNA data with log normalization
+so <- NormalizeData(so)
+# Find and scale variable features
+so <- FindVariableFeatures(so, selection.method = "mean.var.plot")
+so <- ScaleData(so, features = VariableFeatures(so))
+
+# Normalize HTO data, here we use centered log-ratio (CLR) transformation
+so <- NormalizeData(so, assay = "HTO", normalization.method = "CLR")
+```
+
+# Demultiplex cells based on HTO enrichment
+
+```{r demultiplex-hto, message = TRUE}
+so <- HTODemux(so, assay = "HTO", positive.quantile = 0.99)
+```
+
+## Visualize results
+
+```{r demultiplexing-viz}
+# Global classification results
+table(so$HTO_classification.global)
+
+# Group cells based on the max HTO signal
+Idents(so) <- "HTO_maxID"
+# Group cells based on the max HTO signal
+RidgePlot(so, assay = "HTO", features = rownames(so[["HTO"]]), ncol = 3)
+
+# Visualize pairs of HTO signals to check mutual exclusivity in singlets
+DefaultAssay(object = so) <- "HTO"
+FeatureScatter(so, feature1 = "B0253", feature2 = "B0254")
+FeatureScatter(so, feature1 = "B0257", feature2 = "B0254")
+FeatureScatter(so, feature1 = "B0253", feature2 = "B0257")
+
+## compare number of UMIs for singlet's, doublets and negative cells
+Idents(so) <- "HTO_classification.global"
+VlnPlot(so, features = "nCount_HTO", pt.size = 0.1, log = TRUE)
+VlnPlot(so, features = "nCount_RNA", pt.size = 0.1, log = TRUE)
+
+## tSNE for HTOs
+# First, we will remove negative cells from the object
+subs <- subset(so, idents = "Negative", invert = TRUE)
+subs$HTO_classification %>% table
+# Calculate a tSNE embedding of the HTO data
+DefaultAssay(subs) <- "HTO"
+subs <- ScaleData(subs, features = rownames(subs), 
+    verbose = FALSE)
+subs <- RunPCA(subs, features = rownames(subs), approx = FALSE, npcs = 3)
+subs <- RunTSNE(subs, dims = 1:3, perplexity = 100)
+Idents(subs) <- "HTO_classification.global"
+DimPlot(subs)
+Idents(subs) <- 'HTO_classification'
+DimPlot(subs)
+
+# HTO heatmap
+HTOHeatmap(so, assay = "HTO", ncells = 5000)
+```
+
+
+## Cluster based on gene counts and visualize cells
+```{r gene-count-clustering}
+DefaultAssay(so) <- "RNA"
+# Extract the singlets
+singlets <- subset(so, idents = "Singlet")
+singlets$HTO_classification %>% table
+# Select the top 1000 most variable features
+singlets <- FindVariableFeatures(singlets, selection.method = "mean.var.plot")
+# Scaling RNA data, we only scale the variable features here for efficiency
+singlets <- ScaleData(singlets, features = VariableFeatures(singlets))
+# Run PCA
+singlets <- RunPCA(singlets, features = VariableFeatures(singlets))
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+singlets <- FindNeighbors(singlets, reduction = "pca", dims = 1:10)
+singlets <- FindClusters(singlets, resolution = 0.6, verbose = FALSE)
+singlets <- RunTSNE(singlets, reduction = "pca", dims = 1:10)
+singlets <- RunUMAP(singlets, reduction = "pca", dims = 1:10)
+
+# Projecting singlet identities on TSNE visualization
+DimPlot(singlets, group.by = "HTO_classification", reduction = "tsne")
+DimPlot(singlets, group.by = "HTO_classification", reduction = "umap")
+```
+
+
+
+## Identification of low quality cells
+
+Based on the QC metrics, we identify cells with lower quality:
 
 ```{r outlier-identification}
 cols <- c("sum", "detected", "subsets_Mt_percent")
@@ -192,13 +299,13 @@ dim(sce_filtered)
 
 
 # Create Seurat object and split gene and HTO counts
-```{r create-so}
+```{r create-so-filtered}
 ## convert DDelayedMatrix to dgCMatrix for import into Seurat object
 counts <- as(counts(sce_filtered, withDimnames = FALSE), "dgCMatrix")
 colnames(counts) <- colnames(counts(sce_filtered))
 rownames(counts) <- rownames(counts(sce_filtered))
                              
-so <- CreateSeuratObject(
+so_filtered <- CreateSeuratObject(
     counts = counts,
     meta.data = data.frame(colData(sce_filtered)),
     project = "cell_hashing_test")
@@ -208,60 +315,60 @@ hto_counts <- as(counts(sce_raw, withDimnames = FALSE)[m,with(colData(sce),
                                 colnames(sce_filtered)], "dgCMatrix")
 colnames(hto_counts) <- colnames(sce_filtered)
 rownames(hto_counts) <- rownames(sce_raw)[m]
-so[["HTO"]] <- CreateAssayObject(counts = hto_counts)
+so_filtered[["HTO"]] <- CreateAssayObject(counts = hto_counts)
 ```
 
 # Data normalization
-```{r normalize-data}
-DefaultAssay(so) <- "RNA"
+```{r normalize-data-filtered}
+DefaultAssay(so_filtered) <- "RNA"
 # Normalize RNA data with log normalization
-so <- NormalizeData(so)
+so_filtered <- NormalizeData(so_filtered)
 # Find and scale variable features
-so <- FindVariableFeatures(so, selection.method = "mean.var.plot")
-so <- ScaleData(so, features = VariableFeatures(so))
+so_filtered <- FindVariableFeatures(so_filtered, selection.method = "mean.var.plot")
+so_filtered <- ScaleData(so_filtered, features = VariableFeatures(so_filtered))
 
 # Normalize HTO data, here we use centered log-ratio (CLR) transformation
-so <- NormalizeData(so, assay = "HTO", normalization.method = "CLR")
+so_filtered <- NormalizeData(so_filtered, assay = "HTO", normalization.method = "CLR")
 ```
 
 
 # Demultiplex cells based on HTO enrichment
 
-```{r demultiplex-hto}
-so <- HTODemux(so, assay = "HTO", positive.quantile = 0.99)
+```{r demultiplex-hto-filtered, message = TRUE}
+so_filtered <- HTODemux(so_filtered, assay = "HTO", positive.quantile = 0.99)
 ```
 
 ## Visualize results
 
-```{r demultiplexing-viz}
+```{r demultiplexing-viz-filtered}
 # Global classification results
-table(so$HTO_classification.global)
+table(so_filtered$HTO_classification.global)
 
 # Group cells based on the max HTO signal
-Idents(so) <- "HTO_maxID"
+Idents(so_filtered) <- "HTO_maxID"
 # Group cells based on the max HTO signal
-RidgePlot(so, assay = "HTO", features = rownames(so[["HTO"]]), ncol = 3)
+RidgePlot(so_filtered, assay = "HTO", features = rownames(so_filtered[["HTO"]]), ncol = 3)
 
 # Visualize pairs of HTO signals to check mutual exclusivity in singlets
-DefaultAssay(object = so) <- "HTO"
-FeatureScatter(so, feature1 = "B0253", feature2 = "B0254")
-FeatureScatter(so, feature1 = "B0257", feature2 = "B0254")
-FeatureScatter(so, feature1 = "B0253", feature2 = "B0257")
+DefaultAssay(object = so_filtered) <- "HTO"
+FeatureScatter(so_filtered, feature1 = "B0253", feature2 = "B0254")
+FeatureScatter(so_filtered, feature1 = "B0257", feature2 = "B0254")
+FeatureScatter(so_filtered, feature1 = "B0253", feature2 = "B0257")
 
 ## compare number of UMIs for singlet's, doublets and negative cells
-Idents(so) <- "HTO_classification.global"
-VlnPlot(so, features = "nCount_HTO", pt.size = 0.1, log = TRUE)
-VlnPlot(so, features = "nCount_RNA", pt.size = 0.1, log = TRUE)
+Idents(so_filtered) <- "HTO_classification.global"
+VlnPlot(so_filtered, features = "nCount_HTO", pt.size = 0.1, log = TRUE)
+VlnPlot(so_filtered, features = "nCount_RNA", pt.size = 0.1, log = TRUE)
 
 ## tSNE for HTOs
 # First, we will remove negative cells from the object
-subs <- subset(so, idents = "Negative", invert = TRUE)
+subs <- subset(so_filtered, idents = "Negative", invert = TRUE)
 subs$HTO_classification %>% table
 # Calculate a tSNE embedding of the HTO data
 DefaultAssay(subs) <- "HTO"
 subs <- ScaleData(subs, features = rownames(subs), 
     verbose = FALSE)
-subs <- RunPCA(subs, features = rownames(subs), approx = FALSE)
+subs <- RunPCA(subs, features = rownames(subs), approx = FALSE, npcs = 3)
 subs <- RunTSNE(subs, dims = 1:3, perplexity = 100)
 Idents(subs) <- "HTO_classification.global"
 DimPlot(subs)
@@ -269,35 +376,40 @@ Idents(subs) <- 'HTO_classification'
 DimPlot(subs)
 
 # HTO heatmap
-HTOHeatmap(so, assay = "HTO", ncells = 5000)
+HTOHeatmap(so_filtered, assay = "HTO", ncells = 5000)
 ```
 
 
 ## Cluster based on gene counts and visualize cells
-```{r gene-count-clustering}
-DefaultAssay(so) <- "RNA"
+```{r gene-count-clustering-filtered}
+DefaultAssay(so_filtered) <- "RNA"
 # Extract the singlets
-subs <- subset(so, idents = "Singlet")
-subs$HTO_classification %>% table
+singlets_filtered <- subset(so_filtered, idents = "Singlet")
+singlets_filtered$HTO_classification %>% table
 # Select the top 1000 most variable features
-subs <- FindVariableFeatures(subs, selection.method = "mean.var.plot")
+singlets_filtered <- FindVariableFeatures(singlets_filtered, selection.method = "mean.var.plot")
 # Scaling RNA data, we only scale the variable features here for efficiency
-subs <- ScaleData(subs, features = VariableFeatures(subs))
+singlets_filtered <- ScaleData(singlets_filtered, features = VariableFeatures(singlets_filtered))
 # Run PCA
-subs <- RunPCA(subs, features = VariableFeatures(subs))
+singlets_filtered <- RunPCA(singlets_filtered, features = VariableFeatures(singlets_filtered))
 
 # We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
-subs <- FindNeighbors(subs, reduction = "pca", dims = 1:10)
-subs <- FindClusters(subs, resolution = 0.6, verbose = FALSE)
-subs <- RunTSNE(subs, reduction = "pca", dims = 1:10)
-subs <- RunUMAP(subs, reduction = "pca", dims = 1:10)
+singlets_filtered <- FindNeighbors(singlets_filtered, reduction = "pca", dims = 1:10)
+singlets_filtered <- FindClusters(singlets_filtered, resolution = 0.6, verbose = FALSE)
+singlets_filtered <- RunTSNE(singlets_filtered, reduction = "pca", dims = 1:10)
+singlets_filtered <- RunUMAP(singlets_filtered, reduction = "pca", dims = 1:10)
 
 # Projecting singlet identities on TSNE visualization
-DimPlot(subs, group.by = "HTO_classification", reduction = "tsne")
-DimPlot(subs, group.by = "HTO_classification", reduction = "umap")
+DimPlot(singlets_filtered, group.by = "HTO_classification", reduction = "tsne")
+DimPlot(singlets_filtered, group.by = "HTO_classification", reduction = "umap")
 ```
+
 
 ## Save data to RDS
 ```{r save-data}
 saveRDS(sce, file.path("output", "CH-test-01-preprocessing.rds"))
+saveRDS(singlets, file.path("output", "CH-test-01-preprocessing_singlets.rds"))
+saveRDS(so, file.path("output", "CH-test-01-preprocessing_so.rds"))
+saveRDS(singlets_filtered, file.path("output", "CH-test-01-preprocessing_singlets_filtered.rds"))
+saveRDS(so_filtered, file.path("output", "CH-test-01-preprocessing_so_filtered.rds"))
 ```
