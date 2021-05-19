@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Katharina Hembach" />
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">neural_scRNAseq</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/khembach/neural_scRNAseq">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-05-19
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it's best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200522code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200522)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200522code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200522)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeab048ce6ec05b6a35eec4ec7cd48168acaf343c1targetblankab048cea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/ab048ce6ec05b6a35eec4ec7cd48168acaf343c1" target="_blank">ab048ce</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeab048ce6ec05b6a35eec4ec7cd48168acaf343c1targetblankab048cea" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/ab048ce6ec05b6a35eec4ec7cd48168acaf343c1" target="_blank">ab048ce</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    ._.DS_Store
+    Ignored:    ._Filtered.pdf
+    Ignored:    ._Rplots.pdf
+    Ignored:    ._Unfiltered.pdf
+    Ignored:    .__workflowr.yml
+    Ignored:    ._coverage.pdf
+    Ignored:    ._coverage_sashimi.pdf
+    Ignored:    ._coverage_sashimi.png
+    Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    ._pbDS_cell_level.pdf
+    Ignored:    ._pbDS_top_expr_umap.pdf
+    Ignored:    ._pbDS_upset.pdf
+    Ignored:    ._sashimi.pdf
+    Ignored:    ._stmn2.pdf
+    Ignored:    ._tdp.pdf
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/._.DS_Store
+    Ignored:    analysis/._01-preprocessing.Rmd
+    Ignored:    analysis/._01-preprocessing.html
+    Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._03-filtering.Rmd
+    Ignored:    analysis/._04-clustering.Rmd
+    Ignored:    analysis/._04-clustering.knit.md
+    Ignored:    analysis/._04.1-cell_cycle.Rmd
+    Ignored:    analysis/._05-annotation.Rmd
+    Ignored:    analysis/._07-cluster-analysis-all-timepoints.Rmd
+    Ignored:    analysis/._Lam-0-NSC_no_integration.Rmd
+    Ignored:    analysis/._Lam-01-NSC_integration.Rmd
+    Ignored:    analysis/._Lam-02-NSC_annotation.Rmd
+    Ignored:    analysis/._NSC-1-clustering.Rmd
+    Ignored:    analysis/._NSC-2-annotation.Rmd
+    Ignored:    analysis/.__site.yml
+    Ignored:    analysis/._additional_filtering.Rmd
+    Ignored:    analysis/._additional_filtering_clustering.Rmd
+    Ignored:    analysis/._index.Rmd
+    Ignored:    analysis/._organoid-01-1-qualtiy-control.Rmd
+    Ignored:    analysis/._organoid-01-clustering.Rmd
+    Ignored:    analysis/._organoid-02-integration.Rmd
+    Ignored:    analysis/._organoid-03-cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-04-group_integration.Rmd
+    Ignored:    analysis/._organoid-04-stage_integration.Rmd
+    Ignored:    analysis/._organoid-05-group_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-05-stage_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-06-1-prepare-sce.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-Seurat.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-function.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-06-group-integration-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-07-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-07-group-integration-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-08-conos-comparison.Rmd
+    Ignored:    analysis/._organoid-0x-sample_integration.Rmd
+    Ignored:    analysis/01-preprocessing_cache/
+    Ignored:    analysis/02-1-SampleQC_cache/
+    Ignored:    analysis/02-quality_control_cache/
+    Ignored:    analysis/02.1-SampleQC_cache/
+    Ignored:    analysis/03-filtering_cache/
+    Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/04.1-cell_cycle_cache/
+    Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/06-clustering-all-timepoints_cache/
+    Ignored:    analysis/07-cluster-analysis-all-timepoints_cache/
+    Ignored:    analysis/CH-test-01-preprocessing_cache/
+    Ignored:    analysis/CH-test-02-transgene-expression_cache/
+    Ignored:    analysis/Lam-01-NSC_integration_cache/
+    Ignored:    analysis/Lam-02-NSC_annotation_cache/
+    Ignored:    analysis/NSC-1-clustering_cache/
+    Ignored:    analysis/NSC-2-annotation_cache/
+    Ignored:    analysis/TDP-01-preprocessing_cache/
+    Ignored:    analysis/TDP-02-quality_control_cache/
+    Ignored:    analysis/TDP-03-filtering_cache/
+    Ignored:    analysis/TDP-04-clustering_cache/
+    Ignored:    analysis/TDP-05-00-filtering-plasmid-QC_cache/
+    Ignored:    analysis/TDP-05-plasmid_expression_cache/
+    Ignored:    analysis/TDP-06-cluster_analysis_cache/
+    Ignored:    analysis/TDP-07-01-STMN2_expression_cache/
+    Ignored:    analysis/TDP-07-cluster_12_cache/
+    Ignored:    analysis/TDP-08-00-clustering-HA-D96_cache/
+    Ignored:    analysis/TDP-08-01-HA-D96-expression-changes_cache/
+    Ignored:    analysis/TDP-08-02-TDP_target_genes_cache/
+    Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
+    Ignored:    analysis/additional_filtering_cache/
+    Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
+    Ignored:    analysis/organoid-01-clustering_cache/
+    Ignored:    analysis/organoid-02-integration_cache/
+    Ignored:    analysis/organoid-03-cluster_analysis_cache/
+    Ignored:    analysis/organoid-04-group_integration_cache/
+    Ignored:    analysis/organoid-04-stage_integration_cache/
+    Ignored:    analysis/organoid-05-group_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-05-stage_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_test_cache/
+    Ignored:    analysis/organoid-06-group-integration-conos-analysis_cache/
+    Ignored:    analysis/organoid-07-conos-visualization_cache/
+    Ignored:    analysis/organoid-07-group-integration-conos-visualization_cache/
+    Ignored:    analysis/organoid-08-conos-comparison_cache/
+    Ignored:    analysis/organoid-0x-sample_integration_cache/
+    Ignored:    analysis/sample5_QC_cache/
+    Ignored:    analysis/timepoints-01-organoid-integration_cache/
+    Ignored:    analysis/timepoints-02-cluster-analysis_cache/
+    Ignored:    data/.DS_Store
+    Ignored:    data/._.DS_Store
+    Ignored:    data/._.smbdeleteAAA17ed8b4b
+    Ignored:    data/._Lam_figure2_markers.R
+    Ignored:    data/._README.md
+    Ignored:    data/._Reactive_astrocytes_markers.xlsx
+    Ignored:    data/._known_NSC_markers.R
+    Ignored:    data/._known_cell_type_markers.R
+    Ignored:    data/._metadata.csv
+    Ignored:    data/._virus_cell_tropism_markers.R
+    Ignored:    data/._~$Reactive_astrocytes_markers.xlsx
+    Ignored:    data/data_sushi/
+    Ignored:    data/filtered_feature_matrices/
+    Ignored:    output/.DS_Store
+    Ignored:    output/._.DS_Store
+    Ignored:    output/._NSC_cluster2_marker_genes.txt
+    Ignored:    output/._TDP-06-no_integration_cluster12_marker_genes.txt
+    Ignored:    output/._TDP-06-no_integration_cluster13_marker_genes.txt
+    Ignored:    output/._organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_0.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_1.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_10.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_11.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_12.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_13.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_14.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_5.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_7.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_8.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_all.xlsx
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_0.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_1.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_10.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_11.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_12.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_13.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_14.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_5.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_7.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_8.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/._~$tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/CH-test-01-preprocessing.rds
+    Ignored:    output/CH-test-01-preprocessing_singlets.rds
+    Ignored:    output/CH-test-01-preprocessing_singlets_filtered.rds
+    Ignored:    output/CH-test-01-preprocessing_so.rds
+    Ignored:    output/CH-test-01-preprocessing_so_filtered.rds
+    Ignored:    output/Lam-01-clustering.rds
+    Ignored:    output/NSC_1_clustering.rds
+    Ignored:    output/NSC_cluster1_marker_genes.txt
+    Ignored:    output/NSC_cluster2_marker_genes.txt
+    Ignored:    output/NSC_cluster3_marker_genes.txt
+    Ignored:    output/NSC_cluster4_marker_genes.txt
+    Ignored:    output/NSC_cluster5_marker_genes.txt
+    Ignored:    output/NSC_cluster6_marker_genes.txt
+    Ignored:    output/NSC_cluster7_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster0_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster10_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster11_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster12_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster13_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster14_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster15_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster16_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster17_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster1_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster2_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster3_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster4_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster5_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster6_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster7_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster8_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster9_marker_genes.txt
+    Ignored:    output/TDP-06_scran_markers.rds
+    Ignored:    output/additional_filtering.rds
+    Ignored:    output/conos/
+    Ignored:    output/conos_organoid-06-conos-analysis.rds
+    Ignored:    output/conos_organoid-06-group-integration-conos-analysis.rds
+    Ignored:    output/figures/
+    Ignored:    output/organoid_integration_cluster10_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster11_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster12_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster13_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster14_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster15_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster16_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster17_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster2_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster3_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster4_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster5_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster6_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster7_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster8_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster9_marker_genes.txt
+    Ignored:    output/res_TDP-08-01-muscat.rds
+    Ignored:    output/sce_01_preprocessing.rds
+    Ignored:    output/sce_02_quality_control.rds
+    Ignored:    output/sce_03_filtering.rds
+    Ignored:    output/sce_03_filtering_all_genes.rds
+    Ignored:    output/sce_06-1-prepare-sce.rds
+    Ignored:    output/sce_TDP-08-01-muscat.rds
+    Ignored:    output/sce_TDP_01_preprocessing.rds
+    Ignored:    output/sce_TDP_02_quality_control.rds
+    Ignored:    output/sce_TDP_03_filtering.rds
+    Ignored:    output/sce_TDP_03_filtering_all_genes.rds
+    Ignored:    output/sce_organoid-01-clustering.rds
+    Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04-stage_integration.rds
+    Ignored:    output/so_04_1_cell_cycle.rds
+    Ignored:    output/so_04_clustering.rds
+    Ignored:    output/so_06-clustering_all_timepoints.rds
+    Ignored:    output/so_08-00_clustering_HA_D96.rds
+    Ignored:    output/so_08-clustering_timeline_HA.rds
+    Ignored:    output/so_0x-sample_integration.rds
+    Ignored:    output/so_CH-test-02-transgene_expression.rds
+    Ignored:    output/so_TDP-06-cluster-analysis.rds
+    Ignored:    output/so_TDP_04_clustering.rds
+    Ignored:    output/so_TDP_05_plasmid_expression.rds
+    Ignored:    output/so_additional_filtering_clustering.rds
+    Ignored:    output/so_integrated_organoid-02-integration.rds
+    Ignored:    output/so_merged_organoid-02-integration.rds
+    Ignored:    output/so_organoid-01-clustering.rds
+    Ignored:    output/so_sample_organoid-01-clustering.rds
+    Ignored:    output/so_timepoints-01-organoid_integration.rds
+    Ignored:    output/tbl_TDP-08-01-muscat.rds
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_0.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_1.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_10.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_11.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_12.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_13.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_14.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_5.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_7.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_8.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_all.xlsx
+    Ignored:    output/tbl_TDP-08-02-targets_hek.rds
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_0.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_1.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_10.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_11.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_12.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_13.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_14.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_5.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_7.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_8.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/~$tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    scripts/.DS_Store
+    Ignored:    scripts/._.DS_Store
+    Ignored:    scripts/._bu_Rcode.R
+    Ignored:    scripts/._plasmid_expression.sh
+    Ignored:    scripts/._plasmid_expression_cell_hashing_test.sh
+    Ignored:    scripts/._prepare_salmon_transcripts.R
+
+Untracked files:
+    Untracked:  Filtered.pdf
+    Untracked:  Rplots.pdf
+    Untracked:  Unfiltered
+    Untracked:  Unfiltered.pdf
+    Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
+    Untracked:  analysis/TDP-07-01-STMN2_expression copy.Rmd
+    Untracked:  analysis/additional_filtering.Rmd
+    Untracked:  analysis/additional_filtering_clustering.Rmd
+    Untracked:  analysis/organoid-01-1-qualtiy-control.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-Seurat.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-function.Rmd
+    Untracked:  analysis/organoid-07-conos-visualization.Rmd
+    Untracked:  analysis/organoid-07-group-integration-conos-visualization.Rmd
+    Untracked:  analysis/organoid-08-conos-comparison.Rmd
+    Untracked:  analysis/organoid-0x-sample_integration.Rmd
+    Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  coverage.pdf
+    Untracked:  coverage_sashimi.pdf
+    Untracked:  coverage_sashimi.png
+    Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
+    Untracked:  data/Kanton_et_al/
+    Untracked:  data/Lam_et_al/
+    Untracked:  data/Sep2020/
+    Untracked:  data/cell_hashing_test/
+    Untracked:  data/cell_hashing_test_FB/
+    Untracked:  data/reference/
+    Untracked:  data/virus_cell_tropism_markers.R
+    Untracked:  data/~$Reactive_astrocytes_markers.xlsx
+    Untracked:  pbDS_cell_level.pdf
+    Untracked:  pbDS_heatmap.pdf
+    Untracked:  pbDS_top_expr_umap.pdf
+    Untracked:  pbDS_upset.pdf
+    Untracked:  sashimi.pdf
+    Untracked:  scripts/bu_Rcode.R
+    Untracked:  scripts/bu_code.Rmd
+    Untracked:  scripts/plasmid_expression_cell_hashing_test.sh
+    Untracked:  scripts/prepare_salmon_transcripts_cell_hashing_test.R
+    Untracked:  scripts/salmon-latest_linux_x86_64/
+    Untracked:  stmn2.pdf
+    Untracked:  tdp.pdf
+
+Unstaged changes:
+    Modified:   analysis/05-annotation.Rmd
+    Modified:   analysis/TDP-04-clustering.Rmd
+    Modified:   analysis/TDP-08-01-HA-D96-expression-changes.Rmd
+    Modified:   analysis/_site.yml
+    Modified:   analysis/organoid-02-integration.Rmd
+    Modified:   analysis/organoid-04-group_integration.Rmd
+    Modified:   analysis/organoid-06-conos-analysis.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/CH-test-03-cluster-analysis.Rmd</code>) and HTML (<code>docs/CH-test-03-cluster-analysis.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ab048ce6ec05b6a35eec4ec7cd48168acaf343c1/analysis/CH-test-03-cluster-analysis.Rmd" target="_blank">ab048ce</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+<td>
+analyze clusters of cell hashing test experiment
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-packages" class="section level3">
+<h3>Load packages</h3>
+<pre class="r"><code>library(ComplexHeatmap)
+library(cowplot)
+library(ggplot2)
+library(dplyr)
+library(muscat)
+library(purrr)
+library(RColorBrewer)
+library(viridis)
+library(scran)
+library(Seurat)
+library(SingleCellExperiment)
+library(stringr)</code></pre>
+</div>
+<div id="load-data-convert-to-sce" class="section level1">
+<h1>Load data &amp; convert to SCE</h1>
+<pre class="r"><code>so &lt;- readRDS(file.path(&quot;output&quot;, &quot;so_CH-test-02-transgene_expression.rds&quot;))
+sce &lt;- as.SingleCellExperiment(so, assay = &quot;RNA&quot;)
+colData(sce) &lt;- as.data.frame(colData(sce)) %&gt;% 
+    mutate_if(is.character, as.factor) %&gt;% 
+    DataFrame(row.names = colnames(sce))</code></pre>
+</div>
+<div id="number-of-clusters-by-resolution" class="section level1">
+<h1>Number of clusters by resolution</h1>
+<pre class="r"><code>cluster_cols &lt;- grep(&quot;res.[0-9]&quot;, colnames(colData(sce)), value = TRUE)
+sapply(colData(sce)[cluster_cols], nlevels)</code></pre>
+<pre><code>RNA_snn_res.0.6 RNA_snn_res.0.2 RNA_snn_res.0.4 RNA_snn_res.0.8   RNA_snn_res.1 
+             10               6              11              16              16 </code></pre>
+</div>
+<div id="cluster-sample-counts" class="section level1">
+<h1>Cluster-sample counts</h1>
+<pre class="r"><code># set cluster IDs to resolution 0.4 clustering
+so &lt;- SetIdent(so, value = &quot;RNA_snn_res.0.8&quot;)
+so@meta.data$cluster_id &lt;- Idents(so)
+sce$cluster_id &lt;- Idents(so)
+(n_cells &lt;- table(sce$cluster_id, sce$sample_id))</code></pre>
+<pre><code>    
+     GA50-EGFP HA-GA50 TDP-43-HA
+  0        280     246       285
+  1        155     135       212
+  2        185     134       149
+  3        208     138        63
+  4         85      98       121
+  5         93      93        98
+  6         84      89        99
+  7         96      66       108
+  8        111      68        83
+  9        115      61        41
+  10       139      62         3
+  11        53      50        51
+  12        33      37        53
+  13        39      34         7
+  14         8      14        46
+  15        15       4         5</code></pre>
+</div>
+<div id="relative-cluster-abundances" class="section level1">
+<h1>Relative cluster-abundances</h1>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells, margin = 2)
+mat &lt;- round(as.matrix(unclass(fqs))*100, 2)
+colfunc &lt;- colorRampPalette(c(&quot;ghostwhite&quot;, &quot;deepskyblue4&quot;))
+Heatmap(mat,
+    # col = rev(brewer.pal(11, &quot;RdGy&quot;)[-6]),
+    col = colfunc(10),
+    name = &quot;Percentage\nof cells&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cluster ID&quot;,
+    column_title = &quot;sample ID&quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="dr-colored-by-cluster-id" class="section level1 tabset">
+<h1>DR colored by cluster ID</h1>
+<pre class="r"><code>.plot_dr &lt;- function(so, dr, id)
+    DimPlot(so, group.by = id, reduction = dr, pt.size = 0.4) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+ids &lt;- c(&quot;cluster_id&quot;, &quot;sample_id&quot;)
+for (id in ids) {
+    cat(&quot;## &quot;, id, &quot;\n&quot;)
+    p1 &lt;- .plot_dr(so, &quot;tsne&quot;, id)
+    lgd &lt;- get_legend(p1)
+    p1 &lt;- p1 + theme(legend.position = &quot;none&quot;)
+    p2 &lt;- .plot_dr(so, &quot;umap&quot;, id) + theme(legend.position = &quot;none&quot;)
+    ps &lt;- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p &lt;- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="cluster_id" class="section level2">
+<h2>cluster_id</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="sample_id" class="section level2">
+<h2>sample_id</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="find-markers-using-scran" class="section level1">
+<h1>Find markers using <code>scran</code></h1>
+<div id="markers" class="section level2">
+<h2>Markers</h2>
+<p>We identify candidate marker genes for each cluster that enable a separation of that group from any other group. The null hypothesis is that the log FC between a cluster and the compared cluster is 2.</p>
+<pre class="r"><code>scran_markers &lt;- findMarkers(sce, 
+    groups = sce$cluster_id, block = sce$sample_id, 
+    direction = &quot;up&quot;, lfc = 2, full.stats = TRUE, log.p = FALSE)</code></pre>
+<p>We write tables with the top marker genes per cluster.</p>
+<pre class="r"><code># gs2 &lt;- lapply(scran_markers, function(u) u[u$Top %in% 1:2,])
+# for (i in seq_along(gs2)) {
+#   write.table(x = gs2[[i]] %&gt;% as.data.frame %&gt;% 
+#                 dplyr::mutate(gene = rownames(gs2[[i]])) %&gt;%
+#                 dplyr::relocate(gene), 
+#               file =  file.path(&quot;output&quot;, 
+#                                 paste0(&quot;TDP-06-no_integration_cluster&quot;, i-1, &quot;_marker_genes.txt&quot;)),
+#               sep = &quot;\t&quot;, quote = FALSE, row.names = FALSE)
+# }</code></pre>
+</div>
+<div id="heatmap-of-mean-marker-exprs.-by-cluster" class="section level2">
+<h2>Heatmap of mean marker-exprs. by cluster</h2>
+<p>We aggregate the cells to pseudobulks and plot the average expression of the condidate marker genes in each of the clusters.</p>
+<pre class="r"><code>## including marker genes of rank 1 and 2
+gs &lt;- lapply(scran_markers, function(u) rownames(u)[u$Top %in% 1:2])
+## candidate cluster markers
+lapply(gs, function(x) {
+  y &lt;- str_split(x, pattern = &quot;\\.&quot;, simplify = TRUE)[,2]
+  y[which(y == &quot;&quot;)] &lt;- x[which(y == &quot;&quot;)]
+  y
+  })</code></pre>
+<pre><code>$`0`
+ [1] &quot;RTN4&quot;         &quot;VGF&quot;          &quot;STMN2&quot;        &quot;RPLP1&quot;        &quot;TMSB4X&quot;      
+ [6] &quot;MT-RNR2&quot;      &quot;TAC1&quot;         &quot;FTH1&quot;         &quot;RPL36&quot;        &quot;MT-ATP6&quot;     
+[11] &quot;STMN2-alevin&quot;
+
+$`1`
+[1] &quot;SCG2&quot;    &quot;VGF&quot;     &quot;WSB1&quot;    &quot;MT-RNR2&quot; &quot;DST&quot;     &quot;STMN2&quot;   &quot;ATP2B1&quot; 
+[8] &quot;MT-RNR1&quot; &quot;MT-ATP6&quot;
+
+$`2`
+ [1] &quot;VGF&quot;     &quot;STMN2&quot;   &quot;VIM&quot;     &quot;FTL&quot;     &quot;MT-RNR2&quot; &quot;MT-ATP6&quot; &quot;MT-ND5&quot; 
+ [8] &quot;RPL32&quot;   &quot;RPL7A&quot;   &quot;MT-RNR1&quot; &quot;MT-ND1&quot; 
+
+$`3`
+ [1] &quot;TUBB&quot;         &quot;DYNC2H1&quot;      &quot;CST3&quot;         &quot;PCP4&quot;         &quot;STMN2-alevin&quot;
+ [6] &quot;NSG2&quot;         &quot;NPTX2&quot;        &quot;CLU&quot;          &quot;STMN2&quot;        &quot;TXN&quot;         
+[11] &quot;RPLP1&quot;       
+
+$`4`
+ [1] &quot;PNOC&quot;         &quot;RTN1&quot;         &quot;CRABP1&quot;       &quot;STMN2-alevin&quot; &quot;MLLT11&quot;      
+ [6] &quot;SPP1&quot;         &quot;SCRG1&quot;        &quot;STMN2&quot;        &quot;RPS13&quot;        &quot;TUBA1A&quot;      
+[11] &quot;PCP4&quot;        
+
+$`5`
+[1] &quot;S100A10&quot;      &quot;IGFBP5&quot;       &quot;STMN2-alevin&quot; &quot;SH3BGRL3&quot;     &quot;TAC1&quot;        
+[6] &quot;STMN2&quot;        &quot;B2M&quot;          &quot;MT-RNR2&quot;     
+
+$`6`
+[1] &quot;UTS2&quot;         &quot;FABP7&quot;        &quot;TUBA1A&quot;       &quot;CRABP1&quot;       &quot;STMN2-alevin&quot;
+[6] &quot;RPS8&quot;         &quot;IGFBP5&quot;       &quot;STMN2&quot;        &quot;RTN1&quot;        
+
+$`7`
+[1] &quot;C1orf61&quot; &quot;SPARCL1&quot; &quot;FABP5&quot;   &quot;VIM&quot;     &quot;GFAP&quot;    &quot;SPP1&quot;   
+
+$`8`
+[1] &quot;C1orf61&quot;      &quot;STMN2&quot;        &quot;VIM&quot;          &quot;MT-RNR2&quot;      &quot;MT-ATP6&quot;     
+[6] &quot;STMN2-alevin&quot;
+
+$`9`
+ [1] &quot;MAP2&quot;     &quot;NPTX2&quot;    &quot;PLCG2&quot;    &quot;WSB1&quot;     &quot;MT-RNR2&quot;  &quot;MT-CO2&quot;  
+ [7] &quot;MT-ATP6&quot;  &quot;TDP43-HA&quot; &quot;PCDH9&quot;    &quot;PCED1A&quot;   &quot;MT-RNR1&quot;  &quot;MT-ND2&quot;  
+[13] &quot;MT-ND3&quot;   &quot;MT-ND4&quot;  
+
+$`10`
+[1] &quot;SPOCK3&quot;       &quot;CLU&quot;          &quot;RPS13&quot;        &quot;TDP43-HA&quot;     &quot;STMN2-alevin&quot;
+[6] &quot;SELENOK&quot;      &quot;STMN2&quot;        &quot;DYNC2H1&quot;      &quot;CST3&quot;        
+
+$`11`
+[1] &quot;TAC1&quot;         &quot;CRH&quot;          &quot;STMN2-alevin&quot; &quot;SH3BGRL3&quot;     &quot;STMN2&quot;       
+[6] &quot;TUBA1A&quot;      
+
+$`12`
+[1] &quot;PTGDS&quot;  &quot;VIM&quot;    &quot;IFITM3&quot; &quot;DLK1&quot;   &quot;B2M&quot;    &quot;FTL&quot;   
+
+$`13`
+[1] &quot;S100A16&quot; &quot;CLU&quot;     &quot;TAC3&quot;    &quot;CALB1&quot;   &quot;VIM&quot;     &quot;APOE&quot;   
+
+$`14`
+[1] &quot;PLCG2&quot;    &quot;CKS2&quot;     &quot;MT-RNR2&quot;  &quot;MT-ND2&quot;   &quot;TDP43-HA&quot;
+
+$`15`
+[1] &quot;PTN&quot;     &quot;VIM&quot;     &quot;PCLAF&quot;   &quot;S100A10&quot; &quot;C1orf61&quot; &quot;DBI&quot;     &quot;HMGB2&quot;  
+[8] &quot;TUBA1B&quot; </code></pre>
+<pre class="r"><code>sub &lt;- sce[unique(unlist(gs)), ]
+pbs &lt;- aggregateData(sub, assay = &quot;logcounts&quot;, by = &quot;cluster_id&quot;, fun = &quot;mean&quot;)
+mat &lt;- t(muscat:::.scale(assay(pbs)))
+## remove the Ensembl ID from the gene names
+cnames &lt;- colnames(mat)
+colnames(mat) &lt;- str_split(cnames, pattern = &quot;\\.&quot;, simplify = TRUE)[,2] 
+colnames(mat)[which(colnames(mat) == &quot;&quot;)] &lt;- cnames[which(colnames(mat) == &quot;&quot;)]
+
+Heatmap(mat,
+    name = &quot;scaled avg.\nexpression&quot;,
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;cluster_id&quot;,
+    rect_gp = gpar(col = &quot;white&quot;))</code></pre>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/scran-markers-heatmap-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="known-marker-genes" class="section level1">
+<h1>Known marker genes</h1>
+<p>Apart from the usual marker genes, we also want to analyse the expression of Casein Kinase 1 Epsilon (CSNK1E).</p>
+<pre class="r"><code>## source file with list of known marker genes
+source(file.path(&quot;data&quot;, &quot;known_cell_type_markers.R&quot;))
+fs[[&quot;kinase&quot;]] &lt;- &quot;CSNK1E&quot;
+
+fs &lt;- lapply(fs, sapply, function(g)
+    grep(pattern = paste0(&quot;\\.&quot;, g, &quot;$&quot;), rownames(sce), value = TRUE)
+  )
+
+fs &lt;- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
+
+gs &lt;- gsub(&quot;.*\\.&quot;, &quot;&quot;, unlist(fs))
+ns &lt;- vapply(fs, length, numeric(1))
+ks &lt;- rep.int(names(fs), ns)
+labs &lt;- lapply(fs, function(x) gsub(&quot;.*\\.&quot;, &quot;&quot;,x))</code></pre>
+<div id="heatmap-of-mean-marker-exprs.-by-cluster-1" class="section level2">
+<h2>Heatmap of mean marker-exprs. by cluster</h2>
+<pre class="r"><code># split cells by cluster
+cs_by_k &lt;- split(colnames(sce), sce$cluster_id)
+# compute cluster-marker means
+ms_by_cluster &lt;- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+# prep. for plotting &amp; scale b/w 0 and 1
+mat &lt;- do.call(&quot;rbind&quot;, ms_by_cluster)
+mat &lt;- muscat:::.scale(mat)
+rownames(mat) &lt;- gs
+cols &lt;- muscat:::.cluster_colors[seq_along(fs)]
+cols &lt;- setNames(cols, names(fs))
+row_anno &lt;- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = &quot;white&quot;))
+# percentage of cells from each of the samples per cluster
+sample_props &lt;- prop.table(n_cells, margin = 1)
+col_mat &lt;- as.matrix(unclass(sample_props))
+sample_cols &lt;- c(&quot;#882255&quot;, &quot;#11588A&quot;,  &quot;#117733&quot;)
+sample_cols &lt;- setNames(sample_cols, colnames(col_mat))
+col_anno &lt;- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, &quot;cm&quot;),
+                               border = FALSE),
+    annotation_label = &quot;fraction of sample\nin cluster&quot;,
+    gap = unit(10, &quot;points&quot;))
+col_lgd &lt;- Legend(labels = names(sample_cols),
+       title = &quot;sample&quot;,
+       legend_gp = gpar(fill = sample_cols))
+
+hm &lt;- Heatmap(mat,
+    name = &quot;scaled avg.\nexpression&quot;,
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    column_title = &quot;cluster_id&quot;,
+    column_title_side = &quot;bottom&quot;,
+    column_names_side = &quot;bottom&quot;,
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = &quot;white&quot;),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/known-markers-heatmap-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="dr-colored-by-marker-expression" class="section level1 tabset">
+<h1>DR colored by marker expression</h1>
+<pre class="r"><code># UMAPs colored by marker-expression
+for (m in seq_along(fs)) {
+    cat(&quot;## &quot;, names(fs)[m], &quot;\n&quot;)
+    ps &lt;- lapply(seq_along(fs[[m]]), function(i) {
+        if (!fs[[m]][i] %in% rownames(so)) return(NULL)
+        FeaturePlot(so, features = fs[[m]][i], reduction = &quot;umap&quot;, 
+                    pt.size = 0.4) +
+            theme(aspect.ratio = 1, legend.position = &quot;none&quot;) +
+            ggtitle(labs[[m]][i]) + theme_void() + theme(aspect.ratio = 1)
+    })
+    # arrange plots in grid
+    ps &lt;- ps[!vapply(ps, is.null, logical(1))]
+    p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+    print(p)
+    cat(&quot;\n\n&quot;)
+}</code></pre>
+<div id="nsc" class="section level2">
+<h2>NSC</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-1.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="proliferating" class="section level2">
+<h2>proliferating</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-2.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="neuronal" class="section level2">
+<h2>neuronal</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-3.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="mature_astrocytes" class="section level2">
+<h2>mature_astrocytes</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-4.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="glial_astrocytic" class="section level2">
+<h2>glial_astrocytic</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-5.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="radial_glia" class="section level2">
+<h2>radial_glia</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-6.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="oligodendrocyte" class="section level2">
+<h2>oligodendrocyte</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-7.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="gabaergic_neurons" class="section level2">
+<h2>GABAergic_neurons</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-8.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="glycinergic_neurons" class="section level2">
+<h2>glycinergic_neurons</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-9.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="glutaminergic_neurons" class="section level2">
+<h2>glutaminergic_neurons</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-10.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="dopaminergic_neurons" class="section level2">
+<h2>dopaminergic_neurons</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-11.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="apoptotic" class="section level2">
+<h2>apoptotic</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-12.png" width="1152" style="display: block; margin: auto;" /></p>
+</div>
+<div id="kinase" class="section level2">
+<h2>kinase</h2>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-13.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## plot the expression of the endogenous TDP-43 and TDP-HA
+transg &lt;- c(&quot;ENSG00000120948.TARDBP&quot;, &quot;ENSG00000120948.TARDBP-alevin&quot;, &quot;TDP43-HA&quot;, 
+         &quot;GA50-EGFP&quot;, &quot;HA-GA50&quot;)
+names(transg) &lt;- c(&quot;TARDBP&quot;, &quot;TARDBP-alevin&quot;, &quot;TDP-HA&quot;, &quot;GA50-EGFP&quot;, &quot;HA-GA50&quot;)
+cat(&quot;## transgenes\n&quot;)</code></pre>
+</div>
+<div id="transgenes" class="section level2">
+<h2>transgenes</h2>
+<pre class="r"><code>ps &lt;- lapply(seq_along(transg), function(i) {
+    if (!transg[i] %in% rownames(so)) return(NULL)
+    FeaturePlot(so, features = transg[i], reduction = &quot;umap&quot;, pt.size = 0.4) +
+        theme(aspect.ratio = 1, legend.position = &quot;none&quot;) +
+        ggtitle(names(transg)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps &lt;- ps[!vapply(ps, is.null, logical(1))]
+p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)</code></pre>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-14.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
+</div>
+</div>
+<div id="reactive-astrocyte-markers" class="section level1">
+<h1>Reactive astrocyte markers</h1>
+<pre class="r"><code>## source file with list of known marker genes
+source(file.path(&quot;data&quot;, &quot;reactive_astrocyte_markers.R&quot;))
+fs &lt;- lapply(fs, sapply, function(g)
+    grep(pattern = paste0(&quot;\\.&quot;, g, &quot;$&quot;), rownames(sce), value = TRUE)
+  )
+
+fs &lt;- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
+
+gs &lt;- gsub(&quot;.*\\.&quot;, &quot;&quot;, unlist(fs))
+ns &lt;- vapply(fs, length, numeric(1))
+ks &lt;- rep.int(names(fs), ns)
+labs &lt;- lapply(fs, function(x) gsub(&quot;.*\\.&quot;, &quot;&quot;,x))</code></pre>
+<div id="heatmap-of-reactive-astrocyte-markers" class="section level2">
+<h2>Heatmap of reactive astrocyte markers</h2>
+<pre class="r"><code># compute cluster-marker means
+ms_by_cluster &lt;- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+# prep. for plotting &amp; scale b/w 0 and 1
+mat &lt;- do.call(&quot;rbind&quot;, ms_by_cluster)
+mat &lt;- muscat:::.scale(mat)
+rownames(mat) &lt;- gs
+cols &lt;- muscat:::.cluster_colors[seq_along(fs)]
+cols &lt;- setNames(cols, names(fs))
+row_anno &lt;- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = &quot;white&quot;))
+# percentage of cells from each of the samples per cluster
+sample_props &lt;- prop.table(n_cells, margin = 1)
+col_mat &lt;- as.matrix(unclass(sample_props))
+sample_cols &lt;- c(&quot;#882255&quot;, &quot;#11588A&quot;,  &quot;#117733&quot;)
+sample_cols &lt;- setNames(sample_cols, colnames(col_mat))
+col_anno &lt;- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, &quot;cm&quot;),
+                               border = FALSE),
+    annotation_label = &quot;fraction of sample\nin cluster&quot;,
+    gap = unit(10, &quot;points&quot;))
+col_lgd &lt;- Legend(labels = names(sample_cols),
+       title = &quot;sample&quot;,
+       legend_gp = gpar(fill = sample_cols))
+
+hm &lt;- Heatmap(mat,
+    name = &quot;scaled avg.\nexpression&quot;,
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    column_title = &quot;cluster_id&quot;,
+    column_title_side = &quot;bottom&quot;,
+    column_names_side = &quot;bottom&quot;,
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = &quot;white&quot;),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/astrocyte-markers-heatmap-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="marker-genes-for-virus-cell-tropism" class="section level1">
+<h1>Marker genes for virus cell tropism</h1>
+<pre class="r"><code>## source file with list of known marker genes
+source(file.path(&quot;data&quot;, &quot;virus_cell_tropism_markers.R&quot;))
+fs &lt;- lapply(fs, sapply, function(g)
+    grep(pattern = paste0(&quot;\\.&quot;, g, &quot;$&quot;), rownames(sce), value = TRUE)
+  )
+
+fs &lt;- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
+
+gs &lt;- gsub(&quot;.*\\.&quot;, &quot;&quot;, unlist(fs))
+ns &lt;- vapply(fs, length, numeric(1))
+ks &lt;- rep.int(names(fs), ns)
+labs &lt;- lapply(fs, function(x) gsub(&quot;.*\\.&quot;, &quot;&quot;,x))</code></pre>
+<div id="heatmap-of-virus-cell-tropism-markers" class="section level2">
+<h2>Heatmap of virus cell tropism markers</h2>
+<pre class="r"><code># compute cluster-marker means
+ms_by_cluster &lt;- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+# prep. for plotting &amp; scale b/w 0 and 1
+mat &lt;- do.call(&quot;rbind&quot;, ms_by_cluster)
+mat &lt;- muscat:::.scale(mat)
+rownames(mat) &lt;- gs
+cols &lt;- muscat:::.cluster_colors[seq_along(fs)]
+cols &lt;- setNames(cols, names(fs))
+row_anno &lt;- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = &quot;white&quot;))
+# percentage of cells from each of the samples per cluster
+sample_props &lt;- prop.table(n_cells, margin = 1)
+col_mat &lt;- as.matrix(unclass(sample_props))
+sample_cols &lt;- c(&quot;#882255&quot;, &quot;#11588A&quot;,  &quot;#117733&quot;)
+sample_cols &lt;- setNames(sample_cols, colnames(col_mat))
+col_anno &lt;- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, &quot;cm&quot;),
+                               border = FALSE),
+    annotation_label = &quot;fraction of sample\nin cluster&quot;,
+    gap = unit(10, &quot;points&quot;))
+col_lgd &lt;- Legend(labels = names(sample_cols),
+       title = &quot;sample&quot;,
+       legend_gp = gpar(fill = sample_cols))
+
+hm &lt;- Heatmap(mat,
+    name = &quot;scaled avg.\nexpression&quot;,
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    column_title = &quot;cluster_id&quot;,
+    column_title_side = &quot;bottom&quot;,
+    column_names_side = &quot;bottom&quot;,
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = &quot;white&quot;),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/virus-markers-heatmap-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="expression-of-cluster-12-markers-genes-changed-in-tdp-ha-expressing-cells" class="section level1">
+<h1>Expression of cluster 12 markers genes (changed in TDP-HA expressing cells)</h1>
+<pre class="r"><code>fs &lt;- list(up = c(&quot;NPTX2&quot;, &quot;FGF18&quot;, &quot;TDP43-HA&quot;, &quot;PCED1A&quot;, &quot;MEF2A&quot;, &quot;DYNC2H1&quot;, 
+                   &quot;APOE&quot;, &quot;GADD45A&quot;, &quot;BCAM&quot;, &quot;DDIT3&quot;),
+           down = c(&quot;VGF&quot;, &quot;SCG2&quot;, &quot;GAP43&quot;, &quot;C4orf48&quot;, &quot;HINT1&quot;, &quot;LY6H&quot;, 
+                     &quot;TUBA1A&quot;, &quot;TMSB4X&quot;, &quot;TUBB2B&quot;, &quot;STMN2&quot;))
+fs &lt;- lapply(fs, sapply, function(g)
+    grep(pattern = paste0(&quot;\\.&quot;, g, &quot;$&quot;), rownames(sce), value = TRUE)
+  )
+fs[[&quot;up&quot;]][&quot;TDP43-HA&quot;] &lt;- &quot;TDP43-HA&quot;
+fs &lt;- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
+
+gs &lt;- gsub(&quot;.*\\.&quot;, &quot;&quot;, unlist(fs))
+ns &lt;- vapply(fs, length, numeric(1))
+ks &lt;- rep.int(names(fs), ns)
+labs &lt;- lapply(fs, function(x) gsub(&quot;.*\\.&quot;, &quot;&quot;,x))</code></pre>
+<div id="heatmap-of-cluster-12-markers" class="section level2">
+<h2>Heatmap of cluster 12 markers</h2>
+<pre class="r"><code># compute cluster-marker means
+ms_by_cluster &lt;- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+# prep. for plotting &amp; scale b/w 0 and 1
+mat &lt;- do.call(&quot;rbind&quot;, ms_by_cluster)
+mat &lt;- muscat:::.scale(mat)
+rownames(mat) &lt;- gs
+cols &lt;- muscat:::.cluster_colors[seq_along(fs)]
+cols &lt;- setNames(cols, names(fs))
+row_anno &lt;- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = &quot;white&quot;))
+# percentage of cells from each of the samples per cluster
+sample_props &lt;- prop.table(n_cells, margin = 1)
+col_mat &lt;- as.matrix(unclass(sample_props))
+sample_cols &lt;- c(&quot;#882255&quot;, &quot;#11588A&quot;,  &quot;#117733&quot;)
+sample_cols &lt;- setNames(sample_cols, colnames(col_mat))
+col_anno &lt;- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, &quot;cm&quot;),
+                               border = FALSE),
+    annotation_label = &quot;fraction of sample\nin cluster&quot;,
+    gap = unit(10, &quot;points&quot;))
+col_lgd &lt;- Legend(labels = names(sample_cols),
+       title = &quot;sample&quot;,
+       legend_gp = gpar(fill = sample_cols))
+
+hm &lt;- Heatmap(mat,
+    name = &quot;scaled avg.\nexpression&quot;,
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    column_title = &quot;cluster_id&quot;,
+    column_title_side = &quot;bottom&quot;,
+    column_names_side = &quot;bottom&quot;,
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = &quot;white&quot;),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/cluster12-markers-heatmap-1.png" width="864" style="display: block; margin: auto;" /></p>
+</div>
+<div id="save-cluster-markers-to-rds" class="section level2">
+<h2>Save cluster markers to RDS</h2>
+<pre class="r"><code>saveRDS(scran_markers, file.path(&quot;output&quot;, &quot;CH-test-03_scran_markers.rds&quot;))
+saveRDS(so, file.path(&quot;output&quot;, &quot;CH-test-03-cluster-analysis_so.rds&quot;))</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.5 (2021-03-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 18.04.5 LTS
+
+Matrix products: default
+BLAS:   /usr/local/R/R-4.0.5/lib/libRblas.so
+LAPACK: /usr/local/R/R-4.0.5/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+ [1] parallel  stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] stringr_1.4.0               SeuratObject_4.0.1         
+ [3] Seurat_4.0.1                scran_1.16.0               
+ [5] SingleCellExperiment_1.10.1 SummarizedExperiment_1.18.1
+ [7] DelayedArray_0.14.0         matrixStats_0.56.0         
+ [9] Biobase_2.48.0              GenomicRanges_1.40.0       
+[11] GenomeInfoDb_1.24.2         IRanges_2.22.2             
+[13] S4Vectors_0.26.1            BiocGenerics_0.34.0        
+[15] viridis_0.5.1               viridisLite_0.3.0          
+[17] RColorBrewer_1.1-2          purrr_0.3.4                
+[19] muscat_1.2.1                dplyr_1.0.2                
+[21] ggplot2_3.3.2               cowplot_1.0.0              
+[23] ComplexHeatmap_2.4.2        workflowr_1.6.2            
+
+loaded via a namespace (and not attached):
+  [1] reticulate_1.16           tidyselect_1.1.0         
+  [3] lme4_1.1-23               RSQLite_2.2.0            
+  [5] AnnotationDbi_1.50.1      htmlwidgets_1.5.1        
+  [7] BiocParallel_1.22.0       Rtsne_0.15               
+  [9] munsell_0.5.0             codetools_0.2-16         
+ [11] ica_1.0-2                 statmod_1.4.34           
+ [13] future_1.17.0             miniUI_0.1.1.1           
+ [15] withr_2.4.1               colorspace_1.4-1         
+ [17] knitr_1.29                ROCR_1.0-11              
+ [19] tensor_1.5                listenv_0.8.0            
+ [21] labeling_0.3              git2r_0.27.1             
+ [23] GenomeInfoDbData_1.2.3    polyclip_1.10-0          
+ [25] farver_2.0.3              bit64_0.9-7              
+ [27] glmmTMB_1.0.2.1           rprojroot_1.3-2          
+ [29] vctrs_0.3.4               generics_0.0.2           
+ [31] xfun_0.15                 R6_2.4.1                 
+ [33] doParallel_1.0.15         ggbeeswarm_0.6.0         
+ [35] clue_0.3-57               rsvd_1.0.3               
+ [37] locfit_1.5-9.4            spatstat.utils_2.1-0     
+ [39] bitops_1.0-6              cachem_1.0.4             
+ [41] promises_1.1.1            scales_1.1.1             
+ [43] beeswarm_0.2.3            gtable_0.3.0             
+ [45] globals_0.12.5            goftest_1.2-2            
+ [47] rlang_0.4.10              genefilter_1.70.0        
+ [49] GlobalOptions_0.1.2       splines_4.0.5            
+ [51] TMB_1.7.16                lazyeval_0.2.2           
+ [53] spatstat.geom_2.1-0       abind_1.4-5              
+ [55] yaml_2.2.1                reshape2_1.4.4           
+ [57] backports_1.1.9           httpuv_1.5.4             
+ [59] tools_4.0.5               spatstat.core_2.1-2      
+ [61] ellipsis_0.3.1            gplots_3.0.4             
+ [63] ggridges_0.5.2            Rcpp_1.0.5               
+ [65] plyr_1.8.6                progress_1.2.2           
+ [67] zlibbioc_1.34.0           RCurl_1.98-1.3           
+ [69] prettyunits_1.1.1         rpart_4.1-15             
+ [71] deldir_0.2-10             pbapply_1.4-2            
+ [73] GetoptLong_1.0.1          zoo_1.8-8                
+ [75] ggrepel_0.8.2             cluster_2.1.0            
+ [77] colorRamps_2.3            fs_1.5.0                 
+ [79] variancePartition_1.18.2  magrittr_1.5             
+ [81] data.table_1.12.8         scattermore_0.7          
+ [83] lmerTest_3.1-2            circlize_0.4.10          
+ [85] lmtest_0.9-37             RANN_2.6.1               
+ [87] whisker_0.4               fitdistrplus_1.1-1       
+ [89] hms_0.5.3                 patchwork_1.0.1          
+ [91] mime_0.9                  evaluate_0.14            
+ [93] xtable_1.8-4              pbkrtest_0.4-8.6         
+ [95] XML_3.99-0.4              gridExtra_2.3            
+ [97] shape_1.4.4               compiler_4.0.5           
+ [99] scater_1.16.2             tibble_3.0.3             
+[101] KernSmooth_2.23-17        crayon_1.3.4             
+[103] minqa_1.2.4               htmltools_0.5.0          
+[105] mgcv_1.8-31               later_1.1.0.1            
+[107] tidyr_1.1.0               geneplotter_1.66.0       
+[109] DBI_1.1.0                 MASS_7.3-51.6            
+[111] rappdirs_0.3.1            boot_1.3-25              
+[113] Matrix_1.3-3              gdata_2.18.0             
+[115] igraph_1.2.5              pkgconfig_2.0.3          
+[117] numDeriv_2016.8-1.1       spatstat.sparse_2.0-0    
+[119] plotly_4.9.2.1            foreach_1.5.0            
+[121] annotate_1.66.0           vipor_0.4.5              
+[123] dqrng_0.2.1               blme_1.0-4               
+[125] XVector_0.28.0            digest_0.6.25            
+[127] sctransform_0.3.2         RcppAnnoy_0.0.18         
+[129] spatstat.data_2.1-0       rmarkdown_2.3            
+[131] leiden_0.3.3              uwot_0.1.10              
+[133] edgeR_3.30.3              DelayedMatrixStats_1.10.1
+[135] shiny_1.5.0               gtools_3.8.2             
+[137] rjson_0.2.20              nloptr_1.2.2.2           
+[139] lifecycle_1.0.0           nlme_3.1-148             
+[141] jsonlite_1.7.2            BiocNeighbors_1.6.0      
+[143] limma_3.44.3              pillar_1.4.6             
+[145] lattice_0.20-41           fastmap_1.0.1            
+[147] httr_1.4.2                survival_3.2-3           
+[149] glue_1.4.2                png_0.1-7                
+[151] iterators_1.0.12          bit_1.1-15.2             
+[153] stringi_1.4.6             blob_1.2.1               
+[155] DESeq2_1.28.1             BiocSingular_1.4.0       
+[157] caTools_1.18.0            memoise_2.0.0            
+[159] irlba_2.3.3               future.apply_1.6.0       </code></pre>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
