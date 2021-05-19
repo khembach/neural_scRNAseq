@@ -91,3 +91,4 @@ Test experiment for demultiplexing with hashtag oligos
 
 - [Preprocessing and quality control](CH-test-01-preprocessing.html)
 - [Transgene expression and clustering](CH-test-02-transgene-expression.html)
+- [Cluster analysis](CH-test-03-cluster-analysis.html)
