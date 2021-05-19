@@ -83,7 +83,13 @@ Heatmap(mat,
 (n_cells <- table(sce$sample_id, sce$cluster_id))
 fqs <- prop.table(n_cells, margin = 2)
 mat <- round(as.matrix(unclass(fqs))*100, 2)
+<<<<<<< HEAD
 Heatmap(mat,
+=======
+colfunc <- colorRampPalette(c("ghostwhite", "deepskyblue4"))
+Heatmap(mat,
+    # col = rev(brewer.pal(11, "RdGy")[-6]),
+>>>>>>> 7f5ea7a194b3ad34a9f3d4ce5d5f712bd85c730b
     col = colfunc(10),
     name = "Percentage\nof cells",
     cluster_rows = FALSE,
