@@ -1,0 +1,182 @@
+---
+title: "Transgene expression"
+author: "Katharina Hembach"
+date: "5/17/2021"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+
+### Load packages
+
+```{r, message = FALSE}
+library(cowplot)
+library(ggplot2)
+library(Seurat)
+library(SingleCellExperiment)
+library(tximport)
+library(readxl)
+library(dplyr)
+```
+
+## Load data
+
+We combine the quantification of the plasmid transcript and the endogenous TDP-43 with the CellRanger count matrix.
+
+```{r read-data}
+meta <- read_excel(file.path("data", "cell_hashing_test", "SampleName_feature_ref_MHP.xlsm"))
+so1 <- readRDS(file.path("output", "CH-test-01-preprocessing_singlets.rds"))
+```
+
+```{r read-alevin}
+# import alevin quants
+txi <- tximport(file.path("data" , "cell_hashing_test", "alevin_STMN2", 
+                        "HashTag_test", "alevin", "quants_mat.gz"), 
+              type="alevin")$counts
+## match the alevin and CellRanger cell IDs
+colnames(txi) <- paste0(colnames(txi), "-1.cell_hashing_test")
+rownames(txi) <- c("ENSG00000120948.TARDBP-alevin", "TDP43-HA", "GA50-EGFP", 
+                   "HA-GA50", "ENSG00000104435.STMN2-alevin")
+```
+
+# Add alevin counts to the Seurat object
+```{r combine-counts}
+rnames <- rownames(so1@assays$RNA@counts)
+## add alevin counts to RNA matrix
+counts <- rbind(so1@assays$RNA@counts, 
+                              as(matrix(0, nrow = nrow(txi), ncol = ncol(so1)), 
+                                 "dgCMatrix"))
+rownames(counts) <- c(rnames, rownames(txi))
+## match the barcodes
+m <- match(colnames(so1), colnames(txi))
+counts[rownames(txi), which(!is.na(m))] <- txi[,m[!is.na(m)]]
+
+so <- CreateSeuratObject(
+    counts = counts,
+    meta.data = so1@meta.data,
+    project = "cell_hashing_test")
+```
+
+# Label cells with demultiplexed sample
+
+We use the HTO classification to define the original sample IDs.
+```{r lable-original-samples}
+so$HTO_classification %>% table
+so$sample_id <- meta$Transgene[match(so$HTO_classification, meta$id)]
+so$sample_id %>% table
+```
+
+
+## Normalization
+```{r normalization, warning = FALSE}
+## log normalize the data using a scaling factor of 10000
+so <- NormalizeData(so, verbose = FALSE, scale.factor = 10000,
+             normalization.method = "LogNormalize")
+```
+
+
+```{r variable-features-scaling}
+so <- FindVariableFeatures(so, nfeatures = 2000,
+    selection.method = "vst", verbose = FALSE)
+so <- ScaleData(so, verbose = FALSE, vars.to.regress = c("sum",
+                                                         "subsets_Mt_percent"))
+```
+
+
+## Dimension reduction 
+
+We perform dimension reduction with t-SNE and UMAP based on PCA results.
+```{r dimension-reduction, warning = FALSE}
+so <- RunPCA(so, npcs = 30, verbose = FALSE)
+so <- RunTSNE(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, do.fast = TRUE, verbose = FALSE)
+so <- RunUMAP(so, reduction = "pca", dims = seq_len(20),
+    seed.use = 1, verbose = FALSE)
+```
+
+### Plot PCA results
+
+```{r, fig.width = 12, fig.height = 8}
+# top genes that are associated with the first two PCs
+VizDimLoadings(so, dims = 1:2, reduction = "pca")
+```
+
+```{r, fig.width = 10, fig.height = 8}
+## PCA plot 
+DimPlot(so, reduction = "pca", group.by = "sample_id")
+```
+
+```{r}
+# elbow plot with the ranking of PCs based on the % of variance explained
+ElbowPlot(so, ndims = 30)
+```
+
+
+## Clustering
+
+We cluster the cells using the reduced PCA dimensions.
+
+```{r clustering, warning = FALSE}
+so <- FindNeighbors(so, reduction = "pca", dims = seq_len(20), verbose = FALSE)
+for (res in c(0.2, 0.4, 0.8, 1))
+    so <- FindClusters(so, resolution = res, random.seed = 1, verbose = FALSE)
+```
+
+
+## Dimension reduction plots 
+
+We plot the dimension reduction (DR) and color by sample, group and cluster ID
+```{r dr-plots, fig.width = 10, fig.height = 9, warning = FALSE}
+thm <- theme(aspect.ratio = 1, legend.position = "none")
+ps <- lapply(c("sample_id", "ident"), function(u) {
+    p1 <- DimPlot(so, reduction = "tsne", group.by = u) + thm
+    p2 <- DimPlot(so, reduction = "umap", group.by = u)
+    lgd <- get_legend(p2)
+    p2 <- p2 + thm
+    list(p1, p2, lgd)
+    plot_grid(p1, p2, lgd, nrow = 1,
+        rel_widths = c(1, 1, 0.5))
+})
+plot_grid(plotlist = ps, ncol = 1)
+```
+
+
+## QC on DR plots {.tabset}
+
+```{r DR-QC, results = "asis", fig.width = 12}
+.plot_features <- function(so, dr, id) {
+    FeaturePlot(so, features = id, reduction = dr, pt.size = 0.4, 
+                cols = c("grey", "blue")) +
+        guides(col = guide_colourbar()) +
+        theme_void() + theme(aspect.ratio = 1)
+}
+ids <- c("sum", "detected", "subsets_Mt_percent", "ENSG00000120948.TARDBP", 
+         "ENSG00000120948.TARDBP-alevin", "TDP43-HA", "GA50-EGFP", "HA-GA50",
+         "ENSG00000104435.STMN2-alevin", "ENSG00000104435.STMN2")
+for (id in ids) {
+    cat("### ", id, "\n")
+    p1 <- .plot_features(so, "tsne", id)
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none") + ggtitle("tSNE")
+    p2 <- .plot_features(so, "umap", id) + theme(legend.position = "none") + 
+      ggtitle("UMAP")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
+
+## Save Seurat object to RDS
+
+```{r}
+saveRDS(so, file.path("output", "so_CH-test-02-transgene_expression.rds"))
+```
