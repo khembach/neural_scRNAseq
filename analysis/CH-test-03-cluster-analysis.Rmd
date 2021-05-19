@@ -1,5 +1,5 @@
 ---
-()title: "Cluster analysis of cell hashing test experiment"
+title: "Cluster analysis of cell hashing test experiment"
 author: "Katharina Hembach"
 date: "5/19/2021"
 output: 
@@ -83,13 +83,7 @@ Heatmap(mat,
 (n_cells <- table(sce$sample_id, sce$cluster_id))
 fqs <- prop.table(n_cells, margin = 2)
 mat <- round(as.matrix(unclass(fqs))*100, 2)
-<<<<<<< HEAD
 Heatmap(mat,
-=======
-colfunc <- colorRampPalette(c("ghostwhite", "deepskyblue4"))
-Heatmap(mat,
-    # col = rev(brewer.pal(11, "RdGy")[-6]),
->>>>>>> 7f5ea7a194b3ad34a9f3d4ce5d5f712bd85c730b
     col = colfunc(10),
     name = "Percentage\nof cells",
     cluster_rows = FALSE,
@@ -477,6 +471,62 @@ hm <- Heatmap(mat,
 draw(hm, annotation_legend_list = list(col_lgd))
 ```
 
+
+In neuronal clusters:
+```{r subset-neurons}
+## subset to neuronal clusters
+## astrocytes: 7-8, 12
+## small cluster with weird cells: 15
+## low quality cells: 0-1
+subs <- as.character(c(2:6, 9:11, 13:14))
+cs_by_k_sub <- cs_by_k[subs]
+```
+
+```{r cluster12-markers-heatmap-neuronal-cells, fig.width = 9, fig.height = 10}
+# compute cluster-marker means
+ms_by_cluster <- lapply(fs, function(gs) vapply(cs_by_k_sub, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+# prep. for plotting & scale b/w 0 and 1
+mat <- do.call("rbind", ms_by_cluster)
+mat <- muscat:::.scale(mat)
+rownames(mat) <- gs
+cols <- muscat:::.cluster_colors[seq_along(fs)]
+cols <- setNames(cols, names(fs))
+row_anno <- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = "white"))
+# percentage of cells from each of the samples per cluster
+sample_props <- prop.table(n_cells, margin = 1)
+col_mat <- as.matrix(unclass(sample_props[subs,]))
+sample_cols <- c("#882255", "#11588A",  "#117733")
+sample_cols <- setNames(sample_cols, colnames(col_mat))
+col_anno <- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, "cm"),
+                               border = FALSE),
+    annotation_label = "fraction of sample\nin cluster",
+    gap = unit(10, "points"))
+col_lgd <- Legend(labels = names(sample_cols),
+       title = "sample",
+       legend_gp = gpar(fill = sample_cols))
+
+hm <- Heatmap(mat,
+    name = "scaled avg.\nexpression",
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    column_title = "cluster_id",
+    column_title_side = "bottom",
+    column_names_side = "bottom",
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = "white"),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))
+```
 
 ## Save cluster markers to RDS
 
