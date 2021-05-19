@@ -500,16 +500,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeab048ce6ec05b6a35eec4ec7cd48168acaf343c1targetblankab048cea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/ab048ce6ec05b6a35eec4ec7cd48168acaf343c1" target="_blank">ab048ce</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef04b0dfec6d89b37e4b6b6d9436afba3f2317912targetblankf04b0dfa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/f04b0dfec6d89b37e4b6b6d9436afba3f2317912" target="_blank">f04b0df</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeab048ce6ec05b6a35eec4ec7cd48168acaf343c1targetblankab048cea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreef04b0dfec6d89b37e4b6b6d9436afba3f2317912targetblankf04b0dfa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/ab048ce6ec05b6a35eec4ec7cd48168acaf343c1" target="_blank">ab048ce</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/f04b0dfec6d89b37e4b6b6d9436afba3f2317912" target="_blank">f04b0df</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -603,6 +603,7 @@ Ignored files:
     Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/figure/
     Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
     Ignored:    analysis/organoid-01-clustering_cache/
     Ignored:    analysis/organoid-02-integration_cache/
@@ -668,6 +669,8 @@ Ignored files:
     Ignored:    output/CH-test-01-preprocessing_singlets_filtered.rds
     Ignored:    output/CH-test-01-preprocessing_so.rds
     Ignored:    output/CH-test-01-preprocessing_so_filtered.rds
+    Ignored:    output/CH-test-03-cluster-analysis_so.rds
+    Ignored:    output/CH-test-03_scran_markers.rds
     Ignored:    output/Lam-01-clustering.rds
     Ignored:    output/NSC_1_clustering.rds
     Ignored:    output/NSC_cluster1_marker_genes.txt
@@ -873,6 +876,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f04b0dfec6d89b37e4b6b6d9436afba3f2317912/analysis/CH-test-03-cluster-analysis.Rmd" target="_blank">f04b0df</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+<td>
+add heatmap with relative sample abundance per cluster
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/CH-test-03-cluster-analysis.html" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/ab048ce6ec05b6a35eec4ec7cd48168acaf343c1/analysis/CH-test-03-cluster-analysis.Rmd" target="_blank">ab048ce</a>
 </td>
 <td>
@@ -954,7 +991,6 @@ sce$cluster_id &lt;- Idents(so)
 mat &lt;- round(as.matrix(unclass(fqs))*100, 2)
 colfunc &lt;- colorRampPalette(c(&quot;ghostwhite&quot;, &quot;deepskyblue4&quot;))
 Heatmap(mat,
-    # col = rev(brewer.pal(11, &quot;RdGy&quot;)[-6]),
     col = colfunc(10),
     name = &quot;Percentage\nof cells&quot;,
     cluster_rows = FALSE,
@@ -968,6 +1004,65 @@ Heatmap(mat,
         grid.text(mat[j, i], x = x, y = y, 
             gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/unnamed-chunk-3-1.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>(n_cells &lt;- table(sce$sample_id, sce$cluster_id))</code></pre>
+<pre><code>           
+              0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
+  GA50-EGFP 280 155 185 208  85  93  84  96 111 115 139  53  33  39   8  15
+  HA-GA50   246 135 134 138  98  93  89  66  68  61  62  50  37  34  14   4
+  TDP-43-HA 285 212 149  63 121  98  99 108  83  41   3  51  53   7  46   5</code></pre>
+<pre class="r"><code>fqs &lt;- prop.table(n_cells, margin = 2)
+mat &lt;- round(as.matrix(unclass(fqs))*100, 2)
+Heatmap(mat,
+    col = colfunc(10),
+    name = &quot;Percentage\nof cells&quot;,
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    row_title = &quot;sample ID&quot;,
+    column_title = &quot;cluster ID&quot;,
+    column_title_side = &quot;bottom&quot;,
+    rect_gp = gpar(col = &quot;white&quot;),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = &quot;black&quot;, fontsize = 10)))</code></pre>
+<p><img src="figure/CH-test-03-cluster-analysis.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="dr-colored-by-cluster-id" class="section level1 tabset">
 <h1>DR colored by cluster ID</h1>
@@ -991,10 +1086,84 @@ for (id in ids) {
 <div id="cluster_id" class="section level2">
 <h2>cluster_id</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-1">
+Past versions of dim-red-1.png
+</button>
+</p>
+<div id="fig-dim-red-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-1.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="sample_id" class="section level2">
 <h2>sample_id</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-2">
+Past versions of dim-red-2.png
+</button>
+</p>
+<div id="fig-dim-red-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-2.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="find-markers-using-scran" class="section level1">
@@ -1003,18 +1172,8 @@ for (id in ids) {
 <h2>Markers</h2>
 <p>We identify candidate marker genes for each cluster that enable a separation of that group from any other group. The null hypothesis is that the log FC between a cluster and the compared cluster is 2.</p>
 <pre class="r"><code>scran_markers &lt;- findMarkers(sce, 
-    groups = sce$cluster_id, block = sce$sample_id, 
-    direction = &quot;up&quot;, lfc = 2, full.stats = TRUE, log.p = FALSE)</code></pre>
-<p>We write tables with the top marker genes per cluster.</p>
-<pre class="r"><code># gs2 &lt;- lapply(scran_markers, function(u) u[u$Top %in% 1:2,])
-# for (i in seq_along(gs2)) {
-#   write.table(x = gs2[[i]] %&gt;% as.data.frame %&gt;% 
-#                 dplyr::mutate(gene = rownames(gs2[[i]])) %&gt;%
-#                 dplyr::relocate(gene), 
-#               file =  file.path(&quot;output&quot;, 
-#                                 paste0(&quot;TDP-06-no_integration_cluster&quot;, i-1, &quot;_marker_genes.txt&quot;)),
-#               sep = &quot;\t&quot;, quote = FALSE, row.names = FALSE)
-# }</code></pre>
+    groups = sce$cluster_id, direction = &quot;up&quot;, lfc = 2, 
+    full.stats = TRUE, log.p = FALSE)</code></pre>
 </div>
 <div id="heatmap-of-mean-marker-exprs.-by-cluster" class="section level2">
 <h2>Heatmap of mean marker-exprs. by cluster</h2>
@@ -1029,20 +1188,20 @@ lapply(gs, function(x) {
   })</code></pre>
 <pre><code>$`0`
  [1] &quot;RTN4&quot;         &quot;VGF&quot;          &quot;STMN2&quot;        &quot;RPLP1&quot;        &quot;TMSB4X&quot;      
- [6] &quot;MT-RNR2&quot;      &quot;TAC1&quot;         &quot;FTH1&quot;         &quot;RPL36&quot;        &quot;MT-ATP6&quot;     
-[11] &quot;STMN2-alevin&quot;
+ [6] &quot;MT-RNR2&quot;      &quot;GAP43&quot;        &quot;TAC1&quot;         &quot;RPS24&quot;        &quot;FTH1&quot;        
+[11] &quot;MT-ATP6&quot;      &quot;STMN2-alevin&quot;
 
 $`1`
-[1] &quot;SCG2&quot;    &quot;VGF&quot;     &quot;WSB1&quot;    &quot;MT-RNR2&quot; &quot;DST&quot;     &quot;STMN2&quot;   &quot;ATP2B1&quot; 
+[1] &quot;VGF&quot;     &quot;WSB1&quot;    &quot;MT-RNR2&quot; &quot;SCG2&quot;    &quot;DST&quot;     &quot;STMN2&quot;   &quot;ANK3&quot;   
 [8] &quot;MT-RNR1&quot; &quot;MT-ATP6&quot;
 
 $`2`
  [1] &quot;VGF&quot;     &quot;STMN2&quot;   &quot;VIM&quot;     &quot;FTL&quot;     &quot;MT-RNR2&quot; &quot;MT-ATP6&quot; &quot;MT-ND5&quot; 
- [8] &quot;RPL32&quot;   &quot;RPL7A&quot;   &quot;MT-RNR1&quot; &quot;MT-ND1&quot; 
+ [8] &quot;RPL32&quot;   &quot;RPL34&quot;   &quot;MT-RNR1&quot; &quot;MT-ND1&quot;  &quot;MT-CO3&quot; 
 
 $`3`
- [1] &quot;TUBB&quot;         &quot;DYNC2H1&quot;      &quot;CST3&quot;         &quot;PCP4&quot;         &quot;STMN2-alevin&quot;
- [6] &quot;NSG2&quot;         &quot;NPTX2&quot;        &quot;CLU&quot;          &quot;STMN2&quot;        &quot;TXN&quot;         
+ [1] &quot;TUBB&quot;         &quot;CLU&quot;          &quot;DYNC2H1&quot;      &quot;CST3&quot;         &quot;PCP4&quot;        
+ [6] &quot;STMN2-alevin&quot; &quot;NSG2&quot;         &quot;NPTX2&quot;        &quot;STMN2&quot;        &quot;RPL7A&quot;       
 [11] &quot;RPLP1&quot;       
 
 $`4`
@@ -1055,37 +1214,36 @@ $`5`
 [6] &quot;STMN2&quot;        &quot;B2M&quot;          &quot;MT-RNR2&quot;     
 
 $`6`
-[1] &quot;UTS2&quot;         &quot;FABP7&quot;        &quot;TUBA1A&quot;       &quot;CRABP1&quot;       &quot;STMN2-alevin&quot;
-[6] &quot;RPS8&quot;         &quot;IGFBP5&quot;       &quot;STMN2&quot;        &quot;RTN1&quot;        
+ [1] &quot;UTS2&quot;         &quot;FABP7&quot;        &quot;CRABP1&quot;       &quot;STMN2-alevin&quot; &quot;RPS8&quot;        
+ [6] &quot;SCG2&quot;         &quot;TAC1&quot;         &quot;STMN2&quot;        &quot;TUBA1A&quot;       &quot;RTN1&quot;        
 
 $`7`
-[1] &quot;C1orf61&quot; &quot;SPARCL1&quot; &quot;FABP5&quot;   &quot;VIM&quot;     &quot;GFAP&quot;    &quot;SPP1&quot;   
+[1] &quot;C1orf61&quot; &quot;SPARCL1&quot; &quot;SPP1&quot;    &quot;VIM&quot;     &quot;GFAP&quot;    &quot;FABP5&quot;  
 
 $`8`
 [1] &quot;C1orf61&quot;      &quot;STMN2&quot;        &quot;VIM&quot;          &quot;MT-RNR2&quot;      &quot;MT-ATP6&quot;     
 [6] &quot;STMN2-alevin&quot;
 
 $`9`
- [1] &quot;MAP2&quot;     &quot;NPTX2&quot;    &quot;PLCG2&quot;    &quot;WSB1&quot;     &quot;MT-RNR2&quot;  &quot;MT-CO2&quot;  
- [7] &quot;MT-ATP6&quot;  &quot;TDP43-HA&quot; &quot;PCDH9&quot;    &quot;PCED1A&quot;   &quot;MT-RNR1&quot;  &quot;MT-ND2&quot;  
-[13] &quot;MT-ND3&quot;   &quot;MT-ND4&quot;  
+ [1] &quot;MAP2&quot;     &quot;DST&quot;      &quot;PLCG2&quot;    &quot;WSB1&quot;     &quot;MT-RNR2&quot;  &quot;MT-CO2&quot;  
+ [7] &quot;MT-ATP6&quot;  &quot;TDP43-HA&quot; &quot;PCED1A&quot;   &quot;MT-RNR1&quot;  &quot;MT-ND2&quot;   &quot;MT-ND4&quot;  
 
 $`10`
 [1] &quot;SPOCK3&quot;       &quot;CLU&quot;          &quot;RPS13&quot;        &quot;TDP43-HA&quot;     &quot;STMN2-alevin&quot;
-[6] &quot;SELENOK&quot;      &quot;STMN2&quot;        &quot;DYNC2H1&quot;      &quot;CST3&quot;        
+[6] &quot;SELENOK&quot;      &quot;STMN2&quot;        &quot;DYNC2H1&quot;      &quot;TAC3&quot;        
 
 $`11`
-[1] &quot;TAC1&quot;         &quot;CRH&quot;          &quot;STMN2-alevin&quot; &quot;SH3BGRL3&quot;     &quot;STMN2&quot;       
+[1] &quot;SH3BGRL3&quot;     &quot;TAC1&quot;         &quot;CRH&quot;          &quot;STMN2-alevin&quot; &quot;STMN2&quot;       
 [6] &quot;TUBA1A&quot;      
 
 $`12`
 [1] &quot;PTGDS&quot;  &quot;VIM&quot;    &quot;IFITM3&quot; &quot;DLK1&quot;   &quot;B2M&quot;    &quot;FTL&quot;   
 
 $`13`
-[1] &quot;S100A16&quot; &quot;CLU&quot;     &quot;TAC3&quot;    &quot;CALB1&quot;   &quot;VIM&quot;     &quot;APOE&quot;   
+[1] &quot;S100A16&quot; &quot;CLU&quot;     &quot;TAC3&quot;    &quot;CALB1&quot;   &quot;APOE&quot;   
 
 $`14`
-[1] &quot;PLCG2&quot;    &quot;CKS2&quot;     &quot;MT-RNR2&quot;  &quot;MT-ND2&quot;   &quot;TDP43-HA&quot;
+[1] &quot;PLCG2&quot;    &quot;RSRP1&quot;    &quot;CKS2&quot;     &quot;MT-RNR2&quot;  &quot;TDP43-HA&quot;
 
 $`15`
 [1] &quot;PTN&quot;     &quot;VIM&quot;     &quot;PCLAF&quot;   &quot;S100A10&quot; &quot;C1orf61&quot; &quot;DBI&quot;     &quot;HMGB2&quot;  
@@ -1107,6 +1265,43 @@ Heatmap(mat,
     row_title = &quot;cluster_id&quot;,
     rect_gp = gpar(col = &quot;white&quot;))</code></pre>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/scran-markers-heatmap-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-scran-markers-heatmap-1">
+Past versions of scran-markers-heatmap-1.png
+</button>
+</p>
+<div id="fig-scran-markers-heatmap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/scran-markers-heatmap-1.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="known-marker-genes" class="section level1">
@@ -1119,7 +1314,6 @@ fs[[&quot;kinase&quot;]] &lt;- &quot;CSNK1E&quot;
 fs &lt;- lapply(fs, sapply, function(g)
     grep(pattern = paste0(&quot;\\.&quot;, g, &quot;$&quot;), rownames(sce), value = TRUE)
   )
-
 fs &lt;- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
 
 gs &lt;- gsub(&quot;.*\\.&quot;, &quot;&quot;, unlist(fs))
@@ -1128,7 +1322,8 @@ ks &lt;- rep.int(names(fs), ns)
 labs &lt;- lapply(fs, function(x) gsub(&quot;.*\\.&quot;, &quot;&quot;,x))</code></pre>
 <div id="heatmap-of-mean-marker-exprs.-by-cluster-1" class="section level2">
 <h2>Heatmap of mean marker-exprs. by cluster</h2>
-<pre class="r"><code># split cells by cluster
+<pre class="r"><code>n_cells &lt;- table(sce$cluster_id, sce$sample_id)
+# split cells by cluster
 cs_by_k &lt;- split(colnames(sce), sce$cluster_id)
 # compute cluster-marker means
 ms_by_cluster &lt;- lapply(fs, function(gs) vapply(cs_by_k, function(i)
@@ -1174,6 +1369,43 @@ hm &lt;- Heatmap(mat,
     top_annotation = col_anno)
 draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/known-markers-heatmap-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-known-markers-heatmap-1">
+Past versions of known-markers-heatmap-1.png
+</button>
+</p>
+<div id="fig-known-markers-heatmap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/known-markers-heatmap-1.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="dr-colored-by-marker-expression" class="section level1 tabset">
@@ -1197,54 +1429,535 @@ for (m in seq_along(fs)) {
 <div id="nsc" class="section level2">
 <h2>NSC</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-1">
+Past versions of dim-red-expr-1.png
+</button>
+</p>
+<div id="fig-dim-red-expr-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-1.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="proliferating" class="section level2">
 <h2>proliferating</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-2">
+Past versions of dim-red-expr-2.png
+</button>
+</p>
+<div id="fig-dim-red-expr-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-2.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="neuronal" class="section level2">
 <h2>neuronal</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-3">
+Past versions of dim-red-expr-3.png
+</button>
+</p>
+<div id="fig-dim-red-expr-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-3.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="mature_astrocytes" class="section level2">
 <h2>mature_astrocytes</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-4">
+Past versions of dim-red-expr-4.png
+</button>
+</p>
+<div id="fig-dim-red-expr-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-4.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="glial_astrocytic" class="section level2">
 <h2>glial_astrocytic</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-5">
+Past versions of dim-red-expr-5.png
+</button>
+</p>
+<div id="fig-dim-red-expr-5" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-5.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="radial_glia" class="section level2">
 <h2>radial_glia</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-6.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-6">
+Past versions of dim-red-expr-6.png
+</button>
+</p>
+<div id="fig-dim-red-expr-6" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-6.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="oligodendrocyte" class="section level2">
 <h2>oligodendrocyte</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-7.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-7">
+Past versions of dim-red-expr-7.png
+</button>
+</p>
+<div id="fig-dim-red-expr-7" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-7.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="gabaergic_neurons" class="section level2">
 <h2>GABAergic_neurons</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-8.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-8">
+Past versions of dim-red-expr-8.png
+</button>
+</p>
+<div id="fig-dim-red-expr-8" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-8.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="glycinergic_neurons" class="section level2">
 <h2>glycinergic_neurons</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-9.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-9">
+Past versions of dim-red-expr-9.png
+</button>
+</p>
+<div id="fig-dim-red-expr-9" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-9.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="glutaminergic_neurons" class="section level2">
 <h2>glutaminergic_neurons</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-10.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-10">
+Past versions of dim-red-expr-10.png
+</button>
+</p>
+<div id="fig-dim-red-expr-10" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-10.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="dopaminergic_neurons" class="section level2">
 <h2>dopaminergic_neurons</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-11.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-11">
+Past versions of dim-red-expr-11.png
+</button>
+</p>
+<div id="fig-dim-red-expr-11" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-11.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="apoptotic" class="section level2">
 <h2>apoptotic</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-12.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-12">
+Past versions of dim-red-expr-12.png
+</button>
+</p>
+<div id="fig-dim-red-expr-12" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-12.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="kinase" class="section level2">
 <h2>kinase</h2>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-13.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-13">
+Past versions of dim-red-expr-13.png
+</button>
+</p>
+<div id="fig-dim-red-expr-13" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-13.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## plot the expression of the endogenous TDP-43 and TDP-HA
 transg &lt;- c(&quot;ENSG00000120948.TARDBP&quot;, &quot;ENSG00000120948.TARDBP-alevin&quot;, &quot;TDP43-HA&quot;, 
          &quot;GA50-EGFP&quot;, &quot;HA-GA50&quot;)
@@ -1264,6 +1977,43 @@ ps &lt;- ps[!vapply(ps, is.null, logical(1))]
 p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
 print(p)</code></pre>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-14.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-14">
+Past versions of dim-red-expr-14.png
+</button>
+</p>
+<div id="fig-dim-red-expr-14" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/dim-red-expr-14.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 </div>
 </div>
@@ -1274,7 +2024,6 @@ source(file.path(&quot;data&quot;, &quot;reactive_astrocyte_markers.R&quot;))
 fs &lt;- lapply(fs, sapply, function(g)
     grep(pattern = paste0(&quot;\\.&quot;, g, &quot;$&quot;), rownames(sce), value = TRUE)
   )
-
 fs &lt;- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
 
 gs &lt;- gsub(&quot;.*\\.&quot;, &quot;&quot;, unlist(fs))
@@ -1327,6 +2076,43 @@ hm &lt;- Heatmap(mat,
     top_annotation = col_anno)
 draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/astrocyte-markers-heatmap-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-astrocyte-markers-heatmap-1">
+Past versions of astrocyte-markers-heatmap-1.png
+</button>
+</p>
+<div id="fig-astrocyte-markers-heatmap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/astrocyte-markers-heatmap-1.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="marker-genes-for-virus-cell-tropism" class="section level1">
@@ -1336,7 +2122,6 @@ source(file.path(&quot;data&quot;, &quot;virus_cell_tropism_markers.R&quot;))
 fs &lt;- lapply(fs, sapply, function(g)
     grep(pattern = paste0(&quot;\\.&quot;, g, &quot;$&quot;), rownames(sce), value = TRUE)
   )
-
 fs &lt;- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
 
 gs &lt;- gsub(&quot;.*\\.&quot;, &quot;&quot;, unlist(fs))
@@ -1389,6 +2174,43 @@ hm &lt;- Heatmap(mat,
     top_annotation = col_anno)
 draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/virus-markers-heatmap-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-virus-markers-heatmap-1">
+Past versions of virus-markers-heatmap-1.png
+</button>
+</p>
+<div id="fig-virus-markers-heatmap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/virus-markers-heatmap-1.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="expression-of-cluster-12-markers-genes-changed-in-tdp-ha-expressing-cells" class="section level1">
@@ -1453,6 +2275,43 @@ hm &lt;- Heatmap(mat,
     top_annotation = col_anno)
 draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
 <p><img src="figure/CH-test-03-cluster-analysis.Rmd/cluster12-markers-heatmap-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-cluster12-markers-heatmap-1">
+Past versions of cluster12-markers-heatmap-1.png
+</button>
+</p>
+<div id="fig-cluster12-markers-heatmap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d55a2c2d9f43c04c0eeea9b69de8f7d1599003c3/docs/figure/CH-test-03-cluster-analysis.Rmd/cluster12-markers-heatmap-1.png" target="_blank">d55a2c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-19
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="save-cluster-markers-to-rds" class="section level2">
 <h2>Save cluster markers to RDS</h2>
