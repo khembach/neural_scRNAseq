@@ -142,3 +142,28 @@ plot_marker_heatmap(all_down, "12", any = FALSE, top = 10, title = "all DOWN")
 plot_marker_heatmap(all_default, "12", any = FALSE, top = 10, title = "all default")
 ```
 
+### Dot plot visualization of marker expression
+
+From Seurat github:
+"The DotPlot shows scaled values (which can be both positive and negative). This is because we want to be able to visualize both highly and lowly expressed genes on the same color scale."
+
+```{r dot-plot, fig.width = 8, fig.height = 4}
+fs <- list(up = c("NPTX2", "FGF18", "TDP43-HA", "PCED1A", "MEF2A", "DYNC2H1", 
+                   "APOE", "GADD45A", "BCAM", "DDIT3"),
+           down = c("VGF", "SCG2", "GAP43", "C4orf48", "HINT1", "LY6H", 
+                     "TUBA1A", "TMSB4X", "TUBB2B", "STMN2"))
+
+features <- all_up[["12"]][1:10,] %>% rownames
+DotPlot(so, assay = "RNA", features = features, idents = neuronal_clusters, 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 8) + 
+  RotatedAxis() + scale_color_viridis() + 
+  theme(axis.text.x = element_text(angle=45)) + ylab("neuronal cluster ID") + 
+  scale_x_discrete(name = "gene", breaks = features, labels=fs[["up"]])
+
+features <- all_down[["12"]][1:10,] %>% rownames
+DotPlot(so, assay = "RNA", features = features, idents = neuronal_clusters, 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 8) + 
+  RotatedAxis() + scale_color_viridis() + 
+  theme(axis.text.x = element_text(angle=45)) + ylab("neuronal cluster ID") + 
+  scale_x_discrete(name = "gene",  breaks = features, labels=fs[["down"]])
+```
