@@ -155,14 +155,14 @@ fs <- list(up = c("NPTX2", "FGF18", "TDP43-HA", "PCED1A", "MEF2A", "DYNC2H1",
 
 features <- all_up[["12"]][1:10,] %>% rownames
 DotPlot(so, assay = "RNA", features = features, idents = neuronal_clusters, 
-        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 8) + 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 7) + 
   RotatedAxis() + scale_color_viridis() + 
   theme(axis.text.x = element_text(angle=45)) + ylab("neuronal cluster ID") + 
   scale_x_discrete(name = "gene", breaks = features, labels=fs[["up"]])
 
 features <- all_down[["12"]][1:10,] %>% rownames
 DotPlot(so, assay = "RNA", features = features, idents = neuronal_clusters, 
-        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 8) + 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 7) + 
   RotatedAxis() + scale_color_viridis() + 
   theme(axis.text.x = element_text(angle=45)) + ylab("neuronal cluster ID") + 
   scale_x_discrete(name = "gene",  breaks = features, labels=fs[["down"]])
