@@ -167,3 +167,18 @@ DotPlot(so, assay = "RNA", features = features, idents = neuronal_clusters,
   theme(axis.text.x = element_text(angle=45)) + ylab("neuronal cluster ID") + 
   scale_x_discrete(name = "gene",  breaks = features, labels=fs[["down"]])
 ```
+
+## UNC13A expression in neuronal clusters
+
+```{r UNC13A-expression, fig.width = 3, fig.height = 4}
+feature <- grep(pattern = paste0("\\.UNC13A$"), rownames(so), value = TRUE)
+
+pdf(width = 4, height = 4)
+DotPlot(so, assay = "RNA", features = feature, idents = neuronal_clusters, 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 7) + 
+  RotatedAxis() + scale_color_viridis() + 
+  theme(axis.text.x = element_text(angle=45)) + ylab("neuronal cluster ID") + 
+  scale_x_discrete(name = "gene", breaks = feature, labels = "UNC13A")
+dev.off()
+```
+
