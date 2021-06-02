@@ -238,3 +238,90 @@ Heatmap(mat,
             gp = gpar(col = "black", fontsize = 10)))
 ```
 
+
+# Plots for manuscript
+
+## UMAP {.tabset} 
+In the manuscript, we want to highlight the timeline of our samples and the organoid samples with shades of two different colors.
+
+```{r manuscript-UMAP, results = "asis", fig.width = 12}
+so$dataset <- ifelse(so$integration_group != "NC", "organoid", "iCoMoNSC")
+
+cs <- sample(colnames(so), 10e3)
+.plot_dr <- function(so, dr, id)
+    DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4) +
+        guides(col = guide_legend(nrow = 11, 
+            override.aes = list(size = 3, alpha = 1))) +
+        theme_void() + theme(aspect.ratio = 1)
+ids <- c("dataset", "integration_group", "sample_id", "group_id", "Stage", 
+         "cl_FullLineage", "cl_LineComp", "PredCellType", "ident")
+
+for (id in ids) {
+    cat("### ", id, "\n")
+    p1 <- .plot_dr(so, "tsne", id)
+    p2 <- .plot_dr(so, "umap", id)
+    if (id == "dataset"){
+      p1 <- p1 + scale_color_manual(values = c("#1965B0", 
+                                          brewer.pal(n = 6, name = "YlGn")[5]))
+      p2 <- p2 + scale_color_manual(values = c("#1965B0", 
+                                          brewer.pal(n = 6, name = "YlGn")[5]))
+    } else if(id == "Stage") {
+      p1 <- p1 + scale_color_manual(values = c("darkmagenta", "#7BAFDE", "#1965B0", "midnightblue", 
+                    brewer.pal(n = 6, name = "YlGn")[-1], "#56776c", "#464f41"))
+      p2 <- p2 + scale_color_manual(values = c("darkmagenta", "#7BAFDE", "#1965B0", "midnightblue", 
+                    brewer.pal(n = 6, name = "YlGn")[-1], "#56776c", "#464f41"))
+    }
+    lgd <- get_legend(p1)
+    p1 <- p1 + theme(legend.position = "none")
+    p2 <- p2 + theme(legend.position = "none")
+    ps <- plot_grid(plotlist = list(p1, p2), nrow = 1)
+    p <- plot_grid(ps, lgd, nrow = 1, rel_widths = c(1, 0.2))
+    print(p)
+    cat("\n\n")
+}
+```
+
+
+## Heatmap
+We also want to include a heatmap with the contribution of each of the two datasets to each cluster.
+
+```{r manuscript-sample-prop-heatmap1, fig.width = 2, fig.height = 7}
+sce$dataset <- ifelse(sce$integration_group != "iCoMoNSC", "organoid", "iCoMoNSC")
+(n_cells <- table(sce$cluster_id, sce$dataset))
+fqs <- prop.table(n_cells, margin = 2)
+mat <- round(as.matrix(unclass(fqs))*100, 1)
+colfunc <- colorRampPalette(c("ghostwhite", "deepskyblue4"))
+Heatmap(mat,
+    col = colfunc(10),
+    name = "Percentage\nof cells",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "cluster ID",
+    column_title = "cell line",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = "black", fontsize = 10)))
+```
+
+```{r manuscript-sample-prop-heatmap2, fig.width = 10, fig.height = 1.5}
+(n_cells <- table(sce$dataset, sce$cluster_id))
+fqs <- prop.table(n_cells, margin = 2)
+mat <- round(as.matrix(unclass(fqs))*100, 1)
+Heatmap(mat,
+    col = colfunc(10),
+    name = "Percentage\nof cells",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "cell line",
+    column_title = "cluster ID",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(mat[j, i], x = x, y = y, 
+            gp = gpar(col = "black", fontsize = 10)))
+```
+
