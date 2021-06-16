@@ -247,7 +247,7 @@ In the manuscript, we want to highlight the timeline of our samples and the orga
 ```{r manuscript-UMAP, results = "asis", fig.width = 12}
 so$dataset <- ifelse(so$integration_group != "NC", "organoid", "iCoMoNSC")
 
-cs <- sample(colnames(so), 10e3)
+cs <- sample(colnames(so), 15e3)
 .plot_dr <- function(so, dr, id)
     DimPlot(so, cells = cs, group.by = id, reduction = dr, pt.size = 0.4) +
         guides(col = guide_legend(nrow = 11, 
@@ -298,7 +298,7 @@ Heatmap(mat,
     cluster_columns = FALSE,
     row_names_side = "left",
     row_title = "cluster ID",
-    column_title = "cell line",
+    column_title = "cell origin",
     column_title_side = "bottom",
     rect_gp = gpar(col = "white"),
     cell_fun = function(i, j, x, y, width, height, fill)
@@ -316,7 +316,7 @@ Heatmap(mat,
     cluster_rows = FALSE,
     cluster_columns = FALSE,
     row_names_side = "left",
-    row_title = "cell line",
+    row_title = "cell origin",
     column_title = "cluster ID",
     column_title_side = "bottom",
     rect_gp = gpar(col = "white"),
