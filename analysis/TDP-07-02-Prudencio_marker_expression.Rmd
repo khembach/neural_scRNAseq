@@ -1,0 +1,103 @@
+---
+title: "Expression of TDP-HA cluster markers in ALS brain RNA-seq"
+author: "Katharina Hembach"
+date: "21.06.2021"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+### Load packages
+
+```{r load-libs, message = FALSE, warning = FALSE}
+library(ggplot2)
+library(dplyr)
+library(readxl)
+library(edgeR)
+library(tidyr)
+```
+
+```{r load-data}
+metadat <- read_excel(file.path("data", "Prudencio_et_al", 
+                                "GSE67196_Petrucelli2015_ALS_genes.rawcount.xlsx"), 
+                      sheet = "metadata")
+dat <- read_excel(file.path("data", "Prudencio_et_al", 
+                                "GSE67196_Petrucelli2015_ALS_genes.rawcount.xlsx"),
+                  sheet = "GSE67196_Petrucelli2015_ALS_gen")
+```
+
+What is the sum of counts per sample? How different are the samples?
+
+```{r sample-counts}
+colSums(dat[,-c(1,2)])
+
+## generate DGE object
+dge <- DGEList(counts = dat[,-c(1,2)], genes = dat[,c(1,2)], samples = metadat)
+dge <- calcNormFactors(dge)
+cpm <- cpm(dge)
+```
+
+We want to compare the gene expression of the cluster 12 markers in controls and ALS patients.
+
+```{r normalized-cpm}
+markers <- list(up = c("NPTX2", "FGF18", "TDP43-HA", "PCED1A", "MEF2A", "DYNC2H1", 
+                   "APOE", "GADD45A", "BCAM", "DDIT3"),
+           down = c("VGF", "SCG2", "GAP43", "C4orf48", "HINT1", "LY6H", 
+                     "TUBA1A", "TMSB4X", "TUBB2B", "STMN2"))
+
+lapply(markers, function(x) x[x %in% dge$genes$GeneID])
+lapply(markers, function(x) x[!x %in% dge$genes$GeneID])
+
+ind <- lapply(markers, function(x) match(x, dge$genes$GeneID))
+markers <- lapply(names(ind), function(x) markers[[x]][!is.na(ind[[x]])])
+names(markers) <- names(ind)
+ind <- lapply(ind, function(x) x[!is.na(x)])
+
+## data frame with cpms, marker label (up/down), sample group and tissue
+markers_cpm <- data.frame(gene = unlist(markers), 
+                          direction = c(rep(names(markers)[[1]], length(markers[[1]])),
+                                        rep(names(markers)[[2]], length(markers[[2]]))))
+markers_cpm <- cbind(markers_cpm, cpm[unlist(ind),])
+```
+
+Prepare data frame for plotting.
+
+```{r prepare-df}
+## long format and join metadata to add group and tissue info
+markers_cpm_long <- markers_cpm %>% 
+  tidyr::pivot_longer(cols = -c(1,2), 
+                      names_to = "sample_name", values_to = "cpm")
+
+markers_cpm_long <- markers_cpm_long %>% dplyr::left_join(metadat) %>%
+  dplyr::mutate(group = factor(group, levels = c("control", "c9ALS", "sALS")))
+```
+
+
+# Marker gene expression {.tabset}
+
+We plot the expression of the different markers in the experimental groups and tissues.
+```{r plot-marker-cpm, results = "asis"}
+for (d in names(markers)){
+  for(g in markers[[d]]){
+     cat("## ", g, " - ", d, "\n")
+    p <- markers_cpm_long %>% dplyr::filter(gene == g) %>%
+      ggplot(aes(x = group, y = cpm))  +
+      geom_boxplot() + 
+      geom_point(alpha = 0.6) + 
+      facet_wrap(vars(tissue))  +
+      scale_y_log10() + 
+      theme_bw() + 
+      ggtitle(paste0(g, " - ", d))
+    print(p)
+    cat("\n\n")
+  }
+}
+```
+
