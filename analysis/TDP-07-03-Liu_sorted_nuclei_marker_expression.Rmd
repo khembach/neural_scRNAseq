@@ -1,0 +1,243 @@
+---
+title: "Expression of TDP-HA cluster markers in ALS brain RNA-seq"
+author: "Katharina Hembach"
+date: "07.07.2021"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+### Load packages
+
+```{r load-libs, message = FALSE, warning = FALSE}
+library(ggplot2)
+library(dplyr)
+library(readxl)
+library(edgeR)
+library(tidyr)
+library(data.table)
+```
+
+# Load data
+```{r load-data}
+metadat <- read_excel(file.path("data", "Liu_et_al", "metadata.xlsx"))
+
+# metadat <- read_excel(file.path("data", "Prudencio_et_al", 
+#                                 "GSE67196_Petrucelli2015_ALS_genes.rawcount.xlsx"), 
+#                       sheet = "metadata")
+dat <- fread(file.path("data", "Liu_et_al", "GSE126542_NeuronalNuclei_RNAseq_counts.txt"))
+```
+
+## Prepare DGE object 
+We calculate normalization factors to scale the raw library sizes and
+minimize the log-fold changes between the samples for most genes. Here the
+trimmed mean of M-values between each pair of samples (TMM) is used by default.
+We also add the gene names.
+
+```{r sample-counts}
+## generate DGE object
+dge0 <- DGEList(counts = dat[,-"gene"], genes = data.frame(gene_name = dat[["gene"]]), 
+                samples = metadat[match(colnames(dat[,-"gene"]), metadat$sample),])
+dge0$samples$condition <- factor(dge0$samples$condition, 
+                                    levels = c("TDP_positive", "TDP_negative"))
+dge0 <- calcNormFactors(dge0)
+dge0$samples
+```
+
+
+# Plot total number of reads per sample
+
+```{r edgeR-plot-totalcount}
+ggplot(dge0$samples, aes(x = sample, y = lib.size)) + geom_bar(stat = "identity") + 
+    theme_bw() + xlab("") + ylab("Total read count") + 
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+```
+
+# Define design. 
+
+Next, we specify the design matrix of the experiment, defining which sample 
+annotations will be taken into account in the statistical modeling.
+We use a paired design, because we have sorted nuclei with and without TDP (condition) for each subject (experiment).
+
+```{r edgeR-define-design}
+stopifnot(all(colnames(dge0) == dge0$samples$sample))
+(des <- model.matrix(~experiment + condition, data = dge0$samples))
+```
+
+# Filter out lowly expressed genes
+
+Next we determine which genes have sufficiently large counts to be retained in
+the statistical analysis, and remove the rest. After removing genes, we 
+recalculate the normalization factors.
+
+```{r edgeR-filter-genes}
+dim(dge0)
+keep <- edgeR::filterByExpr(dge0, design = des)
+dge <- dge0[keep, ]
+dge <- calcNormFactors(dge)
+dim(dge)
+```
+
+# Calculate logCPMs 
+
+Note, we don't have the average transcript lengths which would normally be used with Salmon transcript expression estimates as correction terms. 
+
+We calculate log-counts per million (CPMs) because they are useful descriptive
+measures for the expression level of a gene. Note, however, that the normalized
+values are not used for the differential expression analysis. By default, the
+normalized library sizes are used in the computation.
+
+```{r edgeR-add-logcpm}
+# log2 cpms
+logcpms <- edgeR::cpm(dge, log = TRUE, prior.count = 2)
+dimnames(logcpms) <- list(dge$genes$gene_name, colnames(dge$counts))
+```
+
+
+# Estimate dispersion and fit QL model
+
+We model the count data using a quasi-likelihood (QL) negative binomial (NB)
+generalized log-linear model, which accounts for gene-specific variability from
+both biological and technical sources. Before fitting the model, we estimate
+the NB dispersion (overall biological variability across all genes), and the QL
+dispersion (gene-specific) using the `estimateDisp()` function.
+
+It is also good practice to look at the relationship between the biological
+coefficient of variation (NB dispersion) and the gene abundance (in logCPMs).
+
+```{r edgeR-estimate-disp}
+## Estimate dispersion and fit model
+dge <- estimateDisp(dge, design = des)
+qlfit <- glmQLFit(dge, design = des)
+## Plot dispersions
+plotBCV(dge)
+## MDS plot
+plotMDS(dge)
+```
+
+# Define contrasts 
+
+Before testing for differences in gene expression, we define the contrasts
+we wish to test for. Here we represent the constrasts as a numeric matrix:
+
+```{r edgeR-define-contrasts}
+## we test the last coefficient, which is the difference between TDP-43 negative and postiive cells.
+(contrasts <- makeContrasts(contrasts = "conditionTDP_negative", levels = des))
+```
+
+# Perform DGE tests
+
+Now we perform genewise tests for every contrast defined above, and save the
+results for every contrast.
+
+```{r edgeR-perform-tests}
+signif3 <- function(x) signif(x, digits = 3)
+
+qlf <- glmQLFTest(qlfit, contrast = contrasts)
+tt <- topTags(qlf, n = Inf, sort.by = "none")$table
+edgeR_res <- tt %>%
+    dplyr::mutate(mlog10PValue = -log10(PValue)) %>% 
+    dplyr::mutate_at(vars(one_of(c("logFC", "logCPM", "F", 
+                                   "PValue", "FDR", "mlog10PValue"))), 
+                     list(signif3))
+
+```
+
+# Make MA plots
+
+We can visualize the test results by plotting the logCPM (average) vs the logFC,
+and coloring genes with an adjusted p-value below 0.05 (or another specificed
+FDR threshold). A plot is drawn for every contrast.
+
+```{r edgeR-ma-plots}
+ggplot(edgeR_res, aes(x = logCPM, y = logFC, color = FDR <= 0.05)) + 
+  geom_point() + theme_bw() + 
+  scale_color_manual(values = c("TRUE" = "red", "FALSE" = "black"))
+```
+
+# Write DGE results to text files
+
+We export the results into text files that can be opened using any text editor.
+
+```{r edgeR-save-results}
+## Write results to text files
+write.table(edgeR_res %>% dplyr::arrange(PValue), 
+            file = file.path("output", "Liu_TDP_neg_vs_pos_edgeR_dge_results.txt"), 
+            sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+
+analysis_res <- list(dge = dge, logcpm = logcpms, edgeR_res = edgeR_res)
+saveRDS(analysis_res, 
+        file = file.path("output", "Liu_TDP_neg_vs_pos_edgeR_dge.rds"))
+```
+
+
+
+# Expression of cluster 12 markers
+
+We want to compare the gene expression of the cluster 12 markers in nuclei with and without TDP-43 expression.
+
+```{r normalized-cpm}
+markers <- list(up = c("NPTX2", "FGF18", "TDP43-HA", "PCED1A", "MEF2A", "DYNC2H1", 
+                   "APOE", "GADD45A", "BCAM", "DDIT3"),
+           down = c("VGF", "SCG2", "GAP43", "C4orf48", "HINT1", "LY6H", 
+                     "TUBA1A", "TMSB4X", "TUBB2B", "STMN2"))
+
+lapply(markers, function(x) x[x %in% dge$genes$gene_name])
+lapply(markers, function(x) x[!x %in% dge$genes$gene_name])
+
+ind <- lapply(markers, function(x) match(x, dge$genes$gene_name))
+markers <- lapply(names(ind), function(x) markers[[x]][!is.na(ind[[x]])])
+names(markers) <- names(ind)
+ind <- lapply(ind, function(x) x[!is.na(x)])
+
+## data frame with logcpms, marker label (up/down), sample group and condition
+markers_cpm <- data.frame(gene = unlist(markers), 
+                          direction = c(rep(names(markers)[[1]], length(markers[[1]])),
+                                        rep(names(markers)[[2]], length(markers[[2]]))))
+markers_cpm <- cbind(markers_cpm, logcpms[unlist(ind),])
+```
+
+Prepare data frame for plotting.
+
+```{r prepare-df}
+## long format and join metadata to add group and tissue info
+markers_cpm_long <- markers_cpm %>% 
+  tidyr::pivot_longer(cols = -c(1,2), 
+                      names_to = "sample_name", values_to = "logcpm")
+
+markers_cpm_long <- markers_cpm_long %>% 
+  dplyr::left_join(metadat %>% 
+                     dplyr::select(gender, condition, experiment, sample), 
+                   by = c("sample_name" = "sample"))  %>%
+  dplyr::mutate(condition = factor(condition, 
+                                   levels = c("TDP_positive", "TDP_negative")))
+```
+
+
+# Marker gene expression {.tabset}
+
+We plot the expression of the different markers in all subjects split by TDP-43 expression.
+```{r plot-marker-cpm, results = "asis"}
+for (d in names(markers)){
+  for(g in markers[[d]]){
+     cat("## ", g, " - ", d, "\n")
+    res <- edgeR_res %>% dplyr::filter(gene_name == g)
+    p <- markers_cpm_long %>% dplyr::filter(gene == g) %>%
+      ggplot(aes(x = condition, y = logcpm))  +
+      geom_boxplot() + 
+      geom_point(alpha = 0.6) +
+      theme_bw() + 
+      ggtitle(paste0(g, " - ", d, ", logFC = ", res$logFC, ", FDR = ", res$FDR))
+    print(p)
+    cat("\n\n")
+  }
+}
+```
+
