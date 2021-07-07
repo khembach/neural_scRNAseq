@@ -65,7 +65,7 @@ We quantified the transcript encoded by the plasmid and the endogenous TDP-43 wi
     - [Analysis of cluster 12 (TDP-HA positive)](TDP-07-cluster_12.html)
     - [STMN2 read coverage in cluster 12](TDP-07-01-STMN2_expression.html)
     - [Cluster 12 marker expression in ALS brain RNA-seq](TDP-07-02-Prudencio_marker_expression.html)
-    - [Cluster 12 marker expression in sorted neuronal nuclei from FTD-ALS patients](TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd")
+    - [Cluster 12 marker expression in sorted neuronal nuclei from FTD-ALS patients](TDP-07-03-Liu_sorted_nuclei_marker_expression.html")
     
 We combine the TDP-HA samples with the D96 samples as controls (all samples are D96):
 
