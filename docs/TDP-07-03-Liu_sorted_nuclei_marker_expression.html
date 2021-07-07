@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Katharina Hembach" />
+
+
+<title>Expression of TDP-HA cluster markers in ALS brain RNA-seq</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">neural_scRNAseq</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/khembach/neural_scRNAseq">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Expression of TDP-HA cluster markers in ALS brain RNA-seq</h1>
+<h4 class="author">Katharina Hembach</h4>
+<h4 class="date">07.07.2021</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-07-07
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it's best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200522code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200522)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200522code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200522)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreee4718a8fe595328f9bd0591b08ee841c5c3bf1bctargetblanke4718a8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/e4718a8fe595328f9bd0591b08ee841c5c3bf1bc" target="_blank">e4718a8</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreee4718a8fe595328f9bd0591b08ee841c5c3bf1bctargetblanke4718a8a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/e4718a8fe595328f9bd0591b08ee841c5c3bf1bc" target="_blank">e4718a8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    ._.DS_Store
+    Ignored:    ._Filtered.pdf
+    Ignored:    ._Rplots.pdf
+    Ignored:    ._Unfiltered.pdf
+    Ignored:    .__workflowr.yml
+    Ignored:    ._coverage.pdf
+    Ignored:    ._coverage_sashimi.pdf
+    Ignored:    ._coverage_sashimi.png
+    Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    ._pbDS_cell_level.pdf
+    Ignored:    ._pbDS_top_expr_umap.pdf
+    Ignored:    ._pbDS_upset.pdf
+    Ignored:    ._sashimi.pdf
+    Ignored:    ._stmn2.pdf
+    Ignored:    ._tdp.pdf
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/._.DS_Store
+    Ignored:    analysis/._01-preprocessing.Rmd
+    Ignored:    analysis/._01-preprocessing.html
+    Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._03-filtering.Rmd
+    Ignored:    analysis/._04-clustering.Rmd
+    Ignored:    analysis/._04-clustering.knit.md
+    Ignored:    analysis/._04.1-cell_cycle.Rmd
+    Ignored:    analysis/._05-annotation.Rmd
+    Ignored:    analysis/._07-cluster-analysis-all-timepoints.Rmd
+    Ignored:    analysis/._Lam-0-NSC_no_integration.Rmd
+    Ignored:    analysis/._Lam-01-NSC_integration.Rmd
+    Ignored:    analysis/._Lam-02-NSC_annotation.Rmd
+    Ignored:    analysis/._NSC-1-clustering.Rmd
+    Ignored:    analysis/._NSC-2-annotation.Rmd
+    Ignored:    analysis/._TDP-06-cluster_analysis.Rmd
+    Ignored:    analysis/.__site.yml
+    Ignored:    analysis/._additional_filtering.Rmd
+    Ignored:    analysis/._additional_filtering_clustering.Rmd
+    Ignored:    analysis/._index.Rmd
+    Ignored:    analysis/._organoid-01-1-qualtiy-control.Rmd
+    Ignored:    analysis/._organoid-01-clustering.Rmd
+    Ignored:    analysis/._organoid-02-integration.Rmd
+    Ignored:    analysis/._organoid-03-cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-04-group_integration.Rmd
+    Ignored:    analysis/._organoid-04-stage_integration.Rmd
+    Ignored:    analysis/._organoid-05-group_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-05-stage_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-06-1-prepare-sce.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-Seurat.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-function.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-06-group-integration-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-07-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-07-group-integration-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-08-conos-comparison.Rmd
+    Ignored:    analysis/._organoid-0x-sample_integration.Rmd
+    Ignored:    analysis/01-preprocessing_cache/
+    Ignored:    analysis/02-1-SampleQC_cache/
+    Ignored:    analysis/02-quality_control_cache/
+    Ignored:    analysis/02.1-SampleQC_cache/
+    Ignored:    analysis/03-filtering_cache/
+    Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/04.1-cell_cycle_cache/
+    Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/06-clustering-all-timepoints_cache/
+    Ignored:    analysis/07-cluster-analysis-all-timepoints_cache/
+    Ignored:    analysis/CH-test-01-preprocessing_cache/
+    Ignored:    analysis/CH-test-02-transgene-expression_cache/
+    Ignored:    analysis/CH-test-03-cluster-analysis_cache/
+    Ignored:    analysis/Lam-01-NSC_integration_cache/
+    Ignored:    analysis/Lam-02-NSC_annotation_cache/
+    Ignored:    analysis/NSC-1-clustering_cache/
+    Ignored:    analysis/NSC-2-annotation_cache/
+    Ignored:    analysis/TDP-01-preprocessing_cache/
+    Ignored:    analysis/TDP-02-quality_control_cache/
+    Ignored:    analysis/TDP-03-filtering_cache/
+    Ignored:    analysis/TDP-04-clustering_cache/
+    Ignored:    analysis/TDP-05-00-filtering-plasmid-QC_cache/
+    Ignored:    analysis/TDP-05-plasmid_expression_cache/
+    Ignored:    analysis/TDP-06-cluster_analysis_cache/
+    Ignored:    analysis/TDP-07-01-STMN2_expression_cache/
+    Ignored:    analysis/TDP-07-02-Prudencio_marker_expression_cache/
+    Ignored:    analysis/TDP-07-cluster_12_cache/
+    Ignored:    analysis/TDP-08-00-clustering-HA-D96_cache/
+    Ignored:    analysis/TDP-08-01-HA-D96-expression-changes_cache/
+    Ignored:    analysis/TDP-08-02-TDP_target_genes_cache/
+    Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
+    Ignored:    analysis/additional_filtering_cache/
+    Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
+    Ignored:    analysis/organoid-01-clustering_cache/
+    Ignored:    analysis/organoid-02-integration_cache/
+    Ignored:    analysis/organoid-03-cluster_analysis_cache/
+    Ignored:    analysis/organoid-04-group_integration_cache/
+    Ignored:    analysis/organoid-04-stage_integration_cache/
+    Ignored:    analysis/organoid-05-group_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-05-stage_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_test_cache/
+    Ignored:    analysis/organoid-06-group-integration-conos-analysis_cache/
+    Ignored:    analysis/organoid-07-conos-visualization_cache/
+    Ignored:    analysis/organoid-07-group-integration-conos-visualization_cache/
+    Ignored:    analysis/organoid-08-conos-comparison_cache/
+    Ignored:    analysis/organoid-0x-sample_integration_cache/
+    Ignored:    analysis/sample5_QC_cache/
+    Ignored:    analysis/timepoints-01-organoid-integration_cache/
+    Ignored:    analysis/timepoints-02-cluster-analysis_cache/
+    Ignored:    data/.DS_Store
+    Ignored:    data/._.DS_Store
+    Ignored:    data/._.smbdeleteAAA17ed8b4b
+    Ignored:    data/._Lam_figure2_markers.R
+    Ignored:    data/._README.md
+    Ignored:    data/._Reactive_astrocytes_markers.xlsx
+    Ignored:    data/._known_NSC_markers.R
+    Ignored:    data/._known_cell_type_markers.R
+    Ignored:    data/._metadata.csv
+    Ignored:    data/._virus_cell_tropism_markers.R
+    Ignored:    data/._~$Reactive_astrocytes_markers.xlsx
+    Ignored:    data/data_sushi/
+    Ignored:    data/filtered_feature_matrices/
+    Ignored:    output/.DS_Store
+    Ignored:    output/._.DS_Store
+    Ignored:    output/._NSC_cluster2_marker_genes.txt
+    Ignored:    output/._TDP-06-no_integration_cluster12_marker_genes.txt
+    Ignored:    output/._TDP-06-no_integration_cluster13_marker_genes.txt
+    Ignored:    output/._organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_0.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_1.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_10.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_11.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_12.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_13.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_14.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_5.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_7.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_8.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_all.xlsx
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_0.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_1.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_10.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_11.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_12.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_13.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_14.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_5.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_7.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_8.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/._~$tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/CH-test-01-preprocessing.rds
+    Ignored:    output/CH-test-01-preprocessing_singlets.rds
+    Ignored:    output/CH-test-01-preprocessing_singlets_filtered.rds
+    Ignored:    output/CH-test-01-preprocessing_so.rds
+    Ignored:    output/CH-test-01-preprocessing_so_filtered.rds
+    Ignored:    output/CH-test-03-cluster-analysis_so.rds
+    Ignored:    output/CH-test-03_scran_markers.rds
+    Ignored:    output/Lam-01-clustering.rds
+    Ignored:    output/Liu_TDP_neg_vs_pos_edgeR_dge.rds
+    Ignored:    output/Liu_TDP_neg_vs_pos_edgeR_dge_results.txt
+    Ignored:    output/NSC_1_clustering.rds
+    Ignored:    output/NSC_cluster1_marker_genes.txt
+    Ignored:    output/NSC_cluster2_marker_genes.txt
+    Ignored:    output/NSC_cluster3_marker_genes.txt
+    Ignored:    output/NSC_cluster4_marker_genes.txt
+    Ignored:    output/NSC_cluster5_marker_genes.txt
+    Ignored:    output/NSC_cluster6_marker_genes.txt
+    Ignored:    output/NSC_cluster7_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster0_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster10_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster11_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster12_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster13_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster14_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster15_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster16_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster17_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster1_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster2_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster3_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster4_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster5_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster6_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster7_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster8_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster9_marker_genes.txt
+    Ignored:    output/TDP-06_scran_markers.rds
+    Ignored:    output/additional_filtering.rds
+    Ignored:    output/conos/
+    Ignored:    output/conos_organoid-06-conos-analysis.rds
+    Ignored:    output/conos_organoid-06-group-integration-conos-analysis.rds
+    Ignored:    output/figures/
+    Ignored:    output/organoid_integration_cluster10_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster11_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster12_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster13_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster14_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster15_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster16_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster17_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster2_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster3_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster4_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster5_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster6_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster7_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster8_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster9_marker_genes.txt
+    Ignored:    output/res_TDP-08-01-muscat.rds
+    Ignored:    output/sce_01_preprocessing.rds
+    Ignored:    output/sce_02_quality_control.rds
+    Ignored:    output/sce_03_filtering.rds
+    Ignored:    output/sce_03_filtering_all_genes.rds
+    Ignored:    output/sce_06-1-prepare-sce.rds
+    Ignored:    output/sce_TDP-08-01-muscat.rds
+    Ignored:    output/sce_TDP_01_preprocessing.rds
+    Ignored:    output/sce_TDP_02_quality_control.rds
+    Ignored:    output/sce_TDP_03_filtering.rds
+    Ignored:    output/sce_TDP_03_filtering_all_genes.rds
+    Ignored:    output/sce_organoid-01-clustering.rds
+    Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04-stage_integration.rds
+    Ignored:    output/so_04_1_cell_cycle.rds
+    Ignored:    output/so_04_clustering.rds
+    Ignored:    output/so_06-clustering_all_timepoints.rds
+    Ignored:    output/so_08-00_clustering_HA_D96.rds
+    Ignored:    output/so_08-clustering_timeline_HA.rds
+    Ignored:    output/so_0x-sample_integration.rds
+    Ignored:    output/so_CH-test-02-transgene_expression.rds
+    Ignored:    output/so_TDP-06-cluster-analysis.rds
+    Ignored:    output/so_TDP_04_clustering.rds
+    Ignored:    output/so_TDP_05_plasmid_expression.rds
+    Ignored:    output/so_additional_filtering_clustering.rds
+    Ignored:    output/so_integrated_organoid-02-integration.rds
+    Ignored:    output/so_merged_organoid-02-integration.rds
+    Ignored:    output/so_organoid-01-clustering.rds
+    Ignored:    output/so_sample_organoid-01-clustering.rds
+    Ignored:    output/so_timepoints-01-organoid_integration.rds
+    Ignored:    output/tbl_TDP-08-01-muscat.rds
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_0.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_1.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_10.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_11.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_12.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_13.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_14.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_5.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_7.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_8.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_all.xlsx
+    Ignored:    output/tbl_TDP-08-02-targets_hek.rds
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_0.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_1.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_10.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_11.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_12.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_13.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_14.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_5.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_7.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_8.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/~$tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    scripts/.DS_Store
+    Ignored:    scripts/._.DS_Store
+    Ignored:    scripts/._bu_Rcode.R
+    Ignored:    scripts/._plasmid_expression.sh
+    Ignored:    scripts/._plasmid_expression_cell_hashing_test.sh
+    Ignored:    scripts/._prepare_salmon_transcripts.R
+    Ignored:    scripts/._prepare_salmon_transcripts_cell_hashing_test.R
+
+Untracked files:
+    Untracked:  Filtered.pdf
+    Untracked:  Rplots.pdf
+    Untracked:  Unfiltered
+    Untracked:  Unfiltered.pdf
+    Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
+    Untracked:  analysis/TDP-07-01-STMN2_expression copy.Rmd
+    Untracked:  analysis/additional_filtering.Rmd
+    Untracked:  analysis/additional_filtering_clustering.Rmd
+    Untracked:  analysis/organoid-01-1-qualtiy-control.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-Seurat.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-function.Rmd
+    Untracked:  analysis/organoid-07-conos-visualization.Rmd
+    Untracked:  analysis/organoid-07-group-integration-conos-visualization.Rmd
+    Untracked:  analysis/organoid-08-conos-comparison.Rmd
+    Untracked:  analysis/organoid-0x-sample_integration.Rmd
+    Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  coverage.pdf
+    Untracked:  coverage_sashimi.pdf
+    Untracked:  coverage_sashimi.png
+    Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
+    Untracked:  data/Jun2021/
+    Untracked:  data/Kanton_et_al/
+    Untracked:  data/Lam_et_al/
+    Untracked:  data/Liu_et_al/
+    Untracked:  data/Prudencio_et_al/
+    Untracked:  data/Sep2020/
+    Untracked:  data/cell_hashing_test/
+    Untracked:  data/reference/
+    Untracked:  data/virus_cell_tropism_markers.R
+    Untracked:  data/~$Reactive_astrocytes_markers.xlsx
+    Untracked:  pbDS_cell_level.pdf
+    Untracked:  pbDS_heatmap.pdf
+    Untracked:  pbDS_top_expr_umap.pdf
+    Untracked:  pbDS_upset.pdf
+    Untracked:  sashimi.pdf
+    Untracked:  scripts/bu_Rcode.R
+    Untracked:  scripts/bu_code.Rmd
+    Untracked:  scripts/plasmid_expression_cell_hashing_test.sh
+    Untracked:  scripts/prepare_salmon_transcripts_cell_hashing_test.R
+    Untracked:  scripts/salmon-latest_linux_x86_64/
+    Untracked:  stmn2.pdf
+    Untracked:  tdp.pdf
+
+Unstaged changes:
+    Modified:   analysis/05-annotation.Rmd
+    Modified:   analysis/TDP-04-clustering.Rmd
+    Modified:   analysis/TDP-07-cluster_12.Rmd
+    Modified:   analysis/TDP-08-01-HA-D96-expression-changes.Rmd
+    Modified:   analysis/_site.yml
+    Modified:   analysis/organoid-02-integration.Rmd
+    Modified:   analysis/organoid-04-group_integration.Rmd
+    Modified:   analysis/organoid-06-conos-analysis.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd</code>) and HTML (<code>docs/TDP-07-03-Liu_sorted_nuclei_marker_expression.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e4718a8fe595328f9bd0591b08ee841c5c3bf1bc/analysis/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd" target="_blank">e4718a8</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-07
+</td>
+<td>
+edgeR DGE analysis and cluster 12 marker expression in sorted nuclei
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-packages" class="section level3">
+<h3>Load packages</h3>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+library(readxl)
+library(edgeR)
+library(tidyr)
+library(data.table)</code></pre>
+</div>
+<div id="load-data" class="section level1">
+<h1>Load data</h1>
+<pre class="r"><code>metadat &lt;- read_excel(file.path(&quot;data&quot;, &quot;Liu_et_al&quot;, &quot;metadata.xlsx&quot;))
+
+# metadat &lt;- read_excel(file.path(&quot;data&quot;, &quot;Prudencio_et_al&quot;, 
+#                                 &quot;GSE67196_Petrucelli2015_ALS_genes.rawcount.xlsx&quot;), 
+#                       sheet = &quot;metadata&quot;)
+dat &lt;- fread(file.path(&quot;data&quot;, &quot;Liu_et_al&quot;, &quot;GSE126542_NeuronalNuclei_RNAseq_counts.txt&quot;))</code></pre>
+<div id="prepare-dge-object" class="section level2">
+<h2>Prepare DGE object</h2>
+<p>We calculate normalization factors to scale the raw library sizes and minimize the log-fold changes between the samples for most genes. Here the trimmed mean of M-values between each pair of samples (TMM) is used by default. We also add the gene names.</p>
+<pre class="r"><code>## generate DGE object
+dge0 &lt;- DGEList(counts = dat[,-&quot;gene&quot;], genes = data.frame(gene_name = dat[[&quot;gene&quot;]]), 
+                samples = metadat[match(colnames(dat[,-&quot;gene&quot;]), metadat$sample),])
+dge0$samples$condition &lt;- factor(dge0$samples$condition, 
+                                    levels = c(&quot;TDP_positive&quot;, &quot;TDP_negative&quot;))
+dge0 &lt;- calcNormFactors(dge0)
+dge0$samples</code></pre>
+<pre><code>      group lib.size norm.factors Experiment.Accession
+S1_TN     1 56947896    0.8416073           SRX5373069
+S1_TP     1 52691795    0.9068557           SRX5373068
+S2_TN     1 63369730    0.9531028           SRX5373071
+S2_TP     1 66606293    1.1445786           SRX5373070
+S3_TN     1 56063821    1.0490842           SRX5373073
+S3_TP     1 53230793    1.1573173           SRX5373072
+S4_TN     1 63838338    1.0891277           SRX5373076
+S4_TP     1 66655833    1.1787754           SRX5373075
+S5_TN     1 69950896    0.9507708           SRX5373079
+S5_TP     1 65712555    0.9984895           SRX5373078
+S6_TN     1 65962492    0.9460587           SRX5373081
+S6_TP     1 61708917    1.0066190           SRX5373080
+S7_TN     1 53133044    0.9048945           SRX5373083
+S7_TP     1 56713147    0.9418761           SRX5373082
+                                                                   Experiment.Title
+S1_TN GSM3603264: RNA-Seq - NeuN positive/TDP-43 negative S1; Homo sapiens; RNA-Seq
+S1_TP GSM3603263: RNA-Seq - NeuN positive/TDP-43 positive S1; Homo sapiens; RNA-Seq
+S2_TN GSM3603266: RNA-Seq - NeuN positive/TDP-43 negative S2; Homo sapiens; RNA-Seq
+S2_TP GSM3603265: RNA-Seq - NeuN positive/TDP-43 positive S2; Homo sapiens; RNA-Seq
+S3_TN GSM3603268: RNA-Seq - NeuN positive/TDP-43 negative S3; Homo sapiens; RNA-Seq
+S3_TP GSM3603267: RNA-Seq - NeuN positive/TDP-43 positive S3; Homo sapiens; RNA-Seq
+S4_TN GSM3603271: RNA-Seq - NeuN positive/TDP-43 negative S4; Homo sapiens; RNA-Seq
+S4_TP GSM3603270: RNA-Seq - NeuN positive/TDP-43 positive S4; Homo sapiens; RNA-Seq
+S5_TN GSM3603274: RNA-Seq - NeuN positive/TDP-43 negative S5; Homo sapiens; RNA-Seq
+S5_TP GSM3603273: RNA-Seq - NeuN positive/TDP-43 positive S5; Homo sapiens; RNA-Seq
+S6_TN GSM3603276: RNA-Seq - NeuN positive/TDP-43 negative S6; Homo sapiens; RNA-Seq
+S6_TP GSM3603275: RNA-Seq - NeuN positive/TDP-43 positive S6; Homo sapiens; RNA-Seq
+S7_TN GSM3603278: RNA-Seq - NeuN positive/TDP-43 negative S7; Homo sapiens; RNA-Seq
+S7_TP GSM3603277: RNA-Seq - NeuN positive/TDP-43 positive S7; Homo sapiens; RNA-Seq
+      Organism.Name          Instrument Submitter Study.Accession
+S1_TN  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S1_TP  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S2_TN  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S2_TP  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S3_TN  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S3_TP  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S4_TN  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S4_TP  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S5_TN  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S5_TP  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S6_TN  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S6_TP  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S7_TN  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+S7_TP  Homo sapiens Illumina HiSeq 2500       GEO       SRP185789
+                                                                                      Study.Title
+S1_TN Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S1_TP Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S2_TN Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S2_TP Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S3_TN Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S3_TP Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S4_TN Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S4_TP Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S5_TN Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S5_TP Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S6_TN Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S6_TP Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S7_TN Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+S7_TP Loss of Nuclear TDP-43 Is Associated with Decondensation of LINE Retrotransposons [RNA-Seq]
+      Sample.Accession Total.Size..Mb Total.RUNs Total.Spots Total.Bases
+S1_TN       SRS4361182       14783.46          1   151210060 36288552250
+S1_TP       SRS4361180       14203.37          1   145718214 34996399600
+S2_TN       SRS4361184       13986.87          1   144818443 34870008150
+S2_TP       SRS4361181       15169.53          1   154923320 37159091950
+S3_TN       SRS4361185       11899.29          1   117780545 27942136100
+S3_TP       SRS4361183       12315.07          1   120024367 28242749150
+S4_TN       SRS4361190       12963.65          1   127236303 30140134150
+S4_TP       SRS4361187       12913.88          1   126356871 29933976100
+S5_TN       SRS4361191       17132.26          1   170786112 40775514450
+S5_TP       SRS4361189       13871.14          1   137878652 32837216200
+S6_TN       SRS4361193       15609.90          1   156150613 37214362850
+S6_TP       SRS4361192       14523.02          1   146966879 35165842400
+S7_TN       SRS4361195       13171.29          1   133307846 31941833100
+S7_TP       SRS4361194       13622.80          1   137913088 32872986450
+      Library.Strategy Library.Source Library.Selection Diagnosis gender
+S1_TN          RNA-Seq TRANSCRIPTOMIC              cDNA       FTD female
+S1_TP          RNA-Seq TRANSCRIPTOMIC              cDNA       FTD female
+S2_TN          RNA-Seq TRANSCRIPTOMIC              cDNA   FTD-ALS   male
+S2_TP          RNA-Seq TRANSCRIPTOMIC              cDNA   FTD-ALS   male
+S3_TN          RNA-Seq TRANSCRIPTOMIC              cDNA       FTD female
+S3_TP          RNA-Seq TRANSCRIPTOMIC              cDNA       FTD female
+S4_TN          RNA-Seq TRANSCRIPTOMIC              cDNA       FTD female
+S4_TP          RNA-Seq TRANSCRIPTOMIC              cDNA       FTD female
+S5_TN          RNA-Seq TRANSCRIPTOMIC              cDNA       FTD   male
+S5_TP          RNA-Seq TRANSCRIPTOMIC              cDNA       FTD   male
+S6_TN          RNA-Seq TRANSCRIPTOMIC              cDNA   FTD-ALS   male
+S6_TP          RNA-Seq TRANSCRIPTOMIC              cDNA   FTD-ALS   male
+S7_TN          RNA-Seq TRANSCRIPTOMIC              cDNA   FTD-ALS   male
+S7_TP          RNA-Seq TRANSCRIPTOMIC              cDNA   FTD-ALS   male
+         condition experiment sample
+S1_TN TDP_negative         S1  S1_TN
+S1_TP TDP_positive         S1  S1_TP
+S2_TN TDP_negative         S2  S2_TN
+S2_TP TDP_positive         S2  S2_TP
+S3_TN TDP_negative         S3  S3_TN
+S3_TP TDP_positive         S3  S3_TP
+S4_TN TDP_negative         S4  S4_TN
+S4_TP TDP_positive         S4  S4_TP
+S5_TN TDP_negative         S5  S5_TN
+S5_TP TDP_positive         S5  S5_TP
+S6_TN TDP_negative         S6  S6_TN
+S6_TP TDP_positive         S6  S6_TP
+S7_TN TDP_negative         S7  S7_TN
+S7_TP TDP_positive         S7  S7_TP</code></pre>
+</div>
+</div>
+<div id="plot-total-number-of-reads-per-sample" class="section level1">
+<h1>Plot total number of reads per sample</h1>
+<pre class="r"><code>ggplot(dge0$samples, aes(x = sample, y = lib.size)) + geom_bar(stat = &quot;identity&quot;) + 
+    theme_bw() + xlab(&quot;&quot;) + ylab(&quot;Total read count&quot;) + 
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))</code></pre>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/edgeR-plot-totalcount-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="define-design." class="section level1">
+<h1>Define design.</h1>
+<p>Next, we specify the design matrix of the experiment, defining which sample annotations will be taken into account in the statistical modeling. We use a paired design, because we have sorted nuclei with and without TDP (condition) for each subject (experiment).</p>
+<pre class="r"><code>stopifnot(all(colnames(dge0) == dge0$samples$sample))
+(des &lt;- model.matrix(~experiment + condition, data = dge0$samples))</code></pre>
+<pre><code>      (Intercept) experimentS2 experimentS3 experimentS4 experimentS5
+S1_TN           1            0            0            0            0
+S1_TP           1            0            0            0            0
+S2_TN           1            1            0            0            0
+S2_TP           1            1            0            0            0
+S3_TN           1            0            1            0            0
+S3_TP           1            0            1            0            0
+S4_TN           1            0            0            1            0
+S4_TP           1            0            0            1            0
+S5_TN           1            0            0            0            1
+S5_TP           1            0            0            0            1
+S6_TN           1            0            0            0            0
+S6_TP           1            0            0            0            0
+S7_TN           1            0            0            0            0
+S7_TP           1            0            0            0            0
+      experimentS6 experimentS7 conditionTDP_negative
+S1_TN            0            0                     1
+S1_TP            0            0                     0
+S2_TN            0            0                     1
+S2_TP            0            0                     0
+S3_TN            0            0                     1
+S3_TP            0            0                     0
+S4_TN            0            0                     1
+S4_TP            0            0                     0
+S5_TN            0            0                     1
+S5_TP            0            0                     0
+S6_TN            1            0                     1
+S6_TP            1            0                     0
+S7_TN            0            1                     1
+S7_TP            0            1                     0
+attr(,&quot;assign&quot;)
+[1] 0 1 1 1 1 1 1 2
+attr(,&quot;contrasts&quot;)
+attr(,&quot;contrasts&quot;)$experiment
+[1] &quot;contr.treatment&quot;
+
+attr(,&quot;contrasts&quot;)$condition
+[1] &quot;contr.treatment&quot;</code></pre>
+</div>
+<div id="filter-out-lowly-expressed-genes" class="section level1">
+<h1>Filter out lowly expressed genes</h1>
+<p>Next we determine which genes have sufficiently large counts to be retained in the statistical analysis, and remove the rest. After removing genes, we recalculate the normalization factors.</p>
+<pre class="r"><code>dim(dge0)</code></pre>
+<pre><code>[1] 58567    14</code></pre>
+<pre class="r"><code>keep &lt;- edgeR::filterByExpr(dge0, design = des)
+dge &lt;- dge0[keep, ]
+dge &lt;- calcNormFactors(dge)
+dim(dge)</code></pre>
+<pre><code>[1] 23028    14</code></pre>
+</div>
+<div id="calculate-logcpms" class="section level1">
+<h1>Calculate logCPMs</h1>
+<p>Note, we don't have the average transcript lengths which would normally be used with Salmon transcript expression estimates as correction terms.</p>
+<p>We calculate log-counts per million (CPMs) because they are useful descriptive measures for the expression level of a gene. Note, however, that the normalized values are not used for the differential expression analysis. By default, the normalized library sizes are used in the computation.</p>
+<pre class="r"><code># log2 cpms
+logcpms &lt;- edgeR::cpm(dge, log = TRUE, prior.count = 2)
+dimnames(logcpms) &lt;- list(dge$genes$gene_name, colnames(dge$counts))</code></pre>
+</div>
+<div id="estimate-dispersion-and-fit-ql-model" class="section level1">
+<h1>Estimate dispersion and fit QL model</h1>
+<p>We model the count data using a quasi-likelihood (QL) negative binomial (NB) generalized log-linear model, which accounts for gene-specific variability from both biological and technical sources. Before fitting the model, we estimate the NB dispersion (overall biological variability across all genes), and the QL dispersion (gene-specific) using the <code>estimateDisp()</code> function.</p>
+<p>It is also good practice to look at the relationship between the biological coefficient of variation (NB dispersion) and the gene abundance (in logCPMs).</p>
+<pre class="r"><code>## Estimate dispersion and fit model
+dge &lt;- estimateDisp(dge, design = des)
+qlfit &lt;- glmQLFit(dge, design = des)
+## Plot dispersions
+plotBCV(dge)</code></pre>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/edgeR-estimate-disp-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## MDS plot
+plotMDS(dge)</code></pre>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/edgeR-estimate-disp-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="define-contrasts" class="section level1">
+<h1>Define contrasts</h1>
+<p>Before testing for differences in gene expression, we define the contrasts we wish to test for. Here we represent the constrasts as a numeric matrix:</p>
+<pre class="r"><code>## we test the last coefficient, which is the difference between TDP-43 negative and postiive cells.
+(contrasts &lt;- makeContrasts(contrasts = &quot;conditionTDP_negative&quot;, levels = des))</code></pre>
+<pre><code>Warning in makeContrasts(contrasts = &quot;conditionTDP_negative&quot;, levels = des):
+Renaming (Intercept) to Intercept</code></pre>
+<pre><code>                       Contrasts
+Levels                  conditionTDP_negative
+  Intercept                                 0
+  experimentS2                              0
+  experimentS3                              0
+  experimentS4                              0
+  experimentS5                              0
+  experimentS6                              0
+  experimentS7                              0
+  conditionTDP_negative                     1</code></pre>
+</div>
+<div id="perform-dge-tests" class="section level1">
+<h1>Perform DGE tests</h1>
+<p>Now we perform genewise tests for every contrast defined above, and save the results for every contrast.</p>
+<pre class="r"><code>signif3 &lt;- function(x) signif(x, digits = 3)
+
+qlf &lt;- glmQLFTest(qlfit, contrast = contrasts)
+tt &lt;- topTags(qlf, n = Inf, sort.by = &quot;none&quot;)$table
+edgeR_res &lt;- tt %&gt;%
+    dplyr::mutate(mlog10PValue = -log10(PValue)) %&gt;% 
+    dplyr::mutate_at(vars(one_of(c(&quot;logFC&quot;, &quot;logCPM&quot;, &quot;F&quot;, 
+                                   &quot;PValue&quot;, &quot;FDR&quot;, &quot;mlog10PValue&quot;))), 
+                     list(signif3))</code></pre>
+</div>
+<div id="make-ma-plots" class="section level1">
+<h1>Make MA plots</h1>
+<p>We can visualize the test results by plotting the logCPM (average) vs the logFC, and coloring genes with an adjusted p-value below 0.05 (or another specificed FDR threshold). A plot is drawn for every contrast.</p>
+<pre class="r"><code>ggplot(edgeR_res, aes(x = logCPM, y = logFC, color = FDR &lt;= 0.05)) + 
+  geom_point() + theme_bw() + 
+  scale_color_manual(values = c(&quot;TRUE&quot; = &quot;red&quot;, &quot;FALSE&quot; = &quot;black&quot;))</code></pre>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/edgeR-ma-plots-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="write-dge-results-to-text-files" class="section level1">
+<h1>Write DGE results to text files</h1>
+<p>We export the results into text files that can be opened using any text editor.</p>
+<pre class="r"><code>## Write results to text files
+write.table(edgeR_res %&gt;% dplyr::arrange(PValue), 
+            file = file.path(&quot;output&quot;, &quot;Liu_TDP_neg_vs_pos_edgeR_dge_results.txt&quot;), 
+            sep = &quot;\t&quot;, row.names = FALSE, col.names = TRUE, quote = FALSE)
+
+analysis_res &lt;- list(dge = dge, logcpm = logcpms, edgeR_res = edgeR_res)
+saveRDS(analysis_res, 
+        file = file.path(&quot;output&quot;, &quot;Liu_TDP_neg_vs_pos_edgeR_dge.rds&quot;))</code></pre>
+</div>
+<div id="expression-of-cluster-12-markers" class="section level1">
+<h1>Expression of cluster 12 markers</h1>
+<p>We want to compare the gene expression of the cluster 12 markers in nuclei with and without TDP-43 expression.</p>
+<pre class="r"><code>markers &lt;- list(up = c(&quot;NPTX2&quot;, &quot;FGF18&quot;, &quot;TDP43-HA&quot;, &quot;PCED1A&quot;, &quot;MEF2A&quot;, &quot;DYNC2H1&quot;, 
+                   &quot;APOE&quot;, &quot;GADD45A&quot;, &quot;BCAM&quot;, &quot;DDIT3&quot;),
+           down = c(&quot;VGF&quot;, &quot;SCG2&quot;, &quot;GAP43&quot;, &quot;C4orf48&quot;, &quot;HINT1&quot;, &quot;LY6H&quot;, 
+                     &quot;TUBA1A&quot;, &quot;TMSB4X&quot;, &quot;TUBB2B&quot;, &quot;STMN2&quot;))
+
+lapply(markers, function(x) x[x %in% dge$genes$gene_name])</code></pre>
+<pre><code>$up
+[1] &quot;NPTX2&quot;   &quot;FGF18&quot;   &quot;PCED1A&quot;  &quot;MEF2A&quot;   &quot;DYNC2H1&quot; &quot;APOE&quot;    &quot;GADD45A&quot;
+[8] &quot;BCAM&quot;    &quot;DDIT3&quot;  
+
+$down
+[1] &quot;VGF&quot;    &quot;SCG2&quot;   &quot;GAP43&quot;  &quot;HINT1&quot;  &quot;TUBA1A&quot; &quot;TMSB4X&quot; &quot;TUBB2B&quot; &quot;STMN2&quot; </code></pre>
+<pre class="r"><code>lapply(markers, function(x) x[!x %in% dge$genes$gene_name])</code></pre>
+<pre><code>$up
+[1] &quot;TDP43-HA&quot;
+
+$down
+[1] &quot;C4orf48&quot; &quot;LY6H&quot;   </code></pre>
+<pre class="r"><code>ind &lt;- lapply(markers, function(x) match(x, dge$genes$gene_name))
+markers &lt;- lapply(names(ind), function(x) markers[[x]][!is.na(ind[[x]])])
+names(markers) &lt;- names(ind)
+ind &lt;- lapply(ind, function(x) x[!is.na(x)])
+
+## data frame with logcpms, marker label (up/down), sample group and condition
+markers_cpm &lt;- data.frame(gene = unlist(markers), 
+                          direction = c(rep(names(markers)[[1]], length(markers[[1]])),
+                                        rep(names(markers)[[2]], length(markers[[2]]))))
+markers_cpm &lt;- cbind(markers_cpm, logcpms[unlist(ind),])</code></pre>
+<p>Prepare data frame for plotting.</p>
+<pre class="r"><code>## long format and join metadata to add group and tissue info
+markers_cpm_long &lt;- markers_cpm %&gt;% 
+  tidyr::pivot_longer(cols = -c(1,2), 
+                      names_to = &quot;sample_name&quot;, values_to = &quot;logcpm&quot;)
+
+markers_cpm_long &lt;- markers_cpm_long %&gt;% 
+  dplyr::left_join(metadat %&gt;% 
+                     dplyr::select(gender, condition, experiment, sample), 
+                   by = c(&quot;sample_name&quot; = &quot;sample&quot;))  %&gt;%
+  dplyr::mutate(condition = factor(condition, 
+                                   levels = c(&quot;TDP_positive&quot;, &quot;TDP_negative&quot;)))</code></pre>
+</div>
+<div id="marker-gene-expression" class="section level1 tabset">
+<h1>Marker gene expression</h1>
+<p>We plot the expression of the different markers in all subjects split by TDP-43 expression.</p>
+<pre class="r"><code>for (d in names(markers)){
+  for(g in markers[[d]]){
+     cat(&quot;## &quot;, g, &quot; - &quot;, d, &quot;\n&quot;)
+    res &lt;- edgeR_res %&gt;% dplyr::filter(gene_name == g)
+    p &lt;- markers_cpm_long %&gt;% dplyr::filter(gene == g) %&gt;%
+      ggplot(aes(x = condition, y = logcpm))  +
+      geom_boxplot() + 
+      geom_point(alpha = 0.6) +
+      theme_bw() + 
+      ggtitle(paste0(g, &quot; - &quot;, d, &quot;, logFC = &quot;, res$logFC, &quot;, FDR = &quot;, res$FDR))
+    print(p)
+    cat(&quot;\n\n&quot;)
+  }
+}</code></pre>
+<div id="nptx2---up" class="section level2">
+<h2>NPTX2 - up</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fgf18---up" class="section level2">
+<h2>FGF18 - up</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pced1a---up" class="section level2">
+<h2>PCED1A - up</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="mef2a---up" class="section level2">
+<h2>MEF2A - up</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-4.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="dync2h1---up" class="section level2">
+<h2>DYNC2H1 - up</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-5.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="apoe---up" class="section level2">
+<h2>APOE - up</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-6.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="gadd45a---up" class="section level2">
+<h2>GADD45A - up</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-7.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="bcam---up" class="section level2">
+<h2>BCAM - up</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-8.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="ddit3---up" class="section level2">
+<h2>DDIT3 - up</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-9.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="vgf---down" class="section level2">
+<h2>VGF - down</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-10.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="scg2---down" class="section level2">
+<h2>SCG2 - down</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-11.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="gap43---down" class="section level2">
+<h2>GAP43 - down</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-12.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="hint1---down" class="section level2">
+<h2>HINT1 - down</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-13.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tuba1a---down" class="section level2">
+<h2>TUBA1A - down</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-14.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tmsb4x---down" class="section level2">
+<h2>TMSB4X - down</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-15.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tubb2b---down" class="section level2">
+<h2>TUBB2B - down</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-16.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stmn2---down" class="section level2">
+<h2>STMN2 - down</h2>
+<p><img src="figure/TDP-07-03-Liu_sorted_nuclei_marker_expression.Rmd/plot-marker-cpm-17.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.5 (2021-03-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 18.04.5 LTS
+
+Matrix products: default
+BLAS:   /usr/local/R/R-4.0.5/lib/libRblas.so
+LAPACK: /usr/local/R/R-4.0.5/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] data.table_1.12.8 tidyr_1.1.0       edgeR_3.30.3      limma_3.44.3     
+[5] readxl_1.3.1      dplyr_1.0.2       ggplot2_3.3.2     workflowr_1.6.2  
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.5       cellranger_1.1.0 pillar_1.4.6     compiler_4.0.5  
+ [5] later_1.1.0.1    git2r_0.27.1     tools_4.0.5      digest_0.6.25   
+ [9] lattice_0.20-41  evaluate_0.14    lifecycle_1.0.0  tibble_3.0.3    
+[13] gtable_0.3.0     pkgconfig_2.0.3  rlang_0.4.10     yaml_2.2.1      
+[17] xfun_0.15        withr_2.4.1      stringr_1.4.0    knitr_1.29      
+[21] generics_0.0.2   fs_1.5.0         vctrs_0.3.4      locfit_1.5-9.4  
+[25] rprojroot_1.3-2  grid_4.0.5       tidyselect_1.1.0 glue_1.4.2      
+[29] R6_2.4.1         rmarkdown_2.3    farver_2.0.3     purrr_0.3.4     
+[33] magrittr_1.5     whisker_0.4      splines_4.0.5    codetools_0.2-16
+[37] backports_1.1.9  scales_1.1.1     promises_1.1.1   ellipsis_0.3.1  
+[41] htmltools_0.5.0  colorspace_1.4-1 httpuv_1.5.4     labeling_0.3    
+[45] stringi_1.4.6    munsell_0.5.0    crayon_1.3.4    </code></pre>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
