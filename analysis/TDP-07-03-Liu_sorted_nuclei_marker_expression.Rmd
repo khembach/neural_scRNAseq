@@ -187,7 +187,7 @@ We want to compare the gene expression of the cluster 12 markers in nuclei with 
 markers <- list(up = c("NPTX2", "FGF18", "TDP43-HA", "PCED1A", "MEF2A", "DYNC2H1", 
                    "APOE", "GADD45A", "BCAM", "DDIT3"),
            down = c("VGF", "SCG2", "GAP43", "C4orf48", "HINT1", "LY6H", 
-                     "TUBA1A", "TMSB4X", "TUBB2B", "STMN2"))
+                     "TUBA1A", "TMSB4X", "TUBB2B", "STMN2", "UNC13A"))
 
 lapply(markers, function(x) x[x %in% dge$genes$gene_name])
 lapply(markers, function(x) x[!x %in% dge$genes$gene_name])
@@ -239,5 +239,31 @@ for (d in names(markers)){
     cat("\n\n")
   }
 }
+```
+
+# All markers in one plot
+
+```{r all-markers-plot, fig.width = 6, fig.height = 4}
+# up
+markers_cpm_long %>% dplyr::filter(direction == "up") %>%
+  dplyr::mutate(gene = factor(gene, levels = markers[["up"]])) %>%
+  ggplot(aes(x = gene, y = logcpm, color = condition))  +
+  geom_boxplot(outlier.shape = NA, position=position_dodge(width = 0.8), show.legend = FALSE) + 
+  geom_point(alpha = 0.6, position=position_dodge(width = 0.8)) +
+  theme_bw() + 
+  scale_color_manual(values = c("forestgreen", "darkorange2")) + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) + 
+  guides(color = guide_legend(override.aes = list(alpha = 1)))
+
+# down
+markers_cpm_long %>% dplyr::filter(direction == "down") %>%
+  dplyr::mutate(gene = factor(gene, levels = markers[["down"]])) %>%
+  ggplot(aes(x = gene, y = logcpm, color = condition))  +
+  geom_boxplot(outlier.shape = NA, position=position_dodge(width = 0.8), show.legend = FALSE) + 
+  geom_point(alpha = 0.6, position=position_dodge(width = 0.8)) +
+  theme_bw() + 
+  scale_color_manual(values = c("forestgreen", "darkorange2")) + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) + 
+  guides(color = guide_legend(override.aes = list(alpha = 1)))
 ```
 
