@@ -267,3 +267,27 @@ markers_cpm_long %>% dplyr::filter(direction == "down") %>%
   guides(color = guide_legend(override.aes = list(alpha = 1)))
 ```
 
+
+# LogFC of all markers
+```{r all-markers-logFC, fig.width = 6, fig.height = 4}
+# up
+edgeR_res %>% dplyr::filter(gene_name %in%  markers[["up"]]) %>%
+  dplyr::mutate(gene_name = factor(gene_name, levels = markers[["up"]])) %>%
+  ggplot(aes(x = gene_name, y = logFC, color = FDR<0.05)) + 
+  geom_hline(yintercept = 0, color = "darkgrey")  + 
+  geom_point(size = 2) + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
+  scale_color_manual(values = c("tomato3", "springgreen3"))
+#down
+edgeR_res %>% dplyr::filter(gene_name %in%  markers[["down"]]) %>%
+  dplyr::mutate(gene_name = factor(gene_name, levels = markers[["down"]])) %>%
+  ggplot(aes(x = gene_name, y = logFC, color = FDR<0.05)) + 
+  geom_hline(yintercept = 0, color = "darkgrey")  + 
+  geom_point(size = 2) + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
+  scale_color_manual(values = c("tomato3", "springgreen3"))
+```
+
+
