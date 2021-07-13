@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree096446e38dc8815f46be666880a316953ce4aa7ctargetblank096446ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/096446e38dc8815f46be666880a316953ce4aa7c" target="_blank">096446e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree4626e10282d9a7492e7035b1a9896a5554e7c485targetblank4626e10a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/4626e10282d9a7492e7035b1a9896a5554e7c485" target="_blank">4626e10</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree096446e38dc8815f46be666880a316953ce4aa7ctargetblank096446ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree4626e10282d9a7492e7035b1a9896a5554e7c485targetblank4626e10a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/096446e38dc8815f46be666880a316953ce4aa7c" target="_blank">096446e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/4626e10282d9a7492e7035b1a9896a5554e7c485" target="_blank">4626e10</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -885,6 +885,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/4626e10282d9a7492e7035b1a9896a5554e7c485/analysis/TDP-07-01-STMN2_expression.Rmd" target="_blank">4626e10</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-13
+</td>
+<td>
+fix figure printing
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/8a899fa20471fb151ccd0534bc0f2e655f18e954/docs/TDP-07-01-STMN2_expression.html" target="_blank">8a899fa</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -2429,7 +2463,6 @@ ce_end &lt;- 17642541
 ceTrack &lt;- AnnotationTrack(start = ce_start, end = ce_end, chromosome = chr, 
                           strand = &quot;*&quot;, genome = &quot;hg38&quot;, name = &quot;CE&quot;)
 
-pdf(width = 12)
 ## Whole gene
 plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
              ceTrack, gtftrack),  
@@ -2438,12 +2471,11 @@ plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
            extend.left = 500, extend.right = 100,
            fontsize=13,
            sizes = c(rep(3, 4), 1, 3),
-           transcriptAnnotation = &quot;transcript&quot;)
-
-## only region around exon 20 and 21
+           transcriptAnnotation = &quot;transcript&quot;)</code></pre>
+<p><img src="figure/TDP-07-01-STMN2_expression.Rmd/UNC13A-splice-junctions-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## only region around exon 20 and 21
 region_start &lt;- 17641393
 region_end &lt;- 17642960
-
 plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
              ceTrack, gtftrack),  
            type = c(&quot;coverage&quot;, &quot;sashimi&quot;), 
@@ -2452,6 +2484,7 @@ plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
            fontsize=13,
            sizes = c(rep(3, 4), 1, 3),
            transcriptAnnotation = &quot;transcript&quot;)</code></pre>
+<p><img src="figure/TDP-07-01-STMN2_expression.Rmd/UNC13A-splice-junctions-2.png" width="1152" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
