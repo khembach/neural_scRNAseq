@@ -555,3 +555,70 @@ plotTracks(ht, chromosome = chr,
            from = region_start, to = region_end, cex = 0.5, min.height = 2)
 ```
 
+# UNC13A read coverage
+
+Is the cryptic exon in UNC13A expressed in our TDP-43-HA cells from cluster 12?
+
+
+```{r UNC13A-splice-junctions, fig.width = 12}
+## UNC13A gene range
+chr <- "chr19"
+region_start <- 17601328
+region_end <- 17688199
+
+# Create the alignments track
+alTrack_4wOFF <- AlignmentsTrack(
+  range = bams[["TDP4wOFF"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == "TDP4wOFF"], 
+  importFunction = .import.bam.alignments.cells, name = "4wOFF")
+alTrack_2wON <- AlignmentsTrack(
+  range = bams[["TDP2wON"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == "TDP2wON"], 
+  importFunction = .import.bam.alignments.cells, name = "2wON")
+alTrack_4wONa <- AlignmentsTrack(
+  range = bams[["TDP4wONa"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == "TDP4wONa"], 
+  importFunction = .import.bam.alignments.cells, name = "4wONa")
+alTrack_4wONb <- AlignmentsTrack(
+  range = bams[["TDP4wONb"]],
+  isPaired = FALSE, chromosome = chr, from = region_start, to = region_end,
+  cells = clus12$barcode[clus12$sample_id == "TDP4wONb"], 
+  importFunction = .import.bam.alignments.cells, name = "4wONb")
+
+## cryptic exon between exon 20 and 21:
+## exon 20: chr19:17642845-17642960
+## exon 21: chr19:17641393-17641556
+## cryptic exon location: chr19: 17642414-17642541
+ce_start <- 17642414
+ce_end <- 17642541
+ceTrack <- AnnotationTrack(start = ce_start, end = ce_end, chromosome = chr, 
+                          strand = "*", genome = "hg38", name = "CE")
+
+pdf(width = 12)
+## Whole gene
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c("coverage", "sashimi"), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = "transcript")
+
+## only region around exon 20 and 21
+region_start <- 17641393
+region_end <- 17642960
+
+plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
+             ceTrack, gtftrack),  
+           type = c("coverage", "sashimi"), 
+           chromosome = chr, from = region_start, to = region_end,
+           extend.left = 500, extend.right = 100,
+           fontsize=13,
+           sizes = c(rep(3, 4), 1, 3),
+           transcriptAnnotation = "transcript")
+```
+
