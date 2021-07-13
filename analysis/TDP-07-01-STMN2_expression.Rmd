@@ -597,7 +597,6 @@ ce_end <- 17642541
 ceTrack <- AnnotationTrack(start = ce_start, end = ce_end, chromosome = chr, 
                           strand = "*", genome = "hg38", name = "CE")
 
-pdf(width = 12)
 ## Whole gene
 plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
              ceTrack, gtftrack),  
@@ -611,7 +610,6 @@ plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
 ## only region around exon 20 and 21
 region_start <- 17641393
 region_end <- 17642960
-
 plotTracks(c(alTrack_4wOFF, alTrack_2wON, alTrack_4wONa, alTrack_4wONb,
              ceTrack, gtftrack),  
            type = c("coverage", "sashimi"), 
