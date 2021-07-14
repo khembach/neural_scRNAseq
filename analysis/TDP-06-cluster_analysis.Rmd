@@ -197,6 +197,7 @@ Apart from the usual marker genes, we also want to analyse the expression of Cas
 ## source file with list of known marker genes
 source(file.path("data", "known_cell_type_markers.R"))
 fs[["kinase"]] <- "CSNK1E"
+fs[["ALS-related"]] <- "UNC13A"
 
 fs <- lapply(fs, sapply, function(g)
     grep(pattern = paste0("\\.", g, "$"), rownames(sce), value = TRUE)
@@ -298,6 +299,14 @@ ps <- lapply(seq_along(tdp), function(i) {
 ps <- ps[!vapply(ps, is.null, logical(1))]
 p <- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
 print(p)
+cat("\n\n")
+
+## UNC13A
+cat("## UNC13A\n")
+FeaturePlot(sub, features = "ENSG00000130477.UNC13A", reduction = "umap", 
+            pt.size = 0.4) +
+    theme(aspect.ratio = 1, legend.position = "none") +
+    ggtitle("UNC13A") + theme_void() + theme(aspect.ratio = 1)
 cat("\n\n")
 ```
 
