@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree281d60d1a64fba1be0ecc8648f871f2a72fcbde5targetblank281d60da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/281d60d1a64fba1be0ecc8648f871f2a72fcbde5" target="_blank">281d60d</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeb774264e11dd86455a7ef3fd38d1fa428ceb44a0targetblankb774264a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/b774264e11dd86455a7ef3fd38d1fa428ceb44a0" target="_blank">b774264</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree281d60d1a64fba1be0ecc8648f871f2a72fcbde5targetblank281d60da" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreeb774264e11dd86455a7ef3fd38d1fa428ceb44a0targetblankb774264a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/281d60d1a64fba1be0ecc8648f871f2a72fcbde5" target="_blank">281d60d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/b774264e11dd86455a7ef3fd38d1fa428ceb44a0" target="_blank">b774264</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -891,6 +891,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/b774264e11dd86455a7ef3fd38d1fa428ceb44a0/analysis/TDP-07-04-Tollervey_marker_binding.Rmd" target="_blank">b774264</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-14
+</td>
+<td>
+remove warnings
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/f29be144fc3af9fa37b5d6d23eadae62468cfe44/docs/TDP-07-04-Tollervey_marker_binding.html" target="_blank">f29be14</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/281d60d1a64fba1be0ecc8648f871f2a72fcbde5/analysis/TDP-07-04-Tollervey_marker_binding.Rmd" target="_blank">281d60d</a>
 </td>
 <td>
@@ -983,213 +1017,14 @@ olaps &lt;- sapply(df$gene, function(x) {
     res &lt;- c(countOverlaps(g ,xls[[&quot;control&quot;]]), countOverlaps(g, xls[[&quot;FTLD&quot;]]))
     names(res) &lt;- c(&quot;control&quot;, &quot;FTLD&quot;)
     res
-})</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000195.1, GL000213.1, GL000218.1, GL000220.1, KI270721.1, KI270726.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000224.1, KI270706.1, KI270707.1, KI270714.1, KI270736.1, KI270738.1, KI270742.1, KI270746.1, KI270752.1, KI270756.1, GL000214.1, KI270438.1, KI270467.1, KI270519.1, KI270708.1, KI270712.1, GL000008.2, GL000221.1, KI270512.1, KI270716.1, KI270749.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre><code>Warning in .Seqinfo.mergexy(x, y): Each of the 2 combined objects has sequence levels not in the other:
-  - in &#39;x&#39;: GL000009.2, GL000213.1, GL000220.1, KI270711.1, KI270721.1, KI270726.1, KI270731.1, KI270734.1, KI270750.1
-  - in &#39;y&#39;: GL000008.2, KI270438.1, KI270467.1, KI270706.1, KI270708.1, GL000221.1, GL000224.1, KI270435.1, KI270718.1, KI270729.1, KI270736.1, KI270742.1, KI270749.1, KI270752.1, KI270521.1
-  Make sure to always combine/compare objects based on the same reference
-  genome (use suppressWarnings() to suppress this warning).</code></pre>
-<pre class="r"><code>df$control &lt;- olaps[&quot;control&quot;, ]
+})
+
+df$control &lt;- olaps[&quot;control&quot;, ]
 df$FTLD &lt;- olaps[&quot;FTLD&quot;, ]</code></pre>
 <pre class="r"><code>ggplot(df, aes(x = control + 1, y = FTLD + 1, color = direction, label = gene)) + 
   geom_abline(intercept = 0, slope = 1, color = &quot;grey&quot;) +
   geom_point(size = 3, alpha = 0.7) +
-  geom_text_repel(color = &quot;black&quot;, force = 2, size = 2.5) + 
+  geom_text_repel(color = &quot;black&quot;, force = 2.5, size = 2.5) + 
   theme_bw() + 
   scale_x_log10(breaks=c(1, 2, 3, 6, 11, 21, 41, 61, 101),
                 labels=c(&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;5&quot;, &quot;10&quot;, &quot;20&quot;, &quot;40&quot;, &quot;60&quot;, &quot;100&quot;),
@@ -1226,6 +1061,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/f29be144fc3af9fa37b5d6d23eadae62468cfe44/docs/figure/TDP-07-04-Tollervey_marker_binding.Rmd/plot-nr-xls-1.png" target="_blank">f29be14</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-14
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/d217260ed52b37ea1735d7bee0f570bfca5de198/docs/figure/TDP-07-04-Tollervey_marker_binding.Rmd/plot-nr-xls-1.png" target="_blank">d217260</a>
