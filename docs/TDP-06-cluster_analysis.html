@@ -413,7 +413,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-20
+<strong>Last updated:</strong> 2021-07-14
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -504,16 +504,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree459907ccbe2632e7993b901d6f2cba3d8b12beb8targetblank459907ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/459907ccbe2632e7993b901d6f2cba3d8b12beb8" target="_blank">459907c</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreed2fc383f77b8ee3e06569f1ea09241cad9f6b8fbtargetblankd2fc383a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/d2fc383f77b8ee3e06569f1ea09241cad9f6b8fb" target="_blank">d2fc383</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree459907ccbe2632e7993b901d6f2cba3d8b12beb8targetblank459907ca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreed2fc383f77b8ee3e06569f1ea09241cad9f6b8fbtargetblankd2fc383a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/459907ccbe2632e7993b901d6f2cba3d8b12beb8" target="_blank">459907c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/d2fc383f77b8ee3e06569f1ea09241cad9f6b8fb" target="_blank">d2fc383</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -555,6 +555,7 @@ Ignored files:
     Ignored:    analysis/._Lam-02-NSC_annotation.Rmd
     Ignored:    analysis/._NSC-1-clustering.Rmd
     Ignored:    analysis/._NSC-2-annotation.Rmd
+    Ignored:    analysis/._TDP-06-cluster_analysis.Rmd
     Ignored:    analysis/.__site.yml
     Ignored:    analysis/._additional_filtering.Rmd
     Ignored:    analysis/._additional_filtering_clustering.Rmd
@@ -586,6 +587,9 @@ Ignored files:
     Ignored:    analysis/05-annotation_cache/
     Ignored:    analysis/06-clustering-all-timepoints_cache/
     Ignored:    analysis/07-cluster-analysis-all-timepoints_cache/
+    Ignored:    analysis/CH-test-01-preprocessing_cache/
+    Ignored:    analysis/CH-test-02-transgene-expression_cache/
+    Ignored:    analysis/CH-test-03-cluster-analysis_cache/
     Ignored:    analysis/Lam-01-NSC_integration_cache/
     Ignored:    analysis/Lam-02-NSC_annotation_cache/
     Ignored:    analysis/NSC-1-clustering_cache/
@@ -597,6 +601,8 @@ Ignored files:
     Ignored:    analysis/TDP-05-00-filtering-plasmid-QC_cache/
     Ignored:    analysis/TDP-05-plasmid_expression_cache/
     Ignored:    analysis/TDP-07-01-STMN2_expression_cache/
+    Ignored:    analysis/TDP-07-02-Prudencio_marker_expression_cache/
+    Ignored:    analysis/TDP-07-03-Liu_sorted_nuclei_marker_expression_cache/
     Ignored:    analysis/TDP-07-cluster_12_cache/
     Ignored:    analysis/TDP-08-00-clustering-HA-D96_cache/
     Ignored:    analysis/TDP-08-01-HA-D96-expression-changes_cache/
@@ -637,6 +643,7 @@ Ignored files:
     Ignored:    data/filtered_feature_matrices/
     Ignored:    output/.DS_Store
     Ignored:    output/._.DS_Store
+    Ignored:    output/._Liu_TDP_neg_vs_pos_edgeR_dge_results.txt
     Ignored:    output/._NSC_cluster2_marker_genes.txt
     Ignored:    output/._TDP-06-no_integration_cluster12_marker_genes.txt
     Ignored:    output/._TDP-06-no_integration_cluster13_marker_genes.txt
@@ -664,7 +671,16 @@ Ignored files:
     Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_8.txt
     Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_all.xlsx
     Ignored:    output/._~$tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/CH-test-01-preprocessing.rds
+    Ignored:    output/CH-test-01-preprocessing_singlets.rds
+    Ignored:    output/CH-test-01-preprocessing_singlets_filtered.rds
+    Ignored:    output/CH-test-01-preprocessing_so.rds
+    Ignored:    output/CH-test-01-preprocessing_so_filtered.rds
+    Ignored:    output/CH-test-03-cluster-analysis_so.rds
+    Ignored:    output/CH-test-03_scran_markers.rds
     Ignored:    output/Lam-01-clustering.rds
+    Ignored:    output/Liu_TDP_neg_vs_pos_edgeR_dge.rds
+    Ignored:    output/Liu_TDP_neg_vs_pos_edgeR_dge_results.txt
     Ignored:    output/NSC_1_clustering.rds
     Ignored:    output/NSC_cluster1_marker_genes.txt
     Ignored:    output/NSC_cluster2_marker_genes.txt
@@ -714,6 +730,7 @@ Ignored files:
     Ignored:    output/organoid_integration_cluster7_marker_genes.txt
     Ignored:    output/organoid_integration_cluster8_marker_genes.txt
     Ignored:    output/organoid_integration_cluster9_marker_genes.txt
+    Ignored:    output/paper_supplement/
     Ignored:    output/res_TDP-08-01-muscat.rds
     Ignored:    output/sce_01_preprocessing.rds
     Ignored:    output/sce_02_quality_control.rds
@@ -734,6 +751,7 @@ Ignored files:
     Ignored:    output/so_08-00_clustering_HA_D96.rds
     Ignored:    output/so_08-clustering_timeline_HA.rds
     Ignored:    output/so_0x-sample_integration.rds
+    Ignored:    output/so_CH-test-02-transgene_expression.rds
     Ignored:    output/so_TDP-06-cluster-analysis.rds
     Ignored:    output/so_TDP_04_clustering.rds
     Ignored:    output/so_TDP_05_plasmid_expression.rds
@@ -772,9 +790,12 @@ Ignored files:
     Ignored:    scripts/._.DS_Store
     Ignored:    scripts/._bu_Rcode.R
     Ignored:    scripts/._plasmid_expression.sh
+    Ignored:    scripts/._plasmid_expression_cell_hashing_test.sh
     Ignored:    scripts/._prepare_salmon_transcripts.R
+    Ignored:    scripts/._prepare_salmon_transcripts_cell_hashing_test.R
 
 Untracked files:
+    Untracked:  = gene_name[order(logFC, 
     Untracked:  Filtered.pdf
     Untracked:  Rplots.pdf
     Untracked:  Unfiltered
@@ -795,9 +816,13 @@ Untracked files:
     Untracked:  coverage_sashimi.pdf
     Untracked:  coverage_sashimi.png
     Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
+    Untracked:  data/Jun2021/
     Untracked:  data/Kanton_et_al/
     Untracked:  data/Lam_et_al/
+    Untracked:  data/Liu_et_al/
+    Untracked:  data/Prudencio_et_al/
     Untracked:  data/Sep2020/
+    Untracked:  data/cell_hashing_test/
     Untracked:  data/reference/
     Untracked:  data/virus_cell_tropism_markers.R
     Untracked:  data/~$Reactive_astrocytes_markers.xlsx
@@ -808,6 +833,8 @@ Untracked files:
     Untracked:  sashimi.pdf
     Untracked:  scripts/bu_Rcode.R
     Untracked:  scripts/bu_code.Rmd
+    Untracked:  scripts/plasmid_expression_cell_hashing_test.sh
+    Untracked:  scripts/prepare_salmon_transcripts_cell_hashing_test.R
     Untracked:  scripts/salmon-latest_linux_x86_64/
     Untracked:  stmn2.pdf
     Untracked:  tdp.pdf
@@ -815,6 +842,7 @@ Untracked files:
 Unstaged changes:
     Modified:   analysis/05-annotation.Rmd
     Modified:   analysis/TDP-04-clustering.Rmd
+    Modified:   analysis/TDP-07-cluster_12.Rmd
     Modified:   analysis/TDP-08-01-HA-D96-expression-changes.Rmd
     Modified:   analysis/_site.yml
     Modified:   analysis/organoid-02-integration.Rmd
@@ -858,6 +886,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/d2fc383f77b8ee3e06569f1ea09241cad9f6b8fb/analysis/TDP-06-cluster_analysis.Rmd" target="_blank">d2fc383</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-14
+</td>
+<td>
+include UNC13A in heatmap and feature plot
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/TDP-06-cluster_analysis.html" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1257,6 +1319,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/unnamed-chunk-3-1.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/unnamed-chunk-3-1.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -1418,6 +1491,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-1.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-1.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -1503,6 +1587,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-2.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-2.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -1586,6 +1681,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-3.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-3.png" target="_blank">a983fc3</a>
@@ -1780,6 +1886,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/scran-markers-heatmap-1.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/scran-markers-heatmap-1.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -1856,6 +1973,7 @@ khembach
 <pre class="r"><code>## source file with list of known marker genes
 source(file.path(&quot;data&quot;, &quot;known_cell_type_markers.R&quot;))
 fs[[&quot;kinase&quot;]] &lt;- &quot;CSNK1E&quot;
+fs[[&quot;ALS-related&quot;]] &lt;- &quot;UNC13A&quot;
 
 fs &lt;- lapply(fs, sapply, function(g)
     grep(pattern = paste0(&quot;\\.&quot;, g, &quot;$&quot;), rownames(sce), value = TRUE)
@@ -1937,6 +2055,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/known-markers-heatmap-1.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/known-markers-heatmap-1.png" target="_blank">a983fc3</a>
@@ -2035,6 +2164,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-1.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-1.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -2118,6 +2258,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-2.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-2.png" target="_blank">a983fc3</a>
@@ -2205,6 +2356,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-3.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-3.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -2288,6 +2450,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-4.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-4.png" target="_blank">a983fc3</a>
@@ -2375,6 +2548,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-5.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-5.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -2458,6 +2642,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-6.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-6.png" target="_blank">a983fc3</a>
@@ -2545,6 +2740,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-7.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-7.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -2628,6 +2834,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-8.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-8.png" target="_blank">a983fc3</a>
@@ -2715,6 +2932,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-9.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-9.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -2798,6 +3026,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-10.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-10.png" target="_blank">a983fc3</a>
@@ -2885,6 +3124,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-11.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-11.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -2968,6 +3218,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-12.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-12.png" target="_blank">a983fc3</a>
@@ -3055,6 +3316,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-13.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-13.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -3101,6 +3373,47 @@ khembach
 </table>
 </div>
 </div>
+</div>
+<div id="als-related" class="section level2">
+<h2>ALS-related</h2>
+<p><img src="figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-14.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-14">
+Past versions of dim-red-expr-14.png
+</button>
+</p>
+<div id="fig-dim-red-expr-14" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-14.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## plot the expression of the endogenous TDP-43 and TDP-HA
 tdp &lt;- c(&quot;ENSG00000120948.TARDBP&quot;, &quot;ENSG00000120948.TARDBP-alevin&quot;, &quot;TDP43-HA&quot;)
 names(tdp) &lt;- c(&quot;TARDBP&quot;, &quot;TARDBP-alevin&quot;, &quot;TDP-HA&quot;)
@@ -3118,7 +3431,18 @@ cat(&quot;## TDP-43\n&quot;)</code></pre>
 ps &lt;- ps[!vapply(ps, is.null, logical(1))]
 p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
 print(p)</code></pre>
-<p><img src="figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-14.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-15.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
+<pre class="r"><code>## UNC13A
+cat(&quot;## UNC13A\n&quot;)</code></pre>
+</div>
+<div id="unc13a" class="section level2">
+<h2>UNC13A</h2>
+<pre class="r"><code>FeaturePlot(sub, features = &quot;ENSG00000130477.UNC13A&quot;, reduction = &quot;umap&quot;, 
+            pt.size = 0.4) +
+    theme(aspect.ratio = 1, legend.position = &quot;none&quot;) +
+    ggtitle(&quot;UNC13A&quot;) + theme_void() + theme(aspect.ratio = 1)</code></pre>
+<p><img src="figure/TDP-06-cluster_analysis.Rmd/dim-red-expr-16.png" width="1152" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 </div>
 </div>
@@ -3204,6 +3528,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/astrocyte-markers-heatmap-1.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/astrocyte-markers-heatmap-1.png" target="_blank">a983fc3</a>
@@ -3336,6 +3671,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/astrocyte-markers-glial-clusters-heatmap-1.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/ac0f11a8ced400f7581e4ce7640658ce2cde1a93/docs/figure/TDP-06-cluster_analysis.Rmd/astrocyte-markers-glial-clusters-heatmap-1.png" target="_blank">ac0f11a</a>
 </td>
 <td>
@@ -3416,6 +3762,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-1.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-1.png" target="_blank">a983fc3</a>
@@ -3503,6 +3860,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-2.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-2.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -3586,6 +3954,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-3.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-3.png" target="_blank">a983fc3</a>
@@ -3673,6 +4052,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-4.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-4.png" target="_blank">a983fc3</a>
 </td>
 <td>
@@ -3756,6 +4146,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-5.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/a983fc323076af3c682fad17c5487e43bd4633da/docs/figure/TDP-06-cluster_analysis.Rmd/dim-red-astrocyte-marker-expr-5.png" target="_blank">a983fc3</a>
@@ -3902,6 +4303,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/ecba9c2d30afc9c3ae9813f656268dd790288fd0/docs/figure/TDP-06-cluster_analysis.Rmd/virus-markers-heatmap-1.png" target="_blank">ecba9c2</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-04-20
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/32f4cd35b181093cffce5572aa5b0141263bcac1/docs/figure/TDP-06-cluster_analysis.Rmd/virus-markers-heatmap-1.png" target="_blank">32f4cd3</a>
 </td>
 <td>
@@ -3928,13 +4340,13 @@ saveRDS(so, file.path(&quot;output&quot;, &quot;so_TDP-06-cluster-analysis.rds&q
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.0 (2020-04-24)
+<pre><code>R version 4.0.5 (2021-03-31)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 18.04.5 LTS
 
 Matrix products: default
-BLAS:   /usr/local/R/R-4.0.0/lib/libRblas.so
-LAPACK: /usr/local/R/R-4.0.0/lib/libRlapack.so
+BLAS:   /usr/local/R/R-4.0.5/lib/libRblas.so
+LAPACK: /usr/local/R/R-4.0.5/lib/libRlapack.so
 
 locale:
  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -3950,18 +4362,18 @@ attached base packages:
 
 other attached packages:
  [1] BiocParallel_1.22.0         RCurl_1.98-1.3             
- [3] stringr_1.4.0               Seurat_3.1.5               
- [5] scran_1.16.0                SingleCellExperiment_1.10.1
- [7] SummarizedExperiment_1.18.1 DelayedArray_0.14.0        
- [9] matrixStats_0.56.0          Biobase_2.48.0             
-[11] GenomicRanges_1.40.0        GenomeInfoDb_1.24.2        
-[13] IRanges_2.22.2              S4Vectors_0.26.1           
-[15] BiocGenerics_0.34.0         viridis_0.5.1              
-[17] viridisLite_0.3.0           RColorBrewer_1.1-2         
-[19] purrr_0.3.4                 muscat_1.2.1               
-[21] dplyr_1.0.2                 ggplot2_3.3.2              
-[23] cowplot_1.0.0               ComplexHeatmap_2.4.2       
-[25] workflowr_1.6.2            
+ [3] stringr_1.4.0               SeuratObject_4.0.1         
+ [5] Seurat_4.0.1                scran_1.16.0               
+ [7] SingleCellExperiment_1.10.1 SummarizedExperiment_1.18.1
+ [9] DelayedArray_0.14.0         matrixStats_0.56.0         
+[11] Biobase_2.48.0              GenomicRanges_1.40.0       
+[13] GenomeInfoDb_1.24.2         IRanges_2.22.2             
+[15] S4Vectors_0.26.1            BiocGenerics_0.34.0        
+[17] viridis_0.5.1               viridisLite_0.3.0          
+[19] RColorBrewer_1.1-2          purrr_0.3.4                
+[21] muscat_1.2.1                dplyr_1.0.2                
+[23] ggplot2_3.3.2               cowplot_1.0.0              
+[25] ComplexHeatmap_2.4.2        workflowr_1.6.2            
 
 loaded via a namespace (and not attached):
   [1] reticulate_1.16           tidyselect_1.1.0         
@@ -3970,72 +4382,79 @@ loaded via a namespace (and not attached):
   [7] Rtsne_0.15                munsell_0.5.0            
   [9] codetools_0.2-16          ica_1.0-2                
  [11] statmod_1.4.34            future_1.17.0            
- [13] withr_2.4.1               colorspace_1.4-1         
- [15] knitr_1.29                ROCR_1.0-11              
- [17] listenv_0.8.0             labeling_0.3             
- [19] git2r_0.27.1              GenomeInfoDbData_1.2.3   
- [21] bit64_0.9-7               farver_2.0.3             
- [23] glmmTMB_1.0.2.1           rprojroot_1.3-2          
- [25] vctrs_0.3.4               generics_0.0.2           
- [27] xfun_0.15                 R6_2.4.1                 
- [29] doParallel_1.0.15         ggbeeswarm_0.6.0         
- [31] clue_0.3-57               rsvd_1.0.3               
- [33] locfit_1.5-9.4            bitops_1.0-6             
- [35] cachem_1.0.4              promises_1.1.1           
- [37] scales_1.1.1              beeswarm_0.2.3           
- [39] gtable_0.3.0              globals_0.12.5           
- [41] rlang_0.4.10              genefilter_1.70.0        
- [43] GlobalOptions_0.1.2       splines_4.0.0            
- [45] TMB_1.7.16                lazyeval_0.2.2           
- [47] yaml_2.2.1                reshape2_1.4.4           
- [49] backports_1.1.9           httpuv_1.5.4             
- [51] tools_4.0.0               ellipsis_0.3.1           
- [53] gplots_3.0.4              ggridges_0.5.2           
- [55] Rcpp_1.0.5                plyr_1.8.6               
- [57] progress_1.2.2            zlibbioc_1.34.0          
- [59] prettyunits_1.1.1         pbapply_1.4-2            
- [61] GetoptLong_1.0.1          zoo_1.8-8                
- [63] ggrepel_0.8.2             cluster_2.1.0            
- [65] colorRamps_2.3            fs_1.5.0                 
- [67] variancePartition_1.18.2  magrittr_1.5             
- [69] data.table_1.12.8         lmerTest_3.1-2           
- [71] circlize_0.4.10           lmtest_0.9-37            
- [73] RANN_2.6.1                whisker_0.4              
- [75] fitdistrplus_1.1-1        hms_0.5.3                
- [77] patchwork_1.0.1           evaluate_0.14            
- [79] xtable_1.8-4              pbkrtest_0.4-8.6         
- [81] XML_3.99-0.4              gridExtra_2.3            
- [83] shape_1.4.4               compiler_4.0.0           
- [85] scater_1.16.2             tibble_3.0.3             
- [87] KernSmooth_2.23-17        crayon_1.3.4             
- [89] minqa_1.2.4               htmltools_0.5.0          
- [91] later_1.1.0.1             tidyr_1.1.0              
- [93] geneplotter_1.66.0        DBI_1.1.0                
- [95] MASS_7.3-51.6             rappdirs_0.3.1           
- [97] boot_1.3-25               Matrix_1.2-18            
- [99] gdata_2.18.0              igraph_1.2.5             
-[101] pkgconfig_2.0.3           numDeriv_2016.8-1.1      
-[103] plotly_4.9.2.1            foreach_1.5.0            
-[105] annotate_1.66.0           vipor_0.4.5              
-[107] dqrng_0.2.1               blme_1.0-4               
-[109] XVector_0.28.0            digest_0.6.25            
-[111] sctransform_0.2.1         RcppAnnoy_0.0.16         
-[113] tsne_0.1-3                rmarkdown_2.3            
-[115] leiden_0.3.3              uwot_0.1.8               
-[117] edgeR_3.30.3              DelayedMatrixStats_1.10.1
-[119] gtools_3.8.2              rjson_0.2.20             
-[121] nloptr_1.2.2.2            lifecycle_1.0.0          
-[123] nlme_3.1-148              jsonlite_1.7.2           
-[125] BiocNeighbors_1.6.0       limma_3.44.3             
-[127] pillar_1.4.6              lattice_0.20-41          
-[129] fastmap_1.0.1             httr_1.4.2               
-[131] survival_3.2-3            glue_1.4.2               
-[133] png_0.1-7                 iterators_1.0.12         
-[135] bit_1.1-15.2              stringi_1.4.6            
-[137] blob_1.2.1                DESeq2_1.28.1            
-[139] BiocSingular_1.4.0        caTools_1.18.0           
-[141] memoise_2.0.0             irlba_2.3.3              
-[143] future.apply_1.6.0        ape_5.4                  </code></pre>
+ [13] miniUI_0.1.1.1            withr_2.4.1              
+ [15] colorspace_1.4-1          knitr_1.29               
+ [17] ROCR_1.0-11               tensor_1.5               
+ [19] listenv_0.8.0             labeling_0.3             
+ [21] git2r_0.27.1              GenomeInfoDbData_1.2.3   
+ [23] polyclip_1.10-0           farver_2.0.3             
+ [25] bit64_0.9-7               glmmTMB_1.0.2.1          
+ [27] rprojroot_1.3-2           vctrs_0.3.4              
+ [29] generics_0.0.2            xfun_0.15                
+ [31] R6_2.4.1                  doParallel_1.0.15        
+ [33] ggbeeswarm_0.6.0          clue_0.3-57              
+ [35] rsvd_1.0.3                locfit_1.5-9.4           
+ [37] spatstat.utils_2.1-0      bitops_1.0-6             
+ [39] cachem_1.0.4              promises_1.1.1           
+ [41] scales_1.1.1              beeswarm_0.2.3           
+ [43] gtable_0.3.0              globals_0.12.5           
+ [45] goftest_1.2-2             rlang_0.4.10             
+ [47] genefilter_1.70.0         GlobalOptions_0.1.2      
+ [49] splines_4.0.5             TMB_1.7.16               
+ [51] lazyeval_0.2.2            spatstat.geom_2.1-0      
+ [53] abind_1.4-5               yaml_2.2.1               
+ [55] reshape2_1.4.4            backports_1.1.9          
+ [57] httpuv_1.5.4              tools_4.0.5              
+ [59] spatstat.core_2.1-2       ellipsis_0.3.1           
+ [61] gplots_3.0.4              ggridges_0.5.2           
+ [63] Rcpp_1.0.5                plyr_1.8.6               
+ [65] progress_1.2.2            zlibbioc_1.34.0          
+ [67] prettyunits_1.1.1         rpart_4.1-15             
+ [69] deldir_0.2-10             pbapply_1.4-2            
+ [71] GetoptLong_1.0.1          zoo_1.8-8                
+ [73] ggrepel_0.8.2             cluster_2.1.0            
+ [75] colorRamps_2.3            fs_1.5.0                 
+ [77] variancePartition_1.18.2  magrittr_1.5             
+ [79] data.table_1.12.8         scattermore_0.7          
+ [81] lmerTest_3.1-2            circlize_0.4.10          
+ [83] lmtest_0.9-37             RANN_2.6.1               
+ [85] whisker_0.4               fitdistrplus_1.1-1       
+ [87] hms_0.5.3                 patchwork_1.0.1          
+ [89] mime_0.9                  evaluate_0.14            
+ [91] xtable_1.8-4              pbkrtest_0.4-8.6         
+ [93] XML_3.99-0.4              gridExtra_2.3            
+ [95] shape_1.4.4               compiler_4.0.5           
+ [97] scater_1.16.2             tibble_3.0.3             
+ [99] KernSmooth_2.23-17        crayon_1.3.4             
+[101] minqa_1.2.4               htmltools_0.5.0          
+[103] mgcv_1.8-31               later_1.1.0.1            
+[105] tidyr_1.1.0               geneplotter_1.66.0       
+[107] DBI_1.1.0                 MASS_7.3-51.6            
+[109] rappdirs_0.3.1            boot_1.3-25              
+[111] Matrix_1.3-3              gdata_2.18.0             
+[113] igraph_1.2.5              pkgconfig_2.0.3          
+[115] numDeriv_2016.8-1.1       spatstat.sparse_2.0-0    
+[117] plotly_4.9.2.1            foreach_1.5.0            
+[119] annotate_1.66.0           vipor_0.4.5              
+[121] dqrng_0.2.1               blme_1.0-4               
+[123] XVector_0.28.0            digest_0.6.25            
+[125] sctransform_0.3.2         RcppAnnoy_0.0.18         
+[127] spatstat.data_2.1-0       rmarkdown_2.3            
+[129] leiden_0.3.3              uwot_0.1.10              
+[131] edgeR_3.30.3              DelayedMatrixStats_1.10.1
+[133] shiny_1.5.0               gtools_3.8.2             
+[135] rjson_0.2.20              nloptr_1.2.2.2           
+[137] lifecycle_1.0.0           nlme_3.1-148             
+[139] jsonlite_1.7.2            BiocNeighbors_1.6.0      
+[141] limma_3.44.3              pillar_1.4.6             
+[143] lattice_0.20-41           fastmap_1.0.1            
+[145] httr_1.4.2                survival_3.2-3           
+[147] glue_1.4.2                png_0.1-7                
+[149] iterators_1.0.12          bit_1.1-15.2             
+[151] stringi_1.4.6             blob_1.2.1               
+[153] DESeq2_1.28.1             BiocSingular_1.4.0       
+[155] caTools_1.18.0            memoise_2.0.0            
+[157] irlba_2.3.3               future.apply_1.6.0       </code></pre>
 </div>
 </div>
 </div>
