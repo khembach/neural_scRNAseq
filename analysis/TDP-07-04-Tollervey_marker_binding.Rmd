@@ -52,7 +52,7 @@ markers <- list(up = c("NPTX2", "FGF18", "PCED1A", "MEF2A", "DYNC2H1",
 
 What is the difference in the number of XL sites in cluster 12 marker genes?
 
-```{r number-xls-markers, warnings = FALSE}
+```{r number-xls-markers, warning = FALSE}
 df <- data.frame(gene = c(markers[["up"]], markers[["down"]]),
                  direction = c(rep("up", length(markers[["up"]])),
                                rep("down", length(markers[["down"]]))))
@@ -72,7 +72,7 @@ df$FTLD <- olaps["FTLD", ]
 ggplot(df, aes(x = control + 1, y = FTLD + 1, color = direction, label = gene)) + 
   geom_abline(intercept = 0, slope = 1, color = "grey") +
   geom_point(size = 3, alpha = 0.7) +
-  geom_text_repel(color = "black", force = 2, size = 2.5) + 
+  geom_text_repel(color = "black", force = 2.5, size = 2.5) + 
   theme_bw() + 
   scale_x_log10(breaks=c(1, 2, 3, 6, 11, 21, 41, 61, 101),
                 labels=c("0", "1", "2", "5", "10", "20", "40", "60", "100"),
