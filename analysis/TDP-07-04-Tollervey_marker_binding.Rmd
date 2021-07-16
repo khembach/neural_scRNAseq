@@ -92,10 +92,9 @@ ggplot(df, aes(x = control + 1, y = FTLD + 1, color = direction, label = gene)) 
 # UG repeats in NPTX2
 
 Where are the UG repeats located in NPTX2?
-```{r UG-repeats-NPTX2}
+```{r UG-repeats-NPTX2, warning = FALSE}
 target <- genes[genes$gene_name == "NPTX2"]
 seqlevelsStyle(target) <- "UCSC"
-
 seq <- getSeq(genome, target)[[1]]
 reps <- matchPattern("TGTG", seq)
 reps <- GRanges(seqnames(target), 
