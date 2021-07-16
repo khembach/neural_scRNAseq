@@ -66,6 +66,7 @@ olaps <- sapply(df$gene, function(x) {
 
 df$control <- olaps["control", ]
 df$FTLD <- olaps["FTLD", ]
+df
 ```
 
 ```{r plot-nr-xls, fig.width = 5, fig.height = 4}
@@ -116,7 +117,7 @@ export(reps, file.path(dat_dir, "analysis", "cluster_12_markers", "UG_NPTX2.bed"
 
 We also need the full 3'UTR region so we can highlight the UGs in the final figure.
 
-```{r 3utr-seq}
+```{r 3utr-seq, warning = FALSE}
 utr <- gtf[gtf$gene_name == "NPTX2" & gtf$type == "three_prime_utr"]
 seqlevelsStyle(utr) <- "UCSC"
 export(getSeq(genome, utr), file.path(dat_dir, "analysis", 
