@@ -1,0 +1,451 @@
+---
+title: "Total TDP and construct quantification"
+author: "Katharina Hembach"
+date: "22.07.2021"
+output: 
+  html_document:
+    toc: true,
+    code_folding: show
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
+                      dev.args = list(png = list(type = "cairo")), 
+                      message = FALSE, cache.lazy = FALSE)
+```
+
+
+### Load packages
+
+```{r load-libs, message = FALSE, warning = FALSE}
+library(tximport)
+library(ComplexHeatmap)
+library(cowplot)
+library(ggplot2)
+library(dplyr)
+library(muscat)
+library(purrr)
+library(RColorBrewer)
+library(viridis)
+library(scran)
+library(Seurat)
+library(SingleCellExperiment)
+library(stringr)
+```
+
+# Load data 
+
+```{r load-data}
+so <- readRDS(file.path("output", "so_TDP-06-cluster-analysis.rds"))
+so <- SetIdent(so, value = "RNA_snn_res.0.4")
+```
+
+
+We combine the quantification of the total TDP, the construct, STMN2 and VIM with the CellRanger count matrix.
+```{r read-alevin}
+sample_ids <- c("TDP4wOFF", "TDP2wON", "TDP4wONa", "TDP4wONb")
+samples <- c("no1_Neural_cuture_d_96_TDP-43-HA_4w_DOXoff", 
+             "no2_Neural_cuture_d_96_TDP-43-HA_2w_DOXON",
+             "no3_Neural_cuture_d_96_TDP-43-HA_4w_DOXONa",
+             "no4_Neural_cuture_d_96_TDP-43-HA_4w_DOXONb")
+txi <- matrix(NA, nrow = 4)
+for (i in 1:4) {
+  fi <- file.path("data", "Sep2020", "alevin_total_TDP43", samples[i], 
+                     "alevin/quants_mat.gz")
+
+  # import alevin quants
+  a <- tximport(fi, type="alevin")$counts
+  
+  ## match the alevin and CellRanger cell IDs
+  colnames(a) <- paste0(colnames(a), "-1.", sample_ids[i])
+  txi <- cbind(txi, a)
+}
+txi <- txi[,colnames(txi) != ""]
+```
+
+We add the alevin counts to the CellRanger matrix.
+```{r combine-counts}
+## add two new rows to counts matrix and replace the counts for matching 
+## barcodes with the alevin counts
+alevin_counts <- matrix(0, nrow = 4, ncol = ncol(so))
+colnames(alevin_counts) <- colnames(so)
+rownames(alevin_counts) <- rownames(txi)
+## match the barcodes
+m <- match(colnames(txi), colnames(so))
+for(i in rownames(txi)){
+alevin_counts[i,m[!is.na(m)]] <- txi[i,which(!is.na(m))]
+}
+
+## add new assay with the alevin quantifications
+so[["alevin"]] <- CreateAssayObject(counts = alevin_counts)
+
+## we estimate a scaling factor for the alevin counts so they are ona similar scale than the CellRanger counts
+(ratio <- (colSums(so) %>% median / colSums(so[["alevin"]]) %>% median))
+(sf <- ceiling(10000/ratio))
+DefaultAssay(so) <- "alevin"
+## normalization with the scale factor proprtional to the difference in counts between the two assays
+so <- NormalizeData(so, verbose = FALSE, scale.factor = sf, 
+             normalization.method = "LogNormalize")
+DefaultAssay(so) <- "RNA"
+```
+
+
+# DR colored by marker expression {.tabset}
+
+```{r dim-red-expr, results = "asis", fig.width = 12, fig.height = 4}
+# downsample to 5000 cells
+cs <- sample(colnames(so), 5e3)
+sub <- subset(so, cells = cs)
+
+## plot the expression of the endogenous TDP-43 and TDP-HA
+tdp <- c("ENSG00000120948.TARDBP", "ENSG00000120948.TARDBP-alevin", "TDP43-HA")
+names(tdp) <- c("TARDBP", "TARDBP-alevin", "TDP-HA")
+cat("## TDP-43\n")
+ps <- lapply(seq_along(tdp), function(i) {
+    if (!tdp[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = tdp[i], reduction = "umap", pt.size = 0.4,
+                slot = "data") +
+        theme(aspect.ratio = 1, legend.position = "none") +
+        ggtitle(names(tdp)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps <- ps[!vapply(ps, is.null, logical(1))]
+p <- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)
+cat("\n\n")
+
+DefaultAssay(sub) <- "alevin"
+## total TDP and control genes
+tdp <- c("total-TDP43", "construct")
+names(tdp) <- c("total-TDP43", "construct")
+cat("## total TDP-43\n")
+ps <- lapply(seq_along(tdp), function(i) {
+    if (!tdp[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = tdp[i], reduction = "umap", pt.size = 0.4,
+                slot = "data") +
+        theme(aspect.ratio = 1, legend.position = "none") +
+        ggtitle(names(tdp)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps <- ps[!vapply(ps, is.null, logical(1))]
+p <- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)
+cat("\n\n")
+
+## control genes STMN2 and VIM
+g <- c("STMN2-alevin", "VIM-alevin")
+names(g) <- c("STMN2-alevin", "VIM-alevin")
+cat("## control genes alevin\n")
+ps <- lapply(seq_along(g), function(i) {
+    if (!g[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = g[i], reduction = "umap", pt.size = 0.4,
+                slot = "data") +
+        theme(aspect.ratio = 1, legend.position = "none") +
+        ggtitle(names(g)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps <- ps[!vapply(ps, is.null, logical(1))]
+p <- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)
+cat("\n\n")
+
+DefaultAssay(sub) <- "RNA"
+g <- c("ENSG00000104435.STMN2", "ENSG00000026025.VIM")
+names(g) <- c("STMN2", "VIM")
+cat("## control genes CellRanger\n")
+ps <- lapply(seq_along(g), function(i) {
+    if (!g[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = g[i], reduction = "umap", pt.size = 0.4,
+                slot = "data") +
+        theme(aspect.ratio = 1, legend.position = "none") +
+        ggtitle(names(g)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps <- ps[!vapply(ps, is.null, logical(1))]
+p <- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)
+cat("\n\n")
+```
+
+
+# Heatmap with TDP, construct and control genes
+
+```{r prepare-sce}
+## prepare sce object with all genes in one count matrix!
+merged_counts <- rbind(so@assays$RNA@counts, so@assays$alevin@counts)
+sce <- SingleCellExperiment(list(counts=merged_counts, 
+                                 logcounts = rbind(so@assays$RNA@data, 
+                                                   so@assays$alevin@data)))
+sce$cluster_id <- Idents(so)
+sce$sample_id <- so$sample_id
+```
+
+Apart from the usual marker genes, we also want to analyse the expression of Casein Kinase 1 Epsilon (CSNK1E).
+
+```{r}
+fs <- list(TDP = c("ENSG00000120948.TARDBP", "ENSG00000120948.TARDBP-alevin", 
+                   "TDP43-HA", "total-TDP43", "construct"),
+           control = c("ENSG00000104435.STMN2", "STMN2-alevin", 
+                       "ENSG00000026025.VIM", "VIM-alevin"))
+fs <- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
+gs <- gsub(".*\\.", "", unlist(fs))
+ns <- vapply(fs, length, numeric(1))
+ks <- rep.int(names(fs), ns)
+labs <- lapply(fs, function(x) gsub(".*\\.", "",x))
+```
+
+```{r known-markers-heatmap, fig.width = 10, fig.height = 18}
+# split cells by cluster
+cs_by_k <- split(colnames(sce), sce$cluster_id)
+# compute cluster-marker means
+ms_by_cluster <- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+
+# prep. for plotting & scale b/w 0 and 1
+mat <- do.call("rbind", ms_by_cluster)
+mat <- muscat:::.scale(mat)
+rownames(mat) <- gs
+cols <- muscat:::.cluster_colors[seq_along(fs)]
+cols <- setNames(cols, names(fs))
+row_anno <- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = "white"))
+# percentage of cells from each of the samples per cluster
+(n_cells <- table(sce$cluster_id, sce$sample_id))
+sample_props <- prop.table(n_cells, margin = 1)
+col_mat <- as.matrix(unclass(sample_props))
+sample_cols <- c("#882255", "#11588A",  "#117733", "#44AA99")
+sample_cols <- setNames(sample_cols, colnames(col_mat))
+col_anno <- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, "cm"),
+                               border = FALSE),
+    annotation_label = "fraction of sample\nin cluster",
+    gap = unit(10, "points"))
+col_lgd <- Legend(labels = names(sample_cols),
+       title = "sample",
+       legend_gp = gpar(fill = sample_cols))
+
+hm <- Heatmap(mat,
+    name = "scaled avg.\nexpression",
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    column_title = "cluster_id",
+    column_title_side = "bottom",
+    column_names_side = "bottom",
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = "white"),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))
+```
+
+
+
+# Adding the new alevin quantifications to all other 
+We don't separate the new alevin quantifications but add them to the count matrix with the CellRanger quantifications.
+```{r merge_counts-alevin}
+## new seurat object with the merged counts
+so_merged <- CreateSeuratObject(
+    counts = merged_counts,
+    meta.data = so[[]], ## so@meta.data
+    project = "TDP_experiment")
+```
+
+## Normalization
+```{r normalization-merged-counts, warning = FALSE}
+# split by sample
+cells_by_sample <- split(colnames(so_merged), so_merged$sample_id)
+so_merged <- lapply(cells_by_sample, function(i) subset(so_merged, cells = i))
+
+## log normalize the data using a scaling factor of 10000
+so_merged <- lapply(so_merged, NormalizeData, verbose = FALSE, scale.factor = 10000, 
+             normalization.method = "LogNormalize")
+```
+
+
+We merge the normalized and data of the six samples into a combined Seurat object and compute variable features.
+```{r merge-samples}
+## merge the individial Seurat objects and conserve the normalized and scaled data
+so_merged <- merge(so_merged[[1]], y = so_merged[2:length(so_merged)], project = "TDP_experiment", 
+            merge.data = TRUE)
+## use previously computed dimension reduction
+so_merged@reductions <- so@reductions
+so_merged$RNA_snn_res.0.4 <- factor(so_merged$RNA_snn_res.0.4, levels = 0:16)
+so_merged <- SetIdent(so_merged, value = "RNA_snn_res.0.4")
+```
+
+
+# DR colored by marker expression {.tabset}
+
+```{r dim-red-expr-merged, results = "asis", fig.width = 12, fig.height = 4}
+# downsample to 5000 cells
+cs <- sample(colnames(so_merged), 5e3)
+sub <- subset(so_merged, cells = cs)
+
+## plot the expression of the endogenous TDP-43, TDP-HA, total TDP and the construct
+tdp <- c("ENSG00000120948.TARDBP", "ENSG00000120948.TARDBP-alevin", "TDP43-HA", "total-TDP43", "construct")
+names(tdp) <- c("TARDBP-CellRanger", "TARDBP-alevin", "TDP-HA", "total-TDP43", "construct")
+cat("## TDP-43\n")
+ps <- lapply(seq_along(tdp), function(i) {
+    if (!tdp[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = tdp[i], reduction = "umap", pt.size = 0.4,
+                slot = "data") +
+        theme(aspect.ratio = 1, legend.position = "none") +
+        ggtitle(names(tdp)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps <- ps[!vapply(ps, is.null, logical(1))]
+p <- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)
+cat("\n\n")
+
+## control genes STMN2 and VIM
+g <- c("ENSG00000104435.STMN2", "STMN2-alevin", "ENSG00000026025.VIM", "VIM-alevin")
+names(g) <- c("STMN2-CellRanger", "STMN2-alevin", "VIM-CellRanger", "VIM-alevin")
+cat("## control genes alevin\n")
+ps <- lapply(seq_along(g), function(i) {
+    if (!g[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = g[i], reduction = "umap", pt.size = 0.4,
+                slot = "data") +
+        theme(aspect.ratio = 1, legend.position = "none") +
+        ggtitle(names(g)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps <- ps[!vapply(ps, is.null, logical(1))]
+p <- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)
+cat("\n\n")
+```
+
+
+# Heatmap with TDP, construct and control genes
+
+```{r prepare-sce-merged}
+## prepare sce object with all genes in one count matrix!
+sce_merged <- as.SingleCellExperiment(so_merged)
+sce_merged$cluster_id <- Idents(so_merged)
+sce_merged$sample_id <- so_merged$sample_id
+```
+
+```{r known-markers-heatmap-merged, fig.width = 10, fig.height = 18}
+# split cells by cluster
+cs_by_k <- split(colnames(sce_merged), sce_merged$cluster_id)
+# compute cluster-marker means
+ms_by_cluster <- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce_merged)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+
+# prep. for plotting & scale b/w 0 and 1
+mat <- do.call("rbind", ms_by_cluster)
+mat <- muscat:::.scale(mat)
+rownames(mat) <- gs
+cols <- muscat:::.cluster_colors[seq_along(fs)]
+cols <- setNames(cols, names(fs))
+row_anno <- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = "white"))
+# percentage of cells from each of the samples per cluster
+(n_cells <- table(sce_merged$cluster_id, sce_merged$sample_id))
+sample_props <- prop.table(n_cells, margin = 1)
+col_mat <- as.matrix(unclass(sample_props))
+sample_cols <- c("#882255", "#11588A",  "#117733", "#44AA99")
+sample_cols <- setNames(sample_cols, colnames(col_mat))
+col_anno <- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, "cm"),
+                               border = FALSE),
+    annotation_label = "fraction of sample\nin cluster",
+    gap = unit(10, "points"))
+col_lgd <- Legend(labels = names(sample_cols),
+       title = "sample",
+       legend_gp = gpar(fill = sample_cols))
+
+hm <- Heatmap(mat,
+    name = "scaled avg.\nexpression",
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    column_title = "cluster_id",
+    column_title_side = "bottom",
+    column_names_side = "bottom",
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = "white"),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))
+```
+
+
+# Dotplot
+
+```{r dotplot, fig.width = 8, fig.height = 4}
+features <- c("ENSG00000120948.TARDBP", "ENSG00000120948.TARDBP-alevin", "TDP43-HA", "total-TDP43", "construct", "ENSG00000104435.STMN2", "STMN2-alevin", "ENSG00000026025.VIM", "VIM-alevin")
+fs <- c("TARDBP-CellRanger", "TARDBP-alevin", "TDP-HA", "total-TDP43", "construct", "STMN2-CellRanger", "STMN2-alevin", "VIM-CellRanger", "VIM-alevin")
+
+DotPlot(so_merged, assay = "RNA", features = features, 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 7) + 
+  RotatedAxis() + scale_color_viridis() + 
+  theme(axis.text.x = element_text(angle=45)) + ylab("cluster ID") + 
+  scale_x_discrete(name = "gene", breaks = features, labels=fs)
+
+## only the neuronal clusters
+neuronal_clusters <- c(0, 2:5, 7:11, 12)
+DotPlot(so_merged, assay = "RNA", features = features, idents = neuronal_clusters, 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 7) + 
+  RotatedAxis() + scale_color_viridis() + 
+  theme(axis.text.x = element_text(angle=45)) + ylab("cluster ID") + 
+  scale_x_discrete(name = "gene", breaks = features, labels=fs)
+```
+
+
+# Check for logFC of specific genes
+
+We first subset the data to the neuronal clusters.
+```{r subset-neuronal-clusters}
+sce_sub <- sce_merged[,sce_merged$cluster_id %in% neuronal_clusters]
+```
+
+```{r scran-findMarkers, warning = FALSE}
+## markers for all other clusters
+all_default <- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
+                           pval.type="all", assay.type = "logcounts")
+all_default[["12"]][1:10,]
+
+## what is the logFC for the different TDP quantifications and our control genes?
+all_default[["12"]][which(rownames(all_default[["12"]]) %in% features),]
+
+## compute the mean logFC, because the reporte summary logFC is the smallest logFC to any cluster
+rowMeans(all_default[["12"]][which(rownames(all_default[["12"]]) %in% features),] %>% 
+           as.data.frame %>% dplyr::select(starts_with("logFC")), na.rm = TRUE)
+```
+
+
+```{r seurat-foldchange}
+## using Seurat
+FoldChange(object = so_merged, slot = "data", ident.1 = 12, 
+            ident.2 = neuronal_clusters, 
+            features = features, pseudocount.use = 1)
+# the default pseudocount is 1, but that gives much higher logFC than scran findMarkers
+# a value of 3 gives similar results...
+FoldChange(object = so_merged, slot = "data", ident.1 = 12, 
+            ident.2 = neuronal_clusters, 
+            features = features, pseudocount.use = 3)
+# a small pseudocount doesn't not affect genes with low expression that much
+FoldChange(object = so_merged, slot = "data", ident.1 = 12, 
+            ident.2 = neuronal_clusters, 
+            features = features, pseudocount.use = 0.001)
+```
+
+## Save cluster markers to RDS
+
+```{r save-rds}
+saveRDS(so_merged, file.path("output", "so_TDP-06-01-totalTDP-construct-quantification.rds"))
+saveRDS(sce_merged, file.path("output", "sce_TDP-06-01-totalTDP-construct-quantification.rds"))
+```
+

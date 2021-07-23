@@ -67,7 +67,9 @@ We quantified the transcript encoded by the plasmid and the endogenous TDP-43 wi
     - [Cluster 12 marker expression in ALS brain RNA-seq](TDP-07-02-Prudencio_marker_expression.html)
     - [Cluster 12 marker expression in sorted neuronal nuclei from FTD-ALS patients](TDP-07-03-Liu_sorted_nuclei_marker_expression.html)
     - [Cluster 12 marker binding in iCLIP data from FTLD and controls](TDP-07-04-Tollervey_marker_binding.html)
-    
+- [Total TDP expression (alevin)](TDP-06-01-totalTDP-construct-quantification.html)
+
+
 We combine the TDP-HA samples with the D96 samples as controls (all samples are D96):
 
 - [Clustering (no integration)](TDP-08-00-clustering-HA-D96.html)
