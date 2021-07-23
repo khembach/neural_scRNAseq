@@ -394,7 +394,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -403,7 +403,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -415,7 +415,7 @@ div.tocify {
 <strong>Last updated:</strong> 2021-07-23
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -431,12 +431,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you'll want to first commit it to the Git repo. If you're still working on the analysis, you can ignore this warning. When you're finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreebb748de1515048174a9361021741d00c9e8bda53targetblankbb748dea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/bb748de1515048174a9361021741d00c9e8bda53" target="_blank">bb748de</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree54885462fd9061f8358d538d8e3efcf011944c4ctargetblank5488546a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/54885462fd9061f8358d538d8e3efcf011944c4c" target="_blank">5488546</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreebb748de1515048174a9361021741d00c9e8bda53targetblankbb748dea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree54885462fd9061f8358d538d8e3efcf011944c4ctargetblank5488546a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/bb748de1515048174a9361021741d00c9e8bda53" target="_blank">bb748de</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/54885462fd9061f8358d538d8e3efcf011944c4c" target="_blank">5488546</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -739,6 +739,7 @@ Ignored files:
     Ignored:    output/sce_03_filtering.rds
     Ignored:    output/sce_03_filtering_all_genes.rds
     Ignored:    output/sce_06-1-prepare-sce.rds
+    Ignored:    output/sce_TDP-06-01-totalTDP-construct-quantification.rds
     Ignored:    output/sce_TDP-08-01-muscat.rds
     Ignored:    output/sce_TDP_01_preprocessing.rds
     Ignored:    output/sce_TDP_02_quality_control.rds
@@ -754,6 +755,7 @@ Ignored files:
     Ignored:    output/so_08-clustering_timeline_HA.rds
     Ignored:    output/so_0x-sample_integration.rds
     Ignored:    output/so_CH-test-02-transgene_expression.rds
+    Ignored:    output/so_TDP-06-01-totalTDP-construct-quantification.rds
     Ignored:    output/so_TDP-06-cluster-analysis.rds
     Ignored:    output/so_TDP_04_clustering.rds
     Ignored:    output/so_TDP_05_plasmid_expression.rds
@@ -847,6 +849,7 @@ Untracked files:
 Unstaged changes:
     Modified:   analysis/05-annotation.Rmd
     Modified:   analysis/TDP-04-clustering.Rmd
+    Modified:   analysis/TDP-06-01-totalTDP-construct-quantification.Rmd
     Modified:   analysis/TDP-07-01-STMN2_expression.Rmd
     Modified:   analysis/TDP-07-cluster_12.Rmd
     Modified:   analysis/TDP-08-01-HA-D96-expression-changes.Rmd
@@ -892,6 +895,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/54885462fd9061f8358d538d8e3efcf011944c4c/analysis/TDP-06-01-totalTDP-construct-quantification.Rmd" target="_blank">5488546</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+<td>
+adjust figure sizes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/TDP-06-01-totalTDP-construct-quantification.html" target="_blank">e723f61</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -953,19 +990,8 @@ for (i in 1:4) {
   ## match the alevin and CellRanger cell IDs
   colnames(a) &lt;- paste0(colnames(a), &quot;-1.&quot;, sample_ids[i])
   txi &lt;- cbind(txi, a)
-}</code></pre>
-<pre><code>Warning in Matrix::sparseMatrix(i = unlist(gene.idx), j = cell.idx, x =
-counts.vec, : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quot;T&quot;&#39; for you
-
-Warning in Matrix::sparseMatrix(i = unlist(gene.idx), j = cell.idx, x =
-counts.vec, : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quot;T&quot;&#39; for you
-
-Warning in Matrix::sparseMatrix(i = unlist(gene.idx), j = cell.idx, x =
-counts.vec, : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quot;T&quot;&#39; for you
-
-Warning in Matrix::sparseMatrix(i = unlist(gene.idx), j = cell.idx, x =
-counts.vec, : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quot;T&quot;&#39; for you</code></pre>
-<pre class="r"><code>txi &lt;- txi[,colnames(txi) != &quot;&quot;]</code></pre>
+}
+txi &lt;- txi[,colnames(txi) != &quot;&quot;]</code></pre>
 <p>We add the alevin counts to the CellRanger matrix.</p>
 <pre class="r"><code>## add two new rows to counts matrix and replace the counts for matching 
 ## barcodes with the alevin counts
@@ -979,10 +1005,9 @@ alevin_counts[i,m[!is.na(m)]] &lt;- txi[i,which(!is.na(m))]
 }
 
 ## add new assay with the alevin quantifications
-so[[&quot;alevin&quot;]] &lt;- CreateAssayObject(counts = alevin_counts)</code></pre>
-<pre><code>Warning: Feature names cannot have underscores (&#39;_&#39;), replacing with dashes
-(&#39;-&#39;)</code></pre>
-<pre class="r"><code>## we estimate a scaling factor for the alevin counts so they are ona similar scale than the CellRanger counts
+so[[&quot;alevin&quot;]] &lt;- CreateAssayObject(counts = alevin_counts)
+
+## we estimate a scaling factor for the alevin counts so they are ona similar scale than the CellRanger counts
 (ratio &lt;- (colSums(so) %&gt;% median / colSums(so[[&quot;alevin&quot;]]) %&gt;% median))</code></pre>
 <pre><code>[1] 35.52155</code></pre>
 <pre class="r"><code>(sf &lt;- ceiling(10000/ratio))</code></pre>
@@ -1017,6 +1042,43 @@ ps &lt;- ps[!vapply(ps, is.null, logical(1))]
 p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
 print(p)</code></pre>
 <p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-1">
+Past versions of dim-red-expr-1.png
+</button>
+</p>
+<div id="fig-dim-red-expr-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-1.png" target="_blank">e723f61</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code>DefaultAssay(sub) &lt;- &quot;alevin&quot;
 ## total TDP and control genes
@@ -1038,6 +1100,43 @@ ps &lt;- ps[!vapply(ps, is.null, logical(1))]
 p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
 print(p)</code></pre>
 <p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-2">
+Past versions of dim-red-expr-2.png
+</button>
+</p>
+<div id="fig-dim-red-expr-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-2.png" target="_blank">e723f61</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code>## control genes STMN2 and VIM
 g &lt;- c(&quot;STMN2-alevin&quot;, &quot;VIM-alevin&quot;)
@@ -1058,6 +1157,43 @@ ps &lt;- ps[!vapply(ps, is.null, logical(1))]
 p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
 print(p)</code></pre>
 <p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-3">
+Past versions of dim-red-expr-3.png
+</button>
+</p>
+<div id="fig-dim-red-expr-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-3.png" target="_blank">e723f61</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code>DefaultAssay(sub) &lt;- &quot;RNA&quot;
 g &lt;- c(&quot;ENSG00000104435.STMN2&quot;, &quot;ENSG00000026025.VIM&quot;)
@@ -1078,6 +1214,43 @@ ps &lt;- ps[!vapply(ps, is.null, logical(1))]
 p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
 print(p)</code></pre>
 <p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-4">
+Past versions of dim-red-expr-4.png
+</button>
+</p>
+<div id="fig-dim-red-expr-4" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-4.png" target="_blank">e723f61</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 </div>
 </div>
@@ -1167,6 +1340,43 @@ hm &lt;- Heatmap(mat,
     top_annotation = col_anno)
 draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
 <p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/known-markers-heatmap-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-known-markers-heatmap-1">
+Past versions of known-markers-heatmap-1.png
+</button>
+</p>
+<div id="fig-known-markers-heatmap-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/known-markers-heatmap-1.png" target="_blank">e723f61</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="adding-the-new-alevin-quantifications-to-all-other" class="section level1">
 <h1>Adding the new alevin quantifications to all other</h1>
@@ -1219,6 +1429,43 @@ ps &lt;- ps[!vapply(ps, is.null, logical(1))]
 p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
 print(p)</code></pre>
 <p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-merged-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-merged-1">
+Past versions of dim-red-expr-merged-1.png
+</button>
+</p>
+<div id="fig-dim-red-expr-merged-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-merged-1.png" target="_blank">e723f61</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 <pre class="r"><code>## control genes STMN2 and VIM
 g &lt;- c(&quot;ENSG00000104435.STMN2&quot;, &quot;STMN2-alevin&quot;, &quot;ENSG00000026025.VIM&quot;, &quot;VIM-alevin&quot;)
@@ -1239,6 +1486,43 @@ ps &lt;- ps[!vapply(ps, is.null, logical(1))]
 p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
 print(p)</code></pre>
 <p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-merged-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dim-red-expr-merged-2">
+Past versions of dim-red-expr-merged-2.png
+</button>
+</p>
+<div id="fig-dim-red-expr-merged-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-merged-2.png" target="_blank">e723f61</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
 </div>
 </div>
@@ -1315,26 +1599,137 @@ hm &lt;- Heatmap(mat,
     top_annotation = col_anno)
 draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
 <p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/known-markers-heatmap-merged-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-known-markers-heatmap-merged-1">
+Past versions of known-markers-heatmap-merged-1.png
+</button>
+</p>
+<div id="fig-known-markers-heatmap-merged-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/known-markers-heatmap-merged-1.png" target="_blank">e723f61</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="dotplot" class="section level1">
 <h1>Dotplot</h1>
 <pre class="r"><code>features &lt;- c(&quot;ENSG00000120948.TARDBP&quot;, &quot;ENSG00000120948.TARDBP-alevin&quot;, &quot;TDP43-HA&quot;, &quot;total-TDP43&quot;, &quot;construct&quot;, &quot;ENSG00000104435.STMN2&quot;, &quot;STMN2-alevin&quot;, &quot;ENSG00000026025.VIM&quot;, &quot;VIM-alevin&quot;)
-fs &lt;- c(&quot;TARDBP-CellRanger&quot;, &quot;TARDBP-alevin&quot;, &quot;TDP-HA&quot;, &quot;total-TDP43&quot;, &quot;construct&quot;, &quot;STMN2-CellRanger&quot;, &quot;STMN2-alevin&quot;, &quot;VIM-CellRanger&quot;, &quot;VIM-alevin&quot;)
+fs &lt;- c(&quot;TARDBP-CR&quot;, &quot;TARDBP-alevin&quot;, &quot;TDP-HA&quot;, &quot;total-TDP43&quot;, &quot;construct&quot;, &quot;STMN2-CR&quot;, &quot;STMN2-alevin&quot;, &quot;VIM-CR&quot;, &quot;VIM-alevin&quot;)
 
 DotPlot(so_merged, assay = &quot;RNA&quot;, features = features, 
-        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 7) + 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 6) + 
   RotatedAxis() + scale_color_viridis() + 
   theme(axis.text.x = element_text(angle=45)) + ylab(&quot;cluster ID&quot;) + 
   scale_x_discrete(name = &quot;gene&quot;, breaks = features, labels=fs)</code></pre>
-<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dotplot-1">
+Past versions of dotplot-1.png
+</button>
+</p>
+<div id="fig-dotplot-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-1.png" target="_blank">e723f61</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## only the neuronal clusters
 neuronal_clusters &lt;- c(0, 2:5, 7:11, 12)
 DotPlot(so_merged, assay = &quot;RNA&quot;, features = features, idents = neuronal_clusters, 
-        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 7) + 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 6) + 
   RotatedAxis() + scale_color_viridis() + 
   theme(axis.text.x = element_text(angle=45)) + ylab(&quot;cluster ID&quot;) + 
   scale_x_discrete(name = &quot;gene&quot;, breaks = features, labels=fs)</code></pre>
-<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-2.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-dotplot-2">
+Past versions of dotplot-2.png
+</button>
+</p>
+<div id="fig-dotplot-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-2.png" target="_blank">e723f61</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="check-for-logfc-of-specific-genes" class="section level1">
 <h1>Check for logFC of specific genes</h1>
