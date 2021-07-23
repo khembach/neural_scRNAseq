@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Katharina Hembach" />
+
+
+<title>Total TDP and construct quantification</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">neural_scRNAseq</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/khembach/neural_scRNAseq">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Total TDP and construct quantification</h1>
+<h4 class="author">Katharina Hembach</h4>
+<h4 class="date">22.07.2021</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-07-23
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it's best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20200522code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20200522)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20200522code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20200522)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreebb748de1515048174a9361021741d00c9e8bda53targetblankbb748dea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/bb748de1515048174a9361021741d00c9e8bda53" target="_blank">bb748de</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtreebb748de1515048174a9361021741d00c9e8bda53targetblankbb748dea" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/bb748de1515048174a9361021741d00c9e8bda53" target="_blank">bb748de</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    ._.DS_Store
+    Ignored:    ._Filtered.pdf
+    Ignored:    ._Rplots.pdf
+    Ignored:    ._Unfiltered.pdf
+    Ignored:    .__workflowr.yml
+    Ignored:    ._coverage.pdf
+    Ignored:    ._coverage_sashimi.pdf
+    Ignored:    ._coverage_sashimi.png
+    Ignored:    ._iCLIP_nrXLs_markers.pdf
+    Ignored:    ._neural_scRNAseq.Rproj
+    Ignored:    ._pbDS_cell_level.pdf
+    Ignored:    ._pbDS_top_expr_umap.pdf
+    Ignored:    ._pbDS_upset.pdf
+    Ignored:    ._sashimi.pdf
+    Ignored:    ._stmn2.pdf
+    Ignored:    ._tdp.pdf
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.Rhistory
+    Ignored:    analysis/._.DS_Store
+    Ignored:    analysis/._01-preprocessing.Rmd
+    Ignored:    analysis/._01-preprocessing.html
+    Ignored:    analysis/._02.1-SampleQC.Rmd
+    Ignored:    analysis/._03-filtering.Rmd
+    Ignored:    analysis/._04-clustering.Rmd
+    Ignored:    analysis/._04-clustering.knit.md
+    Ignored:    analysis/._04.1-cell_cycle.Rmd
+    Ignored:    analysis/._05-annotation.Rmd
+    Ignored:    analysis/._07-cluster-analysis-all-timepoints.Rmd
+    Ignored:    analysis/._Lam-0-NSC_no_integration.Rmd
+    Ignored:    analysis/._Lam-01-NSC_integration.Rmd
+    Ignored:    analysis/._Lam-02-NSC_annotation.Rmd
+    Ignored:    analysis/._NSC-1-clustering.Rmd
+    Ignored:    analysis/._NSC-2-annotation.Rmd
+    Ignored:    analysis/._TDP-06-cluster_analysis.Rmd
+    Ignored:    analysis/.__site.yml
+    Ignored:    analysis/._additional_filtering.Rmd
+    Ignored:    analysis/._additional_filtering_clustering.Rmd
+    Ignored:    analysis/._index.Rmd
+    Ignored:    analysis/._organoid-01-1-qualtiy-control.Rmd
+    Ignored:    analysis/._organoid-01-clustering.Rmd
+    Ignored:    analysis/._organoid-02-integration.Rmd
+    Ignored:    analysis/._organoid-03-cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-04-group_integration.Rmd
+    Ignored:    analysis/._organoid-04-stage_integration.Rmd
+    Ignored:    analysis/._organoid-05-group_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-05-stage_integration_cluster_analysis.Rmd
+    Ignored:    analysis/._organoid-06-1-prepare-sce.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-Seurat.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis-function.Rmd
+    Ignored:    analysis/._organoid-06-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-06-group-integration-conos-analysis.Rmd
+    Ignored:    analysis/._organoid-07-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-07-group-integration-conos-visualization.Rmd
+    Ignored:    analysis/._organoid-08-conos-comparison.Rmd
+    Ignored:    analysis/._organoid-0x-sample_integration.Rmd
+    Ignored:    analysis/01-preprocessing_cache/
+    Ignored:    analysis/02-1-SampleQC_cache/
+    Ignored:    analysis/02-quality_control_cache/
+    Ignored:    analysis/02.1-SampleQC_cache/
+    Ignored:    analysis/03-filtering_cache/
+    Ignored:    analysis/04-clustering_cache/
+    Ignored:    analysis/04.1-cell_cycle_cache/
+    Ignored:    analysis/05-annotation_cache/
+    Ignored:    analysis/06-clustering-all-timepoints_cache/
+    Ignored:    analysis/07-cluster-analysis-all-timepoints_cache/
+    Ignored:    analysis/CH-test-01-preprocessing_cache/
+    Ignored:    analysis/CH-test-02-transgene-expression_cache/
+    Ignored:    analysis/CH-test-03-cluster-analysis_cache/
+    Ignored:    analysis/Lam-01-NSC_integration_cache/
+    Ignored:    analysis/Lam-02-NSC_annotation_cache/
+    Ignored:    analysis/NSC-1-clustering_cache/
+    Ignored:    analysis/NSC-2-annotation_cache/
+    Ignored:    analysis/TDP-01-preprocessing_cache/
+    Ignored:    analysis/TDP-02-quality_control_cache/
+    Ignored:    analysis/TDP-03-filtering_cache/
+    Ignored:    analysis/TDP-04-clustering_cache/
+    Ignored:    analysis/TDP-05-00-filtering-plasmid-QC_cache/
+    Ignored:    analysis/TDP-05-plasmid_expression_cache/
+    Ignored:    analysis/TDP-06-cluster_analysis_cache/
+    Ignored:    analysis/TDP-07-01-STMN2_expression_cache/
+    Ignored:    analysis/TDP-07-02-Prudencio_marker_expression_cache/
+    Ignored:    analysis/TDP-07-03-Liu_sorted_nuclei_marker_expression_cache/
+    Ignored:    analysis/TDP-07-04-Tollervey_marker_binding_cache/
+    Ignored:    analysis/TDP-07-cluster_12_cache/
+    Ignored:    analysis/TDP-08-00-clustering-HA-D96_cache/
+    Ignored:    analysis/TDP-08-01-HA-D96-expression-changes_cache/
+    Ignored:    analysis/TDP-08-02-TDP_target_genes_cache/
+    Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
+    Ignored:    analysis/additional_filtering_cache/
+    Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
+    Ignored:    analysis/organoid-01-clustering_cache/
+    Ignored:    analysis/organoid-02-integration_cache/
+    Ignored:    analysis/organoid-03-cluster_analysis_cache/
+    Ignored:    analysis/organoid-04-group_integration_cache/
+    Ignored:    analysis/organoid-04-stage_integration_cache/
+    Ignored:    analysis/organoid-05-group_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-05-stage_integration_cluster_analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_cache/
+    Ignored:    analysis/organoid-06-conos-analysis_test_cache/
+    Ignored:    analysis/organoid-06-group-integration-conos-analysis_cache/
+    Ignored:    analysis/organoid-07-conos-visualization_cache/
+    Ignored:    analysis/organoid-07-group-integration-conos-visualization_cache/
+    Ignored:    analysis/organoid-08-conos-comparison_cache/
+    Ignored:    analysis/organoid-0x-sample_integration_cache/
+    Ignored:    analysis/sample5_QC_cache/
+    Ignored:    analysis/timepoints-01-organoid-integration_cache/
+    Ignored:    analysis/timepoints-02-cluster-analysis_cache/
+    Ignored:    data/.DS_Store
+    Ignored:    data/._.DS_Store
+    Ignored:    data/._.smbdeleteAAA17ed8b4b
+    Ignored:    data/._Lam_figure2_markers.R
+    Ignored:    data/._README.md
+    Ignored:    data/._Reactive_astrocytes_markers.xlsx
+    Ignored:    data/._known_NSC_markers.R
+    Ignored:    data/._known_cell_type_markers.R
+    Ignored:    data/._metadata.csv
+    Ignored:    data/._virus_cell_tropism_markers.R
+    Ignored:    data/._~$Reactive_astrocytes_markers.xlsx
+    Ignored:    data/data_sushi/
+    Ignored:    data/filtered_feature_matrices/
+    Ignored:    output/.DS_Store
+    Ignored:    output/._.DS_Store
+    Ignored:    output/._Liu_TDP_neg_vs_pos_edgeR_dge_results.txt
+    Ignored:    output/._NSC_cluster2_marker_genes.txt
+    Ignored:    output/._TDP-06-no_integration_cluster12_marker_genes.txt
+    Ignored:    output/._TDP-06-no_integration_cluster13_marker_genes.txt
+    Ignored:    output/._organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_0.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_1.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_10.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_11.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_12.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_13.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_14.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_5.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_7.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_8.txt
+    Ignored:    output/._tbl_TDP-08-01-muscat_cluster_all.xlsx
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_0.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_1.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_10.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_11.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_12.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_13.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_14.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_5.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_7.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_8.txt
+    Ignored:    output/._tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/._~$tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/CH-test-01-preprocessing.rds
+    Ignored:    output/CH-test-01-preprocessing_singlets.rds
+    Ignored:    output/CH-test-01-preprocessing_singlets_filtered.rds
+    Ignored:    output/CH-test-01-preprocessing_so.rds
+    Ignored:    output/CH-test-01-preprocessing_so_filtered.rds
+    Ignored:    output/CH-test-03-cluster-analysis_so.rds
+    Ignored:    output/CH-test-03_scran_markers.rds
+    Ignored:    output/Lam-01-clustering.rds
+    Ignored:    output/Liu_TDP_neg_vs_pos_edgeR_dge.rds
+    Ignored:    output/Liu_TDP_neg_vs_pos_edgeR_dge_results.txt
+    Ignored:    output/NSC_1_clustering.rds
+    Ignored:    output/NSC_cluster1_marker_genes.txt
+    Ignored:    output/NSC_cluster2_marker_genes.txt
+    Ignored:    output/NSC_cluster3_marker_genes.txt
+    Ignored:    output/NSC_cluster4_marker_genes.txt
+    Ignored:    output/NSC_cluster5_marker_genes.txt
+    Ignored:    output/NSC_cluster6_marker_genes.txt
+    Ignored:    output/NSC_cluster7_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster0_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster10_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster11_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster12_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster13_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster14_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster15_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster16_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster17_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster1_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster2_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster3_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster4_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster5_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster6_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster7_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster8_marker_genes.txt
+    Ignored:    output/TDP-06-no_integration_cluster9_marker_genes.txt
+    Ignored:    output/TDP-06_scran_markers.rds
+    Ignored:    output/additional_filtering.rds
+    Ignored:    output/conos/
+    Ignored:    output/conos_organoid-06-conos-analysis.rds
+    Ignored:    output/conos_organoid-06-group-integration-conos-analysis.rds
+    Ignored:    output/figures/
+    Ignored:    output/organoid_integration_cluster10_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster11_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster12_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster13_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster14_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster15_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster16_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster17_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster1_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster2_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster3_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster4_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster5_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster6_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster7_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster8_marker_genes.txt
+    Ignored:    output/organoid_integration_cluster9_marker_genes.txt
+    Ignored:    output/paper_supplement/
+    Ignored:    output/res_TDP-08-01-muscat.rds
+    Ignored:    output/sce_01_preprocessing.rds
+    Ignored:    output/sce_02_quality_control.rds
+    Ignored:    output/sce_03_filtering.rds
+    Ignored:    output/sce_03_filtering_all_genes.rds
+    Ignored:    output/sce_06-1-prepare-sce.rds
+    Ignored:    output/sce_TDP-08-01-muscat.rds
+    Ignored:    output/sce_TDP_01_preprocessing.rds
+    Ignored:    output/sce_TDP_02_quality_control.rds
+    Ignored:    output/sce_TDP_03_filtering.rds
+    Ignored:    output/sce_TDP_03_filtering_all_genes.rds
+    Ignored:    output/sce_organoid-01-clustering.rds
+    Ignored:    output/sce_preprocessing.rds
+    Ignored:    output/so_04-stage_integration.rds
+    Ignored:    output/so_04_1_cell_cycle.rds
+    Ignored:    output/so_04_clustering.rds
+    Ignored:    output/so_06-clustering_all_timepoints.rds
+    Ignored:    output/so_08-00_clustering_HA_D96.rds
+    Ignored:    output/so_08-clustering_timeline_HA.rds
+    Ignored:    output/so_0x-sample_integration.rds
+    Ignored:    output/so_CH-test-02-transgene_expression.rds
+    Ignored:    output/so_TDP-06-cluster-analysis.rds
+    Ignored:    output/so_TDP_04_clustering.rds
+    Ignored:    output/so_TDP_05_plasmid_expression.rds
+    Ignored:    output/so_additional_filtering_clustering.rds
+    Ignored:    output/so_integrated_organoid-02-integration.rds
+    Ignored:    output/so_merged_organoid-02-integration.rds
+    Ignored:    output/so_organoid-01-clustering.rds
+    Ignored:    output/so_sample_organoid-01-clustering.rds
+    Ignored:    output/so_timepoints-01-organoid_integration.rds
+    Ignored:    output/tbl_TDP-08-01-muscat.rds
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_0.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_1.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_10.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_11.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_12.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_13.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_14.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_5.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_7.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_8.txt
+    Ignored:    output/tbl_TDP-08-01-muscat_cluster_all.xlsx
+    Ignored:    output/tbl_TDP-08-02-targets_hek.rds
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_0.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_1.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_10.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_11.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_12.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_13.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_14.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_5.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_7.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_8.txt
+    Ignored:    output/tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    output/~$tbl_TDP-08-02-targets_hek_cluster_all.xlsx
+    Ignored:    scripts/.DS_Store
+    Ignored:    scripts/._.DS_Store
+    Ignored:    scripts/._bu_Rcode.R
+    Ignored:    scripts/._plasmid_expression.sh
+    Ignored:    scripts/._plasmid_expression_cell_hashing_test.sh
+    Ignored:    scripts/._plasmid_expression_total_TDP.sh
+    Ignored:    scripts/._prepare_salmon_transcripts.R
+    Ignored:    scripts/._prepare_salmon_transcripts_cell_hashing_test.R
+
+Untracked files:
+    Untracked:  Filtered.pdf
+    Untracked:  Rplots.pdf
+    Untracked:  Unfiltered
+    Untracked:  Unfiltered.pdf
+    Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
+    Untracked:  analysis/TDP-07-01-STMN2_expression copy.Rmd
+    Untracked:  analysis/additional_filtering.Rmd
+    Untracked:  analysis/additional_filtering_clustering.Rmd
+    Untracked:  analysis/organoid-01-1-qualtiy-control.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-Seurat.Rmd
+    Untracked:  analysis/organoid-06-conos-analysis-function.Rmd
+    Untracked:  analysis/organoid-07-conos-visualization.Rmd
+    Untracked:  analysis/organoid-07-group-integration-conos-visualization.Rmd
+    Untracked:  analysis/organoid-08-conos-comparison.Rmd
+    Untracked:  analysis/organoid-0x-sample_integration.Rmd
+    Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  coverage.pdf
+    Untracked:  coverage_sashimi.pdf
+    Untracked:  coverage_sashimi.png
+    Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
+    Untracked:  data/Jun2021/
+    Untracked:  data/Kanton_et_al/
+    Untracked:  data/Lam_et_al/
+    Untracked:  data/Liu_et_al/
+    Untracked:  data/Prudencio_et_al/
+    Untracked:  data/Sep2020/
+    Untracked:  data/cell_hashing_test/
+    Untracked:  data/reference/
+    Untracked:  data/virus_cell_tropism_markers.R
+    Untracked:  data/~$Reactive_astrocytes_markers.xlsx
+    Untracked:  iCLIP_nrXLs_markers.pdf
+    Untracked:  pbDS_cell_level.pdf
+    Untracked:  pbDS_heatmap.pdf
+    Untracked:  pbDS_top_expr_umap.pdf
+    Untracked:  pbDS_upset.pdf
+    Untracked:  sashimi.pdf
+    Untracked:  scripts/bu_Rcode.R
+    Untracked:  scripts/bu_code.Rmd
+    Untracked:  scripts/plasmid_expression_cell_hashing_test.sh
+    Untracked:  scripts/plasmid_expression_total_TDP.sh
+    Untracked:  scripts/prepare_salmon_transcripts_cell_hashing_test.R
+    Untracked:  scripts/prepare_salmon_transcripts_total_TDP.R
+    Untracked:  scripts/salmon-latest_linux_x86_64/
+    Untracked:  stmn2.pdf
+    Untracked:  tdp.pdf
+
+Unstaged changes:
+    Modified:   analysis/05-annotation.Rmd
+    Modified:   analysis/TDP-04-clustering.Rmd
+    Modified:   analysis/TDP-07-01-STMN2_expression.Rmd
+    Modified:   analysis/TDP-07-cluster_12.Rmd
+    Modified:   analysis/TDP-08-01-HA-D96-expression-changes.Rmd
+    Modified:   analysis/_site.yml
+    Modified:   analysis/organoid-02-integration.Rmd
+    Modified:   analysis/organoid-04-group_integration.Rmd
+    Modified:   analysis/organoid-06-conos-analysis.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/TDP-06-01-totalTDP-construct-quantification.Rmd</code>) and HTML (<code>docs/TDP-06-01-totalTDP-construct-quantification.html</code>) files. If you've configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/bb748de1515048174a9361021741d00c9e8bda53/analysis/TDP-06-01-totalTDP-construct-quantification.Rmd" target="_blank">bb748de</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+<td>
+compare total TDP quantification (alevin) with CellRanger counts and
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-packages" class="section level3">
+<h3>Load packages</h3>
+<pre class="r"><code>library(tximport)
+library(ComplexHeatmap)
+library(cowplot)
+library(ggplot2)
+library(dplyr)
+library(muscat)
+library(purrr)
+library(RColorBrewer)
+library(viridis)
+library(scran)
+library(Seurat)
+library(SingleCellExperiment)
+library(stringr)</code></pre>
+</div>
+<div id="load-data" class="section level1">
+<h1>Load data</h1>
+<pre class="r"><code>so &lt;- readRDS(file.path(&quot;output&quot;, &quot;so_TDP-06-cluster-analysis.rds&quot;))
+so &lt;- SetIdent(so, value = &quot;RNA_snn_res.0.4&quot;)</code></pre>
+<p>We combine the quantification of the total TDP, the construct, STMN2 and VIM with the CellRanger count matrix.</p>
+<pre class="r"><code>sample_ids &lt;- c(&quot;TDP4wOFF&quot;, &quot;TDP2wON&quot;, &quot;TDP4wONa&quot;, &quot;TDP4wONb&quot;)
+samples &lt;- c(&quot;no1_Neural_cuture_d_96_TDP-43-HA_4w_DOXoff&quot;, 
+             &quot;no2_Neural_cuture_d_96_TDP-43-HA_2w_DOXON&quot;,
+             &quot;no3_Neural_cuture_d_96_TDP-43-HA_4w_DOXONa&quot;,
+             &quot;no4_Neural_cuture_d_96_TDP-43-HA_4w_DOXONb&quot;)
+txi &lt;- matrix(NA, nrow = 4)
+for (i in 1:4) {
+  fi &lt;- file.path(&quot;data&quot;, &quot;Sep2020&quot;, &quot;alevin_total_TDP43&quot;, samples[i], 
+                     &quot;alevin/quants_mat.gz&quot;)
+
+  # import alevin quants
+  a &lt;- tximport(fi, type=&quot;alevin&quot;)$counts
+  
+  ## match the alevin and CellRanger cell IDs
+  colnames(a) &lt;- paste0(colnames(a), &quot;-1.&quot;, sample_ids[i])
+  txi &lt;- cbind(txi, a)
+}</code></pre>
+<pre><code>Warning in Matrix::sparseMatrix(i = unlist(gene.idx), j = cell.idx, x =
+counts.vec, : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quot;T&quot;&#39; for you
+
+Warning in Matrix::sparseMatrix(i = unlist(gene.idx), j = cell.idx, x =
+counts.vec, : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quot;T&quot;&#39; for you
+
+Warning in Matrix::sparseMatrix(i = unlist(gene.idx), j = cell.idx, x =
+counts.vec, : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quot;T&quot;&#39; for you
+
+Warning in Matrix::sparseMatrix(i = unlist(gene.idx), j = cell.idx, x =
+counts.vec, : &#39;giveCsparse&#39; has been deprecated; setting &#39;repr = &quot;T&quot;&#39; for you</code></pre>
+<pre class="r"><code>txi &lt;- txi[,colnames(txi) != &quot;&quot;]</code></pre>
+<p>We add the alevin counts to the CellRanger matrix.</p>
+<pre class="r"><code>## add two new rows to counts matrix and replace the counts for matching 
+## barcodes with the alevin counts
+alevin_counts &lt;- matrix(0, nrow = 4, ncol = ncol(so))
+colnames(alevin_counts) &lt;- colnames(so)
+rownames(alevin_counts) &lt;- rownames(txi)
+## match the barcodes
+m &lt;- match(colnames(txi), colnames(so))
+for(i in rownames(txi)){
+alevin_counts[i,m[!is.na(m)]] &lt;- txi[i,which(!is.na(m))]
+}
+
+## add new assay with the alevin quantifications
+so[[&quot;alevin&quot;]] &lt;- CreateAssayObject(counts = alevin_counts)</code></pre>
+<pre><code>Warning: Feature names cannot have underscores (&#39;_&#39;), replacing with dashes
+(&#39;-&#39;)</code></pre>
+<pre class="r"><code>## we estimate a scaling factor for the alevin counts so they are ona similar scale than the CellRanger counts
+(ratio &lt;- (colSums(so) %&gt;% median / colSums(so[[&quot;alevin&quot;]]) %&gt;% median))</code></pre>
+<pre><code>[1] 35.52155</code></pre>
+<pre class="r"><code>(sf &lt;- ceiling(10000/ratio))</code></pre>
+<pre><code>[1] 282</code></pre>
+<pre class="r"><code>DefaultAssay(so) &lt;- &quot;alevin&quot;
+## normalization with the scale factor proprtional to the difference in counts between the two assays
+so &lt;- NormalizeData(so, verbose = FALSE, scale.factor = sf, 
+             normalization.method = &quot;LogNormalize&quot;)
+DefaultAssay(so) &lt;- &quot;RNA&quot;</code></pre>
+</div>
+<div id="dr-colored-by-marker-expression" class="section level1 tabset">
+<h1>DR colored by marker expression</h1>
+<pre class="r"><code># downsample to 5000 cells
+cs &lt;- sample(colnames(so), 5e3)
+sub &lt;- subset(so, cells = cs)
+
+## plot the expression of the endogenous TDP-43 and TDP-HA
+tdp &lt;- c(&quot;ENSG00000120948.TARDBP&quot;, &quot;ENSG00000120948.TARDBP-alevin&quot;, &quot;TDP43-HA&quot;)
+names(tdp) &lt;- c(&quot;TARDBP&quot;, &quot;TARDBP-alevin&quot;, &quot;TDP-HA&quot;)
+cat(&quot;## TDP-43\n&quot;)</code></pre>
+<div id="tdp-43" class="section level2">
+<h2>TDP-43</h2>
+<pre class="r"><code>ps &lt;- lapply(seq_along(tdp), function(i) {
+    if (!tdp[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = tdp[i], reduction = &quot;umap&quot;, pt.size = 0.4,
+                slot = &quot;data&quot;) +
+        theme(aspect.ratio = 1, legend.position = &quot;none&quot;) +
+        ggtitle(names(tdp)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps &lt;- ps[!vapply(ps, is.null, logical(1))]
+p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
+<pre class="r"><code>DefaultAssay(sub) &lt;- &quot;alevin&quot;
+## total TDP and control genes
+tdp &lt;- c(&quot;total-TDP43&quot;, &quot;construct&quot;)
+names(tdp) &lt;- c(&quot;total-TDP43&quot;, &quot;construct&quot;)
+cat(&quot;## total TDP-43\n&quot;)</code></pre>
+</div>
+<div id="total-tdp-43" class="section level2">
+<h2>total TDP-43</h2>
+<pre class="r"><code>ps &lt;- lapply(seq_along(tdp), function(i) {
+    if (!tdp[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = tdp[i], reduction = &quot;umap&quot;, pt.size = 0.4,
+                slot = &quot;data&quot;) +
+        theme(aspect.ratio = 1, legend.position = &quot;none&quot;) +
+        ggtitle(names(tdp)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps &lt;- ps[!vapply(ps, is.null, logical(1))]
+p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
+<pre class="r"><code>## control genes STMN2 and VIM
+g &lt;- c(&quot;STMN2-alevin&quot;, &quot;VIM-alevin&quot;)
+names(g) &lt;- c(&quot;STMN2-alevin&quot;, &quot;VIM-alevin&quot;)
+cat(&quot;## control genes alevin\n&quot;)</code></pre>
+</div>
+<div id="control-genes-alevin" class="section level2">
+<h2>control genes alevin</h2>
+<pre class="r"><code>ps &lt;- lapply(seq_along(g), function(i) {
+    if (!g[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = g[i], reduction = &quot;umap&quot;, pt.size = 0.4,
+                slot = &quot;data&quot;) +
+        theme(aspect.ratio = 1, legend.position = &quot;none&quot;) +
+        ggtitle(names(g)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps &lt;- ps[!vapply(ps, is.null, logical(1))]
+p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
+<pre class="r"><code>DefaultAssay(sub) &lt;- &quot;RNA&quot;
+g &lt;- c(&quot;ENSG00000104435.STMN2&quot;, &quot;ENSG00000026025.VIM&quot;)
+names(g) &lt;- c(&quot;STMN2&quot;, &quot;VIM&quot;)
+cat(&quot;## control genes CellRanger\n&quot;)</code></pre>
+</div>
+<div id="control-genes-cellranger" class="section level2">
+<h2>control genes CellRanger</h2>
+<pre class="r"><code>ps &lt;- lapply(seq_along(g), function(i) {
+    if (!g[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = g[i], reduction = &quot;umap&quot;, pt.size = 0.4,
+                slot = &quot;data&quot;) +
+        theme(aspect.ratio = 1, legend.position = &quot;none&quot;) +
+        ggtitle(names(g)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps &lt;- ps[!vapply(ps, is.null, logical(1))]
+p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-4.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
+</div>
+</div>
+<div id="heatmap-with-tdp-construct-and-control-genes" class="section level1">
+<h1>Heatmap with TDP, construct and control genes</h1>
+<pre class="r"><code>## prepare sce object with all genes in one count matrix!
+merged_counts &lt;- rbind(so@assays$RNA@counts, so@assays$alevin@counts)
+sce &lt;- SingleCellExperiment(list(counts=merged_counts, 
+                                 logcounts = rbind(so@assays$RNA@data, 
+                                                   so@assays$alevin@data)))
+sce$cluster_id &lt;- Idents(so)
+sce$sample_id &lt;- so$sample_id</code></pre>
+<p>Apart from the usual marker genes, we also want to analyse the expression of Casein Kinase 1 Epsilon (CSNK1E).</p>
+<pre class="r"><code>fs &lt;- list(TDP = c(&quot;ENSG00000120948.TARDBP&quot;, &quot;ENSG00000120948.TARDBP-alevin&quot;, 
+                   &quot;TDP43-HA&quot;, &quot;total-TDP43&quot;, &quot;construct&quot;),
+           control = c(&quot;ENSG00000104435.STMN2&quot;, &quot;STMN2-alevin&quot;, 
+                       &quot;ENSG00000026025.VIM&quot;, &quot;VIM-alevin&quot;))
+fs &lt;- lapply(fs, function(x) unlist(x[lengths(x) !=0]) )
+gs &lt;- gsub(&quot;.*\\.&quot;, &quot;&quot;, unlist(fs))
+ns &lt;- vapply(fs, length, numeric(1))
+ks &lt;- rep.int(names(fs), ns)
+labs &lt;- lapply(fs, function(x) gsub(&quot;.*\\.&quot;, &quot;&quot;,x))</code></pre>
+<pre class="r"><code># split cells by cluster
+cs_by_k &lt;- split(colnames(sce), sce$cluster_id)
+# compute cluster-marker means
+ms_by_cluster &lt;- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+
+# prep. for plotting &amp; scale b/w 0 and 1
+mat &lt;- do.call(&quot;rbind&quot;, ms_by_cluster)
+mat &lt;- muscat:::.scale(mat)
+rownames(mat) &lt;- gs
+cols &lt;- muscat:::.cluster_colors[seq_along(fs)]
+cols &lt;- setNames(cols, names(fs))
+row_anno &lt;- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = &quot;white&quot;))
+# percentage of cells from each of the samples per cluster
+(n_cells &lt;- table(sce$cluster_id, sce$sample_id))</code></pre>
+<pre><code>    
+     TDP2wON TDP4wOFF TDP4wONa TDP4wONb
+  0     1188     1015     1599     1384
+  1     1168      938     1621      943
+  2      907      811     1066     1091
+  3      725      619      925      775
+  4      616      560      996      771
+  5      672      594      846      802
+  6      576      411      477      243
+  7      375      348      530      446
+  8      450      307      444      467
+  9      254      176      396      304
+  10     207      174      307      251
+  11      63       64      231      143
+  12      97        3       88       36
+  13      49       14       42       32
+  14      37       17       23       24
+  15      12       25       32        9
+  16      10        1       42        1</code></pre>
+<pre class="r"><code>sample_props &lt;- prop.table(n_cells, margin = 1)
+col_mat &lt;- as.matrix(unclass(sample_props))
+sample_cols &lt;- c(&quot;#882255&quot;, &quot;#11588A&quot;,  &quot;#117733&quot;, &quot;#44AA99&quot;)
+sample_cols &lt;- setNames(sample_cols, colnames(col_mat))
+col_anno &lt;- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, &quot;cm&quot;),
+                               border = FALSE),
+    annotation_label = &quot;fraction of sample\nin cluster&quot;,
+    gap = unit(10, &quot;points&quot;))
+col_lgd &lt;- Legend(labels = names(sample_cols),
+       title = &quot;sample&quot;,
+       legend_gp = gpar(fill = sample_cols))
+
+hm &lt;- Heatmap(mat,
+    name = &quot;scaled avg.\nexpression&quot;,
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    column_title = &quot;cluster_id&quot;,
+    column_title_side = &quot;bottom&quot;,
+    column_names_side = &quot;bottom&quot;,
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = &quot;white&quot;),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/known-markers-heatmap-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="adding-the-new-alevin-quantifications-to-all-other" class="section level1">
+<h1>Adding the new alevin quantifications to all other</h1>
+<p>We don't separate the new alevin quantifications but add them to the count matrix with the CellRanger quantifications.</p>
+<pre class="r"><code>## new seurat object with the merged counts
+so_merged &lt;- CreateSeuratObject(
+    counts = merged_counts,
+    meta.data = so[[]], ## so@meta.data
+    project = &quot;TDP_experiment&quot;)</code></pre>
+<div id="normalization" class="section level2">
+<h2>Normalization</h2>
+<pre class="r"><code># split by sample
+cells_by_sample &lt;- split(colnames(so_merged), so_merged$sample_id)
+so_merged &lt;- lapply(cells_by_sample, function(i) subset(so_merged, cells = i))
+
+## log normalize the data using a scaling factor of 10000
+so_merged &lt;- lapply(so_merged, NormalizeData, verbose = FALSE, scale.factor = 10000, 
+             normalization.method = &quot;LogNormalize&quot;)</code></pre>
+<p>We merge the normalized and data of the six samples into a combined Seurat object and compute variable features.</p>
+<pre class="r"><code>## merge the individial Seurat objects and conserve the normalized and scaled data
+so_merged &lt;- merge(so_merged[[1]], y = so_merged[2:length(so_merged)], project = &quot;TDP_experiment&quot;, 
+            merge.data = TRUE)
+## use previously computed dimension reduction
+so_merged@reductions &lt;- so@reductions
+so_merged$RNA_snn_res.0.4 &lt;- factor(so_merged$RNA_snn_res.0.4, levels = 0:16)
+so_merged &lt;- SetIdent(so_merged, value = &quot;RNA_snn_res.0.4&quot;)</code></pre>
+</div>
+</div>
+<div id="dr-colored-by-marker-expression-1" class="section level1 tabset">
+<h1>DR colored by marker expression</h1>
+<pre class="r"><code># downsample to 5000 cells
+cs &lt;- sample(colnames(so_merged), 5e3)
+sub &lt;- subset(so_merged, cells = cs)
+
+## plot the expression of the endogenous TDP-43, TDP-HA, total TDP and the construct
+tdp &lt;- c(&quot;ENSG00000120948.TARDBP&quot;, &quot;ENSG00000120948.TARDBP-alevin&quot;, &quot;TDP43-HA&quot;, &quot;total-TDP43&quot;, &quot;construct&quot;)
+names(tdp) &lt;- c(&quot;TARDBP-CellRanger&quot;, &quot;TARDBP-alevin&quot;, &quot;TDP-HA&quot;, &quot;total-TDP43&quot;, &quot;construct&quot;)
+cat(&quot;## TDP-43\n&quot;)</code></pre>
+<div id="tdp-43-1" class="section level2">
+<h2>TDP-43</h2>
+<pre class="r"><code>ps &lt;- lapply(seq_along(tdp), function(i) {
+    if (!tdp[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = tdp[i], reduction = &quot;umap&quot;, pt.size = 0.4,
+                slot = &quot;data&quot;) +
+        theme(aspect.ratio = 1, legend.position = &quot;none&quot;) +
+        ggtitle(names(tdp)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps &lt;- ps[!vapply(ps, is.null, logical(1))]
+p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-merged-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
+<pre class="r"><code>## control genes STMN2 and VIM
+g &lt;- c(&quot;ENSG00000104435.STMN2&quot;, &quot;STMN2-alevin&quot;, &quot;ENSG00000026025.VIM&quot;, &quot;VIM-alevin&quot;)
+names(g) &lt;- c(&quot;STMN2-CellRanger&quot;, &quot;STMN2-alevin&quot;, &quot;VIM-CellRanger&quot;, &quot;VIM-alevin&quot;)
+cat(&quot;## control genes alevin\n&quot;)</code></pre>
+</div>
+<div id="control-genes-alevin-1" class="section level2">
+<h2>control genes alevin</h2>
+<pre class="r"><code>ps &lt;- lapply(seq_along(g), function(i) {
+    if (!g[i] %in% rownames(sub)) return(NULL)
+    FeaturePlot(sub, features = g[i], reduction = &quot;umap&quot;, pt.size = 0.4,
+                slot = &quot;data&quot;) +
+        theme(aspect.ratio = 1, legend.position = &quot;none&quot;) +
+        ggtitle(names(g)[i]) + theme_void() + theme(aspect.ratio = 1)
+})
+# arrange plots in grid
+ps &lt;- ps[!vapply(ps, is.null, logical(1))]
+p &lt;- plot_grid(plotlist = ps, ncol = 4, label_size = 10)
+print(p)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dim-red-expr-merged-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>cat(&quot;\n\n&quot;)</code></pre>
+</div>
+</div>
+<div id="heatmap-with-tdp-construct-and-control-genes-1" class="section level1">
+<h1>Heatmap with TDP, construct and control genes</h1>
+<pre class="r"><code>## prepare sce object with all genes in one count matrix!
+sce_merged &lt;- as.SingleCellExperiment(so_merged)
+sce_merged$cluster_id &lt;- Idents(so_merged)
+sce_merged$sample_id &lt;- so_merged$sample_id</code></pre>
+<pre class="r"><code># split cells by cluster
+cs_by_k &lt;- split(colnames(sce_merged), sce_merged$cluster_id)
+# compute cluster-marker means
+ms_by_cluster &lt;- lapply(fs, function(gs) vapply(cs_by_k, function(i)
+        Matrix::rowMeans(logcounts(sce_merged)[gs, i, drop = FALSE]), 
+        numeric(length(gs))))
+
+# prep. for plotting &amp; scale b/w 0 and 1
+mat &lt;- do.call(&quot;rbind&quot;, ms_by_cluster)
+mat &lt;- muscat:::.scale(mat)
+rownames(mat) &lt;- gs
+cols &lt;- muscat:::.cluster_colors[seq_along(fs)]
+cols &lt;- setNames(cols, names(fs))
+row_anno &lt;- rowAnnotation(
+    df = data.frame(label = factor(ks, levels = names(fs))),
+    col = list(label = cols), gp = gpar(col = &quot;white&quot;))
+# percentage of cells from each of the samples per cluster
+(n_cells &lt;- table(sce_merged$cluster_id, sce_merged$sample_id))</code></pre>
+<pre><code>    
+     TDP2wON TDP4wOFF TDP4wONa TDP4wONb
+  0     1188     1015     1599     1384
+  1     1168      938     1621      943
+  2      907      811     1066     1091
+  3      725      619      925      775
+  4      616      560      996      771
+  5      672      594      846      802
+  6      576      411      477      243
+  7      375      348      530      446
+  8      450      307      444      467
+  9      254      176      396      304
+  10     207      174      307      251
+  11      63       64      231      143
+  12      97        3       88       36
+  13      49       14       42       32
+  14      37       17       23       24
+  15      12       25       32        9
+  16      10        1       42        1</code></pre>
+<pre class="r"><code>sample_props &lt;- prop.table(n_cells, margin = 1)
+col_mat &lt;- as.matrix(unclass(sample_props))
+sample_cols &lt;- c(&quot;#882255&quot;, &quot;#11588A&quot;,  &quot;#117733&quot;, &quot;#44AA99&quot;)
+sample_cols &lt;- setNames(sample_cols, colnames(col_mat))
+col_anno &lt;- HeatmapAnnotation(
+    perc_sample = anno_barplot(col_mat, gp = gpar(fill = sample_cols), 
+                               height = unit(2, &quot;cm&quot;),
+                               border = FALSE),
+    annotation_label = &quot;fraction of sample\nin cluster&quot;,
+    gap = unit(10, &quot;points&quot;))
+col_lgd &lt;- Legend(labels = names(sample_cols),
+       title = &quot;sample&quot;,
+       legend_gp = gpar(fill = sample_cols))
+
+hm &lt;- Heatmap(mat,
+    name = &quot;scaled avg.\nexpression&quot;,
+    col = viridis(10),
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = &quot;left&quot;,
+    column_title = &quot;cluster_id&quot;,
+    column_title_side = &quot;bottom&quot;,
+    column_names_side = &quot;bottom&quot;,
+    column_names_rot = 0, 
+    column_names_centered = TRUE,
+    rect_gp = gpar(col = &quot;white&quot;),
+    left_annotation = row_anno,
+    top_annotation = col_anno)
+draw(hm, annotation_legend_list = list(col_lgd))</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/known-markers-heatmap-merged-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="dotplot" class="section level1">
+<h1>Dotplot</h1>
+<pre class="r"><code>features &lt;- c(&quot;ENSG00000120948.TARDBP&quot;, &quot;ENSG00000120948.TARDBP-alevin&quot;, &quot;TDP43-HA&quot;, &quot;total-TDP43&quot;, &quot;construct&quot;, &quot;ENSG00000104435.STMN2&quot;, &quot;STMN2-alevin&quot;, &quot;ENSG00000026025.VIM&quot;, &quot;VIM-alevin&quot;)
+fs &lt;- c(&quot;TARDBP-CellRanger&quot;, &quot;TARDBP-alevin&quot;, &quot;TDP-HA&quot;, &quot;total-TDP43&quot;, &quot;construct&quot;, &quot;STMN2-CellRanger&quot;, &quot;STMN2-alevin&quot;, &quot;VIM-CellRanger&quot;, &quot;VIM-alevin&quot;)
+
+DotPlot(so_merged, assay = &quot;RNA&quot;, features = features, 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 7) + 
+  RotatedAxis() + scale_color_viridis() + 
+  theme(axis.text.x = element_text(angle=45)) + ylab(&quot;cluster ID&quot;) + 
+  scale_x_discrete(name = &quot;gene&quot;, breaks = features, labels=fs)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## only the neuronal clusters
+neuronal_clusters &lt;- c(0, 2:5, 7:11, 12)
+DotPlot(so_merged, assay = &quot;RNA&quot;, features = features, idents = neuronal_clusters, 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 7) + 
+  RotatedAxis() + scale_color_viridis() + 
+  theme(axis.text.x = element_text(angle=45)) + ylab(&quot;cluster ID&quot;) + 
+  scale_x_discrete(name = &quot;gene&quot;, breaks = features, labels=fs)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-2.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div id="check-for-logfc-of-specific-genes" class="section level1">
+<h1>Check for logFC of specific genes</h1>
+<p>We first subset the data to the neuronal clusters.</p>
+<pre class="r"><code>sce_sub &lt;- sce_merged[,sce_merged$cluster_id %in% neuronal_clusters]</code></pre>
+<pre class="r"><code>## markers for all other clusters
+all_default &lt;- findMarkers(sce_sub, groups = sce_sub$cluster_id, 
+                           pval.type=&quot;all&quot;, assay.type = &quot;logcounts&quot;)
+all_default[[&quot;12&quot;]][1:10,]</code></pre>
+<pre><code>DataFrame with 10 rows and 19 columns
+                            p.value         FDR summary.logFC   logFC.0
+                          &lt;numeric&gt;   &lt;numeric&gt;     &lt;numeric&gt; &lt;numeric&gt;
+ENSG00000197406.DIO3   2.75524e-101 3.85018e-97     -0.624488 -1.046298
+ENSG00000068305.MEF2A   5.44383e-94 3.80360e-90      1.521393  1.565268
+ENSG00000128564.VGF     1.56866e-87 7.30684e-84     -1.484374 -1.761042
+ENSG00000106236.NPTX2   6.18709e-86 2.16146e-82      2.376912  2.560395
+ENSG00000171951.SCG2    1.42377e-85 3.97914e-82     -1.524608 -1.983169
+ENSG00000115756.HPCAL1  1.12325e-81 2.61605e-78     -0.471511 -0.593918
+ENSG00000171724.VAT1L   1.56707e-81 3.12832e-78     -0.643706 -0.643706
+TDP43-HA                3.53266e-78 6.17067e-75      1.730656  1.745791
+ENSG00000101489.CELF4   7.97054e-74 1.23756e-70     -0.616960 -0.880427
+ENSG00000182870.GALNT9  1.28336e-70 1.79337e-67     -0.319167 -0.343776
+                         logFC.1   logFC.2   logFC.3   logFC.4   logFC.5
+                       &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
+ENSG00000197406.DIO3          NA -0.795685 -1.027247 -1.281696 -0.624488
+ENSG00000068305.MEF2A         NA  1.521393  1.576078  1.590858  1.522749
+ENSG00000128564.VGF           NA -1.821214 -1.894950 -1.692037 -2.172945
+ENSG00000106236.NPTX2         NA  2.828946  2.376912  2.582931  2.362946
+ENSG00000171951.SCG2          NA -1.763626 -1.943555 -1.884667 -1.524608
+ENSG00000115756.HPCAL1        NA -0.471511 -0.843613 -0.840582 -0.705012
+ENSG00000171724.VAT1L         NA -0.822377 -0.747327 -0.815967 -1.073827
+TDP43-HA                      NA  1.744715  1.748357  1.740472  1.730656
+ENSG00000101489.CELF4         NA -0.791644 -0.811538 -0.828414 -0.616960
+ENSG00000182870.GALNT9        NA -0.322449 -0.598481 -0.493152 -0.756738
+                         logFC.6   logFC.7   logFC.8   logFC.9  logFC.10
+                       &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
+ENSG00000197406.DIO3          NA -0.837965 -0.958831 -1.644596 -0.780593
+ENSG00000068305.MEF2A         NA  1.587535  1.530419  1.597972  1.590578
+ENSG00000128564.VGF           NA -1.970662 -1.682397 -1.863520 -2.157665
+ENSG00000106236.NPTX2         NA  2.398881  2.459909  2.491559  2.603176
+ENSG00000171951.SCG2          NA -2.390701 -1.500523 -1.801118 -2.027435
+ENSG00000115756.HPCAL1        NA -0.819573 -1.015065 -1.136672 -1.156999
+ENSG00000171724.VAT1L         NA -0.755207 -0.754875 -0.907415 -1.162016
+TDP43-HA                      NA  1.748184  1.739708  1.745546  1.737825
+ENSG00000101489.CELF4         NA -0.808820 -0.793261 -0.679503 -0.817872
+ENSG00000182870.GALNT9        NA -0.516095 -0.346855 -0.665268 -0.319167
+                        logFC.11  logFC.13  logFC.14  logFC.15  logFC.16
+                       &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
+ENSG00000197406.DIO3   -1.139397        NA        NA        NA        NA
+ENSG00000068305.MEF2A   1.604219        NA        NA        NA        NA
+ENSG00000128564.VGF    -1.484374        NA        NA        NA        NA
+ENSG00000106236.NPTX2   2.747775        NA        NA        NA        NA
+ENSG00000171951.SCG2   -1.473938        NA        NA        NA        NA
+ENSG00000115756.HPCAL1 -1.046186        NA        NA        NA        NA
+ENSG00000171724.VAT1L  -0.885315        NA        NA        NA        NA
+TDP43-HA                1.745746        NA        NA        NA        NA
+ENSG00000101489.CELF4  -0.727986        NA        NA        NA        NA
+ENSG00000182870.GALNT9 -0.376287        NA        NA        NA        NA</code></pre>
+<pre class="r"><code>## what is the logFC for the different TDP quantifications and our control genes?
+all_default[[&quot;12&quot;]][which(rownames(all_default[[&quot;12&quot;]]) %in% features),]</code></pre>
+<pre><code>DataFrame with 9 rows and 19 columns
+                                  p.value         FDR summary.logFC   logFC.0
+                                &lt;numeric&gt;   &lt;numeric&gt;     &lt;numeric&gt; &lt;numeric&gt;
+TDP43-HA                      3.53266e-78 6.17067e-75     1.7306559  1.745791
+total-TDP43                   1.36284e-66 1.36031e-63     1.2744292  1.290974
+construct                     4.75406e-56 2.88840e-53     1.1417415  1.151854
+STMN2-alevin                  1.06158e-19 4.42822e-18    -0.6810534 -1.441526
+ENSG00000104435.STMN2         2.33622e-19 9.46270e-18    -0.6856534 -1.443431
+ENSG00000120948.TARDBP-alevin 2.91357e-04 1.66930e-03     0.1172288  0.128119
+ENSG00000120948.TARDBP        8.28654e-03 3.25362e-02     0.0838790  0.117271
+ENSG00000026025.VIM           2.73719e-01 5.93660e-01     0.0588915 -0.694411
+VIM-alevin                    3.52266e-01 7.15251e-01     0.0487390 -0.696555
+                                logFC.1   logFC.2   logFC.3   logFC.4   logFC.5
+                              &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
+TDP43-HA                             NA  1.744715  1.748357  1.740472  1.730656
+total-TDP43                          NA  1.289610  1.295004  1.288532  1.274429
+construct                            NA  1.150644  1.152148  1.141741  1.145988
+STMN2-alevin                         NA -0.966936 -1.287724 -1.580928 -0.745939
+ENSG00000104435.STMN2                NA -0.974152 -1.288942 -1.586145 -0.752298
+ENSG00000120948.TARDBP-alevin        NA  0.126616  0.128775  0.124126  0.119556
+ENSG00000120948.TARDBP               NA  0.109713  0.123201  0.114812  0.106891
+ENSG00000026025.VIM                  NA -0.468243 -0.768256 -0.584931 -0.228360
+VIM-alevin                           NA -0.472772 -0.769696 -0.583138 -0.237050
+                                logFC.6   logFC.7   logFC.8    logFC.9
+                              &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;  &lt;numeric&gt;
+TDP43-HA                             NA  1.748184  1.739708  1.7455461
+total-TDP43                          NA  1.294260  1.276126  1.2844357
+construct                            NA  1.150276  1.152853  1.1453648
+STMN2-alevin                         NA -1.560722 -0.681053 -1.3457264
+ENSG00000104435.STMN2                NA -1.570907 -0.685653 -1.3439320
+ENSG00000120948.TARDBP-alevin        NA  0.129281  0.117229  0.1194269
+ENSG00000120948.TARDBP               NA  0.106486  0.106091  0.0873809
+ENSG00000026025.VIM                  NA -0.896212 -0.593201 -0.4216214
+VIM-alevin                           NA -0.884929 -0.597517 -0.4206806
+                               logFC.10   logFC.11  logFC.13  logFC.14
+                              &lt;numeric&gt;  &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
+TDP43-HA                       1.737825  1.7457458        NA        NA
+total-TDP43                    1.291781  1.2949158        NA        NA
+construct                      1.149105  1.1471428        NA        NA
+STMN2-alevin                  -1.084390 -1.2281809        NA        NA
+ENSG00000104435.STMN2         -1.086801 -1.2522374        NA        NA
+ENSG00000120948.TARDBP-alevin  0.134381  0.1302804        NA        NA
+ENSG00000120948.TARDBP         0.133261  0.0838790        NA        NA
+ENSG00000026025.VIM           -0.622098  0.0588915        NA        NA
+VIM-alevin                    -0.627804  0.0487390        NA        NA
+                               logFC.15  logFC.16
+                              &lt;numeric&gt; &lt;numeric&gt;
+TDP43-HA                             NA        NA
+total-TDP43                          NA        NA
+construct                            NA        NA
+STMN2-alevin                         NA        NA
+ENSG00000104435.STMN2                NA        NA
+ENSG00000120948.TARDBP-alevin        NA        NA
+ENSG00000120948.TARDBP               NA        NA
+ENSG00000026025.VIM                  NA        NA
+VIM-alevin                           NA        NA</code></pre>
+<pre class="r"><code>## compute the mean logFC, because the reporte summary logFC is the smallest logFC to any cluster
+rowMeans(all_default[[&quot;12&quot;]][which(rownames(all_default[[&quot;12&quot;]]) %in% features),] %&gt;% 
+           as.data.frame %&gt;% dplyr::select(starts_with(&quot;logFC&quot;)), na.rm = TRUE)</code></pre>
+<pre><code>                     TDP43-HA                   total-TDP43 
+                    1.7426999                     1.2880069 
+                    construct                  STMN2-alevin 
+                    1.1487117                    -1.1923126 
+        ENSG00000104435.STMN2 ENSG00000120948.TARDBP-alevin 
+                   -1.1984499                     0.1257790 
+       ENSG00000120948.TARDBP           ENSG00000026025.VIM 
+                    0.1088986                    -0.5218441 
+                   VIM-alevin 
+                   -0.5241402 </code></pre>
+<pre class="r"><code>## using Seurat
+FoldChange(object = so_merged, slot = &quot;data&quot;, ident.1 = 12, 
+            ident.2 = neuronal_clusters, 
+            features = features, pseudocount.use = 1)</code></pre>
+<pre><code>                              avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.2724795 0.415 0.412
+ENSG00000120948.TARDBP-alevin  0.3658926 0.335 0.286
+TDP43-HA                       2.9398736 0.938 0.185
+total-TDP43                    2.1770431 0.911 0.301
+construct                      2.0990349 0.844 0.033
+ENSG00000104435.STMN2         -1.3788752 0.942 0.999
+STMN2-alevin                  -1.3825515 0.938 0.999
+ENSG00000026025.VIM           -0.8045526 0.929 0.980
+VIM-alevin                    -0.8181812 0.920 0.978</code></pre>
+<pre class="r"><code># the default pseudocount is 1, but that gives much higher logFC than scran findMarkers
+# a value of 3 gives similar results...
+FoldChange(object = so_merged, slot = &quot;data&quot;, ident.1 = 12, 
+            ident.2 = neuronal_clusters, 
+            features = features, pseudocount.use = 3)</code></pre>
+<pre><code>                              avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.1123136 0.415 0.412
+ENSG00000120948.TARDBP-alevin  0.1433252 0.335 0.286
+TDP43-HA                       1.7805042 0.938 0.185
+total-TDP43                    1.2273263 0.911 0.301
+construct                      1.0911564 0.844 0.033
+ENSG00000104435.STMN2         -1.2936397 0.942 0.999
+STMN2-alevin                  -1.2878191 0.938 0.999
+ENSG00000026025.VIM           -0.6179135 0.929 0.980
+VIM-alevin                    -0.6215473 0.920 0.978</code></pre>
+<pre class="r"><code># a small pseudocount doesn&#39;t not affect genes with low expression that much
+FoldChange(object = so_merged, slot = &quot;data&quot;, ident.1 = 12, 
+            ident.2 = neuronal_clusters, 
+            features = features, pseudocount.use = 0.001)</code></pre>
+<pre><code>                              avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.9695835 0.415 0.412
+ENSG00000120948.TARDBP-alevin  1.7768719 0.335 0.286
+TDP43-HA                       5.7008509 0.938 0.185
+total-TDP43                    4.3038966 0.911 0.301
+construct                      6.1075702 0.844 0.033
+ENSG00000104435.STMN2         -1.4261511 0.942 0.999
+STMN2-alevin                  -1.4357326 0.938 0.999
+ENSG00000026025.VIM           -0.9493064 0.929 0.980
+VIM-alevin                    -0.9738483 0.920 0.978</code></pre>
+<div id="save-cluster-markers-to-rds" class="section level2">
+<h2>Save cluster markers to RDS</h2>
+<pre class="r"><code>saveRDS(so_merged, file.path(&quot;output&quot;, &quot;so_TDP-06-01-totalTDP-construct-quantification.rds&quot;))
+saveRDS(sce_merged, file.path(&quot;output&quot;, &quot;sce_TDP-06-01-totalTDP-construct-quantification.rds&quot;))</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.0.5 (2021-03-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 18.04.5 LTS
+
+Matrix products: default
+BLAS:   /usr/local/R/R-4.0.5/lib/libRblas.so
+LAPACK: /usr/local/R/R-4.0.5/lib/libRlapack.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+ [1] parallel  stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] stringr_1.4.0               SeuratObject_4.0.1         
+ [3] Seurat_4.0.1                scran_1.16.0               
+ [5] SingleCellExperiment_1.10.1 SummarizedExperiment_1.18.1
+ [7] DelayedArray_0.14.0         matrixStats_0.56.0         
+ [9] Biobase_2.48.0              GenomicRanges_1.40.0       
+[11] GenomeInfoDb_1.24.2         IRanges_2.22.2             
+[13] S4Vectors_0.26.1            BiocGenerics_0.34.0        
+[15] viridis_0.5.1               viridisLite_0.3.0          
+[17] RColorBrewer_1.1-2          purrr_0.3.4                
+[19] muscat_1.2.1                dplyr_1.0.2                
+[21] ggplot2_3.3.2               cowplot_1.0.0              
+[23] ComplexHeatmap_2.4.2        tximport_1.16.1            
+[25] workflowr_1.6.2            
+
+loaded via a namespace (and not attached):
+  [1] reticulate_1.16           tidyselect_1.1.0         
+  [3] lme4_1.1-23               RSQLite_2.2.0            
+  [5] AnnotationDbi_1.50.1      htmlwidgets_1.5.1        
+  [7] BiocParallel_1.22.0       Rtsne_0.15               
+  [9] munsell_0.5.0             codetools_0.2-16         
+ [11] ica_1.0-2                 statmod_1.4.34           
+ [13] future_1.17.0             miniUI_0.1.1.1           
+ [15] withr_2.4.1               colorspace_1.4-1         
+ [17] knitr_1.29                ROCR_1.0-11              
+ [19] tensor_1.5                listenv_0.8.0            
+ [21] labeling_0.3              git2r_0.27.1             
+ [23] GenomeInfoDbData_1.2.3    polyclip_1.10-0          
+ [25] farver_2.0.3              bit64_0.9-7              
+ [27] glmmTMB_1.0.2.1           rprojroot_1.3-2          
+ [29] vctrs_0.3.4               generics_0.0.2           
+ [31] xfun_0.15                 R6_2.4.1                 
+ [33] doParallel_1.0.15         ggbeeswarm_0.6.0         
+ [35] clue_0.3-57               rsvd_1.0.3               
+ [37] locfit_1.5-9.4            spatstat.utils_2.1-0     
+ [39] bitops_1.0-6              cachem_1.0.4             
+ [41] promises_1.1.1            scales_1.1.1             
+ [43] beeswarm_0.2.3            gtable_0.3.0             
+ [45] globals_0.12.5            goftest_1.2-2            
+ [47] rlang_0.4.10              genefilter_1.70.0        
+ [49] GlobalOptions_0.1.2       splines_4.0.5            
+ [51] lazyeval_0.2.2            TMB_1.7.16               
+ [53] spatstat.geom_2.1-0       abind_1.4-5              
+ [55] yaml_2.2.1                reshape2_1.4.4           
+ [57] backports_1.1.9           httpuv_1.5.4             
+ [59] tools_4.0.5               spatstat.core_2.1-2      
+ [61] ellipsis_0.3.1            gplots_3.0.4             
+ [63] ggridges_0.5.2            Rcpp_1.0.5               
+ [65] plyr_1.8.6                progress_1.2.2           
+ [67] zlibbioc_1.34.0           RCurl_1.98-1.3           
+ [69] prettyunits_1.1.1         rpart_4.1-15             
+ [71] deldir_0.2-10             pbapply_1.4-2            
+ [73] GetoptLong_1.0.1          zoo_1.8-8                
+ [75] ggrepel_0.8.2             cluster_2.1.0            
+ [77] colorRamps_2.3            fs_1.5.0                 
+ [79] variancePartition_1.18.2  magrittr_1.5             
+ [81] scattermore_0.7           data.table_1.12.8        
+ [83] lmerTest_3.1-2            circlize_0.4.10          
+ [85] lmtest_0.9-37             RANN_2.6.1               
+ [87] whisker_0.4               fitdistrplus_1.1-1       
+ [89] hms_0.5.3                 patchwork_1.0.1          
+ [91] mime_0.9                  evaluate_0.14            
+ [93] xtable_1.8-4              pbkrtest_0.4-8.6         
+ [95] XML_3.99-0.4              gridExtra_2.3            
+ [97] shape_1.4.4               compiler_4.0.5           
+ [99] scater_1.16.2             tibble_3.0.3             
+[101] KernSmooth_2.23-17        crayon_1.3.4             
+[103] minqa_1.2.4               htmltools_0.5.0          
+[105] mgcv_1.8-31               later_1.1.0.1            
+[107] tidyr_1.1.0               geneplotter_1.66.0       
+[109] DBI_1.1.0                 MASS_7.3-51.6            
+[111] rappdirs_0.3.1            boot_1.3-25              
+[113] Matrix_1.3-3              gdata_2.18.0             
+[115] igraph_1.2.5              pkgconfig_2.0.3          
+[117] numDeriv_2016.8-1.1       spatstat.sparse_2.0-0    
+[119] plotly_4.9.2.1            foreach_1.5.0            
+[121] annotate_1.66.0           vipor_0.4.5              
+[123] dqrng_0.2.1               blme_1.0-4               
+[125] XVector_0.28.0            digest_0.6.25            
+[127] sctransform_0.3.2         RcppAnnoy_0.0.18         
+[129] spatstat.data_2.1-0       rmarkdown_2.3            
+[131] leiden_0.3.3              uwot_0.1.10              
+[133] edgeR_3.30.3              DelayedMatrixStats_1.10.1
+[135] shiny_1.5.0               gtools_3.8.2             
+[137] rjson_0.2.20              nloptr_1.2.2.2           
+[139] lifecycle_1.0.0           nlme_3.1-148             
+[141] jsonlite_1.7.2            BiocNeighbors_1.6.0      
+[143] limma_3.44.3              pillar_1.4.6             
+[145] lattice_0.20-41           fastmap_1.0.1            
+[147] httr_1.4.2                survival_3.2-3           
+[149] glue_1.4.2                png_0.1-7                
+[151] iterators_1.0.12          bit_1.1-15.2             
+[153] stringi_1.4.6             blob_1.2.1               
+[155] DESeq2_1.28.1             BiocSingular_1.4.0       
+[157] caTools_1.18.0            memoise_2.0.0            
+[159] irlba_2.3.3               future.apply_1.6.0       </code></pre>
+</div>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
