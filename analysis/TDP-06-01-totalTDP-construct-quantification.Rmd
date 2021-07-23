@@ -41,7 +41,7 @@ so <- SetIdent(so, value = "RNA_snn_res.0.4")
 
 
 We combine the quantification of the total TDP, the construct, STMN2 and VIM with the CellRanger count matrix.
-```{r read-alevin}
+```{r read-alevin, warning = FALSE}
 sample_ids <- c("TDP4wOFF", "TDP2wON", "TDP4wONa", "TDP4wONb")
 samples <- c("no1_Neural_cuture_d_96_TDP-43-HA_4w_DOXoff", 
              "no2_Neural_cuture_d_96_TDP-43-HA_2w_DOXON",
@@ -63,7 +63,7 @@ txi <- txi[,colnames(txi) != ""]
 ```
 
 We add the alevin counts to the CellRanger matrix.
-```{r combine-counts}
+```{r combine-counts, warning = FALSE}
 ## add two new rows to counts matrix and replace the counts for matching 
 ## barcodes with the alevin counts
 alevin_counts <- matrix(0, nrow = 4, ncol = ncol(so))
@@ -193,7 +193,7 @@ ks <- rep.int(names(fs), ns)
 labs <- lapply(fs, function(x) gsub(".*\\.", "",x))
 ```
 
-```{r known-markers-heatmap, fig.width = 10, fig.height = 18}
+```{r known-markers-heatmap, fig.width = 10, fig.height = 10}
 # split cells by cluster
 cs_by_k <- split(colnames(sce), sce$cluster_id)
 # compute cluster-marker means
@@ -331,7 +331,7 @@ sce_merged$cluster_id <- Idents(so_merged)
 sce_merged$sample_id <- so_merged$sample_id
 ```
 
-```{r known-markers-heatmap-merged, fig.width = 10, fig.height = 18}
+```{r known-markers-heatmap-merged, fig.width = 10, fig.height = 10}
 # split cells by cluster
 cs_by_k <- split(colnames(sce_merged), sce_merged$cluster_id)
 # compute cluster-marker means
@@ -384,12 +384,12 @@ draw(hm, annotation_legend_list = list(col_lgd))
 
 # Dotplot
 
-```{r dotplot, fig.width = 8, fig.height = 4}
+```{r dotplot, fig.width = 7, fig.height = 6}
 features <- c("ENSG00000120948.TARDBP", "ENSG00000120948.TARDBP-alevin", "TDP43-HA", "total-TDP43", "construct", "ENSG00000104435.STMN2", "STMN2-alevin", "ENSG00000026025.VIM", "VIM-alevin")
-fs <- c("TARDBP-CellRanger", "TARDBP-alevin", "TDP-HA", "total-TDP43", "construct", "STMN2-CellRanger", "STMN2-alevin", "VIM-CellRanger", "VIM-alevin")
+fs <- c("TARDBP-CR", "TARDBP-alevin", "TDP-HA", "total-TDP43", "construct", "STMN2-CR", "STMN2-alevin", "VIM-CR", "VIM-alevin")
 
 DotPlot(so_merged, assay = "RNA", features = features, 
-        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 7) + 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 6) + 
   RotatedAxis() + scale_color_viridis() + 
   theme(axis.text.x = element_text(angle=45)) + ylab("cluster ID") + 
   scale_x_discrete(name = "gene", breaks = features, labels=fs)
@@ -397,7 +397,7 @@ DotPlot(so_merged, assay = "RNA", features = features,
 ## only the neuronal clusters
 neuronal_clusters <- c(0, 2:5, 7:11, 12)
 DotPlot(so_merged, assay = "RNA", features = features, idents = neuronal_clusters, 
-        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 7) + 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 6) + 
   RotatedAxis() + scale_color_viridis() + 
   theme(axis.text.x = element_text(angle=45)) + ylab("cluster ID") + 
   scale_x_discrete(name = "gene", breaks = features, labels=fs)
