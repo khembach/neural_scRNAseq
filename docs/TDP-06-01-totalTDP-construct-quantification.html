@@ -394,7 +394,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -403,7 +403,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -412,10 +412,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-07-23
+<strong>Last updated:</strong> 2021-07-26
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>neural_scRNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -431,12 +431,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you'll want to first commit it to the Git repo. If you're still working on the analysis, you can ignore this warning. When you're finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree54885462fd9061f8358d538d8e3efcf011944c4ctargetblank5488546a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/54885462fd9061f8358d538d8e3efcf011944c4c" target="_blank">5488546</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree0419bfbd48c019eae2b66945d5be7f1f9c2f7d70targetblank0419bfba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/0419bfbd48c019eae2b66945d5be7f1f9c2f7d70" target="_blank">0419bfb</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree54885462fd9061f8358d538d8e3efcf011944c4ctargetblank5488546a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree0419bfbd48c019eae2b66945d5be7f1f9c2f7d70targetblank0419bfba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/54885462fd9061f8358d538d8e3efcf011944c4c" target="_blank">5488546</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/0419bfbd48c019eae2b66945d5be7f1f9c2f7d70" target="_blank">0419bfb</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -612,6 +612,7 @@ Ignored files:
     Ignored:    analysis/TDP-08-clustering-timeline-HA_cache/
     Ignored:    analysis/additional_filtering_cache/
     Ignored:    analysis/additional_filtering_clustering_cache/
+    Ignored:    analysis/figure/
     Ignored:    analysis/organoid-01-1-qualtiy-control_cache/
     Ignored:    analysis/organoid-01-clustering_cache/
     Ignored:    analysis/organoid-02-integration_cache/
@@ -804,7 +805,9 @@ Untracked files:
     Untracked:  Rplots.pdf
     Untracked:  Unfiltered
     Untracked:  Unfiltered.pdf
+    Untracked:  analysis/.TDP-06-01-totalTDP-construct-quantification.Rmd.swp
     Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
+    Untracked:  analysis/TDP-06-01-totalTDP-construct-quantification_bu.Rmd
     Untracked:  analysis/TDP-07-01-STMN2_expression copy.Rmd
     Untracked:  analysis/additional_filtering.Rmd
     Untracked:  analysis/additional_filtering_clustering.Rmd
@@ -849,7 +852,6 @@ Untracked files:
 Unstaged changes:
     Modified:   analysis/05-annotation.Rmd
     Modified:   analysis/TDP-04-clustering.Rmd
-    Modified:   analysis/TDP-06-01-totalTDP-construct-quantification.Rmd
     Modified:   analysis/TDP-07-01-STMN2_expression.Rmd
     Modified:   analysis/TDP-07-cluster_12.Rmd
     Modified:   analysis/TDP-08-01-HA-D96-expression-changes.Rmd
@@ -895,6 +897,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/0419bfbd48c019eae2b66945d5be7f1f9c2f7d70/analysis/TDP-06-01-totalTDP-construct-quantification.Rmd" target="_blank">0419bfb</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-26
+</td>
+<td>
+select cells with total-TDP43 count &gt; 0 and add feature plots
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/9e6d90ccbaf65443cbe90dd965cc5a838bf0b518/docs/TDP-06-01-totalTDP-construct-quantification.html" target="_blank">9e6d90c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1364,6 +1400,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/9e6d90ccbaf65443cbe90dd965cc5a838bf0b518/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/known-markers-heatmap-1.png" target="_blank">9e6d90c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/known-markers-heatmap-1.png" target="_blank">e723f61</a>
 </td>
 <td>
@@ -1623,6 +1670,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/9e6d90ccbaf65443cbe90dd965cc5a838bf0b518/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/known-markers-heatmap-merged-1.png" target="_blank">9e6d90c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/known-markers-heatmap-merged-1.png" target="_blank">e723f61</a>
 </td>
 <td>
@@ -1672,6 +1730,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/9e6d90ccbaf65443cbe90dd965cc5a838bf0b518/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-1.png" target="_blank">9e6d90c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-1.png" target="_blank">e723f61</a>
 </td>
 <td>
@@ -1715,6 +1784,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/9e6d90ccbaf65443cbe90dd965cc5a838bf0b518/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-2.png" target="_blank">9e6d90c</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-07-23
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/e723f614b52317f855ccbdae393ef0b846cb6fcf/docs/figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-2.png" target="_blank">e723f61</a>
@@ -1846,7 +1926,7 @@ ENSG00000120948.TARDBP-alevin        NA        NA
 ENSG00000120948.TARDBP               NA        NA
 ENSG00000026025.VIM                  NA        NA
 VIM-alevin                           NA        NA</code></pre>
-<pre class="r"><code>## compute the mean logFC, because the reporte summary logFC is the smallest logFC to any cluster
+<pre class="r"><code>## compute the mean logFC, because the reported summary logFC is the smallest logFC to any cluster
 rowMeans(all_default[[&quot;12&quot;]][which(rownames(all_default[[&quot;12&quot;]]) %in% features),] %&gt;% 
            as.data.frame %&gt;% dplyr::select(starts_with(&quot;logFC&quot;)), na.rm = TRUE)</code></pre>
 <pre><code>                     TDP43-HA                   total-TDP43 
@@ -1859,49 +1939,217 @@ rowMeans(all_default[[&quot;12&quot;]][which(rownames(all_default[[&quot;12&quot
                     0.1088986                    -0.5218441 
                    VIM-alevin 
                    -0.5241402 </code></pre>
-<pre class="r"><code>## using Seurat
+<pre class="r"><code>neuronal_clusters1 &lt;- neuronal_clusters[neuronal_clusters != &quot;12&quot;]
+## using Seurat
 FoldChange(object = so_merged, slot = &quot;data&quot;, ident.1 = 12, 
-            ident.2 = neuronal_clusters, 
+            ident.2 = neuronal_clusters1, 
             features = features, pseudocount.use = 1)</code></pre>
 <pre><code>                              avg_log2FC pct.1 pct.2
-ENSG00000120948.TARDBP         0.2724795 0.415 0.412
-ENSG00000120948.TARDBP-alevin  0.3658926 0.335 0.286
-TDP43-HA                       2.9398736 0.938 0.185
-total-TDP43                    2.1770431 0.911 0.301
-construct                      2.0990349 0.844 0.033
-ENSG00000104435.STMN2         -1.3788752 0.942 0.999
-STMN2-alevin                  -1.3825515 0.938 0.999
-ENSG00000026025.VIM           -0.8045526 0.929 0.980
-VIM-alevin                    -0.8181812 0.920 0.978</code></pre>
+ENSG00000120948.TARDBP         0.2752933 0.415 0.412
+ENSG00000120948.TARDBP-alevin  0.3698014 0.335 0.286
+TDP43-HA                       3.0330579 0.938 0.178
+total-TDP43                    2.2254752 0.911 0.295
+construct                      2.1441423 0.844 0.026
+ENSG00000104435.STMN2         -1.3871739 0.942 1.000
+STMN2-alevin                  -1.3908633 0.938 1.000
+ENSG00000026025.VIM           -0.8103212 0.929 0.980
+VIM-alevin                    -0.8240223 0.920 0.979</code></pre>
 <pre class="r"><code># the default pseudocount is 1, but that gives much higher logFC than scran findMarkers
 # a value of 3 gives similar results...
 FoldChange(object = so_merged, slot = &quot;data&quot;, ident.1 = 12, 
-            ident.2 = neuronal_clusters, 
+            ident.2 = neuronal_clusters1, 
             features = features, pseudocount.use = 3)</code></pre>
 <pre><code>                              avg_log2FC pct.1 pct.2
-ENSG00000120948.TARDBP         0.1123136 0.415 0.412
-ENSG00000120948.TARDBP-alevin  0.1433252 0.335 0.286
-TDP43-HA                       1.7805042 0.938 0.185
-total-TDP43                    1.2273263 0.911 0.301
-construct                      1.0911564 0.844 0.033
-ENSG00000104435.STMN2         -1.2936397 0.942 0.999
-STMN2-alevin                  -1.2878191 0.938 0.999
-ENSG00000026025.VIM           -0.6179135 0.929 0.980
-VIM-alevin                    -0.6215473 0.920 0.978</code></pre>
+ENSG00000120948.TARDBP         0.1134088 0.415 0.412
+ENSG00000120948.TARDBP-alevin  0.1447382 0.335 0.286
+TDP43-HA                       1.8138183 0.938 0.178
+total-TDP43                    1.2455788 0.911 0.295
+construct                      1.1065239 0.844 0.026
+ENSG00000104435.STMN2         -1.3016237 0.942 1.000
+STMN2-alevin                  -1.2957810 0.938 1.000
+ENSG00000026025.VIM           -0.6226167 0.929 0.980
+VIM-alevin                    -0.6262727 0.920 0.979</code></pre>
 <pre class="r"><code># a small pseudocount doesn&#39;t not affect genes with low expression that much
 FoldChange(object = so_merged, slot = &quot;data&quot;, ident.1 = 12, 
-            ident.2 = neuronal_clusters, 
+            ident.2 = neuronal_clusters1, 
             features = features, pseudocount.use = 0.001)</code></pre>
 <pre><code>                              avg_log2FC pct.1 pct.2
-ENSG00000120948.TARDBP         0.9695835 0.415 0.412
-ENSG00000120948.TARDBP-alevin  1.7768719 0.335 0.286
-TDP43-HA                       5.7008509 0.938 0.185
-total-TDP43                    4.3038966 0.911 0.301
-construct                      6.1075702 0.844 0.033
-ENSG00000104435.STMN2         -1.4261511 0.942 0.999
-STMN2-alevin                  -1.4357326 0.938 0.999
-ENSG00000026025.VIM           -0.9493064 0.929 0.980
-VIM-alevin                    -0.9738483 0.920 0.978</code></pre>
+ENSG00000120948.TARDBP         0.9825999 0.415 0.412
+ENSG00000120948.TARDBP-alevin  1.8100665 0.335 0.286
+TDP43-HA                       6.6391454 0.938 0.178
+total-TDP43                    4.5827505 0.911 0.295
+construct                      7.5692157 0.844 0.026
+ENSG00000104435.STMN2         -1.4346164 0.942 1.000
+STMN2-alevin                  -1.4442310 0.938 1.000
+ENSG00000026025.VIM           -0.9558110 0.929 0.980
+VIM-alevin                    -0.9804704 0.920 0.979</code></pre>
+</div>
+<div id="logfc-of-tdp-43-expressing-cells" class="section level1">
+<h1>logFC of TDP-43 expressing cells</h1>
+<p>We compute the total TDP-43 logFC between cluster 12 and all neuronal clusters using the cells with expression &gt; 0.</p>
+<pre class="r"><code>so_merge_sub &lt;- subset(x = so_merged, subset = `total-TDP43` &gt; 0, slot = &quot;counts&quot;,
+                       idents = neuronal_clusters)
+## mean log2FC over all neuronal clusters
+FoldChange(object = so_merge_sub, slot = &quot;data&quot;, ident.1 = 12, 
+            ident.2 = neuronal_clusters1, 
+            features = features, pseudocount.use = 0.001)</code></pre>
+<pre><code>                              avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.2694650 0.446 0.695
+ENSG00000120948.TARDBP-alevin  0.1926280 0.368 0.968
+TDP43-HA                       5.1524308 0.990 0.558
+total-TDP43                    2.9631770 1.000 1.000
+construct                      6.6715474 0.887 0.046
+ENSG00000104435.STMN2         -1.4407947 0.951 1.000
+STMN2-alevin                  -1.4457037 0.941 1.000
+ENSG00000026025.VIM           -0.9492385 0.936 0.985
+VIM-alevin                    -0.9660023 0.931 0.984</code></pre>
+<pre class="r"><code># logFC for each cluster individually
+res_per_cluster &lt;- lapply(neuronal_clusters1, function(x) {
+  FoldChange(object = so_merge_sub, slot = &quot;data&quot;, ident.1 = 12, 
+            ident.2 = x, 
+            features = features, pseudocount.use = 0.001)
+})
+names(res_per_cluster) &lt;- neuronal_clusters1
+res_per_cluster</code></pre>
+<pre><code>$`0`
+                               avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.18895629 0.446 0.688
+ENSG00000120948.TARDBP-alevin  0.07857973 0.368 0.978
+TDP43-HA                       4.91736705 0.990 0.567
+total-TDP43                    2.80867991 1.000 1.000
+construct                      6.46790055 0.887 0.030
+ENSG00000104435.STMN2         -1.65110924 0.951 1.000
+STMN2-alevin                  -1.65965375 0.941 1.000
+ENSG00000026025.VIM           -1.14474838 0.936 0.983
+VIM-alevin                    -1.16476202 0.931 0.981
+
+$`2`
+                               avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.14270135 0.446 0.686
+ENSG00000120948.TARDBP-alevin  0.06419426 0.368 0.969
+TDP43-HA                       5.08966165 0.990 0.556
+total-TDP43                    2.85087536 1.000 1.000
+construct                      6.65708914 0.887 0.041
+ENSG00000104435.STMN2         -0.99665280 0.951 1.000
+STMN2-alevin                  -0.99923351 0.941 1.000
+ENSG00000026025.VIM           -0.83613952 0.936 0.991
+VIM-alevin                    -0.86080516 0.931 0.989
+
+$`3`
+                               avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.16820761 0.446 0.654
+ENSG00000120948.TARDBP-alevin  0.02705666 0.368 0.970
+TDP43-HA                       5.27865242 0.990 0.555
+total-TDP43                    2.85976517 1.000 1.000
+construct                      7.33023052 0.887 0.038
+ENSG00000104435.STMN2         -1.49092338 0.951 1.000
+STMN2-alevin                  -1.50312479 0.941 1.000
+ENSG00000026025.VIM           -1.19022410 0.936 0.978
+VIM-alevin                    -1.20554661 0.931 0.977
+
+$`4`
+                              avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.5205529 0.446 0.738
+ENSG00000120948.TARDBP-alevin  0.5712139 0.368 0.967
+TDP43-HA                       5.6110905 0.990 0.535
+total-TDP43                    3.3895587 1.000 1.000
+construct                      6.7301499 0.887 0.061
+ENSG00000104435.STMN2         -1.8701496 0.951 1.000
+STMN2-alevin                  -1.8756345 0.941 1.000
+ENSG00000026025.VIM           -0.8112479 0.936 0.999
+VIM-alevin                    -0.8250981 0.931 0.999
+
+$`5`
+                               avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.06978598 0.446 0.635
+ENSG00000120948.TARDBP-alevin -0.14820830 0.368 0.959
+TDP43-HA                       4.56253758 0.990 0.594
+total-TDP43                    2.54475230 1.000 1.000
+construct                      6.02026525 0.887 0.054
+ENSG00000104435.STMN2         -0.70209771 0.951 1.000
+STMN2-alevin                  -0.69963070 0.941 1.000
+ENSG00000026025.VIM           -0.48110503 0.936 0.959
+VIM-alevin                    -0.50647735 0.931 0.956
+
+$`7`
+                              avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.4535827 0.446 0.715
+ENSG00000120948.TARDBP-alevin  0.4689463 0.368 0.957
+TDP43-HA                       5.6258284 0.990 0.539
+total-TDP43                    3.2959716 1.000 1.000
+construct                      7.2107819 0.887 0.048
+ENSG00000104435.STMN2         -1.8248918 0.951 1.000
+STMN2-alevin                  -1.8228662 0.941 1.000
+ENSG00000026025.VIM           -1.3109036 0.936 0.998
+VIM-alevin                    -1.3084975 0.931 0.996
+
+$`8`
+                               avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.14483856 0.446 0.672
+ENSG00000120948.TARDBP-alevin -0.03171034 0.368 0.981
+TDP43-HA                       4.95766299 0.990 0.572
+total-TDP43                    2.71864852 1.000 1.000
+construct                      7.14860106 0.887 0.024
+ENSG00000104435.STMN2         -0.68255999 0.951 0.996
+STMN2-alevin                  -0.67208701 0.941 0.996
+ENSG00000026025.VIM           -1.25674580 0.936 0.966
+VIM-alevin                    -1.27230507 0.931 0.964
+
+$`9`
+                              avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.4996492 0.446 0.779
+ENSG00000120948.TARDBP-alevin  0.6714105 0.368 0.959
+TDP43-HA                       5.7199577 0.990 0.514
+total-TDP43                    3.5264805 1.000 1.000
+construct                      6.4798113 0.887 0.071
+ENSG00000104435.STMN2         -1.5139336 0.951 1.000
+STMN2-alevin                  -1.5301681 0.941 1.000
+ENSG00000026025.VIM           -0.5568563 0.936 1.000
+VIM-alevin                    -0.5745956 0.931 0.998
+
+$`10`
+                              avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.5734840 0.446 0.662
+ENSG00000120948.TARDBP-alevin  0.4526797 0.368 0.952
+TDP43-HA                       5.1442100 0.990 0.604
+total-TDP43                    3.1343867 1.000 1.000
+construct                      6.8065050 0.887 0.055
+ENSG00000104435.STMN2         -1.2536313 0.951 1.000
+STMN2-alevin                  -1.2630024 0.941 1.000
+ENSG00000026025.VIM           -0.9339855 0.936 0.997
+VIM-alevin                    -0.9560955 0.931 0.997
+
+$`11`
+                              avg_log2FC pct.1 pct.2
+ENSG00000120948.TARDBP         0.4415897 0.446 0.789
+ENSG00000120948.TARDBP-alevin  0.7155268 0.368 0.963
+TDP43-HA                       5.8346476 0.990 0.563
+total-TDP43                    3.5385782 1.000 1.000
+construct                      7.1546691 0.887 0.068
+ENSG00000104435.STMN2         -1.3337359 0.951 1.000
+STMN2-alevin                  -1.3102117 0.941 1.000
+ENSG00000026025.VIM            0.3753479 0.936 0.979
+VIM-alevin                     0.3684862 0.931 0.979</code></pre>
+</div>
+<div id="gene-expression-per-cluster" class="section level1">
+<h1>Gene expression per cluster</h1>
+<p>Some feature plots for the cells with total-TDP-43 countx &gt; 0.</p>
+<pre class="r"><code>features1 &lt;- features &lt;- c(&quot;ENSG00000120948.TARDBP&quot;,&quot;TDP43-HA&quot;, &quot;total-TDP43&quot;, 
+                           &quot;construct&quot;, &quot;ENSG00000104435.STMN2&quot;, &quot;ENSG00000026025.VIM&quot;)
+RidgePlot(so_merge_sub, features = features1, ncol = 3)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/ridgeplot-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>VlnPlot(so_merge_sub, features = features1)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/ridgeplot-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(so_merge_sub, features = features1, reduction = &quot;umap&quot;, pt.size = 0.4)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/umap-sub-1.png" width="960" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>fs1 &lt;- c(&quot;TARDBP-CR&quot;, &quot;TDP-HA&quot;, &quot;total-TDP43&quot;, &quot;construct&quot;, &quot;STMN2-CR&quot;,  &quot;VIM-CR&quot;)
+
+DotPlot(so_merge_sub, assay = &quot;RNA&quot;, features = features1, idents = neuronal_clusters, 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 6) + 
+  RotatedAxis() + scale_color_viridis() + 
+  theme(axis.text.x = element_text(angle=45)) + ylab(&quot;cluster ID&quot;) + 
+  scale_x_discrete(name = &quot;gene&quot;, breaks = features1, labels=fs1)</code></pre>
+<p><img src="figure/TDP-06-01-totalTDP-construct-quantification.Rmd/dotplot-sub-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="save-cluster-markers-to-rds" class="section level2">
 <h2>Save cluster markers to RDS</h2>
 <pre class="r"><code>saveRDS(so_merged, file.path(&quot;output&quot;, &quot;so_TDP-06-01-totalTDP-construct-quantification.rds&quot;))
