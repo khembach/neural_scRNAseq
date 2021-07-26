@@ -420,27 +420,75 @@ all_default[["12"]][1:10,]
 ## what is the logFC for the different TDP quantifications and our control genes?
 all_default[["12"]][which(rownames(all_default[["12"]]) %in% features),]
 
-## compute the mean logFC, because the reporte summary logFC is the smallest logFC to any cluster
+## compute the mean logFC, because the reported summary logFC is the smallest logFC to any cluster
 rowMeans(all_default[["12"]][which(rownames(all_default[["12"]]) %in% features),] %>% 
            as.data.frame %>% dplyr::select(starts_with("logFC")), na.rm = TRUE)
 ```
 
 
 ```{r seurat-foldchange}
+neuronal_clusters1 <- neuronal_clusters[neuronal_clusters != "12"]
 ## using Seurat
 FoldChange(object = so_merged, slot = "data", ident.1 = 12, 
-            ident.2 = neuronal_clusters, 
+            ident.2 = neuronal_clusters1, 
             features = features, pseudocount.use = 1)
 # the default pseudocount is 1, but that gives much higher logFC than scran findMarkers
 # a value of 3 gives similar results...
 FoldChange(object = so_merged, slot = "data", ident.1 = 12, 
-            ident.2 = neuronal_clusters, 
+            ident.2 = neuronal_clusters1, 
             features = features, pseudocount.use = 3)
 # a small pseudocount doesn't not affect genes with low expression that much
 FoldChange(object = so_merged, slot = "data", ident.1 = 12, 
-            ident.2 = neuronal_clusters, 
+            ident.2 = neuronal_clusters1, 
             features = features, pseudocount.use = 0.001)
 ```
+
+
+# logFC of TDP-43 expressing cells
+
+We compute the total TDP-43 logFC between cluster 12 and all neuronal clusters using the cells with expression > 0. 
+```{r foldchange-TDP-pos-cells}
+so_merge_sub <- subset(x = so_merged, subset = `total-TDP43` > 0, slot = "counts",
+                       idents = neuronal_clusters)
+## mean log2FC over all neuronal clusters
+FoldChange(object = so_merge_sub, slot = "data", ident.1 = 12, 
+            ident.2 = neuronal_clusters1, 
+            features = features, pseudocount.use = 0.001)
+# logFC for each cluster individually
+res_per_cluster <- lapply(neuronal_clusters1, function(x) {
+  FoldChange(object = so_merge_sub, slot = "data", ident.1 = 12, 
+            ident.2 = x, 
+            features = features, pseudocount.use = 0.001)
+})
+names(res_per_cluster) <- neuronal_clusters1
+res_per_cluster
+```
+
+
+# Gene expression per cluster
+
+Some feature plots for the cells with total-TDP-43 countx > 0.
+```{r ridgeplot, fig.width = 12}
+features1 <- features <- c("ENSG00000120948.TARDBP","TDP43-HA", "total-TDP43", 
+                           "construct", "ENSG00000104435.STMN2", "ENSG00000026025.VIM")
+RidgePlot(so_merge_sub, features = features1, ncol = 3)
+VlnPlot(so_merge_sub, features = features1)
+```
+ 
+```{r umap-sub, fig.width = 10, fig.height = 12}
+FeaturePlot(so_merge_sub, features = features1, reduction = "umap", pt.size = 0.4)
+```
+ 
+```{r dotplot-sub,  fig.width = 7, fig.height = 6}
+fs1 <- c("TARDBP-CR", "TDP-HA", "total-TDP43", "construct", "STMN2-CR",  "VIM-CR")
+
+DotPlot(so_merge_sub, assay = "RNA", features = features1, idents = neuronal_clusters, 
+        scale = TRUE, scale.min = 0, scale.max = 100, dot.scale = 6) + 
+  RotatedAxis() + scale_color_viridis() + 
+  theme(axis.text.x = element_text(angle=45)) + ylab("cluster ID") + 
+  scale_x_discrete(name = "gene", breaks = features1, labels=fs1)
+```
+ 
 
 ## Save cluster markers to RDS
 
