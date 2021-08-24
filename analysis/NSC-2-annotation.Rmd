@@ -290,6 +290,20 @@ for (m in seq_along(fs)) {
     print(p)
     cat("\n\n")
 }
+```
+
+# Violin plot of selected NSC markers
+
+```{r marker-expression-violin, fig.width = 9}
+p <- VlnPlot(sub, features = fs[["NSC"]][1:6], combine = FALSE, pt.size = 0.01, 
+             same.y.lims = TRUE) 
+p <- lapply(seq_along(p), function(x) {
+  p[[x]] + xlab("cluster ID") + ggtitle(names(fs[["NSC"]])[x]) + 
+    theme(legend.position = "none", 
+          axis.text.x = element_text(angle = 0, vjust = 0.5, hjust=1))
+})
+plot_grid(plotlist = p, ncol = 3, label_size = 10)
+          
 DefaultAssay(so) <- "integrated"
 ```
 
