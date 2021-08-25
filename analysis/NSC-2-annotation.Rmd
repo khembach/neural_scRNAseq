@@ -106,7 +106,7 @@ m <- match(cc_genes$geneID[cc_genes$phase == "G2/M"],
 g2m_genes <- rownames(GetAssayData(so))[m]
 (g2m_genes <- g2m_genes[!is.na(g2m_genes)])
 so <- CellCycleScoring(so, s.features = s_genes, g2m.features = g2m_genes,
-                       set.ident = TRUE)
+                       set.ident = FALSE)
 DefaultAssay(so) <- "integrated"
 ```
 
