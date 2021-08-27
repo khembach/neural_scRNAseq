@@ -31,6 +31,7 @@ library(SingleCellExperiment)
 library(stringr)
 library(RCurl)
 library(BiocParallel)
+library(CellMixS)
 ```
 
 # Load data & convert to SCE
@@ -238,4 +239,64 @@ hm <- Heatmap(mat,
     top_annotation = col_anno)
 draw(hm, annotation_legend_list = list(col_lgd))
 ```
+
+
+# Explore data integration with CellMixS
+
+We use the [CellMixS](https://github.com/almutlue/CellMixS) Bioconductor R package to evaluate the data integration and potential batch effects. 
+We test how well the two dataset are mixing or if there are batch effect with the Cellspecific Mixing Score (CMS), a test for batch effects within k-nearest neighbouring cells. 
+A high cms score refers to good mixing, while a low score indicates batch-specific bias. The test considers differences in the number of cells from each batch.
+
+```{r cellmixs-cms, fig.width = 12}
+sce$group_id %>% table
+
+## using PCA based on integrated and scaled data
+## we set k high but below the size of the smallest group 
+## because we want to evaluate global structures
+## k_min is used to define the minimum size of the local neighbourhoods
+sce <- cms(sce, k = 700, k_min = 200, group = "group_id", dim_red = "PCA",
+           n_dim = 10, unbalanced = TRUE, 
+           BPPARAM = MulticoreParam(workers = 15))
+head(colData(sce)[,c("cms_smooth", "cms")])
+
+## cms histogram
+visHist(sce)
+p1 <- visMetric(sce, metric_var = "cms_smooth", dim_red = "UMAP") + 
+  theme_void() + theme(aspect.ratio = 1)
+p2 <- visMetric(sce, metric_var = "cms", dim_red = "UMAP") + 
+  theme_void() + theme(aspect.ratio = 1)
+plot_grid(p1, p2)
+
+## score distribution per cluster
+p1 <- visCluster(sce, metric_var = "cms", cluster_var = "cluster_id") + 
+  scale_fill_hue() +  
+  scale_y_discrete(limits = rev(unique(sort(sce$cluster_id))))
+p2 <- visCluster(sce, metric_var = "cms_smooth", cluster_var = "cluster_id") + 
+  scale_fill_hue() + 
+  scale_y_discrete(limits = rev(unique(sort(sce$cluster_id))))
+plot_grid(p1, p2)
+```
+
+
+We also test how well the two datasets are integrated with the Local Density Differences (ldfDiff) metric.
+In an optimal case relative densities (according to the same set of cells) should not change by integration and the ldfDiff score should be close to 0. In general the overall distribution of ldfDiff should be centered around 0 without long tails.
+```{r cellmixs-integration-evaluation}
+sce_int <- as.SingleCellExperiment(so, assay = "integrated")
+colData(sce_int) <- as.data.frame(colData(sce_int)) %>% 
+    mutate_if(is.character, as.factor) %>% 
+    DataFrame(row.names = colnames(sce_int))
+
+sce_pre_list <- list("P22" = sce[,sce$group_id == "P22"], 
+                     "NES" = sce[,sce$group_id == "NES"])
+## remove dimension reduction from integrated data
+sce_pre_list <- lapply(sce_pre_list, function(x) {reducedDims(x) <- NULL; x})
+
+sce_int <- ldfDiff(sce_pre_list, sce_combined = sce_int, group = "group_id",
+               k = 7, dim_red = "PCA", dim_combined = "PCA", 
+               assay_pre = "logcounts", assay_combined = "logcounts",
+               n_dim = 3, res_name = "Seurat")
+
+visIntegration(sce_int, metric = "diff_ldf", metric_name = "ldfDiff") 
+```
+
 
