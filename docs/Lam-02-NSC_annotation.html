@@ -412,7 +412,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-05-26
+<strong>Last updated:</strong> 2021-08-27
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree5ebe77ec7fccbcf9dc868a6145f7d9437c25411ftargetblank5ebe77ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/5ebe77ec7fccbcf9dc868a6145f7d9437c25411f" target="_blank">5ebe77e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree2da9eceb90b7be0f86bcaf3bd9509e1b6624694ctargetblank2da9ecea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/khembach/neural_scRNAseq/tree/2da9eceb90b7be0f86bcaf3bd9509e1b6624694c" target="_blank">2da9ece</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree5ebe77ec7fccbcf9dc868a6145f7d9437c25411ftargetblank5ebe77ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomkhembachneuralscRNAseqtree2da9eceb90b7be0f86bcaf3bd9509e1b6624694ctargetblank2da9ecea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/5ebe77ec7fccbcf9dc868a6145f7d9437c25411f" target="_blank">5ebe77e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/khembach/neural_scRNAseq/tree/2da9eceb90b7be0f86bcaf3bd9509e1b6624694c" target="_blank">2da9ece</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -527,9 +527,18 @@ Ignored files:
     Ignored:    ._Rplots.pdf
     Ignored:    ._Unfiltered.pdf
     Ignored:    .__workflowr.yml
+    Ignored:    ._cms_PCA10_k1000_k_min200.pdf
+    Ignored:    ._cms_PCA10_k500.pdf
+    Ignored:    ._cms_PCA10_k700_batch_min100.pdf
+    Ignored:    ._cms_PCA10_k700_batch_min50.pdf
+    Ignored:    ._cms_PCA10_k_min100.pdf
+    Ignored:    ._cms_PCA10_k_min200.pdf
+    Ignored:    ._cms_PCA_10_k700.pdf
+    Ignored:    ._cms_umap_PCA.pdf
     Ignored:    ._coverage.pdf
     Ignored:    ._coverage_sashimi.pdf
     Ignored:    ._coverage_sashimi.png
+    Ignored:    ._iCLIP_nrXLs_markers.pdf
     Ignored:    ._neural_scRNAseq.Rproj
     Ignored:    ._pbDS_cell_level.pdf
     Ignored:    ._pbDS_top_expr_umap.pdf
@@ -554,6 +563,7 @@ Ignored files:
     Ignored:    analysis/._Lam-02-NSC_annotation.Rmd
     Ignored:    analysis/._NSC-1-clustering.Rmd
     Ignored:    analysis/._NSC-2-annotation.Rmd
+    Ignored:    analysis/._TDP-06-cluster_analysis.Rmd
     Ignored:    analysis/.__site.yml
     Ignored:    analysis/._additional_filtering.Rmd
     Ignored:    analysis/._additional_filtering_clustering.Rmd
@@ -597,8 +607,13 @@ Ignored files:
     Ignored:    analysis/TDP-04-clustering_cache/
     Ignored:    analysis/TDP-05-00-filtering-plasmid-QC_cache/
     Ignored:    analysis/TDP-05-plasmid_expression_cache/
+    Ignored:    analysis/TDP-06-01-totalTDP-construct-quantification_cache/
     Ignored:    analysis/TDP-06-cluster_analysis_cache/
     Ignored:    analysis/TDP-07-01-STMN2_expression_cache/
+    Ignored:    analysis/TDP-07-02-Prudencio_marker_expression_cache/
+    Ignored:    analysis/TDP-07-03-Liu_sorted_nuclei_marker_expression_cache/
+    Ignored:    analysis/TDP-07-04-Tollervey_marker_binding_cache/
+    Ignored:    analysis/TDP-07-05-marker_gene_read_coverage_cache/
     Ignored:    analysis/TDP-07-cluster_12_cache/
     Ignored:    analysis/TDP-08-00-clustering-HA-D96_cache/
     Ignored:    analysis/TDP-08-01-HA-D96-expression-changes_cache/
@@ -639,6 +654,7 @@ Ignored files:
     Ignored:    data/filtered_feature_matrices/
     Ignored:    output/.DS_Store
     Ignored:    output/._.DS_Store
+    Ignored:    output/._Liu_TDP_neg_vs_pos_edgeR_dge_results.txt
     Ignored:    output/._NSC_cluster2_marker_genes.txt
     Ignored:    output/._TDP-06-no_integration_cluster12_marker_genes.txt
     Ignored:    output/._TDP-06-no_integration_cluster13_marker_genes.txt
@@ -674,6 +690,8 @@ Ignored files:
     Ignored:    output/CH-test-03-cluster-analysis_so.rds
     Ignored:    output/CH-test-03_scran_markers.rds
     Ignored:    output/Lam-01-clustering.rds
+    Ignored:    output/Liu_TDP_neg_vs_pos_edgeR_dge.rds
+    Ignored:    output/Liu_TDP_neg_vs_pos_edgeR_dge_results.txt
     Ignored:    output/NSC_1_clustering.rds
     Ignored:    output/NSC_cluster1_marker_genes.txt
     Ignored:    output/NSC_cluster2_marker_genes.txt
@@ -723,12 +741,14 @@ Ignored files:
     Ignored:    output/organoid_integration_cluster7_marker_genes.txt
     Ignored:    output/organoid_integration_cluster8_marker_genes.txt
     Ignored:    output/organoid_integration_cluster9_marker_genes.txt
+    Ignored:    output/paper_supplement/
     Ignored:    output/res_TDP-08-01-muscat.rds
     Ignored:    output/sce_01_preprocessing.rds
     Ignored:    output/sce_02_quality_control.rds
     Ignored:    output/sce_03_filtering.rds
     Ignored:    output/sce_03_filtering_all_genes.rds
     Ignored:    output/sce_06-1-prepare-sce.rds
+    Ignored:    output/sce_TDP-06-01-totalTDP-construct-quantification.rds
     Ignored:    output/sce_TDP-08-01-muscat.rds
     Ignored:    output/sce_TDP_01_preprocessing.rds
     Ignored:    output/sce_TDP_02_quality_control.rds
@@ -744,6 +764,7 @@ Ignored files:
     Ignored:    output/so_08-clustering_timeline_HA.rds
     Ignored:    output/so_0x-sample_integration.rds
     Ignored:    output/so_CH-test-02-transgene_expression.rds
+    Ignored:    output/so_TDP-06-01-totalTDP-construct-quantification.rds
     Ignored:    output/so_TDP-06-cluster-analysis.rds
     Ignored:    output/so_TDP_04_clustering.rds
     Ignored:    output/so_TDP_05_plasmid_expression.rds
@@ -783,15 +804,21 @@ Ignored files:
     Ignored:    scripts/._bu_Rcode.R
     Ignored:    scripts/._plasmid_expression.sh
     Ignored:    scripts/._plasmid_expression_cell_hashing_test.sh
+    Ignored:    scripts/._plasmid_expression_total_TDP.sh
     Ignored:    scripts/._prepare_salmon_transcripts.R
+    Ignored:    scripts/._prepare_salmon_transcripts_cell_hashing_test.R
 
 Untracked files:
     Untracked:  Filtered.pdf
+    Untracked:  Hist(sce)
     Untracked:  Rplots.pdf
     Untracked:  Unfiltered
     Untracked:  Unfiltered.pdf
+    Untracked:  analysis/.TDP-06-01-totalTDP-construct-quantification.Rmd.swp
     Untracked:  analysis/Lam-0-NSC_no_integration.Rmd
+    Untracked:  analysis/TDP-06-01-totalTDP-construct-quantification_bu.Rmd
     Untracked:  analysis/TDP-07-01-STMN2_expression copy.Rmd
+    Untracked:  analysis/TDP-07-05-marker_gene_read_coverage.Rmd
     Untracked:  analysis/additional_filtering.Rmd
     Untracked:  analysis/additional_filtering_clustering.Rmd
     Untracked:  analysis/organoid-01-1-qualtiy-control.Rmd
@@ -802,18 +829,29 @@ Untracked files:
     Untracked:  analysis/organoid-08-conos-comparison.Rmd
     Untracked:  analysis/organoid-0x-sample_integration.Rmd
     Untracked:  analysis/sample5_QC.Rmd
+    Untracked:  cms_PCA10_k1000_k_min200.pdf
+    Untracked:  cms_PCA10_k500.pdf
+    Untracked:  cms_PCA10_k700_batch_min100.pdf
+    Untracked:  cms_PCA10_k700_batch_min50.pdf
+    Untracked:  cms_PCA10_k_min100.pdf
+    Untracked:  cms_PCA10_k_min200.pdf
+    Untracked:  cms_PCA_10_k700.pdf
+    Untracked:  cms_umap_PCA.pdf
     Untracked:  coverage.pdf
     Untracked:  coverage_sashimi.pdf
     Untracked:  coverage_sashimi.png
     Untracked:  data/Homo_sapiens.GRCh38.98.sorted.gtf
+    Untracked:  data/Jun2021/
     Untracked:  data/Kanton_et_al/
     Untracked:  data/Lam_et_al/
+    Untracked:  data/Liu_et_al/
+    Untracked:  data/Prudencio_et_al/
     Untracked:  data/Sep2020/
     Untracked:  data/cell_hashing_test/
-    Untracked:  data/cell_hashing_test_FB/
     Untracked:  data/reference/
     Untracked:  data/virus_cell_tropism_markers.R
     Untracked:  data/~$Reactive_astrocytes_markers.xlsx
+    Untracked:  iCLIP_nrXLs_markers.pdf
     Untracked:  pbDS_cell_level.pdf
     Untracked:  pbDS_heatmap.pdf
     Untracked:  pbDS_top_expr_umap.pdf
@@ -822,7 +860,9 @@ Untracked files:
     Untracked:  scripts/bu_Rcode.R
     Untracked:  scripts/bu_code.Rmd
     Untracked:  scripts/plasmid_expression_cell_hashing_test.sh
+    Untracked:  scripts/plasmid_expression_total_TDP.sh
     Untracked:  scripts/prepare_salmon_transcripts_cell_hashing_test.R
+    Untracked:  scripts/prepare_salmon_transcripts_total_TDP.R
     Untracked:  scripts/salmon-latest_linux_x86_64/
     Untracked:  stmn2.pdf
     Untracked:  tdp.pdf
@@ -830,6 +870,8 @@ Untracked files:
 Unstaged changes:
     Modified:   analysis/05-annotation.Rmd
     Modified:   analysis/TDP-04-clustering.Rmd
+    Modified:   analysis/TDP-07-01-STMN2_expression.Rmd
+    Modified:   analysis/TDP-07-cluster_12.Rmd
     Modified:   analysis/TDP-08-01-HA-D96-expression-changes.Rmd
     Modified:   analysis/_site.yml
     Modified:   analysis/organoid-02-integration.Rmd
@@ -873,6 +915,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/2da9eceb90b7be0f86bcaf3bd9509e1b6624694c/analysis/Lam-02-NSC_annotation.Rmd" target="_blank">2da9ece</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-08-27
+</td>
+<td>
+explore data integration with CellMixS
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/khembach/neural_scRNAseq/7fcea2bceff9105597d9c9af036265cd05722330/docs/Lam-02-NSC_annotation.html" target="_blank">7fcea2b</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1082,7 +1158,8 @@ library(Seurat)
 library(SingleCellExperiment)
 library(stringr)
 library(RCurl)
-library(BiocParallel)</code></pre>
+library(BiocParallel)
+library(CellMixS)</code></pre>
 </div>
 <div id="load-data-convert-to-sce" class="section level1">
 <h1>Load data &amp; convert to SCE</h1>
@@ -1478,6 +1555,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7fcea2bceff9105597d9c9af036265cd05722330/docs/figure/Lam-02-NSC_annotation.Rmd/dim-red-1.png" target="_blank">7fcea2b</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-26
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/489b5df779c6ef11ce1e849b61689ced6fb68bef/docs/figure/Lam-02-NSC_annotation.Rmd/dim-red-1.png" target="_blank">489b5df</a>
 </td>
 <td>
@@ -1539,6 +1627,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7fcea2bceff9105597d9c9af036265cd05722330/docs/figure/Lam-02-NSC_annotation.Rmd/dim-red-2.png" target="_blank">7fcea2b</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-26
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/489b5df779c6ef11ce1e849b61689ced6fb68bef/docs/figure/Lam-02-NSC_annotation.Rmd/dim-red-2.png" target="_blank">489b5df</a>
@@ -1604,6 +1703,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7fcea2bceff9105597d9c9af036265cd05722330/docs/figure/Lam-02-NSC_annotation.Rmd/dim-red-3.png" target="_blank">7fcea2b</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-26
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/489b5df779c6ef11ce1e849b61689ced6fb68bef/docs/figure/Lam-02-NSC_annotation.Rmd/dim-red-3.png" target="_blank">489b5df</a>
 </td>
 <td>
@@ -1665,6 +1775,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/khembach/neural_scRNAseq/blob/7fcea2bceff9105597d9c9af036265cd05722330/docs/figure/Lam-02-NSC_annotation.Rmd/dim-red-4.png" target="_blank">7fcea2b</a>
+</td>
+<td>
+khembach
+</td>
+<td>
+2021-05-26
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/khembach/neural_scRNAseq/blob/489b5df779c6ef11ce1e849b61689ced6fb68bef/docs/figure/Lam-02-NSC_annotation.Rmd/dim-red-4.png" target="_blank">489b5df</a>
@@ -1816,6 +1937,77 @@ khembach
 </table>
 </div>
 </div>
+</div>
+</div>
+<div id="explore-data-integration-with-cellmixs" class="section level1">
+<h1>Explore data integration with CellMixS</h1>
+<p>We use the <a href="https://github.com/almutlue/CellMixS">CellMixS</a> Bioconductor R package to evaluate the data integration and potential batch effects. We test how well the two dataset are mixing or if there are batch effect with the Cellspecific Mixing Score (CMS), a test for batch effects within k-nearest neighbouring cells. A high cms score refers to good mixing, while a low score indicates batch-specific bias. The test considers differences in the number of cells from each batch.</p>
+<pre class="r"><code>sce$group_id %&gt;% table</code></pre>
+<pre><code>.
+  NES   P22 
+  768 16739 </code></pre>
+<pre class="r"><code>## using PCA based on integrated and scaled data
+## we set k high but below the size of the smallest group 
+## because we want to evaluate global structures
+## k_min is used to define the minimum size of the local neighbourhoods
+sce &lt;- cms(sce, k = 700, k_min = 200, group = &quot;group_id&quot;, dim_red = &quot;PCA&quot;,
+           n_dim = 10, unbalanced = TRUE, 
+           BPPARAM = MulticoreParam(workers = 15))
+head(colData(sce)[,c(&quot;cms_smooth&quot;, &quot;cms&quot;)])</code></pre>
+<pre><code>DataFrame with 6 rows and 2 columns
+                        cms_smooth        cms
+                         &lt;numeric&gt;  &lt;numeric&gt;
+AAACCCAAGGTTATAG-1.1NSC   0.415851 0.66510000
+AAACCCACATTGACCA-1.1NSC   0.346162 0.00317485
+AAACCCAGTAGCGCCT-1.1NSC         NA         NA
+AAACCCAGTATTTCTC-1.1NSC   0.403475 0.99411500
+AAACCCAGTTACACTG-1.1NSC   0.469112 0.75650500
+AAACGAAAGACAGCGT-1.1NSC   0.425609 0.06196850</code></pre>
+<pre class="r"><code>## cms histogram
+visHist(sce)</code></pre>
+<pre><code>Warning: Removed 1007 rows containing non-finite values (stat_bin).
+
+Warning: Removed 1007 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="figure/Lam-02-NSC_annotation.Rmd/cellmixs-cms-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p1 &lt;- visMetric(sce, metric_var = &quot;cms_smooth&quot;, dim_red = &quot;UMAP&quot;) + 
+  theme_void() + theme(aspect.ratio = 1)
+p2 &lt;- visMetric(sce, metric_var = &quot;cms&quot;, dim_red = &quot;UMAP&quot;) + 
+  theme_void() + theme(aspect.ratio = 1)
+plot_grid(p1, p2)</code></pre>
+<p><img src="figure/Lam-02-NSC_annotation.Rmd/cellmixs-cms-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>## score distribution per cluster
+p1 &lt;- visCluster(sce, metric_var = &quot;cms&quot;, cluster_var = &quot;cluster_id&quot;) + 
+  scale_fill_hue() +  
+  scale_y_discrete(limits = rev(unique(sort(sce$cluster_id))))
+p2 &lt;- visCluster(sce, metric_var = &quot;cms_smooth&quot;, cluster_var = &quot;cluster_id&quot;) + 
+  scale_fill_hue() + 
+  scale_y_discrete(limits = rev(unique(sort(sce$cluster_id))))
+plot_grid(p1, p2)</code></pre>
+<pre><code>Warning: Removed 1007 rows containing non-finite values (stat_density_ridges).</code></pre>
+<pre><code>Warning: Removed 1007 rows containing non-finite values (stat_density_ridges).</code></pre>
+<p><img src="figure/Lam-02-NSC_annotation.Rmd/cellmixs-cms-3.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>We also test how well the two datasets are integrated with the Local Density Differences (ldfDiff) metric. In an optimal case relative densities (according to the same set of cells) should not change by integration and the ldfDiff score should be close to 0. In general the overall distribution of ldfDiff should be centered around 0 without long tails.</p>
+<pre class="r"><code>sce_int &lt;- as.SingleCellExperiment(so, assay = &quot;integrated&quot;)
+colData(sce_int) &lt;- as.data.frame(colData(sce_int)) %&gt;% 
+    mutate_if(is.character, as.factor) %&gt;% 
+    DataFrame(row.names = colnames(sce_int))
+
+sce_pre_list &lt;- list(&quot;P22&quot; = sce[,sce$group_id == &quot;P22&quot;], 
+                     &quot;NES&quot; = sce[,sce$group_id == &quot;NES&quot;])
+## remove dimension reduction from integrated data
+sce_pre_list &lt;- lapply(sce_pre_list, function(x) {reducedDims(x) &lt;- NULL; x})
+
+sce_int &lt;- ldfDiff(sce_pre_list, sce_combined = sce_int, group = &quot;group_id&quot;,
+               k = 7, dim_red = &quot;PCA&quot;, dim_combined = &quot;PCA&quot;, 
+               assay_pre = &quot;logcounts&quot;, assay_combined = &quot;logcounts&quot;,
+               n_dim = 3, res_name = &quot;Seurat&quot;)</code></pre>
+<pre><code>Warning in .defineSubspace(sce_pre, assay_pre, dim_red, n_dim): &#39;dim_red&#39; not found:
+            PCA subspace is used to calculate distances.
+
+Warning in .defineSubspace(sce_pre, assay_pre, dim_red, n_dim): &#39;dim_red&#39; not found:
+            PCA subspace is used to calculate distances.</code></pre>
+<pre class="r"><code>visIntegration(sce_int, metric = &quot;diff_ldf&quot;, metric_name = &quot;ldfDiff&quot;) </code></pre>
+<p><img src="figure/Lam-02-NSC_annotation.Rmd/cellmixs-integration-evaluation-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1845,19 +2037,21 @@ attached base packages:
  [8] datasets  methods   base     
 
 other attached packages:
- [1] BiocParallel_1.22.0         RCurl_1.98-1.3             
- [3] stringr_1.4.0               SeuratObject_4.0.1         
- [5] Seurat_4.0.1                scran_1.16.0               
- [7] SingleCellExperiment_1.10.1 SummarizedExperiment_1.18.1
- [9] DelayedArray_0.14.0         matrixStats_0.56.0         
-[11] Biobase_2.48.0              GenomicRanges_1.40.0       
-[13] GenomeInfoDb_1.24.2         IRanges_2.22.2             
-[15] S4Vectors_0.26.1            BiocGenerics_0.34.0        
-[17] viridis_0.5.1               viridisLite_0.3.0          
-[19] RColorBrewer_1.1-2          purrr_0.3.4                
-[21] muscat_1.2.1                dplyr_1.0.2                
-[23] ggplot2_3.3.2               cowplot_1.0.0              
-[25] ComplexHeatmap_2.4.2        workflowr_1.6.2            
+ [1] CellMixS_1.4.2              kSamples_1.2-9             
+ [3] SuppDists_1.1-9.5           BiocParallel_1.22.0        
+ [5] RCurl_1.98-1.3              stringr_1.4.0              
+ [7] SeuratObject_4.0.1          Seurat_4.0.1               
+ [9] scran_1.16.0                SingleCellExperiment_1.10.1
+[11] SummarizedExperiment_1.18.1 DelayedArray_0.14.0        
+[13] matrixStats_0.56.0          Biobase_2.48.0             
+[15] GenomicRanges_1.40.0        GenomeInfoDb_1.24.2        
+[17] IRanges_2.22.2              S4Vectors_0.26.1           
+[19] BiocGenerics_0.34.0         viridis_0.5.1              
+[21] viridisLite_0.3.0           RColorBrewer_1.1-2         
+[23] purrr_0.3.4                 muscat_1.2.1               
+[25] dplyr_1.0.2                 ggplot2_3.3.2              
+[27] cowplot_1.0.0               ComplexHeatmap_2.4.2       
+[29] workflowr_1.6.2            
 
 loaded via a namespace (and not attached):
   [1] reticulate_1.16           tidyselect_1.1.0         
@@ -1939,7 +2133,6 @@ loaded via a namespace (and not attached):
 [153] DESeq2_1.28.1             BiocSingular_1.4.0       
 [155] caTools_1.18.0            memoise_2.0.0            
 [157] irlba_2.3.3               future.apply_1.6.0       </code></pre>
-</div>
 </div>
 </div>
 
