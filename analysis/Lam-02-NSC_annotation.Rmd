@@ -11,7 +11,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, autodep = TRUE, cache = TRUE, dev = "png",
                       dev.args = list(png = list(type = "cairo")), 
-                      message = FALSE, cache.lazy = FALSE)
+                      message = FALSE, cache.lazy = FALSE, warning = FALSE)
 ```
 
 ### Load packages
