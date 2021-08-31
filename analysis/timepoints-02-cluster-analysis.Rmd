@@ -241,6 +241,65 @@ Heatmap(mat,
 
 # Plots for manuscript
 
+## Distribution of timeline clusters before and after integration
+
+How are the individual clusters distributed after integration of the organoid dataset?
+
+```{r cluster-before-after-organoid-integration, fig.width = 9, fig.height = 9}
+## Load the Seurat object from our NSC analysis
+so_before <- readRDS(file.path("output", "so_06-clustering_all_timepoints.rds"))
+so_before <- SetIdent(so_before, value = "RNA_snn_res.0.4")
+so_before@meta.data$cluster_id <- Idents(so_before)
+table(so_before@meta.data$cluster_id)
+
+## join the cluster_ids from both clustering runs
+before <- data.frame(cell = colnames(so_before), 
+                     cluster_before = so_before@meta.data[,c("cluster_id")])
+after <- data.frame(cell = colnames(so), 
+                    cluster_after = so@meta.data[,c("cluster_id")])
+clusters <- before %>% full_join(after)
+
+## check if cells from the same cluster are still in the same cluster
+(n_clusters <- table(clusters$cluster_after, clusters$cluster_before))
+fqs <- prop.table(n_clusters, margin = 2)
+mat <- as.matrix(unclass(fqs))
+Heatmap(mat,
+    col = rev(brewer.pal(11, "RdGy")[-6]),
+    name = "Frequency",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "clusters after organoid integration",
+    column_title = "clusters before organoid integration",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
+            gp = gpar(col = "white", fontsize = 8)))
+
+(n_clusters <- table(clusters$cluster_before, clusters$cluster_after))
+fqs <- prop.table(n_clusters, margin = 2)
+mat <- as.matrix(unclass(fqs))
+Heatmap(mat,
+    col = rev(brewer.pal(11, "RdGy")[-6]),
+    name = "Frequency",
+    cluster_rows = FALSE,
+    cluster_columns = FALSE,
+    row_names_side = "left",
+    row_title = "clusters before organoid integration",
+    column_title = "clusters after organoid integration",
+    column_title_side = "bottom",
+    rect_gp = gpar(col = "white"),
+    cell_fun = function(i, j, x, y, width, height, fill)
+        grid.text(round(mat[j, i] * 100, 2), x = x, y = y, 
+            gp = gpar(col = "white", fontsize = 8)))
+
+## add the old cluster identities to the Seurat object
+so@meta.data$cluster_id_before <- so_before@meta.data$cluster_id[
+  match(colnames(so), colnames(so_before))]
+```
+
+
 ## UMAP {.tabset} 
 In the manuscript, we want to highlight the timeline of our samples and the organoid samples with shades of two different colors.
 
@@ -254,7 +313,8 @@ cs <- sample(colnames(so), 15e3)
             override.aes = list(size = 3, alpha = 1))) +
         theme_void() + theme(aspect.ratio = 1)
 ids <- c("dataset", "integration_group", "sample_id", "group_id", "Stage", 
-         "cl_FullLineage", "cl_LineComp", "PredCellType", "ident")
+         "cl_FullLineage", "cl_LineComp", "PredCellType", "ident", 
+         "cluster_id_before")
 
 for (id in ids) {
     cat("### ", id, "\n")
@@ -324,4 +384,7 @@ Heatmap(mat,
         grid.text(mat[j, i], x = x, y = y, 
             gp = gpar(col = "black", fontsize = 10)))
 ```
+
+
+
 
