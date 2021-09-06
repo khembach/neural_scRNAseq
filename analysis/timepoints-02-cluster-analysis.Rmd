@@ -25,6 +25,8 @@ library(muscat)
 library(RColorBrewer)
 library(Seurat)
 library(SingleCellExperiment)
+library(CellMixS)
+library(BiocParallel)
 ```
 
 # Load data & convert to SCE
@@ -386,5 +388,38 @@ Heatmap(mat,
 ```
 
 
+
+## Explore data integration with CellMixS
+
+We use the [CellMixS](https://github.com/almutlue/CellMixS) Bioconductor R package to evaluate the data integration and potential batch effects. 
+We test how well the two datasets are mixing or if there are batch effects with the Cellspecific Mixing Score (CMS), a test for batch effects within k-nearest neighbouring cells. 
+A high cms score refers to good mixing, while a low score indicates batch-specific bias. The test considers differences in the number of cells from each batch.
+
+```{r cellmixs-cms, fig.width = 12}
+sce$dataset %>% table
+
+## using PCA based on integrated and scaled data
+sce <- cms(sce, k = 500, group = "dataset", dim_red = "PCA",
+           n_dim = 10, unbalanced = FALSE, 
+           BPPARAM = MulticoreParam(workers = 15))
+head(colData(sce)[,c("cms_smooth", "cms")])
+
+## cms histogram
+visHist(sce)
+p1 <- visMetric(sce, metric_var = "cms_smooth", dim_red = "UMAP") + 
+  theme_void() + theme(aspect.ratio = 1)
+p2 <- visMetric(sce, metric_var = "cms", dim_red = "UMAP") + 
+  theme_void() + theme(aspect.ratio = 1)
+plot_grid(p1, p2)
+
+## score distribution per cluster
+p1 <- visCluster(sce, metric_var = "cms", cluster_var = "cluster_id") + 
+  scale_fill_hue() +  
+  scale_y_discrete(limits = rev(unique(sort(sce$cluster_id))))
+p2 <- visCluster(sce, metric_var = "cms_smooth", cluster_var = "cluster_id") + 
+  scale_fill_hue() + 
+  scale_y_discrete(limits = rev(unique(sort(sce$cluster_id))))
+plot_grid(p1, p2)
+```
 
 
