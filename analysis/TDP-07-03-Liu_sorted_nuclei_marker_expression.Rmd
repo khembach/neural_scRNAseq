@@ -28,10 +28,6 @@ library(data.table)
 # Load data
 ```{r load-data}
 metadat <- read_excel(file.path("data", "Liu_et_al", "metadata.xlsx"))
-
-# metadat <- read_excel(file.path("data", "Prudencio_et_al", 
-#                                 "GSE67196_Petrucelli2015_ALS_genes.rawcount.xlsx"), 
-#                       sheet = "metadata")
 dat <- fread(file.path("data", "Liu_et_al", "GSE126542_NeuronalNuclei_RNAseq_counts.txt"))
 ```
 
@@ -269,7 +265,7 @@ markers_cpm_long %>% dplyr::filter(direction == "down") %>%
 
 
 # LogFC of all markers
-```{r all-markers-logFC, fig.width = 6, fig.height = 4}
+```{r all-markers-logFC, fig.width = 4, fig.height = 4}
 # up
 edgeR_res %>% dplyr::filter(gene_name %in%  markers[["up"]]) %>%
   dplyr::mutate(gene_name = factor(gene_name, 
@@ -280,10 +276,11 @@ edgeR_res %>% dplyr::filter(gene_name %in%  markers[["up"]]) %>%
                      color=FDR<0.05), size = 3) +
     theme_bw() +
     theme(panel.grid.major.x = element_blank()) +
-    xlab("") +
-    ylab("log2FC") +
+    xlab("cluster-12-upregulated genes") +
+    ylab("log2 fold-change in\npatient TDP-43-negative nuclei") +
     scale_color_manual(values = c("tomato3", "springgreen3")) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1),
+          legend.position="bottom")
 
 # down
 edgeR_res %>% dplyr::filter(gene_name %in%  markers[["down"]]) %>%
@@ -295,10 +292,11 @@ edgeR_res %>% dplyr::filter(gene_name %in%  markers[["down"]]) %>%
                      color=FDR<0.05), size = 3) +
     theme_bw() +
     theme(panel.grid.major.x = element_blank()) +
-    xlab("") +
-    ylab("log2FC") +
+    xlab("cluster-12-downregulated genes") +
+    ylab("log2 fold-change in\npatient TDP-43-negative nuclei") +
     scale_color_manual(values = c("tomato3", "springgreen3")) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1),
+          legend.position="bottom")
 ```
 
 
